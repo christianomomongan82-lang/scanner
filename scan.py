@@ -31,7 +31,7 @@ def fetch(inst):
     return d[["open", "high", "low", "close"]].astype(float)
 def notify(title, msg):
     repo = os.environ["GITHUB_REPOSITORY"]
-    requests.post("https://api.github.com/repos/" + repo + "/issues", headers={"Authorization": "Bearer " + os.environ["GH_TOKEN"], "Accept": "application/vnd.github+json"}, json={"title": title, "body": msg}, timeout=20)
+    requests.post("https://api.github.com/repos/" + repo + "/issues", headers={"Authorization": "Bearer " + os.environ["GH_TOKEN"], "Accept": "application/vnd.github+json"}, json={"title": title, "body": "@" + os.environ["GITHUB_REPOSITORY_OWNER"] + "\n\n" + msg}, timeout=20)
 def main():
     now = pd.Timestamp.now(tz="UTC")
     manual = os.environ.get("EVENT") == "workflow_dispatch"
