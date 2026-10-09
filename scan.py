@@ -1,4 +1,4 @@
-import os, subprocess, datetime
+import os, subprocess, datetime, time
 import numpy as np, pandas as pd, requests
 
 INST = {"usa500idxusd": "S&P 500", "usatechidxusd": "Nasdaq 100"}
@@ -35,48 +35,73 @@ def fetch(inst):
     os.makedirs(outdir, exist_ok=True)
     path = os.path.join(outdir, inst + ".csv")
 
-    # Avoid accidentally reading a stale CSV if the new download fails.
-    if os.path.exists(path):
-        os.remove(path)
-
-    subprocess.run([
+    # Dukascopy sometimes returns HTTP 202 instead of a completed data response.
+    # Lower request concurrency and retry both at the downloader and whole-command level.
+    cmd = [
         "npx", "--yes", "dukascopy-node",
         "-i", inst, "-from", str(frm), "-to", str(to),
         "-t", "h1", "-p", "bid", "-f", "csv",
         "-fl", "-dir", outdir, "-fn", inst,
-        "-r", "3", "-re", "-rp", "1000", "-s"
-    ], check=True)
+        "-bs", "3", "-bp", "2000",
+        "-r", "5", "-re", "-rp", "5000"
+    ]
 
-    if not os.path.isfile(path):
-        raise RuntimeError(
-            f"Dukascopy tidak membuat file CSV untuk {inst}: {path}"
+    last_error = "Unknown download error"
+    for attempt in range(1, 4):
+        if os.path.exists(path):
+            os.remove(path)
+
+        result = subprocess.run(
+            cmd, check=False, stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT, text=True
         )
-    if os.path.getsize(path) == 0:
-        raise RuntimeError(
-            f"Dukascopy mengembalikan CSV kosong untuk {inst} "
-            "meskipun retry sudah dicoba 3 kali."
-        )
+        output = result.stdout or ""
+        if output:
+            print(output, end="" if output.endswith("\n") else "\n", flush=True)
 
-    try:
-        d = pd.read_csv(path)
-    except pd.errors.EmptyDataError as exc:
-        raise RuntimeError(
-            f"CSV Dukascopy untuk {inst} tidak memiliki kolom/data."
-        ) from exc
+        if result.returncode != 0:
+            last_error = f"Dukascopy CLI exit code {result.returncode}"
+        elif not os.path.isfile(path):
+            last_error = f"Dukascopy tidak membuat file CSV: {path}"
+        elif os.path.getsize(path) == 0:
+            last_error = f"Dukascopy membuat CSV kosong: {path}"
+        else:
+            try:
+                d = pd.read_csv(path)
+                required = {"timestamp", "open", "high", "low", "close"}
+                missing = required.difference(d.columns)
+                if d.empty:
+                    raise ValueError("CSV hanya berisi header, tanpa bar data")
+                if missing:
+                    raise ValueError(f"Kolom wajib hilang: {sorted(missing)}")
 
-    if d.empty:
-        raise RuntimeError(f"CSV Dukascopy untuk {inst} hanya berisi header, tanpa bar data.")
+                ts = d["timestamp"]
+                index = (
+                    pd.to_datetime(ts, unit="ms", utc=True)
+                    if np.issubdtype(ts.dtype, np.number)
+                    else pd.to_datetime(ts, utc=True)
+                )
+                bars = d[["open", "high", "low", "close"]].astype(float)
+                bars.index = index
+                if bars.empty:
+                    raise ValueError("CSV tidak menghasilkan bar OHLC")
+                return bars
+            except Exception as exc:
+                last_error = f"CSV Dukascopy tidak valid: {type(exc).__name__}: {exc}"
 
-    required = {"timestamp", "open", "high", "low", "close"}
-    missing = required.difference(d.columns)
-    if missing:
-        raise RuntimeError(
-            f"CSV Dukascopy untuk {inst} kehilangan kolom wajib: {sorted(missing)}"
-        )
+        if attempt < 3:
+            wait_seconds = 10 * attempt
+            print(
+                f"Download {inst} gagal (percobaan {attempt}/3: {last_error}). "
+                f"Mencoba ulang dalam {wait_seconds} detik.",
+                flush=True
+            )
+            time.sleep(wait_seconds)
 
-    ts = d["timestamp"]
-    d.index = pd.to_datetime(ts, unit="ms", utc=True) if np.issubdtype(ts.dtype, np.number) else pd.to_datetime(ts, utc=True)
-    return d[["open", "high", "low", "close"]].astype(float)
+    raise RuntimeError(
+        f"Gagal mengunduh data Dukascopy untuk {inst} setelah 3 percobaan. "
+        f"Kesalahan terakhir: {last_error}"
+    )
 
 
 def notify(title, msg):
