@@ -20,48 +20,6 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install pandas requests
-      - name: Probe Dukascopy response headers
-        if: github.event_name == 'push'
-        run: |
-          node --input-type=module <<'NODE'
-          const now = new Date();
-          const year = now.getUTCFullYear();
-          const month = now.getUTCMonth() + 1;
-          const previousMonth = month === 1 ? 12 : month - 1;
-          const previousYear = month === 1 ? year - 1 : year;
-          const url = `https://jetta.dukascopy.com/v1/candles/hour/USA500.IDX-USD/BID/${previousYear}/${previousMonth}`;
-          const agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/130.0.0.0 Safari/537.36";
-          const variants = [
-            { name: "plain", headers: {} },
-            { name: "browser-agent", headers: { "User-Agent": agent, "Accept": "application/json, text/plain, */*" } },
-            { name: "browser-origin", headers: { "User-Agent": agent, "Accept": "application/json, text/plain, */*", "Origin": "https://www.dukascopy.com", "Referer": "https://www.dukascopy.com/" } }
-          ];
-          for (const variant of variants) {
-            try {
-              const response = await fetch(url, { headers: variant.headers });
-              const bytes = new Uint8Array(await response.arrayBuffer());
-              const headers = {
-                server: response.headers.get("server"),
-                retryAfter: response.headers.get("retry-after"),
-                contentType: response.headers.get("content-type"),
-                location: response.headers.get("location"),
-                cfRay: response.headers.get("cf-ray")
-              };
-              const preview = new TextDecoder().decode(bytes.slice(0, 240)).replace(/\s+/g, " ");
-              console.log("HEADER_PROBE", JSON.stringify({name: variant.name, status: response.status, bytes: bytes.length, headers, preview}));
-            } catch (error) {
-              console.log("HEADER_PROBE_ERROR", variant.name, String(error));
-            }
-          }
-          const legacyUrl = `https://datafeed.dukascopy.com/datafeed/USA500IDXUSD/${previousYear}/${String(previousMonth).padStart(2, "0")}/BID_candles_hour_1.bi5`;
-          try {
-            const response = await fetch(legacyUrl, {headers: {"User-Agent": agent, "Referer": "https://www.dukascopy.com/"}});
-            const bytes = new Uint8Array(await response.arrayBuffer());
-            console.log("LEGACY_PROBE", JSON.stringify({status: response.status, bytes: bytes.length, retryAfter: response.headers.get("retry-after"), body: new TextDecoder().decode(bytes.slice(0, 200))}));
-          } catch (error) {
-            console.log("LEGACY_PROBE_ERROR", String(error));
-          }
-          NODE
       - run: python scan.py
         if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, 'DIAG_ONLY') }}
         env:
