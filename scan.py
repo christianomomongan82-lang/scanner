@@ -1,11 +1,16 @@
 import os, subprocess, datetime
 import numpy as np, pandas as pd, requests
+
 INST = {"usa500idxusd": "S&P 500", "usatechidxusd": "Nasdaq 100"}
 N, M, RR = 55, 27, 2.0
+
+
 def to_h4(h1):
     h1 = h1.copy()
     h1.index = h1.index.tz_convert("America/New_York")
     return h1.resample("4h", offset="1h", label="left", closed="left").agg({"open": "first", "high": "max", "low": "min", "close": "last"}).dropna()
+
+
 def check(h4, now_utc):
     h = h4[h4.index.tz_convert("UTC") + pd.Timedelta(hours=4) <= now_utc]
     if len(h) < N + 2:
@@ -20,18 +25,65 @@ def check(h4, now_utc):
     if risk <= 0:
         return None
     return dict(close_time=close_time, entry=c[i], sl=sl, tp=c[i] + RR * risk, risk_pct=100 * risk / c[i])
+
+
 def fetch(inst):
     today = datetime.date.today()
     frm = today - datetime.timedelta(days=45)
     to = today + datetime.timedelta(days=1)
-    subprocess.run(["npx", "--yes", "dukascopy-node", "-i", inst, "-from", str(frm), "-to", str(to), "-t", "h1", "-p", "bid", "-f", "csv", "-fl", "-dir", "dl", "-fn", inst, "-s"], check=True)
-    d = pd.read_csv("dl/" + inst + ".csv")
+    outdir = "dl"
+    os.makedirs(outdir, exist_ok=True)
+    path = os.path.join(outdir, inst + ".csv")
+
+    # Avoid accidentally reading a stale CSV if the new download fails.
+    if os.path.exists(path):
+        os.remove(path)
+
+    subprocess.run([
+        "npx", "--yes", "dukascopy-node",
+        "-i", inst, "-from", str(frm), "-to", str(to),
+        "-t", "h1", "-p", "bid", "-f", "csv",
+        "-fl", "-dir", outdir, "-fn", inst,
+        "-r", "3", "-re", "-rp", "1000", "-s"
+    ], check=True)
+
+    if not os.path.isfile(path):
+        raise RuntimeError(
+            f"Dukascopy tidak membuat file CSV untuk {inst}: {path}"
+        )
+    if os.path.getsize(path) == 0:
+        raise RuntimeError(
+            f"Dukascopy mengembalikan CSV kosong untuk {inst} "
+            "meskipun retry sudah dicoba 3 kali."
+        )
+
+    try:
+        d = pd.read_csv(path)
+    except pd.errors.EmptyDataError as exc:
+        raise RuntimeError(
+            f"CSV Dukascopy untuk {inst} tidak memiliki kolom/data."
+        ) from exc
+
+    if d.empty:
+        raise RuntimeError(f"CSV Dukascopy untuk {inst} hanya berisi header, tanpa bar data.")
+
+    required = {"timestamp", "open", "high", "low", "close"}
+    missing = required.difference(d.columns)
+    if missing:
+        raise RuntimeError(
+            f"CSV Dukascopy untuk {inst} kehilangan kolom wajib: {sorted(missing)}"
+        )
+
     ts = d["timestamp"]
     d.index = pd.to_datetime(ts, unit="ms", utc=True) if np.issubdtype(ts.dtype, np.number) else pd.to_datetime(ts, utc=True)
     return d[["open", "high", "low", "close"]].astype(float)
+
+
 def notify(title, msg):
     repo = os.environ["GITHUB_REPOSITORY"]
     requests.post("https://api.github.com/repos/" + repo + "/issues", headers={"Authorization": "Bearer " + os.environ["GH_TOKEN"], "Accept": "application/vnd.github+json"}, json={"title": title, "body": "@" + os.environ["GITHUB_REPOSITORY_OWNER"] + "\n\n" + msg}, timeout=20)
+
+
 def main():
     now = pd.Timestamp.now(tz="UTC")
     manual = os.environ.get("EVENT") == "workflow_dispatch"
@@ -40,4 +92,6 @@ def main():
         s = check(to_h4(fetch(inst)), now)
         fresh = s is not None and (now - s["close_time"]) <= pd.Timedelta(minutes=65)
         notify("SINYAL BUY " + name, "Entry sekarang ~%.1f\nSL %.1f\nTP %.1f\nRisiko %.2f%% dari harga\nSkip kalau sudah punya posisi di indeks ini." % (s["entry"], s["sl"], s["tp"], s["risk_pct"])) if fresh else None
+
+
 main() if __name__ == "__main__" else None
