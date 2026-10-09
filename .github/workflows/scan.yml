@@ -20,6 +20,32 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install pandas requests
+      - name: Diagnose Dukascopy API status
+        run: |
+          node --input-type=module <<'NODE'
+          const now = new Date();
+          const year = now.getUTCFullYear();
+          const month = now.getUTCMonth() + 1;
+          const monthStart = Date.UTC(year, now.getUTCMonth(), 1);
+          const prevMonth = month === 1 ? 12 : month - 1;
+          const prevYear = month === 1 ? year - 1 : year;
+          const symbols = ["USA500.IDX-USD", "USATECH.IDX-USD"];
+          const urls = [];
+          for (const symbol of symbols) {
+            urls.push(`https://jetta.dukascopy.com/v1/candles/hour/${symbol}/BID/${prevYear}/${prevMonth}`);
+            urls.push(`https://jetta.dukascopy.com/v1/candles/hour/${symbol}/BID?from=${monthStart}`);
+          }
+          for (const url of urls) {
+            try {
+              const response = await fetch(url);
+              const body = await response.text();
+              console.log("DIAG_STATUS", response.status, "URL", url);
+              console.log("DIAG_BODY", body.slice(0, 500).replace(/\\s+/g, " "));
+            } catch (error) {
+              console.log("DIAG_ERROR", url, String(error));
+            }
+          }
+          NODE
       - run: python scan.py
         env:
           EVENT: ${{ github.event_name }}
