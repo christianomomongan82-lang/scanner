@@ -30,7 +30,6 @@ def check(h4, now_utc):
 def fetch(inst):
     today = datetime.date.today()
     frm = today - datetime.timedelta(days=45)
-    to = today + datetime.timedelta(days=1)
     outdir = "dl"
     os.makedirs(outdir, exist_ok=True)
     path = os.path.join(outdir, inst + ".csv")
@@ -39,7 +38,7 @@ def fetch(inst):
     # Lower request concurrency and retry both at the downloader and whole-command level.
     cmd = [
         "npx", "--yes", "dukascopy-node",
-        "-i", inst, "-from", str(frm), "-to", str(to),
+        "-i", inst, "-from", str(frm), "-to", "now",
         "-t", "h1", "-p", "bid", "-f", "csv",
         "-fl", "-dir", outdir, "-fn", inst,
         "-bs", "3", "-bp", "2000",
