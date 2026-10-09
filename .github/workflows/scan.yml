@@ -21,7 +21,6 @@ jobs:
           python-version: "3.11"
       - run: pip install pandas requests
       - run: python scan.py
-        if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, 'DIAG_ONLY') }}
         env:
           EVENT: ${{ github.event_name }}
           GH_TOKEN: ${{ github.token }}
