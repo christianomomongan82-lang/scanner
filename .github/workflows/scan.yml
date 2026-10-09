@@ -35,12 +35,16 @@ jobs:
             urls.push(`https://jetta.dukascopy.com/v1/candles/hour/${symbol}/BID/${prevYear}/${prevMonth}`);
             urls.push(`https://jetta.dukascopy.com/v1/candles/hour/${symbol}/BID?from=${monthStart}`);
           }
+          for (const symbol of ["USA500IDXUSD", "USATECHIDXUSD"]) {
+            urls.push(`https://datafeed.dukascopy.com/datafeed/${symbol}/${prevYear}/${String(prevMonth).padStart(2, "0")}/BID_candles_hour_1.bi5`);
+          }
           for (const url of urls) {
             try {
               const response = await fetch(url);
-              const body = await response.text();
-              console.log("DIAG_STATUS", response.status, "URL", url);
-              console.log("DIAG_BODY", body.slice(0, 500).replace(/\\s+/g, " "));
+              const bytes = new Uint8Array(await response.arrayBuffer());
+              const preview = new TextDecoder().decode(bytes.slice(0, 160)).replace(/\\s+/g, " ");
+              console.log("DIAG_STATUS", response.status, "BYTES", bytes.length, "URL", url);
+              console.log("DIAG_BODY", preview);
             } catch (error) {
               console.log("DIAG_ERROR", url, String(error));
             }
