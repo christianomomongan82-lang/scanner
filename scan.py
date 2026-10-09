@@ -50,9 +50,17 @@ def fetch(inst):
         if os.path.exists(path):
             os.remove(path)
 
+        # JETTA currently returns HTTP 202 with an empty body unless the
+        # request includes the official Dukascopy Origin and Referer headers.
+        node_env = os.environ.copy()
+        patch_path = os.path.abspath("dukascopy_fetch_patch.cjs")
+        preload = f"--require={patch_path}"
+        existing_options = node_env.get("NODE_OPTIONS", "").strip()
+        node_env["NODE_OPTIONS"] = f"{existing_options} {preload}".strip()
+
         result = subprocess.run(
             cmd, check=False, stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT, text=True
+            stderr=subprocess.STDOUT, text=True, env=node_env
         )
         output = result.stdout or ""
         if output:
