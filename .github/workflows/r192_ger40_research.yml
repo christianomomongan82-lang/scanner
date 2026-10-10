@@ -39,7 +39,32 @@ jobs:
       - name: Prepare output directories
         run: mkdir -p dl results
 
-      - name: Download GER40 M5 BID history
+      - name: Download GER40 H1 BID history for R191-compatible signal bars
+        env:
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        run: |
+          npx --yes dukascopy-node \
+            -i deuidxeur \
+            -from 2016-01-01 \
+            -to now \
+            -t h1 \
+            -p bid \
+            -utc 0 \
+            -f csv \
+            -fl \
+            -dir dl \
+            -fn r192_ger40_h1 \
+            -bs 3 \
+            -bp 2000 \
+            -r 5 \
+            -re \
+            -rp 5000
+          test -s dl/r192_ger40_h1.csv
+          echo "Downloaded GER40 H1 BID:"
+          ls -lh dl/r192_ger40_h1.csv
+          head -n 2 dl/r192_ger40_h1.csv
+
+      - name: Download GER40 M5 BID history for delayed execution and exits
         env:
           NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
         run: |
@@ -53,19 +78,19 @@ jobs:
             -f csv \
             -fl \
             -dir dl \
-            -fn r192_ger40 \
+            -fn r192_ger40_m5 \
             -bs 3 \
             -bp 2000 \
             -r 5 \
             -re \
             -rp 5000
-          test -s dl/r192_ger40.csv
+          test -s dl/r192_ger40_m5.csv
           echo "Downloaded GER40 M5 BID:"
-          ls -lh dl/r192_ger40.csv
-          head -n 2 dl/r192_ger40.csv
+          ls -lh dl/r192_ger40_m5.csv
+          head -n 2 dl/r192_ger40_m5.csv
 
       - name: Run locked research
-        run: python -u research/r192_ger40.py --csv dl/r192_ger40.csv --out results
+        run: python -u research/r192_ger40.py --h1-csv dl/r192_ger40_h1.csv --m5-csv dl/r192_ger40_m5.csv --out results
 
       - name: Upload audit outputs
         if: always()
