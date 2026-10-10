@@ -1,0 +1,17 @@
+{
+  "instruments": {
+    "usa500idxusd": {
+      "last_exit": null,
+      "last_processed_h4_bar_utc": "2026-10-09T17:00:00Z",
+      "last_processed_outcome": "NO_SIGNAL",
+      "position": null
+    },
+    "usatechidxusd": {
+      "last_exit": null,
+      "last_processed_h4_bar_utc": "2026-10-09T17:00:00Z",
+      "last_processed_outcome": "NO_SIGNAL",
+      "position": null
+    }
+  },
+  "schema_version": 1
+}
