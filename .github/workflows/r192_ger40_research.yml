@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: r192-ger40-research-chunked
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   research:
