@@ -1,26 +1,62 @@
 name: scan
+
 on:
   schedule:
     - cron: "3 * * * *"
   workflow_dispatch:
-  push:
-    branches:
-      - main
+
 permissions:
+  contents: write
   issues: write
+
+# Prevent hourly/manual runs from racing on the same state.json.
+concurrency:
+  group: r191-scanner-main
+  cancel-in-progress: false
+
 jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          node-version: 20
-      - uses: actions/setup-python@v5
+          persist-credentials: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install pandas requests
-      - run: python scan.py
+
+      - name: Install Python dependencies
+        run: pip install pandas requests
+
+      - name: Run R191 scanner
+        run: python -u scan.py
         env:
-          EVENT: ${{ github.event_name }}
           GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+
+      - name: Commit scanner state
+        if: always()
+        shell: bash
+        run: |
+          if [ -z "$(git status --porcelain -- state.json)" ]; then
+            echo "state.json has no changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state.json
+          if git diff --cached --quiet -- state.json; then
+            echo "No staged state.json changes."
+            exit 0
+          fi
+          git commit -m "Update R191 scanner state [skip ci]"
+          git push
