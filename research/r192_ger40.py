@@ -176,7 +176,10 @@ def simulate(h4, m5, cfg, mode):
             # Require a non-flat M5 bar within the following H4 window; no weekend
             # flat-bar fills and no stale signal carried into a later session.
             left = int(mt.searchsorted(signal_time + pd.Timedelta(minutes=5), side="left"))
-            right = int(mt.searchsorted(signal_time + pd.Timedelta(hours=4), side="left"))
+            # End the entry window at the actual close of the immediately following
+            # wall-clock H4 bar; its elapsed duration can be 3 or 5 hours on DST Sundays.
+            next_bar_close = pd.Timestamp(h4["bar_close_utc"].iloc[i+1]).tz_convert("UTC")
+            right = int(mt.searchsorted(next_bar_close, side="left"))
             start_j = next((j for j in range(left, right) if not flat[j]), None)
             if start_j is None:
                 skipped_no_fill += 1
@@ -317,7 +320,7 @@ def main():
           **datadiag,"hypothesis_count":len(CONFIGS),
           "configs":CONFIGS,"truncation_gates":gates,
           "execution_assumptions":{"ideal":"next H4 bar open, R191 comparability only",
-             "manual":"first non-flat M5 bar at or after signal close + 5 minutes, strictly within next 4 hours; otherwise skip",
+             "manual":"first non-flat M5 bar at or after signal close + 5 minutes, strictly before the actual close of the next New York wall-clock H4 bar; otherwise skip",
              "exit":"M5 BID OHLC; SL checked before TP; gap through SL fills at open; no time-stop",
              "cost":"1bp and 2bp round-trip price cost, cost points = entry * bp / 10000",
              "flat_bars":"H1/H4 source flats retained and reported to match R191; synthetic flat M5 bars are skipped for both entry and exit; first subsequent non-flat bar is used for gap execution; no forward-fill",
