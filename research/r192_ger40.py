@@ -76,7 +76,7 @@ def build_h4(h1, now_utc):
     h4["source_h1_count"] = cnt
     h4["completed"] = np.asarray(completed, dtype=bool)
     h4["label_utc"] = labels_utc
-    partial = int((cnt < 48).sum())
+    partial = int((cnt < 4).sum())
     return h4, {"source_h1_rows":len(h1), "h4_rows":len(h4), "flat_h1_rows":flat_h1,
                 "flat_h4_rows":flat_h4, "partial_h4_rows_lt4_h1":partial,
                 "h1_start_utc":h1.index[0].tz_convert("UTC").isoformat(),
