@@ -61,28 +61,66 @@ def parse_data(path: Path):
     return df, duplicates
 
 def build_h4(h1, now_utc):
-    rule = "4h"
-    agg = h1.resample(rule, offset="1h", label="left", closed="left").agg(
-        {"open":"first","high":"max","low":"min","close":"last"})
-    cnt = h1["open"].resample(rule, offset="1h", label="left", closed="left").size()
-    h4 = agg.dropna(subset=["open","high","low","close"]).copy()
-    cnt = cnt.reindex(h4.index).fillna(0).astype(int)
-    flat_h1 = int(((h1.open == h1.high) & (h1.high == h1.low) & (h1.low == h1.close)).sum())
-    flat_h4 = int(((h4.open == h4.high) & (h4.high == h4.low) & (h4.low == h4.close)).sum())
-    # Match the live R191 scanner: NY-local resampling, offset=1h, left/left,
-    # drop empty bins only. Keep flat/partial non-empty bars and report their counts.
+    # Explicit New York wall-clock boundaries: 01, 05, 09, 13, 17, 21.
+    # Unlike fixed-duration resampling, this preserves the intended local labels
+    # through DST transitions. The 01->05 interval is 3 elapsed hours in spring
+    # and 5 elapsed hours in autumn; no bars are synthesized or forward-filled.
+    local = h1.copy().sort_index()
+    local.index = local.index.tz_convert(NY)
+    idx_utc = local.index.tz_convert("UTC")
+    first_day = pd.Timestamp(local.index.min().date()) - pd.Timedelta(days=1)
+    last_day = pd.Timestamp(local.index.max().date()) + pd.Timedelta(days=1)
+    boundaries = []
+    for day in pd.date_range(first_day, last_day, freq="D"):
+        date_text = day.strftime("%Y-%m-%d")
+        for hour in (1, 5, 9, 13, 17, 21):
+            # When 01:00 repeats in autumn, choose the first occurrence (EDT).
+            stamp = pd.Timestamp(f"{date_text} {hour:02d}:00").tz_localize(
+                NY, ambiguous=True, nonexistent="raise")
+            boundaries.append(stamp)
+    by_utc = {b.tz_convert("UTC").value: b for b in boundaries}
+    boundaries = [by_utc[k] for k in sorted(by_utc)]
+    records = []
+    for left, right in zip(boundaries, boundaries[1:]):
+        left_utc, right_utc = left.tz_convert("UTC"), right.tz_convert("UTC")
+        a = int(idx_utc.searchsorted(left_utc, side="left"))
+        b = int(idx_utc.searchsorted(right_utc, side="left"))
+        if b <= a:
+            continue
+        chunk = local.iloc[a:b]
+        duration_hours = (right_utc - left_utc) / pd.Timedelta(hours=1)
+        records.append({
+            "label_ny": left,
+            "open": float(chunk["open"].iloc[0]),
+            "high": float(chunk["high"].max()),
+            "low": float(chunk["low"].min()),
+            "close": float(chunk["close"].iloc[-1]),
+            "bar_close_utc": right_utc,
+            "source_h1_count": int(len(chunk)),
+            "duration_hours": float(duration_hours),
+        })
+    if not records:
+        raise RuntimeError("No H4 wall-clock bars could be built from H1 data.")
+    h4 = pd.DataFrame(records).set_index("label_ny")
+    h4.index = pd.DatetimeIndex(h4.index).tz_convert(NY)
+    h4.index.name = "timestamp_ny"
     labels_utc = h4.index.tz_convert("UTC")
-    completed = (labels_utc + pd.Timedelta(hours=4)) <= now_utc
-    h4["source_h1_count"] = cnt
-    h4["completed"] = np.asarray(completed, dtype=bool)
+    closes_utc = pd.DatetimeIndex(h4["bar_close_utc"])
     h4["label_utc"] = labels_utc
-    partial = int((cnt < 4).sum())
-    return h4, {"source_h1_rows":len(h1), "h4_rows":len(h4), "flat_h1_rows":flat_h1,
-                "flat_h4_rows":flat_h4, "partial_h4_rows_lt4_h1":partial,
-                "h1_start_utc":h1.index[0].tz_convert("UTC").isoformat(),
-                "h1_end_utc":h1.index[-1].tz_convert("UTC").isoformat(),
-                "flat_policy":"retained, counted, never forward-filled",
-                "resample":"America/New_York; 4h; offset=1h; label=left; closed=left"}
+    h4["completed"] = np.asarray(closes_utc <= now_utc, dtype=bool)
+    flat_h1 = int(((local.open == local.high) & (local.high == local.low) & (local.low == local.close)).sum())
+    flat_h4 = int(((h4.open == h4.high) & (h4.high == h4.low) & (h4.low == h4.close)).sum())
+    expected_count = h4["duration_hours"].round().astype(int)
+    count_mismatch = int((h4["source_h1_count"].to_numpy() != expected_count.to_numpy()).sum())
+    duration_counts = {str(float(k)): int(v) for k, v in h4["duration_hours"].value_counts().items()}
+    return h4, {
+        "source_h1_rows":len(local), "h4_rows":len(h4), "flat_h1_rows":flat_h1,
+        "flat_h4_rows":flat_h4, "h4_bins_with_unexpected_h1_count":count_mismatch,
+        "h4_elapsed_duration_hours_counts":duration_counts,
+        "h1_start_utc":idx_utc[0].isoformat(), "h1_end_utc":idx_utc[-1].isoformat(),
+        "flat_policy":"existing flat H1/H4 bars retained and counted; never forward-filled",
+        "resample":"explicit America/New_York wall-clock boundaries 01/05/09/13/17/21; left-closed/right-open",
+        "dst_policy":"01:00 autumn ambiguity chooses first occurrence; spring 01->05 bin is 3 elapsed hours and autumn bin is 5"}
 
 def signals_and_stops(h4, cfg):
     hi = h4.high.to_numpy(float); lo = h4.low.to_numpy(float); cl = h4.close.to_numpy(float)
@@ -122,7 +160,7 @@ def simulate(h4, m5, cfg, mode):
     last_exit = None
     for i in range(len(h4)-1):
         if not completed[i] or not sig[i]: continue
-        signal_time = h4utc[i] + pd.Timedelta(hours=4)
+        signal_time = pd.Timestamp(h4["bar_close_utc"].iloc[i]).tz_convert("UTC")
         # Strictly before the signal boundary: exit at the boundary itself is not known yet.
         if last_exit is not None and (pd.isna(last_exit) or not (last_exit < signal_time)):
             skipped_active += 1
