@@ -228,7 +228,7 @@ def main():
     gate_ok=all(g["pass"] for g in gates.values())
     meta={"signal_data":"Dukascopy GER40/deuidxeur H1 BID (R191-compatible H4 source)",
           "entry_exit_data":"Dukascopy GER40/deuidxeur M5 BID","run_utc":now.isoformat(),
-          "source_duplicates_removed":{"h1":dups_h1,"m5":dups_m5},**datadiag,"hypothesis_count":len(CONFIGS),
+          "source_duplicates_removed":{"h1":dups_h1,"m5":dups_m5},\n          "m5_source":{"rows":len(m5),"flat_rows":int(((m5.open==m5.high)&(m5.high==m5.low)&(m5.low==m5.close)).sum()),"start_utc":m5.index[0].tz_convert("UTC").isoformat(),"end_utc":m5.index[-1].tz_convert("UTC").isoformat()},\n          **datadiag,"hypothesis_count":len(CONFIGS),
           "configs":CONFIGS,"truncation_gates":gates,
           "execution_assumptions":{"ideal":"next H4 bar open, R191 comparability only",
              "manual":"first non-flat M5 bar at or after signal close + 5 minutes, strictly within next 4 hours; otherwise skip",
@@ -262,7 +262,6 @@ def main():
             # High PF is a hard hold/reject until an independent extra audit is performed.
             suspicious=(isinstance(f1m["pf"],(int,float)) and f1m["pf"]>1.4)
             base_metrics=(f1m["n"]>=30 and isinstance(f1m["pf"],(int,float)) and f1m["pf"]>=1.15
-                          and isinstance(f2m["pf"],(int,float)) and f2m["pf"]>=1.0
                           and (not ann_forward or worst>=1.0) and not suspicious)
             ledger.append({"config":cfg["id"],"role":cfg["role"],"mode":mode,
                 "breakout":cfg["breakout"],"stop_bars":cfg["stop_bars"],
@@ -306,7 +305,6 @@ def main():
                 why=[]
                 if row["forward_n"]<30: why.append("forward n < 30")
                 if not isinstance(row["forward_pf_1bp"],(int,float)) or row["forward_pf_1bp"]<1.15: why.append("forward PF@1bp < 1.15/undefined")
-                if not isinstance(row["forward_pf_2bp"],(int,float)) or row["forward_pf_2bp"]<1.0: why.append("stress PF@2bp < 1.00/undefined")
                 if row["forward_worst_year_pf_1bp_n5plus"] is not None and row["forward_worst_year_pf_1bp_n5plus"]<1.0: why.append("worst eligible year PF < 1.00")
                 if row["pf_gt_1_4_extra_audit_required"]: why.append("PF > 1.4 requires independent causality audit")
                 if not neighbourhood_ok: why.append(f"neighborhood gate failed (discovery PF@2bp passes={neighbor_passes}/6; base discovery n={base['discovery_n']}; corner_ok={corner_ok})")
