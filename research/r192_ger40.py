@@ -60,27 +60,27 @@ def parse_data(path: Path):
     if len(df) < 1000: raise ValueError(f"Insufficient source bars: {len(df)}")
     return df, duplicates
 
-def build_h4(m5, now_utc):
+def build_h4(h1, now_utc):
     rule = "4h"
-    agg = m5.resample(rule, offset="1h", label="left", closed="left").agg(
+    agg = h1.resample(rule, offset="1h", label="left", closed="left").agg(
         {"open":"first","high":"max","low":"min","close":"last"})
-    cnt = m5["open"].resample(rule, offset="1h", label="left", closed="left").size()
+    cnt = h1["open"].resample(rule, offset="1h", label="left", closed="left").size()
     h4 = agg.dropna(subset=["open","high","low","close"]).copy()
     cnt = cnt.reindex(h4.index).fillna(0).astype(int)
-    flat_m5 = int(((m5.open == m5.high) & (m5.high == m5.low) & (m5.low == m5.close)).sum())
+    flat_h1 = int(((h1.open == h1.high) & (h1.high == h1.low) & (h1.low == h1.close)).sum())
     flat_h4 = int(((h4.open == h4.high) & (h4.high == h4.low) & (h4.low == h4.close)).sum())
     # Match the live R191 scanner: NY-local resampling, offset=1h, left/left,
     # drop empty bins only. Keep flat/partial non-empty bars and report their counts.
     labels_utc = h4.index.tz_convert("UTC")
     completed = (labels_utc + pd.Timedelta(hours=4)) <= now_utc
-    h4["source_m5_count"] = cnt
+    h4["source_h1_count"] = cnt
     h4["completed"] = np.asarray(completed, dtype=bool)
     h4["label_utc"] = labels_utc
     partial = int((cnt < 48).sum())
-    return h4, {"source_m5_rows":len(m5), "h4_rows":len(h4), "flat_m5_rows":flat_m5,
-                "flat_h4_rows":flat_h4, "partial_h4_rows_lt48_m5":partial,
-                "m5_start_utc":m5.index[0].tz_convert("UTC").isoformat(),
-                "m5_end_utc":m5.index[-1].tz_convert("UTC").isoformat(),
+    return h4, {"source_h1_rows":len(h1), "h4_rows":len(h4), "flat_h1_rows":flat_h1,
+                "flat_h4_rows":flat_h4, "partial_h4_rows_lt4_h1":partial,
+                "h1_start_utc":h1.index[0].tz_convert("UTC").isoformat(),
+                "h1_end_utc":h1.index[-1].tz_convert("UTC").isoformat(),
                 "flat_policy":"retained, counted, never forward-filled",
                 "resample":"America/New_York; 4h; offset=1h; label=left; closed=left"}
 
@@ -213,11 +213,12 @@ def safe(x):
 
 def main():
     ap=argparse.ArgumentParser()
-    ap.add_argument("--csv",required=True); ap.add_argument("--out",default="results")
+    ap.add_argument("--m5-csv",required=True); ap.add_argument("--h1-csv",required=True); ap.add_argument("--out",default="results")
     args=ap.parse_args(); out=Path(args.out); out.mkdir(parents=True,exist_ok=True)
     now=pd.Timestamp.now(tz="UTC")
-    m5,dups=parse_data(Path(args.csv))
-    h4,datadiag=build_h4(m5,now)
+    m5,dups_m5=parse_data(Path(args.m5_csv))
+    h1,dups_h1=parse_data(Path(args.h1_csv))
+    h4,datadiag=build_h4(h1,now)
     if len(h4)<100: raise RuntimeError("Too few H4 bars.")
     # Causality/truncation is a hard gate and runs before any PF calculations.
     gates={}
@@ -225,14 +226,15 @@ def main():
         sig,stops=signals_and_stops(h4,cfg)
         gates[cfg["id"]]=truncation_gate(h4,cfg,sig,stops)
     gate_ok=all(g["pass"] for g in gates.values())
-    meta={"data":"Dukascopy GER40/deuidxeur M5 BID","run_utc":now.isoformat(),
-          "source_duplicates_removed":dups,**datadiag,"hypothesis_count":len(CONFIGS),
+    meta={"signal_data":"Dukascopy GER40/deuidxeur H1 BID (R191-compatible H4 source)",
+          "entry_exit_data":"Dukascopy GER40/deuidxeur M5 BID","run_utc":now.isoformat(),
+          "source_duplicates_removed":{"h1":dups_h1,"m5":dups_m5},**datadiag,"hypothesis_count":len(CONFIGS),
           "configs":CONFIGS,"truncation_gates":gates,
           "execution_assumptions":{"ideal":"next H4 bar open, R191 comparability only",
              "manual":"first non-flat M5 bar at or after signal close + 5 minutes, strictly within next 4 hours; otherwise skip",
              "exit":"M5 BID OHLC; SL checked before TP; gap through SL fills at open; no time-stop",
              "cost":"1bp and 2bp round-trip price cost, cost points = entry * bp / 10000",
-             "flat_bars":"preserved in H4 construction and reported; manual entry excludes flat M5 bars; no forward-fill",
+             "flat_bars":"H1-source flats retained and counted in H4 construction; manual entry excludes flat M5 bars; no forward-fill",
              "discovery":"2017-2021 trades only if exit also occurs before 2022-01-01",
              "forward":"entry 2022-2025, counted only if exit occurs before 2026-01-01; cross-boundary trades censored",
              "oos":"entry 2026; outcomes observed up to the last available M5 bar"}}
@@ -324,7 +326,7 @@ def main():
     print("\nBASELINE MANUAL5M YEARLY BREAKDOWN (strictly closed within calendar year):",flush=True)
     baseann=pd.DataFrame([r for r in annual if r["config"]=="H0_BASE_R191" and r["mode"]=="manual5m"])
     print(baseann.to_string(index=False),flush=True)
-    print("\nFlat bars retained/no fill-forward. Manual entries skip flat M5 bars and stale signals; see meta.json.")
+    print("\nH4 signals are built from NY-local H1 BID exactly as the R191 scanner. H1/H4 flat bars retained and counted; no fill-forward. Manual entries skip flat M5 bars and stale signals; see meta.json.")
     print(f"Total hypotheses tried this round: {len(CONFIGS)}. Forward computed once per pre-locked config.")
     print(f"Artifacts written to {out.resolve()}")
 
