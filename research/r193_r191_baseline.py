@@ -5,6 +5,10 @@ import argparse, json
 from pathlib import Path
 import numpy as np
 import pandas as pd
+import sys
+
+# Direct script execution puts research/ rather than the repository root on sys.path.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from research.r192_ger40 import (
     parse_data, build_h4, signals_and_stops, truncation_gate, simulate,
