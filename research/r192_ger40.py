@@ -150,7 +150,14 @@ def simulate(h4, m5, cfg, mode):
         risk = entry - stop
         target = entry + RR*risk
         exit_time=None; exit_price=np.nan; reason="OPEN_AT_DATA_END"
+        flat_skipped=0
         for j in range(start_j, len(mt)):
+            # Dukascopy -fl emits synthetic unchanged-price bars during non-trading periods.
+            # They are retained for R191-compatible H1/H4 signal construction, but cannot
+            # trigger execution exits. The first subsequent non-flat bar captures any gap.
+            if flat[j]:
+                flat_skipped += 1
+                continue
             o=float(op[j]); h=float(hi[j]); l=float(lo[j])
             # SL first if both levels occur in a bar; a gap through SL fills at open.
             if l <= stop or o <= stop:
@@ -165,7 +172,8 @@ def simulate(h4, m5, cfg, mode):
                        "entry":entry,"sl":stop,"tp":target,
                        "exit_time_utc":None if exit_time is None else exit_time.isoformat(),
                        "exit":None if exit_time is None else float(exit_price),"reason":reason,
-                       "entry_exact_m5_timestamp":exact,"risk_points":risk})
+                       "entry_exact_m5_timestamp":exact,"risk_points":risk,
+                       "flat_m5_bars_skipped_while_open":flat_skipped})
         last_exit = pd.NaT if exit_time is None else exit_time
         if pd.isna(last_exit): break
     return trades, {"signals":int((sig & completed).sum()),"taken":len(trades),
@@ -199,7 +207,45 @@ def annual_rows(trades, cfg, mode, observed_end):
             m=metric(trades,start,end,bps)
             rows.append({"config":cfg["id"],"mode":mode,"year":year,"cost_bps_rt":bps,
                          "entries":m["entries"],"n_closed_within_year":m["n"],"censored":m["censored"],
-                         "pf":m["pf"],"wins_r":m["wins_r"],"losses_r":m["losses_r"]})
+                         "pf_closed_within_year":m["pf"],"wins_r":m["wins_r"],"losses_r":m["losses_r"]})
+    return rows
+
+
+def metric_entry_cohort(trades, entry_start, entry_end, outcome_cutoff, bps):
+    # Attribute all completed trade outcomes to the year the trade was entered.
+    # For discovery, outcomes are cut off at 2022-01-01; forward at 2026-01-01;
+    # OOS outcomes at the last available bar. Do not censor a trade just because
+    # it crossed a calendar-year boundary.
+    picked=[t for t in trades if entry_start <= pd.Timestamp(t["entry_time_utc"]) < entry_end]
+    closed=[t for t in picked if t["exit_time_utc"] is not None and pd.Timestamp(t["exit_time_utc"]) < outcome_cutoff]
+    vals=np.array([trade_r(t,bps) for t in closed],dtype=float)
+    wins=float(vals[vals>0].sum()) if len(vals) else 0.0
+    losses=float(-vals[vals<0].sum()) if len(vals) else 0.0
+    pf=(wins/losses if losses>0 else (float("inf") if wins>0 else float("nan")))
+    return {"entries":len(picked),"n":len(closed),"censored":len(picked)-len(closed),
+            "pf":pf,"wins_r":wins,"losses_r":losses}
+
+
+def annual_cohort_rows(trades, cfg, mode, observed_end):
+    rows=[]
+    for year in range(2017,2027):
+        start=pd.Timestamp(f"{year}-01-01",tz="UTC")
+        entry_end=pd.Timestamp(f"{year+1}-01-01",tz="UTC") if year<2026 else observed_end
+        if year <= 2021:
+            cutoff=PERIODS["discovery"][1]
+            period="discovery_outcome_cutoff_2022"
+        elif year <= 2025:
+            cutoff=PERIODS["forward"][1]
+            period="forward_outcome_cutoff_2026"
+        else:
+            cutoff=observed_end
+            period="oos_observed_end"
+        for bps in (1,2):
+            m=metric_entry_cohort(trades,start,entry_end,cutoff,bps)
+            rows.append({"config":cfg["id"],"mode":mode,"entry_year":year,"cost_bps_rt":bps,
+                         "outcome_cutoff":period,"entries":m["entries"],"n_closed_by_cutoff":m["n"],
+                         "censored_by_cutoff":m["censored"],"pf_entry_cohort":m["pf"],
+                         "wins_r":m["wins_r"],"losses_r":m["losses_r"]})
     return rows
 
 def safe(x):
@@ -236,7 +282,7 @@ def main():
              "manual":"first non-flat M5 bar at or after signal close + 5 minutes, strictly within next 4 hours; otherwise skip",
              "exit":"M5 BID OHLC; SL checked before TP; gap through SL fills at open; no time-stop",
              "cost":"1bp and 2bp round-trip price cost, cost points = entry * bp / 10000",
-             "flat_bars":"H1-source flats retained and counted in H4 construction; manual entry excludes flat M5 bars; no forward-fill",
+             "flat_bars":"H1/H4 source flats retained and reported to match R191; synthetic flat M5 bars are skipped for both entry and exit; first subsequent non-flat bar is used for gap execution; no forward-fill",
              "discovery":"2017-2021 trades only if exit also occurs before 2022-01-01",
              "forward":"entry 2022-2025, counted only if exit occurs before 2026-01-01; cross-boundary trades censored",
              "oos":"entry 2026; outcomes observed up to the last available M5 bar"}}
@@ -246,7 +292,7 @@ def main():
         print(json.dumps(gates,indent=2))
         raise SystemExit(2)
     print("TRUNCATION GATE PASS for all 8 pre-registered hypotheses; checked every completed H4 prefix.",flush=True)
-    ledger=[]; annual=[]; all_trades=[]
+    ledger=[]; annual=[]; annual_cohort=[]; all_trades=[]
     d0,d1=PERIODS["discovery"]
     f0,f1=PERIODS["forward"]
     o0=PERIODS["oos2026"][0]
@@ -258,9 +304,11 @@ def main():
             f1m=metric(trades,f0,f1,1); f2m=metric(trades,f0,f1,2)
             o1m=metric(trades,o0,observed_end,1); o2m=metric(trades,o0,observed_end,2)
             ann=annual_rows(trades,cfg,mode,observed_end); annual.extend(ann)
-            # Calendar-year PF is only considered for years with >=5 completed trades.
-            ann_forward=[r for r in ann if 2022<=r["year"]<=2025 and r["cost_bps_rt"]==1 and r["n_closed_within_year"]>=5]
-            worst=min([float(r["pf"]) for r in ann_forward if isinstance(r["pf"],(int,float))],default=float("nan"))
+            cohort=annual_cohort_rows(trades,cfg,mode,observed_end); annual_cohort.extend(cohort)
+            # Apply the worst-year gate to entry-year cohorts, including trades
+            # closed in a later year but before the locked forward boundary.
+            ann_forward=[r for r in cohort if 2022<=r["entry_year"]<=2025 and r["cost_bps_rt"]==1 and r["n_closed_by_cutoff"]>=5]
+            worst=min([float(r["pf_entry_cohort"]) for r in ann_forward if isinstance(r["pf_entry_cohort"],(int,float))],default=float("nan"))
             # High PF is a hard hold/reject until an independent extra audit is performed.
             suspicious=(isinstance(f1m["pf"],(int,float)) and f1m["pf"]>1.4)
             base_metrics=(f1m["n"]>=30 and isinstance(f1m["pf"],(int,float)) and f1m["pf"]>=1.15
@@ -307,7 +355,7 @@ def main():
                 why=[]
                 if row["forward_n"]<30: why.append("forward n < 30")
                 if not isinstance(row["forward_pf_1bp"],(int,float)) or row["forward_pf_1bp"]<1.15: why.append("forward PF@1bp < 1.15/undefined")
-                if row["forward_worst_year_pf_1bp_n5plus"] is not None and row["forward_worst_year_pf_1bp_n5plus"]<1.0: why.append("worst eligible year PF < 1.00")
+                if row["forward_worst_year_pf_1bp_n5plus"] is not None and row["forward_worst_year_pf_1bp_n5plus"]<1.0: why.append("worst eligible entry-year cohort PF < 1.00")
                 if row["pf_gt_1_4_extra_audit_required"]: why.append("PF > 1.4 requires independent causality audit")
                 if not neighbourhood_ok: why.append(f"neighborhood gate failed (discovery PF@2bp passes={neighbor_passes}/6; base discovery n={base['discovery_n']}; corner_ok={corner_ok})")
                 row["reason"]="; ".join(why) if why else "one or more locked gates failed"
@@ -316,6 +364,7 @@ def main():
             row["reason"]="pre-registered neighborhood diagnostic only; cannot replace locked R191 base based on forward outcome"
     pd.DataFrame(ledger).to_csv(out/"ledger.csv",index=False)
     pd.DataFrame(annual).to_csv(out/"annual.csv",index=False)
+    pd.DataFrame(annual_cohort).to_csv(out/"annual_cohort.csv",index=False)
     pd.DataFrame(all_trades).to_csv(out/"trades.csv",index=False)
     print("\nLEDGER (manual5m is primary; all 8 hypotheses were pre-registered):",flush=True)
     show=pd.DataFrame([r for r in ledger if r["mode"]=="manual5m"])
@@ -323,10 +372,13 @@ def main():
           "forward_n","forward_pf_1bp","forward_pf_2bp","forward_worst_year_pf_1bp_n5plus",
           "oos2026_n","oos2026_pf_1bp","verdict"]
     print(show[cols].to_string(index=False),flush=True)
-    print("\nBASELINE MANUAL5M YEARLY BREAKDOWN (strictly closed within calendar year):",flush=True)
+    print("\nBASELINE MANUAL5M YEARLY BREAKDOWN (closed within calendar year; diagnostic only):",flush=True)
     baseann=pd.DataFrame([r for r in annual if r["config"]=="H0_BASE_R191" and r["mode"]=="manual5m"])
     print(baseann.to_string(index=False),flush=True)
-    print("\nH4 signals are built from NY-local H1 BID exactly as the R191 scanner. H1/H4 flat bars retained and counted; no fill-forward. Manual entries skip flat M5 bars and stale signals; see meta.json.")
+    print("\nBASELINE MANUAL5M ENTRY-YEAR COHORTS (used for worst-year PASS gate):",flush=True)
+    basecohort=pd.DataFrame([r for r in annual_cohort if r["config"]=="H0_BASE_R191" and r["mode"]=="manual5m"])
+    print(basecohort.to_string(index=False),flush=True)
+    print("\nH4 signals retain/report flat H1/H4 source bars for R191 compatibility; synthetic flat M5 bars are skipped for entry AND exit. The next tradable non-flat M5 bar captures post-closure gaps; no forward-fill.")
     print(f"Total hypotheses tried this round: {len(CONFIGS)}. Forward computed once per pre-locked config.")
     print(f"Artifacts written to {out.resolve()}")
 
