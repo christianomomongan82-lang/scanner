@@ -39,6 +39,24 @@ jobs:
       - name: Prepare output directories
         run: mkdir -p dl results
 
+      - name: Compile runner and preflight both Dukascopy timeframes
+        env:
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile research/r192_ger40.py
+          for TF in h1 m5; do
+            echo "Preflight ${TF}"
+            npx --yes dukascopy-node \
+              -i deuidxeur -from 2025-01-06 -to 2025-01-08 \
+              -t "$TF" -p bid -utc 0 -f csv -fl \
+              -dir dl -fn "smoke_${TF}" \
+              -bs 3 -bp 2000 -r 5 -re -rp 5000
+            test -s "dl/smoke_${TF}.csv"
+            head -n 2 "dl/smoke_${TF}.csv"
+          done
+
       - name: Download and join annual GER40 H1 BID chunks
         env:
           NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
