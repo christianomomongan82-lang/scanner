@@ -86,12 +86,13 @@ jobs:
           ls -lh dl/r192_ger40_h1.csv
           head -n 2 dl/r192_ger40_h1.csv
 
-      - name: Download and join annual GER40 M5 BID chunks
+      - name: Download and join annual GER40 M5 BID chunks (skip unavailable years, record coverage)
         env:
           NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
+          : > dl/m5_coverage.txt
           for YEAR in $(seq 2016 2026); do
             NEXT=$((YEAR + 1))
             FROM="${YEAR}-01-01"
@@ -99,21 +100,68 @@ jobs:
             FILE="dl/ger40_m5_${YEAR}.csv"
             echo "M5 download ${YEAR}: ${YEAR}-01-01 to $TO"
             rm -f "$FILE"
-            npx --yes dukascopy-node \
+            if npx --yes dukascopy-node \
               -i deuidxeur -from "$FROM" -to "$TO" \
               -t m5 -p bid -utc 0 -f csv -fl \
               -dir dl -fn "ger40_m5_${YEAR}" \
-              -bs 3 -bp 2000 -r 5 -re -rp 5000
-            test -s "$FILE"
-            echo "M5 chunk rows: $(($(wc -l < "$FILE") - 1))"
+              -bs 3 -bp 2000 -r 5 -re -rp 5000; then
+              if [ -s "$FILE" ] && [ "$(wc -l < "$FILE")" -gt 1 ]; then
+                ROWS=$(($(wc -l < "$FILE") - 1))
+                echo "${YEAR},AVAILABLE,${ROWS}" | tee -a dl/m5_coverage.txt
+              else
+                echo "${YEAR},EMPTY_OR_HEADER_ONLY,0" | tee -a dl/m5_coverage.txt
+                rm -f "$FILE"
+              fi
+            else
+              echo "${YEAR},DOWNLOAD_FAILED_OR_NO_DATA,0" | tee -a dl/m5_coverage.txt
+              rm -f "$FILE"
+            fi
           done
-          head -n 1 dl/ger40_m5_2016.csv > dl/r192_ger40_m5.csv
-          for YEAR in $(seq 2016 2026); do
-            tail -n +2 "dl/ger40_m5_${YEAR}.csv" >> dl/r192_ger40_m5.csv
-          done
-          test -s dl/r192_ger40_m5.csv
+          python - <<'PY'
+          from pathlib import Path
+          import csv
+          years = list(range(2016, 2027))
+          available = []
+          for year in years:
+              p = Path(f"dl/ger40_m5_{year}.csv")
+              if p.exists() and p.stat().st_size:
+                  with p.open(newline="", encoding="utf-8-sig") as f:
+                      rows = csv.reader(f)
+                      header = next(rows, None)
+                      first = next(rows, None)
+                  if header and first:
+                      available.append((year, p, header))
+          if not available:
+              raise SystemExit("No usable GER40 M5 data returned for any year; research aborted.")
+          header = available[0][2]
+          out = Path("dl/r192_ger40_m5.csv")
+          total = 0
+          with out.open("w", newline="", encoding="utf-8") as dst:
+              writer = csv.writer(dst)
+              writer.writerow(header)
+              for year, path, _ in available:
+                  with path.open(newline="", encoding="utf-8-sig") as src:
+                      reader = csv.reader(src)
+                      next(reader, None)
+                      count = 0
+                      for row in reader:
+                          if row:
+                              writer.writerow(row)
+                              count += 1
+                  total += count
+                  print(f"M5_JOIN year={year} rows={count}")
+          print(f"M5_JOIN total_rows={total} available_years={[x[0] for x in available]}")
+          if total == 0:
+              raise SystemExit("Joined M5 file has no data rows.")
+          PY
+          echo "M5 coverage diagnostics:"
+          cat dl/m5_coverage.txt
           ls -lh dl/r192_ger40_m5.csv
           head -n 2 dl/r192_ger40_m5.csv
+          grep -E '^(2022|2023|2024|2025),AVAILABLE,' dl/m5_coverage.txt >/dev/null || {
+            echo "ERROR: At least one forward year (2022-2025) lacks usable M5 data."
+            exit 1
+          }
 
       - name: Run locked research
         run: python -u research/r192_ger40.py --h1-csv dl/r192_ger40_h1.csv --m5-csv dl/r192_ger40_m5.csv --out results
