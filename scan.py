@@ -209,15 +209,52 @@ def fetch_h1(inst, inst_state):
 
 
 def to_h4(h1):
-    local = h1.copy()
+    # Explicit New York wall-clock boundaries: 01, 05, 09, 13, 17, 21.
+    # During the spring DST change, 01->05 is 3 elapsed hours; during autumn
+    # it is 5 elapsed hours. This avoids allowing fixed UTC-duration resampling
+    # to move the intended local boundary on the DST-transition day.
+    local = h1.copy().sort_index()
     local.index = local.index.tz_convert(NY_TZ)
-    return local.resample("4h", offset="1h", label="left", closed="left").agg(
-        {"open": "first", "high": "max", "low": "min", "close": "last"}
-    ).dropna(subset=["open", "high", "low", "close"])
+    idx_utc = local.index.tz_convert("UTC")
+    first_day = pd.Timestamp(local.index.min().date()) - pd.Timedelta(days=1)
+    last_day = pd.Timestamp(local.index.max().date()) + pd.Timedelta(days=1)
+    boundaries = []
+    for day in pd.date_range(first_day, last_day, freq="D"):
+        date_text = day.strftime("%Y-%m-%d")
+        for hour in (1, 5, 9, 13, 17, 21):
+            # At the repeated 01:00 in autumn, choose the first occurrence (DST).
+            stamp = pd.Timestamp(f"{date_text} {hour:02d}:00").tz_localize(
+                NY_TZ, ambiguous=True, nonexistent="raise")
+            boundaries.append(stamp)
+    by_utc = {b.tz_convert("UTC").value: b for b in boundaries}
+    boundaries = [by_utc[k] for k in sorted(by_utc)]
+    records = []
+    for left, right in zip(boundaries, boundaries[1:]):
+        left_utc, right_utc = left.tz_convert("UTC"), right.tz_convert("UTC")
+        a = int(idx_utc.searchsorted(left_utc, side="left"))
+        b = int(idx_utc.searchsorted(right_utc, side="left"))
+        if b <= a:
+            continue
+        chunk = local.iloc[a:b]
+        records.append({
+            "label_ny": left,
+            "open": float(chunk["open"].iloc[0]),
+            "high": float(chunk["high"].max()),
+            "low": float(chunk["low"].min()),
+            "close": float(chunk["close"].iloc[-1]),
+            "bar_close_utc": right_utc,
+            "source_h1_count": int(len(chunk)),
+        })
+    if not records:
+        raise RuntimeError("No H4 bars could be built from H1 source data.")
+    h4 = pd.DataFrame(records).set_index("label_ny")
+    h4.index = pd.DatetimeIndex(h4.index).tz_convert(NY_TZ)
+    h4.index.name = "timestamp_ny"
+    return h4
 
 
 def completed_h4(h4, now):
-    close_utc = h4.index.tz_convert("UTC") + pd.Timedelta(hours=4)
+    close_utc = pd.DatetimeIndex(h4["bar_close_utc"]).tz_convert("UTC")
     return h4.loc[close_utc <= now].copy()
 
 
@@ -226,7 +263,7 @@ def diagnostics(h4):
     if n == 0:
         return {"h4_count": n, "close_ny": "N/A", "close_value": "N/A", "prior_high": "N/A"}
     label = h4.index[-1]
-    close_time = (label.tz_convert("UTC") + pd.Timedelta(hours=4)).tz_convert(NY_TZ)
+    close_time = pd.Timestamp(h4["bar_close_utc"].iloc[-1]).tz_convert(NY_TZ)
     prior_high = price(h4["high"].iloc[-1 - BREAKOUT_BARS:-1].max()) if n > BREAKOUT_BARS else "N/A"
     return {
         "h4_count": n,
@@ -353,7 +390,7 @@ def analyze(inst, name, h1, h4_all, h4, rec, now):
 
     label = h4.index[-1]
     label_utc = label.tz_convert("UTC")
-    close_time = label_utc + pd.Timedelta(hours=4)
+    close_time = pd.Timestamp(h4.loc[label, "bar_close_utc"]).tz_convert("UTC")
     close_ny = close_time.tz_convert(NY_TZ).strftime("%Y-%m-%d %H:%M:%S %Z")
     close_value = float(h4["close"].iloc[-1])
     prior_high = float(h4["high"].iloc[-1 - BREAKOUT_BARS:-1].max())
