@@ -35,7 +35,7 @@ jobs:
 
       - name: Install dependencies and compile
         run: |
-          python -m pip install --upgrade pip pandas numpy
+          python -m pip install --upgrade pip pandas numpy requests
           python -m py_compile scan.py research/r192_ger40.py research/r193_r191_baseline.py
           mkdir -p dl results
 
