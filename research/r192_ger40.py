@@ -228,7 +228,9 @@ def main():
     gate_ok=all(g["pass"] for g in gates.values())
     meta={"signal_data":"Dukascopy GER40/deuidxeur H1 BID (R191-compatible H4 source)",
           "entry_exit_data":"Dukascopy GER40/deuidxeur M5 BID","run_utc":now.isoformat(),
-          "source_duplicates_removed":{"h1":dups_h1,"m5":dups_m5},\n          "m5_source":{"rows":len(m5),"flat_rows":int(((m5.open==m5.high)&(m5.high==m5.low)&(m5.low==m5.close)).sum()),"start_utc":m5.index[0].tz_convert("UTC").isoformat(),"end_utc":m5.index[-1].tz_convert("UTC").isoformat()},\n          **datadiag,"hypothesis_count":len(CONFIGS),
+          "source_duplicates_removed":{"h1":dups_h1,"m5":dups_m5},
+          "m5_source":{"rows":len(m5),"flat_rows":int(((m5.open==m5.high)&(m5.high==m5.low)&(m5.low==m5.close)).sum()),"start_utc":m5.index[0].tz_convert("UTC").isoformat(),"end_utc":m5.index[-1].tz_convert("UTC").isoformat()},
+          **datadiag,"hypothesis_count":len(CONFIGS),
           "configs":CONFIGS,"truncation_gates":gates,
           "execution_assumptions":{"ideal":"next H4 bar open, R191 comparability only",
              "manual":"first non-flat M5 bar at or after signal close + 5 minutes, strictly within next 4 hours; otherwise skip",
