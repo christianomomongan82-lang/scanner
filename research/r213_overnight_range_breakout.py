@@ -6,12 +6,12 @@ Discovery is processed for all four US indices, then selection is frozen on
 Raw M5 BID OHLC only; no standard indicators; session times use New York DST.
 """
 from __future__ import annotations
-import json, math
+import argparse, json, math
 from pathlib import Path
 import numpy as np
 import pandas as pd
 
-DATA = Path('/content/drive/MyDrive/dukascopy_idx')
+DATA = Path('dl')
 OUT = Path('results/r213')
 TZ = 'America/New_York'
 RR = 2.0
@@ -261,10 +261,21 @@ def json_safe(x):
     return x
 
 def main():
+    global DATA, OUT
+    ap=argparse.ArgumentParser()
+    ap.add_argument('--data-dir',default='dl')
+    ap.add_argument('--out',default='results/r213')
+    args=ap.parse_args()
+    DATA=Path(args.data_dir); OUT=Path(args.out); OUT.mkdir(parents=True,exist_ok=True)
     parsed={}; flatmaps={}; data_diag={}
-    print('R213: local source/data checks',flush=True)
+    print('R213: source/data checks',flush=True)
     for inst in ASSETS:
-        x,flat,d=load_m5(DATA/f'{inst}_m5.csv')
+        gz_path=DATA/f'{inst}_m5.csv.gz'
+        csv_path=DATA/f'{inst}_m5.csv'
+        source_path=gz_path if gz_path.is_file() else csv_path if csv_path.is_file() else None
+        if source_path is None:
+            raise SystemExit(f'HARD STOP: missing M5 source data for {inst} in {DATA}')
+        x,flat,d=load_m5(source_path)
         parsed[inst]=x; flatmaps[inst]=flat; data_diag[inst]=d
         print(f'  {inst}: rows={len(x):,}, duplicates={d["duplicates_removed"]}, flat={d["flat_rows"]:,}, end={d["end_utc"]}',flush=True)
     discovery_trades={}; discovery_rows=[]; diags={}; gate_counts={}
