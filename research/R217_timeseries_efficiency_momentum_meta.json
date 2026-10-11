@@ -1,0 +1,81 @@
+{
+  "experiment": "R217",
+  "decision": "REJECT_FORWARD_GATE_FAILED",
+  "selected_symbol": "jpnidxjpy",
+  "locked_rules": {
+    "lookback_hours": 24,
+    "minimum_absolute_24h_return_pct": 0.25,
+    "minimum_directional_efficiency": 0.35,
+    "signal_closes_utc": [
+      "00:00",
+      "04:00",
+      "08:00",
+      "12:00",
+      "16:00",
+      "20:00"
+    ],
+    "entry": "next exact H1 open",
+    "holding_hours": 4,
+    "exit": "schedule at entry + 4h; if the source bar is flat, exit at first later non-flat source open",
+    "flat_bar_handling": "flat signal/entry bars do not create trades; scheduled exit delayed to first later non-flat source open",
+    "costs_round_trip_bps": [
+      1,
+      2
+    ],
+    "selection_rule": ">=100 closed discovery trades and PF @2bps >=1.00; choose highest PF @2bps, tie-break by more trades",
+    "forward_gate": {
+      "closed_trades_min": 30,
+      "pf_1bps_min": 1.15,
+      "pf_2bps_min": 1.15,
+      "each_qualifying_year_pf_1bps_min": 1
+    },
+    "periods": {
+      "discovery": [
+        "2017-01-01T00:00:00Z",
+        "2022-01-01T00:00:00Z"
+      ],
+      "forward": [
+        "2022-01-01T00:00:00Z",
+        "2026-01-01T00:00:00Z"
+      ],
+      "oos": [
+        "2026-01-01T00:00:00Z",
+        "2026-10-10T00:00:00Z"
+      ]
+    }
+  },
+  "selected_period_summaries": [
+    {
+      "period": "discovery_2017_2021",
+      "closed_trades": 2084,
+      "pf_1bps": 1.123450712,
+      "pf_2bps": 1.057942921,
+      "mean_net_1bps": 1.939375298,
+      "mean_net_2bps": 0.939375298
+    },
+    {
+      "period": "forward_2022_2025",
+      "closed_trades": 1611,
+      "pf_1bps": 0.948805112,
+      "pf_2bps": 0.896617467,
+      "mean_net_1bps": -0.9290103,
+      "mean_net_2bps": -1.9290103
+    },
+    {
+      "period": "oos_2026_cutoff",
+      "closed_trades": 327,
+      "pf_1bps": 0.940899342,
+      "pf_2bps": 0.904608497,
+      "mean_net_1bps": -1.549187255,
+      "mean_net_2bps": -2.549187256
+    }
+  ],
+  "tests_passed": 15,
+  "tests_total": 15,
+  "limitations": [
+    "BID-only",
+    "1/2 bps are modeled costs, not verified live broker/prop costs",
+    "multiple-testing risk across ten candidate instruments",
+    "not live/funded readiness"
+  ]
+}
