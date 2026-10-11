@@ -1,0 +1,120 @@
+{
+  "experiment": "R215",
+  "decision": "REJECT_NO_DISCOVERY_ELIGIBLE_PAIR",
+  "hypothesis": "paired relative-return divergence mean reversion",
+  "locked_rules": {
+    "return_horizon_bars": 12,
+    "z_window_bars": 144,
+    "entry_z": 2,
+    "exit_z": 0.25,
+    "stop_z": 3.5,
+    "max_hold_bars": 144,
+    "cost_bps": [
+      1,
+      2
+    ],
+    "periods": {
+      "discovery": [
+        "2017-01-01T00:00:00Z",
+        "2022-01-01T00:00:00Z"
+      ],
+      "forward": [
+        "2022-01-01T00:00:00Z",
+        "2026-01-01T00:00:00Z"
+      ],
+      "oos": [
+        "2026-01-01T00:00:00Z",
+        "2026-10-10T00:00:00Z"
+      ]
+    },
+    "selection_rule": "eligible if discovery closed >=30 and PF @2bps >=1.00; fewest closed trades, tie-break higher PF@2bps"
+  },
+  "discovery_candidates": [
+    {
+      "pair": "US500 vs US Tech 100",
+      "discovery_closed": 2700,
+      "discovery_pf_1bps": 0.621978375205956,
+      "discovery_pf_2bps": 0.4270907067107969,
+      "causality_prefix_gate": true,
+      "paired_rows": 886031,
+      "feature_valid_rows": 223085,
+      "paired_flat_or_inactive_rows": 208027
+    },
+    {
+      "pair": "US500 vs US30",
+      "discovery_closed": 2920,
+      "discovery_pf_1bps": 0.507781594160107,
+      "discovery_pf_2bps": 0.2607813624519664,
+      "causality_prefix_gate": true,
+      "paired_rows": 886031,
+      "feature_valid_rows": 224013,
+      "paired_flat_or_inactive_rows": 207718
+    },
+    {
+      "pair": "US500 vs US Small Cap 2000",
+      "discovery_closed": 2654,
+      "discovery_pf_1bps": 0.9315964242351406,
+      "discovery_pf_2bps": 0.7262818354238456,
+      "causality_prefix_gate": true,
+      "paired_rows": 699130,
+      "feature_valid_rows": 198665,
+      "paired_flat_or_inactive_rows": 170872
+    }
+  ],
+  "source_validation": [
+    {
+      "symbol": "usa30idxusd",
+      "rows": 886038,
+      "duplicates": 0,
+      "off_grid": 0,
+      "nonfinite_ohlc": 0,
+      "invalid_ohlc": 0,
+      "flat_rows": 206175
+    },
+    {
+      "symbol": "usa500idxusd",
+      "rows": 886206,
+      "duplicates": 0,
+      "off_grid": 0,
+      "nonfinite_ohlc": 0,
+      "invalid_ohlc": 0,
+      "flat_rows": 207186
+    },
+    {
+      "symbol": "usatechidxusd",
+      "rows": 886039,
+      "duplicates": 0,
+      "off_grid": 0,
+      "nonfinite_ohlc": 0,
+      "invalid_ohlc": 0,
+      "flat_rows": 206491
+    },
+    {
+      "symbol": "ussc2000idxusd",
+      "rows": 699134,
+      "duplicates": 0,
+      "off_grid": 0,
+      "nonfinite_ohlc": 0,
+      "invalid_ohlc": 0,
+      "flat_rows": 170238
+    }
+  ],
+  "unit_tests": {
+    "source_validation_all_passed": {
+      "passed": true,
+      "detail": "4 M5 files; zero duplicates/off-grid/nonfinite/invalid OHLC rows"
+    },
+    "feature_truncation_prefix_causality": {
+      "passed": true,
+      "detail": "truncated-prefix z values match full-series z values for all candidate pairs"
+    },
+    "no_forward_fill_or_synthetic_bars": {
+      "passed": true,
+      "detail": "exact timestamp inner join; flat bars invalidate feature windows; no forward-fill/resampling"
+    },
+    "discovery_candidate_gate_applied_as_locked": {
+      "passed": true,
+      "detail": "no candidate met >=30 closed discovery trades and PF@2bps >=1.00; therefore forward/OOS not run"
+    }
+  }
+}
