@@ -205,8 +205,8 @@ def main():
                     "pf_entry_cohort":row["pf"]})
         worst=min(year_pfs) if year_pfs else None
         suspicious=isinstance(f1["pf"],(int,float)) and math.isfinite(float(f1["pf"])) and float(f1["pf"])>1.4
-        normal_pass=(f1["n"]>=30 and isinstance(f1["pf"],(int,float)) and f1["pf"]>=1.15
-            and isinstance(f2["pf"],(int,float)) and f2["pf"]>=1.15 and (worst is None or worst>=1.0))
+        normal_pass=(f1["n"]>=30 and isinstance(f1["pf"],(int,float)) and math.isfinite(float(f1["pf"])) and f1["pf"]>=1.15
+            and isinstance(f2["pf"],(int,float)) and math.isfinite(float(f2["pf"])) and f2["pf"]>=1.15 and (worst is None or worst>=1.0))
         verdict="HOLD_EXTRA_AUDIT" if normal_pass and suspicious else "PASS" if normal_pass else "REJECT"
         o1=metric(selected_trades,O0,common_end,1); o2=metric(selected_trades,O0,common_end,2)
         selected_result={"instrument":inst,"instrument_name":pick["instrument_name"],
