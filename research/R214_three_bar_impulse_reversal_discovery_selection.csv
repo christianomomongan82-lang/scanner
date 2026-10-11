@@ -1,0 +1,11 @@
+instrument,instrument_name,discovery_closed,pf_1bp,pf_2bp,eligible
+usa500idxusd,USA 500 / S&P 500,148,1.100292674,1.0549961,True
+usatechidxusd,USA 100 Tech / Nasdaq 100,150,0.8548348,0.8265097,False
+usa30idxusd,USA 30 / Dow Jones,167,0.9917466,0.9497310,False
+ussc2000idxusd,US Small Cap 2000,126,0.9698190,0.9448320,False
+deuidxeur,Germany 40 / DAX,143,1.237060909,1.194427334,True
+gbridxgbp,FTSE 100,149,1.186966,1.143556,True
+fraidxeur,France 40 / CAC 40,16,0.755962,0.731172,False
+eusidxeur,EU Stocks 50,11,2.146270,2.048809,False
+ausidxaud,Australia 200,180,1.093103,1.049660,True
+jpnidxjpy,Japan 200+,172,1.055305,1.012434,True
