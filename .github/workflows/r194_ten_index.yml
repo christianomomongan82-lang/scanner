@@ -138,7 +138,11 @@ jobs:
                 NEXT=$((YEAR + 1))
                 FROM="${YEAR}-01-01"
                 if [ "$YEAR" -eq 2026 ]; then TO="now"; else TO="${NEXT}-01-01"; fi
-                if [ "$TF" = "h1" ]; then BS=3; BP=2000; RP=5000; else BS=10; BP=1000; RP=1000; fi
+                if [ "$TF" = "h1" ]; then
+                  BS=3; BP=2000; RP=5000; EXTRA=(-re)
+                else
+                  BS=10; BP=1000; RP=1000; EXTRA=()
+                fi
                 MAX_ATTEMPTS=3
                 if [ "$YEAR" -le 2018 ]; then MAX_ATTEMPTS=1; fi
                 OK=false
@@ -149,7 +153,7 @@ jobs:
                     -i "$INST" -from "$FROM" -to "$TO" \
                     -t "$TF" -p bid -utc 0 -f csv -fl \
                     -dir dl/chunks -fn "$BASE" \
-                    -bs "$BS" -bp "$BP" -r 5 -re -rp "$RP"; then
+                    -bs "$BS" -bp "$BP" -r 5 "${EXTRA[@]}" -rp "$RP"; then
                     LINES=$(wc -l < "$RAW" 2>/dev/null || echo 0)
                     if [ -s "$RAW" ] && [ "$LINES" -gt 1000 ]; then
                       if gzip -1 "$RAW" && gzip -t "$CHUNK"; then
