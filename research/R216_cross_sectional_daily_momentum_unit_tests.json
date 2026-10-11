@@ -1,0 +1,52 @@
+[
+  {
+    "test": "entry_after_signal_close_and_exit_exactly_24h_later",
+    "passed": true,
+    "details": "entry = signal bar timestamp + 5 min; exit = entry + 24 h"
+  },
+  {
+    "test": "at_most_one_portfolio_per_signal_timestamp",
+    "passed": true,
+    "details": "one daily scheduled decision"
+  },
+  {
+    "test": "long_short_are_different_assets",
+    "passed": true,
+    "details": "long/short ranks are distinct"
+  },
+  {
+    "test": "closed_trades_have_finite_pnl",
+    "passed": true,
+    "details": "finite realized return records"
+  },
+  {
+    "test": "modeled_costs_reduce_pnl_by_exact_amount",
+    "passed": true,
+    "details": "cost is 1 or 2 bps per round-trip equal-weight portfolio"
+  },
+  {
+    "test": "actual_truncation_prefix_causality",
+    "passed": true,
+    "details": "full vs truncated trade records before 2020-01-01T00:00:00Z; full=196, truncated=196"
+  },
+  {
+    "test": "discovery_period_and_exit_boundary",
+    "passed": true,
+    "details": "both entry and exit remain inside discovery period"
+  },
+  {
+    "test": "source_index_strictly_increasing",
+    "passed": true,
+    "details": "exact common timestamp index"
+  },
+  {
+    "test": "causal_signal_formula_explicit",
+    "passed": true,
+    "details": "signal uses closes at 15:55 UTC and 15:55 UTC one day earlier; entry at following 16:00 UTC open"
+  },
+  {
+    "test": "all_four_source_files_integrity",
+    "passed": true,
+    "details": "four files checked; raw rows, duplicates, grid, OHLC relations, finiteness"
+  }
+]
