@@ -1,0 +1,39 @@
+{
+  "research": "R205 independent local reproduction",
+  "verdict": "REJECT",
+  "source_run": 38160487617,
+  "source_data": "10 H1/M5 BID-only snapshot pairs; timestamps in milliseconds since Unix epoch, UTC",
+  "audit_comparison": {
+    "original_trade_rows": 1401,
+    "local_trade_rows": 1401,
+    "trade_columns_compared": 23,
+    "mismatched_trade_fields": 0,
+    "instrument_mode_ledger_rows_compared": 20,
+    "instrument_mode_ledger_rows_matched": 20,
+    "all_h4_bar_and_skipped_bin_counts_match": true,
+    "discovery_selection_and_forward_summary_match": true,
+    "overall_pass": true
+  },
+  "selected_asset": "ussc2000idxusd",
+  "discovery": {
+    "closed": 19,
+    "pf_1bp": 1.7912177778895537,
+    "pf_2bp": 1.7824989431472746
+  },
+  "forward_2022_2025": {
+    "closed": 29,
+    "pf_1bp": 1.0487076920381695,
+    "pf_2bp": 1.0448042901362882,
+    "worst_qualifying_entry_year_pf_1bp": 0.5697649543723992
+  },
+  "reasons": [
+    "forward closed trades below 30",
+    "forward PF below 1.15 at both modeled costs",
+    "worst qualifying annual entry cohort PF below 1.00"
+  ],
+  "caveats": [
+    "Source data are BID-only",
+    "1/2 bps are modeled price-cost stress, not measured broker costs",
+    "not evidence of funded/live readiness"
+  ]
+}
