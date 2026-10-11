@@ -1,0 +1,3 @@
+instrument,instrument_name,cost_bps_rt,entries,closed,censored,pf,common_oos_cutoff_utc
+ussc2000idxusd,US Small Cap 2000,1,181,181,0,1.0414219374194038,2026-10-09T20:15:00+00:00
+ussc2000idxusd,US Small Cap 2000,2,181,181,0,0.9679615955216198,2026-10-09T20:15:00+00:00
