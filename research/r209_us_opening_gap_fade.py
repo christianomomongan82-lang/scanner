@@ -310,7 +310,7 @@ def simulate_candidates(m5, candidates):
         exit_price = np.nan
         reason = "OPEN_AT_DATA_END"
         flat_skipped = 0
-        candidate_day = candidate["ny_date"]
+        candidate_day = pd.Timestamp(candidate["ny_date"]).date()
         for j in range(entry_i, len(mt)):
             if trade_dates[j] != candidate_day:
                 # End-of-session is mandatory for an opening-gap fade.
@@ -600,7 +600,7 @@ def main():
             "stop": "first 09:30 M5 candle high for shorts or low for longs",
             "target": "prior valid RTH session close; only trades with target reward/risk >=2 at entry are eligible",
             "time_exit": "any open position is closed at the regular-session close if neither stop nor target is hit",
-            "exit": "M5 BID OHLC; SL before TP; gap through stop fills at open; no time stop; flat synthetic M5 bars skipped",
+            "exit": "M5 BID OHLC; SL before TP; gap through stop fills at open; close at 16:00 ET when neither stop nor target hits; flat synthetic M5 bars skipped",
             "cost_model": "1bp and 2bp modeled round-trip cost relative to entry price; not verified actual spread, commissions or slippage",
             "selection": "discovery-only eligibility: >=50 closed trades and PF@2bp >=1.00; among eligible choose highest discovery closed-trade count, then PF@2bp",
             "validation": "forward 2022-2025 requires >=30 closed trades, PF >=1.15 at both modeled costs, and worst eligible entry-year cohort PF >=1.00; PF >1.40 requires separate extra audit",
