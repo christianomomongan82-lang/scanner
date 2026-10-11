@@ -192,7 +192,7 @@ jobs:
           from pathlib import Path
           from research.r192_ger40 import parse_data
           assets = ("usa500idxusd","usatechidxusd","usa30idxusd","ussc2000idxusd","deuidxeur","gbridxgbp","fraidxeur","eusidxeur","ausidxaud","jpnidxjpy")
-          required = set(range(2019, 2027))
+          required = set(range(2019, 2026))
           for inst in assets:
               for tf in ("h1","m5"):
                   final = Path("dl") / f"{inst}_{tf}.csv.gz"
