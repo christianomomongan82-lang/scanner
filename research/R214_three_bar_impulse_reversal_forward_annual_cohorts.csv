@@ -1,0 +1,9 @@
+instrument,entry_year,cost_bps_rt,entries,closed,censored,pf,cohort_gate_applicable,cohort_gate_pass
+deuidxeur,2022,1,43,43,0,0.4455073776916738,True,False
+deuidxeur,2022,2,43,43,0,0.435534992,False,
+deuidxeur,2023,1,48,48,0,1.1579316,True,True
+deuidxeur,2023,2,48,48,0,1.1177050,False,
+deuidxeur,2024,1,34,34,0,0.6800382,True,False
+deuidxeur,2024,2,34,34,0,0.6461820,False,
+deuidxeur,2025,1,46,46,0,1.1480630,True,True
+deuidxeur,2025,2,46,46,0,1.0920760,False,
