@@ -1,0 +1,4 @@
+pair,a_symbol,b_symbol,discovery_entries,discovery_closed,discovery_censored,discovery_pf_1bps,discovery_pf_2bps,causality_prefix_gate,paired_rows,feature_valid_rows,paired_flat_or_inactive_rows,min_time,max_time
+US500 vs US Tech 100,usa500idxusd,usatechidxusd,2700,2700,0,0.621978375205956,0.4270907067107969,True,886031,223085,208027,2016-01-04T00:00:00+00:00,2026-10-09T20:10:00+00:00
+US500 vs US30,usa500idxusd,usa30idxusd,2920,2920,0,0.507781594160107,0.2607813624519664,True,886031,224013,207718,2016-01-04T00:00:00+00:00,2026-10-09T20:10:00+00:00
+US500 vs US Small Cap 2000,usa500idxusd,ussc2000idxusd,2654,2654,0,0.9315964242351406,0.7262818354238456,True,699130,198665,170872,2018-08-08T13:30:00+00:00,2026-10-09T20:10:00+00:00
