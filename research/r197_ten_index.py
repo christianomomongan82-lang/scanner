@@ -3,7 +3,7 @@
 
 Rule locked before reading forward results:
 - long-only; completed H4 close exceeds prior 55-bar high and closes in the top 25% of its own candle range;
-- stop is the lowest low of the signal H4 bar and prior 26 bars; target 1.5R;
+- stop is the lowest low of the signal H4 bar and prior 26 bars; target 2R;
 - manual execution at first non-flat M5 bar >=5 minutes after signal close and
   before the next actual H4 close; SL-first intrabar handling and gap-at-open;
 - select the lowest-frequency instrument using 2017-2021 discovery only.
