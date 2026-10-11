@@ -72,7 +72,7 @@ def truncation_gate(h4, full_sig, full_stop):
                         and candle_range>=CFG["range_multiple"]*prior_median
                         and close_location>=CFG["close_location_min"])
         if prefix_sig != bool(full_sig[i]):
-            return {"pass":False,"checked":checked,"bar":int(i),"reason":"panic-drop signal mismatch"}
+            return {"pass":False,"checked":checked,"bar":int(i),"reason":"bullish expansion signal mismatch"}
         if not np.isclose(float(lo[i]),float(full_stop[i]),rtol=0,atol=1e-12):
             return {"pass":False,"checked":checked,"bar":int(i),"reason":"signal-low stop mismatch"}
     return {"pass":True,"checked":checked,"reason":"all completed-bar prefixes match"}
