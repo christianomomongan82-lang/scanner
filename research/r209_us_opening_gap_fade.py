@@ -278,6 +278,9 @@ def simulate_candidates(m5, candidates):
     skipped_no_fill = 0
     skipped_invalid_risk = 0
     last_exit = None
+    local_trade = mt.tz_convert(TZ_NY)
+    trade_minutes = (local_trade.hour * 60 + local_trade.minute).to_numpy(dtype=np.int16)
+    trade_dates = np.asarray(local_trade.date, dtype=object)
 
     for candidate in candidates:
         signal_close = pd.Timestamp(candidate["signal_close_utc"])
@@ -296,7 +299,7 @@ def simulate_candidates(m5, candidates):
         entry_time = mt[entry_i]
         entry = float(op[entry_i])
         direction = int(candidate["direction_sign"])
-        stop = float(candidate["or_low"] if direction == 1 else candidate["or_high"])
+        stop = float(candidate["stop"])
         risk = entry - stop if direction == 1 else stop - entry
         if not math.isfinite(risk) or risk <= 0:
             skipped_invalid_risk += 1
@@ -307,9 +310,6 @@ def simulate_candidates(m5, candidates):
         exit_price = np.nan
         reason = "OPEN_AT_DATA_END"
         flat_skipped = 0
-        local_trade = mt.tz_convert(TZ_NY)
-        trade_minutes = (local_trade.hour * 60 + local_trade.minute).to_numpy(dtype=np.int16)
-        trade_dates = np.asarray(local_trade.date, dtype=object)
         candidate_day = candidate["ny_date"]
         for j in range(entry_i, len(mt)):
             if trade_dates[j] != candidate_day:
