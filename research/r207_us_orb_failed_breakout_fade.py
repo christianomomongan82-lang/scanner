@@ -545,10 +545,9 @@ def main():
         "locked_rule": {
             "session_timezone": TZ_NY,
             "opening_range": "six M5 bars opening 09:30, 09:35, 09:40, 09:45, 09:50 and 09:55 New York time; require all six and at least four non-flat bars",
-            "signal": "first M5 close after 10:00 and no later than 15:50 ET that closes beyond the opening-range high or low",
-            "entry": "first non-flat M5 open at or after the signal close and before 16:00 ET on the same New York date",
-            "attempt_limit": "one first-breakout attempt per instrument per NY session date",
-            "failure_confirmation": "first M5 close back inside the opening range within 60 minutes after the first close outside it; a wick alone is insufficient",
+            "trigger": "first non-flat M5 close after 10:00 and no later than 15:50 ET beyond the opening-range high or low",
+            "failure_confirmation": "within 60 minutes after the trigger, a subsequent non-flat M5 close returns inside the range; enter against the initial breakout at the next non-flat M5 open before 16:00 ET",
+            "attempt_limit": "one candidate per instrument per NY session date; only the first initial breakout is considered",
             "stop": "most adverse high/low from the first breakout bar through the confirmed failure close",
             "target": "2R from entry based on entry-to-excursion-stop risk",
             "exit": "M5 BID OHLC; SL before TP; gap through stop fills at open; no time stop; flat synthetic M5 bars skipped",
@@ -564,7 +563,7 @@ def main():
         "selection_eligible_instruments": eligible["instrument"].tolist(),
         "locked_selected_candidate": selected,
         "guardrails": [
-            "Only one pre-registered ORB rule is tested; no parameter grid.",
+            "Only one pre-registered failed-opening-range-breakout fade rule is tested; no parameter grid.",
             "Selection is frozen on discovery only; do not replace a failed candidate after viewing forward results.",
             "BID-only M5 execution is a screening proxy and is not proof of executable short-side fills.",
             "Broker commissions, instrument-specific spread and live slippage remain unverified.",
@@ -593,7 +592,7 @@ def main():
         ]
         vals = [float(x) for x in c["pf_entry_cohort"] if finite_number(x)]
         ledger_df.loc[ix, "forward_worst_entry_year_pf_1bp_n5plus"] = min(vals) if vals else np.nan
-    print(ledger_df[cols[:-1] + ["forward_worst_entry_year_pf_1bp_n5plus"] + cols[-3:]].to_string(index=False), flush=True)
+    print(ledger_df[cols].to_string(index=False), flush=True)
     print("\nLOCKED SELECTION + FORWARD VERDICT:", flush=True)
     print(json.dumps(selected, indent=2, default=safe), flush=True)
     print(f"Common OOS cutoff UTC: {common_end.isoformat()}", flush=True)
