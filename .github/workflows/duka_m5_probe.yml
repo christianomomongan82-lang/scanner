@@ -1,0 +1,65 @@
+name: Diagnose Dukascopy M5 Download
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/duka_m5_probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Probe current downloader 1.50.0 using known working USA500 M5 2019
+        env:
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        shell: bash
+        run: |
+          mkdir -p probe/latest probe/legacy logs
+          set +e
+          npx --yes dukascopy-node@1.50.0 \
+            -i usa500idxusd -from 2019-01-01 -to 2020-01-01 \
+            -t m5 -p bid -utc 0 -f csv -fl \
+            -dir probe/latest -fn usa500idxusd_m5_2019 \
+            -bs 10 -bp 1000 -r 5 -rp 1000 2>&1 | tee logs/latest.log
+          RC=\${PIPESTATUS[0]}
+          echo "LATEST_EXIT=$RC"
+          FILE=probe/latest/usa500idxusd_m5_2019.csv
+          if [ -s "$FILE" ]; then echo "LATEST_BYTES=$(wc -c < "$FILE")"; echo "LATEST_ROWS=$(($(wc -l < "$FILE") - 1))"; else echo "LATEST_FILE_MISSING"; fi
+          exit 0
+      - name: Probe stable downloader 1.46.4 on the exact same period
+        env:
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        shell: bash
+        run: |
+          mkdir -p probe/legacy logs
+          set +e
+          npx --yes dukascopy-node@1.46.4 \
+            -i usa500idxusd -from 2019-01-01 -to 2020-01-01 \
+            -t m5 -p bid -utc 0 -f csv -fl \
+            -dir probe/legacy -fn usa500idxusd_m5_2019 \
+            -bs 10 -bp 1000 -r 5 -rp 1000 2>&1 | tee logs/legacy.log
+          RC=\${PIPESTATUS[0]}
+          echo "LEGACY_EXIT=$RC"
+          FILE=probe/legacy/usa500idxusd_m5_2019.csv
+          if [ -s "$FILE" ]; then echo "LEGACY_BYTES=$(wc -c < "$FILE")"; echo "LEGACY_ROWS=$(($(wc -l < "$FILE") - 1))"; else echo "LEGACY_FILE_MISSING"; fi
+          exit 0
+      - name: Upload diagnostic logs and any downloaded sample data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dukascopy-M5-probe
+          path: |
+            logs/
+            probe/
+          if-no-files-found: warn
+          retention-days: 14
