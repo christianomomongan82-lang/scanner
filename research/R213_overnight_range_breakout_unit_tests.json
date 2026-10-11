@@ -1,0 +1,43 @@
+{
+  "suite": "R213 execution and timezone tests",
+  "passed": 9,
+  "failed": 0,
+  "tests": [
+    {
+      "name": "Long candle touching stop and target: stop first",
+      "result": "PASS"
+    },
+    {
+      "name": "Long stop gap: fill at open",
+      "result": "PASS"
+    },
+    {
+      "name": "Short candle touching stop and target: stop first",
+      "result": "PASS"
+    },
+    {
+      "name": "Scheduled 15:55 liquidation uses open and not future high/low",
+      "result": "PASS"
+    },
+    {
+      "name": "America/New_York session grid on a regular EDT weekday",
+      "result": "PASS"
+    },
+    {
+      "name": "America/New_York session grid on a regular EST weekday",
+      "result": "PASS"
+    },
+    {
+      "name": "Every emitted entry occurs after completed signal close",
+      "result": "PASS"
+    },
+    {
+      "name": "Every trade exits after its entry timestamp",
+      "result": "PASS"
+    },
+    {
+      "name": "At most one trade per instrument and New York session date",
+      "result": "PASS"
+    }
+  ]
+}
