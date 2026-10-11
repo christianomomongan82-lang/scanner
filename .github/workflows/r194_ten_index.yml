@@ -66,6 +66,51 @@ jobs:
           assert len(fall)==1 and float((fall.bar_close_utc.iloc[0]-fall.index[0].tz_convert("UTC"))/pd.Timedelta(hours=1))==5
           print("PASS: live scanner and research engine match exactly; DST transition intervals are 3h/5h.")
           PY
+      - name: Preflight all ten M5 feeds and seed cache with 2025 chunks
+        env:
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dl/chunks
+          for INST in usa500idxusd usatechidxusd usa30idxusd ussc2000idxusd deuidxeur gbridxgbp fraidxeur eusidxeur ausidxaud jpnidxjpy; do
+            BASE="${INST}_m5_2025"
+            CHUNK="dl/chunks/${BASE}.csv.gz"
+            RAW="dl/chunks/${BASE}.csv"
+            if [ -s "$CHUNK" ] && gzip -t "$CHUNK" >/dev/null 2>&1; then
+              echo "PREFLIGHT CACHE HIT: $BASE"
+              continue
+            fi
+            OK=false
+            for ATTEMPT in 1 2 3; do
+              rm -f "$RAW"
+              echo "PREFLIGHT M5 $INST year=2025 attempt=$ATTEMPT/3"
+              if npx --yes dukascopy-node@1.50.0 \
+                -i "$INST" -from "2025-01-01" -to "2026-01-01" \
+                -t m5 -p bid -utc 0 -f csv -fl \
+                -dir dl/chunks -fn "$BASE" \
+                -bs 10 -bp 1000 -r 5 -rp 1000; then
+                LINES=$(wc -l < "$RAW" 2>/dev/null || echo 0)
+                if [ -s "$RAW" ] && [ "$LINES" -gt 1000 ]; then
+                  gzip -1 "$RAW"
+                  gzip -t "$CHUNK"
+                  echo "PREFLIGHT PASS $INST rows=$((LINES - 1))"
+                  OK=true
+                  break
+                fi
+              fi
+              rm -f "$RAW"
+              if [ "$ATTEMPT" -lt 3 ]; then sleep $((ATTEMPT * 15)); fi
+            done
+            if [ "$OK" != "true" ]; then
+              echo "PREFLIGHT FAILED: M5 feed for $INST is empty/unavailable after retries."
+              echo "Stopping before the full download to avoid wasting another long run."
+              exit 1
+            fi
+            sleep 8
+          done
+          echo "PASS: all ten M5 feeds returned real historical data; 2025 chunks are cached for the full run."
+
       - name: Download missing data by annual chunks; reuse cached chunks
         env:
           NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
@@ -100,7 +145,7 @@ jobs:
                 for ATTEMPT in $(seq 1 "$MAX_ATTEMPTS"); do
                   rm -f "$RAW"
                   echo "DOWNLOAD $BASE: $FROM to $TO (attempt $ATTEMPT/$MAX_ATTEMPTS)"
-                  if npx --yes dukascopy-node \
+                  if npx --yes dukascopy-node@1.50.0 \
                     -i "$INST" -from "$FROM" -to "$TO" \
                     -t "$TF" -p bid -utc 0 -f csv -fl \
                     -dir dl/chunks -fn "$BASE" \
@@ -115,15 +160,20 @@ jobs:
                     fi
                   fi
                   rm -f "$RAW"
-                  if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then sleep $((ATTEMPT * 5)); fi
+                  if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then sleep $((ATTEMPT * 15)); fi
                 done
                 if [ "$OK" != "true" ]; then
                   if [ "$YEAR" -le 2018 ]; then
                     echo "NO EARLY HISTORY: $BASE; allowed only before 2019."
                     continue
                   fi
+                  if [ "$YEAR" -eq 2026 ]; then
+                    echo "NO CURRENT OOS DATA: $BASE; optional 2026 sample skipped."
+                    continue
+                  fi
                   echo "ERROR: required chunk unavailable: $BASE"
-                  FAILURES+=("$BASE")
+                  echo "Stopping early. Partial data will be cached for the next run."
+                  exit 1
                 fi
               done
             done
