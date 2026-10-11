@@ -1,0 +1,77 @@
+[
+  {
+    "test": "usa500idxusd_truncation_causality",
+    "passed": true,
+    "details": "full vs truncated feature and trade ledger match"
+  },
+  {
+    "test": "usatechidxusd_truncation_causality",
+    "passed": true,
+    "details": "full vs truncated feature and trade ledger match"
+  },
+  {
+    "test": "usa30idxusd_truncation_causality",
+    "passed": true,
+    "details": "full vs truncated feature and trade ledger match"
+  },
+  {
+    "test": "ussc2000idxusd_truncation_causality",
+    "passed": true,
+    "details": "full vs truncated feature and trade ledger match"
+  },
+  {
+    "test": "deuidxeur_truncation_causality",
+    "passed": true,
+    "details": "full vs truncated feature and trade ledger match"
+  },
+  {
+    "test": "gbridxgbp_truncation_causality",
+    "passed": true,
+    "details": "full vs truncated feature and trade ledger match"
+  },
+  {
+    "test": "fraidxeur_truncation_causality",
+    "passed": true,
+    "details": "full vs truncated feature and trade ledger match"
+  },
+  {
+    "test": "eusidxeur_truncation_causality",
+    "passed": true,
+    "details": "full vs truncated feature and trade ledger match"
+  },
+  {
+    "test": "ausidxaud_truncation_causality",
+    "passed": true,
+    "details": "full vs truncated feature and trade ledger match"
+  },
+  {
+    "test": "jpnidxjpy_truncation_causality",
+    "passed": true,
+    "details": "full vs truncated feature and trade ledger match"
+  },
+  {
+    "test": "all_ten_source_files_integrity",
+    "passed": true,
+    "details": "no timestamp duplicates/off-hour-grid intervals/nonfinite/invalid OHLC rows"
+  },
+  {
+    "test": "entry_after_completed_signal_bar_and_time_exit",
+    "passed": true,
+    "details": "next H1 open; scheduled exit +4h or first later non-flat open"
+  },
+  {
+    "test": "only_registered_4h_signal_times",
+    "passed": true,
+    "details": "UTC close schedule checked"
+  },
+  {
+    "test": "modeled_costs_deducted_exactly",
+    "passed": true,
+    "details": "1/2 bps subtracted from gross bps"
+  },
+  {
+    "test": "no_duplicate_signal_trades_per_symbol",
+    "passed": true,
+    "details": "one position max per symbol"
+  }
+]
