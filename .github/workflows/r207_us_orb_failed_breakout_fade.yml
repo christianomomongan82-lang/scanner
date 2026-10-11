@@ -35,7 +35,7 @@ jobs:
           python - <<'PY'
           import pandas as pd
           from datetime import date
-          from research.r206_us_opening_range_breakout import session_bounds_utc
+          from research.r207_us_orb_failed_breakout_fade import session_bounds_utc
           spring_open, spring_close = session_bounds_utc(date(2025, 3, 10))
           fall_open, fall_close = session_bounds_utc(date(2025, 11, 3))
           assert spring_open == pd.Timestamp("2025-03-10T13:30:00Z")
