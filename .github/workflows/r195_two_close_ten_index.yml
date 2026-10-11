@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - "research/r195_ten_index.py"
-      - ".github/workflows/r194_ten_index.yml"
+      - ".github/workflows/r195_two_close_ten_index.yml"
   workflow_dispatch:
 
 permissions:
