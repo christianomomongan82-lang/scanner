@@ -1,0 +1,18 @@
+{
+  "source_validation_all_passed": {
+    "passed": true,
+    "detail": "4 M5 files; zero duplicates/off-grid/nonfinite/invalid OHLC rows"
+  },
+  "feature_truncation_prefix_causality": {
+    "passed": true,
+    "detail": "truncated-prefix z values match full-series z values for all candidate pairs"
+  },
+  "no_forward_fill_or_synthetic_bars": {
+    "passed": true,
+    "detail": "exact timestamp inner join; flat bars invalidate feature windows; no forward-fill/resampling"
+  },
+  "discovery_candidate_gate_applied_as_locked": {
+    "passed": true,
+    "detail": "no candidate met >=30 closed discovery trades and PF@2bps >=1.00; therefore forward/OOS not run"
+  }
+}
