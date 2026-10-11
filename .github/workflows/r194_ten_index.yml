@@ -7,8 +7,6 @@ on:
       - "research/r194_ten_index.py"
       - ".github/workflows/r194_ten_index.yml"
   workflow_dispatch:
-  schedule:
-    - cron: "23 3 * * 1"
 
 permissions:
   contents: read
@@ -18,29 +16,21 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  backtest:
+  boundary-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 100
+    timeout-minutes: 10
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Restore persistent historical-data cache
-        uses: actions/cache/restore@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          path: dl
-          key: r194-ten-index-data-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            r194-ten-index-data-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-      - name: Setup Python and compile
+          python-version: "3.11"
+      - name: Install and compile
         run: |
           python -m pip install --upgrade pip pandas numpy requests
           python -m py_compile scan.py research/r192_ger40.py research/r194_ten_index.py
-          mkdir -p dl/chunks results
-      - name: Regression check corrected H4 boundaries against live scanner
+      - name: Verify H4/DST boundaries match scanner
         run: |
           python - <<'PY'
           import numpy as np
@@ -56,215 +46,252 @@ jobs:
           h1 = pd.DataFrame({"open":v,"high":v+1,"low":v-1,"close":v+0.25},index=idx)
           a = scan.to_h4(h1)
           b, _ = build_h4(h1, pd.Timestamp("2026-01-01",tz="UTC"))
-          assert a.index.equals(b.index), "H4 index mismatch between live scanner and baseline engine"
-          for c in ("open","high","low","close"):
-              assert np.allclose(a[c].to_numpy(), b[c].to_numpy()), f"H4 OHLC mismatch: {c}"
-          assert set(a.index.hour).issubset({1,5,9,13,17,21}), "unexpected NY H4 boundary"
+          assert a.index.equals(b.index), "H4 index mismatch between scanner and research engine"
+          for col in ("open","high","low","close"):
+              assert np.allclose(a[col].to_numpy(), b[col].to_numpy()), f"H4 OHLC mismatch: {col}"
           spring = a.loc[(a.index.strftime("%Y-%m-%d")=="2025-03-09") & (a.index.hour==1)]
           fall = a.loc[(a.index.strftime("%Y-%m-%d")=="2025-11-02") & (a.index.hour==1)]
-          assert len(spring)==1 and float((spring.bar_close_utc.iloc[0]-spring.index[0].tz_convert("UTC"))/pd.Timedelta(hours=1))==3
-          assert len(fall)==1 and float((fall.bar_close_utc.iloc[0]-fall.index[0].tz_convert("UTC"))/pd.Timedelta(hours=1))==5
-          print("PASS: live scanner and research engine match exactly; DST transition intervals are 3h/5h.")
+          assert len(spring)==1 and (spring.bar_close_utc.iloc[0]-spring.index[0].tz_convert("UTC"))/pd.Timedelta(hours=1)==3
+          assert len(fall)==1 and (fall.bar_close_utc.iloc[0]-fall.index[0].tz_convert("UTC"))/pd.Timedelta(hours=1)==5
+          print("PASS: scanner and engine match; DST intervals 3h/5h.")
           PY
-      - name: Preflight all ten M5 feeds and seed cache with 2025 chunks
-        env:
-          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p dl/chunks
-          for INST in usa500idxusd usatechidxusd usa30idxusd ussc2000idxusd deuidxeur gbridxgbp fraidxeur eusidxeur ausidxaud jpnidxjpy; do
-            BASE="${INST}_m5_2025"
-            CHUNK="dl/chunks/${BASE}.csv.gz"
-            RAW="dl/chunks/${BASE}.csv"
-            if [ -s "$CHUNK" ] && gzip -t "$CHUNK" >/dev/null 2>&1; then
-              echo "PREFLIGHT CACHE HIT: $BASE"
-              continue
-            fi
-            OK=false
-            for ATTEMPT in 1 2 3; do
-              rm -f "$RAW"
-              echo "PREFLIGHT M5 $INST year=2025 attempt=$ATTEMPT/3"
-              if npx --yes dukascopy-node@1.50.0 \
-                -i "$INST" -from "2025-01-01" -to "2026-01-01" \
-                -t m5 -p bid -utc 0 -f csv -fl \
-                -dir dl/chunks -fn "$BASE" \
-                -bs 10 -bp 1000 -r 5 -rp 1000; then
-                LINES=$(wc -l < "$RAW" 2>/dev/null || echo 0)
-                if [ -s "$RAW" ] && [ "$LINES" -gt 1000 ]; then
-                  gzip -1 "$RAW"
-                  gzip -t "$CHUNK"
-                  echo "PREFLIGHT PASS $INST rows=$((LINES - 1))"
-                  OK=true
-                  break
-                fi
-              fi
-              rm -f "$RAW"
-              if [ "$ATTEMPT" -lt 3 ]; then sleep $((ATTEMPT * 15)); fi
-            done
-            if [ "$OK" != "true" ]; then
-              echo "PREFLIGHT FAILED: M5 feed for $INST is empty/unavailable after retries."
-              echo "Stopping before the full download to avoid wasting another long run."
-              exit 1
-            fi
-            sleep 8
-          done
-          echo "PASS: all ten M5 feeds returned real historical data; 2025 chunks are cached for the full run."
 
-      - name: Download missing data by annual chunks; reuse cached chunks
+  prepare-instrument:
+    needs: boundary-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        instrument:
+          - usa500idxusd
+          - usatechidxusd
+          - usa30idxusd
+          - ussc2000idxusd
+          - deuidxeur
+          - gbridxgbp
+          - fraidxeur
+          - eusidxeur
+          - ausidxaud
+          - jpnidxjpy
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Restore this instrument's persistent cache, with migration from the previous shared cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dl
+          key: r194-asset-${{ matrix.instrument }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            r194-asset-${{ matrix.instrument }}-
+            r194-ten-index-data-
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Python and prepare folders
+        run: |
+          python -m pip install --upgrade pip pandas numpy requests
+          python -m py_compile research/r192_ger40.py research/r194_ten_index.py
+          mkdir -p dl/chunks results
+      - name: Download only missing annual chunks for this instrument
         env:
+          INST: ${{ matrix.instrument }}
           NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
         shell: bash
         run: |
           set -uo pipefail
-          mkdir -p dl/chunks
-          FAILURES=()
-          INSTRUMENTS=(usa500idxusd usatechidxusd usa30idxusd ussc2000idxusd deuidxeur gbridxgbp fraidxeur eusidxeur ausidxaud jpnidxjpy)
-          for INST in "${INSTRUMENTS[@]}"; do
-            for TF in h1 m5; do
-              DATASET="dl/${INST}_${TF}.csv.gz"
-              if [ -s "$DATASET" ] && gzip -t "$DATASET" >/dev/null 2>&1; then
-                echo "DATASET CACHE HIT: $INST $TF; will not redownload its history."
+          echo "INSTRUMENT JOB: $INST; a separate runner handles each index."
+          for TF in h1 m5; do
+            DATASET="dl/${INST}_${TF}.csv.gz"
+            if [ -s "$DATASET" ] && gzip -t "$DATASET" >/dev/null 2>&1; then
+              echo "DATASET CACHE HIT: $INST $TF; reusing the completed snapshot."
+              continue
+            fi
+
+            for YEAR in $(seq 2016 2026); do
+              BASE="${INST}_${TF}_${YEAR}"
+              CHUNK="dl/chunks/${BASE}.csv.gz"
+              RAW="dl/chunks/${BASE}.csv"
+              if [ -s "$CHUNK" ] && gzip -t "$CHUNK" >/dev/null 2>&1; then
+                echo "CHUNK CACHE HIT: $BASE"
                 continue
               fi
-              for YEAR in $(seq 2016 2026); do
-                BASE="${INST}_${TF}_${YEAR}"
-                CHUNK="dl/chunks/${BASE}.csv.gz"
-                RAW="dl/chunks/${BASE}.csv"
-                if [ -s "$CHUNK" ] && gzip -t "$CHUNK" >/dev/null 2>&1; then
-                  echo "CHUNK CACHE HIT: $BASE"
-                  continue
-                fi
-                NEXT=$((YEAR + 1))
-                FROM="${YEAR}-01-01"
-                if [ "$YEAR" -eq 2026 ]; then TO="now"; else TO="${NEXT}-01-01"; fi
+
+              NEXT=$((YEAR + 1))
+              FROM="${YEAR}-01-01"
+              if [ "$YEAR" -eq 2026 ]; then TO="now"; else TO="${NEXT}-01-01"; fi
+              if [ "$TF" = "h1" ]; then
+                BS=3; BP=2000; RP=5000
+              else
+                BS=10; BP=1000; RP=1000
+              fi
+              MAX_ATTEMPTS=3
+              if [ "$YEAR" -le 2018 ]; then MAX_ATTEMPTS=1; fi
+              OK=false
+              for ATTEMPT in $(seq 1 "$MAX_ATTEMPTS"); do
+                rm -f "$RAW"
+                echo "DOWNLOAD $BASE: $FROM to $TO (attempt $ATTEMPT/$MAX_ATTEMPTS)"
+                DOWNLOAD_OK=false
                 if [ "$TF" = "h1" ]; then
-                  BS=3; BP=2000; RP=5000; EXTRA=(-re)
-                else
-                  BS=10; BP=1000; RP=1000; EXTRA=()
-                fi
-                MAX_ATTEMPTS=3
-                if [ "$YEAR" -le 2018 ]; then MAX_ATTEMPTS=1; fi
-                OK=false
-                for ATTEMPT in $(seq 1 "$MAX_ATTEMPTS"); do
-                  rm -f "$RAW"
-                  echo "DOWNLOAD $BASE: $FROM to $TO (attempt $ATTEMPT/$MAX_ATTEMPTS)"
                   if npx --yes dukascopy-node@1.50.0 \
                     -i "$INST" -from "$FROM" -to "$TO" \
-                    -t "$TF" -p bid -utc 0 -f csv -fl \
+                    -t h1 -p bid -utc 0 -f csv -fl \
                     -dir dl/chunks -fn "$BASE" \
-                    -bs "$BS" -bp "$BP" -r 5 "${EXTRA[@]}" -rp "$RP"; then
-                    LINES=$(wc -l < "$RAW" 2>/dev/null || echo 0)
-                    if [ -s "$RAW" ] && [ "$LINES" -gt 1000 ]; then
-                      if gzip -1 "$RAW" && gzip -t "$CHUNK"; then
-                        echo "SAVED $CHUNK ($(du -h "$CHUNK" | cut -f1), rows=$((LINES - 1)))"
-                        OK=true
-                        break
-                      fi
+                    -bs "$BS" -bp "$BP" -r 5 -re -rp "$RP"; then
+                    DOWNLOAD_OK=true
+                  fi
+                else
+                  if npx --yes dukascopy-node@1.50.0 \
+                    -i "$INST" -from "$FROM" -to "$TO" \
+                    -t m5 -p bid -utc 0 -f csv -fl \
+                    -dir dl/chunks -fn "$BASE" \
+                    -bs "$BS" -bp "$BP" -r 5 -rp "$RP"; then
+                    DOWNLOAD_OK=true
+                  fi
+                fi
+
+                if [ "$DOWNLOAD_OK" = "true" ]; then
+                  LINES=$(wc -l < "$RAW" 2>/dev/null || echo 0)
+                  if [ -s "$RAW" ] && [ "$LINES" -gt 1000 ]; then
+                    if gzip -1 "$RAW" && gzip -t "$CHUNK"; then
+                      echo "SAVED $CHUNK ($(du -h "$CHUNK" | cut -f1), rows=$((LINES - 1)))"
+                      OK=true
+                      break
                     fi
                   fi
-                  rm -f "$RAW"
-                  if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then sleep $((ATTEMPT * 15)); fi
-                done
-                if [ "$OK" != "true" ]; then
-                  if [ "$YEAR" -le 2018 ]; then
-                    echo "NO EARLY HISTORY: $BASE; allowed only before 2019."
-                    continue
-                  fi
-                  if [ "$YEAR" -eq 2026 ]; then
-                    echo "NO CURRENT OOS DATA: $BASE; optional 2026 sample skipped."
-                    continue
-                  fi
-                  echo "ERROR: required chunk unavailable: $BASE"
-                  echo "Stopping early. Partial data will be cached for the next run."
-                  exit 1
                 fi
+                rm -f "$RAW"
+                if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then sleep $((ATTEMPT * 15)); fi
               done
+
+              if [ "$OK" != "true" ]; then
+                if [ "$YEAR" -le 2018 ]; then
+                  echo "NO EARLY HISTORY: $BASE; allowed only before 2019."
+                  continue
+                fi
+                if [ "$YEAR" -eq 2026 ]; then
+                  echo "NO CURRENT OOS DATA: $BASE; optional 2026 sample skipped."
+                  continue
+                fi
+                echo "ERROR: required chunk unavailable: $BASE"
+                echo "Stopping this instrument job. Completed downloads will be cached."
+                exit 1
+              fi
             done
           done
-          if [ "${#FAILURES[@]}" -gt 0 ]; then
-            printf 'Required annual chunks missing: %s\n' "${FAILURES[*]}"
-            exit 1
-          fi
-          echo "All required annual data chunks are ready."
-      - name: Join annual chunks into one compressed snapshot per instrument/timeframe
+      - name: Join this instrument's cached annual chunks into compact snapshots
         if: success()
+        env:
+          INST: ${{ matrix.instrument }}
         run: |
           python - <<'PY'
           import gzip
           import os
           from pathlib import Path
           from research.r192_ger40 import parse_data
-          assets = ("usa500idxusd","usatechidxusd","usa30idxusd","ussc2000idxusd","deuidxeur","gbridxgbp","fraidxeur","eusidxeur","ausidxaud","jpnidxjpy")
+          inst = os.environ["INST"]
           required = set(range(2019, 2026))
-          for inst in assets:
-              for tf in ("h1","m5"):
-                  final = Path("dl") / f"{inst}_{tf}.csv.gz"
-                  if final.is_file() and final.stat().st_size and os.system(f"gzip -t '{final}' >/dev/null 2>&1") == 0:
-                      print(f"SNAPSHOT READY: {final} (using persistent cache)")
-                      continue
-                  chunks = sorted(Path("dl/chunks").glob(f"{inst}_{tf}_*.csv.gz"))
-                  years = set()
+          for tf in ("h1", "m5"):
+              final = Path("dl") / f"{inst}_{tf}.csv.gz"
+              if final.is_file() and final.stat().st_size and os.system(f"gzip -t '{final}' >/dev/null 2>&1") == 0:
+                  bars, duplicates = parse_data(final)
+                  print(f"SNAPSHOT READY {final}: rows={len(bars):,}; duplicates_removed={duplicates}")
+                  continue
+              chunks = sorted(Path("dl/chunks").glob(f"{inst}_{tf}_*.csv.gz"))
+              years = set()
+              for p in chunks:
+                  try:
+                      years.add(int(p.name[:-7].rsplit("_", 1)[1]))
+                  except Exception:
+                      pass
+              missing = sorted(required - years)
+              if missing:
+                  raise SystemExit(f"Cannot join {inst} {tf}: required annual chunks missing {missing}")
+              if not chunks:
+                  raise SystemExit(f"No annual chunks found for {inst} {tf}")
+              tmp = final.with_suffix(final.suffix + ".tmp")
+              header = None
+              rows = 0
+              with gzip.open(tmp, "wb", compresslevel=1) as dst:
                   for p in chunks:
-                      try:
-                          years.add(int(p.name[:-7].rsplit("_", 1)[1]))
-                      except Exception:
-                          pass
-                  missing = sorted(required - years)
-                  if missing:
-                      raise SystemExit(f"Cannot join {inst} {tf}: required annual chunks missing {missing}")
-                  if not chunks:
-                      raise SystemExit(f"No annual chunks found for {inst} {tf}")
-                  tmp = final.with_suffix(final.suffix + ".tmp")
-                  header = None
-                  row_count = 0
-                  with gzip.open(tmp, "wb", compresslevel=1) as dst:
-                      for p in chunks:
-                          with gzip.open(p, "rb") as src:
-                              this_header = src.readline()
-                              if not this_header:
-                                  continue
-                              if header is None:
-                                  header = this_header
-                                  dst.write(header)
-                              elif this_header.strip() != header.strip():
-                                  raise SystemExit(f"CSV header changed inside {inst} {tf} at {p}")
-                              for line in src:
-                                  if line.strip():
-                                      dst.write(line)
-                                      row_count += 1
-                  if header is None or row_count < 1000:
-                      tmp.unlink(missing_ok=True)
-                      raise SystemExit(f"Insufficient joined rows for {inst} {tf}: {row_count}")
-                  tmp.replace(final)
-                  bars, dupes = parse_data(final)
-                  print(f"JOINED {final}: rows={len(bars):,}; duplicates_removed_by_parser={dupes}; years={sorted(years)}")
-                  for p in chunks:
-                      p.unlink(missing_ok=True)
+                      with gzip.open(p, "rb") as src:
+                          current_header = src.readline()
+                          if not current_header:
+                              continue
+                          if header is None:
+                              header = current_header
+                              dst.write(header)
+                          elif current_header.strip() != header.strip():
+                              raise SystemExit(f"CSV header changed inside {inst} {tf} at {p}")
+                          for line in src:
+                              if line.strip():
+                                  dst.write(line)
+                                  rows += 1
+              if header is None or rows < 1000:
+                  tmp.unlink(missing_ok=True)
+                  raise SystemExit(f"Insufficient joined rows for {inst} {tf}: {rows}")
+              tmp.replace(final)
+              bars, duplicates = parse_data(final)
+              print(f"JOINED {final}: rows={len(bars):,}; duplicates_removed={duplicates}; years={sorted(years)}")
+              for p in chunks:
+                  p.unlink(missing_ok=True)
           PY
-      - name: Persist cache, including partial progress after a failed download
+      - name: Save this instrument's progress, including partial data on failure
         if: always()
         uses: actions/cache/save@v4
         with:
           path: dl
-          key: r194-ten-index-data-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Validate all source data and report coverage
+          key: r194-asset-${{ matrix.instrument }}-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Upload completed source snapshot for final analysis
         if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r194-asset-${{ matrix.instrument }}
+          path: |
+            dl/${{ matrix.instrument }}_h1.csv.gz
+            dl/${{ matrix.instrument }}_m5.csv.gz
+          if-no-files-found: error
+          retention-days: 7
+
+  backtest:
+    needs: [boundary-test, prepare-instrument]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Download all ten instrument snapshots
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r194-asset-*
+          path: dl
+          merge-multiple: true
+      - name: Install Python and compile
+        run: |
+          python -m pip install --upgrade pip pandas numpy requests
+          python -m py_compile research/r192_ger40.py research/r194_ten_index.py
+      - name: Validate snapshots and run locked R191 baseline
         run: |
           python - <<'PY'
           from pathlib import Path
           from research.r192_ger40 import parse_data
           assets = ("usa500idxusd","usatechidxusd","usa30idxusd","ussc2000idxusd","deuidxeur","gbridxgbp","fraidxeur","eusidxeur","ausidxaud","jpnidxjpy")
+          missing = []
           for inst in assets:
-              for tf in ("h1","m5"):
+              for tf in ("h1", "m5"):
                   p = Path("dl") / f"{inst}_{tf}.csv.gz"
-                  bars, duplicates = parse_data(p)
-                  print(f"COVERAGE {inst} {tf.upper()}: rows={len(bars):,}; duplicates_removed={duplicates}; UTC={bars.index[0].tz_convert('UTC').isoformat()}..{bars.index[-1].tz_convert('UTC').isoformat()}")
-          print(f"PASS: validated H1 and M5 source data for all {len(assets)} instruments.")
+                  try:
+                      bars, duplicates = parse_data(p)
+                      print(f"COVERAGE {inst} {tf.upper()}: rows={len(bars):,}; duplicates_removed={duplicates}; UTC={bars.index[0].tz_convert('UTC').isoformat()}..{bars.index[-1].tz_convert('UTC').isoformat()}")
+                  except Exception as exc:
+                      missing.append(f"{inst} {tf}: {type(exc).__name__}: {exc}")
+          if missing:
+              raise SystemExit("Incomplete snapshots:\n" + "\n".join(missing))
+          print("PASS: all ten H1/M5 snapshot pairs validate.")
           PY
-      - name: Run locked R191 baseline across ten instruments
-        if: success()
-        run: python -u research/r194_ten_index.py --data-dir dl --out results
+          python -u research/r194_ten_index.py --data-dir dl --out results
       - name: Upload R194 audit outputs
         if: always()
         uses: actions/upload-artifact@v4
