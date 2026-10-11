@@ -163,7 +163,7 @@ def main():
     # Discovery selection: do not calculate/report forward metrics for unselected assets.
     for inst,name in ASSETS.items():
         h4,m5=assets_data[inst]
-        trades,diag=simulate_confirmed(h4,m5)
+        trades,diag=simulate_one_close(h4,m5)
         trades_by_inst[inst]=trades
         d1m=metric(trades,D0,D1,1); d2m=metric(trades,D0,D1,2)
         discovery_rows.append({"instrument":inst,"instrument_name":name,
