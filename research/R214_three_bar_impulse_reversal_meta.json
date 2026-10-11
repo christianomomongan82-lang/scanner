@@ -1,0 +1,79 @@
+{
+  "research": "R214 H4 three-bar impulse exhaustion + confirmed structure reversal",
+  "run_type": "local Python execution; no new Actions backtest launched",
+  "verdict": "REJECT",
+  "hypothesis_count": 1,
+  "source_run_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/38160487617",
+  "source_artifact_ids": {
+    "usa500idxusd": 11709864394,
+    "usatechidxusd": 11710370389,
+    "usa30idxusd": 11710730507,
+    "ussc2000idxusd": 11710111254,
+    "deuidxeur": 11710710062,
+    "gbridxgbp": 11710540168,
+    "fraidxeur": 11710800007,
+    "eusidxeur": 11710326105,
+    "ausidxaud": 11710081320,
+    "jpnidxjpy": 11709853083,
+    "audit": 11709064850
+  },
+  "rule": {
+    "long": "three prior completed H4 candles bearish with strictly descending closes; current completed H4 candle bullish and closes above prior H4 high",
+    "short": "three prior completed H4 candles bullish with strictly ascending closes; current completed H4 candle bearish and closes below prior H4 low",
+    "entry": "first non-flat M5 BID open >= signal H4 close + 5m and strictly before next scheduled H4 close",
+    "stop": "signal H4 low for long; signal H4 high for short",
+    "target": "2R",
+    "execution": "BID M5 OHLC; SL before TP; stop gap at available open; skip synthetic flat bars; no forward-fill; one position per instrument",
+    "costs": "modeled round-trip entry price costs of 1bp and 2bp, not measured broker costs",
+    "selection": "discovery eligibility >=30 closed and PF@2bp >=1.00; among eligible pick fewest trades then highest PF@2bp; never replace based on forward"
+  },
+  "periods": {
+    "discovery": "2017-2021; exits strictly before 2022-01-01 UTC",
+    "forward": "2022-2025; exits strictly before 2026-01-01 UTC",
+    "oos_cutoff": "2026-10-09T20:00:00Z"
+  },
+  "selection": {
+    "instrument": "deuidxeur",
+    "name": "Germany 40 / DAX",
+    "discovery_closed": 143,
+    "discovery_pf_1bp": 1.2370609093141631,
+    "discovery_pf_2bp": 1.1944273338821736
+  },
+  "forward": {
+    "closed": 171,
+    "pf_1bp": 0.8478544123907503,
+    "pf_2bp": 0.814436750521873,
+    "worst_eligible_cohort_pf_1bp": 0.4455073776916738,
+    "cohort_pf_1bp": {
+      "2022": 0.4455073776916738,
+      "2023": 1.1579316,
+      "2024": 0.6800382,
+      "2025": 1.148063
+    }
+  },
+  "oos": {
+    "entries": 29,
+    "closed": 28,
+    "censored": 1,
+    "pf_1bp": 0.613848,
+    "pf_2bp": 0.595382
+  },
+  "source_validation": {
+    "files": 20,
+    "rows": 9145088,
+    "duplicate_timestamps": 0,
+    "timestamp_parse_errors": 0,
+    "off_grid": 0,
+    "invalid_ohlc": 0,
+    "causal_h4_prefixes": 227462,
+    "all_ten_gates_pass": true,
+    "independent_tests_passed": 10,
+    "independent_tests_failed": 0
+  },
+  "limitations": [
+    "BID-only source; no historical ASK stream",
+    "1/2bp are modeled cost assumptions only",
+    "commission/spread/financing/live slippage remain unverified",
+    "not proof of live/funded readiness"
+  ]
+}
