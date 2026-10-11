@@ -1,0 +1,107 @@
+{
+  "research": "R213 US overnight-range first breakout",
+  "verdict": "REJECT",
+  "run_type": "local Python execution, not GitHub Actions",
+  "hypothesis_count": 1,
+  "rule": {
+    "overnight_range": "Non-flat M5 bars opening from 00:00 through 09:25 America/New_York inclusive; full 114-slot 5m grid; at least 60 non-flat bars",
+    "session_validity": "Full 78-slot 09:30–15:55 ET grid, at least 60 non-flat session bars, non-flat 15:55 exit-open bar",
+    "signal": "First non-flat M5 close outside overnight range between 09:30 and 15:50 ET",
+    "direction": "close above overnight high = long; close below overnight low = short",
+    "entry": "next non-flat M5 open after signal candle completion and before 15:55 ET",
+    "stop": "signal bar low for long, signal bar high for short",
+    "target": "2R",
+    "exit": "M5 BID OHLC; stop first; gap-through-stop at open; remaining trade exits at 15:55 bar open before using the final candle's high/low",
+    "cost": "modeled round-trip price cost at 1bp and 2bp of entry price; not verified execution cost"
+  },
+  "periods": {
+    "discovery": "2017–2021, exits before 2022-01-01 UTC",
+    "forward": "2022–2025, exits before 2026-01-01 UTC",
+    "oos": "2026 through common source cutoff"
+  },
+  "data": {
+    "usa500idxusd": {
+      "rows": 886206,
+      "duplicates": 0,
+      "off_grid": 0,
+      "flat_rows": 207186,
+      "start_utc": "2016-01-04",
+      "end_utc": "2026-10-09T20:10:00Z"
+    },
+    "usatechidxusd": {
+      "rows": 886039,
+      "duplicates": 0,
+      "off_grid": 0,
+      "flat_rows": 206491,
+      "start_utc": "2016-01-04",
+      "end_utc": "2026-10-09T20:10:00Z"
+    },
+    "usa30idxusd": {
+      "rows": 886038,
+      "duplicates": 0,
+      "off_grid": 0,
+      "flat_rows": 206175,
+      "start_utc": "2016-01-04",
+      "end_utc": "2026-10-09T20:10:00Z"
+    },
+    "ussc2000idxusd": {
+      "rows": 699134,
+      "duplicates": 0,
+      "off_grid": 0,
+      "flat_rows": 170238,
+      "start_utc": "2018-08-08",
+      "end_utc": "2026-10-09T20:10:00Z"
+    }
+  },
+  "selection": {
+    "instrument": "ussc2000idxusd",
+    "basis": "discovery-only; >=50 closed trades and PF@2bp >=1.00; highest discovery count then PF@2bp",
+    "discovery_closed": 656,
+    "discovery_pf_1bp": 1.151115513806018,
+    "discovery_pf_2bp": 1.0736002500290245
+  },
+  "forward": {
+    "closed": 942,
+    "pf_1bp": 0.8172381551468039,
+    "pf_2bp": 0.765291585069175,
+    "worst_qualifying_year_pf_1bp": 0.6902199434594196,
+    "cohort_pf": {
+      "2022": 0.93375,
+      "2023": 0.859672,
+      "2024": 0.78532,
+      "2025": 0.69022
+    }
+  },
+  "oos_2026": {
+    "closed": 181,
+    "pf_1bp": 1.0414219374194038,
+    "pf_2bp": 0.9679615955216198,
+    "cutoff_utc": "2026-10-09T20:15:00+00:00"
+  },
+  "causality": {
+    "prefix_stream_checks": {
+      "usa500idxusd": 95865,
+      "usatechidxusd": 95711,
+      "usa30idxusd": 95865,
+      "ussc2000idxusd": 53130
+    },
+    "selected_full_run_checks": 144452,
+    "entry_before_signal_close_violations": 0,
+    "exit_before_entry_violations": 0,
+    "duplicate_instrument_session_trades": 0,
+    "execution_and_dst_unit_tests": "9/9 PASS"
+  },
+  "gates": {
+    "forward_closed_min_30": "PASS",
+    "pf_1bp_min_1_15": "FAIL",
+    "pf_2bp_min_1_15": "FAIL",
+    "eligible_forward_cohort_pf_1bp_min_1": "FAIL",
+    "pf_above_1_4_extra_audit": "NOT_TRIGGERED"
+  },
+  "limitations": [
+    "BID-only source; no ASK quote series",
+    "1/2bp are modeled stress costs only",
+    "live spread, broker/prop commission, financing and slippage not verified",
+    "not evidence of funded/live readiness"
+  ]
+}
