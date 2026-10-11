@@ -434,7 +434,7 @@ def main():
         }
         print(
             f"SOURCE PASS {inst}: M5={len(m5):,}; valid OR days={build_diag['valid_opening_ranges']:,}; "
-            f"first breakouts={build_diag['first_breakout_signals']:,}; taken={len(trades):,}",
+            f"first breakouts={build_diag['initial_breakout_days']:,}; taken={len(trades):,}",
             flush=True,
         )
 
