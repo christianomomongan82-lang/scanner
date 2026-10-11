@@ -1,0 +1,5 @@
+symbol,file,rows,min_timestamp_utc,max_timestamp_utc,duplicate_timestamps,timestamp_off_five_minute_grid,all_ohlc_finite,all_ohlc_relationships_valid,flat_rows,sha256
+usa500idxusd,usa500idxusd_m5.csv,886206,2016-01-04T00:00:00+00:00,2026-10-09T20:10:00+00:00,0,0,True,True,207186,source verified locally
+usatechidxusd,usatechidxusd_m5.csv,886039,2016-01-04T00:00:00+00:00,2026-10-09T20:10:00+00:00,0,0,True,True,206491,source verified locally
+usa30idxusd,usa30idxusd_m5.csv,886038,2016-01-04T00:00:00+00:00,2026-10-09T20:10:00+00:00,0,0,True,True,206175,source verified locally
+ussc2000idxusd,ussc2000idxusd_m5.csv,699134,2018-08-08T13:30:00+00:00,2026-10-09T20:10:00+00:00,0,0,True,True,170238,source verified locally
