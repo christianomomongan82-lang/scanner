@@ -232,6 +232,7 @@ def make_candidates(m5, instrument):
             "or_nonflat_bars": 1,
             "stop": stop,
             "target": target,
+            "potential_reward_risk": RR,
             "entry_i": entry_i,
         })
 
