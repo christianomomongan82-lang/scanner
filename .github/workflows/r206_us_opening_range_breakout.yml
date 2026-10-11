@@ -1,0 +1,288 @@
+name: R206 US Cash-Session Opening-Range Breakout — Four Index Test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "research/r206_us_opening_range_breakout.py"
+      - ".github/workflows/r206_us_opening_range_breakout.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r206-us-opening-range
+  cancel-in-progress: false
+
+jobs:
+  boundary-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install and compile
+        run: |
+          python -m pip install --upgrade pip pandas numpy requests
+          python -m py_compile scan.py research/r192_ger40.py research/r206_us_opening_range_breakout.py
+      - name: Verify US cash-session DST conversion
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          from datetime import date
+          from research.r206_us_opening_range_breakout import session_bounds_utc
+          spring_open, spring_close = session_bounds_utc(date(2025, 3, 10))
+          fall_open, fall_close = session_bounds_utc(date(2025, 11, 3))
+          assert spring_open == pd.Timestamp("2025-03-10T13:30:00Z")
+          assert spring_close == pd.Timestamp("2025-03-10T20:00:00Z")
+          assert fall_open == pd.Timestamp("2025-11-03T14:30:00Z")
+          assert fall_close == pd.Timestamp("2025-11-03T21:00:00Z")
+          print("PASS: NY cash-session boundaries map correctly through DST.")
+          PY
+
+  prepare-instrument:
+    needs: boundary-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        instrument:
+          - usa500idxusd
+          - usatechidxusd
+          - usa30idxusd
+          - ussc2000idxusd
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Restore this instrument's persistent cache, with migration from the previous shared cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dl
+          key: r206-asset-${{ matrix.instrument }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            r206-asset-${{ matrix.instrument }}-
+            r205-asset-${{ matrix.instrument }}-
+            r204-asset-${{ matrix.instrument }}-
+            r202-asset-${{ matrix.instrument }}-
+            r194-asset-${{ matrix.instrument }}-
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Python and prepare folders
+        run: |
+          python -m pip install --upgrade pip pandas numpy requests
+          python -m py_compile research/r192_ger40.py research/r206_us_opening_range_breakout.py
+          mkdir -p dl/chunks results
+      - name: Download only missing annual chunks for this instrument
+        env:
+          INST: ${{ matrix.instrument }}
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        shell: bash
+        run: |
+          set -uo pipefail
+          echo "INSTRUMENT JOB: $INST; a separate runner handles each index."
+          for TF in h1 m5; do
+            DATASET="dl/${INST}_${TF}.csv.gz"
+            if [ -s "$DATASET" ] && gzip -t "$DATASET" >/dev/null 2>&1; then
+              echo "DATASET CACHE HIT: $INST $TF; reusing the completed snapshot."
+              continue
+            fi
+
+            for YEAR in $(seq 2016 2026); do
+              BASE="${INST}_${TF}_${YEAR}"
+              CHUNK="dl/chunks/${BASE}.csv.gz"
+              RAW="dl/chunks/${BASE}.csv"
+              if [ -s "$CHUNK" ] && gzip -t "$CHUNK" >/dev/null 2>&1; then
+                echo "CHUNK CACHE HIT: $BASE"
+                continue
+              fi
+
+              NEXT=$((YEAR + 1))
+              FROM="${YEAR}-01-01"
+              if [ "$YEAR" -eq 2026 ]; then TO="now"; else TO="${NEXT}-01-01"; fi
+              if [ "$TF" = "h1" ]; then
+                BS=3; BP=2000; RP=5000
+              else
+                BS=10; BP=1000; RP=1000
+              fi
+              MAX_ATTEMPTS=3
+              if [ "$YEAR" -le 2018 ]; then MAX_ATTEMPTS=1; fi
+              OK=false
+              for ATTEMPT in $(seq 1 "$MAX_ATTEMPTS"); do
+                rm -f "$RAW"
+                echo "DOWNLOAD $BASE: $FROM to $TO (attempt $ATTEMPT/$MAX_ATTEMPTS)"
+                DOWNLOAD_OK=false
+                if [ "$TF" = "h1" ]; then
+                  if npx --yes dukascopy-node@1.50.0 \
+                    -i "$INST" -from "$FROM" -to "$TO" \
+                    -t h1 -p bid -utc 0 -f csv -fl \
+                    -dir dl/chunks -fn "$BASE" \
+                    -bs "$BS" -bp "$BP" -r 5 -re -rp "$RP"; then
+                    DOWNLOAD_OK=true
+                  fi
+                else
+                  if npx --yes dukascopy-node@1.50.0 \
+                    -i "$INST" -from "$FROM" -to "$TO" \
+                    -t m5 -p bid -utc 0 -f csv -fl \
+                    -dir dl/chunks -fn "$BASE" \
+                    -bs "$BS" -bp "$BP" -r 5 -rp "$RP"; then
+                    DOWNLOAD_OK=true
+                  fi
+                fi
+
+                if [ "$DOWNLOAD_OK" = "true" ]; then
+                  LINES=$(wc -l < "$RAW" 2>/dev/null || echo 0)
+                  if [ -s "$RAW" ] && [ "$LINES" -gt 1000 ]; then
+                    if gzip -1 "$RAW" && gzip -t "$CHUNK"; then
+                      echo "SAVED $CHUNK ($(du -h "$CHUNK" | cut -f1), rows=$((LINES - 1)))"
+                      OK=true
+                      break
+                    fi
+                  fi
+                fi
+                rm -f "$RAW"
+                if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then sleep $((ATTEMPT * 15)); fi
+              done
+
+              if [ "$OK" != "true" ]; then
+                if [ "$YEAR" -le 2018 ]; then
+                  echo "NO EARLY HISTORY: $BASE; allowed only before 2019."
+                  continue
+                fi
+                if [ "$YEAR" -eq 2026 ]; then
+                  echo "NO CURRENT OOS DATA: $BASE; optional 2026 sample skipped."
+                  continue
+                fi
+                echo "ERROR: required chunk unavailable: $BASE"
+                echo "Stopping this instrument job. Completed downloads will be cached."
+                exit 1
+              fi
+            done
+          done
+      - name: Join this instrument's cached annual chunks into compact snapshots
+        if: success()
+        env:
+          INST: ${{ matrix.instrument }}
+        run: |
+          python - <<'PY'
+          import gzip
+          import os
+          from pathlib import Path
+          from research.r192_ger40 import parse_data
+          inst = os.environ["INST"]
+          required = set(range(2019, 2026))
+          for tf in ("h1", "m5"):
+              final = Path("dl") / f"{inst}_{tf}.csv.gz"
+              if final.is_file() and final.stat().st_size and os.system(f"gzip -t '{final}' >/dev/null 2>&1") == 0:
+                  bars, duplicates = parse_data(final)
+                  print(f"SNAPSHOT READY {final}: rows={len(bars):,}; duplicates_removed={duplicates}")
+                  continue
+              chunks = sorted(Path("dl/chunks").glob(f"{inst}_{tf}_*.csv.gz"))
+              years = set()
+              for p in chunks:
+                  try:
+                      years.add(int(p.name[:-7].rsplit("_", 1)[1]))
+                  except Exception:
+                      pass
+              missing = sorted(required - years)
+              if missing:
+                  raise SystemExit(f"Cannot join {inst} {tf}: required annual chunks missing {missing}")
+              if not chunks:
+                  raise SystemExit(f"No annual chunks found for {inst} {tf}")
+              tmp = final.with_suffix(final.suffix + ".tmp")
+              header = None
+              rows = 0
+              with gzip.open(tmp, "wb", compresslevel=1) as dst:
+                  for p in chunks:
+                      with gzip.open(p, "rb") as src:
+                          current_header = src.readline()
+                          if not current_header:
+                              continue
+                          if header is None:
+                              header = current_header
+                              dst.write(header)
+                          elif current_header.strip() != header.strip():
+                              raise SystemExit(f"CSV header changed inside {inst} {tf} at {p}")
+                          for line in src:
+                              if line.strip():
+                                  dst.write(line)
+                                  rows += 1
+              if header is None or rows < 1000:
+                  tmp.unlink(missing_ok=True)
+                  raise SystemExit(f"Insufficient joined rows for {inst} {tf}: {rows}")
+              tmp.replace(final)
+              bars, duplicates = parse_data(final)
+              print(f"JOINED {final}: rows={len(bars):,}; duplicates_removed={duplicates}; years={sorted(years)}")
+              for p in chunks:
+                  p.unlink(missing_ok=True)
+          PY
+      - name: Save this instrument's progress, including partial data on failure
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: dl
+          key: r206-asset-${{ matrix.instrument }}-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Upload completed source snapshot for final analysis
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r206-asset-${{ matrix.instrument }}
+          path: |
+            dl/${{ matrix.instrument }}_h1.csv.gz
+            dl/${{ matrix.instrument }}_m5.csv.gz
+          if-no-files-found: error
+          retention-days: 7
+
+  backtest:
+    needs: [boundary-test, prepare-instrument]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Download all four US index M5 snapshots
+        uses: actions/download-artifact@v4
+        with:
+          pattern: r206-asset-*
+          path: dl
+          merge-multiple: true
+      - name: Install Python and compile
+        run: |
+          python -m pip install --upgrade pip pandas numpy requests
+          python -m py_compile research/r192_ger40.py research/r206_us_opening_range_breakout.py
+      - name: Validate M5 snapshots and run locked R206 US opening-range breakout test
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from research.r192_ger40 import parse_data
+          assets = ("usa500idxusd","usatechidxusd","usa30idxusd","ussc2000idxusd")
+          missing = []
+          for inst in assets:
+              for tf in ("m5",):
+                  p = Path("dl") / f"{inst}_{tf}.csv.gz"
+                  try:
+                      bars, duplicates = parse_data(p)
+                      print(f"COVERAGE {inst} {tf.upper()}: rows={len(bars):,}; duplicates_removed={duplicates}; UTC={bars.index[0].tz_convert('UTC').isoformat()}..{bars.index[-1].tz_convert('UTC').isoformat()}")
+                  except Exception as exc:
+                      missing.append(f"{inst} {tf}: {type(exc).__name__}: {exc}")
+          if missing:
+              raise SystemExit("Incomplete snapshots:\n" + "\n".join(missing))
+          print("PASS: all four US index M5 snapshots validate.")
+          PY
+          python -u research/r206_us_opening_range_breakout.py --data-dir dl --out results
+      - name: Upload R206 opening-range audit outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R206-opening-range-audit
+          path: results/
+          if-no-files-found: warn
+          retention-days: 90
