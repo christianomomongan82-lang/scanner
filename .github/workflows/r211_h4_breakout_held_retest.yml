@@ -1,4 +1,4 @@
-name: R211 UTC-Anchored H4 Baseline — Ten Index Test
+name: R211 H4 Breakout Held-Retest — Ten Index Test
 
 on:
   push:
@@ -266,7 +266,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip pandas numpy requests
           python -m py_compile research/r192_ger40.py research/r211_h4_breakout_held_retest.py
-      - name: Validate snapshots and run locked R211 H4 breakout-retest baseline robustness test
+      - name: Validate snapshots and run locked R211 H4 breakout-held-retest test
         run: |
           python - <<'PY'
           from pathlib import Path
