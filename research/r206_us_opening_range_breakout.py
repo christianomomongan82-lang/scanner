@@ -13,11 +13,13 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from research.r192_ger40 import parse_data
 
 TZ_NY = "America/New_York"
