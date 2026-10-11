@@ -1,0 +1,55 @@
+{
+  "suite": "R214 independent local execution, source-data and causality tests",
+  "passed": 10,
+  "failed": 0,
+  "tests": [
+    {
+      "name": "Long same-bar SL/TP collision checks SL first",
+      "result": "PASS"
+    },
+    {
+      "name": "Long gap through stop fills at open",
+      "result": "PASS"
+    },
+    {
+      "name": "Short same-bar SL/TP collision checks SL first",
+      "result": "PASS"
+    },
+    {
+      "name": "Short gap through stop fills at open",
+      "result": "PASS"
+    },
+    {
+      "name": "No entry at or after scheduled next H4 boundary",
+      "result": "PASS"
+    },
+    {
+      "name": "All completed USA500 H4 prefixes produce same signal/stop",
+      "result": "PASS"
+    },
+    {
+      "name": "Vectorized UTC H4 aggregation matches scalar reference on 1,500 H1 bars",
+      "result": "PASS"
+    },
+    {
+      "name": "All emitted entries strictly after signal close",
+      "result": "PASS"
+    },
+    {
+      "name": "All closed trades exit after entry; no duplicate signal-bar trades",
+      "result": "PASS"
+    },
+    {
+      "name": "All 20 source files have valid timestamps, grid alignment and OHLC relationships",
+      "result": "PASS"
+    }
+  ],
+  "totals": {
+    "source_files": 20,
+    "source_rows": 9145088,
+    "duplicate_timestamps": 0,
+    "off_grid_timestamps": 0,
+    "invalid_ohlc_rows": 0,
+    "completed_h4_prefix_checks": 227462
+  }
+}
