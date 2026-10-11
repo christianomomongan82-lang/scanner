@@ -1,0 +1,3 @@
+instrument,instrument_name,cost_bps_rt,entries,closed,censored,pf,common_oos_cutoff_utc
+deuidxeur,Germany 40 / DAX,1,29,28,1,0.613848,2026-10-09T20:00:00Z
+deuidxeur,Germany 40 / DAX,2,29,28,1,0.595382,2026-10-09T20:00:00Z
