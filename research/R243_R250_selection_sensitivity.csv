@@ -1,0 +1,9 @@
+strategy,full_discovery_selected,common_span_selected,selection_stable,common_span_asset_eligible
+R243,,,False,False
+R244,,,False,False
+R245,,,False,False
+R246,eusidxeur,eusidxeur,True,True
+R247,deuidxeur,fraidxeur,False,True
+R248,deuidxeur,deuidxeur,True,True
+R249,ussc2000idxusd,ussc2000idxusd,True,True
+R250,jpnidxjpy,jpnidxjpy,True,True
