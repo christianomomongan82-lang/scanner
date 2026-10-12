@@ -1,0 +1,5 @@
+strategy,symbol,trades,calendar_weeks,block_weeks,replicates,mean_net_2bps,ci95_low,ci95_high,p_positive_one_sided,holm_adjusted_p_positive
+R236,jpnidxjpy,123,207,4,2000,5.054158,-4.904806,15.621220,0.158421,1.000000
+R238,usatechidxusd,320,207,4,2000,4.634752,-4.098955,14.911621,0.169915,1.000000
+R241,fraidxeur,819,208,4,2000,-0.980241,-5.491932,3.322396,0.674663,1.000000
+R242,ussc2000idxusd,2449,209,4,2000,0.867981,-2.494632,4.193224,0.307846,1.000000
