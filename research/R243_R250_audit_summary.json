@@ -1,0 +1,21 @@
+{
+  "batch": "R243-R250",
+  "hypotheses": 8,
+  "discovery_eligible": 5,
+  "forward_tested": 5,
+  "passes": 0,
+  "source_files": 10,
+  "source_validation_passed": true,
+  "causality_checks": 190,
+  "causality_checks_passed": 190,
+  "ledger_files": 90,
+  "ledger_files_passed": 90,
+  "trade_rows_checked": 119234,
+  "failed_assertions": 0,
+  "cumulative_hypotheses_r218_r250": 33,
+  "limitations": [
+    "BID-only OHLC",
+    "costs modeled, not broker verified",
+    "no independent verification of funded execution costs or DLL/MLL implementation"
+  ]
+}
