@@ -1,0 +1,53 @@
+{
+  "batch": "R218-R226",
+  "independent_ledger_audit": {
+    "ledger_files_audited": 106,
+    "ledger_files_passed": 106,
+    "ledger_files_failed": 0,
+    "trade_rows_inspected": 102860,
+    "source_open_checks": true,
+    "cost_deductions_checked": [
+      0,
+      1,
+      2,
+      3,
+      5
+    ],
+    "time_order_checked": true,
+    "overlap_checked": true,
+    "period_boundaries_checked": true
+  },
+  "causality_prefix_checks": {
+    "passed": 90,
+    "total": 90
+  },
+  "total_tests": {
+    "passed": 100,
+    "total": 100
+  },
+  "selection_rule": "Highest discovery PF at modeled 2 bps among instruments with >=100 discovery trades; forward and OOS not used for selection.",
+  "forward_acceptance": {
+    "min_closed_trades": 30,
+    "PF_at_1bps_min": 1.15,
+    "PF_at_2bps_min": 1.15,
+    "each_annual_cohort_with_at_least_5_trades_PF_at_1bps_min": 1
+  },
+  "cost_stress_bps": [
+    0,
+    1,
+    2,
+    3,
+    5
+  ],
+  "bootstrap": {
+    "replicates_per_cell": 2000,
+    "block_length_weeks": 4,
+    "rows": 32
+  },
+  "verdict": "NO_STRATEGY_PASSED_FORWARD_GATE",
+  "limitations": [
+    "BID-only",
+    "transaction costs are modeled, not broker-verified",
+    "no actual commission/slippage/financing/contract-size/funded drawdown enforcement"
+  ]
+}
