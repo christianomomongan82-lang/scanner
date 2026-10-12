@@ -1,0 +1,9 @@
+strategy,original_selected,common_window_selected,selection_changed,status,common_window,forward_rerun
+R235,None,None,False,NO_CANDIDATE_EITHER_WINDOW,2018-08-08 13:00 UTC to 2022-01-01 00:00 UTC,False
+R236,jpnidxjpy,None,True,UNSTABLE_NO_COMMON_WINDOW_ELIGIBLE_ASSET,2018-08-08 13:00 UTC to 2022-01-01 00:00 UTC,False
+R237,None,None,False,NO_CANDIDATE_EITHER_WINDOW,2018-08-08 13:00 UTC to 2022-01-01 00:00 UTC,False
+R238,usatechidxusd,usatechidxusd,False,UNCHANGED,2018-08-08 13:00 UTC to 2022-01-01 00:00 UTC,False
+R239,None,ausidxaud,True,CHANGED,2018-08-08 13:00 UTC to 2022-01-01 00:00 UTC,False
+R240,None,None,False,NO_CANDIDATE_EITHER_WINDOW,2018-08-08 13:00 UTC to 2022-01-01 00:00 UTC,False
+R241,fraidxeur,fraidxeur,False,UNCHANGED,2018-08-08 13:00 UTC to 2022-01-01 00:00 UTC,False
+R242,ussc2000idxusd,ussc2000idxusd,False,UNCHANGED,2018-08-08 13:00 UTC to 2022-01-01 00:00 UTC,False
