@@ -45,3 +45,21 @@ Forward acceptance requires >=30 closed trades, PF >=1.15 at both modeled 1 and 
 - Test register: 100/100 checks passed.
 
 Data are BID-only. Costs are modeled, not verified broker/funded spread, commission, financing or slippage. No contract multipliers or funded drawdown rules are simulated. A discovery-winning instrument still has multiple-testing bias; independent forward results remain decisive. No strategy is live/funded-ready.
+
+## Common-history discovery-selection sensitivity — exploratory
+
+The US Small Cap 2000 source begins 2018-08-08, while other instruments have earlier history. To control for unequal discovery periods, a sensitivity pass repeated the asset selection over the common 2018-08-08 to 2022-01-01 window using the same minimum sample and PF@2 bps ranking. This sensitivity was run after the primary forward/OOS results had been inspected; its alternate forward/OOS statistics are diagnostics only, not a fresh validation.
+
+| Strategy | Original asset | Common-window choice | Changed? | Common discovery trades | PF @2 bps | Alt forward PF @1/@2 | Alt OOS PF @1/@2 |
+|---|---|---|---|---:|---:|---|---|
+| R218 | US30 | US30 | No | 2075 | 0.948 | 0.872 / 0.826 | 0.959 / 0.900 |
+| R219 | US Tech 100 | France 40 | Yes | 1218 | 0.956 | 0.952 / 0.894 | 0.842 / 0.787 |
+| R220 | US Small Cap | US Small Cap | No | 125 | 1.535 | 0.802 / 0.774 | 1.149 / 1.113 |
+| R221 | None | None | — | 26 max | 0.503 max | — | — |
+| R222 | US30 | US30 | No | 2627 | 1.014 | 0.901 / 0.848 | 1.086 / 1.011 |
+| R223 | US Tech 100 | Japan 225 | Yes | 282 | 0.854 | 1.019 / 0.969 | 1.481 / 1.426 |
+| R224 | US Small Cap | US Small Cap | No | 492 | 1.181 | 0.988 / 0.954 | 1.327 / 1.272 |
+| R225 | US30 | US Tech 100 | Yes | 517 | 0.971 | 0.928 / 0.899 | 0.985 / 0.943 |
+| R226 | Japan 225 | FTSE 100 | Yes | 427 | 0.940 | 1.139 / 1.065 | 1.249 / 1.167 |
+
+Four of eight locked asset choices changed. Even among these post-hoc choices none meets the forward PF>=1.15 gate at both 1 and 2 bps. High OOS PF for R223/R226 cannot override the failed primary forward protocol; all primary decisions remain REJECT.
