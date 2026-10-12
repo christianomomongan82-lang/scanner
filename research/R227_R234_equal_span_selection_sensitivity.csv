@@ -1,0 +1,9 @@
+strategy,original_selected_symbol,common_window_selected_symbol,selection_changed,eligible_common_window_assets,common_window_best_pf_symbol,common_window_best_pf_trades,common_window_best_pf_2bps,most_trades_symbol,most_trades_count,sensitivity_status
+R227,fraidxeur,fraidxeur,False,2,fraidxeur,1082,1.038438,usatechidxusd,1534,DISCOVERY_ONLY_NO_FORWARD_RERUN
+R228,usatechidxusd,ausidxaud,True,5,ausidxaud,550,1.210616,usatechidxusd,848,DISCOVERY_ONLY_NO_FORWARD_RERUN
+R229,usa500idxusd,usa500idxusd,False,4,usa500idxusd,227,1.206887,ussc2000idxusd,252,DISCOVERY_ONLY_NO_FORWARD_RERUN
+R230,eusidxeur,fraidxeur,True,2,fraidxeur,321,1.144308,gbridxgbp,493,DISCOVERY_ONLY_NO_FORWARD_RERUN
+R231,,,False,0,usatechidxusd,21,1.330914,usatechidxusd,21,DISCOVERY_ONLY_NO_FORWARD_RERUN
+R232,,,False,0,ausidxaud,408,0.965706,ussc2000idxusd,782,DISCOVERY_ONLY_NO_FORWARD_RERUN
+R233,ausidxaud,ausidxaud,False,2,ausidxaud,1301,1.038772,usatechidxusd,1708,DISCOVERY_ONLY_NO_FORWARD_RERUN
+R234,gbridxgbp,gbridxgbp,False,5,gbridxgbp,104,1.227487,ussc2000idxusd,134,DISCOVERY_ONLY_NO_FORWARD_RERUN
