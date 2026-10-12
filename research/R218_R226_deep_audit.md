@@ -39,3 +39,9 @@ R221's maximum discovery sample was 26 trades, below the registered 100-trade mi
 ## Execution and data boundary
 
 The engine calculates signals using closed raw H1 candles; entry is the next exact hourly open. No flat bars are synthesized or forward-filled. Time exits use the first observed non-flat open at or after the scheduled horizon, and closed trades must exit inside their assessment period. BID-only data and modeled costs are insufficient to claim funded/live readiness.
+
+## Common-history selection sensitivity — post-hoc only
+
+The shared-history interval is 2018-08-08 to 2022-01-01, matching the latest-starting index source. Selection changed four of eight assets (R219 to France 40, R223 to Japan 225, R225 to US Tech 100, R226 to FTSE 100). This analysis happened after the main forward/OOS data had already been reviewed, so the alternate forward/OOS readings are descriptive and cannot be considered confirmation. None of these alternative assets reaches PF 1.15 at both modeled cost levels in forward. The main batch verdicts are unchanged.
+
+The exact CSV and explanatory note are stored as R218_R226_equal_span_selection_sensitivity.csv and R218_R226_equal_span_selection_sensitivity.md.
