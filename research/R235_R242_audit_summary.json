@@ -1,0 +1,36 @@
+{
+  "batch": "R235-R242",
+  "input_files_validated": 10,
+  "truncation_prefix_checks_passed": 190,
+  "truncation_prefix_checks_total": 190,
+  "unique_trade_ledger_files": 88,
+  "ledgers_passed": 88,
+  "trade_rows_inspected": 75308,
+  "failed_assertions": 0,
+  "cost_scenarios_bps": [
+    0,
+    1,
+    2,
+    3,
+    5
+  ],
+  "bootstrap": {
+    "draws_per_selected_forward_hypothesis": 2000,
+    "block_length_calendar_weeks": 4,
+    "method": "circular moving-block bootstrap of weekly trade sums and counts"
+  },
+  "multiple_testing": {
+    "registered_hypotheses": 8,
+    "correction": "Holm-Bonferroni",
+    "familywise_one_sided_positive_expectancy_alpha": 0.05
+  },
+  "discovery_selection_rule": "At least 100 discovery closes and PF>=1.00 at modeled 2 bps; pick highest discovery PF@2 bps. Forward/OOS do not select the candidate.",
+  "forward_acceptance_rule": "At least 30 forward closes, PF>=1.15 at modeled 1 and 2 bps, every qualifying annual cohort with at least 5 trades PF>=1 at 1 bp, and Holm-adjusted bootstrap p<0.05 for positive mean expectancy.",
+  "final_decision": "NO_CANDIDATE_PASSED",
+  "constraints": [
+    "BID-only OHLC",
+    "modeled costs",
+    "no broker/prop schedule verification",
+    "not live/funded ready"
+  ]
+}
