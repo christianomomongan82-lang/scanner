@@ -1,345 +1,425 @@
 #!/usr/bin/env python3
-"""Locked R189 signal, fresh Dukascopy EURUSD M1 BID/ASK OOS data for 2026.
-Workflow bootstrap update 2026-10-13.
-Compares legacy exit timing with a causal time-stop that exits at the scheduled bar OPEN
-before using that bar's high/low. No parameter selection is performed on 2026 data.
+"""R189 locked-parameter OOS test on fresh Dukascopy EURUSD M1 BID/ASK, 2026.
+Downloads one calendar month per request; a failed or empty month fails the run.
+The canonical L80 signal logic is frozen from canonical_fast_2026-09-29.py.
 """
-import hashlib, json, math, os, subprocess, time
+from __future__ import annotations
+import calendar
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import time
+from datetime import date
 from pathlib import Path
+
 import numpy as np
 import pandas as pd
 
 ROOT = Path(".")
-DATA = ROOT / "dl"
+DATA = ROOT / "dl" / "r189_2026"
 OUT = ROOT / "research"
-OUT.mkdir(parents=True, exist_ok=True)
-START = "2026-01-01"
-END_EXCLUSIVE = "2026-10-13"  # last full UTC date expected through Oct 12
 PIP = 0.0001
+START = date(2026, 1, 1)
+END_EXCLUSIVE = date(2026, 10, 13)
 SL = 6.0
 TP = 18.0
-MFE = 6.0
+MFE_TRIGGER = 6.0
 TRAIL = 0.0
-TIME_STOP = 60
-MAX_SPREAD = 1.5
-MARKUPS = [0.0, 0.2, 0.5, 0.8, 1.0, 2.0]
+TIME_STOP_BARS = 60
+MAX_SPREAD_PIPS = 1.5
+EXTRA_COST_STRESS = [0.0, 0.2, 0.5, 0.8, 1.0, 2.0]
 
-def download(inst, price_type, outname):
-    DATA.mkdir(parents=True, exist_ok=True)
-    path = DATA / f"{outname}.csv"
-    path.unlink(missing_ok=True)
-    cmd = [
-        "npx", "--yes", "dukascopy-node", "-i", inst, "-from", START, "-to", END_EXCLUSIVE,
-        "-t", "m1", "-p", price_type, "-utc", "0", "-f", "csv",
-        "-dir", str(DATA), "-fn", outname, "-bs", "3", "-bp", "2000",
-        "-r", "5", "-re", "-rp", "5000",
-    ]
-    env = os.environ.copy()
-    patch = ROOT / "dukascopy_fetch_patch.cjs"
-    if patch.exists():
-        env["NODE_OPTIONS"] = (env.get("NODE_OPTIONS", "") + f" --require={patch.resolve()}").strip()
-    last = "not attempted"
-    for attempt in range(1, 4):
-        try:
-            p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                               text=True, check=False, env=env, timeout=900)
-            last = p.stdout[-12000:]
-            if p.returncode == 0 and path.is_file() and path.stat().st_size > 0:
-                return path, {"command_exit": p.returncode, "attempt": attempt, "log_tail": last}
-            last = f"exit={p.returncode}; file_exists={path.exists()}; log_tail={last}"
-        except Exception as e:
-            last = f"{type(e).__name__}: {e}"
-        time.sleep(attempt * 5)
-    raise RuntimeError(f"download {inst}/{price_type} failed: {last}")
-
-def load_bars(path):
-    df = pd.read_csv(path)
-    original_columns = list(df.columns)
-    df.columns = [str(c).replace("\ufeff", "").strip().lower() for c in df.columns]
-    if "timestamp" not in df.columns:
-        raise ValueError(f"timestamp column missing in {path}; columns={original_columns}")
-    raw = df["timestamp"]
-    numeric = pd.to_numeric(raw, errors="coerce")
-    if numeric.notna().mean() > 0.95:
-        med = float(numeric.abs().median())
-        unit = "ms" if med >= 1e11 else ("s" if med >= 1e8 else None)
-        if not unit:
-            raise ValueError(f"unknown numeric timestamp scale in {path}: median={med}")
-        idx = pd.to_datetime(numeric, unit=unit, utc=True, errors="coerce")
-    else:
-        idx = pd.to_datetime(raw.astype(str), utc=True, errors="coerce")
-    req = ["open", "high", "low", "close"]
-    if idx.isna().any() or any(c not in df.columns for c in req):
-        raise ValueError(f"bad timestamp or OHLC columns in {path}")
-    for c in req:
-        df[c] = pd.to_numeric(df[c], errors="coerce")
-    out = df[req].copy()
-    out.index = pd.DatetimeIndex(idx, name="timestamp_utc")
-    out = out.replace([np.inf, -np.inf], np.nan).dropna().sort_index()
-    dupes = int(out.index.duplicated(keep="last").sum())
-    out = out.loc[~out.index.duplicated(keep="last")]
-    valid = ((out.high >= out[["open", "close"]].max(axis=1)) &
-             (out.low <= out[["open", "close"]].min(axis=1)) &
-             (out.high >= out.low))
-    invalid = int((~valid).sum())
-    out = out.loc[valid]
-    return out, {"input_rows": int(len(df)), "duplicates_removed": dupes,
-                 "invalid_ohlc_rows": invalid, "columns": original_columns}
-
-def pf(x):
-    x = np.asarray(x, dtype=float)
-    gains = float(x[x > 0].sum())
-    losses = float(-x[x < 0].sum())
-    if losses == 0:
-        return None if gains == 0 else "INF"
-    return gains / losses
-
-def max_dd(x):
-    x = np.asarray(x, dtype=float)
-    if len(x) == 0: return 0.0
-    eq = np.cumsum(x)
-    peak = np.maximum.accumulate(np.r_[0.0, eq])
-    return float(np.max(peak[1:] - eq))
-
-def metrics(rows, markup=0.2, n_weeks=None):
-    vals = np.array([r["gross_pips"] - markup for r in rows], dtype=float)
-    return {
-        "closed_trades": int(len(vals)),
-        "pf": pf(vals),
-        "net_pips": float(vals.sum()) if len(vals) else 0.0,
-        "max_drawdown_pips": max_dd(vals),
-        "win_rate": float((vals > 0).mean()) if len(vals) else None,
-        "mean_pips_per_trade": float(vals.mean()) if len(vals) else None,
-        "trades_per_calendar_week": (float(len(vals) / n_weeks) if n_weeks and len(vals) else None),
-    }
-
-def idx_hour_ok(ts):
-    return ts.hour not in (6, 9)
-
-def signals(df):
-    close = df["close"].to_numpy(float)
-    op = df["open"].to_numpy(float)
-    idx = df.index
+def l80_fast(df, w1=11, w2=12, disp_thr=15.0, body_thr=2.0,
+             late_thr=0.80, dc_thr=7, s0=3, s1=11, dedup=14):
+    """Exact signal-generation logic from the locked canonical L80 implementation."""
+    close = df.Close.to_numpy()
+    op = df.Open.to_numpy()
+    hours = df.index.hour.to_numpy()
     n = len(df)
     step = np.diff(close, prepend=np.nan)
-    sgn = np.sign(step)
-    pos = (sgn == 1).astype(np.int64)
-    neg = (sgn == -1).astype(np.int64)
-    pp = np.r_[0, np.cumsum(pos)]
-    pn = np.r_[0, np.cumsum(neg)]
+    sgnstep = np.sign(step)
+    pos = (sgnstep == 1).astype(np.int32)
+    neg = (sgnstep == -1).astype(np.int32)
+    ppos = np.concatenate(([0], np.cumsum(pos, dtype=np.int64)))
+    pneg = np.concatenate(([0], np.cumsum(neg, dtype=np.int64)))
+    body = np.abs(close - op)
     d5 = close - np.roll(close, 5)
     d5[:5] = np.nan
-    candidates = []
-    for w in (11, 12):
+    cand = []
+    for w in (w1, w2):
         d = close - np.roll(close, w)
         d[:w] = np.nan
         with np.errstate(divide="ignore", invalid="ignore"):
             late = np.abs(d5) / np.abs(d)
-        same = np.where(d > 0, pp[np.arange(n)+1] - pp[np.maximum(0, np.arange(n)-w+1)],
-                        np.where(d < 0, pn[np.arange(n)+1] - pn[np.maximum(0, np.arange(n)-w+1)], 0))
+        p_count = np.zeros(n, dtype=np.int64)
+        n_count = np.zeros(n, dtype=np.int64)
+        valid = np.arange(w, n)
+        p_count[valid] = ppos[valid + 1] - ppos[valid - w + 1]
+        n_count[valid] = pneg[valid + 1] - pneg[valid - w + 1]
+        dsign = np.sign(d)
+        same = np.where(dsign > 0, p_count, np.where(dsign < 0, n_count, 0))
         ok = (
-            np.isfinite(d) & np.isfinite(late) &
-            (idx.hour >= 3) & (idx.hour <= 11) &
-            (np.abs(d) >= 15.0 * PIP) &
-            (np.abs(close-op) >= 2.0 * PIP) &
-            (late >= 0.80) & (same >= 7)
+            (hours >= s0) & (hours <= s1) &
+            (np.abs(d) >= disp_thr * PIP) &
+            (body >= body_thr * PIP) &
+            (late >= late_thr) &
+            (same >= dc_thr)
         )
         for i in np.flatnonzero(ok):
-            candidates.append((int(i), 1 if d[i] < 0 else -1))
-    candidates.sort(key=lambda x: x[0])  # stable: w=11 precedes w=12 at equal index
-    accepted, last = [], -10**18
-    for i, direction in candidates:
-        if i - last > 14 and i + 1 < n:
-            accepted.append((i, direction))
+            cand.append((int(i), 1 if d[i] < 0 else -1, "L80"))
+    cand.sort(key=lambda z: z[0])
+    out = []
+    last = -10**18
+    for i, direction, src in cand:
+        if i - last > dedup and i + 1 < n:
+            out.append((i, direction, src))
             last = i
-    return accepted
+    return out
 
-def run_sim(df, bid, ask, sigs, corrected_timeout):
+def month_ranges(start: date, end: date):
+    cur = start
+    while cur < end:
+        last_day = calendar.monthrange(cur.year, cur.month)[1]
+        next_month = date(cur.year + (cur.month == 12), 1 if cur.month == 12 else cur.month + 1, 1)
+        yield cur, min(next_month, end)
+        cur = next_month
+
+def download_side(price_type: str, outname: str):
+    DATA.mkdir(parents=True, exist_ok=True)
+    patch = ROOT / "dukascopy_fetch_patch.cjs"
+    downloaded = []
+    download_logs = []
+    for chunk_start, chunk_end in month_ranges(START, END_EXCLUSIVE):
+        stem = f"{outname}_{chunk_start:%Y%m}"
+        path = DATA / f"{stem}.csv"
+        path.unlink(missing_ok=True)
+        cmd = [
+            "npx", "--yes", "dukascopy-node",
+            "-i", "eurusd", "-from", chunk_start.isoformat(), "-to", chunk_end.isoformat(),
+            "-t", "m1", "-p", price_type, "-utc", "0", "-f", "csv", "-fl",
+            "-dir", str(DATA), "-fn", stem,
+            "-bs", "3", "-bp", "2000", "-r", "5", "-re", "-rp", "5000",
+        ]
+        env = os.environ.copy()
+        if patch.is_file():
+            env["NODE_OPTIONS"] = (env.get("NODE_OPTIONS", "") + f" --require={patch.resolve()}").strip()
+        last_error = "no attempt"
+        success = False
+        # Short chunk requests are retried up to 3 times. Empty/invalid monthly data is fatal.
+        for attempt in range(1, 4):
+            path.unlink(missing_ok=True)
+            try:
+                proc = subprocess.run(
+                    cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                    text=True, check=False, env=env, timeout=600
+                )
+                log = proc.stdout or ""
+                last_error = f"exit={proc.returncode}; bytes={(path.stat().st_size if path.exists() else 0)}; log={log[-1800:]}"
+                if proc.returncode == 0 and path.is_file() and path.stat().st_size > 20:
+                    try:
+                        preview = pd.read_csv(path, nrows=2)
+                        if len(preview.columns) >= 5 and len(preview) > 0:
+                            success = True
+                            download_logs.append({
+                                "side": price_type, "month": chunk_start.strftime("%Y-%m"),
+                                "attempt": attempt, "bytes": path.stat().st_size
+                            })
+                            break
+                    except Exception as exc:
+                        last_error += f"; parse preview failed: {type(exc).__name__}: {exc}"
+                if "Request returned an empty dataset" in log and attempt < 3:
+                    last_error += "; empty dataset response retried"
+            except Exception as exc:
+                last_error = f"{type(exc).__name__}: {exc}"
+            if attempt < 3:
+                time.sleep(attempt * 3)
+        if not success:
+            raise RuntimeError(
+                f"DOWNLOAD_FAILED side={price_type} month={chunk_start:%Y-%m}..{chunk_end.isoformat()} "
+                f"after 3 tries: {last_error}"
+            )
+        downloaded.append(path)
+
+    frames = []
+    for path in downloaded:
+        df = pd.read_csv(path)
+        frames.append(df)
+    combined = pd.concat(frames, ignore_index=True)
+    final_path = DATA / f"{outname}.csv"
+    combined.to_csv(final_path, index=False)
+    return final_path, download_logs
+
+def read_bars(path: Path):
+    raw = pd.read_csv(path)
+    raw.columns = [str(c).replace("\ufeff", "").strip().lower() for c in raw.columns]
+    ts_col = next((c for c in ("timestamp", "datetime", "date") if c in raw.columns), None)
+    if ts_col is None:
+        raise ValueError(f"No timestamp/datetime column in {path}; columns={list(raw.columns)}")
+    ts_raw = raw[ts_col].astype(str).str.strip()
+    numeric = pd.to_numeric(ts_raw, errors="coerce")
+    if numeric.notna().mean() > 0.95:
+        med = float(numeric.abs().median())
+        unit = "ms" if med >= 1e11 else ("s" if med >= 1e8 else None)
+        if unit is None:
+            raise ValueError(f"Unknown numeric timestamp scale in {path}; median={med}")
+        idx = pd.to_datetime(numeric, unit=unit, utc=True, errors="coerce")
+    else:
+        idx = pd.to_datetime(ts_raw, utc=True, errors="coerce")
+    req = ["open", "high", "low", "close"]
+    missing = set(req) - set(raw.columns)
+    if missing or idx.isna().any():
+        raise ValueError(f"Missing OHLC columns {sorted(missing)} or invalid timestamps in {path}")
+    bars = raw[req].apply(pd.to_numeric, errors="coerce")
+    bars.index = pd.DatetimeIndex(idx, name="timestamp_utc")
+    bars = bars.replace([np.inf, -np.inf], np.nan).dropna().sort_index()
+    dupes = int(bars.index.duplicated(keep="last").sum())
+    bars = bars.loc[~bars.index.duplicated(keep="last")]
+    valid = (
+        (bars.High >= bars[["Open", "Close"]].max(axis=1)) &
+        (bars.Low <= bars[["Open", "Close"]].min(axis=1)) &
+        (bars.High >= bars.Low)
+    )
+    invalid = int((~valid).sum())
+    bars = bars.loc[valid]
+    if bars.empty:
+        raise ValueError(f"No valid OHLC rows in {path}")
+    diagnostics = {
+        "rows": int(len(bars)),
+        "duplicate_timestamps_removed": dupes,
+        "invalid_ohlc_rows_removed": invalid,
+        "start_utc": bars.index[0].isoformat(),
+        "end_utc": bars.index[-1].isoformat(),
+        "columns": list(raw.columns),
+    }
+    return bars, diagnostics
+
+def pf(values):
+    a = np.asarray(values, dtype=float)
+    gross_profit = float(a[a > 0].sum())
+    gross_loss = float(-a[a < 0].sum())
+    if gross_loss == 0:
+        return "INF" if gross_profit > 0 else None
+    return gross_profit / gross_loss
+
+def max_dd(values):
+    a = np.asarray(values, dtype=float)
+    if not len(a):
+        return 0.0
+    eq = np.cumsum(a)
+    peaks = np.maximum.accumulate(np.r_[0.0, eq])
+    return float(np.max(peaks[1:] - eq))
+
+def metric_block(trades, extra_cost, elapsed_weeks):
+    net = np.array([t["gross_pips"] - extra_cost for t in trades], dtype=float)
+    wins = int(np.sum(net > 0))
+    return {
+        "trades": int(len(net)),
+        "PF": pf(net),
+        "net_pips": float(net.sum()) if len(net) else 0.0,
+        "max_drawdown_pips": max_dd(net),
+        "win_rate": float(wins / len(net)) if len(net) else None,
+        "mean_net_pips_per_trade": float(net.mean()) if len(net) else None,
+        "trades_per_week": float(len(net) / elapsed_weeks) if elapsed_weeks > 0 else None,
+    }
+
+def simulate(df, bid, ask, signals, corrected_timeout):
     n = len(df)
     idx = df.index
-    bo, bh, bl, bc = [bid[k].to_numpy(float) for k in ("open", "high", "low", "close")]
-    ao, ah, al, ac = [ask[k].to_numpy(float) for k in ("open", "high", "low", "close")]
-    spread = (ao - bo) / PIP
-    rows = []
+    bo, bh, bl = (bid[k].to_numpy(float) for k in ("Open", "High", "Low"))
+    ao, ah, al = (ask[k].to_numpy(float) for k in ("Open", "High", "Low"))
+    spread_open = (ask.Open.to_numpy(float) - bid.Open.to_numpy(float)) / PIP
+    trades = []
     active_exit = -1
+    spread_rejects = 0
+    overlaps = 0
     censored = 0
-    skipped_spread = 0
-    skipped_overlap = 0
-    for si, direction in sigs:
+    for si, direction, _src in signals:
         e = si + 1
-        if e >= n: continue
-        if not np.isfinite(spread[e]) or spread[e] < 0 or spread[e] > MAX_SPREAD + 1e-12:
-            skipped_spread += 1
+        if e >= n:
+            continue
+        if not np.isfinite(spread_open[e]) or spread_open[e] < -1e-9 or spread_open[e] > MAX_SPREAD_PIPS + 1e-12:
+            spread_rejects += 1
             continue
         if e <= active_exit:
-            skipped_overlap += 1
+            overlaps += 1
             continue
-        ep = ao[e] if direction == 1 else bo[e]
-        hard_sl = ep - direction * SL * PIP
-        target = ep + direction * TP * PIP
-        fav = ep
+        entry = float(ask.Open.iat[e] if direction == 1 else bid.Open.iat[e])
+        hard_stop = entry - direction * SL * PIP
+        target = entry + direction * TP * PIP
+        fav = entry
         trail_active = False
-        stop = hard_sl
-        scheduled = e + TIME_STOP
+        stop = hard_stop
+        scheduled = e + TIME_STOP_BARS
         if scheduled >= n:
             censored += 1
-            active_exit = n  # no later trades may be opened inside this truncated window
+            active_exit = n
             continue
-        last = min(n - 1, scheduled)
+        last = scheduled - 1 if corrected_timeout else scheduled
         exit_i = None
         gross = None
         reason = None
-
-        # In corrected mode, exit at the scheduled OPEN before checking that candle's
-        # high/low. Legacy mode preserves the old engine's intrabar check on that candle.
-        process_until = last if not corrected_timeout else min(last, scheduled - 1)
-        for j in range(e, process_until + 1):
-            current_stop = stop if trail_active else hard_sl
+        for j in range(e, last + 1):
+            current_stop = stop if trail_active else hard_stop
             stop_hit = (bl[j] <= current_stop) if direction == 1 else (ah[j] >= current_stop)
             target_hit = (bh[j] >= target) if direction == 1 else (al[j] <= target)
             if stop_hit:
-                exit_i, gross, reason = j, direction * (current_stop - ep) / PIP, ("TRAIL_STOP" if trail_active else "STOP")
+                exit_i = j
+                gross = direction * (current_stop - entry) / PIP
+                reason = "TRAIL_STOP" if trail_active else "STOP"
                 break
             if target_hit:
-                exit_i, gross, reason = j, TP, "TARGET"
+                exit_i = j
+                gross = TP
+                reason = "TARGET"
                 break
             if direction == 1:
                 fav = max(fav, bh[j])
-                mfe = (fav - ep) / PIP
-                if mfe >= MFE:
-                    ns = ep + (mfe - TRAIL) * PIP
-                    if ns > stop: stop = ns
+                favourable = (fav - entry) / PIP
+                if favourable >= MFE_TRIGGER:
+                    new_stop = entry + (favourable - TRAIL) * PIP
+                    if new_stop > stop:
+                        stop = new_stop
                     trail_active = True
             else:
                 fav = min(fav, al[j])
-                mfe = (ep - fav) / PIP
-                if mfe >= MFE:
-                    ns = ep - (mfe - TRAIL) * PIP
-                    if (not trail_active) or ns < stop: stop = ns
+                favourable = (entry - fav) / PIP
+                if favourable >= MFE_TRIGGER:
+                    new_stop = entry - (favourable - TRAIL) * PIP
+                    if (not trail_active) or new_stop < stop:
+                        stop = new_stop
                     trail_active = True
-            if j == last and j > e:
-                px = bo[j] if direction == 1 else ao[j]
-                exit_i, gross, reason = j, direction * (px - ep) / PIP, "TIME_OPEN_LEGACY"
-                break
-
         if exit_i is None:
-            if corrected_timeout:
-                # All bars before scheduled are clear; exit at executable price on scheduled open.
-                j = scheduled
-                px = bo[j] if direction == 1 else ao[j]
-                exit_i, gross, reason = j, direction * (px - ep) / PIP, "TIME_OPEN_CAUSAL"
-            else:
-                # End-of-data without a planned time stop: censor, do not fabricate an exit.
-                censored += 1
-                active_exit = n
-                continue
-
-        rows.append({
+            exit_i = scheduled
+            # Time-stop executes at the scheduled bar OPEN, before its high/low is observed.
+            exit_price = float(bid.Open.iat[exit_i] if direction == 1 else ask.Open.iat[exit_i])
+            gross = direction * (exit_price - entry) / PIP
+            reason = "TIME_OPEN_CAUSAL" if corrected_timeout else "TIME_OPEN_LEGACY"
+        trades.append({
             "signal_utc": idx[si].isoformat(),
             "entry_utc": idx[e].isoformat(),
             "exit_utc": idx[exit_i].isoformat(),
             "direction": "LONG" if direction == 1 else "SHORT",
-            "entry_price": float(ep),
+            "entry_price": entry,
+            "entry_spread_pips": float(spread_open[e]),
             "exit_reason": reason,
             "gross_pips": float(gross),
-            "entry_spread_pips": float(spread[e]),
-            "legacy_or_corrected": "corrected" if corrected_timeout else "legacy",
+            "engine": "causal_time_stop" if corrected_timeout else "legacy",
         })
         active_exit = exit_i
-    return rows, {"spread_filtered": skipped_spread, "overlap_skipped": skipped_overlap, "censored": censored}
+    return trades, {
+        "signals_filtered_by_spread_in_sim": spread_rejects,
+        "overlap_skipped": overlaps,
+        "end_of_data_censored": censored,
+    }
 
 def main():
+    OUT.mkdir(parents=True, exist_ok=True)
     report = {
         "status": "STARTED",
-        "method": "R189 locked parameters applied once to fresh 2026 Dukascopy EURUSD M1 bid/ask; no re-optimization.",
-        "test_window_requested_utc": {"from": START, "to_exclusive": END_EXCLUSIVE},
-        "params": {"displacement_pips": 15, "late_ratio_min": 0.8, "body_pips_min": 2,
-                   "directional_consistency_min": 7, "signal_hours_utc": "03-11 except 06 and 09",
-                   "dedup_bars": 14, "spread_cap_pips": MAX_SPREAD, "SL_pips": SL, "TP_pips": TP,
-                   "MFE_trigger_pips": MFE, "trail_pips": TRAIL, "time_stop_minutes": TIME_STOP,
-                   "extra_markup_stress_pips_per_trade": MARKUPS},
-        "source": "Dukascopy EURUSD M1 OHLC, bid and ask downloaded separately with dukascopy-node; prices include quoted bid/ask execution. This is a different feed from the missing historical R189 raw files.",
+        "round": "R189",
+        "method": "Locked R189 L80 rules on fresh 2026 Dukascopy EURUSD M1 bid/ask; no parameter optimization.",
+        "window_utc": {"from_inclusive": START.isoformat(), "to_exclusive": END_EXCLUSIVE.isoformat()},
+        "locked_parameters": {
+            "displacement_pips": 15, "late_ratio_min": 0.8, "body_pips_min": 2,
+            "directional_consistency_min": 7, "signal_hours_utc": "03..11 excluding 06 and 09",
+            "dedup_bars": 14, "entry_spread_cap_pips": MAX_SPREAD_PIPS,
+            "SL_pips": SL, "TP_pips": TP, "MFE_trigger_pips": MFE_TRIGGER,
+            "trailing_distance_pips": TRAIL, "time_stop_bars": TIME_STOP_BARS,
+            "extra_cost_stress_pips_per_trade": EXTRA_COST_STRESS,
+        },
+        "notes": [
+            "Feed is different from missing 2016-2025 HistData/spread files; use as independent recent-data check, not as replacement for exact historical reproduction.",
+            "Extra costs are applied per closed trade on top of executable bid/ask prices.",
+            "Legacy and causal exits are both reported; causal is the implementation that exits at the time-stop bar open before considering that bar's high/low.",
+        ],
     }
+    results_path = OUT / "r189_oos_2026_results.json"
     try:
-        bp, blog = download("eurusd", "bid", "eurusd_bid")
-        ap, alog = download("eurusd", "ask", "eurusd_ask")
-        bid, bdiag = load_bars(bp)
-        ask, adiag = load_bars(ap)
+        bid_path, bid_logs = download_side("bid", "eurusd_bid")
+        ask_path, ask_logs = download_side("ask", "eurusd_ask")
+        bid, bid_diag = read_bars(bid_path)
+        ask, ask_diag = read_bars(ask_path)
         common = bid.index.intersection(ask.index).sort_values()
-        bid, ask = bid.loc[common], ask.loc[common]
-        spread = (ask["open"] - bid["open"]) / PIP
-        # Common rows are required so each signal and executable quote use identical timestamps.
-        data_bad = int((spread < -1e-9).sum())
-        if len(common) < 10000: raise ValueError(f"too few common bid/ask M1 bars: {len(common)}")
-        if data_bad:
-            raise ValueError(f"ask open below bid open in {data_bad} common bars")
+        if len(common) < 10000:
+            raise RuntimeError(f"Only {len(common)} common bid/ask M1 bars; refusing to test")
+        bid = bid.loc[common]
+        ask = ask.loc[common]
         df = bid.copy()
-        sigs = signals(df)
-        # Candidate reduction is as locked: signal dedup first, then spread cap at entry.
-        # Match R189 order exactly: deduplicate all 03-11 signals first, then remove UTC hours 06/09 and spread-filter.
-        cap_sigs = [(i, d) for i, d in sigs
-                    if i + 1 < len(df) and idx_hour_ok(df.index[i]) and spread.iloc[i+1] <= MAX_SPREAD]
-        legacy, ldiag = run_sim(df, bid, ask, cap_sigs, corrected_timeout=False)
-        corrected, cdiag = run_sim(df, bid, ask, cap_sigs, corrected_timeout=True)
-        start, end = df.index.min(), df.index.max()
-        n_weeks = max((end - start).total_seconds() / (7*24*3600), 1/7)
+        spread_open = (ask.Open - bid.Open) / PIP
+        if (spread_open < -1e-8).any():
+            raise RuntimeError(f"Negative ask-bid open spread in {int((spread_open < -1e-8).sum())} rows")
+        if not np.isfinite(spread_open.to_numpy()).all():
+            raise RuntimeError("Missing/non-finite spread after bid/ask timestamp alignment")
+        # Generate the canonical L80 signals first; preserve R189 order of hour & spread filters.
+        all_signals = l80_fast(df, disp_thr=15, late_thr=0.8)
+        eligible_signals = [
+            (i, d, src) for i, d, src in all_signals
+            if df.index[i].hour not in (6, 9) and i + 1 < len(df)
+            and spread_open.iat[i + 1] <= MAX_SPREAD_PIPS + 1e-12
+        ]
+        legacy, legacy_diag = simulate(df, bid, ask, eligible_signals, corrected_timeout=False)
+        causal, causal_diag = simulate(df, bid, ask, eligible_signals, corrected_timeout=True)
+        start_ts, end_ts = df.index[0], df.index[-1]
+        elapsed_weeks = max((end_ts - start_ts).total_seconds() / (7 * 24 * 3600), 1 / 7)
         report.update({
             "status": "COMPLETE",
             "data": {
-                "bid_file_sha256": hashlib.sha256(bp.read_bytes()).hexdigest(),
-                "ask_file_sha256": hashlib.sha256(ap.read_bytes()).hexdigest(),
-                "bid_diagnostics": bdiag, "ask_diagnostics": adiag,
-                "bid_rows_common": int(len(bid)), "ask_rows_common": int(len(ask)),
-                "common_rows": int(len(common)), "negative_spreads": data_bad,
-                "data_start_utc": start.isoformat(), "data_end_utc": end.isoformat(),
-                "min_spread_pips": float(spread.min()), "median_spread_pips": float(spread.median()),
-                "p95_spread_pips": float(spread.quantile(0.95)), "max_spread_pips": float(spread.max()),
-                "signals_before_spread_filter": int(len(sigs)),
-                "signals_after_spread_filter": int(len(cap_sigs)),
-                "n_weeks_calendar": float(n_weeks),
-                "download_bid_attempt": blog["attempt"], "download_ask_attempt": alog["attempt"],
-                "download_logs_tail": {"bid": blog["log_tail"][-2000:], "ask": alog["log_tail"][-2000:]},
+                "bid_file_sha256": hashlib.sha256(bid_path.read_bytes()).hexdigest(),
+                "ask_file_sha256": hashlib.sha256(ask_path.read_bytes()).hexdigest(),
+                "bid_diagnostics": bid_diag, "ask_diagnostics": ask_diag,
+                "common_bars": int(len(common)),
+                "start_utc": start_ts.isoformat(), "end_utc": end_ts.isoformat(),
+                "spread_min_pips": float(spread_open.min()),
+                "spread_median_pips": float(spread_open.median()),
+                "spread_p95_pips": float(spread_open.quantile(0.95)),
+                "spread_max_pips": float(spread_open.max()),
+                "signals_before_R189_hour/spread_filters": int(len(all_signals)),
+                "eligible_signals": int(len(eligible_signals)),
+                "calendar_weeks_in_sample": float(elapsed_weeks),
+                "monthly_downloads_bid": bid_logs,
+                "monthly_downloads_ask": ask_logs,
             },
-            "legacy_execution": {
-                "diagnostics": ldiag,
-                "baseline_markup_0_2_pips": metrics(legacy, 0.2, n_weeks),
-                "markup_stress": [{"markup_pips": c, **metrics(legacy, c, n_weeks)} for c in MARKUPS],
+            "legacy_engine": {
+                "diagnostics": legacy_diag,
+                "at_0_2_extra_cost": metric_block(legacy, 0.2, elapsed_weeks),
+                "cost_stress": [{"extra_cost_pips": c, **metric_block(legacy, c, elapsed_weeks)} for c in EXTRA_COST_STRESS],
             },
-            "causal_time_stop_execution": {
-                "diagnostics": cdiag,
-                "baseline_markup_0_2_pips": metrics(corrected, 0.2, n_weeks),
-                "markup_stress": [{"markup_pips": c, **metrics(corrected, c, n_weeks)} for c in MARKUPS],
-                "monthly": [],
+            "causal_time_stop_engine": {
+                "diagnostics": causal_diag,
+                "at_0_2_extra_cost": metric_block(causal, 0.2, elapsed_weeks),
+                "cost_stress": [{"extra_cost_pips": c, **metric_block(causal, c, elapsed_weeks)} for c in EXTRA_COST_STRESS],
             },
-            "comparison": {
-                "legacy_closed_trades": len(legacy), "corrected_closed_trades": len(corrected),
-                "legacy_pf_markup_0_2": metrics(legacy,0.2,n_weeks)["pf"],
-                "corrected_pf_markup_0_2": metrics(corrected,0.2,n_weeks)["pf"],
-                "legacy_net_markup_0_2": metrics(legacy,0.2,n_weeks)["net_pips"],
-                "corrected_net_markup_0_2": metrics(corrected,0.2,n_weeks)["net_pips"],
+            "comparison_at_0_2_extra_cost": {
+                "legacy": metric_block(legacy, 0.2, elapsed_weeks),
+                "causal_time_stop": metric_block(causal, 0.2, elapsed_weeks),
             },
         })
-        monthly = {}
-        for r in corrected:
-            m = r["entry_utc"][:7]
-            monthly.setdefault(m, []).append(r)
-        report["causal_time_stop_execution"]["monthly"] = []
-        for m, rs in sorted(monthly.items()):
-            weeks_in_month = float(pd.Period(m, freq="M").days_in_month / 7.0)
-            report["causal_time_stop_execution"]["monthly"].append({
-                "month_utc": m, **metrics(rs, 0.2, weeks_in_month)
-            })
-        # Write machine-readable summary and auditable trade ledgers.
-        (OUT / "r189_oos_2026_results.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
+        annual = []
+        for year in sorted({pd.Timestamp(t["entry_utc"]).year for t in causal}):
+            yy = [t for t in causal if pd.Timestamp(t["entry_utc"]).year == year]
+            annual.append({"year": year, **metric_block(yy, 0.2, 52.0)})
+        report["causal_time_stop_engine"]["annual_at_0_2_extra_cost"] = annual
+        monthly = []
+        for month in sorted({pd.Timestamp(t["entry_utc"]).strftime("%Y-%m") for t in causal}):
+            mm = [t for t in causal if pd.Timestamp(t["entry_utc"]).strftime("%Y-%m") == month]
+            weeks = calendar.monthrange(int(month[:4]), int(month[5:7]))[1] / 7.0
+            monthly.append({"month_utc": month, **metric_block(mm, 0.2, weeks)})
+        report["causal_time_stop_engine"]["monthly_at_0_2_extra_cost"] = monthly
         pd.DataFrame(legacy).to_csv(OUT / "r189_oos_2026_legacy_trades.csv", index=False)
-        pd.DataFrame(corrected).to_csv(OUT / "r189_oos_2026_causal_trades.csv", index=False)
-    except Exception as e:
-        report.update({"status": "FAILED", "error": f"{type(e).__name__}: {e}"})
-        (OUT / "r189_oos_2026_results.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
-        print(json.dumps(report, indent=2))
-        # Return a usable failed artifact rather than fail before commit.
-        return
-    print(json.dumps(report, indent=2, allow_nan=False))
+        pd.DataFrame(causal).to_csv(OUT / "r189_oos_2026_causal_trades.csv", index=False)
+    except Exception as exc:
+        report.update({
+            "status": "FAILED",
+            "error": f"{type(exc).__name__}: {exc}",
+        })
+        results_path.write_text(json.dumps(report, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+        print(json.dumps(report, indent=2, allow_nan=False), flush=True)
+        return 1
+    results_path.write_text(json.dumps(report, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    print(json.dumps(report, indent=2, allow_nan=False), flush=True)
+    return 0
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
