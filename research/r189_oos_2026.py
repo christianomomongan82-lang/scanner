@@ -177,7 +177,7 @@ def run_sim(df, bid, ask, sigs, corrected_timeout):
         trail_active = False
         stop = hard_sl
         scheduled = e + TIME_STOP
-        if corrected_timeout and scheduled >= n:
+        if scheduled >= n:
             censored += 1
             active_exit = n  # no later trades may be opened inside this truncated window
             continue
@@ -313,18 +313,16 @@ def main():
                 "corrected_net_markup_0_2": metrics(corrected,0.2,n_weeks)["net_pips"],
             },
         })
-        for row in corrected:
-            month = row["entry_utc"][:7]
-            report["causal_time_stop_execution"]["monthly"].append({
-                "_month": month, "gross_pips": row["gross_pips"]})
         monthly = {}
         for r in corrected:
             m = r["entry_utc"][:7]
             monthly.setdefault(m, []).append(r)
-        report["causal_time_stop_execution"]["monthly"] = [
-            {"month_utc": m, **metrics(rs, 0.2, max((end-start).total_seconds()/(7*24*3600),1/7) / max(1,len(pd.period_range(start=m,end=m,freq="M"))))}
-            for m, rs in sorted(monthly.items())
-        ]
+        report["causal_time_stop_execution"]["monthly"] = []
+        for m, rs in sorted(monthly.items()):
+            weeks_in_month = float(pd.Period(m, freq="M").days_in_month / 7.0)
+            report["causal_time_stop_execution"]["monthly"].append({
+                "month_utc": m, **metrics(rs, 0.2, weeks_in_month)
+            })
         # Write machine-readable summary and auditable trade ledgers.
         (OUT / "r189_oos_2026_results.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
         pd.DataFrame(legacy).to_csv(OUT / "r189_oos_2026_legacy_trades.csv", index=False)
