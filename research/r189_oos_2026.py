@@ -36,7 +36,9 @@ def l80_fast(df, w1=11, w2=12, disp_thr=15.0, body_thr=2.0,
     """Exact signal-generation logic from the locked canonical L80 implementation."""
     close = df.Close.to_numpy()
     op = df.Open.to_numpy()
-    hours = df.index.hour.to_numpy()
+    # Canonical R189 historical files use a fixed GMT-5 wall clock (no DST).
+    # New Dukascopy timestamps are UTC, so map UTC bars to the original fixed session clock.
+    hours = ((df.index.hour - 5) % 24).to_numpy()
     n = len(df)
     step = np.diff(close, prepend=np.nan)
     sgnstep = np.sign(step)
@@ -332,6 +334,7 @@ def main():
         },
         "notes": [
             "Feed is different from missing 2016-2025 HistData/spread files; use as independent recent-data check, not as replacement for exact historical reproduction.",
+            "Signal session hours are mapped from Dukascopy UTC timestamps to the canonical fixed GMT-5 HistData wall clock (no DST).",
             "Empty individual daily buckets are allowed because weekends and market holidays can legitimately have no minute candles; non-empty data and coverage diagnostics are still checked.",
             "Extra costs are applied per closed trade on top of executable bid/ask prices.",
             "Legacy and causal exits are both reported; causal is the implementation that exits at the time-stop bar open before considering that bar's high/low.",
@@ -358,7 +361,7 @@ def main():
         all_signals = l80_fast(df, disp_thr=15, late_thr=0.8)
         eligible_signals = [
             (i, d, src) for i, d, src in all_signals
-            if df.index[i].hour not in (6, 9) and i + 1 < len(df)
+            if ((df.index[i].hour - 5) % 24) not in (6, 9) and i + 1 < len(df)
             and spread_open.iat[i + 1] <= MAX_SPREAD_PIPS + 1e-12
         ]
         legacy, legacy_diag = simulate(df, bid, ask, eligible_signals, corrected_timeout=False)
