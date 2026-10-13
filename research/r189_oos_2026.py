@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Locked R189 signal, fresh Dukascopy EURUSD M1 BID/ASK OOS data for 2026.
+Workflow bootstrap update 2026-10-13.
 Compares legacy exit timing with a causal time-stop that exits at the scheduled bar OPEN
 before using that bar's high/low. No parameter selection is performed on 2026 data.
 """
