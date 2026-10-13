@@ -50,7 +50,10 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add research/r189_oos_2026_results.json research/r189_oos_2026_legacy_trades.csv research/r189_oos_2026_causal_trades.csv 2>/dev/null || true
+          git add -f research/r189_oos_2026_results.json
+          for file in research/r189_oos_2026_legacy_trades.csv research/r189_oos_2026_causal_trades.csv; do
+            if [ -f "$file" ]; then git add -f "$file"; fi
+          done
           if git diff --cached --quiet; then
             echo "No output changes to commit."
           else
