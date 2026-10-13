@@ -112,6 +112,9 @@ def metrics(rows, markup=0.2, n_weeks=None):
         "trades_per_calendar_week": (float(len(vals) / n_weeks) if n_weeks and len(vals) else None),
     }
 
+def idx_hour_ok(ts):
+    return ts.hour not in (6, 9)
+
 def signals(df):
     close = df["close"].to_numpy(float)
     op = df["open"].to_numpy(float)
@@ -145,7 +148,7 @@ def signals(df):
     candidates.sort(key=lambda x: x[0])  # stable: w=11 precedes w=12 at equal index
     accepted, last = [], -10**18
     for i, direction in candidates:
-        if i - last > 14 and i + 1 < n and idx[i].hour not in (6, 9):
+        if i - last > 14 and i + 1 < n:
             accepted.append((i, direction))
             last = i
     return accepted
@@ -272,7 +275,9 @@ def main():
         df = bid.copy()
         sigs = signals(df)
         # Candidate reduction is as locked: signal dedup first, then spread cap at entry.
-        cap_sigs = [(i, d) for i, d in sigs if i + 1 < len(df) and spread.iloc[i+1] <= MAX_SPREAD]
+        # Match R189 order exactly: deduplicate all 03-11 signals first, then remove UTC hours 06/09 and spread-filter.
+        cap_sigs = [(i, d) for i, d in sigs
+                    if i + 1 < len(df) and idx_hour_ok(df.index[i]) and spread.iloc[i+1] <= MAX_SPREAD]
         legacy, ldiag = run_sim(df, bid, ask, cap_sigs, corrected_timeout=False)
         corrected, cdiag = run_sim(df, bid, ask, cap_sigs, corrected_timeout=True)
         start, end = df.index.min(), df.index.max()
