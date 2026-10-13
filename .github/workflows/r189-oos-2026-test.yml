@@ -1,6 +1,7 @@
 name: R189 fresh-data OOS test
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - r189-oos-2026-test
