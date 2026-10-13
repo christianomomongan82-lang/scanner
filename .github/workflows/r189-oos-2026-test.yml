@@ -1,0 +1,56 @@
+name: R189 fresh-data OOS test
+
+on:
+  push:
+    branches:
+      - r189-oos-2026-test
+    paths-ignore:
+      - "research/r189_oos_2026_results.json"
+      - "research/r189_oos_2026_legacy_trades.csv"
+      - "research/r189_oos_2026_causal_trades.csv"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r189-oos-2026-test
+  cancel-in-progress: true
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout isolated test branch
+        uses: actions/checkout@v4
+        with:
+          ref: r189-oos-2026-test
+          persist-credentials: true
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Python libraries
+        run: python -m pip install --upgrade pip pandas numpy
+      - name: Run fresh-data R189 test
+        run: python -u research/r189_oos_2026.py
+      - name: Commit results to isolated branch
+        if: always()
+        run: |
+          if [ ! -f research/r189_oos_2026_results.json ]; then
+            mkdir -p research
+            printf '{"status":"FAILED","error":"test script did not emit results"}\n' > research/r189_oos_2026_results.json
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/r189_oos_2026_results.json research/r189_oos_2026_legacy_trades.csv research/r189_oos_2026_causal_trades.csv 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No output changes to commit."
+          else
+            git commit -m "[skip ci] R189 fresh-data OOS results"
+            git push origin HEAD:r189-oos-2026-test
+          fi
