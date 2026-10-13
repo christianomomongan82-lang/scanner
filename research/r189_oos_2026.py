@@ -172,6 +172,7 @@ def read_bars(path: Path):
     if missing or idx.isna().any():
         raise ValueError(f"Missing OHLC columns {sorted(missing)} or invalid timestamps in {path}")
     bars = raw[req].apply(pd.to_numeric, errors="coerce")
+    bars.columns = ["Open", "High", "Low", "Close"]
     bars.index = pd.DatetimeIndex(idx, name="timestamp_utc")
     bars = bars.replace([np.inf, -np.inf], np.nan).dropna().sort_index()
     dupes = int(bars.index.duplicated(keep="last").sum())
