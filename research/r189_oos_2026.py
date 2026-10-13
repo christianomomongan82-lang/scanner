@@ -100,7 +100,7 @@ def download_side(price_type: str, outname: str):
             "-i", "eurusd", "-from", chunk_start.isoformat(), "-to", chunk_end.isoformat(),
             "-t", "m1", "-p", price_type, "-utc", "0", "-f", "csv", "-fl",
             "-dir", str(DATA), "-fn", stem,
-            "-bs", "3", "-bp", "2000", "-r", "5", "-re", "-rp", "5000",
+            "-bs", "3", "-bp", "2000", "-r", "5", "-rp", "5000",
         ]
         env = os.environ.copy()
         if patch.is_file():
@@ -332,6 +332,7 @@ def main():
         },
         "notes": [
             "Feed is different from missing 2016-2025 HistData/spread files; use as independent recent-data check, not as replacement for exact historical reproduction.",
+            "Empty individual daily buckets are allowed because weekends and market holidays can legitimately have no minute candles; non-empty data and coverage diagnostics are still checked.",
             "Extra costs are applied per closed trade on top of executable bid/ask prices.",
             "Legacy and causal exits are both reported; causal is the implementation that exits at the time-stop bar open before considering that bar's high/low.",
         ],
