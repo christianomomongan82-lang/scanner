@@ -1,0 +1,39 @@
+{
+  "status": "FAILED_RUN",
+  "strategy_family": "EURUSD H1 range-compression breakout",
+  "verdict": "GAGAL",
+  "preregistered_design": {
+    "compression_window_hours": 6,
+    "compression_threshold_fit_period": [
+      "2017-01-01",
+      "2021-01-01"
+    ],
+    "compression_quantiles": [
+      0.2,
+      0.3
+    ],
+    "breakout_lookback_hours": [
+      12,
+      24
+    ],
+    "target_RR": [
+      1.5,
+      2.0
+    ],
+    "long_signal": "six prior H1 bars compressed below the training-only range quantile and current BID close breaks previous lookback high",
+    "short_signal": "six prior H1 bars compressed below the training-only range quantile and current ASK close breaks previous lookback low",
+    "entry": "next exact H1 open",
+    "stop": "opposite extreme of completed breakout H1 candle",
+    "maximum_holding_hours": 24,
+    "intrabar_execution": "actual BID/ASK H1 OHLC, stop-first if stop/target both touched",
+    "extra_cost_stress_pips_on_top_of_observed_bidask": [
+      0.0,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "selection": "highest 2021 validation PF at +1 pip among candidates with at least 50 trades; tie-break expectancy then count; no forward/OOS tuning"
+  },
+  "error": "RuntimeError: Insufficient training compression ranges: 0",
+  "decision": "No partial PF is accepted when the locked test pipeline fails."
+}
