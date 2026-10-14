@@ -130,6 +130,7 @@ def simulate_config(bid, ask, date_positions, buffer_fraction, rr_multiple):
         "days_with_complete_hourly_grid": 0,
         "days_skipped_incomplete_grid": 0,
         "days_skipped_no_breakout": 0,
+        "days_skipped_invalid_range": 0,
         "days_skipped_invalid_stop_distance": 0,
         "days_skipped_invalid_quotes": 0,
         "invalid_quote_nonfinite": 0,
@@ -152,7 +153,7 @@ def simulate_config(bid, ask, date_positions, buffer_fraction, rr_multiple):
         lower = float(bid.Low.iloc[rpos].min())
         width_pips = (upper - lower) / PIP
         if not np.isfinite([upper, lower]).all() or width_pips <= 0:
-            diagnostics["days_skipped_invalid_quotes"] += 1
+            diagnostics["days_skipped_invalid_range"] += 1
             continue
         buffer_px = (upper - lower) * buffer_fraction
         signal_i = None
