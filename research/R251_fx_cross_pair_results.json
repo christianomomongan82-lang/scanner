@@ -1,5 +1,5 @@
 {
-  "status": "FAILED_RUN",
+  "status": "COMPLETE",
   "strategy": "R251 FX cross-pair consensus and EURUSD lag catch-up",
   "verdict": "GAGAL",
   "parameters_locked_before_test": {
@@ -45,6 +45,4482 @@
     "Execution PnL uses actual EURUSD quote sides: long enters ASK and exits BID; short enters BID and exits ASK.",
     "No parameter grid search is performed; thresholds are frozen in this script before discovery/forward/OOS metrics are calculated."
   ],
-  "error": "KeyError: 'gross_pips'",
-  "decision": "The experiment is scored as GAGAL if the frozen dataset/download/validation pipeline cannot complete; no partial PF may be used."
+  "data": {
+    "pairs": {
+      "gbpusd_bid": {
+        "rows": 85170,
+        "duplicate_timestamps_removed": 0,
+        "invalid_ohlc_rows_removed": 0,
+        "hourly_grid_violations": 0,
+        "missing_hour_gaps": 40,
+        "start_utc": "2017-01-01T00:00:00+00:00",
+        "end_utc": "2026-10-13T23:00:00+00:00",
+        "sha256": "dae0f6f7eeb38cc117bf7816c1554b768fd0099b2803a433189cf6999ba858e4"
+      },
+      "eurusd_bid": {
+        "rows": 85170,
+        "duplicate_timestamps_removed": 0,
+        "invalid_ohlc_rows_removed": 0,
+        "hourly_grid_violations": 0,
+        "missing_hour_gaps": 40,
+        "start_utc": "2017-01-01T00:00:00+00:00",
+        "end_utc": "2026-10-13T23:00:00+00:00",
+        "sha256": "68d667ef6e84d4357207da86dc0ffd18453bbfa91837d0dd1349ac82bb6c47bf"
+      },
+      "eurusd_ask": {
+        "rows": 85170,
+        "duplicate_timestamps_removed": 0,
+        "invalid_ohlc_rows_removed": 0,
+        "hourly_grid_violations": 0,
+        "missing_hour_gaps": 40,
+        "start_utc": "2017-01-01T00:00:00+00:00",
+        "end_utc": "2026-10-13T23:00:00+00:00",
+        "sha256": "8b9d3660213fae55bf0066c42fd093badc4a8092ddb2a0ca1672bbac5bcc7b91"
+      },
+      "audusd_bid": {
+        "rows": 85170,
+        "duplicate_timestamps_removed": 0,
+        "invalid_ohlc_rows_removed": 0,
+        "hourly_grid_violations": 0,
+        "missing_hour_gaps": 40,
+        "start_utc": "2017-01-01T00:00:00+00:00",
+        "end_utc": "2026-10-13T23:00:00+00:00",
+        "sha256": "27cecfe1c76a2ba73d46a26d7955c42da62e0d4b6ce200d60fa803b4679518cf"
+      },
+      "usdchf_bid": {
+        "rows": 85170,
+        "duplicate_timestamps_removed": 0,
+        "invalid_ohlc_rows_removed": 0,
+        "hourly_grid_violations": 0,
+        "missing_hour_gaps": 40,
+        "start_utc": "2017-01-01T00:00:00+00:00",
+        "end_utc": "2026-10-13T23:00:00+00:00",
+        "sha256": "936f2b4dd27de19989f4d980726aeafef52b5d7bb10e0206e59a965e8b787802"
+      }
+    },
+    "common_hourly_rows": 85170,
+    "common_start_utc": "2017-01-01T00:00:00+00:00",
+    "common_end_utc": "2026-10-13T23:00:00+00:00",
+    "downloads": [
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2017-01",
+        "attempt": 1,
+        "bytes": 33815
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2017-02",
+        "attempt": 1,
+        "bytes": 30719
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2017-03",
+        "attempt": 1,
+        "bytes": 33642
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2017-04",
+        "attempt": 1,
+        "bytes": 32929
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2017-05",
+        "attempt": 1,
+        "bytes": 33981
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2017-06",
+        "attempt": 1,
+        "bytes": 32780
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2017-07",
+        "attempt": 1,
+        "bytes": 34037
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2017-08",
+        "attempt": 1,
+        "bytes": 34008
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2017-09",
+        "attempt": 1,
+        "bytes": 31662
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2017-10",
+        "attempt": 1,
+        "bytes": 33995
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2017-11",
+        "attempt": 1,
+        "bytes": 32899
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2017-12",
+        "attempt": 1,
+        "bytes": 31713
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2018-01",
+        "attempt": 1,
+        "bytes": 33800
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2018-02",
+        "attempt": 1,
+        "bytes": 30702
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2018-03",
+        "attempt": 1,
+        "bytes": 32552
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2018-04",
+        "attempt": 1,
+        "bytes": 32919
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2018-05",
+        "attempt": 1,
+        "bytes": 33961
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2018-06",
+        "attempt": 1,
+        "bytes": 31646
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2018-07",
+        "attempt": 1,
+        "bytes": 34020
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2018-08",
+        "attempt": 1,
+        "bytes": 33853
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2018-09",
+        "attempt": 1,
+        "bytes": 32912
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2018-10",
+        "attempt": 1,
+        "bytes": 33809
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2018-11",
+        "attempt": 1,
+        "bytes": 32815
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2018-12",
+        "attempt": 1,
+        "bytes": 33928
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2019-01",
+        "attempt": 1,
+        "bytes": 33805
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2019-02",
+        "attempt": 1,
+        "bytes": 30735
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2019-03",
+        "attempt": 1,
+        "bytes": 34044
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2019-04",
+        "attempt": 1,
+        "bytes": 32901
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2019-05",
+        "attempt": 1,
+        "bytes": 33680
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2019-06",
+        "attempt": 1,
+        "bytes": 32905
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2019-07",
+        "attempt": 1,
+        "bytes": 34015
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2019-08",
+        "attempt": 1,
+        "bytes": 32811
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2019-09",
+        "attempt": 1,
+        "bytes": 32524
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2019-10",
+        "attempt": 1,
+        "bytes": 34010
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2019-11",
+        "attempt": 1,
+        "bytes": 31756
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2019-12",
+        "attempt": 1,
+        "bytes": 33918
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2020-01",
+        "attempt": 1,
+        "bytes": 33926
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2020-02",
+        "attempt": 1,
+        "bytes": 30634
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2020-03",
+        "attempt": 1,
+        "bytes": 33933
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2020-04",
+        "attempt": 1,
+        "bytes": 32722
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2020-05",
+        "attempt": 1,
+        "bytes": 34016
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2020-06",
+        "attempt": 1,
+        "bytes": 32912
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2020-07",
+        "attempt": 1,
+        "bytes": 33848
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2020-08",
+        "attempt": 1,
+        "bytes": 33829
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2020-09",
+        "attempt": 1,
+        "bytes": 32920
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2020-10",
+        "attempt": 1,
+        "bytes": 32801
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2020-11",
+        "attempt": 1,
+        "bytes": 32915
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2020-12",
+        "attempt": 1,
+        "bytes": 33964
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2021-01",
+        "attempt": 1,
+        "bytes": 34032
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2021-02",
+        "attempt": 1,
+        "bytes": 30709
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2021-03",
+        "attempt": 1,
+        "bytes": 33957
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2021-04",
+        "attempt": 1,
+        "bytes": 32785
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2021-05",
+        "attempt": 1,
+        "bytes": 33991
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2021-06",
+        "attempt": 1,
+        "bytes": 32904
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2021-07",
+        "attempt": 1,
+        "bytes": 32752
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2021-08",
+        "attempt": 1,
+        "bytes": 34026
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2021-09",
+        "attempt": 1,
+        "bytes": 32301
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2021-10",
+        "attempt": 1,
+        "bytes": 34037
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2021-11",
+        "attempt": 1,
+        "bytes": 32711
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2021-12",
+        "attempt": 1,
+        "bytes": 33679
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2022-01",
+        "attempt": 1,
+        "bytes": 34002
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2022-02",
+        "attempt": 1,
+        "bytes": 30753
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2022-03",
+        "attempt": 1,
+        "bytes": 34026
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2022-04",
+        "attempt": 1,
+        "bytes": 31707
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2022-05",
+        "attempt": 1,
+        "bytes": 33820
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2022-06",
+        "attempt": 1,
+        "bytes": 32898
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2022-07",
+        "attempt": 1,
+        "bytes": 33830
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2022-08",
+        "attempt": 1,
+        "bytes": 33800
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2022-09",
+        "attempt": 1,
+        "bytes": 32775
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2022-10",
+        "attempt": 1,
+        "bytes": 33806
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2022-11",
+        "attempt": 1,
+        "bytes": 32931
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2022-12",
+        "attempt": 1,
+        "bytes": 32827
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2023-01",
+        "attempt": 1,
+        "bytes": 33643
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2023-02",
+        "attempt": 1,
+        "bytes": 30744
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2023-03",
+        "attempt": 1,
+        "bytes": 33880
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2023-04",
+        "attempt": 1,
+        "bytes": 32928
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2023-05",
+        "attempt": 1,
+        "bytes": 33825
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2023-06",
+        "attempt": 1,
+        "bytes": 32764
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2023-07",
+        "attempt": 1,
+        "bytes": 34032
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2023-08",
+        "attempt": 1,
+        "bytes": 33647
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2023-09",
+        "attempt": 1,
+        "bytes": 31686
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2023-10",
+        "attempt": 1,
+        "bytes": 34006
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2023-11",
+        "attempt": 1,
+        "bytes": 32895
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2023-12",
+        "attempt": 1,
+        "bytes": 31740
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2024-01",
+        "attempt": 1,
+        "bytes": 33851
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2024-02",
+        "attempt": 1,
+        "bytes": 31791
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2024-03",
+        "attempt": 1,
+        "bytes": 33818
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2024-04",
+        "attempt": 1,
+        "bytes": 32923
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2024-05",
+        "attempt": 1,
+        "bytes": 33865
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2024-06",
+        "attempt": 1,
+        "bytes": 32957
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2024-07",
+        "attempt": 1,
+        "bytes": 33643
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2024-08",
+        "attempt": 1,
+        "bytes": 32736
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2024-09",
+        "attempt": 1,
+        "bytes": 32743
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2024-10",
+        "attempt": 1,
+        "bytes": 33817
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2024-11",
+        "attempt": 1,
+        "bytes": 31749
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2024-12",
+        "attempt": 1,
+        "bytes": 33870
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2025-01",
+        "attempt": 1,
+        "bytes": 33895
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2025-02",
+        "attempt": 1,
+        "bytes": 30628
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2025-03",
+        "attempt": 1,
+        "bytes": 34000
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2025-04",
+        "attempt": 1,
+        "bytes": 32733
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2025-05",
+        "attempt": 1,
+        "bytes": 32807
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2025-06",
+        "attempt": 1,
+        "bytes": 32703
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2025-07",
+        "attempt": 1,
+        "bytes": 34018
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2025-08",
+        "attempt": 1,
+        "bytes": 33830
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2025-09",
+        "attempt": 1,
+        "bytes": 32722
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2025-10",
+        "attempt": 1,
+        "bytes": 33869
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2025-11",
+        "attempt": 1,
+        "bytes": 32936
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2025-12",
+        "attempt": 1,
+        "bytes": 33934
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2026-01",
+        "attempt": 1,
+        "bytes": 32638
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2026-02",
+        "attempt": 1,
+        "bytes": 29562
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2026-03",
+        "attempt": 1,
+        "bytes": 34010
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2026-04",
+        "attempt": 1,
+        "bytes": 32929
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2026-05",
+        "attempt": 1,
+        "bytes": 34010
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2026-06",
+        "attempt": 1,
+        "bytes": 32931
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2026-07",
+        "attempt": 1,
+        "bytes": 33662
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2026-08",
+        "attempt": 1,
+        "bytes": 34083
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2026-09",
+        "attempt": 1,
+        "bytes": 32938
+      },
+      {
+        "pair": "gbpusd",
+        "side": "bid",
+        "month": "2026-10",
+        "attempt": 1,
+        "bytes": 14263
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2017-01",
+        "attempt": 1,
+        "bytes": 33450
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2017-02",
+        "attempt": 1,
+        "bytes": 30741
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2017-03",
+        "attempt": 1,
+        "bytes": 33835
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2017-04",
+        "attempt": 1,
+        "bytes": 32563
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2017-05",
+        "attempt": 1,
+        "bytes": 33611
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2017-06",
+        "attempt": 1,
+        "bytes": 32786
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2017-07",
+        "attempt": 1,
+        "bytes": 34007
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2017-08",
+        "attempt": 1,
+        "bytes": 33835
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2017-09",
+        "attempt": 1,
+        "bytes": 31695
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2017-10",
+        "attempt": 1,
+        "bytes": 33995
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2017-11",
+        "attempt": 1,
+        "bytes": 32731
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2017-12",
+        "attempt": 1,
+        "bytes": 31546
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2018-01",
+        "attempt": 1,
+        "bytes": 33986
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2018-02",
+        "attempt": 1,
+        "bytes": 30530
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2018-03",
+        "attempt": 1,
+        "bytes": 32730
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2018-04",
+        "attempt": 1,
+        "bytes": 32937
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2018-05",
+        "attempt": 1,
+        "bytes": 33797
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2018-06",
+        "attempt": 1,
+        "bytes": 31644
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2018-07",
+        "attempt": 1,
+        "bytes": 33994
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2018-08",
+        "attempt": 1,
+        "bytes": 33474
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2018-09",
+        "attempt": 1,
+        "bytes": 32732
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2018-10",
+        "attempt": 1,
+        "bytes": 34003
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2018-11",
+        "attempt": 1,
+        "bytes": 32625
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2018-12",
+        "attempt": 1,
+        "bytes": 33949
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2019-01",
+        "attempt": 1,
+        "bytes": 34008
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2019-02",
+        "attempt": 1,
+        "bytes": 30713
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2019-03",
+        "attempt": 1,
+        "bytes": 33839
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2019-04",
+        "attempt": 1,
+        "bytes": 32915
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2019-05",
+        "attempt": 1,
+        "bytes": 33869
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2019-06",
+        "attempt": 1,
+        "bytes": 32745
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2019-07",
+        "attempt": 1,
+        "bytes": 34014
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2019-08",
+        "attempt": 1,
+        "bytes": 32603
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2019-09",
+        "attempt": 1,
+        "bytes": 32725
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2019-10",
+        "attempt": 1,
+        "bytes": 33599
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2019-11",
+        "attempt": 1,
+        "bytes": 31724
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2019-12",
+        "attempt": 1,
+        "bytes": 33868
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2020-01",
+        "attempt": 1,
+        "bytes": 33748
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2020-02",
+        "attempt": 1,
+        "bytes": 30626
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2020-03",
+        "attempt": 1,
+        "bytes": 33981
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2020-04",
+        "attempt": 1,
+        "bytes": 32958
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2020-05",
+        "attempt": 1,
+        "bytes": 33818
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2020-06",
+        "attempt": 1,
+        "bytes": 32490
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2020-07",
+        "attempt": 1,
+        "bytes": 33686
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2020-08",
+        "attempt": 1,
+        "bytes": 33990
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2020-09",
+        "attempt": 1,
+        "bytes": 32896
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2020-10",
+        "attempt": 1,
+        "bytes": 32786
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2020-11",
+        "attempt": 1,
+        "bytes": 32171
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2020-12",
+        "attempt": 1,
+        "bytes": 33921
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2021-01",
+        "attempt": 1,
+        "bytes": 34049
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2021-02",
+        "attempt": 1,
+        "bytes": 30747
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2021-03",
+        "attempt": 1,
+        "bytes": 34040
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2021-04",
+        "attempt": 1,
+        "bytes": 32748
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2021-05",
+        "attempt": 1,
+        "bytes": 33825
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2021-06",
+        "attempt": 1,
+        "bytes": 32901
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2021-07",
+        "attempt": 1,
+        "bytes": 32570
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2021-08",
+        "attempt": 1,
+        "bytes": 33719
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2021-09",
+        "attempt": 1,
+        "bytes": 32920
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2021-10",
+        "attempt": 1,
+        "bytes": 34040
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2021-11",
+        "attempt": 1,
+        "bytes": 32876
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2021-12",
+        "attempt": 1,
+        "bytes": 33706
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2022-01",
+        "attempt": 1,
+        "bytes": 33647
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2022-02",
+        "attempt": 1,
+        "bytes": 30730
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2022-03",
+        "attempt": 1,
+        "bytes": 33958
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2022-04",
+        "attempt": 1,
+        "bytes": 31683
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2022-05",
+        "attempt": 1,
+        "bytes": 33818
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2022-06",
+        "attempt": 1,
+        "bytes": 32902
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2022-07",
+        "attempt": 1,
+        "bytes": 34015
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2022-08",
+        "attempt": 1,
+        "bytes": 33788
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2022-09",
+        "attempt": 1,
+        "bytes": 32735
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2022-10",
+        "attempt": 1,
+        "bytes": 34037
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2022-11",
+        "attempt": 1,
+        "bytes": 32708
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2022-12",
+        "attempt": 1,
+        "bytes": 32812
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2023-01",
+        "attempt": 1,
+        "bytes": 34002
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2023-02",
+        "attempt": 1,
+        "bytes": 30513
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2023-03",
+        "attempt": 1,
+        "bytes": 33865
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2023-04",
+        "attempt": 1,
+        "bytes": 32905
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2023-05",
+        "attempt": 1,
+        "bytes": 34003
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2023-06",
+        "attempt": 1,
+        "bytes": 32783
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2023-07",
+        "attempt": 1,
+        "bytes": 34007
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2023-08",
+        "attempt": 1,
+        "bytes": 34018
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2023-09",
+        "attempt": 1,
+        "bytes": 31699
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2023-10",
+        "attempt": 1,
+        "bytes": 34021
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2023-11",
+        "attempt": 1,
+        "bytes": 32890
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2023-12",
+        "attempt": 1,
+        "bytes": 31722
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2024-01",
+        "attempt": 1,
+        "bytes": 33819
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2024-02",
+        "attempt": 1,
+        "bytes": 31793
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2024-03",
+        "attempt": 1,
+        "bytes": 34028
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2024-04",
+        "attempt": 1,
+        "bytes": 32896
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2024-05",
+        "attempt": 1,
+        "bytes": 33685
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2024-06",
+        "attempt": 1,
+        "bytes": 32930
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2024-07",
+        "attempt": 1,
+        "bytes": 33806
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2024-08",
+        "attempt": 1,
+        "bytes": 32587
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2024-09",
+        "attempt": 1,
+        "bytes": 32812
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2024-10",
+        "attempt": 1,
+        "bytes": 33972
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2024-11",
+        "attempt": 1,
+        "bytes": 31699
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2024-12",
+        "attempt": 1,
+        "bytes": 33935
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2025-01",
+        "attempt": 1,
+        "bytes": 33240
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2025-02",
+        "attempt": 1,
+        "bytes": 30241
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2025-03",
+        "attempt": 1,
+        "bytes": 34006
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2025-04",
+        "attempt": 1,
+        "bytes": 32917
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2025-05",
+        "attempt": 1,
+        "bytes": 32570
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2025-06",
+        "attempt": 1,
+        "bytes": 32935
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2025-07",
+        "attempt": 1,
+        "bytes": 33992
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2025-08",
+        "attempt": 1,
+        "bytes": 33838
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2025-09",
+        "attempt": 1,
+        "bytes": 32920
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2025-10",
+        "attempt": 1,
+        "bytes": 33888
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2025-11",
+        "attempt": 1,
+        "bytes": 32933
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2025-12",
+        "attempt": 1,
+        "bytes": 33704
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2026-01",
+        "attempt": 1,
+        "bytes": 32424
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2026-02",
+        "attempt": 1,
+        "bytes": 29550
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2026-03",
+        "attempt": 1,
+        "bytes": 33814
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2026-04",
+        "attempt": 1,
+        "bytes": 32926
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2026-05",
+        "attempt": 1,
+        "bytes": 34042
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2026-06",
+        "attempt": 1,
+        "bytes": 32933
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2026-07",
+        "attempt": 1,
+        "bytes": 33884
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2026-08",
+        "attempt": 1,
+        "bytes": 34027
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2026-09",
+        "attempt": 1,
+        "bytes": 32718
+      },
+      {
+        "pair": "eurusd",
+        "side": "bid",
+        "month": "2026-10",
+        "attempt": 1,
+        "bytes": 14270
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2017-01",
+        "attempt": 1,
+        "bytes": 33404
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2017-02",
+        "attempt": 1,
+        "bytes": 30515
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2017-03",
+        "attempt": 1,
+        "bytes": 33493
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2017-04",
+        "attempt": 1,
+        "bytes": 32921
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2017-05",
+        "attempt": 1,
+        "bytes": 33597
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2017-06",
+        "attempt": 1,
+        "bytes": 32777
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2017-07",
+        "attempt": 1,
+        "bytes": 34002
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2017-08",
+        "attempt": 1,
+        "bytes": 33829
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2017-09",
+        "attempt": 1,
+        "bytes": 31667
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2017-10",
+        "attempt": 1,
+        "bytes": 33999
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2017-11",
+        "attempt": 1,
+        "bytes": 32921
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2017-12",
+        "attempt": 1,
+        "bytes": 31713
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2018-01",
+        "attempt": 1,
+        "bytes": 33997
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2018-02",
+        "attempt": 1,
+        "bytes": 30683
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2018-03",
+        "attempt": 1,
+        "bytes": 32763
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2018-04",
+        "attempt": 1,
+        "bytes": 32885
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2018-05",
+        "attempt": 1,
+        "bytes": 33788
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2018-06",
+        "attempt": 1,
+        "bytes": 31429
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2018-07",
+        "attempt": 1,
+        "bytes": 33983
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2018-08",
+        "attempt": 1,
+        "bytes": 33612
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2018-09",
+        "attempt": 1,
+        "bytes": 32774
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2018-10",
+        "attempt": 1,
+        "bytes": 34008
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2018-11",
+        "attempt": 1,
+        "bytes": 32598
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2018-12",
+        "attempt": 1,
+        "bytes": 33772
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2019-01",
+        "attempt": 1,
+        "bytes": 33995
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2019-02",
+        "attempt": 1,
+        "bytes": 30710
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2019-03",
+        "attempt": 1,
+        "bytes": 34050
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2019-04",
+        "attempt": 1,
+        "bytes": 32726
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2019-05",
+        "attempt": 1,
+        "bytes": 33857
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2019-06",
+        "attempt": 1,
+        "bytes": 32746
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2019-07",
+        "attempt": 1,
+        "bytes": 33965
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2019-08",
+        "attempt": 1,
+        "bytes": 32588
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2019-09",
+        "attempt": 1,
+        "bytes": 32721
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2019-10",
+        "attempt": 1,
+        "bytes": 33601
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2019-11",
+        "attempt": 1,
+        "bytes": 31738
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2019-12",
+        "attempt": 1,
+        "bytes": 33730
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2020-01",
+        "attempt": 1,
+        "bytes": 33544
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2020-02",
+        "attempt": 1,
+        "bytes": 30419
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2020-03",
+        "attempt": 1,
+        "bytes": 33999
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2020-04",
+        "attempt": 1,
+        "bytes": 32912
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2020-05",
+        "attempt": 1,
+        "bytes": 34014
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2020-06",
+        "attempt": 1,
+        "bytes": 32718
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2020-07",
+        "attempt": 1,
+        "bytes": 33653
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2020-08",
+        "attempt": 1,
+        "bytes": 33990
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2020-09",
+        "attempt": 1,
+        "bytes": 32721
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2020-10",
+        "attempt": 1,
+        "bytes": 32764
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2020-11",
+        "attempt": 1,
+        "bytes": 32490
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2020-12",
+        "attempt": 1,
+        "bytes": 33181
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2021-01",
+        "attempt": 1,
+        "bytes": 34014
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2021-02",
+        "attempt": 1,
+        "bytes": 30710
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2021-03",
+        "attempt": 1,
+        "bytes": 33590
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2021-04",
+        "attempt": 1,
+        "bytes": 32773
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2021-05",
+        "attempt": 1,
+        "bytes": 33804
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2021-06",
+        "attempt": 1,
+        "bytes": 32890
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2021-07",
+        "attempt": 1,
+        "bytes": 32789
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2021-08",
+        "attempt": 1,
+        "bytes": 34017
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2021-09",
+        "attempt": 1,
+        "bytes": 32929
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2021-10",
+        "attempt": 1,
+        "bytes": 33626
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2021-11",
+        "attempt": 1,
+        "bytes": 32713
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2021-12",
+        "attempt": 1,
+        "bytes": 33865
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2022-01",
+        "attempt": 1,
+        "bytes": 34026
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2022-02",
+        "attempt": 1,
+        "bytes": 30743
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2022-03",
+        "attempt": 1,
+        "bytes": 34008
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2022-04",
+        "attempt": 1,
+        "bytes": 31663
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2022-05",
+        "attempt": 1,
+        "bytes": 34017
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2022-06",
+        "attempt": 1,
+        "bytes": 32706
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2022-07",
+        "attempt": 1,
+        "bytes": 33644
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2022-08",
+        "attempt": 1,
+        "bytes": 33997
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2022-09",
+        "attempt": 1,
+        "bytes": 32750
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2022-10",
+        "attempt": 1,
+        "bytes": 34002
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2022-11",
+        "attempt": 1,
+        "bytes": 32932
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2022-12",
+        "attempt": 1,
+        "bytes": 32622
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2023-01",
+        "attempt": 1,
+        "bytes": 34003
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2023-02",
+        "attempt": 1,
+        "bytes": 30497
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2023-03",
+        "attempt": 1,
+        "bytes": 33849
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2023-04",
+        "attempt": 1,
+        "bytes": 32934
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2023-05",
+        "attempt": 1,
+        "bytes": 33779
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2023-06",
+        "attempt": 1,
+        "bytes": 32762
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2023-07",
+        "attempt": 1,
+        "bytes": 34024
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2023-08",
+        "attempt": 1,
+        "bytes": 33977
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2023-09",
+        "attempt": 1,
+        "bytes": 31675
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2023-10",
+        "attempt": 1,
+        "bytes": 33986
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2023-11",
+        "attempt": 1,
+        "bytes": 32708
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2023-12",
+        "attempt": 1,
+        "bytes": 31518
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2024-01",
+        "attempt": 1,
+        "bytes": 33996
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2024-02",
+        "attempt": 1,
+        "bytes": 31793
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2024-03",
+        "attempt": 1,
+        "bytes": 34020
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2024-04",
+        "attempt": 1,
+        "bytes": 32903
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2024-05",
+        "attempt": 1,
+        "bytes": 33878
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2024-06",
+        "attempt": 1,
+        "bytes": 32547
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2024-07",
+        "attempt": 1,
+        "bytes": 33791
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2024-08",
+        "attempt": 1,
+        "bytes": 32349
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2024-09",
+        "attempt": 1,
+        "bytes": 32709
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2024-10",
+        "attempt": 1,
+        "bytes": 33995
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2024-11",
+        "attempt": 1,
+        "bytes": 31534
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2024-12",
+        "attempt": 1,
+        "bytes": 33834
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2025-01",
+        "attempt": 1,
+        "bytes": 33511
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2025-02",
+        "attempt": 1,
+        "bytes": 30641
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2025-03",
+        "attempt": 1,
+        "bytes": 33828
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2025-04",
+        "attempt": 1,
+        "bytes": 32901
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2025-05",
+        "attempt": 1,
+        "bytes": 32799
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2025-06",
+        "attempt": 1,
+        "bytes": 32914
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2025-07",
+        "attempt": 1,
+        "bytes": 33630
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2025-08",
+        "attempt": 1,
+        "bytes": 34006
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2025-09",
+        "attempt": 1,
+        "bytes": 32889
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2025-10",
+        "attempt": 1,
+        "bytes": 33513
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2025-11",
+        "attempt": 1,
+        "bytes": 32926
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2025-12",
+        "attempt": 1,
+        "bytes": 33891
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2026-01",
+        "attempt": 1,
+        "bytes": 32821
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2026-02",
+        "attempt": 1,
+        "bytes": 29229
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2026-03",
+        "attempt": 1,
+        "bytes": 33604
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2026-04",
+        "attempt": 1,
+        "bytes": 32954
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2026-05",
+        "attempt": 1,
+        "bytes": 33867
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2026-06",
+        "attempt": 1,
+        "bytes": 32738
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2026-07",
+        "attempt": 1,
+        "bytes": 33700
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2026-08",
+        "attempt": 1,
+        "bytes": 34015
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2026-09",
+        "attempt": 1,
+        "bytes": 32919
+      },
+      {
+        "pair": "eurusd",
+        "side": "ask",
+        "month": "2026-10",
+        "attempt": 1,
+        "bytes": 14281
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2017-01",
+        "attempt": 1,
+        "bytes": 33829
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2017-02",
+        "attempt": 1,
+        "bytes": 30546
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2017-03",
+        "attempt": 1,
+        "bytes": 33869
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2017-04",
+        "attempt": 1,
+        "bytes": 32948
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2017-05",
+        "attempt": 1,
+        "bytes": 33809
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2017-06",
+        "attempt": 1,
+        "bytes": 32786
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2017-07",
+        "attempt": 1,
+        "bytes": 34026
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2017-08",
+        "attempt": 1,
+        "bytes": 34036
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2017-09",
+        "attempt": 1,
+        "bytes": 31499
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2017-10",
+        "attempt": 1,
+        "bytes": 34021
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2017-11",
+        "attempt": 1,
+        "bytes": 32746
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2017-12",
+        "attempt": 1,
+        "bytes": 31715
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2018-01",
+        "attempt": 1,
+        "bytes": 34024
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2018-02",
+        "attempt": 1,
+        "bytes": 30700
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2018-03",
+        "attempt": 1,
+        "bytes": 32796
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2018-04",
+        "attempt": 1,
+        "bytes": 32556
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2018-05",
+        "attempt": 1,
+        "bytes": 33816
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2018-06",
+        "attempt": 1,
+        "bytes": 31691
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2018-07",
+        "attempt": 1,
+        "bytes": 33801
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2018-08",
+        "attempt": 1,
+        "bytes": 33898
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2018-09",
+        "attempt": 1,
+        "bytes": 32956
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2018-10",
+        "attempt": 1,
+        "bytes": 34036
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2018-11",
+        "attempt": 1,
+        "bytes": 32778
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2018-12",
+        "attempt": 1,
+        "bytes": 33962
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2019-01",
+        "attempt": 1,
+        "bytes": 34009
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2019-02",
+        "attempt": 1,
+        "bytes": 30739
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2019-03",
+        "attempt": 1,
+        "bytes": 34033
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2019-04",
+        "attempt": 1,
+        "bytes": 32538
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2019-05",
+        "attempt": 1,
+        "bytes": 33687
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2019-06",
+        "attempt": 1,
+        "bytes": 32954
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2019-07",
+        "attempt": 1,
+        "bytes": 34015
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2019-08",
+        "attempt": 1,
+        "bytes": 32784
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2019-09",
+        "attempt": 1,
+        "bytes": 32900
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2019-10",
+        "attempt": 1,
+        "bytes": 33820
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2019-11",
+        "attempt": 1,
+        "bytes": 31723
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2019-12",
+        "attempt": 1,
+        "bytes": 33753
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2020-01",
+        "attempt": 1,
+        "bytes": 33596
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2020-02",
+        "attempt": 1,
+        "bytes": 30648
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2020-03",
+        "attempt": 1,
+        "bytes": 34036
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2020-04",
+        "attempt": 1,
+        "bytes": 32907
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2020-05",
+        "attempt": 1,
+        "bytes": 33833
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2020-06",
+        "attempt": 1,
+        "bytes": 32917
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2020-07",
+        "attempt": 1,
+        "bytes": 33529
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2020-08",
+        "attempt": 1,
+        "bytes": 34023
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2020-09",
+        "attempt": 1,
+        "bytes": 32904
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2020-10",
+        "attempt": 1,
+        "bytes": 32806
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2020-11",
+        "attempt": 1,
+        "bytes": 32935
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2020-12",
+        "attempt": 1,
+        "bytes": 33662
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2021-01",
+        "attempt": 1,
+        "bytes": 33843
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2021-02",
+        "attempt": 1,
+        "bytes": 30718
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2021-03",
+        "attempt": 1,
+        "bytes": 33983
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2021-04",
+        "attempt": 1,
+        "bytes": 32745
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2021-05",
+        "attempt": 1,
+        "bytes": 33844
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2021-06",
+        "attempt": 1,
+        "bytes": 32921
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2021-07",
+        "attempt": 1,
+        "bytes": 32579
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2021-08",
+        "attempt": 1,
+        "bytes": 33991
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2021-09",
+        "attempt": 1,
+        "bytes": 32714
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2021-10",
+        "attempt": 1,
+        "bytes": 34038
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2021-11",
+        "attempt": 1,
+        "bytes": 32719
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2021-12",
+        "attempt": 1,
+        "bytes": 33918
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2022-01",
+        "attempt": 1,
+        "bytes": 34054
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2022-02",
+        "attempt": 1,
+        "bytes": 30718
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2022-03",
+        "attempt": 1,
+        "bytes": 33583
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2022-04",
+        "attempt": 1,
+        "bytes": 31713
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2022-05",
+        "attempt": 1,
+        "bytes": 33621
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2022-06",
+        "attempt": 1,
+        "bytes": 32712
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2022-07",
+        "attempt": 1,
+        "bytes": 34060
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2022-08",
+        "attempt": 1,
+        "bytes": 33960
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2022-09",
+        "attempt": 1,
+        "bytes": 32787
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2022-10",
+        "attempt": 1,
+        "bytes": 34045
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2022-11",
+        "attempt": 1,
+        "bytes": 32932
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2022-12",
+        "attempt": 1,
+        "bytes": 32419
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2023-01",
+        "attempt": 1,
+        "bytes": 34032
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2023-02",
+        "attempt": 1,
+        "bytes": 30716
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2023-03",
+        "attempt": 1,
+        "bytes": 33878
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2023-04",
+        "attempt": 1,
+        "bytes": 32744
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2023-05",
+        "attempt": 1,
+        "bytes": 33995
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2023-06",
+        "attempt": 1,
+        "bytes": 32806
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2023-07",
+        "attempt": 1,
+        "bytes": 33831
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2023-08",
+        "attempt": 1,
+        "bytes": 34007
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2023-09",
+        "attempt": 1,
+        "bytes": 31479
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2023-10",
+        "attempt": 1,
+        "bytes": 33981
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2023-11",
+        "attempt": 1,
+        "bytes": 32732
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2023-12",
+        "attempt": 1,
+        "bytes": 31739
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2024-01",
+        "attempt": 1,
+        "bytes": 33976
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2024-02",
+        "attempt": 1,
+        "bytes": 31830
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2024-03",
+        "attempt": 1,
+        "bytes": 34032
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2024-04",
+        "attempt": 1,
+        "bytes": 32942
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2024-05",
+        "attempt": 1,
+        "bytes": 33869
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2024-06",
+        "attempt": 1,
+        "bytes": 32949
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2024-07",
+        "attempt": 1,
+        "bytes": 34021
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2024-08",
+        "attempt": 1,
+        "bytes": 32776
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2024-09",
+        "attempt": 1,
+        "bytes": 32910
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2024-10",
+        "attempt": 1,
+        "bytes": 33603
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2024-11",
+        "attempt": 1,
+        "bytes": 31538
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2024-12",
+        "attempt": 1,
+        "bytes": 33728
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2025-01",
+        "attempt": 1,
+        "bytes": 33936
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2025-02",
+        "attempt": 1,
+        "bytes": 30626
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2025-03",
+        "attempt": 1,
+        "bytes": 34013
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2025-04",
+        "attempt": 1,
+        "bytes": 32951
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2025-05",
+        "attempt": 1,
+        "bytes": 32604
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2025-06",
+        "attempt": 1,
+        "bytes": 32919
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2025-07",
+        "attempt": 1,
+        "bytes": 34029
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2025-08",
+        "attempt": 1,
+        "bytes": 34005
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2025-09",
+        "attempt": 1,
+        "bytes": 32911
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2025-10",
+        "attempt": 1,
+        "bytes": 33859
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2025-11",
+        "attempt": 1,
+        "bytes": 32729
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2025-12",
+        "attempt": 1,
+        "bytes": 33700
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2026-01",
+        "attempt": 1,
+        "bytes": 32747
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2026-02",
+        "attempt": 1,
+        "bytes": 29514
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2026-03",
+        "attempt": 1,
+        "bytes": 34001
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2026-04",
+        "attempt": 1,
+        "bytes": 32927
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2026-05",
+        "attempt": 1,
+        "bytes": 33647
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2026-06",
+        "attempt": 1,
+        "bytes": 32880
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2026-07",
+        "attempt": 1,
+        "bytes": 33422
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2026-08",
+        "attempt": 1,
+        "bytes": 33628
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2026-09",
+        "attempt": 1,
+        "bytes": 32892
+      },
+      {
+        "pair": "audusd",
+        "side": "bid",
+        "month": "2026-10",
+        "attempt": 1,
+        "bytes": 14269
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2017-01",
+        "attempt": 1,
+        "bytes": 34028
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2017-02",
+        "attempt": 1,
+        "bytes": 30720
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2017-03",
+        "attempt": 1,
+        "bytes": 33698
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2017-04",
+        "attempt": 1,
+        "bytes": 32929
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2017-05",
+        "attempt": 1,
+        "bytes": 33661
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2017-06",
+        "attempt": 1,
+        "bytes": 32578
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2017-07",
+        "attempt": 1,
+        "bytes": 34041
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2017-08",
+        "attempt": 1,
+        "bytes": 33791
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2017-09",
+        "attempt": 1,
+        "bytes": 31676
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2017-10",
+        "attempt": 1,
+        "bytes": 34033
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2017-11",
+        "attempt": 1,
+        "bytes": 32748
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2017-12",
+        "attempt": 1,
+        "bytes": 31468
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2018-01",
+        "attempt": 1,
+        "bytes": 33463
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2018-02",
+        "attempt": 1,
+        "bytes": 30364
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2018-03",
+        "attempt": 1,
+        "bytes": 32605
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2018-04",
+        "attempt": 1,
+        "bytes": 32949
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2018-05",
+        "attempt": 1,
+        "bytes": 34031
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2018-06",
+        "attempt": 1,
+        "bytes": 31695
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2018-07",
+        "attempt": 1,
+        "bytes": 34025
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2018-08",
+        "attempt": 1,
+        "bytes": 33877
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2018-09",
+        "attempt": 1,
+        "bytes": 32748
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2018-10",
+        "attempt": 1,
+        "bytes": 34016
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2018-11",
+        "attempt": 1,
+        "bytes": 32799
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2018-12",
+        "attempt": 1,
+        "bytes": 33523
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2019-01",
+        "attempt": 1,
+        "bytes": 34005
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2019-02",
+        "attempt": 1,
+        "bytes": 30680
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2019-03",
+        "attempt": 1,
+        "bytes": 34016
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2019-04",
+        "attempt": 1,
+        "bytes": 32876
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2019-05",
+        "attempt": 1,
+        "bytes": 33846
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2019-06",
+        "attempt": 1,
+        "bytes": 32942
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2019-07",
+        "attempt": 1,
+        "bytes": 33646
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2019-08",
+        "attempt": 1,
+        "bytes": 32803
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2019-09",
+        "attempt": 1,
+        "bytes": 32853
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2019-10",
+        "attempt": 1,
+        "bytes": 34026
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2019-11",
+        "attempt": 1,
+        "bytes": 31708
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2019-12",
+        "attempt": 1,
+        "bytes": 33744
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2020-01",
+        "attempt": 1,
+        "bytes": 33934
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2020-02",
+        "attempt": 1,
+        "bytes": 30618
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2020-03",
+        "attempt": 1,
+        "bytes": 34041
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2020-04",
+        "attempt": 1,
+        "bytes": 32720
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2020-05",
+        "attempt": 1,
+        "bytes": 34034
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2020-06",
+        "attempt": 1,
+        "bytes": 32892
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2020-07",
+        "attempt": 1,
+        "bytes": 33893
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2020-08",
+        "attempt": 1,
+        "bytes": 33829
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2020-09",
+        "attempt": 1,
+        "bytes": 32919
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2020-10",
+        "attempt": 1,
+        "bytes": 32772
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2020-11",
+        "attempt": 1,
+        "bytes": 32747
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2020-12",
+        "attempt": 1,
+        "bytes": 33932
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2021-01",
+        "attempt": 1,
+        "bytes": 34034
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2021-02",
+        "attempt": 1,
+        "bytes": 30751
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2021-03",
+        "attempt": 1,
+        "bytes": 33978
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2021-04",
+        "attempt": 1,
+        "bytes": 32785
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2021-05",
+        "attempt": 1,
+        "bytes": 34030
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2021-06",
+        "attempt": 1,
+        "bytes": 32917
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2021-07",
+        "attempt": 1,
+        "bytes": 32776
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2021-08",
+        "attempt": 1,
+        "bytes": 33848
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2021-09",
+        "attempt": 1,
+        "bytes": 32924
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2021-10",
+        "attempt": 1,
+        "bytes": 34060
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2021-11",
+        "attempt": 1,
+        "bytes": 32890
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2021-12",
+        "attempt": 1,
+        "bytes": 33927
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2022-01",
+        "attempt": 1,
+        "bytes": 33651
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2022-02",
+        "attempt": 1,
+        "bytes": 30745
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2022-03",
+        "attempt": 1,
+        "bytes": 33815
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2022-04",
+        "attempt": 1,
+        "bytes": 31666
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2022-05",
+        "attempt": 1,
+        "bytes": 33825
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2022-06",
+        "attempt": 1,
+        "bytes": 32914
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2022-07",
+        "attempt": 1,
+        "bytes": 33817
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2022-08",
+        "attempt": 1,
+        "bytes": 34016
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2022-09",
+        "attempt": 1,
+        "bytes": 32611
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2022-10",
+        "attempt": 1,
+        "bytes": 33874
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2022-11",
+        "attempt": 1,
+        "bytes": 32932
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2022-12",
+        "attempt": 1,
+        "bytes": 32825
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2023-01",
+        "attempt": 1,
+        "bytes": 34014
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2023-02",
+        "attempt": 1,
+        "bytes": 30743
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2023-03",
+        "attempt": 1,
+        "bytes": 33882
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2023-04",
+        "attempt": 1,
+        "bytes": 32742
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2023-05",
+        "attempt": 1,
+        "bytes": 33806
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2023-06",
+        "attempt": 1,
+        "bytes": 32769
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2023-07",
+        "attempt": 1,
+        "bytes": 34030
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2023-08",
+        "attempt": 1,
+        "bytes": 33979
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2023-09",
+        "attempt": 1,
+        "bytes": 31704
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2023-10",
+        "attempt": 1,
+        "bytes": 33833
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2023-11",
+        "attempt": 1,
+        "bytes": 32735
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2023-12",
+        "attempt": 1,
+        "bytes": 31720
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2024-01",
+        "attempt": 1,
+        "bytes": 34035
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2024-02",
+        "attempt": 1,
+        "bytes": 31260
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2024-03",
+        "attempt": 1,
+        "bytes": 33840
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2024-04",
+        "attempt": 1,
+        "bytes": 32907
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2024-05",
+        "attempt": 1,
+        "bytes": 33665
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2024-06",
+        "attempt": 1,
+        "bytes": 32949
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2024-07",
+        "attempt": 1,
+        "bytes": 33985
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2024-08",
+        "attempt": 1,
+        "bytes": 32604
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2024-09",
+        "attempt": 1,
+        "bytes": 32853
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2024-10",
+        "attempt": 1,
+        "bytes": 33641
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2024-11",
+        "attempt": 1,
+        "bytes": 31725
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2024-12",
+        "attempt": 1,
+        "bytes": 33526
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2025-01",
+        "attempt": 1,
+        "bytes": 33919
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2025-02",
+        "attempt": 1,
+        "bytes": 30642
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2025-03",
+        "attempt": 1,
+        "bytes": 33849
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2025-04",
+        "attempt": 1,
+        "bytes": 32938
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2025-05",
+        "attempt": 1,
+        "bytes": 32603
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2025-06",
+        "attempt": 1,
+        "bytes": 32906
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2025-07",
+        "attempt": 1,
+        "bytes": 33839
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2025-08",
+        "attempt": 1,
+        "bytes": 34017
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2025-09",
+        "attempt": 1,
+        "bytes": 32724
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2025-10",
+        "attempt": 1,
+        "bytes": 33293
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2025-11",
+        "attempt": 1,
+        "bytes": 32564
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2025-12",
+        "attempt": 1,
+        "bytes": 33924
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2026-01",
+        "attempt": 1,
+        "bytes": 32814
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2026-02",
+        "attempt": 1,
+        "bytes": 29531
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2026-03",
+        "attempt": 1,
+        "bytes": 34038
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2026-04",
+        "attempt": 1,
+        "bytes": 32911
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2026-05",
+        "attempt": 1,
+        "bytes": 34031
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2026-06",
+        "attempt": 1,
+        "bytes": 32928
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2026-07",
+        "attempt": 1,
+        "bytes": 33668
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2026-08",
+        "attempt": 1,
+        "bytes": 33665
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2026-09",
+        "attempt": 1,
+        "bytes": 32722
+      },
+      {
+        "pair": "usdchf",
+        "side": "bid",
+        "month": "2026-10",
+        "attempt": 1,
+        "bytes": 14278
+      }
+    ],
+    "sha256_trade_ledger": "125849444ca96cdb40440ad54018a701bd7bf1356bca8fa69e050e2440fd7fdf"
+  },
+  "signals_and_execution": {
+    "potential_signal": 5431,
+    "bad_time_grid": 120,
+    "overlap_skipped": 1854,
+    "entry_exit_missing": 200,
+    "executed_trades": 3577
+  },
+  "metrics": {
+    "discovery": {
+      "0.0": {
+        "trades": 1797,
+        "PF": 0.9563384687573284,
+        "net_pips": -558.3000000000404,
+        "mean_net_pips_per_trade": -0.3106844741235617,
+        "win_rate": 0.4757929883138564,
+        "trades_per_week": 6.888828039430449
+      },
+      "0.5": {
+        "trades": 1797,
+        "PF": 0.8901730182064884,
+        "net_pips": -1456.8000000000407,
+        "mean_net_pips_per_trade": -0.8106844741235618,
+        "win_rate": 0.46132442960489706,
+        "trades_per_week": 6.888828039430449
+      },
+      "1.0": {
+        "trades": 1797,
+        "PF": 0.8287540261307679,
+        "net_pips": -2355.30000000004,
+        "mean_net_pips_per_trade": -1.3106844741235617,
+        "win_rate": 0.44741235392320533,
+        "trades_per_week": 6.888828039430449
+      },
+      "2.0": {
+        "trades": 1797,
+        "PF": 0.7188255449392914,
+        "net_pips": -4152.30000000004,
+        "mean_net_pips_per_trade": -2.3106844741235615,
+        "win_rate": 0.42292710072342793,
+        "trades_per_week": 6.888828039430449
+      }
+    },
+    "forward": {
+      "0.0": {
+        "trades": 1499,
+        "PF": 1.0588757017720303,
+        "net_pips": 643.8999999999852,
+        "mean_net_pips_per_trade": 0.4295530353568947,
+        "win_rate": 0.48032021347565046,
+        "trades_per_week": 7.182067077344285
+      },
+      "0.5": {
+        "trades": 1499,
+        "PF": 0.9906791180468504,
+        "net_pips": -105.6000000000148,
+        "mean_net_pips_per_trade": -0.07044696464310528,
+        "win_rate": 0.47164776517678453,
+        "trades_per_week": 7.182067077344285
+      },
+      "1.0": {
+        "trades": 1499,
+        "PF": 0.9270989633065055,
+        "net_pips": -855.1000000000147,
+        "mean_net_pips_per_trade": -0.5704469646431052,
+        "win_rate": 0.45697131420947296,
+        "trades_per_week": 7.182067077344285
+      },
+      "2.0": {
+        "trades": 1499,
+        "PF": 0.8126566765082716,
+        "net_pips": -2354.100000000015,
+        "mean_net_pips_per_trade": -1.5704469646431054,
+        "win_rate": 0.4229486324216144,
+        "trades_per_week": 7.182067077344285
+      }
+    },
+    "oos_2026": {
+      "0.0": {
+        "trades": 281,
+        "PF": 0.848749370488505,
+        "net_pips": -270.29999999999006,
+        "mean_net_pips_per_trade": -0.961921708185018,
+        "win_rate": 0.4626334519572954,
+        "trades_per_week": 6.877622377622378
+      },
+      "0.5": {
+        "trades": 281,
+        "PF": 0.7795191069128411,
+        "net_pips": -410.79999999999006,
+        "mean_net_pips_per_trade": -1.461921708185018,
+        "win_rate": 0.4555160142348754,
+        "trades_per_week": 6.877622377622378
+      },
+      "1.0": {
+        "trades": 281,
+        "PF": 0.7158833230261821,
+        "net_pips": -551.2999999999901,
+        "mean_net_pips_per_trade": -1.961921708185018,
+        "win_rate": 0.44483985765124556,
+        "trades_per_week": 6.877622377622378
+      },
+      "2.0": {
+        "trades": 281,
+        "PF": 0.6036855387838682,
+        "net_pips": -832.2999999999901,
+        "mean_net_pips_per_trade": -2.961921708185018,
+        "win_rate": 0.4128113879003559,
+        "trades_per_week": 6.877622377622378
+      }
+    }
+  },
+  "annual_cohorts": [
+    {
+      "year": 2017,
+      "PF_cost_0.0": 0.8780695969274919,
+      "PF_cost_0.5": 0.8195891746007933,
+      "PF_cost_1.0": 0.7650746484997817,
+      "PF_cost_2.0": 0.6666327292472676,
+      "trades_cost_0.0": 334,
+      "trades_cost_0.5": 334,
+      "trades_cost_1.0": 334,
+      "trades_cost_2.0": 334,
+      "mean_pips_cost_0.0": -0.9410179640718718,
+      "mean_pips_cost_0.5": -1.4410179640718717,
+      "mean_pips_cost_1.0": -1.9410179640718714,
+      "mean_pips_cost_2.0": -2.9410179640718717
+    },
+    {
+      "year": 2018,
+      "PF_cost_0.0": 0.9794615201334329,
+      "PF_cost_0.5": 0.9178164367126619,
+      "PF_cost_1.0": 0.8600545300138602,
+      "PF_cost_2.0": 0.754979410034461,
+      "trades_cost_0.0": 270,
+      "trades_cost_0.5": 270,
+      "trades_cost_1.0": 270,
+      "trades_cost_2.0": 270,
+      "mean_pips_cost_0.0": -0.15962962962959792,
+      "mean_pips_cost_0.5": -0.6596296296295983,
+      "mean_pips_cost_1.0": -1.159629629629598,
+      "mean_pips_cost_2.0": -2.1596296296295976
+    },
+    {
+      "year": 2019,
+      "PF_cost_0.0": 1.037240432469524,
+      "PF_cost_0.5": 0.9448883091472238,
+      "PF_cost_1.0": 0.8614931237720913,
+      "PF_cost_2.0": 0.7179667699239568,
+      "trades_cost_0.0": 333,
+      "trades_cost_0.5": 333,
+      "trades_cost_1.0": 333,
+      "trades_cost_2.0": 333,
+      "mean_pips_cost_0.0": 0.19549549549542247,
+      "mean_pips_cost_0.5": -0.30450450450457744,
+      "mean_pips_cost_1.0": -0.8045045045045774,
+      "mean_pips_cost_2.0": -1.8045045045045776
+    },
+    {
+      "year": 2020,
+      "PF_cost_0.0": 0.9384028345598304,
+      "PF_cost_0.5": 0.8841510131832756,
+      "PF_cost_1.0": 0.8332607637732797,
+      "PF_cost_2.0": 0.7408165723232604,
+      "trades_cost_0.0": 425,
+      "trades_cost_0.5": 425,
+      "trades_cost_1.0": 425,
+      "trades_cost_2.0": 425,
+      "mean_pips_cost_0.0": -0.5317647058823098,
+      "mean_pips_cost_0.5": -1.0317647058823098,
+      "mean_pips_cost_1.0": -1.5317647058823098,
+      "mean_pips_cost_2.0": -2.5317647058823103
+    },
+    {
+      "year": 2021,
+      "PF_cost_0.0": 0.9851505364368572,
+      "PF_cost_0.5": 0.9081865506667488,
+      "PF_cost_1.0": 0.8372451601850142,
+      "PF_cost_2.0": 0.7119523930108786,
+      "trades_cost_0.0": 435,
+      "trades_cost_0.5": 435,
+      "trades_cost_1.0": 435,
+      "trades_cost_2.0": 435,
+      "mean_pips_cost_0.0": -0.09195402298859265,
+      "mean_pips_cost_0.5": -0.5919540229885927,
+      "mean_pips_cost_1.0": -1.0919540229885927,
+      "mean_pips_cost_2.0": -2.0919540229885927
+    },
+    {
+      "year": 2022,
+      "PF_cost_0.0": 1.2238241362890858,
+      "PF_cost_0.5": 1.162627354121643,
+      "PF_cost_1.0": 1.1046427230634468,
+      "PF_cost_2.0": 0.9976546953472945,
+      "trades_cost_0.0": 428,
+      "trades_cost_0.5": 428,
+      "trades_cost_1.0": 428,
+      "trades_cost_2.0": 428,
+      "mean_pips_cost_0.0": 1.9768691588785037,
+      "mean_pips_cost_0.5": 1.4768691588785041,
+      "mean_pips_cost_1.0": 0.9768691588785043,
+      "mean_pips_cost_2.0": -0.023130841121495938
+    },
+    {
+      "year": 2023,
+      "PF_cost_0.0": 0.9841626778887885,
+      "PF_cost_0.5": 0.9190740683278028,
+      "PF_cost_1.0": 0.8583765630153859,
+      "PF_cost_2.0": 0.7490891766156634,
+      "trades_cost_0.0": 423,
+      "trades_cost_0.5": 423,
+      "trades_cost_1.0": 423,
+      "trades_cost_2.0": 423,
+      "mean_pips_cost_0.0": -0.11654846335694993,
+      "mean_pips_cost_0.5": -0.6165484633569501,
+      "mean_pips_cost_1.0": -1.11654846335695,
+      "mean_pips_cost_2.0": -2.11654846335695
+    },
+    {
+      "year": 2024,
+      "PF_cost_0.0": 1.126521267622589,
+      "PF_cost_0.5": 1.0208714547117879,
+      "PF_cost_1.0": 0.9255272885409738,
+      "PF_cost_2.0": 0.7621504742247672,
+      "trades_cost_0.0": 347,
+      "trades_cost_0.5": 347,
+      "trades_cost_1.0": 347,
+      "trades_cost_2.0": 347,
+      "mean_pips_cost_0.0": 0.6051873198846532,
+      "mean_pips_cost_0.5": 0.1051873198846532,
+      "mean_pips_cost_1.0": -0.39481268011534676,
+      "mean_pips_cost_2.0": -1.3948126801153466
+    },
+    {
+      "year": 2025,
+      "PF_cost_0.0": 0.8477576876284777,
+      "PF_cost_0.5": 0.7922382744526738,
+      "PF_cost_1.0": 0.7406235349273333,
+      "PF_cost_2.0": 0.6480265557744228,
+      "trades_cost_0.0": 301,
+      "trades_cost_0.5": 301,
+      "trades_cost_1.0": 301,
+      "trades_cost_2.0": 301,
+      "mean_pips_cost_0.0": -1.2056478405315592,
+      "mean_pips_cost_0.5": -1.7056478405315592,
+      "mean_pips_cost_1.0": -2.205647840531559,
+      "mean_pips_cost_2.0": -3.2056478405315594
+    },
+    {
+      "year": 2026,
+      "PF_cost_0.0": 0.848749370488505,
+      "PF_cost_0.5": 0.7795191069128411,
+      "PF_cost_1.0": 0.7158833230261821,
+      "PF_cost_2.0": 0.6036855387838682,
+      "trades_cost_0.0": 281,
+      "trades_cost_0.5": 281,
+      "trades_cost_1.0": 281,
+      "trades_cost_2.0": 281,
+      "mean_pips_cost_0.0": -0.961921708185018,
+      "mean_pips_cost_0.5": -1.461921708185018,
+      "mean_pips_cost_1.0": -1.961921708185018,
+      "mean_pips_cost_2.0": -2.961921708185018
+    }
+  ],
+  "forward_block_bootstrap_cost_1pip": {
+    "draws": 2000,
+    "p_mean_positive": 0.1445,
+    "ci95_mean_pips": [
+      -1.6444719300544144,
+      0.4868648289770718
+    ]
+  },
+  "acceptance_gates": {
+    "discovery_min_100_trades": true,
+    "discovery_PF_at_1pip_ge_1.05": false,
+    "forward_min_100_trades": true,
+    "forward_PF_at_1pip_ge_1.10": false,
+    "forward_PF_at_2pip_ge_1.05": false,
+    "forward_each_year_with_20plus_trades_PF_ge_1_at_1pip": false,
+    "forward_4week_block_bootstrap_mean_positive_95pct": false,
+    "oos_2026_min_30_trades": true,
+    "oos_2026_PF_at_1pip_ge_1.00": false
+  },
+  "verdict_rule": "All predeclared discovery, forward, annual stability, bootstrap, and 2026 OOS gates must pass. No after-the-fact tuning.",
+  "limitations": [
+    "Dukascopy historical H1 quotes may differ from the user's exact funded broker feed.",
+    "Bid/ask execution modeled from H1 open prices; intrahour quote path and live slippage are not observed.",
+    "Challenge pass probability is not claimed from this alpha test; a separate chronological risk replay is required only if all strategy acceptance gates pass."
+  ]
 }
