@@ -121,7 +121,7 @@ def main():
   long=(ret24>=threshold)&(ret120>0)&eligible
   short=(ret24<=-threshold)&(ret120<0)&eligible
   direction[long.to_numpy()]=1; direction[short.to_numpy()]=-1
-  records=[]; skipped={"invalid_signal_window":0,"missing_execution_grid":0,"overlap":0,"invalid_stop":0}
+  records=[]; skipped={"invalid_signal_window":0,"missing_execution_grid":0,"missing_entry_quote":0,"overlap":0,"invalid_stop":0}
   last_exit_idx=-1
   bid_arr={c:b[c].to_numpy(float) for c in ("Open","High","Low","Close")}
   ask_arr={c:a[c].to_numpy(float) for c in ("Open","High","Low","Close")}
@@ -132,9 +132,17 @@ def main():
    if entry_i>=len(ix): continue
    if entry_i<last_exit_idx:
     skipped["overlap"]+=1; continue
-   exit_i=entry_i+24
-   if exit_i>=len(ix) or not valid_arr[entry_i:exit_i+1].all() or not np.all(np.diff(times[entry_i:exit_i+1].asi8)==pd.Timedelta(hours=1).value):
+   desired_exit_i=entry_i+24
+   if desired_exit_i>=len(ix):
     skipped["missing_execution_grid"]+=1; continue
+   if not valid_arr[entry_i]:
+    skipped["missing_entry_quote"]+=1; continue
+   # Do not synthesize bars: keep managing the position on observed quotes only.
+   # If the exact 24-hour exit timestamp is missing, use the first observed quote at/after it.
+   observed_exit_offsets=np.flatnonzero(valid_arr[desired_exit_i:])
+   if len(observed_exit_offsets)==0:
+    skipped["missing_execution_grid"]+=1; continue
+   exit_i=desired_exit_i+int(observed_exit_offsets[0])
    d=int(direction[sig_i]); dist=0.5*range_arr[sig_i]
    if not np.isfinite(dist) or dist<3*PIP:
     skipped["invalid_stop"]+=1; continue
@@ -144,6 +152,8 @@ def main():
     ep=bid_arr["Open"][entry_i]; sl=ep+dist; tp=ep-2*dist
    exitp=None; reason=None; actual_exit_i=None
    for j in range(entry_i,exit_i):
+    if not valid_arr[j]:
+     continue
     if d==1:
      op,hi,lo=bid_arr["Open"][j],bid_arr["High"][j],bid_arr["Low"][j]
      if op<=sl: exitp=op; reason="STOP_GAP"; actual_exit_i=j; break
