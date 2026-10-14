@@ -34,6 +34,6 @@
     ],
     "selection": "highest 2021 validation PF at +1 pip among candidates with at least 50 trades; tie-break expectancy then count; no forward/OOS tuning"
   },
-  "error": "RuntimeError: Insufficient training compression ranges: 0",
+  "error": "RuntimeError: No candidate reached the 50-trade validation minimum",
   "decision": "No partial PF is accepted when the locked test pipeline fails."
 }
