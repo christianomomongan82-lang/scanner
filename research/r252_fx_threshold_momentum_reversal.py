@@ -106,10 +106,9 @@ def make_candidate(bid, ask, lookback, mode, threshold):
     ret = np.full(n, np.nan, dtype=float)
     abs_ret = np.full(n, np.nan, dtype=float)
     valid_ret = np.zeros(n, dtype=bool)
-    ns = idx.asi8
-    hour_ns = int(pd.Timedelta(hours=1).value)
+    one_hour = pd.Timedelta(hours=1)
     for i in range(lookback, n):
-        if ns[i] - ns[i - lookback] != lookback * hour_ns:
+        if idx[i] - idx[i - lookback] != pd.Timedelta(hours=lookback):
             continue
         r = close[i] / close[i - lookback] - 1.0
         if np.isfinite(r):
@@ -120,7 +119,7 @@ def make_candidate(bid, ask, lookback, mode, threshold):
     for i in range(lookback + 1, n - HOLD_HOURS - 1):
         if not valid_ret[i] or not valid_ret[i - 1]:
             continue
-        if ns[i] - ns[i - 1] != hour_ns:
+        if idx[i] - idx[i - 1] != one_hour:
             continue
         # A single entry is emitted when the rolling move first crosses its frozen
         # training-only tail threshold, not on every bar while beyond the threshold.
@@ -128,9 +127,9 @@ def make_candidate(bid, ask, lookback, mode, threshold):
             continue
         entry_i = i + 1
         exit_i = i + HOLD_HOURS + 1
-        if ns[entry_i] - ns[i] != hour_ns:
+        if idx[entry_i] - idx[i] != one_hour:
             continue
-        if ns[exit_i] - ns[entry_i] != HOLD_HOURS * hour_ns:
+        if idx[exit_i] - idx[entry_i] != pd.Timedelta(hours=HOLD_HOURS):
             continue
         direction = 1 if ret[i] > 0 else -1
         if mode == "reversal":
@@ -279,14 +278,17 @@ def main():
         diagnostics = {}
         for lookback in LOOKBACKS:
             ret = bid.Close / bid.Close.shift(lookback) - 1.0
-            ns = bid.index.asi8
-            valid = np.zeros(len(bid), dtype=bool)
-            hour_ns = int(pd.Timedelta(hours=1).value)
+            abs_train_values = []
             for i in range(lookback, len(bid)):
-                valid[i] = (ns[i] - ns[i-lookback] == lookback * hour_ns) and np.isfinite(ret.iloc[i])
-            close_time = bid.index + pd.Timedelta(hours=1)
-            fit = valid & (close_time >= TRAIN_START) & (close_time < TRAIN_END)
-            abs_train = np.abs(ret.to_numpy(float)[fit])
+                close_time = bid.index[i] + pd.Timedelta(hours=1)
+                if not (TRAIN_START <= close_time < TRAIN_END):
+                    continue
+                if bid.index[i] - bid.index[i-lookback] != pd.Timedelta(hours=lookback):
+                    continue
+                value = float(ret.iloc[i])
+                if np.isfinite(value):
+                    abs_train_values.append(abs(value))
+            abs_train = np.asarray(abs_train_values, dtype=float)
             if len(abs_train) < 1000:
                 raise RuntimeError(f"Insufficient training returns for lookback={lookback}: {len(abs_train)}")
             thresholds[lookback] = float(np.quantile(abs_train, TAIL_QUANTILE))
