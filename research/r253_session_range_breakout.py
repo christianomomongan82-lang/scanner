@@ -132,6 +132,9 @@ def simulate_config(bid, ask, date_positions, buffer_fraction, rr_multiple):
         "days_skipped_no_breakout": 0,
         "days_skipped_invalid_stop_distance": 0,
         "days_skipped_invalid_quotes": 0,
+        "invalid_quote_nonfinite": 0,
+        "invalid_entry_spread": 0,
+        "invalid_scheduled_exit_spread": 0,
         "trades_closed": 0,
         "stop_first_collisions": 0,
         "scheduled_time_exits": 0,
@@ -177,8 +180,18 @@ def simulate_config(bid, ask, date_positions, buffer_fraction, rr_multiple):
         entry_ask = float(ask.Open.iloc[entry_i])
         scheduled_bid = float(bid.Open.iloc[exit_i])
         scheduled_ask = float(ask.Open.iloc[exit_i])
-        if not np.isfinite([entry_bid, entry_ask, scheduled_bid, scheduled_ask]).all() or entry_ask < entry_bid or scheduled_ask < scheduled_bid:
+        quote_values = np.asarray([entry_bid, entry_ask, scheduled_bid, scheduled_ask], dtype=float)
+        if not np.isfinite(quote_values).all():
             diagnostics["days_skipped_invalid_quotes"] += 1
+            diagnostics["invalid_quote_nonfinite"] += 1
+            continue
+        if entry_ask < entry_bid:
+            diagnostics["days_skipped_invalid_quotes"] += 1
+            diagnostics["invalid_entry_spread"] += 1
+            continue
+        if scheduled_ask < scheduled_bid:
+            diagnostics["days_skipped_invalid_quotes"] += 1
+            diagnostics["invalid_scheduled_exit_spread"] += 1
             continue
         if direction == 1:
             stop = lower
@@ -437,6 +450,8 @@ def main():
                 "calendar_days": int(len(date_positions)),
                 "days_with_incomplete_or_missing_hourly_grid": int(skipped_days),
                 "no_missing_bars_synthesized": True,
+                "nonfinite_bid_ask_open_values_after_alignment": int((~np.isfinite(bid.Open.to_numpy(float))).sum() + (~np.isfinite(ask.Open.to_numpy(float))).sum()),
+                "negative_bid_ask_open_spreads_after_alignment": int((ask.Open < bid.Open).sum()),
             },
             "all_candidate_validation_cost_1pip": validation_scores,
             "selected_candidate": chosen,
