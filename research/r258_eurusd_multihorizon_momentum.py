@@ -5,6 +5,8 @@ One hypothesis, no parameter search. All signal features use completed hourly ba
 from __future__ import annotations
 import json
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import numpy as np
 import pandas as pd
 from research.r251_fx_cross_pair import DATA, download_pair, parse_bars
