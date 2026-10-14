@@ -347,7 +347,7 @@ def main():
         ranks.sort(reverse=True)
         chosen=ranks[0][3]
         records=candidates[chosen]
-        pd.DataFrame([{**t,**{f"net_pips_cost_{c:.1f}":t["gross_pips"]-c for c in EXTRA_COSTS} for t in records]).to_csv(trades_path,index=False)
+        pd.DataFrame([{**t, **{f"net_pips_cost_{c:.1f}": t["gross_pips"] - c for c in EXTRA_COSTS}} for t in records]).to_csv(trades_path, index=False)
         periods={"discovery_2017_2020":(TRAIN_START,TRAIN_END),"validation_2021":(VALID_START,VALID_END),"forward_2022_2025":(FORWARD_START,FORWARD_END),"oos_2026":(OOS_START,OOS_END)}
         metrics={phase:{str(cost):period_metrics(records,a,b,cost) for cost in EXTRA_COSTS} for phase,(a,b) in periods.items()}
         annual=[]
