@@ -1,1 +1,412 @@
-{"status":"FAILED_RUN","verdict":"GAGAL","error":"script did not emit a result file"}
+{
+  "status": "COMPLETED",
+  "strategy": "R258 EURUSD aligned 24h/120h multi-horizon momentum",
+  "verdict": "GAGAL",
+  "locked_rule": {
+    "id": "R258_EURUSD_24H_120H_ALIGNED_MOMENTUM_Q65_RISK_HALF_24H_RANGE_RR2_HOLD24",
+    "signal": "24-hour return magnitude above the 2017-2020 training-only 65th percentile, aligned with the 120-hour return sign",
+    "threshold_quantile": 0.65,
+    "fast_horizon_hours": 24,
+    "slow_horizon_hours": 120,
+    "threshold_training_period": [
+      "2017-01-01",
+      "2021-01-01"
+    ],
+    "entry": "next exact H1 open after completed signal H1 bar",
+    "stop": "0.5 times the prior 24-bar high-low range, known at signal close",
+    "target": "2R from executable-side entry",
+    "max_holding_hours": 24,
+    "overlap": "one open position; no signal accepted before prior trade exit",
+    "execution": "actual EURUSD ASK entry/BID exit for longs and BID entry/ASK exit for shorts; stop first on same-bar collisions; stop-gap fills use available executable open",
+    "cost_stress_extra_pips_on_top_of_observed_quote_side_costs": [
+      0.0,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "no_missing_bar_fill": true
+  },
+  "data": {
+    "instrument": "EURUSD",
+    "source": "Dukascopy H1 BID/ASK",
+    "common_quote_rows": 85170,
+    "grid_hours": 85752,
+    "valid_common_hours": 85170,
+    "missing_or_incomplete_hours": 582,
+    "negative_open_spread_rows": 0,
+    "bid_diagnostics": {
+      "rows": 85170,
+      "duplicate_timestamps_removed": 0,
+      "invalid_ohlc_rows_removed": 0,
+      "hourly_grid_violations": 0,
+      "missing_hour_gaps": 40,
+      "start_utc": "2017-01-01T00:00:00+00:00",
+      "end_utc": "2026-10-13T23:00:00+00:00",
+      "sha256": "68d667ef6e84d4357207da86dc0ffd18453bbfa91837d0dd1349ac82bb6c47bf"
+    },
+    "ask_diagnostics": {
+      "rows": 85170,
+      "duplicate_timestamps_removed": 0,
+      "invalid_ohlc_rows_removed": 0,
+      "hourly_grid_violations": 0,
+      "missing_hour_gaps": 40,
+      "start_utc": "2017-01-01T00:00:00+00:00",
+      "end_utc": "2026-10-13T23:00:00+00:00",
+      "sha256": "8b9d3660213fae55bf0066c42fd093badc4a8092ddb2a0ca1672bbac5bcc7b91"
+    },
+    "start_utc": "2017-01-01T00:00:00+00:00",
+    "end_utc": "2026-10-13T23:00:00+00:00",
+    "threshold_abs_24h_return_fitted_only_on_2017_2020": 0.0027694586952961018,
+    "training_feature_observations": 32642,
+    "download_requests": []
+  },
+  "diagnostics": {
+    "signals": 21390,
+    "invalid_signal_window": 0,
+    "missing_execution_grid": 21390,
+    "overlap": 0,
+    "invalid_stop": 0,
+    "completed_trades": 0,
+    "exit_counts": {
+      "STOP_GAP": 0,
+      "STOP": 0,
+      "TARGET": 0,
+      "TIME": 0
+    }
+  },
+  "periods": {
+    "discovery": {
+      "0.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "0.5": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "1.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "2.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      }
+    },
+    "validation_2021": {
+      "0.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "0.5": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "1.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "2.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      }
+    },
+    "forward": {
+      "0.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "0.5": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "1.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "2.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      }
+    },
+    "oos2026": {
+      "0.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "0.5": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "1.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "2.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      }
+    }
+  },
+  "forward_annual": {
+    "2022": {
+      "0.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "0.5": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "1.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "2.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      }
+    },
+    "2023": {
+      "0.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "0.5": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "1.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "2.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      }
+    },
+    "2024": {
+      "0.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "0.5": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "1.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "2.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      }
+    },
+    "2025": {
+      "0.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "0.5": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "1.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      },
+      "2.0": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0.0,
+        "mean_net_pips_per_trade": null,
+        "win_rate": null,
+        "trades_per_week": 0.0
+      }
+    }
+  },
+  "forward_bootstrap_extra_cost_1pip": {
+    "draws": 0,
+    "p_mean_positive": null,
+    "ci95_mean_pips": null
+  },
+  "challenge_replay_2026_oos": [
+    {
+      "risk_pct": 0.25,
+      "result": "FAILED_TO_PASS_IN_2026_OOS",
+      "phase1_date": null,
+      "phase2_date": null,
+      "trades_processed": 0,
+      "ending_phase": 1,
+      "ending_balance": 6000.0,
+      "reason": null
+    },
+    {
+      "risk_pct": 0.5,
+      "result": "FAILED_TO_PASS_IN_2026_OOS",
+      "phase1_date": null,
+      "phase2_date": null,
+      "trades_processed": 0,
+      "ending_phase": 1,
+      "ending_balance": 6000.0,
+      "reason": null
+    },
+    {
+      "risk_pct": 0.75,
+      "result": "FAILED_TO_PASS_IN_2026_OOS",
+      "phase1_date": null,
+      "phase2_date": null,
+      "trades_processed": 0,
+      "ending_phase": 1,
+      "ending_balance": 6000.0,
+      "reason": null
+    },
+    {
+      "risk_pct": 1.0,
+      "result": "FAILED_TO_PASS_IN_2026_OOS",
+      "phase1_date": null,
+      "phase2_date": null,
+      "trades_processed": 0,
+      "ending_phase": 1,
+      "ending_balance": 6000.0,
+      "reason": null
+    }
+  ],
+  "acceptance_gates": {
+    "discovery_at_least_100_trades_and_PF_1pip_ge_1.00": false,
+    "validation_2021_at_least_30_trades_and_PF_1pip_ge_1.00": false,
+    "forward_at_least_100_trades": false,
+    "forward_PF_1pip_ge_1.10": false,
+    "forward_PF_2pip_ge_1.05": false,
+    "forward_trade_frequency_ge_2_per_week": false,
+    "all_qualifying_forward_years_PF_1pip_ge_1": false,
+    "4week_bootstrap_positive_expectancy_prob_ge_0.95": false,
+    "oos_at_least_30_trades_and_PF_1pip_ge_1.00": false,
+    "challenge_replay_reaches_both_phases_in_2026_OOS": false
+  }
+}
