@@ -112,7 +112,7 @@ def simulate(bid,ask,features,lookback,quantile,threshold,rr):
         "overlap_skipped":0,"invalid_entry_exit_grid":0,"invalid_stop_distance":0,"invalid_quotes":0,
         "trades_closed":0,"stop_first_collisions":0,"stop_exits":0,"target_exits":0,"time_exits":0}
     for i in range(max(lookback,COMPRESSION_HOURS),n-MAX_HOLD_HOURS-1):
-        if not features["exact6"][i] or not np.isfinite(cr[i]) or cr[i]<=0:
+        if idx[i]-idx[i-COMPRESSION_HOURS]!=pd.Timedelta(hours=COMPRESSION_HOURS) or not np.isfinite(cr[i]) or cr[i]<=0:
             diag["invalid_compression_grid"]+=1; continue
         if ns[i]-ns[i-lookback]!=lookback*hour:
             diag["invalid_breakout_grid"]+=1; continue
@@ -219,12 +219,19 @@ def main():
         bid,ask=bid.loc[common],ask.loc[common]
         if (ask.Open<bid.Open).any():raise RuntimeError("EURUSD ASK open below BID open")
         feats=make_features(bid,ask); thresholds={}
-        ns=feats["ns"]; hour=feats["hour_ns"]; ranges=feats["compression_range"]; exact6=feats["exact6"]; close_times=common+pd.Timedelta(hours=1)
-        trainvals=[]
+        ns=feats["ns"]; hour=feats["hour_ns"]; ranges=feats["compression_range"]; exact6=feats["exact6"]
+        trainvals=[]; train_clock_rows=0; exact6_rows=0; finite_ranges=0
         for i in range(COMPRESSION_HOURS,len(common)):
-            if exact6[i] and TRAIN_START<=close_times[i]<TRAIN_END and np.isfinite(ranges[i]) and ranges[i]>0:
-                trainvals.append(float(ranges[i]))
-        if len(trainvals)<1000:raise RuntimeError(f"Insufficient training compression ranges: {len(trainvals)}")
+            close_time=common[i]+pd.Timedelta(hours=1)
+            if TRAIN_START<=close_time<TRAIN_END:
+                train_clock_rows+=1
+                if common[i]-common[i-COMPRESSION_HOURS]==pd.Timedelta(hours=COMPRESSION_HOURS):
+                    exact6_rows+=1
+                    if np.isfinite(ranges[i]) and ranges[i]>0:
+                        finite_ranges+=1
+                        trainvals.append(float(ranges[i]))
+        if len(trainvals)<1000:
+            raise RuntimeError(f"Insufficient training compression ranges: {len(trainvals)}; training_clock_rows={train_clock_rows}; exact6_rows={exact6_rows}; finite_ranges={finite_ranges}; common_start={common[0].isoformat()}; common_end={common[-1].isoformat()}")
         for q in COMPRESSION_QUANTILES:thresholds[q]=float(np.quantile(trainvals,q))
         candidates={};diagnostics={}
         for lookback in BREAKOUT_LOOKBACKS:
