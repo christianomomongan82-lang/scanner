@@ -93,11 +93,25 @@ Metrik sejarah R189 yang pernah dikutip (2016–2025: 1.840 trade, PF 1,328; for
 - Challenge replay R258 belum setara dengan engine funded yang sebenarnya.
 - Penyimpanan data mentah/periode historis harus memiliki asal-usul, timestamp, sisi BID/ASK, checksum dan versi yang jelas; jangan mengandalkan data yang hanya pernah terunggah di percakapan.
 
-## 6. Langkah berikutnya — jangan mulai R259 secara acak
+## 6. Langkah berikutnya — status diperbarui 2026-10-15
 
-1. Audit R251–R258 satu per satu dan bangun **peta kegagalan kumulatif**: hipotesis, sumber edge yang diuji, frekuensi, expectancy setelah biaya, forward/OOS, stabilitas tahunan, dan alasan gagal.
-2. Reproduksi hasil historis R189 atau jelaskan tepatnya bagian mana yang belum bisa direproduksi; pertahankan hasil OOS 2026 sebagai bukti terpisah.
-3. Berdasarkan bukti itu, pilih strategi A yang punya kualitas edge terbaik dan keluarga strategi B yang benar-benar berbeda untuk menutup kelemahan frekuensi bila diperlukan.
-4. Preregistrasikan hipotesis dan semua gate sebelum run berikutnya. Simpan semua artefak ke GitHub dan berikan verdict biner LULUS/GAGAL.
+### Peta kegagalan R251–R258 selesai
+- [Peta kegagalan kumulatif R251–R258](https://github.com/christianomomongan82-lang/scanner/blob/r251-fx-cross-pair-lead-lag/research/R251_R258_failure_taxonomy.md)
+- Semua delapan jalur berakhir gagal. Pada mayoritas metode, frekuensi bukan masalah inti; expectancy tidak bertahan setelah biaya dan/atau tidak stabil pada forward tahunan. R257 menghasilkan nol trade valid untuk semua konfigurasi pada periode validasi. Jangan retune konfigurasi tersebut memakai hasil forward/OOS yang telah dilihat.
 
-**Kesimpulan status saat ini:** belum ada strategi final yang lulus. R258 resmi GAGAL. R189 punya sinyal OOS 2026 yang perlu direproduksi lebih lanjut, bukan dianggap sudah final. Arah baru adalah strategi modular dengan satu pengendali risiko, bukan satu metode yang dipaksa memenuhi semuanya.
+### R259 — R189/L80 cross-feed replay sedang berjalan
+- [Preregistrasi dan gate R259](https://github.com/christianomomongan82-lang/scanner/blob/r259-r189-dukascopy-history/research/R259_R189_cross_feed_test_plan.md)
+- [Skrip R259](https://github.com/christianomomongan82-lang/scanner/blob/r259-r189-dukascopy-history/research/r259_r189_history.py)
+- [GitHub Actions run](https://github.com/christianomomongan82-lang/scanner/actions/runs/38623417685)
+- Status terakhir saat checkpoint: **IN PROGRESS**. Aturan R189 dikunci; R259 menguji lintas-sumber Dukascopy EURUSD M1 BID/ASK 2016–2025, memisahkan discovery 2016–2020, validation 2021, forward 2022–2025, dan interval 2021–2025 yang pernah dilaporkan.
+- Ini bukan reproduksi persis atas laporan historis R189. Data asli `EURUSD_M1_2016-2025.xz`, `spread_2016-2025.csv.xz`, dan ledger transaksi historis tidak ada di repositori. Hasil R259 harus dinilai sebagai cross-feed replication dan tidak boleh menggantikan data atau hasil asli yang hilang.
+- Gate terkunci: forward 2022–2025 minimal 100 trade; PF ≥1,10 setelah tambahan 1 pip; PF ≥1,05 setelah tambahan 2 pip; setiap cohort forward dengan minimal 20 trade punya PF ≥1 setelah tambahan 1 pip; lower bound CI bootstrap blok sirkular 4-minggu atas net pips mingguan harus di atas nol setelah tambahan 1 pip. Semua gate wajib lolos.
+- Bahkan jika R259 lulus, status funded-ready tetap **belum lulus** sampai komisi/slippage aktual, eksekusi riil, aturan DLL/MLL, dan kepatuhan Quick Strike sub-30-detik dapat dibuktikan. Data M1 tidak cukup untuk membuktikan durasi penutupan di bawah 30 detik.
+
+### Setelah R259 selesai
+1. Putuskan R189 cross-feed LULUS/GAGAL sesuai gate yang telah ditentukan; jangan mengubah parameter.
+2. Jika gagal, tutup jalur R189 sebagai strategi yang tidak memenuhi cross-feed robustness gate dan pilih hipotesis baru berdasarkan peta kegagalan, bukan tuning ulang hasil OOS.
+3. Jika lulus, dokumentasikan bahwa bukti lintas-sumber memperkuat edge, tetapi jangan menyebut laporan historis lama tereproduksi karena input aslinya tetap hilang.
+4. Baru setelah itu pilih Strategi A dan, bila frekuensi tidak memadai, riset Strategi B independen. Uji strategi terpisah sebelum penggabungan pada satu pengendali risiko akun.
+
+**Kesimpulan status saat ini:** belum ada strategi final yang lulus. R258 resmi GAGAL. Laporan R189 historis tetap belum terverifikasi dan R189 sendiri berstatus GAGAL untuk klaim pass funded berdasarkan bukti yang ada. R259 sedang menguji apakah edge R189 bertahan pada sumber data independen; belum ada hasilnya. Arah sistem tetap modular: strategi kualitas edge, strategi pelengkap bila diperlukan, dan satu pengendali risiko.
