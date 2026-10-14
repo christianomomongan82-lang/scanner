@@ -30,7 +30,7 @@ This was a simplified, chronological close-to-close replay for a $6,000 Stellar 
 |---:|---:|---|---|---|---|
 | +0.2 pip | 1.00% | Both targets reached | 2026-03-23 | 2026-06-18 | Passes this simplified replay only |
 | +0.2 pip | 1.25% | Both targets reached | 2026-03-19 | 2026-06-09 | Faster, but higher risk and still only simplified replay |
-| +0.5 pip | 1.00% | Not both reached by 2026-10-02 | 2026-06-18 | Not reached | Fail in this sample window |
+| +0.5 pip | 1.00% | Not both reached by 2026-10-02 | 2026-05-21 | Not reached | Fail in this sample window |
 | +0.5 pip | 1.25% | Both targets reached | 2026-03-19 | 2026-06-18 | Simplified replay only |
 | +1.0 pip | 0.25%–1.25% | No combination reached both targets by 2026-10-02 | Some settings did reach Phase 1 | Not reached | Cost stress fails speed objective |
 
