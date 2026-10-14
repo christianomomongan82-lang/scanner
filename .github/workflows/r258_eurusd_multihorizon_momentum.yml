@@ -1,0 +1,91 @@
+name: R258 EURUSD multihorizon momentum — binary verdict
+
+on:
+  push:
+    branches:
+      - r251-fx-cross-pair-lead-lag
+    paths:
+      - ".github/workflows/r258_eurusd_multihorizon_momentum.yml"
+      - "research/r258_eurusd_multihorizon_momentum.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r258-eurusd-multihorizon-momentum
+  cancel-in-progress: false
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout isolated experiment branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Restore audited EURUSD H1 BID/ASK quote history
+        id: quote-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dl/r251_fx
+          key: ${{ runner.os }}-r251-fx-h1-history-v1
+      - name: Setup Node.js for cache-miss downloads
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Python libraries
+        run: python -m pip install --upgrade pip numpy pandas
+      - name: Compile locked R258 code
+        run: python -m py_compile research/r258_eurusd_multihorizon_momentum.py research/r251_fx_cross_pair.py
+      - name: Run R258
+        id: backtest
+        continue-on-error: true
+        env:
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        run: python -u research/r258_eurusd_multihorizon_momentum.py
+      - name: Save quote cache if it was not already present
+        if: always() && steps.quote-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: dl/r251_fx
+          key: ${{ runner.os }}-r251-fx-h1-history-v1
+      - name: Upload complete results and trade ledgers
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R258-multihorizon-momentum-audit
+          path: |
+            research/R258_multihorizon_momentum_results.json
+            research/R258_multihorizon_momentum_trades.csv
+            research/R258_multihorizon_momentum_annual.csv
+            dl/r251_fx/eurusd_bid_H1.csv
+            dl/r251_fx/eurusd_ask_H1.csv
+          if-no-files-found: ignore
+          retention-days: 30
+      - name: Commit binary verdict and ledgers
+        if: always()
+        run: |
+          if [ ! -f research/R258_multihorizon_momentum_results.json ]; then
+            printf '{"status":"FAILED_RUN","verdict":"GAGAL","error":"script did not emit a result file"}\n' > research/R258_multihorizon_momentum_results.json
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f research/R258_multihorizon_momentum_results.json
+          for file in research/R258_multihorizon_momentum_trades.csv research/R258_multihorizon_momentum_annual.csv; do
+            if [ -f "$file" ]; then git add -f "$file"; fi
+          done
+          if git diff --cached --quiet; then
+            echo "No R258 result changes to commit."
+          else
+            git commit -m "[skip ci] R258 EURUSD multihorizon momentum results"
+            git push origin HEAD:r251-fx-cross-pair-lead-lag
+          fi
+      - name: Fail the workflow if the backtest itself failed
+        if: steps.backtest.outcome == 'failure'
+        run: exit 1
