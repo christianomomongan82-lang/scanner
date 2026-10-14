@@ -96,8 +96,12 @@ def download_pair(pair: str, side: str):
                 "-r", "5", "-rp", "5000"
             ]
             try:
+                env = __import__("os").environ.copy()
+                patch = ROOT / "dukascopy_fetch_patch.cjs"
+                if patch.is_file():
+                    env["NODE_OPTIONS"] = (env.get("NODE_OPTIONS", "") + f" --require={patch.resolve()}").strip()
                 proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                      text=True, check=False, timeout=900)
+                                      text=True, check=False, timeout=900, env=env)
                 last_error = (proc.stdout or "")[-1600:]
                 if proc.returncode == 0 and path.is_file() and path.stat().st_size > 20:
                     probe = pd.read_csv(path, nrows=2)
