@@ -191,9 +191,9 @@ def main():
             "cost_stress_extra_pips_on_top_of_EURUSD_bid_ask": list(COST_STRESS),
         },
         "periods_utc": {
-            "discovery": ["2017-01-01", "2022-01-01"),
-            "forward": ["2022-01-01", "2026-01-01"),
-            "oos_2026": ["2026-01-01", END_EXCLUSIVE.isoformat()),
+            "discovery": ["2017-01-01", "2022-01-01"],
+            "forward": ["2022-01-01", "2026-01-01"],
+            "oos_2026": ["2026-01-01", END_EXCLUSIVE.isoformat()],
         },
         "notes": [
             "All signals use completed H1 closes only; orders use next shared exact hourly open.",
