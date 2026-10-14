@@ -1,0 +1,4228 @@
+{
+  "status": "COMPLETE",
+  "round": "R259",
+  "method": "Locked R189/L80 rules replayed without parameter changes on Dukascopy EURUSD M1 BID/ASK 2016-2025; independent cross-feed replication, not exact reproduction of the unavailable HistData/spread inputs.",
+  "window_utc": {
+    "from_inclusive": "2016-01-01",
+    "to_exclusive": "2026-01-01"
+  },
+  "locked_parameters": {
+    "displacement_pips": 15,
+    "late_ratio_min": 0.8,
+    "body_pips_min": 2,
+    "directional_consistency_min": 7,
+    "signal_hours_utc": "03..11 excluding 06 and 09",
+    "dedup_bars": 14,
+    "entry_spread_cap_pips": 1.5,
+    "SL_pips": 6.0,
+    "TP_pips": 18.0,
+    "MFE_trigger_pips": 6.0,
+    "trailing_distance_pips": 0.0,
+    "time_stop_bars": 60,
+    "extra_cost_stress_pips_per_trade": [
+      0.0,
+      0.2,
+      0.5,
+      0.8,
+      1.0,
+      2.0
+    ]
+  },
+  "notes": [
+    "Dukascopy is a different feed from the unavailable original 2016-2025 HistData and spread files; this is a cross-feed replication, not exact historical reproduction.",
+    "The locked fixed GMT-5 signal clock is retained with no DST: eligible wall-clock hours 03..11, excluding 06 and 09 (corresponding to UTC hours 08..16 excluding 11 and 14).",
+    "Empty individual daily buckets are allowed because weekends and market holidays can legitimately have no minute candles; non-empty data and coverage diagnostics are still checked.",
+    "Extra costs are applied per closed trade on top of executable bid/ask prices.",
+    "Legacy and causal exits are both reported; causal is the implementation that exits at the time-stop bar open before considering that bar's high/low."
+  ],
+  "data": {
+    "bid_file_sha256": "2bd74a6fa94c7734a6f878b6d886cd9450f6fea3c5483ec262c02c655e1494fa",
+    "ask_file_sha256": "6a465872a6e9ef9b183a23cdbcb536da8a8e68a410b1550d4be11b9b36b3a05a",
+    "bid_diagnostics": {
+      "rows": 4415493,
+      "duplicate_timestamps_removed": 0,
+      "invalid_ohlc_rows_removed": 0,
+      "start_utc": "2016-01-03T00:00:00+00:00",
+      "end_utc": "2025-12-31T21:58:00+00:00",
+      "columns": [
+        "timestamp",
+        "open",
+        "high",
+        "low",
+        "close"
+      ]
+    },
+    "ask_diagnostics": {
+      "rows": 4415493,
+      "duplicate_timestamps_removed": 0,
+      "invalid_ohlc_rows_removed": 0,
+      "start_utc": "2016-01-03T00:00:00+00:00",
+      "end_utc": "2025-12-31T21:58:00+00:00",
+      "columns": [
+        "timestamp",
+        "open",
+        "high",
+        "low",
+        "close"
+      ]
+    },
+    "common_bars": 4415493,
+    "start_utc": "2016-01-03T00:00:00+00:00",
+    "end_utc": "2025-12-31T21:58:00+00:00",
+    "spread_min_pips": 0.0,
+    "spread_median_pips": 0.30000000000196536,
+    "spread_p95_pips": 5.5000000000005045,
+    "spread_max_pips": 33.10000000000146,
+    "signals_before_R189_hour/spread_filters": 2250,
+    "eligible_signals": 1673,
+    "calendar_weeks_in_sample": 521.5593253968254,
+    "monthly_downloads_bid": [
+      {
+        "side": "bid",
+        "month": "2016-01",
+        "attempt": 1,
+        "bytes": 1615813
+      },
+      {
+        "side": "bid",
+        "month": "2016-02",
+        "attempt": 1,
+        "bytes": 1620427
+      },
+      {
+        "side": "bid",
+        "month": "2016-03",
+        "attempt": 1,
+        "bytes": 1746056
+      },
+      {
+        "side": "bid",
+        "month": "2016-04",
+        "attempt": 1,
+        "bytes": 1596101
+      },
+      {
+        "side": "bid",
+        "month": "2016-05",
+        "attempt": 1,
+        "bytes": 1740572
+      },
+      {
+        "side": "bid",
+        "month": "2016-06",
+        "attempt": 1,
+        "bytes": 1674744
+      },
+      {
+        "side": "bid",
+        "month": "2016-07",
+        "attempt": 1,
+        "bytes": 1667266
+      },
+      {
+        "side": "bid",
+        "month": "2016-08",
+        "attempt": 1,
+        "bytes": 1740538
+      },
+      {
+        "side": "bid",
+        "month": "2016-09",
+        "attempt": 1,
+        "bytes": 1665632
+      },
+      {
+        "side": "bid",
+        "month": "2016-10",
+        "attempt": 1,
+        "bytes": 1674578
+      },
+      {
+        "side": "bid",
+        "month": "2016-11",
+        "attempt": 1,
+        "bytes": 1677392
+      },
+      {
+        "side": "bid",
+        "month": "2016-12",
+        "attempt": 1,
+        "bytes": 1674259
+      },
+      {
+        "side": "bid",
+        "month": "2017-01",
+        "attempt": 1,
+        "bytes": 1752295
+      },
+      {
+        "side": "bid",
+        "month": "2017-02",
+        "attempt": 1,
+        "bytes": 1554932
+      },
+      {
+        "side": "bid",
+        "month": "2017-03",
+        "attempt": 1,
+        "bytes": 1738392
+      },
+      {
+        "side": "bid",
+        "month": "2017-04",
+        "attempt": 1,
+        "bytes": 1610298
+      },
+      {
+        "side": "bid",
+        "month": "2017-05",
+        "attempt": 1,
+        "bytes": 1730955
+      },
+      {
+        "side": "bid",
+        "month": "2017-06",
+        "attempt": 1,
+        "bytes": 1667390
+      },
+      {
+        "side": "bid",
+        "month": "2017-07",
+        "attempt": 1,
+        "bytes": 1671225
+      },
+      {
+        "side": "bid",
+        "month": "2017-08",
+        "attempt": 1,
+        "bytes": 1740251
+      },
+      {
+        "side": "bid",
+        "month": "2017-09",
+        "attempt": 1,
+        "bytes": 1600912
+      },
+      {
+        "side": "bid",
+        "month": "2017-10",
+        "attempt": 1,
+        "bytes": 1735792
+      },
+      {
+        "side": "bid",
+        "month": "2017-11",
+        "attempt": 1,
+        "bytes": 1683643
+      },
+      {
+        "side": "bid",
+        "month": "2017-12",
+        "attempt": 1,
+        "bytes": 1615633
+      },
+      {
+        "side": "bid",
+        "month": "2018-01",
+        "attempt": 1,
+        "bytes": 1736301
+      },
+      {
+        "side": "bid",
+        "month": "2018-02",
+        "attempt": 1,
+        "bytes": 1554003
+      },
+      {
+        "side": "bid",
+        "month": "2018-03",
+        "attempt": 1,
+        "bytes": 1666557
+      },
+      {
+        "side": "bid",
+        "month": "2018-04",
+        "attempt": 1,
+        "bytes": 1674897
+      },
+      {
+        "side": "bid",
+        "month": "2018-05",
+        "attempt": 1,
+        "bytes": 1739359
+      },
+      {
+        "side": "bid",
+        "month": "2018-06",
+        "attempt": 1,
+        "bytes": 1600711
+      },
+      {
+        "side": "bid",
+        "month": "2018-07",
+        "attempt": 1,
+        "bytes": 1740149
+      },
+      {
+        "side": "bid",
+        "month": "2018-08",
+        "attempt": 1,
+        "bytes": 1727148
+      },
+      {
+        "side": "bid",
+        "month": "2018-09",
+        "attempt": 1,
+        "bytes": 1609414
+      },
+      {
+        "side": "bid",
+        "month": "2018-10",
+        "attempt": 1,
+        "bytes": 1735367
+      },
+      {
+        "side": "bid",
+        "month": "2018-11",
+        "attempt": 1,
+        "bytes": 1667278
+      },
+      {
+        "side": "bid",
+        "month": "2018-12",
+        "attempt": 1,
+        "bytes": 1681129
+      },
+      {
+        "side": "bid",
+        "month": "2019-01",
+        "attempt": 1,
+        "bytes": 1752270
+      },
+      {
+        "side": "bid",
+        "month": "2019-02",
+        "attempt": 1,
+        "bytes": 1555293
+      },
+      {
+        "side": "bid",
+        "month": "2019-03",
+        "attempt": 1,
+        "bytes": 1673551
+      },
+      {
+        "side": "bid",
+        "month": "2019-04",
+        "attempt": 1,
+        "bytes": 1675580
+      },
+      {
+        "side": "bid",
+        "month": "2019-05",
+        "attempt": 1,
+        "bytes": 1728232
+      },
+      {
+        "side": "bid",
+        "month": "2019-06",
+        "attempt": 1,
+        "bytes": 1600188
+      },
+      {
+        "side": "bid",
+        "month": "2019-07",
+        "attempt": 1,
+        "bytes": 1741688
+      },
+      {
+        "side": "bid",
+        "month": "2019-08",
+        "attempt": 1,
+        "bytes": 1662450
+      },
+      {
+        "side": "bid",
+        "month": "2019-09",
+        "attempt": 1,
+        "bytes": 1675607
+      },
+      {
+        "side": "bid",
+        "month": "2019-10",
+        "attempt": 1,
+        "bytes": 1730514
+      },
+      {
+        "side": "bid",
+        "month": "2019-11",
+        "attempt": 1,
+        "bytes": 1612199
+      },
+      {
+        "side": "bid",
+        "month": "2019-12",
+        "attempt": 1,
+        "bytes": 1742482
+      },
+      {
+        "side": "bid",
+        "month": "2020-01",
+        "attempt": 1,
+        "bytes": 1741767
+      },
+      {
+        "side": "bid",
+        "month": "2020-02",
+        "attempt": 1,
+        "bytes": 1554048
+      },
+      {
+        "side": "bid",
+        "month": "2020-03",
+        "attempt": 1,
+        "bytes": 1743662
+      },
+      {
+        "side": "bid",
+        "month": "2020-04",
+        "attempt": 1,
+        "bytes": 1664129
+      },
+      {
+        "side": "bid",
+        "month": "2020-05",
+        "attempt": 1,
+        "bytes": 1666945
+      },
+      {
+        "side": "bid",
+        "month": "2020-06",
+        "attempt": 1,
+        "bytes": 1669772
+      },
+      {
+        "side": "bid",
+        "month": "2020-07",
+        "attempt": 1,
+        "bytes": 1732426
+      },
+      {
+        "side": "bid",
+        "month": "2020-08",
+        "attempt": 1,
+        "bytes": 1675532
+      },
+      {
+        "side": "bid",
+        "month": "2020-09",
+        "attempt": 1,
+        "bytes": 1674802
+      },
+      {
+        "side": "bid",
+        "month": "2020-10",
+        "attempt": 1,
+        "bytes": 1666643
+      },
+      {
+        "side": "bid",
+        "month": "2020-11",
+        "attempt": 1,
+        "bytes": 1681721
+      },
+      {
+        "side": "bid",
+        "month": "2020-12",
+        "attempt": 1,
+        "bytes": 1697667
+      },
+      {
+        "side": "bid",
+        "month": "2021-01",
+        "attempt": 1,
+        "bytes": 1615556
+      },
+      {
+        "side": "bid",
+        "month": "2021-02",
+        "attempt": 1,
+        "bytes": 1555231
+      },
+      {
+        "side": "bid",
+        "month": "2021-03",
+        "attempt": 1,
+        "bytes": 1740387
+      },
+      {
+        "side": "bid",
+        "month": "2021-04",
+        "attempt": 1,
+        "bytes": 1666451
+      },
+      {
+        "side": "bid",
+        "month": "2021-05",
+        "attempt": 1,
+        "bytes": 1665610
+      },
+      {
+        "side": "bid",
+        "month": "2021-06",
+        "attempt": 1,
+        "bytes": 1674798
+      },
+      {
+        "side": "bid",
+        "month": "2021-07",
+        "attempt": 1,
+        "bytes": 1666602
+      },
+      {
+        "side": "bid",
+        "month": "2021-08",
+        "attempt": 1,
+        "bytes": 1735241
+      },
+      {
+        "side": "bid",
+        "month": "2021-09",
+        "attempt": 1,
+        "bytes": 1669049
+      },
+      {
+        "side": "bid",
+        "month": "2021-10",
+        "attempt": 1,
+        "bytes": 1656398
+      },
+      {
+        "side": "bid",
+        "month": "2021-11",
+        "attempt": 1,
+        "bytes": 1682347
+      },
+      {
+        "side": "bid",
+        "month": "2021-12",
+        "attempt": 1,
+        "bytes": 1745721
+      },
+      {
+        "side": "bid",
+        "month": "2022-01",
+        "attempt": 1,
+        "bytes": 1680865
+      },
+      {
+        "side": "bid",
+        "month": "2022-02",
+        "attempt": 1,
+        "bytes": 1554954
+      },
+      {
+        "side": "bid",
+        "month": "2022-03",
+        "attempt": 1,
+        "bytes": 1745544
+      },
+      {
+        "side": "bid",
+        "month": "2022-04",
+        "attempt": 1,
+        "bytes": 1600635
+      },
+      {
+        "side": "bid",
+        "month": "2022-05",
+        "attempt": 1,
+        "bytes": 1740549
+      },
+      {
+        "side": "bid",
+        "month": "2022-06",
+        "attempt": 1,
+        "bytes": 1663948
+      },
+      {
+        "side": "bid",
+        "month": "2022-07",
+        "attempt": 1,
+        "bytes": 1650564
+      },
+      {
+        "side": "bid",
+        "month": "2022-08",
+        "attempt": 1,
+        "bytes": 1733240
+      },
+      {
+        "side": "bid",
+        "month": "2022-09",
+        "attempt": 1,
+        "bytes": 1660385
+      },
+      {
+        "side": "bid",
+        "month": "2022-10",
+        "attempt": 1,
+        "bytes": 1675434
+      },
+      {
+        "side": "bid",
+        "month": "2022-11",
+        "attempt": 1,
+        "bytes": 1683643
+      },
+      {
+        "side": "bid",
+        "month": "2022-12",
+        "attempt": 1,
+        "bytes": 1675371
+      },
+      {
+        "side": "bid",
+        "month": "2023-01",
+        "attempt": 1,
+        "bytes": 1747030
+      },
+      {
+        "side": "bid",
+        "month": "2023-02",
+        "attempt": 1,
+        "bytes": 1554284
+      },
+      {
+        "side": "bid",
+        "month": "2023-03",
+        "attempt": 1,
+        "bytes": 1738220
+      },
+      {
+        "side": "bid",
+        "month": "2023-04",
+        "attempt": 1,
+        "bytes": 1604856
+      },
+      {
+        "side": "bid",
+        "month": "2023-05",
+        "attempt": 1,
+        "bytes": 1740233
+      },
+      {
+        "side": "bid",
+        "month": "2023-06",
+        "attempt": 1,
+        "bytes": 1661161
+      },
+      {
+        "side": "bid",
+        "month": "2023-07",
+        "attempt": 1,
+        "bytes": 1674905
+      },
+      {
+        "side": "bid",
+        "month": "2023-08",
+        "attempt": 1,
+        "bytes": 1740993
+      },
+      {
+        "side": "bid",
+        "month": "2023-09",
+        "attempt": 1,
+        "bytes": 1591416
+      },
+      {
+        "side": "bid",
+        "month": "2023-10",
+        "attempt": 1,
+        "bytes": 1736169
+      },
+      {
+        "side": "bid",
+        "month": "2023-11",
+        "attempt": 1,
+        "bytes": 1677820
+      },
+      {
+        "side": "bid",
+        "month": "2023-12",
+        "attempt": 1,
+        "bytes": 1615470
+      },
+      {
+        "side": "bid",
+        "month": "2024-01",
+        "attempt": 1,
+        "bytes": 1742156
+      },
+      {
+        "side": "bid",
+        "month": "2024-02",
+        "attempt": 1,
+        "bytes": 1620592
+      },
+      {
+        "side": "bid",
+        "month": "2024-03",
+        "attempt": 1,
+        "bytes": 1673071
+      },
+      {
+        "side": "bid",
+        "month": "2024-04",
+        "attempt": 1,
+        "bytes": 1670141
+      },
+      {
+        "side": "bid",
+        "month": "2024-05",
+        "attempt": 1,
+        "bytes": 1722149
+      },
+      {
+        "side": "bid",
+        "month": "2024-06",
+        "attempt": 1,
+        "bytes": 1605105
+      },
+      {
+        "side": "bid",
+        "month": "2024-07",
+        "attempt": 1,
+        "bytes": 1735624
+      },
+      {
+        "side": "bid",
+        "month": "2024-08",
+        "attempt": 1,
+        "bytes": 1666581
+      },
+      {
+        "side": "bid",
+        "month": "2024-09",
+        "attempt": 1,
+        "bytes": 1659429
+      },
+      {
+        "side": "bid",
+        "month": "2024-10",
+        "attempt": 1,
+        "bytes": 1735276
+      },
+      {
+        "side": "bid",
+        "month": "2024-11",
+        "attempt": 1,
+        "bytes": 1600935
+      },
+      {
+        "side": "bid",
+        "month": "2024-12",
+        "attempt": 1,
+        "bytes": 1600392
+      },
+      {
+        "side": "bid",
+        "month": "2025-01",
+        "attempt": 1,
+        "bytes": 1746110
+      },
+      {
+        "side": "bid",
+        "month": "2025-02",
+        "attempt": 1,
+        "bytes": 1554555
+      },
+      {
+        "side": "bid",
+        "month": "2025-03",
+        "attempt": 1,
+        "bytes": 1673234
+      },
+      {
+        "side": "bid",
+        "month": "2025-04",
+        "attempt": 1,
+        "bytes": 1675164
+      },
+      {
+        "side": "bid",
+        "month": "2025-05",
+        "attempt": 1,
+        "bytes": 1661723
+      },
+      {
+        "side": "bid",
+        "month": "2025-06",
+        "attempt": 1,
+        "bytes": 1675678
+      },
+      {
+        "side": "bid",
+        "month": "2025-07",
+        "attempt": 1,
+        "bytes": 1740621
+      },
+      {
+        "side": "bid",
+        "month": "2025-08",
+        "attempt": 1,
+        "bytes": 1667356
+      },
+      {
+        "side": "bid",
+        "month": "2025-09",
+        "attempt": 1,
+        "bytes": 1675258
+      },
+      {
+        "side": "bid",
+        "month": "2025-10",
+        "attempt": 1,
+        "bytes": 1732711
+      },
+      {
+        "side": "bid",
+        "month": "2025-11",
+        "attempt": 1,
+        "bytes": 1621185
+      },
+      {
+        "side": "bid",
+        "month": "2025-12",
+        "attempt": 1,
+        "bytes": 1741431
+      }
+    ],
+    "monthly_downloads_ask": [
+      {
+        "side": "ask",
+        "month": "2016-01",
+        "attempt": 1,
+        "bytes": 1614757
+      },
+      {
+        "side": "ask",
+        "month": "2016-02",
+        "attempt": 1,
+        "bytes": 1620315
+      },
+      {
+        "side": "ask",
+        "month": "2016-03",
+        "attempt": 1,
+        "bytes": 1735622
+      },
+      {
+        "side": "ask",
+        "month": "2016-04",
+        "attempt": 1,
+        "bytes": 1600098
+      },
+      {
+        "side": "ask",
+        "month": "2016-05",
+        "attempt": 1,
+        "bytes": 1740538
+      },
+      {
+        "side": "ask",
+        "month": "2016-06",
+        "attempt": 1,
+        "bytes": 1669052
+      },
+      {
+        "side": "ask",
+        "month": "2016-07",
+        "attempt": 1,
+        "bytes": 1667482
+      },
+      {
+        "side": "ask",
+        "month": "2016-08",
+        "attempt": 1,
+        "bytes": 1739790
+      },
+      {
+        "side": "ask",
+        "month": "2016-09",
+        "attempt": 1,
+        "bytes": 1666764
+      },
+      {
+        "side": "ask",
+        "month": "2016-10",
+        "attempt": 1,
+        "bytes": 1669684
+      },
+      {
+        "side": "ask",
+        "month": "2016-11",
+        "attempt": 1,
+        "bytes": 1682534
+      },
+      {
+        "side": "ask",
+        "month": "2016-12",
+        "attempt": 1,
+        "bytes": 1669171
+      },
+      {
+        "side": "ask",
+        "month": "2017-01",
+        "attempt": 1,
+        "bytes": 1751782
+      },
+      {
+        "side": "ask",
+        "month": "2017-02",
+        "attempt": 1,
+        "bytes": 1549601
+      },
+      {
+        "side": "ask",
+        "month": "2017-03",
+        "attempt": 1,
+        "bytes": 1737600
+      },
+      {
+        "side": "ask",
+        "month": "2017-04",
+        "attempt": 1,
+        "bytes": 1609354
+      },
+      {
+        "side": "ask",
+        "month": "2017-05",
+        "attempt": 1,
+        "bytes": 1739347
+      },
+      {
+        "side": "ask",
+        "month": "2017-06",
+        "attempt": 1,
+        "bytes": 1667434
+      },
+      {
+        "side": "ask",
+        "month": "2017-07",
+        "attempt": 1,
+        "bytes": 1675673
+      },
+      {
+        "side": "ask",
+        "month": "2017-08",
+        "attempt": 1,
+        "bytes": 1740384
+      },
+      {
+        "side": "ask",
+        "month": "2017-09",
+        "attempt": 1,
+        "bytes": 1595761
+      },
+      {
+        "side": "ask",
+        "month": "2017-10",
+        "attempt": 1,
+        "bytes": 1735171
+      },
+      {
+        "side": "ask",
+        "month": "2017-11",
+        "attempt": 1,
+        "bytes": 1682953
+      },
+      {
+        "side": "ask",
+        "month": "2017-12",
+        "attempt": 1,
+        "bytes": 1609526
+      },
+      {
+        "side": "ask",
+        "month": "2018-01",
+        "attempt": 1,
+        "bytes": 1751973
+      },
+      {
+        "side": "ask",
+        "month": "2018-02",
+        "attempt": 1,
+        "bytes": 1537642
+      },
+      {
+        "side": "ask",
+        "month": "2018-03",
+        "attempt": 1,
+        "bytes": 1660914
+      },
+      {
+        "side": "ask",
+        "month": "2018-04",
+        "attempt": 1,
+        "bytes": 1669864
+      },
+      {
+        "side": "ask",
+        "month": "2018-05",
+        "attempt": 1,
+        "bytes": 1739705
+      },
+      {
+        "side": "ask",
+        "month": "2018-06",
+        "attempt": 1,
+        "bytes": 1595385
+      },
+      {
+        "side": "ask",
+        "month": "2018-07",
+        "attempt": 1,
+        "bytes": 1740551
+      },
+      {
+        "side": "ask",
+        "month": "2018-08",
+        "attempt": 1,
+        "bytes": 1731658
+      },
+      {
+        "side": "ask",
+        "month": "2018-09",
+        "attempt": 1,
+        "bytes": 1609960
+      },
+      {
+        "side": "ask",
+        "month": "2018-10",
+        "attempt": 1,
+        "bytes": 1740759
+      },
+      {
+        "side": "ask",
+        "month": "2018-11",
+        "attempt": 1,
+        "bytes": 1677571
+      },
+      {
+        "side": "ask",
+        "month": "2018-12",
+        "attempt": 1,
+        "bytes": 1676345
+      },
+      {
+        "side": "ask",
+        "month": "2019-01",
+        "attempt": 1,
+        "bytes": 1746270
+      },
+      {
+        "side": "ask",
+        "month": "2019-02",
+        "attempt": 1,
+        "bytes": 1549686
+      },
+      {
+        "side": "ask",
+        "month": "2019-03",
+        "attempt": 1,
+        "bytes": 1672650
+      },
+      {
+        "side": "ask",
+        "month": "2019-04",
+        "attempt": 1,
+        "bytes": 1675380
+      },
+      {
+        "side": "ask",
+        "month": "2019-05",
+        "attempt": 1,
+        "bytes": 1723485
+      },
+      {
+        "side": "ask",
+        "month": "2019-06",
+        "attempt": 1,
+        "bytes": 1600038
+      },
+      {
+        "side": "ask",
+        "month": "2019-07",
+        "attempt": 1,
+        "bytes": 1740831
+      },
+      {
+        "side": "ask",
+        "month": "2019-08",
+        "attempt": 1,
+        "bytes": 1666768
+      },
+      {
+        "side": "ask",
+        "month": "2019-09",
+        "attempt": 1,
+        "bytes": 1670170
+      },
+      {
+        "side": "ask",
+        "month": "2019-10",
+        "attempt": 1,
+        "bytes": 1739872
+      },
+      {
+        "side": "ask",
+        "month": "2019-11",
+        "attempt": 1,
+        "bytes": 1607482
+      },
+      {
+        "side": "ask",
+        "month": "2019-12",
+        "attempt": 1,
+        "bytes": 1747859
+      },
+      {
+        "side": "ask",
+        "month": "2020-01",
+        "attempt": 1,
+        "bytes": 1742234
+      },
+      {
+        "side": "ask",
+        "month": "2020-02",
+        "attempt": 1,
+        "bytes": 1555138
+      },
+      {
+        "side": "ask",
+        "month": "2020-03",
+        "attempt": 1,
+        "bytes": 1733285
+      },
+      {
+        "side": "ask",
+        "month": "2020-04",
+        "attempt": 1,
+        "bytes": 1674493
+      },
+      {
+        "side": "ask",
+        "month": "2020-05",
+        "attempt": 1,
+        "bytes": 1667015
+      },
+      {
+        "side": "ask",
+        "month": "2020-06",
+        "attempt": 1,
+        "bytes": 1674478
+      },
+      {
+        "side": "ask",
+        "month": "2020-07",
+        "attempt": 1,
+        "bytes": 1732006
+      },
+      {
+        "side": "ask",
+        "month": "2020-08",
+        "attempt": 1,
+        "bytes": 1674633
+      },
+      {
+        "side": "ask",
+        "month": "2020-09",
+        "attempt": 1,
+        "bytes": 1675046
+      },
+      {
+        "side": "ask",
+        "month": "2020-10",
+        "attempt": 1,
+        "bytes": 1666729
+      },
+      {
+        "side": "ask",
+        "month": "2020-11",
+        "attempt": 1,
+        "bytes": 1680776
+      },
+      {
+        "side": "ask",
+        "month": "2020-12",
+        "attempt": 1,
+        "bytes": 1702421
+      },
+      {
+        "side": "ask",
+        "month": "2021-01",
+        "attempt": 1,
+        "bytes": 1620886
+      },
+      {
+        "side": "ask",
+        "month": "2021-02",
+        "attempt": 1,
+        "bytes": 1554461
+      },
+      {
+        "side": "ask",
+        "month": "2021-03",
+        "attempt": 1,
+        "bytes": 1746002
+      },
+      {
+        "side": "ask",
+        "month": "2021-04",
+        "attempt": 1,
+        "bytes": 1666423
+      },
+      {
+        "side": "ask",
+        "month": "2021-05",
+        "attempt": 1,
+        "bytes": 1665489
+      },
+      {
+        "side": "ask",
+        "month": "2021-06",
+        "attempt": 1,
+        "bytes": 1670034
+      },
+      {
+        "side": "ask",
+        "month": "2021-07",
+        "attempt": 1,
+        "bytes": 1666554
+      },
+      {
+        "side": "ask",
+        "month": "2021-08",
+        "attempt": 1,
+        "bytes": 1740444
+      },
+      {
+        "side": "ask",
+        "month": "2021-09",
+        "attempt": 1,
+        "bytes": 1674504
+      },
+      {
+        "side": "ask",
+        "month": "2021-10",
+        "attempt": 1,
+        "bytes": 1666306
+      },
+      {
+        "side": "ask",
+        "month": "2021-11",
+        "attempt": 1,
+        "bytes": 1682403
+      },
+      {
+        "side": "ask",
+        "month": "2021-12",
+        "attempt": 1,
+        "bytes": 1739995
+      },
+      {
+        "side": "ask",
+        "month": "2022-01",
+        "attempt": 1,
+        "bytes": 1686109
+      },
+      {
+        "side": "ask",
+        "month": "2022-02",
+        "attempt": 1,
+        "bytes": 1554240
+      },
+      {
+        "side": "ask",
+        "month": "2022-03",
+        "attempt": 1,
+        "bytes": 1740479
+      },
+      {
+        "side": "ask",
+        "month": "2022-04",
+        "attempt": 1,
+        "bytes": 1600407
+      },
+      {
+        "side": "ask",
+        "month": "2022-05",
+        "attempt": 1,
+        "bytes": 1740555
+      },
+      {
+        "side": "ask",
+        "month": "2022-06",
+        "attempt": 1,
+        "bytes": 1674776
+      },
+      {
+        "side": "ask",
+        "month": "2022-07",
+        "attempt": 1,
+        "bytes": 1666892
+      },
+      {
+        "side": "ask",
+        "month": "2022-08",
+        "attempt": 1,
+        "bytes": 1739280
+      },
+      {
+        "side": "ask",
+        "month": "2022-09",
+        "attempt": 1,
+        "bytes": 1664752
+      },
+      {
+        "side": "ask",
+        "month": "2022-10",
+        "attempt": 1,
+        "bytes": 1675604
+      },
+      {
+        "side": "ask",
+        "month": "2022-11",
+        "attempt": 1,
+        "bytes": 1672920
+      },
+      {
+        "side": "ask",
+        "month": "2022-12",
+        "attempt": 1,
+        "bytes": 1680610
+      },
+      {
+        "side": "ask",
+        "month": "2023-01",
+        "attempt": 1,
+        "bytes": 1751711
+      },
+      {
+        "side": "ask",
+        "month": "2023-02",
+        "attempt": 1,
+        "bytes": 1548663
+      },
+      {
+        "side": "ask",
+        "month": "2023-03",
+        "attempt": 1,
+        "bytes": 1732183
+      },
+      {
+        "side": "ask",
+        "month": "2023-04",
+        "attempt": 1,
+        "bytes": 1604534
+      },
+      {
+        "side": "ask",
+        "month": "2023-05",
+        "attempt": 1,
+        "bytes": 1739656
+      },
+      {
+        "side": "ask",
+        "month": "2023-06",
+        "attempt": 1,
+        "bytes": 1656230
+      },
+      {
+        "side": "ask",
+        "month": "2023-07",
+        "attempt": 1,
+        "bytes": 1675466
+      },
+      {
+        "side": "ask",
+        "month": "2023-08",
+        "attempt": 1,
+        "bytes": 1740090
+      },
+      {
+        "side": "ask",
+        "month": "2023-09",
+        "attempt": 1,
+        "bytes": 1595983
+      },
+      {
+        "side": "ask",
+        "month": "2023-10",
+        "attempt": 1,
+        "bytes": 1725875
+      },
+      {
+        "side": "ask",
+        "month": "2023-11",
+        "attempt": 1,
+        "bytes": 1682560
+      },
+      {
+        "side": "ask",
+        "month": "2023-12",
+        "attempt": 1,
+        "bytes": 1614433
+      },
+      {
+        "side": "ask",
+        "month": "2024-01",
+        "attempt": 1,
+        "bytes": 1746472
+      },
+      {
+        "side": "ask",
+        "month": "2024-02",
+        "attempt": 1,
+        "bytes": 1614389
+      },
+      {
+        "side": "ask",
+        "month": "2024-03",
+        "attempt": 1,
+        "bytes": 1672474
+      },
+      {
+        "side": "ask",
+        "month": "2024-04",
+        "attempt": 1,
+        "bytes": 1669615
+      },
+      {
+        "side": "ask",
+        "month": "2024-05",
+        "attempt": 1,
+        "bytes": 1732264
+      },
+      {
+        "side": "ask",
+        "month": "2024-06",
+        "attempt": 1,
+        "bytes": 1604138
+      },
+      {
+        "side": "ask",
+        "month": "2024-07",
+        "attempt": 1,
+        "bytes": 1740494
+      },
+      {
+        "side": "ask",
+        "month": "2024-08",
+        "attempt": 1,
+        "bytes": 1666068
+      },
+      {
+        "side": "ask",
+        "month": "2024-09",
+        "attempt": 1,
+        "bytes": 1675285
+      },
+      {
+        "side": "ask",
+        "month": "2024-10",
+        "attempt": 1,
+        "bytes": 1740101
+      },
+      {
+        "side": "ask",
+        "month": "2024-11",
+        "attempt": 1,
+        "bytes": 1606259
+      },
+      {
+        "side": "ask",
+        "month": "2024-12",
+        "attempt": 1,
+        "bytes": 1605103
+      },
+      {
+        "side": "ask",
+        "month": "2025-01",
+        "attempt": 1,
+        "bytes": 1745522
+      },
+      {
+        "side": "ask",
+        "month": "2025-02",
+        "attempt": 1,
+        "bytes": 1554328
+      },
+      {
+        "side": "ask",
+        "month": "2025-03",
+        "attempt": 1,
+        "bytes": 1673160
+      },
+      {
+        "side": "ask",
+        "month": "2025-04",
+        "attempt": 1,
+        "bytes": 1669827
+      },
+      {
+        "side": "ask",
+        "month": "2025-05",
+        "attempt": 1,
+        "bytes": 1661322
+      },
+      {
+        "side": "ask",
+        "month": "2025-06",
+        "attempt": 1,
+        "bytes": 1675288
+      },
+      {
+        "side": "ask",
+        "month": "2025-07",
+        "attempt": 1,
+        "bytes": 1740417
+      },
+      {
+        "side": "ask",
+        "month": "2025-08",
+        "attempt": 1,
+        "bytes": 1667305
+      },
+      {
+        "side": "ask",
+        "month": "2025-09",
+        "attempt": 1,
+        "bytes": 1669957
+      },
+      {
+        "side": "ask",
+        "month": "2025-10",
+        "attempt": 1,
+        "bytes": 1727595
+      },
+      {
+        "side": "ask",
+        "month": "2025-11",
+        "attempt": 1,
+        "bytes": 1615799
+      },
+      {
+        "side": "ask",
+        "month": "2025-12",
+        "attempt": 1,
+        "bytes": 1745847
+      }
+    ]
+  },
+  "legacy_engine": {
+    "diagnostics": {
+      "signals_filtered_by_spread_in_sim": 0,
+      "overlap_skipped": 0,
+      "end_of_data_censored": 0
+    },
+    "at_0_2_extra_cost": {
+      "trades": 1673,
+      "PF": 1.3633761085865408,
+      "net_pips": 1815.1000000004542,
+      "max_drawdown_pips": 84.29999999997369,
+      "win_rate": 0.5176329946204423,
+      "mean_net_pips_per_trade": 1.0849372384939953,
+      "trades_per_week": 3.2076887873246394
+    },
+    "cost_stress": [
+      {
+        "extra_cost_pips": 0.0,
+        "trades": 1673,
+        "PF": 1.444731778968631,
+        "net_pips": 2149.7000000004537,
+        "max_drawdown_pips": 74.49999999998363,
+        "win_rate": 0.5176329946204423,
+        "mean_net_pips_per_trade": 1.284937238493995,
+        "trades_per_week": 3.2076887873246394
+      },
+      {
+        "extra_cost_pips": 0.2,
+        "trades": 1673,
+        "PF": 1.3633761085865408,
+        "net_pips": 1815.1000000004542,
+        "max_drawdown_pips": 84.29999999997369,
+        "win_rate": 0.5176329946204423,
+        "mean_net_pips_per_trade": 1.0849372384939953,
+        "trades_per_week": 3.2076887873246394
+      },
+      {
+        "extra_cost_pips": 0.5,
+        "trades": 1673,
+        "PF": 1.2507446727259939,
+        "net_pips": 1313.200000000454,
+        "max_drawdown_pips": 102.59999999997206,
+        "win_rate": 0.5176329946204423,
+        "mean_net_pips_per_trade": 0.7849372384939953,
+        "trades_per_week": 3.2076887873246394
+      },
+      {
+        "extra_cost_pips": 0.8,
+        "trades": 1673,
+        "PF": 1.1480663588415538,
+        "net_pips": 811.300000000454,
+        "max_drawdown_pips": 120.89999999997235,
+        "win_rate": 0.5176329946204423,
+        "mean_net_pips_per_trade": 0.4849372384939952,
+        "trades_per_week": 3.2076887873246394
+      },
+      {
+        "extra_cost_pips": 1.0,
+        "trades": 1673,
+        "PF": 1.084510787668285,
+        "net_pips": 476.70000000045405,
+        "max_drawdown_pips": 142.29999999999004,
+        "win_rate": 0.5176329946204423,
+        "mean_net_pips_per_trade": 0.28493723849399527,
+        "trades_per_week": 3.2076887873246394
+      },
+      {
+        "extra_cost_pips": 2.0,
+        "trades": 1673,
+        "PF": 0.8144609705787121,
+        "net_pips": -1196.299999999546,
+        "max_drawdown_pips": 1272.0999999995781,
+        "win_rate": 0.5176329946204423,
+        "mean_net_pips_per_trade": -0.7150627615060047,
+        "trades_per_week": 3.2076887873246394
+      }
+    ]
+  },
+  "causal_time_stop_engine": {
+    "diagnostics": {
+      "signals_filtered_by_spread_in_sim": 0,
+      "overlap_skipped": 0,
+      "end_of_data_censored": 0
+    },
+    "at_0_2_extra_cost": {
+      "trades": 1673,
+      "PF": 1.3633761085865408,
+      "net_pips": 1815.1000000004542,
+      "max_drawdown_pips": 84.29999999997369,
+      "win_rate": 0.5176329946204423,
+      "mean_net_pips_per_trade": 1.0849372384939953,
+      "trades_per_week": 3.2076887873246394
+    },
+    "cost_stress": [
+      {
+        "extra_cost_pips": 0.0,
+        "trades": 1673,
+        "PF": 1.444731778968631,
+        "net_pips": 2149.7000000004537,
+        "max_drawdown_pips": 74.49999999998363,
+        "win_rate": 0.5176329946204423,
+        "mean_net_pips_per_trade": 1.284937238493995,
+        "trades_per_week": 3.2076887873246394
+      },
+      {
+        "extra_cost_pips": 0.2,
+        "trades": 1673,
+        "PF": 1.3633761085865408,
+        "net_pips": 1815.1000000004542,
+        "max_drawdown_pips": 84.29999999997369,
+        "win_rate": 0.5176329946204423,
+        "mean_net_pips_per_trade": 1.0849372384939953,
+        "trades_per_week": 3.2076887873246394
+      },
+      {
+        "extra_cost_pips": 0.5,
+        "trades": 1673,
+        "PF": 1.2507446727259939,
+        "net_pips": 1313.200000000454,
+        "max_drawdown_pips": 102.59999999997206,
+        "win_rate": 0.5176329946204423,
+        "mean_net_pips_per_trade": 0.7849372384939953,
+        "trades_per_week": 3.2076887873246394
+      },
+      {
+        "extra_cost_pips": 0.8,
+        "trades": 1673,
+        "PF": 1.1480663588415538,
+        "net_pips": 811.300000000454,
+        "max_drawdown_pips": 120.89999999997235,
+        "win_rate": 0.5176329946204423,
+        "mean_net_pips_per_trade": 0.4849372384939952,
+        "trades_per_week": 3.2076887873246394
+      },
+      {
+        "extra_cost_pips": 1.0,
+        "trades": 1673,
+        "PF": 1.084510787668285,
+        "net_pips": 476.70000000045405,
+        "max_drawdown_pips": 142.29999999999004,
+        "win_rate": 0.5176329946204423,
+        "mean_net_pips_per_trade": 0.28493723849399527,
+        "trades_per_week": 3.2076887873246394
+      },
+      {
+        "extra_cost_pips": 2.0,
+        "trades": 1673,
+        "PF": 0.8144609705787121,
+        "net_pips": -1196.299999999546,
+        "max_drawdown_pips": 1272.0999999995781,
+        "win_rate": 0.5176329946204423,
+        "mean_net_pips_per_trade": -0.7150627615060047,
+        "trades_per_week": 3.2076887873246394
+      }
+    ],
+    "annual_at_0_2_extra_cost": [
+      {
+        "year": 2016,
+        "trades": 275,
+        "PF": 1.2842449742871611,
+        "net_pips": 243.2000000000695,
+        "max_drawdown_pips": 66.59999999998794,
+        "win_rate": 0.49818181818181817,
+        "mean_net_pips_per_trade": 0.8843636363638891,
+        "trades_per_week": 5.288461538461538
+      },
+      {
+        "year": 2017,
+        "trades": 154,
+        "PF": 1.6843672456577703,
+        "net_pips": 275.80000000005236,
+        "max_drawdown_pips": 30.299999999996132,
+        "win_rate": 0.577922077922078,
+        "mean_net_pips_per_trade": 1.790909090909431,
+        "trades_per_week": 2.9615384615384617
+      },
+      {
+        "year": 2018,
+        "trades": 171,
+        "PF": 1.348151062155912,
+        "net_pips": 177.00000000004695,
+        "max_drawdown_pips": 72.59999999998577,
+        "win_rate": 0.52046783625731,
+        "mean_net_pips_per_trade": 1.0350877192985202,
+        "trades_per_week": 3.2884615384615383
+      },
+      {
+        "year": 2019,
+        "trades": 67,
+        "PF": 1.1427893738141661,
+        "net_pips": 30.100000000022973,
+        "max_drawdown_pips": 50.39999999998345,
+        "win_rate": 0.4925373134328358,
+        "mean_net_pips_per_trade": 0.44925373134362645,
+        "trades_per_week": 1.2884615384615385
+      },
+      {
+        "year": 2020,
+        "trades": 239,
+        "PF": 1.2442186873413907,
+        "net_pips": 182.7000000000752,
+        "max_drawdown_pips": 84.29999999997261,
+        "win_rate": 0.4895397489539749,
+        "mean_net_pips_per_trade": 0.7644351464438293,
+        "trades_per_week": 4.596153846153846
+      },
+      {
+        "year": 2021,
+        "trades": 68,
+        "PF": 1.411290322580833,
+        "net_pips": 81.6000000000286,
+        "max_drawdown_pips": 35.39999999999334,
+        "win_rate": 0.5294117647058824,
+        "mean_net_pips_per_trade": 1.2000000000004205,
+        "trades_per_week": 1.3076923076923077
+      },
+      {
+        "year": 2022,
+        "trades": 321,
+        "PF": 1.2274886206214837,
+        "net_pips": 229.9000000000575,
+        "max_drawdown_pips": 79.59999999998738,
+        "win_rate": 0.49221183800623053,
+        "mean_net_pips_per_trade": 0.7161993769472197,
+        "trades_per_week": 6.173076923076923
+      },
+      {
+        "year": 2023,
+        "trades": 145,
+        "PF": 1.3270609318997906,
+        "net_pips": 146.0000000000511,
+        "max_drawdown_pips": 37.19999999999604,
+        "win_rate": 0.503448275862069,
+        "mean_net_pips_per_trade": 1.0068965517244903,
+        "trades_per_week": 2.7884615384615383
+      },
+      {
+        "year": 2024,
+        "trades": 74,
+        "PF": 1.8882091212460204,
+        "net_pips": 159.70000000001744,
+        "max_drawdown_pips": 25.499999999994596,
+        "win_rate": 0.6081081081081081,
+        "mean_net_pips_per_trade": 2.158108108108344,
+        "trades_per_week": 1.4230769230769231
+      },
+      {
+        "year": 2025,
+        "trades": 159,
+        "PF": 1.6661290322582096,
+        "net_pips": 289.10000000003265,
+        "max_drawdown_pips": 37.199999999991874,
+        "win_rate": 0.559748427672956,
+        "mean_net_pips_per_trade": 1.8182389937108971,
+        "trades_per_week": 3.0576923076923075
+      }
+    ],
+    "annual_cost_stress": [
+      {
+        "year": 2016,
+        "entries_attributed_to_year": 275,
+        "completed_inside_year": 275,
+        "extra_cost_pips": 0.2,
+        "trades": 275,
+        "PF": 1.2842449742871611,
+        "net_pips": 243.2000000000695,
+        "max_drawdown_pips": 66.59999999998794,
+        "win_rate": 0.49818181818181817,
+        "mean_net_pips_per_trade": 0.8843636363638891,
+        "trades_per_week": 5.259562841530054
+      },
+      {
+        "year": 2016,
+        "entries_attributed_to_year": 275,
+        "completed_inside_year": 275,
+        "extra_cost_pips": 1.0,
+        "trades": 275,
+        "PF": 1.0240165631470721,
+        "net_pips": 23.20000000006947,
+        "max_drawdown_pips": 94.09999999998163,
+        "win_rate": 0.49818181818181817,
+        "mean_net_pips_per_trade": 0.08436363636388898,
+        "trades_per_week": 5.259562841530054
+      },
+      {
+        "year": 2016,
+        "entries_attributed_to_year": 275,
+        "completed_inside_year": 275,
+        "extra_cost_pips": 2.0,
+        "trades": 275,
+        "PF": 0.7719202898551165,
+        "net_pips": -251.79999999993055,
+        "max_drawdown_pips": 251.79999999993112,
+        "win_rate": 0.49818181818181817,
+        "mean_net_pips_per_trade": -0.9156363636361111,
+        "trades_per_week": 5.259562841530054
+      },
+      {
+        "year": 2017,
+        "entries_attributed_to_year": 154,
+        "completed_inside_year": 154,
+        "extra_cost_pips": 0.2,
+        "trades": 154,
+        "PF": 1.6843672456577703,
+        "net_pips": 275.80000000005236,
+        "max_drawdown_pips": 30.299999999996132,
+        "win_rate": 0.577922077922078,
+        "mean_net_pips_per_trade": 1.790909090909431,
+        "trades_per_week": 2.953424657534246
+      },
+      {
+        "year": 2017,
+        "entries_attributed_to_year": 154,
+        "completed_inside_year": 154,
+        "extra_cost_pips": 1.0,
+        "trades": 154,
+        "PF": 1.3353846153847624,
+        "net_pips": 152.60000000005238,
+        "max_drawdown_pips": 46.19999999998154,
+        "win_rate": 0.577922077922078,
+        "mean_net_pips_per_trade": 0.990909090909431,
+        "trades_per_week": 2.953424657534246
+      },
+      {
+        "year": 2017,
+        "entries_attributed_to_year": 154,
+        "completed_inside_year": 154,
+        "extra_cost_pips": 2.0,
+        "trades": 154,
+        "PF": 0.9973076923077929,
+        "net_pips": -1.3999999999476103,
+        "max_drawdown_pips": 78.59999999996947,
+        "win_rate": 0.577922077922078,
+        "mean_net_pips_per_trade": -0.009090909090568897,
+        "trades_per_week": 2.953424657534246
+      },
+      {
+        "year": 2018,
+        "entries_attributed_to_year": 171,
+        "completed_inside_year": 171,
+        "extra_cost_pips": 0.2,
+        "trades": 171,
+        "PF": 1.348151062155912,
+        "net_pips": 177.00000000004695,
+        "max_drawdown_pips": 72.59999999998577,
+        "win_rate": 0.52046783625731,
+        "mean_net_pips_per_trade": 1.0350877192985202,
+        "trades_per_week": 3.2794520547945205
+      },
+      {
+        "year": 2018,
+        "entries_attributed_to_year": 171,
+        "completed_inside_year": 171,
+        "extra_cost_pips": 1.0,
+        "trades": 171,
+        "PF": 1.0700348432056632,
+        "net_pips": 40.2000000000469,
+        "max_drawdown_pips": 116.29999999997784,
+        "win_rate": 0.52046783625731,
+        "mean_net_pips_per_trade": 0.23508771929851988,
+        "trades_per_week": 3.2794520547945205
+      },
+      {
+        "year": 2018,
+        "entries_attributed_to_year": 171,
+        "completed_inside_year": 171,
+        "extra_cost_pips": 2.0,
+        "trades": 171,
+        "PF": 0.8006097560976159,
+        "net_pips": -130.7999999999531,
+        "max_drawdown_pips": 235.0999999999523,
+        "win_rate": 0.52046783625731,
+        "mean_net_pips_per_trade": -0.7649122807014801,
+        "trades_per_week": 3.2794520547945205
+      },
+      {
+        "year": 2019,
+        "entries_attributed_to_year": 67,
+        "completed_inside_year": 67,
+        "extra_cost_pips": 0.2,
+        "trades": 67,
+        "PF": 1.1427893738141661,
+        "net_pips": 30.100000000022973,
+        "max_drawdown_pips": 50.39999999998345,
+        "win_rate": 0.4925373134328358,
+        "mean_net_pips_per_trade": 0.44925373134362645,
+        "trades_per_week": 1.284931506849315
+      },
+      {
+        "year": 2019,
+        "entries_attributed_to_year": 67,
+        "completed_inside_year": 67,
+        "extra_cost_pips": 1.0,
+        "trades": 67,
+        "PF": 0.9012605042017677,
+        "net_pips": -23.499999999977035,
+        "max_drawdown_pips": 87.19999999998348,
+        "win_rate": 0.4925373134328358,
+        "mean_net_pips_per_trade": -0.35074626865637365,
+        "trades_per_week": 1.284931506849315
+      },
+      {
+        "year": 2019,
+        "entries_attributed_to_year": 67,
+        "completed_inside_year": 67,
+        "extra_cost_pips": 2.0,
+        "trades": 67,
+        "PF": 0.6672794117647629,
+        "net_pips": -90.49999999997705,
+        "max_drawdown_pips": 133.19999999998353,
+        "win_rate": 0.4925373134328358,
+        "mean_net_pips_per_trade": -1.3507462686563738,
+        "trades_per_week": 1.284931506849315
+      },
+      {
+        "year": 2020,
+        "entries_attributed_to_year": 239,
+        "completed_inside_year": 239,
+        "extra_cost_pips": 0.2,
+        "trades": 239,
+        "PF": 1.2442186873413907,
+        "net_pips": 182.7000000000752,
+        "max_drawdown_pips": 84.29999999997261,
+        "win_rate": 0.4895397489539749,
+        "mean_net_pips_per_trade": 0.7644351464438293,
+        "trades_per_week": 4.5710382513661205
+      },
+      {
+        "year": 2020,
+        "entries_attributed_to_year": 239,
+        "completed_inside_year": 239,
+        "extra_cost_pips": 1.0,
+        "trades": 239,
+        "PF": 0.989949154546617,
+        "net_pips": -8.499999999924835,
+        "max_drawdown_pips": 133.09999999997274,
+        "win_rate": 0.4895397489539749,
+        "mean_net_pips_per_trade": -0.03556485355617086,
+        "trades_per_week": 4.5710382513661205
+      },
+      {
+        "year": 2020,
+        "entries_attributed_to_year": 239,
+        "completed_inside_year": 239,
+        "extra_cost_pips": 2.0,
+        "trades": 239,
+        "PF": 0.7442389170197937,
+        "net_pips": -247.49999999992485,
+        "max_drawdown_pips": 305.59999999993624,
+        "win_rate": 0.4895397489539749,
+        "mean_net_pips_per_trade": -1.035564853556171,
+        "trades_per_week": 4.5710382513661205
+      },
+      {
+        "year": 2021,
+        "entries_attributed_to_year": 68,
+        "completed_inside_year": 68,
+        "extra_cost_pips": 0.2,
+        "trades": 68,
+        "PF": 1.411290322580833,
+        "net_pips": 81.6000000000286,
+        "max_drawdown_pips": 35.39999999999334,
+        "win_rate": 0.5294117647058824,
+        "mean_net_pips_per_trade": 1.2000000000004205,
+        "trades_per_week": 1.3041095890410959
+      },
+      {
+        "year": 2021,
+        "entries_attributed_to_year": 68,
+        "completed_inside_year": 68,
+        "extra_cost_pips": 1.0,
+        "trades": 68,
+        "PF": 1.1214285714287104,
+        "net_pips": 27.200000000028595,
+        "max_drawdown_pips": 58.499999999982975,
+        "win_rate": 0.5294117647058824,
+        "mean_net_pips_per_trade": 0.4000000000004205,
+        "trades_per_week": 1.3041095890410959
+      },
+      {
+        "year": 2021,
+        "entries_attributed_to_year": 68,
+        "completed_inside_year": 68,
+        "extra_cost_pips": 2.0,
+        "trades": 68,
+        "PF": 0.8406250000000984,
+        "net_pips": -40.799999999971405,
+        "max_drawdown_pips": 93.49999999998298,
+        "win_rate": 0.5294117647058824,
+        "mean_net_pips_per_trade": -0.5999999999995795,
+        "trades_per_week": 1.3041095890410959
+      },
+      {
+        "year": 2022,
+        "entries_attributed_to_year": 321,
+        "completed_inside_year": 321,
+        "extra_cost_pips": 0.2,
+        "trades": 321,
+        "PF": 1.2274886206214837,
+        "net_pips": 229.9000000000575,
+        "max_drawdown_pips": 79.59999999998738,
+        "win_rate": 0.49221183800623053,
+        "mean_net_pips_per_trade": 0.7161993769472197,
+        "trades_per_week": 6.156164383561643
+      },
+      {
+        "year": 2022,
+        "entries_attributed_to_year": 321,
+        "completed_inside_year": 321,
+        "extra_cost_pips": 1.0,
+        "trades": 321,
+        "PF": 0.9764241893076742,
+        "net_pips": -26.899999999942516,
+        "max_drawdown_pips": 122.9999999999998,
+        "win_rate": 0.49221183800623053,
+        "mean_net_pips_per_trade": -0.08380062305278042,
+        "trades_per_week": 6.156164383561643
+      },
+      {
+        "year": 2022,
+        "entries_attributed_to_year": 321,
+        "completed_inside_year": 321,
+        "extra_cost_pips": 2.0,
+        "trades": 321,
+        "PF": 0.7332055214724238,
+        "net_pips": -347.8999999999425,
+        "max_drawdown_pips": 381.0999999999458,
+        "win_rate": 0.49221183800623053,
+        "mean_net_pips_per_trade": -1.0838006230527804,
+        "trades_per_week": 6.156164383561643
+      },
+      {
+        "year": 2023,
+        "entries_attributed_to_year": 145,
+        "completed_inside_year": 145,
+        "extra_cost_pips": 0.2,
+        "trades": 145,
+        "PF": 1.3270609318997906,
+        "net_pips": 146.0000000000511,
+        "max_drawdown_pips": 37.19999999999604,
+        "win_rate": 0.503448275862069,
+        "mean_net_pips_per_trade": 1.0068965517244903,
+        "trades_per_week": 2.780821917808219
+      },
+      {
+        "year": 2023,
+        "entries_attributed_to_year": 145,
+        "completed_inside_year": 145,
+        "extra_cost_pips": 1.0,
+        "trades": 145,
+        "PF": 1.0595238095239163,
+        "net_pips": 30.000000000051067,
+        "max_drawdown_pips": 56.49999999998511,
+        "win_rate": 0.503448275862069,
+        "mean_net_pips_per_trade": 0.20689655172449012,
+        "trades_per_week": 2.780821917808219
+      },
+      {
+        "year": 2023,
+        "entries_attributed_to_year": 145,
+        "completed_inside_year": 145,
+        "extra_cost_pips": 2.0,
+        "trades": 145,
+        "PF": 0.8003472222222943,
+        "net_pips": -114.99999999994891,
+        "max_drawdown_pips": 120.49999999995401,
+        "win_rate": 0.503448275862069,
+        "mean_net_pips_per_trade": -0.7931034482755097,
+        "trades_per_week": 2.780821917808219
+      },
+      {
+        "year": 2024,
+        "entries_attributed_to_year": 74,
+        "completed_inside_year": 74,
+        "extra_cost_pips": 0.2,
+        "trades": 74,
+        "PF": 1.8882091212460204,
+        "net_pips": 159.70000000001744,
+        "max_drawdown_pips": 25.499999999994596,
+        "win_rate": 0.6081081081081081,
+        "mean_net_pips_per_trade": 2.158108108108344,
+        "trades_per_week": 1.4153005464480874
+      },
+      {
+        "year": 2024,
+        "entries_attributed_to_year": 74,
+        "completed_inside_year": 74,
+        "extra_cost_pips": 1.0,
+        "trades": 74,
+        "PF": 1.495073891625748,
+        "net_pips": 100.50000000001742,
+        "max_drawdown_pips": 40.69999999999183,
+        "win_rate": 0.6081081081081081,
+        "mean_net_pips_per_trade": 1.3581081081083435,
+        "trades_per_week": 1.4153005464480874
+      },
+      {
+        "year": 2024,
+        "entries_attributed_to_year": 74,
+        "completed_inside_year": 74,
+        "extra_cost_pips": 2.0,
+        "trades": 74,
+        "PF": 1.114224137931119,
+        "net_pips": 26.500000000017423,
+        "max_drawdown_pips": 65.69999999999183,
+        "win_rate": 0.6081081081081081,
+        "mean_net_pips_per_trade": 0.35810810810834354,
+        "trades_per_week": 1.4153005464480874
+      },
+      {
+        "year": 2025,
+        "entries_attributed_to_year": 159,
+        "completed_inside_year": 159,
+        "extra_cost_pips": 0.2,
+        "trades": 159,
+        "PF": 1.6661290322582096,
+        "net_pips": 289.10000000003265,
+        "max_drawdown_pips": 37.199999999991874,
+        "win_rate": 0.559748427672956,
+        "mean_net_pips_per_trade": 1.8182389937108971,
+        "trades_per_week": 3.0493150684931507
+      },
+      {
+        "year": 2025,
+        "entries_attributed_to_year": 159,
+        "completed_inside_year": 159,
+        "extra_cost_pips": 1.0,
+        "trades": 159,
+        "PF": 1.3304081632654041,
+        "net_pips": 161.9000000000326,
+        "max_drawdown_pips": 53.99999999999191,
+        "win_rate": 0.559748427672956,
+        "mean_net_pips_per_trade": 1.0182389937108969,
+        "trades_per_week": 3.0493150684931507
+      },
+      {
+        "year": 2025,
+        "entries_attributed_to_year": 159,
+        "completed_inside_year": 159,
+        "extra_cost_pips": 2.0,
+        "trades": 159,
+        "PF": 1.0051785714286303,
+        "net_pips": 2.900000000032591,
+        "max_drawdown_pips": 75.099999999983,
+        "win_rate": 0.559748427672956,
+        "mean_net_pips_per_trade": 0.018238993710896798,
+        "trades_per_week": 3.0493150684931507
+      }
+    ],
+    "monthly_at_0_2_extra_cost": [
+      {
+        "month_utc": "2016-01",
+        "trades": 35,
+        "PF": 1.08422939068108,
+        "net_pips": 9.400000000007518,
+        "max_drawdown_pips": 24.799999999997357,
+        "win_rate": 0.4857142857142857,
+        "mean_net_pips_per_trade": 0.26857142857164334,
+        "trades_per_week": 7.903225806451612
+      },
+      {
+        "month_utc": "2016-02",
+        "trades": 36,
+        "PF": 1.1434634974533637,
+        "net_pips": 16.90000000000444,
+        "max_drawdown_pips": 29.799999999994633,
+        "win_rate": 0.4722222222222222,
+        "mean_net_pips_per_trade": 0.4694444444445678,
+        "trades_per_week": 8.689655172413792
+      },
+      {
+        "month_utc": "2016-03",
+        "trades": 29,
+        "PF": 1.201075268817304,
+        "net_pips": 18.700000000007297,
+        "max_drawdown_pips": 24.799999999997354,
+        "win_rate": 0.4827586206896552,
+        "mean_net_pips_per_trade": 0.6448275862071482,
+        "trades_per_week": 6.548387096774193
+      },
+      {
+        "month_utc": "2016-04",
+        "trades": 21,
+        "PF": 1.811827956989371,
+        "net_pips": 45.30000000000208,
+        "max_drawdown_pips": 22.899999999997032,
+        "win_rate": 0.5714285714285714,
+        "mean_net_pips_per_trade": 2.157142857142956,
+        "trades_per_week": 4.9
+      },
+      {
+        "month_utc": "2016-05",
+        "trades": 11,
+        "PF": 0.9731182795699815,
+        "net_pips": -0.9999999999965805,
+        "max_drawdown_pips": 24.799999999997354,
+        "win_rate": 0.45454545454545453,
+        "mean_net_pips_per_trade": -0.09090909090878005,
+        "trades_per_week": 2.4838709677419355
+      },
+      {
+        "month_utc": "2016-06",
+        "trades": 45,
+        "PF": 1.4953917050692582,
+        "net_pips": 64.50000000001054,
+        "max_drawdown_pips": 37.09999999999499,
+        "win_rate": 0.5333333333333333,
+        "mean_net_pips_per_trade": 1.4333333333335676,
+        "trades_per_week": 10.5
+      },
+      {
+        "month_utc": "2016-07",
+        "trades": 13,
+        "PF": 1.4274193548390883,
+        "net_pips": 15.900000000012394,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.5384615384615384,
+        "mean_net_pips_per_trade": 1.2230769230778764,
+        "trades_per_week": 2.9354838709677415
+      },
+      {
+        "month_utc": "2016-08",
+        "trades": 6,
+        "PF": 6.193548387096806,
+        "net_pips": 32.19999999999676,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.8333333333333334,
+        "mean_net_pips_per_trade": 5.366666666666127,
+        "trades_per_week": 1.3548387096774193
+      },
+      {
+        "month_utc": "2016-09",
+        "trades": 12,
+        "PF": 6.064516129033042,
+        "net_pips": 62.80000000000303,
+        "max_drawdown_pips": 6.199999999999342,
+        "win_rate": 0.8333333333333334,
+        "mean_net_pips_per_trade": 5.233333333333586,
+        "trades_per_week": 2.8000000000000003
+      },
+      {
+        "month_utc": "2016-10",
+        "trades": 15,
+        "PF": 0.861290322580751,
+        "net_pips": -8.599999999992512,
+        "max_drawdown_pips": 30.999999999996696,
+        "win_rate": 0.3333333333333333,
+        "mean_net_pips_per_trade": -0.5733333333328342,
+        "trades_per_week": 3.387096774193548
+      },
+      {
+        "month_utc": "2016-11",
+        "trades": 34,
+        "PF": 0.7603686635945299,
+        "net_pips": -31.199999999988883,
+        "max_drawdown_pips": 53.399999999992275,
+        "win_rate": 0.38235294117647056,
+        "mean_net_pips_per_trade": -0.9176470588232024,
+        "trades_per_week": 7.933333333333334
+      },
+      {
+        "month_utc": "2016-12",
+        "trades": 18,
+        "PF": 1.295161290322666,
+        "net_pips": 18.30000000000335,
+        "max_drawdown_pips": 23.89999999999732,
+        "win_rate": 0.4444444444444444,
+        "mean_net_pips_per_trade": 1.016666666666853,
+        "trades_per_week": 4.064516129032258
+      },
+      {
+        "month_utc": "2017-01",
+        "trades": 31,
+        "PF": 1.128024193548485,
+        "net_pips": 12.700000000008352,
+        "max_drawdown_pips": 18.59999999999802,
+        "win_rate": 0.4838709677419355,
+        "mean_net_pips_per_trade": 0.4096774193551081,
+        "trades_per_week": 7.0
+      },
+      {
+        "month_utc": "2017-02",
+        "trades": 9,
+        "PF": 3.677419354839042,
+        "net_pips": 33.200000000000585,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.7777777777777778,
+        "mean_net_pips_per_trade": 3.688888888888954,
+        "trades_per_week": 2.25
+      },
+      {
+        "month_utc": "2017-03",
+        "trades": 6,
+        "PF": 2.5241935483873137,
+        "net_pips": 18.900000000000677,
+        "max_drawdown_pips": 6.1999999999993385,
+        "win_rate": 0.6666666666666666,
+        "mean_net_pips_per_trade": 3.1500000000001127,
+        "trades_per_week": 1.3548387096774193
+      },
+      {
+        "month_utc": "2017-04",
+        "trades": 7,
+        "PF": 1.7419354838710284,
+        "net_pips": 13.79999999999966,
+        "max_drawdown_pips": 18.599999999998015,
+        "win_rate": 0.5714285714285714,
+        "mean_net_pips_per_trade": 1.971428571428523,
+        "trades_per_week": 1.6333333333333333
+      },
+      {
+        "month_utc": "2017-05",
+        "trades": 8,
+        "PF": 2.032258064516522,
+        "net_pips": 19.20000000000526,
+        "max_drawdown_pips": 18.59999999999802,
+        "win_rate": 0.625,
+        "mean_net_pips_per_trade": 2.4000000000006576,
+        "trades_per_week": 1.8064516129032258
+      },
+      {
+        "month_utc": "2017-06",
+        "trades": 14,
+        "PF": 0.6415770609320307,
+        "net_pips": -19.999999999990553,
+        "max_drawdown_pips": 27.099999999992143,
+        "win_rate": 0.35714285714285715,
+        "mean_net_pips_per_trade": -1.4285714285707538,
+        "trades_per_week": 3.2666666666666666
+      },
+      {
+        "month_utc": "2017-07",
+        "trades": 16,
+        "PF": 2.1263440860216885,
+        "net_pips": 41.90000000000236,
+        "max_drawdown_pips": 12.399999999998684,
+        "win_rate": 0.625,
+        "mean_net_pips_per_trade": 2.6187500000001473,
+        "trades_per_week": 3.6129032258064515
+      },
+      {
+        "month_utc": "2017-08",
+        "trades": 20,
+        "PF": 1.21774193548406,
+        "net_pips": 13.500000000010285,
+        "max_drawdown_pips": 18.59999999999802,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 0.6750000000005143,
+        "trades_per_week": 4.516129032258064
+      },
+      {
+        "month_utc": "2017-09",
+        "trades": 20,
+        "PF": 2.541474654378207,
+        "net_pips": 66.90000000000707,
+        "max_drawdown_pips": 22.799999999997183,
+        "win_rate": 0.65,
+        "mean_net_pips_per_trade": 3.3450000000003532,
+        "trades_per_week": 4.666666666666667
+      },
+      {
+        "month_utc": "2017-10",
+        "trades": 9,
+        "PF": 4.217741935484398,
+        "net_pips": 39.900000000002294,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.7777777777777778,
+        "mean_net_pips_per_trade": 4.4333333333335885,
+        "trades_per_week": 2.032258064516129
+      },
+      {
+        "month_utc": "2017-11",
+        "trades": 7,
+        "PF": 1.6774193548389378,
+        "net_pips": 12.600000000002902,
+        "max_drawdown_pips": 12.399999999998677,
+        "win_rate": 0.5714285714285714,
+        "mean_net_pips_per_trade": 1.8000000000004146,
+        "trades_per_week": 1.6333333333333333
+      },
+      {
+        "month_utc": "2017-12",
+        "trades": 7,
+        "PF": 2.8709677419359663,
+        "net_pips": 23.20000000000351,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.7142857142857143,
+        "mean_net_pips_per_trade": 3.3142857142862154,
+        "trades_per_week": 1.5806451612903225
+      },
+      {
+        "month_utc": "2018-01",
+        "trades": 21,
+        "PF": 4.058064516129293,
+        "net_pips": 94.799999999998,
+        "max_drawdown_pips": 12.39999999999867,
+        "win_rate": 0.7619047619047619,
+        "mean_net_pips_per_trade": 4.514285714285618,
+        "trades_per_week": 4.741935483870967
+      },
+      {
+        "month_utc": "2018-02",
+        "trades": 21,
+        "PF": 0.9596774193549699,
+        "net_pips": -2.999999999989919,
+        "max_drawdown_pips": 30.299999999996153,
+        "win_rate": 0.42857142857142855,
+        "mean_net_pips_per_trade": -0.14285714285666282,
+        "trades_per_week": 5.25
+      },
+      {
+        "month_utc": "2018-03",
+        "trades": 19,
+        "PF": 0.5940860215054258,
+        "net_pips": -30.199999999993096,
+        "max_drawdown_pips": 30.699999999993928,
+        "win_rate": 0.3684210526315789,
+        "mean_net_pips_per_trade": -1.5894736842101629,
+        "trades_per_week": 4.290322580645161
+      },
+      {
+        "month_utc": "2018-04",
+        "trades": 10,
+        "PF": 0.7150537634408671,
+        "net_pips": -10.59999999999861,
+        "max_drawdown_pips": 22.699999999998344,
+        "win_rate": 0.4,
+        "mean_net_pips_per_trade": -1.059999999999861,
+        "trades_per_week": 2.3333333333333335
+      },
+      {
+        "month_utc": "2018-05",
+        "trades": 20,
+        "PF": 1.4080645161291991,
+        "net_pips": 25.300000000007653,
+        "max_drawdown_pips": 23.099999999996925,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 1.2650000000003827,
+        "trades_per_week": 4.516129032258064
+      },
+      {
+        "month_utc": "2018-06",
+        "trades": 14,
+        "PF": 0.9858870967742902,
+        "net_pips": -0.6999999999951196,
+        "max_drawdown_pips": 30.999999999996696,
+        "win_rate": 0.42857142857142855,
+        "mean_net_pips_per_trade": -0.0499999999996514,
+        "trades_per_week": 3.2666666666666666
+      },
+      {
+        "month_utc": "2018-07",
+        "trades": 7,
+        "PF": 0.5064516129033158,
+        "net_pips": -15.299999999995581,
+        "max_drawdown_pips": 18.599999999998015,
+        "win_rate": 0.2857142857142857,
+        "mean_net_pips_per_trade": -2.1857142857136544,
+        "trades_per_week": 1.5806451612903225
+      },
+      {
+        "month_utc": "2018-08",
+        "trades": 11,
+        "PF": 3.053763440860696,
+        "net_pips": 38.20000000000487,
+        "max_drawdown_pips": 6.199999999999342,
+        "win_rate": 0.7272727272727273,
+        "mean_net_pips_per_trade": 3.4727272727277154,
+        "trades_per_week": 2.4838709677419355
+      },
+      {
+        "month_utc": "2018-09",
+        "trades": 14,
+        "PF": 1.6129032258065485,
+        "net_pips": 22.800000000001177,
+        "max_drawdown_pips": 17.599999999997728,
+        "win_rate": 0.5714285714285714,
+        "mean_net_pips_per_trade": 1.6285714285715127,
+        "trades_per_week": 3.2666666666666666
+      },
+      {
+        "month_utc": "2018-10",
+        "trades": 11,
+        "PF": 0.8897849462366902,
+        "net_pips": -4.099999999994686,
+        "max_drawdown_pips": 18.59999999999802,
+        "win_rate": 0.45454545454545453,
+        "mean_net_pips_per_trade": -0.3727272727267896,
+        "trades_per_week": 2.4838709677419355
+      },
+      {
+        "month_utc": "2018-11",
+        "trades": 11,
+        "PF": 2.4314516129034884,
+        "net_pips": 35.500000000002736,
+        "max_drawdown_pips": 18.59999999999802,
+        "win_rate": 0.6363636363636364,
+        "mean_net_pips_per_trade": 3.2272727272729758,
+        "trades_per_week": 2.566666666666667
+      },
+      {
+        "month_utc": "2018-12",
+        "trades": 12,
+        "PF": 1.783870967742003,
+        "net_pips": 24.2999999999995,
+        "max_drawdown_pips": 24.799999999997357,
+        "win_rate": 0.5833333333333334,
+        "mean_net_pips_per_trade": 2.024999999999958,
+        "trades_per_week": 2.7096774193548385
+      },
+      {
+        "month_utc": "2019-01",
+        "trades": 14,
+        "PF": 1.954838709677707,
+        "net_pips": 29.60000000000576,
+        "max_drawdown_pips": 6.399999999998027,
+        "win_rate": 0.6428571428571429,
+        "mean_net_pips_per_trade": 2.1142857142861256,
+        "trades_per_week": 3.161290322580645
+      },
+      {
+        "month_utc": "2019-02",
+        "trades": 5,
+        "PF": 1.830645161290472,
+        "net_pips": 10.300000000000754,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.6,
+        "mean_net_pips_per_trade": 2.0600000000001506,
+        "trades_per_week": 1.25
+      },
+      {
+        "month_utc": "2019-03",
+        "trades": 5,
+        "PF": 0.2983870967741737,
+        "net_pips": -17.399999999998638,
+        "max_drawdown_pips": 18.59999999999802,
+        "win_rate": 0.2,
+        "mean_net_pips_per_trade": -3.4799999999997278,
+        "trades_per_week": 1.129032258064516
+      },
+      {
+        "month_utc": "2019-04",
+        "trades": 4,
+        "PF": 1.1048387096774654,
+        "net_pips": 1.3000000000004341,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 0.32500000000010854,
+        "trades_per_week": 0.9333333333333333
+      },
+      {
+        "month_utc": "2019-05",
+        "trades": 3,
+        "PF": 0.5161290322582042,
+        "net_pips": -5.9999999999976295,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.3333333333333333,
+        "mean_net_pips_per_trade": -1.9999999999992097,
+        "trades_per_week": 0.6774193548387096
+      },
+      {
+        "month_utc": "2019-06",
+        "trades": 12,
+        "PF": 1.0092165898618677,
+        "net_pips": 0.40000000000502034,
+        "max_drawdown_pips": 12.699999999996713,
+        "win_rate": 0.4166666666666667,
+        "mean_net_pips_per_trade": 0.03333333333375169,
+        "trades_per_week": 2.8000000000000003
+      },
+      {
+        "month_utc": "2019-07",
+        "trades": 4,
+        "PF": 1.0403225806453151,
+        "net_pips": 0.5000000000018545,
+        "max_drawdown_pips": 6.3999999999980295,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 0.12500000000046363,
+        "trades_per_week": 0.9032258064516129
+      },
+      {
+        "month_utc": "2019-08",
+        "trades": 5,
+        "PF": 1.7822580645163144,
+        "net_pips": 9.700000000001264,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.6,
+        "mean_net_pips_per_trade": 1.9400000000002529,
+        "trades_per_week": 1.129032258064516
+      },
+      {
+        "month_utc": "2019-09",
+        "trades": 8,
+        "PF": 0.38440860215054107,
+        "net_pips": -22.899999999997434,
+        "max_drawdown_pips": 28.999999999996515,
+        "win_rate": 0.25,
+        "mean_net_pips_per_trade": -2.862499999999679,
+        "trades_per_week": 1.8666666666666667
+      },
+      {
+        "month_utc": "2019-10",
+        "trades": 3,
+        "PF": 0.524193548387111,
+        "net_pips": -5.899999999999195,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.3333333333333333,
+        "mean_net_pips_per_trade": -1.9666666666663983,
+        "trades_per_week": 0.6774193548387096
+      },
+      {
+        "month_utc": "2019-11",
+        "trades": 1,
+        "PF": "INF",
+        "net_pips": 8.300000000000175,
+        "max_drawdown_pips": 0.0,
+        "win_rate": 1.0,
+        "mean_net_pips_per_trade": 8.300000000000175,
+        "trades_per_week": 0.23333333333333334
+      },
+      {
+        "month_utc": "2019-12",
+        "trades": 3,
+        "PF": "INF",
+        "net_pips": 22.2000000000006,
+        "max_drawdown_pips": 0.0,
+        "win_rate": 1.0,
+        "mean_net_pips_per_trade": 7.4000000000002,
+        "trades_per_week": 0.6774193548387096
+      },
+      {
+        "month_utc": "2020-01",
+        "trades": 4,
+        "PF": 1.0403225806453151,
+        "net_pips": 0.5000000000018545,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 0.12500000000046363,
+        "trades_per_week": 0.9032258064516129
+      },
+      {
+        "month_utc": "2020-02",
+        "trades": 2,
+        "PF": 0.9677419354837207,
+        "net_pips": -0.20000000000091056,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": -0.10000000000045528,
+        "trades_per_week": 0.48275862068965514
+      },
+      {
+        "month_utc": "2020-03",
+        "trades": 101,
+        "PF": 1.2631421744326126,
+        "net_pips": 88.1000000000296,
+        "max_drawdown_pips": 46.799999999993744,
+        "win_rate": 0.46534653465346537,
+        "mean_net_pips_per_trade": 0.8722772277230653,
+        "trades_per_week": 22.806451612903224
+      },
+      {
+        "month_utc": "2020-04",
+        "trades": 11,
+        "PF": 0.916666666666738,
+        "net_pips": -3.0999999999970145,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.45454545454545453,
+        "mean_net_pips_per_trade": -0.2818181818179104,
+        "trades_per_week": 2.566666666666667
+      },
+      {
+        "month_utc": "2020-05",
+        "trades": 18,
+        "PF": 1.347670250896208,
+        "net_pips": 19.400000000006358,
+        "max_drawdown_pips": 18.599999999998015,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 1.077777777778131,
+        "trades_per_week": 4.064516129032258
+      },
+      {
+        "month_utc": "2020-06",
+        "trades": 24,
+        "PF": 2.8018433179725357,
+        "net_pips": 78.19999999999973,
+        "max_drawdown_pips": 18.599999999998012,
+        "win_rate": 0.7083333333333334,
+        "mean_net_pips_per_trade": 3.258333333333322,
+        "trades_per_week": 5.6000000000000005
+      },
+      {
+        "month_utc": "2020-07",
+        "trades": 10,
+        "PF": 0.5115207373272572,
+        "net_pips": -21.199999999994777,
+        "max_drawdown_pips": 21.199999999994773,
+        "win_rate": 0.3,
+        "mean_net_pips_per_trade": -2.119999999999478,
+        "trades_per_week": 2.258064516129032
+      },
+      {
+        "month_utc": "2020-08",
+        "trades": 21,
+        "PF": 0.47188533627347357,
+        "net_pips": -47.89999999999098,
+        "max_drawdown_pips": 63.89999999998962,
+        "win_rate": 0.2857142857142857,
+        "mean_net_pips_per_trade": -2.2809523809519514,
+        "trades_per_week": 4.741935483870967
+      },
+      {
+        "month_utc": "2020-09",
+        "trades": 12,
+        "PF": 1.6354838709679675,
+        "net_pips": 19.700000000004895,
+        "max_drawdown_pips": 12.699999999997619,
+        "win_rate": 0.5833333333333334,
+        "mean_net_pips_per_trade": 1.6416666666670745,
+        "trades_per_week": 2.8000000000000003
+      },
+      {
+        "month_utc": "2020-10",
+        "trades": 8,
+        "PF": 0.5673076923077811,
+        "net_pips": -13.499999999995804,
+        "max_drawdown_pips": 31.199999999996695,
+        "win_rate": 0.25,
+        "mean_net_pips_per_trade": -1.6874999999994755,
+        "trades_per_week": 1.8064516129032258
+      },
+      {
+        "month_utc": "2020-11",
+        "trades": 13,
+        "PF": 1.2231182795700448,
+        "net_pips": 8.300000000004793,
+        "max_drawdown_pips": 18.59999999999802,
+        "win_rate": 0.5384615384615384,
+        "mean_net_pips_per_trade": 0.6384615384619072,
+        "trades_per_week": 3.033333333333333
+      },
+      {
+        "month_utc": "2020-12",
+        "trades": 15,
+        "PF": 3.1935483870973083,
+        "net_pips": 54.40000000000744,
+        "max_drawdown_pips": 12.39999999999868,
+        "win_rate": 0.7333333333333333,
+        "mean_net_pips_per_trade": 3.6266666666671625,
+        "trades_per_week": 3.387096774193548
+      },
+      {
+        "month_utc": "2021-01",
+        "trades": 8,
+        "PF": 0.7645161290323894,
+        "net_pips": -7.299999999995154,
+        "max_drawdown_pips": 12.499999999996714,
+        "win_rate": 0.375,
+        "mean_net_pips_per_trade": -0.9124999999993942,
+        "trades_per_week": 1.8064516129032258
+      },
+      {
+        "month_utc": "2021-02",
+        "trades": 7,
+        "PF": 2.854838709677794,
+        "net_pips": 23.0000000000022,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.7142857142857143,
+        "mean_net_pips_per_trade": 3.2857142857146,
+        "trades_per_week": 1.75
+      },
+      {
+        "month_utc": "2021-03",
+        "trades": 9,
+        "PF": 4.467741935484451,
+        "net_pips": 43.00000000000261,
+        "max_drawdown_pips": 6.199999999999342,
+        "win_rate": 0.7777777777777778,
+        "mean_net_pips_per_trade": 4.777777777778067,
+        "trades_per_week": 2.032258064516129
+      },
+      {
+        "month_utc": "2021-04",
+        "trades": 5,
+        "PF": 4.564516129033052,
+        "net_pips": 22.100000000002563,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.8,
+        "mean_net_pips_per_trade": 4.420000000000512,
+        "trades_per_week": 1.1666666666666667
+      },
+      {
+        "month_utc": "2021-05",
+        "trades": 7,
+        "PF": 0.46774193548391807,
+        "net_pips": -16.49999999999678,
+        "max_drawdown_pips": 30.999999999996696,
+        "win_rate": 0.2857142857142857,
+        "mean_net_pips_per_trade": -2.357142857142397,
+        "trades_per_week": 1.5806451612903225
+      },
+      {
+        "month_utc": "2021-06",
+        "trades": 5,
+        "PF": 1.5483870967742541,
+        "net_pips": 6.800000000000028,
+        "max_drawdown_pips": 12.399999999998677,
+        "win_rate": 0.6,
+        "mean_net_pips_per_trade": 1.3600000000000056,
+        "trades_per_week": 1.1666666666666667
+      },
+      {
+        "month_utc": "2021-07",
+        "trades": 5,
+        "PF": 0.3104838709678026,
+        "net_pips": -17.099999999996673,
+        "max_drawdown_pips": 17.099999999996673,
+        "win_rate": 0.2,
+        "mean_net_pips_per_trade": -3.4199999999993347,
+        "trades_per_week": 1.129032258064516
+      },
+      {
+        "month_utc": "2021-08",
+        "trades": 4,
+        "PF": 3.8387096774197604,
+        "net_pips": 17.60000000000064,
+        "max_drawdown_pips": 6.1999999999993385,
+        "win_rate": 0.75,
+        "mean_net_pips_per_trade": 4.40000000000016,
+        "trades_per_week": 0.9032258064516129
+      },
+      {
+        "month_utc": "2021-09",
+        "trades": 3,
+        "PF": 1.2500000000001907,
+        "net_pips": 3.1000000000020362,
+        "max_drawdown_pips": 12.399999999998677,
+        "win_rate": 0.3333333333333333,
+        "mean_net_pips_per_trade": 1.033333333334012,
+        "trades_per_week": 0.7000000000000001
+      },
+      {
+        "month_utc": "2021-10",
+        "trades": 2,
+        "PF": 0.0,
+        "net_pips": -12.399999999998679,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.0,
+        "mean_net_pips_per_trade": -6.199999999999339,
+        "trades_per_week": 0.45161290322580644
+      },
+      {
+        "month_utc": "2021-11",
+        "trades": 6,
+        "PF": 1.1075268817206134,
+        "net_pips": 2.0000000000032,
+        "max_drawdown_pips": 18.599999999998015,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 0.33333333333386667,
+        "trades_per_week": 1.4000000000000001
+      },
+      {
+        "month_utc": "2021-12",
+        "trades": 7,
+        "PF": 1.9301075268819596,
+        "net_pips": 17.300000000002605,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.5714285714285714,
+        "mean_net_pips_per_trade": 2.4714285714289437,
+        "trades_per_week": 1.5806451612903225
+      },
+      {
+        "month_utc": "2022-01",
+        "trades": 3,
+        "PF": "INF",
+        "net_pips": 18.299999999999475,
+        "max_drawdown_pips": 0.0,
+        "win_rate": 1.0,
+        "mean_net_pips_per_trade": 6.099999999999825,
+        "trades_per_week": 0.6774193548387096
+      },
+      {
+        "month_utc": "2022-02",
+        "trades": 20,
+        "PF": 1.5304659498209696,
+        "net_pips": 29.600000000006954,
+        "max_drawdown_pips": 12.499999999998938,
+        "win_rate": 0.55,
+        "mean_net_pips_per_trade": 1.4800000000003477,
+        "trades_per_week": 5.0
+      },
+      {
+        "month_utc": "2022-03",
+        "trades": 45,
+        "PF": 1.317671809256791,
+        "net_pips": 45.30000000001355,
+        "max_drawdown_pips": 55.79999999999405,
+        "win_rate": 0.4888888888888889,
+        "mean_net_pips_per_trade": 1.0066666666669677,
+        "trades_per_week": 10.161290322580644
+      },
+      {
+        "month_utc": "2022-04",
+        "trades": 9,
+        "PF": 0.9354838709679076,
+        "net_pips": -1.9999999999946496,
+        "max_drawdown_pips": 24.799999999997354,
+        "win_rate": 0.4444444444444444,
+        "mean_net_pips_per_trade": -0.22222222222162774,
+        "trades_per_week": 2.1
+      },
+      {
+        "month_utc": "2022-05",
+        "trades": 24,
+        "PF": 0.8021505376345492,
+        "net_pips": -18.399999999984974,
+        "max_drawdown_pips": 49.09999999999023,
+        "win_rate": 0.375,
+        "mean_net_pips_per_trade": -0.7666666666660406,
+        "trades_per_week": 5.419354838709677
+      },
+      {
+        "month_utc": "2022-06",
+        "trades": 30,
+        "PF": 1.9569892473120125,
+        "net_pips": 71.20000000000617,
+        "max_drawdown_pips": 18.599999999998005,
+        "win_rate": 0.6,
+        "mean_net_pips_per_trade": 2.373333333333539,
+        "trades_per_week": 7.0
+      },
+      {
+        "month_utc": "2022-07",
+        "trades": 38,
+        "PF": 1.1233870967743222,
+        "net_pips": 15.300000000014581,
+        "max_drawdown_pips": 25.199999999994738,
+        "win_rate": 0.47368421052631576,
+        "mean_net_pips_per_trade": 0.40263157894775214,
+        "trades_per_week": 8.580645161290322
+      },
+      {
+        "month_utc": "2022-08",
+        "trades": 19,
+        "PF": 2.556451612903152,
+        "net_pips": 57.89999999999454,
+        "max_drawdown_pips": 12.400000000000901,
+        "win_rate": 0.6842105263157895,
+        "mean_net_pips_per_trade": 3.047368421052344,
+        "trades_per_week": 4.290322580645161
+      },
+      {
+        "month_utc": "2022-09",
+        "trades": 38,
+        "PF": 1.0944700460828976,
+        "net_pips": 12.299999999993572,
+        "max_drawdown_pips": 37.19999999999746,
+        "win_rate": 0.4473684210526316,
+        "mean_net_pips_per_trade": 0.32368421052614665,
+        "trades_per_week": 8.866666666666667
+      },
+      {
+        "month_utc": "2022-10",
+        "trades": 38,
+        "PF": 1.3449820788529656,
+        "net_pips": 38.49999999999336,
+        "max_drawdown_pips": 48.1000000000055,
+        "win_rate": 0.5263157894736842,
+        "mean_net_pips_per_trade": 1.0131578947366675,
+        "trades_per_week": 8.580645161290322
+      },
+      {
+        "month_utc": "2022-11",
+        "trades": 35,
+        "PF": 0.6185133239832106,
+        "net_pips": -54.399999999989674,
+        "max_drawdown_pips": 75.59999999998769,
+        "win_rate": 0.34285714285714286,
+        "mean_net_pips_per_trade": -1.5542857142854192,
+        "trades_per_week": 8.166666666666666
+      },
+      {
+        "month_utc": "2022-12",
+        "trades": 22,
+        "PF": 1.2390029325514125,
+        "net_pips": 16.300000000004605,
+        "max_drawdown_pips": 36.19999999999575,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 0.7409090909093002,
+        "trades_per_week": 4.967741935483871
+      },
+      {
+        "month_utc": "2023-01",
+        "trades": 29,
+        "PF": 1.3139784946237887,
+        "net_pips": 29.200000000009233,
+        "max_drawdown_pips": 24.799999999997357,
+        "win_rate": 0.4827586206896552,
+        "mean_net_pips_per_trade": 1.0068965517244564,
+        "trades_per_week": 6.548387096774193
+      },
+      {
+        "month_utc": "2023-02",
+        "trades": 15,
+        "PF": 1.2782258064518022,
+        "net_pips": 13.800000000007923,
+        "max_drawdown_pips": 25.0999999999967,
+        "win_rate": 0.4666666666666667,
+        "mean_net_pips_per_trade": 0.9200000000005282,
+        "trades_per_week": 3.75
+      },
+      {
+        "month_utc": "2023-03",
+        "trades": 26,
+        "PF": 0.9935483870968563,
+        "net_pips": -0.5999999999923116,
+        "max_drawdown_pips": 30.999999999996696,
+        "win_rate": 0.4230769230769231,
+        "mean_net_pips_per_trade": -0.023076923076627367,
+        "trades_per_week": 5.870967741935483
+      },
+      {
+        "month_utc": "2023-04",
+        "trades": 10,
+        "PF": 1.170967741935684,
+        "net_pips": 5.300000000005635,
+        "max_drawdown_pips": 18.59999999999802,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 0.5300000000005636,
+        "trades_per_week": 2.3333333333333335
+      },
+      {
+        "month_utc": "2023-05",
+        "trades": 5,
+        "PF": 6.564516129033077,
+        "net_pips": 34.5000000000014,
+        "max_drawdown_pips": 6.199999999999342,
+        "win_rate": 0.8,
+        "mean_net_pips_per_trade": 6.90000000000028,
+        "trades_per_week": 1.129032258064516
+      },
+      {
+        "month_utc": "2023-06",
+        "trades": 9,
+        "PF": 0.967741935483965,
+        "net_pips": -0.9999999999969793,
+        "max_drawdown_pips": 18.59999999999802,
+        "win_rate": 0.4444444444444444,
+        "mean_net_pips_per_trade": -0.11111111111077548,
+        "trades_per_week": 2.1
+      },
+      {
+        "month_utc": "2023-07",
+        "trades": 9,
+        "PF": 2.456989247312015,
+        "net_pips": 27.100000000000595,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.6666666666666666,
+        "mean_net_pips_per_trade": 3.0111111111111772,
+        "trades_per_week": 2.032258064516129
+      },
+      {
+        "month_utc": "2023-08",
+        "trades": 10,
+        "PF": 1.125806451613089,
+        "net_pips": 3.9000000000053445,
+        "max_drawdown_pips": 24.799999999997357,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 0.3900000000005345,
+        "trades_per_week": 2.258064516129032
+      },
+      {
+        "month_utc": "2023-09",
+        "trades": 6,
+        "PF": 2.3870967741939264,
+        "net_pips": 17.20000000000286,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.6666666666666666,
+        "mean_net_pips_per_trade": 2.866666666667143,
+        "trades_per_week": 1.4000000000000001
+      },
+      {
+        "month_utc": "2023-10",
+        "trades": 6,
+        "PF": 0.19677419354837852,
+        "net_pips": -24.89999999999761,
+        "max_drawdown_pips": 24.89999999999761,
+        "win_rate": 0.16666666666666666,
+        "mean_net_pips_per_trade": -4.149999999999602,
+        "trades_per_week": 1.3548387096774193
+      },
+      {
+        "month_utc": "2023-11",
+        "trades": 9,
+        "PF": 2.4032258064519194,
+        "net_pips": 26.10000000000292,
+        "max_drawdown_pips": 18.599999999998015,
+        "win_rate": 0.6666666666666666,
+        "mean_net_pips_per_trade": 2.9000000000003245,
+        "trades_per_week": 2.1
+      },
+      {
+        "month_utc": "2023-12",
+        "trades": 11,
+        "PF": 1.4967741935485064,
+        "net_pips": 15.400000000002063,
+        "max_drawdown_pips": 12.399999999998677,
+        "win_rate": 0.5454545454545454,
+        "mean_net_pips_per_trade": 1.4000000000001875,
+        "trades_per_week": 2.4838709677419355
+      },
+      {
+        "month_utc": "2024-01",
+        "trades": 7,
+        "PF": 1.661290322580885,
+        "net_pips": 12.300000000003156,
+        "max_drawdown_pips": 18.599999999998015,
+        "win_rate": 0.5714285714285714,
+        "mean_net_pips_per_trade": 1.7571428571433079,
+        "trades_per_week": 1.5806451612903225
+      },
+      {
+        "month_utc": "2024-02",
+        "trades": 6,
+        "PF": 5.903225806451861,
+        "net_pips": 30.399999999998297,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.8333333333333334,
+        "mean_net_pips_per_trade": 5.066666666666383,
+        "trades_per_week": 1.4482758620689653
+      },
+      {
+        "month_utc": "2024-03",
+        "trades": 3,
+        "PF": 0.5000000000000322,
+        "net_pips": -6.19999999999894,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.3333333333333333,
+        "mean_net_pips_per_trade": -2.0666666666663134,
+        "trades_per_week": 0.6774193548387096
+      },
+      {
+        "month_utc": "2024-04",
+        "trades": 4,
+        "PF": 1.4516129032260128,
+        "net_pips": 5.60000000000196,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 1.40000000000049,
+        "trades_per_week": 0.9333333333333333
+      },
+      {
+        "month_utc": "2024-05",
+        "trades": 5,
+        "PF": 0.24596774193547313,
+        "net_pips": -18.699999999998273,
+        "max_drawdown_pips": 18.699999999998273,
+        "win_rate": 0.2,
+        "mean_net_pips_per_trade": -3.7399999999996547,
+        "trades_per_week": 1.129032258064516
+      },
+      {
+        "month_utc": "2024-06",
+        "trades": 3,
+        "PF": 1.9516129032259715,
+        "net_pips": 5.900000000000394,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.6666666666666666,
+        "mean_net_pips_per_trade": 1.966666666666798,
+        "trades_per_week": 0.7000000000000001
+      },
+      {
+        "month_utc": "2024-08",
+        "trades": 6,
+        "PF": 1.2043010752689287,
+        "net_pips": 3.8000000000016696,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 0.6333333333336116,
+        "trades_per_week": 1.3548387096774193
+      },
+      {
+        "month_utc": "2024-09",
+        "trades": 6,
+        "PF": 1.553763440860385,
+        "net_pips": 10.300000000002065,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 1.7166666666670107,
+        "trades_per_week": 1.4000000000000001
+      },
+      {
+        "month_utc": "2024-10",
+        "trades": 8,
+        "PF": 3.427419354839063,
+        "net_pips": 30.10000000000117,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.75,
+        "mean_net_pips_per_trade": 3.7625000000001463,
+        "trades_per_week": 1.8064516129032258
+      },
+      {
+        "month_utc": "2024-11",
+        "trades": 19,
+        "PF": 3.500000000000472,
+        "net_pips": 77.50000000000637,
+        "max_drawdown_pips": 12.399999999998684,
+        "win_rate": 0.7368421052631579,
+        "mean_net_pips_per_trade": 4.078947368421388,
+        "trades_per_week": 4.433333333333334
+      },
+      {
+        "month_utc": "2024-12",
+        "trades": 7,
+        "PF": 1.4677419354838968,
+        "net_pips": 8.699999999999555,
+        "max_drawdown_pips": 12.399999999998677,
+        "win_rate": 0.5714285714285714,
+        "mean_net_pips_per_trade": 1.2428571428570794,
+        "trades_per_week": 1.5806451612903225
+      },
+      {
+        "month_utc": "2025-01",
+        "trades": 15,
+        "PF": 2.57741935483903,
+        "net_pips": 48.90000000000471,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.6666666666666666,
+        "mean_net_pips_per_trade": 3.2600000000003138,
+        "trades_per_week": 3.387096774193548
+      },
+      {
+        "month_utc": "2025-02",
+        "trades": 12,
+        "PF": 1.2795698924731937,
+        "net_pips": 10.400000000001699,
+        "max_drawdown_pips": 24.799999999997354,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": 0.8666666666668082,
+        "trades_per_week": 3.0
+      },
+      {
+        "month_utc": "2025-03",
+        "trades": 17,
+        "PF": 1.6497695852537417,
+        "net_pips": 28.2000000000094,
+        "max_drawdown_pips": 23.699999999996024,
+        "win_rate": 0.5882352941176471,
+        "mean_net_pips_per_trade": 1.6588235294123177,
+        "trades_per_week": 3.8387096774193545
+      },
+      {
+        "month_utc": "2025-04",
+        "trades": 51,
+        "PF": 1.791788856305098,
+        "net_pips": 108.00000000000387,
+        "max_drawdown_pips": 34.19999999999556,
+        "win_rate": 0.5686274509803921,
+        "mean_net_pips_per_trade": 2.1176470588236054,
+        "trades_per_week": 11.9
+      },
+      {
+        "month_utc": "2025-05",
+        "trades": 12,
+        "PF": 1.8032258064518094,
+        "net_pips": 24.900000000003434,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.5833333333333334,
+        "mean_net_pips_per_trade": 2.075000000000286,
+        "trades_per_week": 2.7096774193548385
+      },
+      {
+        "month_utc": "2025-06",
+        "trades": 11,
+        "PF": 1.4516129032257683,
+        "net_pips": 13.999999999997327,
+        "max_drawdown_pips": 18.599999999998015,
+        "win_rate": 0.5454545454545454,
+        "mean_net_pips_per_trade": 1.2727272727270298,
+        "trades_per_week": 2.566666666666667
+      },
+      {
+        "month_utc": "2025-07",
+        "trades": 15,
+        "PF": 1.0143369175628887,
+        "net_pips": 0.8000000000091134,
+        "max_drawdown_pips": 18.59999999999802,
+        "win_rate": 0.4,
+        "mean_net_pips_per_trade": 0.05333333333394089,
+        "trades_per_week": 3.387096774193548
+      },
+      {
+        "month_utc": "2025-08",
+        "trades": 9,
+        "PF": 3.0913978494624788,
+        "net_pips": 38.89999999999796,
+        "max_drawdown_pips": 12.399999999998677,
+        "win_rate": 0.6666666666666666,
+        "mean_net_pips_per_trade": 4.3222222222219955,
+        "trades_per_week": 2.032258064516129
+      },
+      {
+        "month_utc": "2025-09",
+        "trades": 7,
+        "PF": 1.5913978494624985,
+        "net_pips": 11.000000000001304,
+        "max_drawdown_pips": 18.599999999998015,
+        "win_rate": 0.5714285714285714,
+        "mean_net_pips_per_trade": 1.5714285714287577,
+        "trades_per_week": 1.6333333333333333
+      },
+      {
+        "month_utc": "2025-10",
+        "trades": 4,
+        "PF": 0.3548387096774646,
+        "net_pips": -11.999999999997879,
+        "max_drawdown_pips": 12.399999999998679,
+        "win_rate": 0.25,
+        "mean_net_pips_per_trade": -2.9999999999994698,
+        "trades_per_week": 0.9032258064516129
+      },
+      {
+        "month_utc": "2025-11",
+        "trades": 2,
+        "PF": 0.9516129032259069,
+        "net_pips": -0.29999999999934523,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.5,
+        "mean_net_pips_per_trade": -0.14999999999967262,
+        "trades_per_week": 0.4666666666666667
+      },
+      {
+        "month_utc": "2025-12",
+        "trades": 4,
+        "PF": 3.629032258064958,
+        "net_pips": 16.300000000001003,
+        "max_drawdown_pips": 6.199999999999339,
+        "win_rate": 0.75,
+        "mean_net_pips_per_trade": 4.075000000000251,
+        "trades_per_week": 0.9032258064516129
+      }
+    ]
+  },
+  "comparison_at_0_2_extra_cost": {
+    "legacy": {
+      "trades": 1673,
+      "PF": 1.3633761085865408,
+      "net_pips": 1815.1000000004542,
+      "max_drawdown_pips": 84.29999999997369,
+      "win_rate": 0.5176329946204423,
+      "mean_net_pips_per_trade": 1.0849372384939953,
+      "trades_per_week": 3.2076887873246394
+    },
+    "causal_time_stop": {
+      "trades": 1673,
+      "PF": 1.3633761085865408,
+      "net_pips": 1815.1000000004542,
+      "max_drawdown_pips": 84.29999999997369,
+      "win_rate": 0.5176329946204423,
+      "mean_net_pips_per_trade": 1.0849372384939953,
+      "trades_per_week": 3.2076887873246394
+    }
+  },
+  "period_metrics": {
+    "full_2016_2025": {
+      "start_utc": "2016-01-01T00:00:00+00:00",
+      "end_exclusive_utc": "2026-01-01T00:00:00+00:00",
+      "elapsed_weeks": 521.8571428571429,
+      "extra_cost_stress": {},
+      "engines": {
+        "legacy": {
+          "entries_attributed_to_period": 1673,
+          "completed_inside_period": 1673,
+          "excluded_cross_boundary_exits": 0,
+          "cost_stress": [
+            {
+              "extra_cost_pips": 0.0,
+              "trades": 1673,
+              "PF": 1.444731778968631,
+              "net_pips": 2149.7000000004537,
+              "max_drawdown_pips": 74.49999999998363,
+              "win_rate": 0.5176329946204423,
+              "mean_net_pips_per_trade": 1.284937238493995,
+              "trades_per_week": 3.205858198740761
+            },
+            {
+              "extra_cost_pips": 0.2,
+              "trades": 1673,
+              "PF": 1.3633761085865408,
+              "net_pips": 1815.1000000004542,
+              "max_drawdown_pips": 84.29999999997369,
+              "win_rate": 0.5176329946204423,
+              "mean_net_pips_per_trade": 1.0849372384939953,
+              "trades_per_week": 3.205858198740761
+            },
+            {
+              "extra_cost_pips": 0.5,
+              "trades": 1673,
+              "PF": 1.2507446727259939,
+              "net_pips": 1313.200000000454,
+              "max_drawdown_pips": 102.59999999997206,
+              "win_rate": 0.5176329946204423,
+              "mean_net_pips_per_trade": 0.7849372384939953,
+              "trades_per_week": 3.205858198740761
+            },
+            {
+              "extra_cost_pips": 0.8,
+              "trades": 1673,
+              "PF": 1.1480663588415538,
+              "net_pips": 811.300000000454,
+              "max_drawdown_pips": 120.89999999997235,
+              "win_rate": 0.5176329946204423,
+              "mean_net_pips_per_trade": 0.4849372384939952,
+              "trades_per_week": 3.205858198740761
+            },
+            {
+              "extra_cost_pips": 1.0,
+              "trades": 1673,
+              "PF": 1.084510787668285,
+              "net_pips": 476.70000000045405,
+              "max_drawdown_pips": 142.29999999999004,
+              "win_rate": 0.5176329946204423,
+              "mean_net_pips_per_trade": 0.28493723849399527,
+              "trades_per_week": 3.205858198740761
+            },
+            {
+              "extra_cost_pips": 2.0,
+              "trades": 1673,
+              "PF": 0.8144609705787121,
+              "net_pips": -1196.299999999546,
+              "max_drawdown_pips": 1272.0999999995781,
+              "win_rate": 0.5176329946204423,
+              "mean_net_pips_per_trade": -0.7150627615060047,
+              "trades_per_week": 3.205858198740761
+            }
+          ]
+        },
+        "causal_time_stop": {
+          "entries_attributed_to_period": 1673,
+          "completed_inside_period": 1673,
+          "excluded_cross_boundary_exits": 0,
+          "cost_stress": [
+            {
+              "extra_cost_pips": 0.0,
+              "trades": 1673,
+              "PF": 1.444731778968631,
+              "net_pips": 2149.7000000004537,
+              "max_drawdown_pips": 74.49999999998363,
+              "win_rate": 0.5176329946204423,
+              "mean_net_pips_per_trade": 1.284937238493995,
+              "trades_per_week": 3.205858198740761
+            },
+            {
+              "extra_cost_pips": 0.2,
+              "trades": 1673,
+              "PF": 1.3633761085865408,
+              "net_pips": 1815.1000000004542,
+              "max_drawdown_pips": 84.29999999997369,
+              "win_rate": 0.5176329946204423,
+              "mean_net_pips_per_trade": 1.0849372384939953,
+              "trades_per_week": 3.205858198740761
+            },
+            {
+              "extra_cost_pips": 0.5,
+              "trades": 1673,
+              "PF": 1.2507446727259939,
+              "net_pips": 1313.200000000454,
+              "max_drawdown_pips": 102.59999999997206,
+              "win_rate": 0.5176329946204423,
+              "mean_net_pips_per_trade": 0.7849372384939953,
+              "trades_per_week": 3.205858198740761
+            },
+            {
+              "extra_cost_pips": 0.8,
+              "trades": 1673,
+              "PF": 1.1480663588415538,
+              "net_pips": 811.300000000454,
+              "max_drawdown_pips": 120.89999999997235,
+              "win_rate": 0.5176329946204423,
+              "mean_net_pips_per_trade": 0.4849372384939952,
+              "trades_per_week": 3.205858198740761
+            },
+            {
+              "extra_cost_pips": 1.0,
+              "trades": 1673,
+              "PF": 1.084510787668285,
+              "net_pips": 476.70000000045405,
+              "max_drawdown_pips": 142.29999999999004,
+              "win_rate": 0.5176329946204423,
+              "mean_net_pips_per_trade": 0.28493723849399527,
+              "trades_per_week": 3.205858198740761
+            },
+            {
+              "extra_cost_pips": 2.0,
+              "trades": 1673,
+              "PF": 0.8144609705787121,
+              "net_pips": -1196.299999999546,
+              "max_drawdown_pips": 1272.0999999995781,
+              "win_rate": 0.5176329946204423,
+              "mean_net_pips_per_trade": -0.7150627615060047,
+              "trades_per_week": 3.205858198740761
+            }
+          ]
+        }
+      }
+    },
+    "discovery_2016_2020": {
+      "start_utc": "2016-01-01T00:00:00+00:00",
+      "end_exclusive_utc": "2021-01-01T00:00:00+00:00",
+      "elapsed_weeks": 261.0,
+      "extra_cost_stress": {},
+      "engines": {
+        "legacy": {
+          "entries_attributed_to_period": 906,
+          "completed_inside_period": 906,
+          "excluded_cross_boundary_exits": 0,
+          "cost_stress": [
+            {
+              "extra_cost_pips": 0.0,
+              "trades": 906,
+              "PF": 1.4132388065361436,
+              "net_pips": 1090.0000000002667,
+              "max_drawdown_pips": 74.49999999998363,
+              "win_rate": 0.5132450331125827,
+              "mean_net_pips_per_trade": 1.2030905077265637,
+              "trades_per_week": 3.471264367816092
+            },
+            {
+              "extra_cost_pips": 0.2,
+              "trades": 906,
+              "PF": 1.3333944752193272,
+              "net_pips": 908.8000000002668,
+              "max_drawdown_pips": 84.29999999997369,
+              "win_rate": 0.5132450331125827,
+              "mean_net_pips_per_trade": 1.0030905077265637,
+              "trades_per_week": 3.471264367816092
+            },
+            {
+              "extra_cost_pips": 0.5,
+              "trades": 906,
+              "PF": 1.222867539010682,
+              "net_pips": 637.0000000002668,
+              "max_drawdown_pips": 102.59999999997206,
+              "win_rate": 0.5132450331125827,
+              "mean_net_pips_per_trade": 0.7030905077265638,
+              "trades_per_week": 3.471264367816092
+            },
+            {
+              "extra_cost_pips": 0.8,
+              "trades": 906,
+              "PF": 1.1221200468150152,
+              "net_pips": 365.2000000002668,
+              "max_drawdown_pips": 120.89999999997235,
+              "win_rate": 0.5132450331125827,
+              "mean_net_pips_per_trade": 0.4030905077265638,
+              "trades_per_week": 3.471264367816092
+            },
+            {
+              "extra_cost_pips": 1.0,
+              "trades": 906,
+              "PF": 1.0597654854322551,
+              "net_pips": 184.00000000026685,
+              "max_drawdown_pips": 138.49999999986477,
+              "win_rate": 0.5132450331125827,
+              "mean_net_pips_per_trade": 0.20309050772656384,
+              "trades_per_week": 3.471264367816092
+            },
+            {
+              "extra_cost_pips": 2.0,
+              "trades": 906,
+              "PF": 0.7948688808705873,
+              "net_pips": -721.9999999997331,
+              "max_drawdown_pips": 761.7999999997367,
+              "win_rate": 0.5132450331125827,
+              "mean_net_pips_per_trade": -0.7969094922734361,
+              "trades_per_week": 3.471264367816092
+            }
+          ]
+        },
+        "causal_time_stop": {
+          "entries_attributed_to_period": 906,
+          "completed_inside_period": 906,
+          "excluded_cross_boundary_exits": 0,
+          "cost_stress": [
+            {
+              "extra_cost_pips": 0.0,
+              "trades": 906,
+              "PF": 1.4132388065361436,
+              "net_pips": 1090.0000000002667,
+              "max_drawdown_pips": 74.49999999998363,
+              "win_rate": 0.5132450331125827,
+              "mean_net_pips_per_trade": 1.2030905077265637,
+              "trades_per_week": 3.471264367816092
+            },
+            {
+              "extra_cost_pips": 0.2,
+              "trades": 906,
+              "PF": 1.3333944752193272,
+              "net_pips": 908.8000000002668,
+              "max_drawdown_pips": 84.29999999997369,
+              "win_rate": 0.5132450331125827,
+              "mean_net_pips_per_trade": 1.0030905077265637,
+              "trades_per_week": 3.471264367816092
+            },
+            {
+              "extra_cost_pips": 0.5,
+              "trades": 906,
+              "PF": 1.222867539010682,
+              "net_pips": 637.0000000002668,
+              "max_drawdown_pips": 102.59999999997206,
+              "win_rate": 0.5132450331125827,
+              "mean_net_pips_per_trade": 0.7030905077265638,
+              "trades_per_week": 3.471264367816092
+            },
+            {
+              "extra_cost_pips": 0.8,
+              "trades": 906,
+              "PF": 1.1221200468150152,
+              "net_pips": 365.2000000002668,
+              "max_drawdown_pips": 120.89999999997235,
+              "win_rate": 0.5132450331125827,
+              "mean_net_pips_per_trade": 0.4030905077265638,
+              "trades_per_week": 3.471264367816092
+            },
+            {
+              "extra_cost_pips": 1.0,
+              "trades": 906,
+              "PF": 1.0597654854322551,
+              "net_pips": 184.00000000026685,
+              "max_drawdown_pips": 138.49999999986477,
+              "win_rate": 0.5132450331125827,
+              "mean_net_pips_per_trade": 0.20309050772656384,
+              "trades_per_week": 3.471264367816092
+            },
+            {
+              "extra_cost_pips": 2.0,
+              "trades": 906,
+              "PF": 0.7948688808705873,
+              "net_pips": -721.9999999997331,
+              "max_drawdown_pips": 761.7999999997367,
+              "win_rate": 0.5132450331125827,
+              "mean_net_pips_per_trade": -0.7969094922734361,
+              "trades_per_week": 3.471264367816092
+            }
+          ]
+        }
+      }
+    },
+    "validation_2021": {
+      "start_utc": "2021-01-01T00:00:00+00:00",
+      "end_exclusive_utc": "2022-01-01T00:00:00+00:00",
+      "elapsed_weeks": 52.142857142857146,
+      "extra_cost_stress": {},
+      "engines": {
+        "legacy": {
+          "entries_attributed_to_period": 68,
+          "completed_inside_period": 68,
+          "excluded_cross_boundary_exits": 0,
+          "cost_stress": [
+            {
+              "extra_cost_pips": 0.0,
+              "trades": 68,
+              "PF": 1.4958333333335367,
+              "net_pips": 95.20000000002858,
+              "max_drawdown_pips": 32.199999999993416,
+              "win_rate": 0.5294117647058824,
+              "mean_net_pips_per_trade": 1.4000000000004202,
+              "trades_per_week": 1.3041095890410959
+            },
+            {
+              "extra_cost_pips": 0.2,
+              "trades": 68,
+              "PF": 1.411290322580833,
+              "net_pips": 81.6000000000286,
+              "max_drawdown_pips": 35.39999999999334,
+              "win_rate": 0.5294117647058824,
+              "mean_net_pips_per_trade": 1.2000000000004205,
+              "trades_per_week": 1.3041095890410959
+            },
+            {
+              "extra_cost_pips": 0.5,
+              "trades": 68,
+              "PF": 1.2942307692309367,
+              "net_pips": 61.200000000028595,
+              "max_drawdown_pips": 40.999999999983004,
+              "win_rate": 0.5294117647058824,
+              "mean_net_pips_per_trade": 0.9000000000004205,
+              "trades_per_week": 1.3041095890410959
+            },
+            {
+              "extra_cost_pips": 0.8,
+              "trades": 68,
+              "PF": 1.1875000000001494,
+              "net_pips": 40.80000000002859,
+              "max_drawdown_pips": 51.49999999998295,
+              "win_rate": 0.5294117647058824,
+              "mean_net_pips_per_trade": 0.6000000000004204,
+              "trades_per_week": 1.3041095890410959
+            },
+            {
+              "extra_cost_pips": 1.0,
+              "trades": 68,
+              "PF": 1.1214285714287104,
+              "net_pips": 27.200000000028595,
+              "max_drawdown_pips": 58.499999999982975,
+              "win_rate": 0.5294117647058824,
+              "mean_net_pips_per_trade": 0.4000000000004205,
+              "trades_per_week": 1.3041095890410959
+            },
+            {
+              "extra_cost_pips": 2.0,
+              "trades": 68,
+              "PF": 0.8406250000000984,
+              "net_pips": -40.799999999971405,
+              "max_drawdown_pips": 93.49999999998298,
+              "win_rate": 0.5294117647058824,
+              "mean_net_pips_per_trade": -0.5999999999995795,
+              "trades_per_week": 1.3041095890410959
+            }
+          ]
+        },
+        "causal_time_stop": {
+          "entries_attributed_to_period": 68,
+          "completed_inside_period": 68,
+          "excluded_cross_boundary_exits": 0,
+          "cost_stress": [
+            {
+              "extra_cost_pips": 0.0,
+              "trades": 68,
+              "PF": 1.4958333333335367,
+              "net_pips": 95.20000000002858,
+              "max_drawdown_pips": 32.199999999993416,
+              "win_rate": 0.5294117647058824,
+              "mean_net_pips_per_trade": 1.4000000000004202,
+              "trades_per_week": 1.3041095890410959
+            },
+            {
+              "extra_cost_pips": 0.2,
+              "trades": 68,
+              "PF": 1.411290322580833,
+              "net_pips": 81.6000000000286,
+              "max_drawdown_pips": 35.39999999999334,
+              "win_rate": 0.5294117647058824,
+              "mean_net_pips_per_trade": 1.2000000000004205,
+              "trades_per_week": 1.3041095890410959
+            },
+            {
+              "extra_cost_pips": 0.5,
+              "trades": 68,
+              "PF": 1.2942307692309367,
+              "net_pips": 61.200000000028595,
+              "max_drawdown_pips": 40.999999999983004,
+              "win_rate": 0.5294117647058824,
+              "mean_net_pips_per_trade": 0.9000000000004205,
+              "trades_per_week": 1.3041095890410959
+            },
+            {
+              "extra_cost_pips": 0.8,
+              "trades": 68,
+              "PF": 1.1875000000001494,
+              "net_pips": 40.80000000002859,
+              "max_drawdown_pips": 51.49999999998295,
+              "win_rate": 0.5294117647058824,
+              "mean_net_pips_per_trade": 0.6000000000004204,
+              "trades_per_week": 1.3041095890410959
+            },
+            {
+              "extra_cost_pips": 1.0,
+              "trades": 68,
+              "PF": 1.1214285714287104,
+              "net_pips": 27.200000000028595,
+              "max_drawdown_pips": 58.499999999982975,
+              "win_rate": 0.5294117647058824,
+              "mean_net_pips_per_trade": 0.4000000000004205,
+              "trades_per_week": 1.3041095890410959
+            },
+            {
+              "extra_cost_pips": 2.0,
+              "trades": 68,
+              "PF": 0.8406250000000984,
+              "net_pips": -40.799999999971405,
+              "max_drawdown_pips": 93.49999999998298,
+              "win_rate": 0.5294117647058824,
+              "mean_net_pips_per_trade": -0.5999999999995795,
+              "trades_per_week": 1.3041095890410959
+            }
+          ]
+        }
+      }
+    },
+    "forward_2022_2025": {
+      "start_utc": "2022-01-01T00:00:00+00:00",
+      "end_exclusive_utc": "2026-01-01T00:00:00+00:00",
+      "elapsed_weeks": 208.71428571428572,
+      "extra_cost_stress": {},
+      "engines": {
+        "legacy": {
+          "entries_attributed_to_period": 699,
+          "completed_inside_period": 699,
+          "excluded_cross_boundary_exits": 0,
+          "cost_stress": [
+            {
+              "extra_cost_pips": 0.0,
+              "trades": 699,
+              "PF": 1.4812874251498225,
+              "net_pips": 964.5000000001586,
+              "max_drawdown_pips": 72.79999999998682,
+              "win_rate": 0.5221745350500715,
+              "mean_net_pips_per_trade": 1.3798283261804845,
+              "trades_per_week": 3.3490759753593426
+            },
+            {
+              "extra_cost_pips": 0.2,
+              "trades": 699,
+              "PF": 1.3982518833302242,
+              "net_pips": 824.7000000001586,
+              "max_drawdown_pips": 79.59999999998738,
+              "win_rate": 0.5221745350500715,
+              "mean_net_pips_per_trade": 1.1798283261804845,
+              "trades_per_week": 3.3490759753593426
+            },
+            {
+              "extra_cost_pips": 0.5,
+              "trades": 699,
+              "PF": 1.2832795946569362,
+              "net_pips": 615.0000000001586,
+              "max_drawdown_pips": 93.59999999997754,
+              "win_rate": 0.5221745350500715,
+              "mean_net_pips_per_trade": 0.8798283261804843,
+              "trades_per_week": 3.3490759753593426
+            },
+            {
+              "extra_cost_pips": 0.8,
+              "trades": 699,
+              "PF": 1.1784519196901153,
+              "net_pips": 405.30000000015855,
+              "max_drawdown_pips": 118.5999999999838,
+              "win_rate": 0.5221745350500715,
+              "mean_net_pips_per_trade": 0.5798283261804843,
+              "trades_per_week": 3.3490759753593426
+            },
+            {
+              "extra_cost_pips": 1.0,
+              "trades": 699,
+              "PF": 1.1135585970916078,
+              "net_pips": 265.50000000015854,
+              "max_drawdown_pips": 142.29999999998978,
+              "win_rate": 0.5221745350500715,
+              "mean_net_pips_per_trade": 0.3798283261804843,
+              "trades_per_week": 3.3490759753593426
+            },
+            {
+              "extra_cost_pips": 2.0,
+              "trades": 699,
+              "PF": 0.8377619760479526,
+              "net_pips": -433.4999999998414,
+              "max_drawdown_pips": 536.8999999998817,
+              "win_rate": 0.5221745350500715,
+              "mean_net_pips_per_trade": -0.6201716738195157,
+              "trades_per_week": 3.3490759753593426
+            }
+          ]
+        },
+        "causal_time_stop": {
+          "entries_attributed_to_period": 699,
+          "completed_inside_period": 699,
+          "excluded_cross_boundary_exits": 0,
+          "cost_stress": [
+            {
+              "extra_cost_pips": 0.0,
+              "trades": 699,
+              "PF": 1.4812874251498225,
+              "net_pips": 964.5000000001586,
+              "max_drawdown_pips": 72.79999999998682,
+              "win_rate": 0.5221745350500715,
+              "mean_net_pips_per_trade": 1.3798283261804845,
+              "trades_per_week": 3.3490759753593426
+            },
+            {
+              "extra_cost_pips": 0.2,
+              "trades": 699,
+              "PF": 1.3982518833302242,
+              "net_pips": 824.7000000001586,
+              "max_drawdown_pips": 79.59999999998738,
+              "win_rate": 0.5221745350500715,
+              "mean_net_pips_per_trade": 1.1798283261804845,
+              "trades_per_week": 3.3490759753593426
+            },
+            {
+              "extra_cost_pips": 0.5,
+              "trades": 699,
+              "PF": 1.2832795946569362,
+              "net_pips": 615.0000000001586,
+              "max_drawdown_pips": 93.59999999997754,
+              "win_rate": 0.5221745350500715,
+              "mean_net_pips_per_trade": 0.8798283261804843,
+              "trades_per_week": 3.3490759753593426
+            },
+            {
+              "extra_cost_pips": 0.8,
+              "trades": 699,
+              "PF": 1.1784519196901153,
+              "net_pips": 405.30000000015855,
+              "max_drawdown_pips": 118.5999999999838,
+              "win_rate": 0.5221745350500715,
+              "mean_net_pips_per_trade": 0.5798283261804843,
+              "trades_per_week": 3.3490759753593426
+            },
+            {
+              "extra_cost_pips": 1.0,
+              "trades": 699,
+              "PF": 1.1135585970916078,
+              "net_pips": 265.50000000015854,
+              "max_drawdown_pips": 142.29999999998978,
+              "win_rate": 0.5221745350500715,
+              "mean_net_pips_per_trade": 0.3798283261804843,
+              "trades_per_week": 3.3490759753593426
+            },
+            {
+              "extra_cost_pips": 2.0,
+              "trades": 699,
+              "PF": 0.8377619760479526,
+              "net_pips": -433.4999999998414,
+              "max_drawdown_pips": 536.8999999998817,
+              "win_rate": 0.5221745350500715,
+              "mean_net_pips_per_trade": -0.6201716738195157,
+              "trades_per_week": 3.3490759753593426
+            }
+          ]
+        }
+      }
+    },
+    "reported_forward_2021_2025": {
+      "start_utc": "2021-01-01T00:00:00+00:00",
+      "end_exclusive_utc": "2026-01-01T00:00:00+00:00",
+      "elapsed_weeks": 260.85714285714283,
+      "extra_cost_stress": {},
+      "engines": {
+        "legacy": {
+          "entries_attributed_to_period": 767,
+          "completed_inside_period": 767,
+          "excluded_cross_boundary_exits": 0,
+          "cost_stress": [
+            {
+              "extra_cost_pips": 0.0,
+              "trades": 767,
+              "PF": 1.482559198542934,
+              "net_pips": 1059.7000000001872,
+              "max_drawdown_pips": 72.79999999998682,
+              "win_rate": 0.5228161668839635,
+              "mean_net_pips_per_trade": 1.3816166883965935,
+              "trades_per_week": 2.940306681270537
+            },
+            {
+              "extra_cost_pips": 0.2,
+              "trades": 767,
+              "PF": 1.3993918561608785,
+              "net_pips": 906.3000000001871,
+              "max_drawdown_pips": 79.59999999998786,
+              "win_rate": 0.5228161668839635,
+              "mean_net_pips_per_trade": 1.1816166883965933,
+              "trades_per_week": 2.940306681270537
+            },
+            {
+              "extra_cost_pips": 0.5,
+              "trades": 767,
+              "PF": 1.2842370744011113,
+              "net_pips": 676.2000000001872,
+              "max_drawdown_pips": 93.59999999997754,
+              "win_rate": 0.5228161668839635,
+              "mean_net_pips_per_trade": 0.8816166883965935,
+              "trades_per_week": 2.940306681270537
+            },
+            {
+              "extra_cost_pips": 0.8,
+              "trades": 767,
+              "PF": 1.179243008678971,
+              "net_pips": 446.10000000018715,
+              "max_drawdown_pips": 118.59999999998368,
+              "win_rate": 0.5228161668839635,
+              "mean_net_pips_per_trade": 0.5816166883965934,
+              "trades_per_week": 2.940306681270537
+            },
+            {
+              "extra_cost_pips": 1.0,
+              "trades": 767,
+              "PF": 1.1142466822795511,
+              "net_pips": 292.7000000001872,
+              "max_drawdown_pips": 142.29999999998995,
+              "win_rate": 0.5228161668839635,
+              "mean_net_pips_per_trade": 0.38161668839659346,
+              "trades_per_week": 2.940306681270537
+            },
+            {
+              "extra_cost_pips": 2.0,
+              "trades": 767,
+              "PF": 0.8380122950820201,
+              "net_pips": -474.2999999998128,
+              "max_drawdown_pips": 585.4999999998631,
+              "win_rate": 0.5228161668839635,
+              "mean_net_pips_per_trade": -0.6183833116034065,
+              "trades_per_week": 2.940306681270537
+            }
+          ]
+        },
+        "causal_time_stop": {
+          "entries_attributed_to_period": 767,
+          "completed_inside_period": 767,
+          "excluded_cross_boundary_exits": 0,
+          "cost_stress": [
+            {
+              "extra_cost_pips": 0.0,
+              "trades": 767,
+              "PF": 1.482559198542934,
+              "net_pips": 1059.7000000001872,
+              "max_drawdown_pips": 72.79999999998682,
+              "win_rate": 0.5228161668839635,
+              "mean_net_pips_per_trade": 1.3816166883965935,
+              "trades_per_week": 2.940306681270537
+            },
+            {
+              "extra_cost_pips": 0.2,
+              "trades": 767,
+              "PF": 1.3993918561608785,
+              "net_pips": 906.3000000001871,
+              "max_drawdown_pips": 79.59999999998786,
+              "win_rate": 0.5228161668839635,
+              "mean_net_pips_per_trade": 1.1816166883965933,
+              "trades_per_week": 2.940306681270537
+            },
+            {
+              "extra_cost_pips": 0.5,
+              "trades": 767,
+              "PF": 1.2842370744011113,
+              "net_pips": 676.2000000001872,
+              "max_drawdown_pips": 93.59999999997754,
+              "win_rate": 0.5228161668839635,
+              "mean_net_pips_per_trade": 0.8816166883965935,
+              "trades_per_week": 2.940306681270537
+            },
+            {
+              "extra_cost_pips": 0.8,
+              "trades": 767,
+              "PF": 1.179243008678971,
+              "net_pips": 446.10000000018715,
+              "max_drawdown_pips": 118.59999999998368,
+              "win_rate": 0.5228161668839635,
+              "mean_net_pips_per_trade": 0.5816166883965934,
+              "trades_per_week": 2.940306681270537
+            },
+            {
+              "extra_cost_pips": 1.0,
+              "trades": 767,
+              "PF": 1.1142466822795511,
+              "net_pips": 292.7000000001872,
+              "max_drawdown_pips": 142.29999999998995,
+              "win_rate": 0.5228161668839635,
+              "mean_net_pips_per_trade": 0.38161668839659346,
+              "trades_per_week": 2.940306681270537
+            },
+            {
+              "extra_cost_pips": 2.0,
+              "trades": 767,
+              "PF": 0.8380122950820201,
+              "net_pips": -474.2999999998128,
+              "max_drawdown_pips": 585.4999999998631,
+              "win_rate": 0.5228161668839635,
+              "mean_net_pips_per_trade": -0.6183833116034065,
+              "trades_per_week": 2.940306681270537
+            }
+          ]
+        }
+      }
+    }
+  },
+  "forward_2022_2025_weekly_block_bootstrap": {
+    "0.2": {
+      "trades": 699,
+      "weeks": 209,
+      "block_weeks": 4,
+      "reps": 5000,
+      "seed": 189,
+      "observed_mean_net_pips_per_week": 3.945933014354826,
+      "observed_net_pips": 824.7000000001586,
+      "observed_mean_net_pips_per_trade": 1.1798283261804845,
+      "probability_mean_weekly_net_positive": 1.0,
+      "bootstrap_95pct_ci_mean_weekly_net_pips": [
+        2.323624401914854,
+        5.55331339712985
+      ]
+    },
+    "1.0": {
+      "trades": 699,
+      "weeks": 209,
+      "block_weeks": 4,
+      "reps": 5000,
+      "seed": 189,
+      "observed_mean_net_pips_per_week": 1.2703349282304237,
+      "observed_net_pips": 265.50000000015854,
+      "observed_mean_net_pips_per_trade": 0.3798283261804843,
+      "probability_mean_weekly_net_positive": 0.9442,
+      "bootstrap_95pct_ci_mean_weekly_net_pips": [
+        -0.28815789473587317,
+        2.7985765550246966
+      ]
+    },
+    "2.0": {
+      "trades": 699,
+      "weeks": 209,
+      "block_weeks": 4,
+      "reps": 5000,
+      "seed": 189,
+      "observed_mean_net_pips_per_week": -2.074162679425079,
+      "observed_net_pips": -433.4999999998415,
+      "observed_mean_net_pips_per_trade": -0.6201716738195157,
+      "probability_mean_weekly_net_positive": 0.0074,
+      "bootstrap_95pct_ci_mean_weekly_net_pips": [
+        -3.859389952152225,
+        -0.40125598086058833
+      ]
+    }
+  },
+  "acceptance_gates": {
+    "rule": "All listed gates must pass; no retuning is permitted after forward results.",
+    "gates": {
+      "forward_completed_trades_ge_100": true,
+      "forward_PF_ge_1.10_at_plus_1pip": true,
+      "forward_PF_ge_1.05_at_plus_2pip": false,
+      "every_forward_year_with_at_least_20_trades_PF_ge_1_at_plus_1pip": false,
+      "four_week_bootstrap_95pct_lower_weekly_net_gt_zero_at_plus_1pip": false
+    },
+    "forward_PF_plus_1pip": 1.1135585970916078,
+    "forward_PF_plus_2pip": 0.8377619760479526,
+    "forward_trades": 699,
+    "annual_forward_cohorts_plus_1pip": [
+      {
+        "year": 2022,
+        "entries_attributed_to_year": 321,
+        "completed_inside_year": 321,
+        "extra_cost_pips": 1.0,
+        "trades": 321,
+        "PF": 0.9764241893076742,
+        "net_pips": -26.899999999942516,
+        "max_drawdown_pips": 122.9999999999998,
+        "win_rate": 0.49221183800623053,
+        "mean_net_pips_per_trade": -0.08380062305278042,
+        "trades_per_week": 6.156164383561643
+      },
+      {
+        "year": 2023,
+        "entries_attributed_to_year": 145,
+        "completed_inside_year": 145,
+        "extra_cost_pips": 1.0,
+        "trades": 145,
+        "PF": 1.0595238095239163,
+        "net_pips": 30.000000000051067,
+        "max_drawdown_pips": 56.49999999998511,
+        "win_rate": 0.503448275862069,
+        "mean_net_pips_per_trade": 0.20689655172449012,
+        "trades_per_week": 2.780821917808219
+      },
+      {
+        "year": 2024,
+        "entries_attributed_to_year": 74,
+        "completed_inside_year": 74,
+        "extra_cost_pips": 1.0,
+        "trades": 74,
+        "PF": 1.495073891625748,
+        "net_pips": 100.50000000001742,
+        "max_drawdown_pips": 40.69999999999183,
+        "win_rate": 0.6081081081081081,
+        "mean_net_pips_per_trade": 1.3581081081083435,
+        "trades_per_week": 1.4153005464480874
+      },
+      {
+        "year": 2025,
+        "entries_attributed_to_year": 159,
+        "completed_inside_year": 159,
+        "extra_cost_pips": 1.0,
+        "trades": 159,
+        "PF": 1.3304081632654041,
+        "net_pips": 161.9000000000326,
+        "max_drawdown_pips": 53.99999999999191,
+        "win_rate": 0.559748427672956,
+        "mean_net_pips_per_trade": 1.0182389937108969,
+        "trades_per_week": 3.0493150684931507
+      }
+    ],
+    "forward_weekly_bootstrap_plus_1pip": {
+      "trades": 699,
+      "weeks": 209,
+      "block_weeks": 4,
+      "reps": 5000,
+      "seed": 189,
+      "observed_mean_net_pips_per_week": 1.2703349282304237,
+      "observed_net_pips": 265.50000000015854,
+      "observed_mean_net_pips_per_trade": 0.3798283261804843,
+      "probability_mean_weekly_net_positive": 0.9442,
+      "bootstrap_95pct_ci_mean_weekly_net_pips": [
+        -0.28815789473587317,
+        2.7985765550246966
+      ]
+    }
+  },
+  "verdict": "GAGAL"
+}
