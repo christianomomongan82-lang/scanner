@@ -478,12 +478,61 @@ def main():
             yy = [t for t in causal if pd.Timestamp(t["entry_utc"]).year == year]
             annual.append({"year": year, **metric_block(yy, 0.2, 52.0)})
         report["causal_time_stop_engine"]["annual_at_0_2_extra_cost"] = annual
+
+        # Annual cohorts under higher cost stresses, with the same period-boundary rule.
+        annual_stress = []
+        for year in sorted({pd.Timestamp(t["entry_utc"]).year for t in causal}):
+            y0 = pd.Timestamp(f"{year}-01-01", tz="UTC")
+            y1 = pd.Timestamp(f"{year + 1}-01-01", tz="UTC")
+            entered, completed = phase_subset(causal, y0, y1)
+            weeks = (y1 - y0).total_seconds() / (7 * 24 * 3600)
+            for cost in (0.2, 1.0, 2.0):
+                annual_stress.append({
+                    "year": year, "entries_attributed_to_year": len(entered),
+                    "completed_inside_year": len(completed), "extra_cost_pips": cost,
+                    **metric_block(completed, cost, weeks)
+                })
+        report["causal_time_stop_engine"]["annual_cost_stress"] = annual_stress
         monthly = []
         for month in sorted({pd.Timestamp(t["entry_utc"]).strftime("%Y-%m") for t in causal}):
             mm = [t for t in causal if pd.Timestamp(t["entry_utc"]).strftime("%Y-%m") == month]
             weeks = calendar.monthrange(int(month[:4]), int(month[5:7]))[1] / 7.0
             monthly.append({"month_utc": month, **metric_block(mm, 0.2, weeks)})
         report["causal_time_stop_engine"]["monthly_at_0_2_extra_cost"] = monthly
+
+        # Binary decision for this locked cross-feed robustness test.
+        fwd = report["period_metrics"]["forward_2022_2025"]["engines"]["causal_time_stop"]["cost_stress"]
+        fwd_by_cost = {round(row["extra_cost_pips"], 4): row for row in fwd}
+        fwd_plus1 = fwd_by_cost[1.0]
+        fwd_plus2 = fwd_by_cost[2.0]
+        annual_forward_plus1 = [
+            row for row in annual_stress
+            if 2022 <= row["year"] <= 2025 and row["extra_cost_pips"] == 1.0
+            and row["trades"] >= 20
+        ]
+        bootstrap_plus1 = report["forward_2022_2025_weekly_block_bootstrap"]["1.0"]
+        gate_results = {
+            "forward_completed_trades_ge_100": fwd_plus1["trades"] >= 100,
+            "forward_PF_ge_1.10_at_plus_1pip": isinstance(fwd_plus1["PF"], (int, float)) and fwd_plus1["PF"] >= 1.10,
+            "forward_PF_ge_1.05_at_plus_2pip": isinstance(fwd_plus2["PF"], (int, float)) and fwd_plus2["PF"] >= 1.05,
+            "every_forward_year_with_at_least_20_trades_PF_ge_1_at_plus_1pip": bool(annual_forward_plus1) and all(
+                isinstance(row["PF"], (int, float)) and row["PF"] >= 1.0 for row in annual_forward_plus1
+            ),
+            "four_week_bootstrap_95pct_lower_weekly_net_gt_zero_at_plus_1pip":
+                len(bootstrap_plus1.get("bootstrap_95pct_ci_mean_weekly_net_pips", [])) == 2
+                and bootstrap_plus1["bootstrap_95pct_ci_mean_weekly_net_pips"][0] > 0,
+        }
+        report["acceptance_gates"] = {
+            "rule": "All listed gates must pass; no retuning is permitted after forward results.",
+            "gates": gate_results,
+            "forward_PF_plus_1pip": fwd_plus1["PF"],
+            "forward_PF_plus_2pip": fwd_plus2["PF"],
+            "forward_trades": fwd_plus1["trades"],
+            "annual_forward_cohorts_plus_1pip": annual_forward_plus1,
+            "forward_weekly_bootstrap_plus_1pip": bootstrap_plus1,
+        }
+        report["verdict"] = "LULUS" if all(gate_results.values()) else "GAGAL"
+
         pd.DataFrame(legacy).to_csv(OUT / "r259_r189_history_legacy_trades.csv", index=False)
         pd.DataFrame(causal).to_csv(OUT / "r259_r189_history_causal_trades.csv", index=False)
     except Exception as exc:
