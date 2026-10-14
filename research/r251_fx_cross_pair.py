@@ -124,7 +124,7 @@ def profit_factor(values):
     gp = float(x[x > 0].sum())
     gl = float(-x[x < 0].sum())
     if gl <= 0:
-        return float("inf") if gp > 0 else None
+        return "INF" if gp > 0 else None
     return gp / gl
 
 def metrics(records, start, end, cost):
