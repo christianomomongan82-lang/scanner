@@ -1,0 +1,49 @@
+name: R251 FX cross-pair lead-lag test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "research/r251_fx_lead_lag.py"
+      - ".github/workflows/r251_fx_lead_lag.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r251-fx-lead-lag
+  cancel-in-progress: false
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install libraries
+        run: python -m pip install --upgrade pip numpy pandas
+      - name: Compile
+        run: python -m py_compile research/r251_fx_lead_lag.py
+      - name: Run locked R251 test
+        env:
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        run: python -u research/r251_fx_lead_lag.py
+      - name: Upload full result and ledger
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R251-fx-lead-lag-results
+          path: |
+            research/R251_fx_lead_lag_results.json
+            research/R251_fx_lead_lag_trades.csv
+          if-no-files-found: warn
