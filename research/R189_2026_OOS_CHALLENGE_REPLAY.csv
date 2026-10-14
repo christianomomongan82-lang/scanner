@@ -1,0 +1,19 @@
+extra_cost_pips,risk_per_trade_pct,outcome,phase1_pass_date,phase2_pass_date,trades_processed,elapsed_months,notes
+0.2,0.25,NOT_PASSED_IN_SAMPLE,,,55,,Phase 1 ending balance 6196.77
+0.2,0.4,NOT_PASSED_IN_SAMPLE,,,55,,Phase 1 ending balance 6316.26
+0.2,0.5,NOT_PASSED_IN_SAMPLE,2026-09-10,,55,,Phase 2 ending balance 5901.65
+0.2,0.75,NOT_PASSED_IN_SAMPLE,2026-05-21,,55,,Phase 2 ending balance 6101.22
+0.2,1.0,PASSED_SIMPLIFIED_REPLAY,2026-03-23,2026-06-18,39,5.11,Does not audit sub-minute Quick Strike or intrabar floating equity
+0.2,1.25,PASSED_SIMPLIFIED_REPLAY,2026-03-19,2026-06-09,37,4.81,Does not audit sub-minute Quick Strike or intrabar floating equity
+0.5,0.25,NOT_PASSED_IN_SAMPLE,,,55,,Phase 1 ending balance 6154.33
+0.5,0.4,NOT_PASSED_IN_SAMPLE,,,55,,Phase 1 ending balance 6247.22
+0.5,0.5,NOT_PASSED_IN_SAMPLE,,,55,,Phase 1 ending balance 6309.24
+0.5,0.75,NOT_PASSED_IN_SAMPLE,2026-06-18,,55,,Phase 2 ending balance 5947.04
+0.5,1.0,NOT_PASSED_IN_SAMPLE,2026-05-21,,55,,Phase 2 ending balance 6072.26
+0.5,1.25,PASSED_SIMPLIFIED_REPLAY,2026-03-19,2026-06-18,39,5.11,Does not audit sub-minute Quick Strike or intrabar floating equity
+1.0,0.25,NOT_PASSED_IN_SAMPLE,,,55,,Phase 1 ending balance 6084.24
+1.0,0.4,NOT_PASSED_IN_SAMPLE,,,55,,Phase 1 ending balance 6133.79
+1.0,0.5,NOT_PASSED_IN_SAMPLE,,,55,,Phase 1 ending balance 6166.39
+1.0,0.75,NOT_PASSED_IN_SAMPLE,,,55,,Phase 1 ending balance 6246.35
+1.0,1.0,NOT_PASSED_IN_SAMPLE,2026-06-18,,55,,Phase 2 ending balance 5849.25
+1.0,1.25,NOT_PASSED_IN_SAMPLE,2026-06-11,,55,,Phase 2 ending balance 5876.71
