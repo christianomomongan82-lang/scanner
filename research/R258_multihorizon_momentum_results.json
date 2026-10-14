@@ -63,297 +63,301 @@
   "diagnostics": {
     "signals": 21390,
     "invalid_signal_window": 0,
-    "missing_execution_grid": 21390,
-    "overlap": 0,
+    "missing_execution_grid": 1,
+    "missing_entry_quote": 0,
+    "overlap": 19324,
     "invalid_stop": 0,
-    "completed_trades": 0,
+    "completed_trades": 2065,
     "exit_counts": {
-      "STOP_GAP": 0,
-      "STOP": 0,
-      "TARGET": 0,
-      "TIME": 0
+      "STOP_GAP": 1,
+      "STOP": 787,
+      "TARGET": 246,
+      "TIME": 1031
     }
   },
   "periods": {
     "discovery": {
       "0.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 820,
+        "PF": 1.0398346748553797,
+        "net_pips": 513.700000000006,
+        "mean_net_pips_per_trade": 0.6264634146341536,
+        "win_rate": 0.4292682926829268,
+        "trades_per_week": 3.9288158795345653
       },
       "0.5": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 820,
+        "PF": 1.0078977030402736,
+        "net_pips": 103.70000000000596,
+        "mean_net_pips_per_trade": 0.12646341463415361,
+        "win_rate": 0.4268292682926829,
+        "trades_per_week": 3.9288158795345653
       },
       "1.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 820,
+        "PF": 0.9770839879696552,
+        "net_pips": -306.29999999999404,
+        "mean_net_pips_per_trade": -0.3735365853658464,
+        "win_rate": 0.42317073170731706,
+        "trades_per_week": 3.9288158795345653
       },
       "2.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 820,
+        "PF": 0.9186358152672531,
+        "net_pips": -1126.2999999999943,
+        "mean_net_pips_per_trade": -1.3735365853658468,
+        "win_rate": 0.4146341463414634,
+        "trades_per_week": 3.9288158795345653
       }
     },
     "validation_2021": {
       "0.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 166,
+        "PF": 0.9734338665351222,
+        "net_pips": -56.55000000001294,
+        "mean_net_pips_per_trade": -0.3406626506024876,
+        "win_rate": 0.4457831325301205,
+        "trades_per_week": 3.1835616438356165
       },
       "0.5": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 166,
+        "PF": 0.9358287540523708,
+        "net_pips": -139.55000000001294,
+        "mean_net_pips_per_trade": -0.8406626506024876,
+        "win_rate": 0.4457831325301205,
+        "trades_per_week": 3.1835616438356165
       },
       "1.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 166,
+        "PF": 0.8997815954787961,
+        "net_pips": -222.550000000013,
+        "mean_net_pips_per_trade": -1.340662650602488,
+        "win_rate": 0.4457831325301205,
+        "trades_per_week": 3.1835616438356165
       },
       "2.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 166,
+        "PF": 0.831996540914491,
+        "net_pips": -388.550000000013,
+        "mean_net_pips_per_trade": -2.340662650602488,
+        "win_rate": 0.43373493975903615,
+        "trades_per_week": 3.1835616438356165
       }
     },
     "forward": {
       "0.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 944,
+        "PF": 0.832119994797915,
+        "net_pips": -2904.4499999999707,
+        "mean_net_pips_per_trade": -3.0767478813559013,
+        "win_rate": 0.3665254237288136,
+        "trades_per_week": 4.522929500342231
       },
       "0.5": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 944,
+        "PF": 0.8081600649987088,
+        "net_pips": -3376.4499999999707,
+        "mean_net_pips_per_trade": -3.5767478813559013,
+        "win_rate": 0.3633474576271186,
+        "trades_per_week": 4.522929500342231
       },
       "1.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 944,
+        "PF": 0.7850298146880993,
+        "net_pips": -3848.4499999999707,
+        "mean_net_pips_per_trade": -4.076747881355901,
+        "win_rate": 0.3569915254237288,
+        "trades_per_week": 4.522929500342231
       },
       "2.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 944,
+        "PF": 0.7411452383460142,
+        "net_pips": -4792.449999999972,
+        "mean_net_pips_per_trade": -5.076747881355902,
+        "win_rate": 0.3495762711864407,
+        "trades_per_week": 4.522929500342231
       }
     },
     "oos2026": {
       "0.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 135,
+        "PF": 0.9536812818795447,
+        "net_pips": -89.89999999999162,
+        "mean_net_pips_per_trade": -0.6659259259258639,
+        "win_rate": 0.4074074074074074,
+        "trades_per_week": 3.3041958041958046
       },
       "0.5": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 135,
+        "PF": 0.9205411681558928,
+        "net_pips": -157.3999999999916,
+        "mean_net_pips_per_trade": -1.1659259259258636,
+        "win_rate": 0.4074074074074074,
+        "trades_per_week": 3.3041958041958046
       },
       "1.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 135,
+        "PF": 0.8887294676429882,
+        "net_pips": -224.89999999999165,
+        "mean_net_pips_per_trade": -1.665925925925864,
+        "win_rate": 0.4,
+        "trades_per_week": 3.3041958041958046
       },
       "2.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 135,
+        "PF": 0.8288553901754753,
+        "net_pips": -359.8999999999917,
+        "mean_net_pips_per_trade": -2.665925925925864,
+        "win_rate": 0.3925925925925926,
+        "trades_per_week": 3.3041958041958046
       }
     }
   },
   "forward_annual": {
     "2022": {
       "0.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 314,
+        "PF": 0.7473199776038896,
+        "net_pips": -1850.2999999999943,
+        "mean_net_pips_per_trade": -5.89267515923565,
+        "win_rate": 0.3343949044585987,
+        "trades_per_week": 6.021917808219178
       },
       "0.5": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 314,
+        "PF": 0.7297366436880658,
+        "net_pips": -2007.2999999999943,
+        "mean_net_pips_per_trade": -6.39267515923565,
+        "win_rate": 0.3343949044585987,
+        "trades_per_week": 6.021917808219178
       },
       "1.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 314,
+        "PF": 0.7126564968601059,
+        "net_pips": -2164.2999999999943,
+        "mean_net_pips_per_trade": -6.89267515923565,
+        "win_rate": 0.33121019108280253,
+        "trades_per_week": 6.021917808219178
       },
       "2.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 314,
+        "PF": 0.6799137240720174,
+        "net_pips": -2478.2999999999943,
+        "mean_net_pips_per_trade": -7.89267515923565,
+        "win_rate": 0.32802547770700635,
+        "trades_per_week": 6.021917808219178
       }
     },
     "2023": {
       "0.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 227,
+        "PF": 0.8736233067864645,
+        "net_pips": -464.1500000000142,
+        "mean_net_pips_per_trade": -2.0447136563877275,
+        "win_rate": 0.3876651982378855,
+        "trades_per_week": 4.353424657534246
       },
       "0.5": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 227,
+        "PF": 0.8456409913821866,
+        "net_pips": -577.6500000000142,
+        "mean_net_pips_per_trade": -2.5447136563877275,
+        "win_rate": 0.3876651982378855,
+        "trades_per_week": 4.353424657534246
       },
       "1.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 227,
+        "PF": 0.8187218863520094,
+        "net_pips": -691.1500000000142,
+        "mean_net_pips_per_trade": -3.0447136563877275,
+        "win_rate": 0.3744493392070485,
+        "trades_per_week": 4.353424657534246
       },
       "2.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 227,
+        "PF": 0.7679007040206249,
+        "net_pips": -918.1500000000144,
+        "mean_net_pips_per_trade": -4.044713656387729,
+        "win_rate": 0.3656387665198238,
+        "trades_per_week": 4.353424657534246
       }
     },
     "2024": {
       "0.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 189,
+        "PF": 0.7545275942132572,
+        "net_pips": -687.1999999999812,
+        "mean_net_pips_per_trade": -3.635978835978736,
+        "win_rate": 0.35978835978835977,
+        "trades_per_week": 3.6147540983606556
       },
       "0.5": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 189,
+        "PF": 0.7267069887774057,
+        "net_pips": -781.6999999999811,
+        "mean_net_pips_per_trade": -4.135978835978736,
+        "win_rate": 0.3544973544973545,
+        "trades_per_week": 3.6147540983606556
       },
       "1.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 189,
+        "PF": 0.7000650395371968,
+        "net_pips": -876.1999999999812,
+        "mean_net_pips_per_trade": -4.635978835978737,
+        "win_rate": 0.3544973544973545,
+        "trades_per_week": 3.6147540983606556
       },
       "2.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 189,
+        "PF": 0.6502380561484197,
+        "net_pips": -1065.1999999999812,
+        "mean_net_pips_per_trade": -5.635978835978737,
+        "win_rate": 0.3386243386243386,
+        "trades_per_week": 3.6147540983606556
       }
     },
     "2025": {
       "0.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 214,
+        "PF": 1.0277254834845169,
+        "net_pips": 97.20000000001937,
+        "mean_net_pips_per_trade": 0.45420560747672606,
+        "win_rate": 0.397196261682243,
+        "trades_per_week": 4.104109589041095
       },
       "0.5": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 214,
+        "PF": 0.9972553632442781,
+        "net_pips": -9.799999999980578,
+        "mean_net_pips_per_trade": -0.045794392523273726,
+        "win_rate": 0.3878504672897196,
+        "trades_per_week": 4.104109589041095
       },
       "1.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 214,
+        "PF": 0.9678785545349593,
+        "net_pips": -116.79999999998053,
+        "mean_net_pips_per_trade": -0.5457943925232734,
+        "win_rate": 0.37850467289719625,
+        "trades_per_week": 4.104109589041095
       },
       "2.0": {
-        "trades": 0,
-        "PF": null,
-        "net_pips": 0.0,
-        "mean_net_pips_per_trade": null,
-        "win_rate": null,
-        "trades_per_week": 0.0
+        "trades": 214,
+        "PF": 0.912256969311164,
+        "net_pips": -330.7999999999805,
+        "mean_net_pips_per_trade": -1.5457943925232733,
+        "win_rate": 0.37383177570093457,
+        "trades_per_week": 4.104109589041095
       }
     }
   },
   "forward_bootstrap_extra_cost_1pip": {
-    "draws": 0,
-    "p_mean_positive": null,
-    "ci95_mean_pips": null
+    "draws": 2000,
+    "p_mean_positive": 0.003,
+    "ci95_mean_pips": [
+      -6.971635311636338,
+      -1.2410399165095232
+    ]
   },
   "challenge_replay_2026_oos": [
     {
@@ -361,9 +365,9 @@
       "result": "FAILED_TO_PASS_IN_2026_OOS",
       "phase1_date": null,
       "phase2_date": null,
-      "trades_processed": 0,
+      "trades_processed": 135,
       "ending_phase": 1,
-      "ending_balance": 6000.0,
+      "ending_balance": 5895.0,
       "reason": null
     },
     {
@@ -371,9 +375,9 @@
       "result": "FAILED_TO_PASS_IN_2026_OOS",
       "phase1_date": null,
       "phase2_date": null,
-      "trades_processed": 0,
+      "trades_processed": 135,
       "ending_phase": 1,
-      "ending_balance": 6000.0,
+      "ending_balance": 5786.71,
       "reason": null
     },
     {
@@ -381,29 +385,29 @@
       "result": "FAILED_TO_PASS_IN_2026_OOS",
       "phase1_date": null,
       "phase2_date": null,
-      "trades_processed": 0,
+      "trades_processed": 135,
       "ending_phase": 1,
-      "ending_balance": 6000.0,
+      "ending_balance": 5675.38,
       "reason": null
     },
     {
       "risk_pct": 1.0,
       "result": "FAILED_TO_PASS_IN_2026_OOS",
-      "phase1_date": null,
+      "phase1_date": "2026-01-27",
       "phase2_date": null,
-      "trades_processed": 0,
-      "ending_phase": 1,
-      "ending_balance": 6000.0,
-      "reason": null
+      "trades_processed": 104,
+      "ending_phase": 2,
+      "ending_balance": 5349.19,
+      "reason": "STATIC_MLL"
     }
   ],
   "acceptance_gates": {
     "discovery_at_least_100_trades_and_PF_1pip_ge_1.00": false,
     "validation_2021_at_least_30_trades_and_PF_1pip_ge_1.00": false,
-    "forward_at_least_100_trades": false,
+    "forward_at_least_100_trades": true,
     "forward_PF_1pip_ge_1.10": false,
     "forward_PF_2pip_ge_1.05": false,
-    "forward_trade_frequency_ge_2_per_week": false,
+    "forward_trade_frequency_ge_2_per_week": true,
     "all_qualifying_forward_years_PF_1pip_ge_1": false,
     "4week_bootstrap_positive_expectancy_prob_ge_0.95": false,
     "oos_at_least_30_trades_and_PF_1pip_ge_1.00": false,
