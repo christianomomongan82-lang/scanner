@@ -1,5 +1,5 @@
 {
-  "status": "FAILED_RUN",
+  "status": "COMPLETE",
   "strategy_family": "EURUSD H1 threshold-crossing time-series momentum vs reversal",
   "verdict": "GAGAL",
   "preregistered_design": {
@@ -45,6 +45,506 @@
     ],
     "selection_rule": "among candidates with at least 50 validation trades, choose highest PF at +1 extra pip; tie-break higher mean net pips at +1, then higher trade count; forward and OOS results not used for selection"
   },
-  "error": "RuntimeError: Insufficient training returns for lookback=3: 0",
-  "decision": "No partial performance result is accepted when the frozen data or calculation pipeline fails."
+  "data": {
+    "eurusd_bid": {
+      "rows": 85170,
+      "duplicate_timestamps_removed": 0,
+      "invalid_ohlc_rows_removed": 0,
+      "off_hour_timestamps": 0,
+      "missing_hour_gaps": 40,
+      "start_utc": "2017-01-01T00:00:00+00:00",
+      "end_utc": "2026-10-13T23:00:00+00:00",
+      "sha256": "68d667ef6e84d4357207da86dc0ffd18453bbfa91837d0dd1349ac82bb6c47bf"
+    },
+    "eurusd_ask": {
+      "rows": 85170,
+      "duplicate_timestamps_removed": 0,
+      "invalid_ohlc_rows_removed": 0,
+      "off_hour_timestamps": 0,
+      "missing_hour_gaps": 40,
+      "start_utc": "2017-01-01T00:00:00+00:00",
+      "end_utc": "2026-10-13T23:00:00+00:00",
+      "sha256": "8b9d3660213fae55bf0066c42fd093badc4a8092ddb2a0ca1672bbac5bcc7b91"
+    },
+    "common_hourly_rows": 85170,
+    "common_start_utc": "2017-01-01T00:00:00+00:00",
+    "common_end_utc": "2026-10-13T23:00:00+00:00",
+    "extra_cost_is_added_on_top_of_observed_bidask": true
+  },
+  "thresholds_fit_2017_2020_only": {
+    "3": 0.0020130517931117864,
+    "6": 0.0029483244294955524,
+    "12": 0.004258229470638142
+  },
+  "all_candidate_validation_and_discovery": {
+    "L03_MOMENTUM": {
+      "threshold_abs_return": 0.0020130517931117864,
+      "validation_cost_1pip": {
+        "trades": 255,
+        "PF": 0.9777155990806466,
+        "net_pips": -44.59999999999391,
+        "mean_net_pips_per_trade": -0.17490196078428985,
+        "win_rate": 0.4745098039215686,
+        "trades_per_week": 4.890410958904109
+      },
+      "discovery_cost_1pip": {
+        "trades": 1359,
+        "PF": 0.77802782177437,
+        "net_pips": -3097.2000000000385,
+        "mean_net_pips_per_trade": -2.279028697571772,
+        "win_rate": 0.4451802796173657,
+        "trades_per_week": 6.511293634496919
+      }
+    },
+    "L03_REVERSAL": {
+      "threshold_abs_return": 0.0020130517931117864,
+      "validation_cost_1pip": {
+        "trades": 255,
+        "PF": 0.7052359405300652,
+        "net_pips": -683.9999999999818,
+        "mean_net_pips_per_trade": -2.6823529411763993,
+        "win_rate": 0.43137254901960786,
+        "trades_per_week": 4.890410958904109
+      },
+      "discovery_cost_1pip": {
+        "trades": 1359,
+        "PF": 0.9391203029420329,
+        "net_pips": -773.3000000000021,
+        "mean_net_pips_per_trade": -0.5690213392200163,
+        "win_rate": 0.481972038263429,
+        "trades_per_week": 6.511293634496919
+      }
+    },
+    "L06_MOMENTUM": {
+      "threshold_abs_return": 0.0029483244294955524,
+      "validation_cost_1pip": {
+        "trades": 181,
+        "PF": 1.0868917141604528,
+        "net_pips": 99.09999999999644,
+        "mean_net_pips_per_trade": 0.5475138121546764,
+        "win_rate": 0.48066298342541436,
+        "trades_per_week": 3.4712328767123286
+      },
+      "discovery_cost_1pip": {
+        "trades": 998,
+        "PF": 0.8697739042566628,
+        "net_pips": -1134.1000000000033,
+        "mean_net_pips_per_trade": -1.1363727454909853,
+        "win_rate": 0.45791583166332667,
+        "trades_per_week": 4.781656399726215
+      }
+    },
+    "L06_REVERSAL": {
+      "threshold_abs_return": 0.0029483244294955524,
+      "validation_cost_1pip": {
+        "trades": 181,
+        "PF": 0.576116262247659,
+        "net_pips": -644.599999999984,
+        "mean_net_pips_per_trade": -3.5613259668507404,
+        "win_rate": 0.4198895027624309,
+        "trades_per_week": 3.4712328767123286
+      },
+      "discovery_cost_1pip": {
+        "trades": 998,
+        "PF": 0.8044815319658255,
+        "net_pips": -1764.2999999999752,
+        "mean_net_pips_per_trade": -1.7678356713426604,
+        "win_rate": 0.46292585170340683,
+        "trades_per_week": 4.781656399726215
+      }
+    },
+    "L12_MOMENTUM": {
+      "threshold_abs_return": 0.004258229470638142,
+      "validation_cost_1pip": {
+        "trades": 126,
+        "PF": 1.1794104444111968,
+        "net_pips": 119.90000000000335,
+        "mean_net_pips_per_trade": 0.9515873015873282,
+        "win_rate": 0.42857142857142855,
+        "trades_per_week": 2.4164383561643836
+      },
+      "discovery_cost_1pip": {
+        "trades": 749,
+        "PF": 0.7304354146979668,
+        "net_pips": -1854.2000000000394,
+        "mean_net_pips_per_trade": -2.4755674232310274,
+        "win_rate": 0.41388518024032045,
+        "trades_per_week": 3.5886379192334017
+      }
+    },
+    "L12_REVERSAL": {
+      "threshold_abs_return": 0.004258229470638142,
+      "validation_cost_1pip": {
+        "trades": 126,
+        "PF": 0.45731707317073605,
+        "net_pips": -542.8999999999955,
+        "mean_net_pips_per_trade": -4.308730158730123,
+        "win_rate": 0.4603174603174603,
+        "trades_per_week": 2.4164383561643836
+      },
+      "discovery_cost_1pip": {
+        "trades": 749,
+        "PF": 0.9261099903229519,
+        "net_pips": -450.4999999999941,
+        "mean_net_pips_per_trade": -0.6014686248331029,
+        "win_rate": 0.48464619492656874,
+        "trades_per_week": 3.5886379192334017
+      }
+    }
+  },
+  "candidate_diagnostics": {
+    "L03_MOMENTUM": {
+      "signal_crossings": 4303,
+      "overlap_skipped": 922
+    },
+    "L03_REVERSAL": {
+      "signal_crossings": 4303,
+      "overlap_skipped": 922
+    },
+    "L06_MOMENTUM": {
+      "signal_crossings": 3060,
+      "overlap_skipped": 525
+    },
+    "L06_REVERSAL": {
+      "signal_crossings": 3060,
+      "overlap_skipped": 525
+    },
+    "L12_MOMENTUM": {
+      "signal_crossings": 2211,
+      "overlap_skipped": 356
+    },
+    "L12_REVERSAL": {
+      "signal_crossings": 2211,
+      "overlap_skipped": 356
+    }
+  },
+  "selected_candidate": "L12_MOMENTUM",
+  "selected_validation_metrics_cost_1pip": {
+    "trades": 126,
+    "PF": 1.1794104444111968,
+    "net_pips": 119.90000000000335,
+    "mean_net_pips_per_trade": 0.9515873015873282,
+    "win_rate": 0.42857142857142855,
+    "trades_per_week": 2.4164383561643836
+  },
+  "selected_metrics_by_period_and_cost": {
+    "discovery_2017_2020": {
+      "0.0": {
+        "trades": 749,
+        "PF": 0.8286538193206252,
+        "net_pips": -1105.2000000000394,
+        "mean_net_pips_per_trade": -1.4755674232310272,
+        "win_rate": 0.44192256341789055,
+        "trades_per_week": 3.5886379192334017
+      },
+      "0.5": {
+        "trades": 749,
+        "PF": 0.7778761859012796,
+        "net_pips": -1479.7000000000394,
+        "mean_net_pips_per_trade": -1.9755674232310272,
+        "win_rate": 0.42857142857142855,
+        "trades_per_week": 3.5886379192334017
+      },
+      "1.0": {
+        "trades": 749,
+        "PF": 0.7304354146979668,
+        "net_pips": -1854.2000000000394,
+        "mean_net_pips_per_trade": -2.4755674232310274,
+        "win_rate": 0.41388518024032045,
+        "trades_per_week": 3.5886379192334017
+      },
+      "2.0": {
+        "trades": 749,
+        "PF": 0.6448082958111568,
+        "net_pips": -2603.2000000000394,
+        "mean_net_pips_per_trade": -3.4755674232310274,
+        "win_rate": 0.38451268357810414,
+        "trades_per_week": 3.5886379192334017
+      }
+    },
+    "validation_2021": {
+      "0.0": {
+        "trades": 126,
+        "PF": 1.4111352616619324,
+        "net_pips": 245.90000000000336,
+        "mean_net_pips_per_trade": 1.9515873015873282,
+        "win_rate": 0.4523809523809524,
+        "trades_per_week": 2.4164383561643836
+      },
+      "0.5": {
+        "trades": 126,
+        "PF": 1.2889415481832582,
+        "net_pips": 182.90000000000336,
+        "mean_net_pips_per_trade": 1.4515873015873282,
+        "win_rate": 0.4444444444444444,
+        "trades_per_week": 2.4164383561643836
+      },
+      "1.0": {
+        "trades": 126,
+        "PF": 1.1794104444111968,
+        "net_pips": 119.90000000000335,
+        "mean_net_pips_per_trade": 0.9515873015873282,
+        "win_rate": 0.42857142857142855,
+        "trades_per_week": 2.4164383561643836
+      },
+      "2.0": {
+        "trades": 126,
+        "PF": 0.9917623227548998,
+        "net_pips": -6.099999999996658,
+        "mean_net_pips_per_trade": -0.048412698412671894,
+        "win_rate": 0.42063492063492064,
+        "trades_per_week": 2.4164383561643836
+      }
+    },
+    "forward_2022_2025": {
+      "0.0": {
+        "trades": 888,
+        "PF": 0.7251278752477083,
+        "net_pips": -2649.30000000002,
+        "mean_net_pips_per_trade": -2.983445945945969,
+        "win_rate": 0.4189189189189189,
+        "trades_per_week": 4.254620123203285
+      },
+      "0.5": {
+        "trades": 888,
+        "PF": 0.6874791622465357,
+        "net_pips": -3093.3000000000197,
+        "mean_net_pips_per_trade": -3.4834459459459683,
+        "win_rate": 0.41216216216216217,
+        "trades_per_week": 4.254620123203285
+      },
+      "1.0": {
+        "trades": 888,
+        "PF": 0.6518850934427666,
+        "net_pips": -3537.3000000000197,
+        "mean_net_pips_per_trade": -3.9834459459459683,
+        "win_rate": 0.39864864864864863,
+        "trades_per_week": 4.254620123203285
+      },
+      "2.0": {
+        "trades": 888,
+        "PF": 0.5864823951558632,
+        "net_pips": -4425.300000000019,
+        "mean_net_pips_per_trade": -4.9834459459459675,
+        "win_rate": 0.37725225225225223,
+        "trades_per_week": 4.254620123203285
+      }
+    },
+    "oos_2026": {
+      "0.0": {
+        "trades": 92,
+        "PF": 0.8345057827590426,
+        "net_pips": -138.79999999999012,
+        "mean_net_pips_per_trade": -1.5086956521738057,
+        "win_rate": 0.3804347826086957,
+        "trades_per_week": 2.251748251748252
+      },
+      "0.5": {
+        "trades": 92,
+        "PF": 0.7869003690037001,
+        "net_pips": -184.79999999999012,
+        "mean_net_pips_per_trade": -2.0086956521738055,
+        "win_rate": 0.3804347826086957,
+        "trades_per_week": 2.251748251748252
+      },
+      "1.0": {
+        "trades": 92,
+        "PF": 0.7423244389862772,
+        "net_pips": -230.79999999999012,
+        "mean_net_pips_per_trade": -2.5086956521738055,
+        "win_rate": 0.3804347826086957,
+        "trades_per_week": 2.251748251748252
+      },
+      "2.0": {
+        "trades": 92,
+        "PF": 0.661457787100166,
+        "net_pips": -322.79999999999,
+        "mean_net_pips_per_trade": -3.5086956521738046,
+        "win_rate": 0.3695652173913043,
+        "trades_per_week": 2.251748251748252
+      }
+    }
+  },
+  "annual_cohorts": [
+    {
+      "year": 2017,
+      "PF_cost_0.0": 0.8010110853940706,
+      "PF_cost_0.5": 0.7476036459864657,
+      "PF_cost_1.0": 0.6979663712792463,
+      "PF_cost_2.0": 0.6093642292804429,
+      "trades_cost_0.0": 205,
+      "trades_cost_0.5": 205,
+      "trades_cost_1.0": 205,
+      "trades_cost_2.0": 205,
+      "mean_pips_cost_0.0": -1.5936585365854403,
+      "mean_pips_cost_0.5": -2.0936585365854405,
+      "mean_pips_cost_1.0": -2.5936585365854397,
+      "mean_pips_cost_2.0": -3.5936585365854405
+    },
+    {
+      "year": 2018,
+      "PF_cost_0.0": 0.7040363028421159,
+      "PF_cost_0.5": 0.6592863085883196,
+      "PF_cost_1.0": 0.617662848962049,
+      "PF_cost_2.0": 0.542434804518529,
+      "trades_cost_0.0": 235,
+      "trades_cost_0.5": 235,
+      "trades_cost_1.0": 235,
+      "trades_cost_2.0": 235,
+      "mean_pips_cost_0.0": -2.6365957446810024,
+      "mean_pips_cost_0.5": -3.1365957446810024,
+      "mean_pips_cost_1.0": -3.6365957446810024,
+      "mean_pips_cost_2.0": -4.636595744681004
+    },
+    {
+      "year": 2019,
+      "PF_cost_0.0": 0.9354339841484528,
+      "PF_cost_0.5": 0.8541050295857896,
+      "PF_cost_1.0": 0.7799009200283005,
+      "PF_cost_2.0": 0.6510610724121101,
+      "trades_cost_0.0": 91,
+      "trades_cost_0.5": 91,
+      "trades_cost_1.0": 91,
+      "trades_cost_2.0": 91,
+      "mean_pips_cost_0.0": -0.36703296703302846,
+      "mean_pips_cost_0.5": -0.8670329670330285,
+      "mean_pips_cost_1.0": -1.3670329670330286,
+      "mean_pips_cost_2.0": -2.367032967033029
+    },
+    {
+      "year": 2020,
+      "PF_cost_0.0": 0.942889647326515,
+      "PF_cost_0.5": 0.8960964154371113,
+      "PF_cost_1.0": 0.851792725546885,
+      "PF_cost_2.0": 0.7703006749846657,
+      "trades_cost_0.0": 218,
+      "trades_cost_0.5": 218,
+      "trades_cost_1.0": 218,
+      "trades_cost_2.0": 218,
+      "mean_pips_cost_0.0": -0.5756880733944167,
+      "mean_pips_cost_0.5": -1.0756880733944172,
+      "mean_pips_cost_1.0": -1.575688073394417,
+      "mean_pips_cost_2.0": -2.575688073394417
+    },
+    {
+      "year": 2021,
+      "PF_cost_0.0": 1.4111352616619324,
+      "PF_cost_0.5": 1.2889415481832582,
+      "PF_cost_1.0": 1.1794104444111968,
+      "PF_cost_2.0": 0.9917623227548998,
+      "trades_cost_0.0": 126,
+      "trades_cost_0.5": 126,
+      "trades_cost_1.0": 126,
+      "trades_cost_2.0": 126,
+      "mean_pips_cost_0.0": 1.9515873015873282,
+      "mean_pips_cost_0.5": 1.4515873015873282,
+      "mean_pips_cost_1.0": 0.9515873015873282,
+      "mean_pips_cost_2.0": -0.048412698412671894
+    },
+    {
+      "year": 2022,
+      "PF_cost_0.0": 0.6386387683271803,
+      "PF_cost_0.5": 0.6108846698063408,
+      "PF_cost_1.0": 0.5844094130286572,
+      "PF_cost_2.0": 0.5351206964780378,
+      "trades_cost_0.0": 338,
+      "trades_cost_0.5": 338,
+      "trades_cost_1.0": 338,
+      "trades_cost_2.0": 338,
+      "mean_pips_cost_0.0": -4.951183431952656,
+      "mean_pips_cost_0.5": -5.451183431952655,
+      "mean_pips_cost_1.0": -5.951183431952656,
+      "mean_pips_cost_2.0": -6.951183431952656
+    },
+    {
+      "year": 2023,
+      "PF_cost_0.0": 0.8894024075666352,
+      "PF_cost_0.5": 0.8378801314485392,
+      "PF_cost_1.0": 0.7894576940604557,
+      "PF_cost_2.0": 0.7016305902545978,
+      "trades_cost_0.0": 210,
+      "trades_cost_0.5": 210,
+      "trades_cost_1.0": 210,
+      "trades_cost_2.0": 210,
+      "mean_pips_cost_0.0": -0.9800000000000233,
+      "mean_pips_cost_0.5": -1.4800000000000233,
+      "mean_pips_cost_1.0": -1.980000000000023,
+      "mean_pips_cost_2.0": -2.9800000000000235
+    },
+    {
+      "year": 2024,
+      "PF_cost_0.0": 0.5419248568515064,
+      "PF_cost_0.5": 0.5054694621695427,
+      "PF_cost_1.0": 0.4716703458425216,
+      "PF_cost_2.0": 0.410503009755752,
+      "trades_cost_0.0": 134,
+      "trades_cost_0.5": 134,
+      "trades_cost_1.0": 134,
+      "trades_cost_2.0": 134,
+      "mean_pips_cost_0.0": -4.358208955224048,
+      "mean_pips_cost_0.5": -4.858208955224047,
+      "mean_pips_cost_1.0": -5.358208955224046,
+      "mean_pips_cost_2.0": -6.358208955224046
+    },
+    {
+      "year": 2025,
+      "PF_cost_0.0": 0.9006144803633477,
+      "PF_cost_0.5": 0.850204737469551,
+      "PF_cost_1.0": 0.8027474462839049,
+      "PF_cost_2.0": 0.7159009929212807,
+      "trades_cost_0.0": 206,
+      "trades_cost_0.5": 206,
+      "trades_cost_1.0": 206,
+      "trades_cost_2.0": 206,
+      "mean_pips_cost_0.0": -0.9029126213591995,
+      "mean_pips_cost_0.5": -1.4029126213591996,
+      "mean_pips_cost_1.0": -1.9029126213591996,
+      "mean_pips_cost_2.0": -2.9029126213592003
+    },
+    {
+      "year": 2026,
+      "PF_cost_0.0": 0.8345057827590426,
+      "PF_cost_0.5": 0.7869003690037001,
+      "PF_cost_1.0": 0.7423244389862772,
+      "PF_cost_2.0": 0.661457787100166,
+      "trades_cost_0.0": 92,
+      "trades_cost_0.5": 92,
+      "trades_cost_1.0": 92,
+      "trades_cost_2.0": 92,
+      "mean_pips_cost_0.0": -1.5086956521738057,
+      "mean_pips_cost_0.5": -2.0086956521738055,
+      "mean_pips_cost_1.0": -2.5086956521738055,
+      "mean_pips_cost_2.0": -3.5086956521738046
+    }
+  ],
+  "forward_block_bootstrap_cost_1pip": {
+    "draws": 2000,
+    "p_mean_positive": 0.0,
+    "ci95_mean_pips": [
+      -5.611680830363885,
+      -2.3815354641178934
+    ],
+    "method": "circular 4-week block bootstrap over forward entry-week trade returns"
+  },
+  "acceptance_gates": {
+    "validation_min_50_trades": true,
+    "validation_PF_at_1pip_ge_1.05": true,
+    "discovery_min_100_trades": true,
+    "discovery_PF_at_1pip_ge_1.00": false,
+    "forward_min_100_trades": true,
+    "forward_PF_at_1pip_ge_1.10": false,
+    "forward_PF_at_2pip_ge_1.05": false,
+    "forward_frequency_ge_2_trades_per_week": true,
+    "each_forward_year_with_20plus_trades_PF_ge_1_at_1pip": false,
+    "forward_4week_block_bootstrap_positive_95pct": false,
+    "oos_min_30_trades": true,
+    "oos_PF_at_1pip_ge_1.00": false
+  },
+  "verdict_rule": "Every preregistered validation, discovery, forward, annual stability, bootstrap, frequency, and 2026 OOS gate must pass. No post-forward tuning.",
+  "trade_ledger_sha256": "110fda40d23a9ce959ef366846c234c4d555462bb4d2789473722072e83da59e",
+  "limitations": [
+    "Historical data are Dukascopy EURUSD H1 quote-side opens and may differ from the exact funded broker feed.",
+    "H1 opens model entry and exit; spread changes and slippage within the hour are not captured beyond observed open quotes.",
+    "The one-minute R189 Quick Strike rule cannot be certified from this H1 experiment; any strategy passing alpha gates requires execution-granularity and challenge-rule validation before being called funded-ready."
+  ]
 }
