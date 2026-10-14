@@ -45,6 +45,6 @@
     "Execution PnL uses actual EURUSD quote sides: long enters ASK and exits BID; short enters BID and exits ASK.",
     "No parameter grid search is performed; thresholds are frozen in this script before discovery/forward/OOS metrics are calculated."
   ],
-  "error": "RuntimeError: Download failed eurusd/bid/2017 after 3 attempts: ----------------------------------------------------\nDownloading historical price data for:\n----------------------------------------------------\nInstrument:     Euro vs US Dollar\nTimeframe:      h1\nFrom date:      Jan 1, 2017, 12 AM\nTo date:        Jan 1, 2018, 12 AM\nPrice type:     bid\nVolumes:        false\nUTC Offset:     0\nInclude flats:  true\nFormat:         csv\n----------------------------------------------------\n\nSomething went wrong:\n > Request failed with status 202\n\n",
+  "error": "KeyError: 'gross_pips'",
   "decision": "The experiment is scored as GAGAL if the frozen dataset/download/validation pipeline cannot complete; no partial PF may be used."
 }
