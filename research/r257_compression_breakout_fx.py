@@ -245,7 +245,28 @@ def main():
             if m["trades"]>=MIN_VALIDATION_TRADES:
                 score=float(m["PF"]) if isinstance(m["PF"],(int,float)) and np.isfinite(m["PF"]) else (-1.0 if m["PF"] is None else 999.0)
                 ranks.append((score,m["mean_net_pips_per_trade"] or -999.0,m["trades"],name))
-        if not ranks:raise RuntimeError("No candidate reached the 50-trade validation minimum")
+        if not ranks:
+            report.update({
+                "status":"COMPLETE",
+                "data":{"eurusd_bid":bdiag,"eurusd_ask":adiag,"common_hourly_rows":int(len(common)),
+                    "common_start_utc":common[0].isoformat(),"common_end_utc":common[-1].isoformat(),
+                    "compression_training_observations":int(len(trainvals)),
+                    "compression_thresholds_price":{str(k):v for k,v in thresholds.items()},
+                    "no_missing_bars_synthesized":True},
+                "candidate_validation_cost_1pip":validation,
+                "candidate_diagnostics":diagnostics,
+                "selected_candidate":None,
+                "acceptance_gates":{"at_least_one_candidate_with_50_validation_trades":False},
+                "verdict":"GAGAL",
+                "verdict_rule":"Every experiment must yield at least one preregistered configuration with 50 validation trades; none did, so no forward/OOS winner is selected.",
+                "limitations":["Forward and 2026 OOS metrics were deliberately not used to lower the preregistered validation trade-count threshold.",
+                    "Actual BID/ASK quote-side H1 OHLC is available; additional costs are stress assumptions."]
+            })
+            report_path.write_text(json.dumps(report,indent=2,allow_nan=False)+"\\n")
+            print(json.dumps({"status":report["status"],"verdict":report["verdict"],
+                "candidate_validation_cost_1pip":report["candidate_validation_cost_1pip"],
+                "acceptance_gates":report["acceptance_gates"]},indent=2))
+            return
         ranks.sort(reverse=True);selected=ranks[0][3]; records=candidates[selected]
         pd.DataFrame([{**t,**{f"net_pips_cost_{c:.1f}":t["gross_pips"]-c for c in EXTRA_COSTS}} for t in records]).to_csv(trades_path,index=False)
         periods={"discovery_2017_2020":(TRAIN_START,TRAIN_END),"validation_2021":(VALID_START,VALID_END),
