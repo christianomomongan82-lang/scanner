@@ -1,0 +1,62 @@
+name: R259 locked R189 cross-feed history
+
+on:
+  push:
+    branches:
+      - r259-r189-dukascopy-history
+    paths-ignore:
+      - "research/r259_r189_history_results.json"
+      - "research/r259_r189_history_legacy_trades.csv"
+      - "research/r259_r189_history_causal_trades.csv"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r259-r189-dukascopy-history
+  cancel-in-progress: true
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - name: Checkout isolated research branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Python libraries
+        run: python -m pip install --upgrade pip pandas numpy
+      - name: Run locked R189 cross-feed replay (2016-2025)
+        id: run_replay
+        continue-on-error: true
+        run: python -u research/r259_r189_history.py
+      - name: Commit reproducibility artifacts
+        if: always()
+        run: |
+          if [ ! -f research/r259_r189_history_results.json ]; then
+            printf '{"status":"FAILED","round":"R259","error":"script did not emit results"}\n' > research/r259_r189_history_results.json
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+actions@users.noreply.github.com"
+          git add -f research/r259_r189_history_results.json
+          for file in research/r259_r189_history_legacy_trades.csv research/r259_r189_history_causal_trades.csv; do
+            if [ -f "$file" ]; then git add -f "$file"; fi
+          done
+          if git diff --cached --quiet; then
+            echo "No output changes to commit."
+          else
+            git commit -m "[skip ci] Save R259 R189 cross-feed results"
+            git push origin HEAD:r259-r189-dukascopy-history
+          fi
+      - name: Fail workflow if replay failed
+        if: steps.run_replay.outcome == 'failure'
+        run: exit 1
