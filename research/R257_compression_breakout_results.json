@@ -1,5 +1,5 @@
 {
-  "status": "FAILED_RUN",
+  "status": "COMPLETE",
   "strategy_family": "EURUSD H1 range-compression breakout",
   "verdict": "GAGAL",
   "preregistered_design": {
@@ -34,6 +34,232 @@
     ],
     "selection": "highest 2021 validation PF at +1 pip among candidates with at least 50 trades; tie-break expectancy then count; no forward/OOS tuning"
   },
-  "error": "RuntimeError: No candidate reached the 50-trade validation minimum",
-  "decision": "No partial PF is accepted when the locked test pipeline fails."
-}
+  "data": {
+    "eurusd_bid": {
+      "rows": 85170,
+      "duplicate_timestamps_removed": 0,
+      "invalid_ohlc_rows_removed": 0,
+      "off_hour_timestamps": 0,
+      "missing_hour_gaps": 40,
+      "start_utc": "2017-01-01T00:00:00+00:00",
+      "end_utc": "2026-10-13T23:00:00+00:00",
+      "sha256": "68d667ef6e84d4357207da86dc0ffd18453bbfa91837d0dd1349ac82bb6c47bf"
+    },
+    "eurusd_ask": {
+      "rows": 85170,
+      "duplicate_timestamps_removed": 0,
+      "invalid_ohlc_rows_removed": 0,
+      "off_hour_timestamps": 0,
+      "missing_hour_gaps": 40,
+      "start_utc": "2017-01-01T00:00:00+00:00",
+      "end_utc": "2026-10-13T23:00:00+00:00",
+      "sha256": "8b9d3660213fae55bf0066c42fd093badc4a8092ddb2a0ca1672bbac5bcc7b91"
+    },
+    "common_hourly_rows": 85170,
+    "common_start_utc": "2017-01-01T00:00:00+00:00",
+    "common_end_utc": "2026-10-13T23:00:00+00:00",
+    "compression_training_observations": 25888,
+    "compression_thresholds_price": {
+      "0.2": 0.0016700000000000603,
+      "0.3": 0.0020700000000000163
+    },
+    "no_missing_bars_synthesized": true
+  },
+  "candidate_validation_cost_1pip": {
+    "B12_Q20_RR1.5": {
+      "trades": 0,
+      "PF": null,
+      "net_pips": 0.0,
+      "mean_net_pips_per_trade": null,
+      "win_rate": null,
+      "trades_per_week": 0.0
+    },
+    "B12_Q20_RR2.0": {
+      "trades": 0,
+      "PF": null,
+      "net_pips": 0.0,
+      "mean_net_pips_per_trade": null,
+      "win_rate": null,
+      "trades_per_week": 0.0
+    },
+    "B12_Q30_RR1.5": {
+      "trades": 0,
+      "PF": null,
+      "net_pips": 0.0,
+      "mean_net_pips_per_trade": null,
+      "win_rate": null,
+      "trades_per_week": 0.0
+    },
+    "B12_Q30_RR2.0": {
+      "trades": 0,
+      "PF": null,
+      "net_pips": 0.0,
+      "mean_net_pips_per_trade": null,
+      "win_rate": null,
+      "trades_per_week": 0.0
+    },
+    "B24_Q20_RR1.5": {
+      "trades": 0,
+      "PF": null,
+      "net_pips": 0.0,
+      "mean_net_pips_per_trade": null,
+      "win_rate": null,
+      "trades_per_week": 0.0
+    },
+    "B24_Q20_RR2.0": {
+      "trades": 0,
+      "PF": null,
+      "net_pips": 0.0,
+      "mean_net_pips_per_trade": null,
+      "win_rate": null,
+      "trades_per_week": 0.0
+    },
+    "B24_Q30_RR1.5": {
+      "trades": 0,
+      "PF": null,
+      "net_pips": 0.0,
+      "mean_net_pips_per_trade": null,
+      "win_rate": null,
+      "trades_per_week": 0.0
+    },
+    "B24_Q30_RR2.0": {
+      "trades": 0,
+      "PF": null,
+      "net_pips": 0.0,
+      "mean_net_pips_per_trade": null,
+      "win_rate": null,
+      "trades_per_week": 0.0
+    }
+  },
+  "candidate_diagnostics": {
+    "B12_Q20_RR1.5": {
+      "bars_seen": 85170,
+      "invalid_compression_grid": 21817,
+      "invalid_breakout_grid": 63316,
+      "not_compressed_or_no_breakout": 0,
+      "overlap_skipped": 0,
+      "invalid_entry_exit_grid": 0,
+      "invalid_stop_distance": 0,
+      "invalid_quotes": 0,
+      "trades_closed": 0,
+      "stop_first_collisions": 0,
+      "stop_exits": 0,
+      "target_exits": 0,
+      "time_exits": 0
+    },
+    "B12_Q20_RR2.0": {
+      "bars_seen": 85170,
+      "invalid_compression_grid": 21817,
+      "invalid_breakout_grid": 63316,
+      "not_compressed_or_no_breakout": 0,
+      "overlap_skipped": 0,
+      "invalid_entry_exit_grid": 0,
+      "invalid_stop_distance": 0,
+      "invalid_quotes": 0,
+      "trades_closed": 0,
+      "stop_first_collisions": 0,
+      "stop_exits": 0,
+      "target_exits": 0,
+      "time_exits": 0
+    },
+    "B12_Q30_RR1.5": {
+      "bars_seen": 85170,
+      "invalid_compression_grid": 21817,
+      "invalid_breakout_grid": 63316,
+      "not_compressed_or_no_breakout": 0,
+      "overlap_skipped": 0,
+      "invalid_entry_exit_grid": 0,
+      "invalid_stop_distance": 0,
+      "invalid_quotes": 0,
+      "trades_closed": 0,
+      "stop_first_collisions": 0,
+      "stop_exits": 0,
+      "target_exits": 0,
+      "time_exits": 0
+    },
+    "B12_Q30_RR2.0": {
+      "bars_seen": 85170,
+      "invalid_compression_grid": 21817,
+      "invalid_breakout_grid": 63316,
+      "not_compressed_or_no_breakout": 0,
+      "overlap_skipped": 0,
+      "invalid_entry_exit_grid": 0,
+      "invalid_stop_distance": 0,
+      "invalid_quotes": 0,
+      "trades_closed": 0,
+      "stop_first_collisions": 0,
+      "stop_exits": 0,
+      "target_exits": 0,
+      "time_exits": 0
+    },
+    "B24_Q20_RR1.5": {
+      "bars_seen": 85170,
+      "invalid_compression_grid": 21806,
+      "invalid_breakout_grid": 63315,
+      "not_compressed_or_no_breakout": 0,
+      "overlap_skipped": 0,
+      "invalid_entry_exit_grid": 0,
+      "invalid_stop_distance": 0,
+      "invalid_quotes": 0,
+      "trades_closed": 0,
+      "stop_first_collisions": 0,
+      "stop_exits": 0,
+      "target_exits": 0,
+      "time_exits": 0
+    },
+    "B24_Q20_RR2.0": {
+      "bars_seen": 85170,
+      "invalid_compression_grid": 21806,
+      "invalid_breakout_grid": 63315,
+      "not_compressed_or_no_breakout": 0,
+      "overlap_skipped": 0,
+      "invalid_entry_exit_grid": 0,
+      "invalid_stop_distance": 0,
+      "invalid_quotes": 0,
+      "trades_closed": 0,
+      "stop_first_collisions": 0,
+      "stop_exits": 0,
+      "target_exits": 0,
+      "time_exits": 0
+    },
+    "B24_Q30_RR1.5": {
+      "bars_seen": 85170,
+      "invalid_compression_grid": 21806,
+      "invalid_breakout_grid": 63315,
+      "not_compressed_or_no_breakout": 0,
+      "overlap_skipped": 0,
+      "invalid_entry_exit_grid": 0,
+      "invalid_stop_distance": 0,
+      "invalid_quotes": 0,
+      "trades_closed": 0,
+      "stop_first_collisions": 0,
+      "stop_exits": 0,
+      "target_exits": 0,
+      "time_exits": 0
+    },
+    "B24_Q30_RR2.0": {
+      "bars_seen": 85170,
+      "invalid_compression_grid": 21806,
+      "invalid_breakout_grid": 63315,
+      "not_compressed_or_no_breakout": 0,
+      "overlap_skipped": 0,
+      "invalid_entry_exit_grid": 0,
+      "invalid_stop_distance": 0,
+      "invalid_quotes": 0,
+      "trades_closed": 0,
+      "stop_first_collisions": 0,
+      "stop_exits": 0,
+      "target_exits": 0,
+      "time_exits": 0
+    }
+  },
+  "selected_candidate": null,
+  "acceptance_gates": {
+    "at_least_one_candidate_with_50_validation_trades": false
+  },
+  "verdict_rule": "Every experiment must yield at least one preregistered configuration with 50 validation trades; none did, so no forward/OOS winner is selected.",
+  "limitations": [
+    "Forward and 2026 OOS metrics were deliberately not used to lower the preregistered validation trade-count threshold.",
+    "Actual BID/ASK quote-side H1 OHLC is available; additional costs are stress assumptions."
+  ]
+}\n
