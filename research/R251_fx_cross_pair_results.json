@@ -1,0 +1,50 @@
+{
+  "status": "FAILED_RUN",
+  "strategy": "R251 FX cross-pair consensus and EURUSD lag catch-up",
+  "verdict": "GAGAL",
+  "parameters_locked_before_test": {
+    "signal_pairs": [
+      "GBPUSD",
+      "AUDUSD",
+      "inverse USDCHF"
+    ],
+    "lookback_hours": 3,
+    "all_three_peers_same_sign": true,
+    "minimum_median_peer_abs_return": 0.0005,
+    "EURUSD_signed_return_max_fraction_of_peer_median": 0.5,
+    "EURUSD_adverse_return_max_fraction_of_peer_median": 0.25,
+    "entry": "next exact shared H1 open after completed signal H1 candle",
+    "exit": "open after 4 exact elapsed hours",
+    "overlap": "one position at a time; overlapping signals skipped",
+    "risk_or_stop": "not searched; this is an alpha validation gate before challenge sizing",
+    "cost_stress_extra_pips_on_top_of_EURUSD_bid_ask": [
+      0.0,
+      0.5,
+      1.0,
+      2.0
+    ]
+  },
+  "periods_utc": {
+    "discovery": [
+      "2017-01-01",
+      "2022-01-01"
+    ],
+    "forward": [
+      "2022-01-01",
+      "2026-01-01"
+    ],
+    "oos_2026": [
+      "2026-01-01",
+      "2026-10-14"
+    ]
+  },
+  "notes": [
+    "All signals use completed H1 closes only; orders use next shared exact hourly open.",
+    "No missing bars are synthesized, no series are forward-filled, and signal/entry/exit intervals must be exact hourly timestamps.",
+    "USDCHF returns are sign-inverted before peer consensus so positive peer consensus means EURUSD-up.",
+    "Execution PnL uses actual EURUSD quote sides: long enters ASK and exits BID; short enters BID and exits ASK.",
+    "No parameter grid search is performed; thresholds are frozen in this script before discovery/forward/OOS metrics are calculated."
+  ],
+  "error": "RuntimeError: Download failed eurusd/bid/2017 after 3 attempts: ----------------------------------------------------\nDownloading historical price data for:\n----------------------------------------------------\nInstrument:     Euro vs US Dollar\nTimeframe:      h1\nFrom date:      Jan 1, 2017, 12 AM\nTo date:        Jan 1, 2018, 12 AM\nPrice type:     bid\nVolumes:        false\nUTC Offset:     0\nInclude flats:  true\nFormat:         csv\n----------------------------------------------------\n\nSomething went wrong:\n > Request failed with status 202\n\n",
+  "decision": "The experiment is scored as GAGAL if the frozen dataset/download/validation pipeline cannot complete; no partial PF may be used."
+}
