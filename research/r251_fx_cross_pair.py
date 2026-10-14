@@ -2,6 +2,7 @@
 """R251 preregistered FX cross-pair lead-lag test. No threshold grid search."""
 from __future__ import annotations
 import calendar
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
 import json
 import subprocess
@@ -76,13 +77,13 @@ def download_pair(pair: str, side: str):
     DATA.mkdir(parents=True, exist_ok=True)
     parts = []
     logs = []
-    start_year, end_year = START.year, END_EXCLUSIVE.year
-    for year in range(start_year, end_year + 1):
-        chunk_start = max(START, date(year, 1, 1))
-        chunk_end = min(END_EXCLUSIVE, date(year + 1, 1, 1))
-        if chunk_start >= chunk_end:
-            continue
-        stem = f"{pair}_{side}_{year}"
+    cur = START
+    patch = ROOT / "dukascopy_fetch_patch.cjs"
+    while cur < END_EXCLUSIVE:
+        next_month = date(cur.year + (1 if cur.month == 12 else 0),
+                          1 if cur.month == 12 else cur.month + 1, 1)
+        chunk_end = min(next_month, END_EXCLUSIVE)
+        stem = f"{pair}_{side}_{cur:%Y%m}"
         path = DATA / f"{stem}.csv"
         last_error = ""
         ok = False
@@ -90,33 +91,35 @@ def download_pair(pair: str, side: str):
             path.unlink(missing_ok=True)
             cmd = [
                 "npx", "--yes", "dukascopy-node", "-i", pair,
-                "-from", chunk_start.isoformat(), "-to", chunk_end.isoformat(),
+                "-from", cur.isoformat(), "-to", chunk_end.isoformat(),
                 "-t", "h1", "-p", side, "-utc", "0", "-f", "csv", "-fl",
                 "-dir", str(DATA), "-fn", stem, "-bs", "3", "-bp", "2000",
                 "-r", "5", "-rp", "5000"
             ]
             try:
-                env = __import__("os").environ.copy()
-                patch = ROOT / "dukascopy_fetch_patch.cjs"
+                import os
+                env = os.environ.copy()
                 if patch.is_file():
                     env["NODE_OPTIONS"] = (env.get("NODE_OPTIONS", "") + f" --require={patch.resolve()}").strip()
                 proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                      text=True, check=False, timeout=900, env=env)
+                                      text=True, check=False, timeout=180, env=env)
                 last_error = (proc.stdout or "")[-1600:]
                 if proc.returncode == 0 and path.is_file() and path.stat().st_size > 20:
                     probe = pd.read_csv(path, nrows=2)
                     if len(probe.columns) >= 5 and len(probe) > 0:
                         ok = True
-                        logs.append({"pair": pair, "side": side, "year": year,
+                        logs.append({"pair": pair, "side": side, "month": cur.strftime("%Y-%m"),
                                      "attempt": attempt, "bytes": path.stat().st_size})
+                        print(f"Downloaded {pair}/{side}/{cur:%Y-%m} (attempt {attempt})", flush=True)
                         break
             except Exception as exc:
                 last_error = f"{type(exc).__name__}: {exc}"
             if attempt < 3:
                 time.sleep(attempt * 2)
         if not ok:
-            raise RuntimeError(f"Download failed {pair}/{side}/{year} after 3 attempts: {last_error}")
+            raise RuntimeError(f"Download failed {pair}/{side}/{cur:%Y-%m} after 3 attempts: {last_error}")
         parts.append(path)
+        cur = chunk_end
     frames = [pd.read_csv(p) for p in parts]
     combined = pd.concat(frames, ignore_index=True)
     combined_path = DATA / f"{pair}_{side}_H1.csv"
@@ -211,10 +214,12 @@ def main():
         raw = {}
         diagnostics = {}
         downloads = []
-        for pair in PAIRS:
-            sides = ("bid", "ask") if pair == "eurusd" else ("bid",)
-            for side in sides:
-                path, logs = download_pair(pair, side)
+        tasks = [(pair, side) for pair in PAIRS for side in (("bid", "ask") if pair == "eurusd" else ("bid",))]
+        with ThreadPoolExecutor(max_workers=3) as pool:
+            futures = {pool.submit(download_pair, pair, side): (pair, side) for pair, side in tasks}
+            for future in as_completed(futures):
+                pair, side = futures[future]
+                path, logs = future.result()
                 bars, diag = parse_bars(path)
                 raw[(pair, side)] = bars
                 diagnostics[f"{pair}_{side}"] = diag
