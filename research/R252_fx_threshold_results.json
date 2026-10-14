@@ -1,0 +1,50 @@
+{
+  "status": "FAILED_RUN",
+  "strategy_family": "EURUSD H1 threshold-crossing time-series momentum vs reversal",
+  "verdict": "GAGAL",
+  "preregistered_design": {
+    "candidates": [
+      "L03_MOMENTUM",
+      "L03_REVERSAL",
+      "L06_MOMENTUM",
+      "L06_REVERSAL",
+      "L12_MOMENTUM",
+      "L12_REVERSAL"
+    ],
+    "lookbacks_hours": [
+      3,
+      6,
+      12
+    ],
+    "signal": "first crossing of absolute L-hour EURUSD BID close return above its 2017-2020-only 90th percentile threshold",
+    "modes": "momentum follows signed return; reversal fades signed return",
+    "entry": "next exact hourly EURUSD open after completed signal candle",
+    "exit": "exactly 4 hours after entry at the next exact observed hourly open",
+    "execution": "long ASK entry/BID exit; short BID entry/ASK exit",
+    "threshold_fit_period": [
+      "2017-01-01",
+      "2021-01-01"
+    ],
+    "validation_selection_period": [
+      "2021-01-01",
+      "2022-01-01"
+    ],
+    "forward_period": [
+      "2022-01-01",
+      "2026-01-01"
+    ],
+    "final_oos_period": [
+      "2026-01-01",
+      "2026-10-14"
+    ],
+    "extra_cost_stress_pips_on_top_of_bid_ask": [
+      0.0,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "selection_rule": "among candidates with at least 50 validation trades, choose highest PF at +1 extra pip; tie-break higher mean net pips at +1, then higher trade count; forward and OOS results not used for selection"
+  },
+  "error": "RuntimeError: Insufficient training returns for lookback=3: 0",
+  "decision": "No partial performance result is accepted when the frozen data or calculation pipeline fails."
+}
