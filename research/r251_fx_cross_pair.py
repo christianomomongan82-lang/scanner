@@ -75,6 +75,11 @@ def parse_bars(path: Path):
 
 def download_pair(pair: str, side: str):
     DATA.mkdir(parents=True, exist_ok=True)
+    combined_path = DATA / f"{pair}_{side}_H1.csv"
+    if combined_path.is_file() and combined_path.stat().st_size > 20:
+        bars, _ = parse_bars(combined_path)
+        print(f"Using cached {pair}/{side}: {len(bars)} hourly rows", flush=True)
+        return combined_path, []
     parts = []
     logs = []
     cur = START
@@ -122,8 +127,9 @@ def download_pair(pair: str, side: str):
         cur = chunk_end
     frames = [pd.read_csv(p) for p in parts]
     combined = pd.concat(frames, ignore_index=True)
-    combined_path = DATA / f"{pair}_{side}_H1.csv"
     combined.to_csv(combined_path, index=False)
+    for part in parts:
+        part.unlink(missing_ok=True)
     return combined_path, logs
 
 def profit_factor(values):
@@ -290,6 +296,7 @@ def main():
                 "eurusd_lookback_return": eur_ret,
                 "entry_bid": ebid, "entry_ask": eask,
                 "exit_bid": xbid, "exit_ask": xask,
+                "gross_pips": float(gross),
                 "gross_pips_after_observed_bid_ask": float(gross),
                 "holding_hours": HOLD_HOURS,
             })
