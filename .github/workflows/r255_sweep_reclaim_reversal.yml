@@ -1,0 +1,87 @@
+name: R255 EURUSD rolling-extreme sweep and reclaim
+
+on:
+  push:
+    branches:
+      - r251-fx-cross-pair-lead-lag
+    paths:
+      - ".github/workflows/r255_sweep_reclaim_reversal.yml"
+      - "research/r255_sweep_reclaim_reversal.py"
+      - "!research/R255_sweep_reclaim_results.json"
+      - "!research/R255_sweep_reclaim_trades.csv"
+      - "!research/R255_sweep_reclaim_annual.csv"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r255-sweep-reclaim-reversal
+  cancel-in-progress: true
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout isolated experiment branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Restore cached EURUSD H1 bid/ask history
+        id: quote-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dl/r251_fx
+          key: ${{ runner.os }}-r251-fx-h1-history-v1
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Python libraries
+        run: python -m pip install --upgrade pip pandas numpy
+      - name: Compile frozen R255 script
+        run: python -m py_compile research/r255_sweep_reclaim_reversal.py
+      - name: Run R255 on cached historical quote data
+        id: backtest
+        continue-on-error: true
+        run: python -u research/r255_sweep_reclaim_reversal.py
+      - name: Save historical quote cache if missing
+        if: always() && steps.quote-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: dl/r251_fx
+          key: ${{ runner.os }}-r251-fx-h1-history-v1
+      - name: Upload R255 audit bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r255-sweep-reclaim-audit
+          path: |
+            research/R255_sweep_reclaim_results.json
+            research/R255_sweep_reclaim_trades.csv
+            research/R255_sweep_reclaim_annual.csv
+            dl/r251_fx/eurusd_bid_H1.csv
+            dl/r251_fx/eurusd_ask_H1.csv
+          if-no-files-found: ignore
+          retention-days: 30
+      - name: Commit R255 outputs
+        if: always()
+        run: |
+          if [ ! -f research/R255_sweep_reclaim_results.json ]; then
+            printf '{"status":"FAILED_RUN","verdict":"GAGAL","error":"Script failed before emitting result JSON"}\n' > research/R255_sweep_reclaim_results.json
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f research/R255_sweep_reclaim_results.json
+          for file in research/R255_sweep_reclaim_trades.csv research/R255_sweep_reclaim_annual.csv; do
+            if [ -f "$file" ]; then git add -f "$file"; fi
+          done
+          if git diff --cached --quiet; then
+            echo "No R255 output changes to commit."
+          else
+            git commit -m "[skip ci] R255 EURUSD sweep-reclaim results"
+            git push origin HEAD:r251-fx-cross-pair-lead-lag
+          fi
+      - name: Fail workflow if test pipeline failed
+        if: steps.backtest.outcome == 'failure'
+        run: exit 1
