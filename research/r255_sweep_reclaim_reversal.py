@@ -97,7 +97,18 @@ def period_metrics(trades,start,end,cost):
         "win_rate":float((vals>0).mean()) if len(vals) else None,"trades_per_week":float(len(vals)/weeks)}
 
 
-def simulate(bid,ask,lookback,rr):
+def prepare_rolling_levels(bid, ask, lookback):
+    # Each shifted rolling value at i covers only bars i-lookback ... i-1.
+    # Exact timestamp-grid checks in simulate reject windows spanning data gaps.
+    bh = bid.High.rolling(lookback, min_periods=lookback).max().shift(1).to_numpy(float)
+    bl = bid.Low.rolling(lookback, min_periods=lookback).min().shift(1).to_numpy(float)
+    ah = ask.High.rolling(lookback, min_periods=lookback).max().shift(1).to_numpy(float)
+    al = ask.Low.rolling(lookback, min_periods=lookback).min().shift(1).to_numpy(float)
+    return {"prev_high_bid": bh, "prev_low_bid": bl, "prev_high_ask": ah, "prev_low_ask": al,
+            "range_bid": bh - bl, "range_ask": ah - al}
+
+
+def simulate(bid,ask,lookback,rr,levels):
     idx=bid.index
     trades=[]
     diag={"bars_seen":int(len(idx)),"invalid_or_gap_lookbacks":0,"no_sweep_reclaim":0,
@@ -114,12 +125,12 @@ def simulate(bid,ask,lookback,rr):
         if idx[entry_i]-idx[i]!=pd.Timedelta(hours=1) or idx[exit_i]-idx[entry_i]!=pd.Timedelta(hours=HOLD_HOURS):
             diag["invalid_forward_grid"]+=1
             continue
-        prev_low_bid=float(bid.Low.iloc[i-lookback:i].min())
-        prev_high_bid=float(bid.High.iloc[i-lookback:i].max())
-        prev_low_ask=float(ask.Low.iloc[i-lookback:i].min())
-        prev_high_ask=float(ask.High.iloc[i-lookback:i].max())
-        range_bid=prev_high_bid-prev_low_bid
-        range_ask=prev_high_ask-prev_low_ask
+        prev_low_bid=float(levels["prev_low_bid"][i])
+        prev_high_bid=float(levels["prev_high_bid"][i])
+        prev_low_ask=float(levels["prev_low_ask"][i])
+        prev_high_ask=float(levels["prev_high_ask"][i])
+        range_bid=float(levels["range_bid"][i])
+        range_ask=float(levels["range_ask"][i])
         if range_bid<=0 or range_ask<=0:
             diag["invalid_or_gap_lookbacks"]+=1
             continue
@@ -241,10 +252,11 @@ def main():
         bid,ask=bid.loc[common],ask.loc[common]
         if (ask.Open<bid.Open).any():raise RuntimeError("EURUSD ASK open below BID open")
         candidates={};diagnostics={}
+        rolling_levels={lookback:prepare_rolling_levels(bid,ask,lookback) for lookback in LOOKBACKS}
         for lookback in LOOKBACKS:
             for rr in REWARD_RISKS:
                 name=f"L{lookback:02d}_RR{rr:.1f}"
-                candidates[name],diagnostics[name]=simulate(bid,ask,lookback,rr)
+                candidates[name],diagnostics[name]=simulate(bid,ask,lookback,rr,rolling_levels[lookback])
         validation={};ranks=[]
         for name,records in candidates.items():
             m=period_metrics(records,VALID_START,VALID_END,1.0);validation[name]=m
