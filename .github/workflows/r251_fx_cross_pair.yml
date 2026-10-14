@@ -5,7 +5,6 @@ on:
     branches:
       - r251-fx-cross-pair-lead-lag
     paths:
-      - ".github/workflows/r251_fx_cross_pair.yml"
       - "research/r251_fx_cross_pair.py"
       - "!research/R251_fx_cross_pair_results.json"
       - "!research/R251_fx_cross_pair_trades.csv"
@@ -27,6 +26,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: true
+      - name: Restore cached R251 H1 quotes
+        uses: actions/cache/restore@v4
+        with:
+          path: dl/r251_fx
+          key: ${{ runner.os }}-r251-fx-h1-history-v1
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -43,6 +47,20 @@ jobs:
         id: backtest
         continue-on-error: true
         run: python -u research/r251_fx_cross_pair.py
+      - name: Save cached R251 H1 quotes
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: dl/r251_fx
+          key: ${{ runner.os }}-r251-fx-h1-history-v1
+      - name: Upload R251 source quote files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r251-source-h1-quotes
+          path: dl/r251_fx/*_H1.csv
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Commit R251 outputs
         if: always()
         run: |
