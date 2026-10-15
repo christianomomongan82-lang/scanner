@@ -1,0 +1,153 @@
+{
+  "status": "NOT_PASSED",
+  "study": "R189 historical Dukascopy EURUSD M1 BID/ASK replay 2016-2025",
+  "exact_histdata_reproduction": false,
+  "data_artifact": {
+    "workflow_run_id": 38697080604,
+    "artifact_id": 11959096102,
+    "name": "EURUSD-M1-Dukascopy-BID-ASK-2016-2025",
+    "bytes": 67719731,
+    "expires_at": "2027-01-13",
+    "bid_rows": 4415493,
+    "ask_rows": 4415493,
+    "timestamps_identical": true,
+    "duplicates_removed": 0,
+    "invalid_ohlc_removed": 0,
+    "bid_sha256": "b588b7e07d9fea3748a84a1e3ecf29ccb2ea1d8ea52503f8579928a3cd4990cc",
+    "ask_sha256": "52e53dbb22ef11aee2d2c3d5e5b4ded6659d58c086189a327559253727e52f8b"
+  },
+  "primary_execution_variant": "intrabar zero-distance trail; stop/target gap at open; stop-first collision policy",
+  "all_2016_2025": {
+    "trades": 1673,
+    "trades_per_week": 3.2059,
+    "costs": {
+      "0": {
+        "PF": 1.442,
+        "net_pips": 2135.5,
+        "max_drawdown_pips": 74.5
+      },
+      "1": {
+        "PF": 1.082,
+        "net_pips": 462.5,
+        "max_drawdown_pips": 142.5
+      },
+      "2": {
+        "PF": 0.812,
+        "net_pips": -1210.5,
+        "max_drawdown_pips": 1286.3
+      },
+      "0.2": {
+        "PF": 1.36,
+        "net_pips": 1800.9,
+        "max_drawdown_pips": 84.4
+      },
+      "0.5": {
+        "PF": 1.248,
+        "net_pips": 1299,
+        "max_drawdown_pips": 102.7
+      },
+      "0.8": {
+        "PF": 1.145,
+        "net_pips": 797.1,
+        "max_drawdown_pips": 121
+      }
+    }
+  },
+  "discovery_2016_2020": {
+    "trades": 906,
+    "costs": {
+      "1": {
+        "PF": 1.056,
+        "net_pips": 171.2,
+        "max_drawdown_pips": 140.4
+      },
+      "0.5": {
+        "PF": 1.218,
+        "net_pips": 624.2,
+        "max_drawdown_pips": 102.7
+      }
+    }
+  },
+  "forward_2021_2025": {
+    "trades": 767,
+    "trades_per_week": 2.9403,
+    "costs": {
+      "1": {
+        "PF": 1.114,
+        "net_pips": 291.3,
+        "max_drawdown_pips": 142.5
+      },
+      "2": {
+        "PF": 0.838,
+        "net_pips": -475.7,
+        "max_drawdown_pips": 586.8
+      },
+      "0.5": {
+        "PF": 1.284,
+        "net_pips": 674.8,
+        "max_drawdown_pips": 93.8
+      }
+    },
+    "annual_at_cost_1_pip": [
+      {
+        "year": 2021,
+        "trades": 68,
+        "PF": 1.121,
+        "net_pips": 27
+      },
+      {
+        "year": 2022,
+        "trades": 321,
+        "PF": 0.976,
+        "net_pips": -27.4
+      },
+      {
+        "year": 2023,
+        "trades": 145,
+        "PF": 1.058,
+        "net_pips": 29.4
+      },
+      {
+        "year": 2024,
+        "trades": 74,
+        "PF": 1.495,
+        "net_pips": 100.4
+      },
+      {
+        "year": 2025,
+        "trades": 159,
+        "PF": 1.33,
+        "net_pips": 161.9
+      }
+    ],
+    "four_week_bootstrap_at_cost_1_pip": {
+      "reps": 5000,
+      "seed": 1892026,
+      "probability_positive_mean": 0.9472,
+      "mean_weekly_net_pips": 1.1161,
+      "ci95_mean_weekly_net_pips": [
+        -0.223,
+        2.4885
+      ]
+    }
+  },
+  "execution_feasibility": {
+    "median_holding_minutes": 2,
+    "same_m1_minute_exit_share": 0.3066,
+    "exit_within_1_minute_share": 0.4752,
+    "exit_within_5_minutes_share": 0.7914,
+    "manual_phone_latency_tested": false
+  },
+  "verdict_reasons": [
+    "full-period PF 1.082 at +1 pip is below the 1.10 robustness floor",
+    "discovery PF is 1.056 at +1 pip",
+    "worst forward annual PF is 0.976",
+    "forward weekly bootstrap 95% interval includes zero",
+    "manual several-minute phone execution is incompatible with observed holding-time distribution"
+  ],
+  "limitations": [
+    "Dukascopy feed is not the missing original HistData M1/spread archive",
+    "M1 OHLC cannot provide tick-perfect intrabar ordering",
+    "live commission, slippage, latency, funded DLL/MLL, and Quick Strike are not verified"
+  ]
+}
