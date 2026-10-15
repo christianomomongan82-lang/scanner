@@ -1,0 +1,163 @@
+{
+  "experiment": "R270",
+  "verdict": "GAGAL",
+  "preregistration": "research/R270_SESSION_REGIME_ROUTER_PREREGISTRATION.md",
+  "input": {
+    "artifact_id": 11959096102,
+    "acquisition_run": 38697080604,
+    "source": "Dukascopy EURUSD M1 BID/ASK",
+    "period_utc": "2016-01-01/2026-01-01 exclusive",
+    "common_quote_rows": 4415493,
+    "first_utc": "2016-01-03T00:00:00+00:00",
+    "last_utc": "2025-12-31T21:58:00+00:00",
+    "sha256_zip": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "note": "No missing bars synthesized; timestamps absent within the span include expected FX market/weekend closures."
+  },
+  "diagnostics": {
+    "eligible_london_weekdays": 2605,
+    "max_observed_asia_efficiency_ratio": 0.21011235955055954,
+    "module_A_trades": 0,
+    "module_B_trades": 577,
+    "router_trades": 577,
+    "note": "Router exactly equals Module B; Module A ER >= 0.30 never triggered."
+  },
+  "metrics_at_extra_cost_1_pip": {
+    "A": {
+      "discovery_2016_2020": {
+        "trades": 0,
+        "pf_R": null,
+        "net_R": 0
+      },
+      "validation_2021": {
+        "trades": 0,
+        "pf_R": null,
+        "net_R": 0
+      },
+      "forward_2022_2025": {
+        "trades": 0,
+        "pf_R": null,
+        "net_R": 0
+      }
+    },
+    "B_and_router": {
+      "discovery_2016_2020": {
+        "trades": 290,
+        "pf_R": 0.7123895085,
+        "net_R": -65.97
+      },
+      "validation_2021": {
+        "trades": 68,
+        "pf_R": 0.6394514134,
+        "net_R": -20.16
+      },
+      "forward_2022_2025": {
+        "trades": 219,
+        "pf_R": 0.6281806315,
+        "net_R": -63.5
+      }
+    }
+  },
+  "forward_cost_sensitivity_net_R": {
+    "extra_cost_0_pips": {
+      "discovery": -14.14,
+      "validation": -5.96,
+      "forward": -30.99
+    },
+    "extra_cost_0_5_pips": {
+      "discovery": -40.06,
+      "validation": -13.06,
+      "forward": -47.24
+    },
+    "extra_cost_1_pip": {
+      "discovery": -65.97,
+      "validation": -20.16,
+      "forward": -63.5
+    },
+    "extra_cost_2_pips": {
+      "discovery": -117.8,
+      "validation": -34.35,
+      "forward": -96
+    }
+  },
+  "forward_annual_at_1_extra_pip": {
+    "2022": {
+      "trades": 55,
+      "pf_R": 0.5553496211,
+      "net_R": -19.81
+    },
+    "2023": {
+      "trades": 45,
+      "pf_R": 0.6261928844,
+      "net_R": -13.24
+    },
+    "2024": {
+      "trades": 58,
+      "pf_R": 0.644149488,
+      "net_R": -15.3
+    },
+    "2025": {
+      "trades": 61,
+      "pf_R": 0.6831572957,
+      "net_R": -15.15
+    }
+  },
+  "forward_bootstrap_at_1_extra_pip": {
+    "mean_R_per_week": -0.3038129945,
+    "positive_bootstrap_fraction": 0.0014,
+    "ci95_mean_R_per_week": [
+      -0.4842724986,
+      -0.1152280764
+    ],
+    "method": "four-week circular block bootstrap",
+    "reps": 10000,
+    "seed": 2702026
+  },
+  "challenge_reference_proxy": {
+    "rules": "$6000 start; +8% Phase 1 then reset $6000 and +5% Phase 2; static $5400 floor; 5% UTC-day DLL proxy; 3000 four-week-block-bootstrap paths",
+    "live_funded_ready": false,
+    "router": [
+      {
+        "risk": 0.0025,
+        "phase1_pass_prob": 0,
+        "both_phase_prob": 0,
+        "loss_breach_prob": 0.281
+      },
+      {
+        "risk": 0.005,
+        "phase1_pass_prob": 0.007,
+        "both_phase_prob": 0,
+        "loss_breach_prob": 0.8553333333
+      },
+      {
+        "risk": 0.0075,
+        "phase1_pass_prob": 0.029,
+        "both_phase_prob": 0.0036666667,
+        "loss_breach_prob": 0.9546666667
+      },
+      {
+        "risk": 0.01,
+        "phase1_pass_prob": 0.073,
+        "both_phase_prob": 0.0106666667,
+        "loss_breach_prob": 0.9786666667
+      }
+    ]
+  },
+  "gates": {
+    "router_net_positive_discovery_at_1_pip": false,
+    "router_net_positive_validation_at_1_pip": false,
+    "module_A_sample_size": false,
+    "module_B_sample_size": true,
+    "bootstrap_lower_95_bound_positive": false,
+    "forward_positive_at_plus_2_pips": false,
+    "positive_in_at_least_3_of_4_forward_years": false,
+    "router_better_than_both_standalones_without_worse_breach": false,
+    "independent_untouched_promotion_window": false,
+    "official_funded_rules_verified": false
+  },
+  "limitations": [
+    "2022-2025 was repeatedly inspected and is not an untouched promotion holdout.",
+    "2026 is absent from the input artifact.",
+    "Challenge simulator uses proxy rules and is not an official funded-equivalent replay.",
+    "Live commission, server timezone/reset and account-specific floating-loss rules are not fully verified."
+  ]
+}
