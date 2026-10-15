@@ -1,0 +1,206 @@
+{
+  "study": "R265 USA500-USATECH relative-value mean reversion",
+  "date": "2026-10-16",
+  "status": "EXPLORATORY_RETROSPECTIVE_AUDIT",
+  "verdict": "FAILED",
+  "parameters_locked_in_repo_before_run": false,
+  "audit_warning": "No contemporaneous R265 preregistration was found in the GitHub branch at audit time. Original output includes an all-available-dates aggregate through 2026-10-09; do not use that aggregate as clean OOS evidence.",
+  "rules": {
+    "lookback_sessions": 60,
+    "entry_z": 2,
+    "adverse_exit_z": 3,
+    "mean_reversion_exit_z": 0,
+    "max_holding_sessions": 10,
+    "entry": "next common RTH session open, 09:30 ET ideal or 09:35 ET delayed",
+    "exit_fill": "next common RTH session open / 09:35 delayed",
+    "cost_bps": [
+      2,
+      4,
+      6
+    ]
+  },
+  "modes": {
+    "ideal": {
+      "trade_count_all_dates_aggregate_not_for_promotion": 103,
+      "periods": {
+        "discovery_2016_2020": {
+          "2": {
+            "trades": 45,
+            "PF": 0.9128964024298777,
+            "gross_bps": -52.6526,
+            "net_bps": -142.6526
+          },
+          "4": {
+            "trades": 45,
+            "PF": 0.8618234857404603,
+            "gross_bps": -52.6526,
+            "net_bps": -232.6526
+          },
+          "6": {
+            "trades": 45,
+            "PF": 0.8134803041500397,
+            "gross_bps": -52.6526,
+            "net_bps": -322.6526
+          }
+        },
+        "validation_2021": {
+          "2": {
+            "trades": 8,
+            "PF": 1.5776402501970384,
+            "gross_bps": 138.2429,
+            "net_bps": 122.2429
+          },
+          "4": {
+            "trades": 8,
+            "PF": 1.4881933926015807,
+            "gross_bps": 138.2429,
+            "net_bps": 106.2429
+          },
+          "6": {
+            "trades": 8,
+            "PF": 1.4035463737914575,
+            "gross_bps": 138.2429,
+            "net_bps": 90.2429
+          }
+        },
+        "forward_2022_2025": {
+          "2": {
+            "trades": 41,
+            "PF": 1.4961174134270596,
+            "gross_bps": 563.9318,
+            "net_bps": 481.9318
+          },
+          "4": {
+            "trades": 41,
+            "PF": 1.395421323462187,
+            "gross_bps": 563.9318,
+            "net_bps": 399.9318
+          },
+          "6": {
+            "trades": 41,
+            "PF": 1.301542084713529,
+            "gross_bps": 563.9318,
+            "net_bps": 317.9318
+          }
+        }
+      },
+      "bootstrap_forward_at_4bps": {
+        "weeks": 209,
+        "reps": 10000,
+        "seed": 2652026,
+        "block_weeks": 4,
+        "mean_weekly_net_bps": 1.9135491007700258,
+        "probability_positive_mean": 0.79,
+        "ci95_mean_weekly_net_bps": [
+          -2.6371699089389073,
+          6.659860657603552
+        ]
+      },
+      "gate": {
+        "forward_trades_ge_100": false,
+        "forward_pf_ge_1_10": true,
+        "bootstrap_95ci_positive": false
+      },
+      "forward_exit_reasons": {
+        "max_10_sessions": 68,
+        "adverse_z_stop": 25,
+        "mean_reversion_to_zero": 10
+      }
+    },
+    "delay5": {
+      "trade_count_all_dates_aggregate_not_for_promotion": 103,
+      "periods": {
+        "discovery_2016_2020": {
+          "2": {
+            "trades": 45,
+            "PF": 0.8472631345319974,
+            "gross_bps": -164.8035,
+            "net_bps": -254.8035
+          },
+          "4": {
+            "trades": 45,
+            "PF": 0.7993288445791406,
+            "gross_bps": -164.8035,
+            "net_bps": -344.8035
+          },
+          "6": {
+            "trades": 45,
+            "PF": 0.7541053847869451,
+            "gross_bps": -164.8035,
+            "net_bps": -434.8035
+          }
+        },
+        "validation_2021": {
+          "2": {
+            "trades": 8,
+            "PF": 1.4540599814160344,
+            "gross_bps": 113.6956,
+            "net_bps": 97.6956
+          },
+          "4": {
+            "trades": 8,
+            "PF": 1.3693956932311058,
+            "gross_bps": 113.6956,
+            "net_bps": 81.6956
+          },
+          "6": {
+            "trades": 8,
+            "PF": 1.2892038964435648,
+            "net_bps": 65.6956
+          }
+        },
+        "forward_2022_2025": {
+          "2": {
+            "trades": 41,
+            "PF": 1.4043429926949893,
+            "gross_bps": 496.4273,
+            "net_bps": 414.4273
+          },
+          "4": {
+            "trades": 41,
+            "PF": 1.3125780654265937,
+            "gross_bps": 496.4273,
+            "net_bps": 332.4273
+          },
+          "6": {
+            "trades": 41,
+            "PF": 1.226690300896597,
+            "net_bps": 250.4273
+          }
+        }
+      },
+      "bootstrap_forward_at_4bps": {
+        "weeks": 209,
+        "reps": 10000,
+        "seed": 2652027,
+        "block_weeks": 4,
+        "mean_weekly_net_bps": 1.5905611831121027,
+        "probability_positive_mean": 0.7456,
+        "ci95_mean_weekly_net_bps": [
+          -3.1371786028477704,
+          6.426245685243136
+        ]
+      },
+      "gate": {
+        "forward_trades_ge_100": false,
+        "forward_pf_ge_1_10": true,
+        "bootstrap_95ci_positive": false
+      },
+      "forward_exit_reasons": {
+        "max_10_sessions": 68,
+        "adverse_z_stop": 25,
+        "mean_reversion_to_zero": 10
+      }
+    }
+  },
+  "limitations": [
+    "BID-only index data; ASK-side prices and observed quoted spread unavailable.",
+    "Cost values are assumed basis points per equal-notional pair trade, not verified live execution cost.",
+    "No funded provider DLL/MLL or Quick Strike verification."
+  ],
+  "promotion_gates": {
+    "forward_trade_count_minimum": 100,
+    "bootstrap_ci_lower_above_zero": true,
+    "passed": false
+  }
+}
