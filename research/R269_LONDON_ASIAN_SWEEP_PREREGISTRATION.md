@@ -18,7 +18,7 @@ Date: 2026-10-16
 4. Short signal: BID High is at least 2.0 pips above the Asian high and BID Close finishes strictly below the Asian high (sweep above and close back inside).
 5. Only the first qualifying signal per day is eligible. If both long and short conditions occur on the same signal bar, discard that day as ambiguous. No re-entry that day.
 6. Place the entry at the delayed executable quote. Stop is one pip beyond the signal-bar extreme: long stop = signal Low − 1 pip; short stop = signal High + 1 pip. Target is the midpoint of the precomputed Asian range.
-7. Compute reward/risk using the actual delayed entry side and executable stop/target side. Require reward/risk >= 1.00; otherwise skip. No rounding of prices beyond source precision.
+7. Before placing the delayed entry, invalidate the setup if the executable-side stop or target was touched after the signal bar and before the delayed entry open. Also skip if the delayed entry open is at/beyond the stop or leaves reward/risk below 1.00. Compute reward/risk using the actual delayed entry side and executable stop/target side. No rounding of prices beyond source precision.
 8. Maximum holding period: 240 elapsed minutes from delayed entry. At each post-entry bar, if stop and target are both touched, stop-first. If opening price has crossed the stop, exit at the worse opening quote; target exits are filled at the target level. If neither target nor stop is hit by the first bar open at/after the four-hour limit, exit at that open quote. No trailing stop.
 9. No position sizing changes feed back into the signal stream; one position per day. For the separate compound diagnostic, size each trade at 0.25% of current realized equity divided by initial stop risk (R multiple), starting at $6,000.
 
