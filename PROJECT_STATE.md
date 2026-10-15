@@ -209,3 +209,18 @@ Raw data collection may use GitHub Actions. All signals, PnL, robustness metrics
 - Ideal entry: discovery 2016–2020 = 646 trades, PF 1.134 before extra cost but PF 0.979 at +1 pip; validation 2021 = 132 trades, PF 0.819 before extra cost; forward 2022–2025 = 503 trades, PF 0.815 before extra cost, 0.760 at +0.5 pip and 0.710 at +1 pip, with net -1,225.5 pips at +1 pip. All four forward years were negative at +1 pip (2022 PF 0.805; 2023 0.728; 2024 0.673; 2025 0.623).
 - Four-week weekly-PnL bootstrap at +1 pip: mean -5.86 pips/week, 0.06% of 5,000 resamples positive, 95% interval [-9.24, -2.60] pips/week. The interval is wholly negative. Delayed-fill tests at +1/+3/+5 minutes remain negative.
 - **Verdict: FAILED.** Do not run 2026 OOS because the historical forward gate failed; do not tune this setup. A different hypothesis is required. The code/results calculation was performed locally; GitHub Actions was not used for backtesting.
+
+
+### R263 — U.S. cash-open opening-range breakout: FAILED (local test, 2026-10-16)
+
+- Preregistration: [R263 locked rules](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R263_US_CASH_OPEN_ORB_PREREGISTRATION.md)
+- Results: [R263 full report](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R263_US_CASH_OPEN_ORB_RESULTS.md)
+- Machine-readable summary: [R263 JSON](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R263_US_cash_open_ORB_results.json)
+- Strategy: 09:30–10:00 New York opening range; first confirmed M5 close breakout 10:00–12:00; opposite range boundary stop; target 1.5R; close by 16:00 New York; one trade per index/day. USA500 and USATECH tested with same locked parameters. No tuning.
+- Source is the already-retained GitHub BID-only M5 snapshot (USA500 886,206 rows; USATECH 886,039, to 2026-10-09). Since there is no ASK stream in these files, +2/+4/+6 basis-point transaction costs are fixed sensitivity assumptions, not measured execution costs. Metrics are return basis points per equal-notional trade and not FundedNext account drawdown percentages. All results were calculated in local Python; no GitHub Actions backtest ran.
+- Ideal entry forward 2022–2025: 1,925 combined trades; PF 1.049 at +2 bps, 0.974 at +4 bps, 0.904 at +6 bps. At +4 bps net is -1,372 bps. USA500 PF 0.969 and USATECH 0.977 at +4 bps.
+- Discovery 2016–2020 combined PF 0.885 at +2 bps and 0.811 at +4 bps; validation 2021 combined PF 0.911 at +2 and 0.831 at +4. Both fail before OOS.
+- Five-minute entry delay forward combined: PF 1.065 at +2 bps, 0.988 at +4, 0.916 at +6. At +4 bps the forward bootstrap 95% intervals include zero both ideal [-35.79, +23.70] and delayed [-30.25, +25.08] bps/week. Annual PF at +4 bps is 1.105 (2022), 1.020 (2023), 0.854 (2024), 0.836 (2025).
+- **Verdict: FAILED.** Primary +4 bps PF gate, per-index gate, discovery/validation gates, positive bootstrap-confidence gate, and latency gate fail. Per preregistration, do not inspect 2026 OOS and do not tune this setup.
+
+Current active conclusion after R189, R262 and R263: no strategy is approved/funded-ready. The next candidate must be a materially different pre-registered hypothesis compatible with several-minute manual latency; keep testing costs and time delay from the outset.
