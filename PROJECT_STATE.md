@@ -240,3 +240,18 @@ A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now
 
 
 - **R268 reproducibility status: GAGAL.** The local combined calculation used R262/R263 delayed trade-ledger CSVs that are not present as repository files; result JSON, report, and runner are saved, but this exact run is not self-contained from GitHub alone. Its local input hashes are documented in the report/JSON. Do not claim otherwise.
+
+
+## R269 — London Asian-range sweep/reclaim reversal — GAGAL (2026-10-16)
+
+- [Preregistration](research/R269_LONDON_ASIAN_SWEEP_PREREGISTRATION.md)
+- [Runner](research/r269_london_asian_sweep.py)
+- [Results report](research/R269_LONDON_ASIAN_SWEEP_RESULTS.md)
+- [Machine-readable compact results](research/R269_results_compact.json)
+- Raw-data collection only: [GitHub run 38697080604](https://github.com/christianomomongan82-lang/scanner/actions/runs/38697080604), artifact ID 11959096102. All signal/PnL calculations were run in local Python, not Actions.
+- Data: Dukascopy EURUSD M1 BID/ASK 2016–2025, 4,415,493 rows per side, identical common timestamps, zero duplicates/invalid OHLC/negative open spreads. ZIP SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`.
+- Locked strategy: London-local Asian range 00:00–07:59, sweep/reclaim signal 08:00–11:59; only first setup per day; entry six minutes after signal-bar timestamp (five minutes after close/decision); ASK long/BID short; SL past signal extreme by 1 pip, target Asian midpoint, minimum 1R reward/risk; 240-minute time stop; stop-first intrabar ambiguity; +1 pip primary extra-cost stress.
+- Discovery 2016–2020: 340 trades, PF 0.758, −73.48R at +1 pip. Validation 2021: 49 trades, PF 0.632, −19.31R. Forward 2022–2025: 242 trades, PF 0.657, −78.91R. Forward bootstrap 95% interval for mean weekly net R: [−0.661, −0.078]. Compounding 0.25% risk from $6,000 ended at $4,912.24; closed equity first crossed $5,400 on 2024-09-13 09:27 UTC.
+- All seven economic gates failed. Do not retune this candidate on the same data. This is an independent Dukascopy feed replay, not an exact reproduction of the missing original HistData R189 archive. The closed-equity replay does not establish funded readiness.
+- Reproducibility note: the detailed trade ledger and annual tables are currently available in the local run output but the repository contains the runner, JSON summary, report and raw-data artifact reference; do not claim the row-level R269 ledger is stored in GitHub until a corresponding ledger file is committed.
+- R269 is closed. Choose any later candidate using a structurally independent hypothesis and a preregistration before results; no R269 parameter rescue.
