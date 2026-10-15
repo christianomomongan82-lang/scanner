@@ -38,3 +38,12 @@ Date: 2026-10-16
 ## Key mathematical note
 
 Capital compounding is a position-sizing rule, not a source of trading edge. It may increase the dollar contribution of later trades and can make dollar PF path-dependent, but it does not demonstrate that the entry/exit system has better risk-normalized expectancy. The intended first-order objective here is **better trade selection/composition and more robust PF**, then compound equity after that stream qualifies.
+
+
+## Latest correction — funded target completion supersedes PF-first framing (2026-10-16)
+
+The previous document's language making risk-normalized PF improvement the primary objective is superseded. PF is a diagnostic, not the target. The actual goal is to build a combined, coordinated strategy system that maximizes the realistic probability of passing the funded challenge quickly while respecting loss limits.
+
+Authoritative spec: [PRIMARY_OBJECTIVE_FUNDED_TARGET_COMPLETION_20261016.md](PRIMARY_OBJECTIVE_FUNDED_TARGET_COMPLETION_20261016.md).
+
+The primary scorecard is target-hit probability before DLL/MLL breach, time-to-target distribution, probability of completing both sequential phases, loss/breach probability, opportunity frequency compatible with five-minute execution delay, and robustness to realistic costs/correlation. PF, expectancy, win rate and drawdown are explanatory diagnostics. Do not optimize for PF as if it were the objective; do not blindly union weak strategies either. Capital compounding is an element of the challenge path simulation, not the objective by itself.
