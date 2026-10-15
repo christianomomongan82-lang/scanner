@@ -55,3 +55,14 @@ Bangun portofolio modular:
 - Capital compounding comes **after** edge construction: fixed-fractional sizing computes position size from the latest equity and tests dollar growth / funded-rule survival. This changes the distribution of dollar outcomes; it does not by itself create entry/exit edge.
 - Every composite must lock its logic before validation and show incremental PF, expectancy, trades, annual stability, bootstrap and five-minute latency/cost stress. The 2022–2025 window has been inspected too many times to serve as an untouched promotion holdout.
 - Full correction and workflow: [COMPOUNDING_OBJECTIVE_CORRECTION_20261016.md](COMPOUNDING_OBJECTIVE_CORRECTION_20261016.md).
+
+
+## 7. Primary objective correction — funded target completion (2026-10-16)
+
+The latest authoritative objective is [PRIMARY_OBJECTIVE_FUNDED_TARGET_COMPLETION_20261016.md](PRIMARY_OBJECTIVE_FUNDED_TARGET_COMPLETION_20261016.md). It supersedes any earlier language that made PF or “better PF” the primary objective.
+
+- The target is to complete the actual funded challenge as quickly as realistically possible, chiefly measured by probability of hitting phase targets before daily/max loss breach and by the time-to-target distribution.
+- For the current reference configuration: +8% Phase 1, then +5% Phase 2, with the firm's actual loss limits/rules modeled. Research only before age eligibility.
+- “Compound” means coordinate/combine multiple usable opportunities, conditions and strategy modules into an integrated system that helps reach these targets—not only fixed-fractional account sizing and not a blind union of losing streams.
+- PF is only one diagnostic. Trade frequency, expected R, win/loss clustering, time-to-target, pass/fail odds, latency, costs, cross-module overlap and loss-rule breaches all matter to the objective.
+- Capital compounding and the shared risk controller are simulated after the integrated opportunity stream is defined. They are not substitutes for optimizing target completion.
