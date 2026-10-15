@@ -197,3 +197,15 @@ Raw data collection may use GitHub Actions. All signals, PnL, robustness metrics
 - Delay means additional minutes after the ideal next-M1-open fill: +1/+3/+5 minutes (approximately 2/4/6 minutes from signal-bar close). Forward 2021–2025 with +0.5 pip extra cost: PF 1.284 at ideal fill, 1.225 at +1 minute, 1.212 at +3 minutes, and 1.071 at +5 minutes. With +1 pip extra cost: PF 1.114, 1.062, 1.048, and 0.926 respectively; the +5-minute result has net −203.0 pips.
 - The PF 1.10 annual robustness floor is already breached in 2023 at only +1 minute delay (PF 0.973 at +0.5 pip extra cost); at +5 minutes three forward years fail the floor. At +1 pip extra cost, all latency settings have a weekly-bootstrap 95% interval crossing zero.
 - **Verdict remains NOT PASSED for the user's several-minute manual-phone execution. Do not optimize R189 to fix the latency result.** Next research should use a separate candidate with a longer decision/holding horizon compatible with manual execution, and must pass its own forward/OOS and cost gates before portfolio combination.
+
+
+### R262 — H4 structural pullback continuation: FAILED (local test, 2026-10-16)
+
+- Preregistration: [R262 locked hypothesis](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R262_H4_STRUCTURE_PULLBACK_PREREGISTRATION.md)
+- Report: [R262 results and decision](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R262_H4_STRUCTURE_PULLBACK_RESULTS.md)
+- Machine-readable verdict: [R262 results JSON](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R262_h4_structure_pullback_results.json)
+- The candidate compared two non-overlapping five-active-H4-bar segments. Recent HH+HL or LH+LL structure plus two consecutive countertrend closes; swing stop from the last 3 completed H4 candles; target 1.5R; 48-hour time stop. Raw Dukascopy EURUSD M1 BID/ASK was used to build UTC H4 candles and simulate quote-side M1 execution. No parameter sweep or tuning.
+- Data checks: 4,415,493 matched minute rows, 666,490 Sunday closed-market placeholder rows removed, 16,090 active H4 bars; 2,268 raw pattern candidates, 1,358 after 4-bar deduplication.
+- Ideal entry: discovery 2016–2020 = 646 trades, PF 1.134 before extra cost but PF 0.979 at +1 pip; validation 2021 = 132 trades, PF 0.819 before extra cost; forward 2022–2025 = 503 trades, PF 0.815 before extra cost, 0.760 at +0.5 pip and 0.710 at +1 pip, with net -1,225.5 pips at +1 pip. All four forward years were negative at +1 pip (2022 PF 0.805; 2023 0.728; 2024 0.673; 2025 0.623).
+- Four-week weekly-PnL bootstrap at +1 pip: mean -5.86 pips/week, 0.06% of 5,000 resamples positive, 95% interval [-9.24, -2.60] pips/week. The interval is wholly negative. Delayed-fill tests at +1/+3/+5 minutes remain negative.
+- **Verdict: FAILED.** Do not run 2026 OOS because the historical forward gate failed; do not tune this setup. A different hypothesis is required. The code/results calculation was performed locally; GitHub Actions was not used for backtesting.
