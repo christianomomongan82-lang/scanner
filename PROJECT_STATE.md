@@ -252,3 +252,14 @@ Research sequence so far: R189 (M1, unfit for manual execution), R262 (H4 struct
 
 
 - **R268 reproducibility status: GAGAL.** The local combined calculation used R262/R263 delayed trade-ledger CSVs that are not present as repository files; result JSON, report, and runner are saved, but this exact run is not self-contained from GitHub alone. Its local input hashes are documented in the report/JSON. Do not claim otherwise.
+
+
+## R269 — London Asian-range sweep/reclaim — GAGAL (2026-10-16)
+
+Active branch record: [full R269 checkpoint and research artifacts](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/PROJECT_STATE.md).
+
+- [Preregristration](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R269_LONDON_ASIAN_SWEEP_PREREGISTRATION.md) · [runner](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/r269_london_asian_sweep.py) · [results](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R269_LONDON_ASIAN_SWEEP_RESULTS.md) · [compact JSON](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R269_results_compact.json).
+- EURUSD M1 BID/ASK from the raw-only GitHub artifact 11959096102 (run 38697080604); calculations were run locally. Feed: Dukascopy, 2016–2025. This is not exact reproduction of original HistData.
+- At +1 pip extra cost: discovery PF 0.758/−73.48R (340 trades), 2021 validation PF 0.632/−19.31R (49), forward 2022–2025 PF 0.657/−78.91R (242). Forward four-week block bootstrap 95% CI for mean weekly net R: [−0.661, −0.078].
+- Fixed fractional 0.25% per trade from $6,000 ended at $4,912.24 (−18.13%); realized-equity path crossed the $5,400 static floor on 2024-09-13 09:27 UTC. This is not tick-level funded replay.
+- **Verdict GAGAL**. Candidate is closed; do not tune it on these dates. Continue from the active branch's failure taxonomy and use pre-registered, structurally justified tests rather than repeated lookalike parameter variations.
