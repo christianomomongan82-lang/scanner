@@ -1,0 +1,155 @@
+{
+  "study": "R189/L80 intrabar execution delay audit",
+  "audit_date": "2026-10-16",
+  "status": "RETROSPECTIVE_EXECUTION_AUDIT",
+  "performance_result_is_new_preregistered_test": false,
+  "verdict": "EXECUTION_ROBUSTNESS_NOT_ESTABLISHED",
+  "source": {
+    "feed": "Dukascopy EURUSD M1 BID/ASK 2016-2025",
+    "local_replay_date": "2026-10-15",
+    "replay_result": "NOT_EXACT_HISTDATA_REPRODUCTION",
+    "ask_bid_quotes_available": true,
+    "source_input_rows_common_bars": "see local replay report and source JSON",
+    "data_quality_source_json": "R189_Dukascopy_2016_2025_results.json"
+  },
+  "rules": {
+    "strategy": "locked R189/L80 rules; no parameter tuning",
+    "hours": "fixed GMT-5 hour conversion, 03..11 inclusive excluding 06 and 09",
+    "ideal_entry": "next M1 bar open; ASK long / BID short",
+    "delay_definition": "0/1/3/5 additional minutes after ideal fill",
+    "stop_pips": 6,
+    "target_pips": 18,
+    "mfe_trigger_pips": 6,
+    "trailing_offset_pips": 0,
+    "time_stop_bars": 60,
+    "time_exit": "scheduled bar open",
+    "quote_side_for_exit": "BID long / ASK short",
+    "modeled_execution": "gap-through stop/target at bar open; stop checked before target within M1 bars",
+    "cost_stress_additional_pips": [
+      0.5,
+      1
+    ],
+    "periods": {
+      "discovery": "2016-2020",
+      "forward": "2021-2025"
+    }
+  },
+  "forward_2021_2025": [
+    {
+      "delay_after_ideal_fill_min": 0,
+      "extra_cost_pips": 0.5,
+      "trades": 767,
+      "PF": 1.2836485918,
+      "net_pips": 674.8,
+      "max_drawdown_pips": 93.8
+    },
+    {
+      "delay_after_ideal_fill_min": 1,
+      "extra_cost_pips": 0.5,
+      "trades": 768,
+      "PF": 1.2254495732,
+      "net_pips": 544.1,
+      "max_drawdown_pips": 121.7
+    },
+    {
+      "delay_after_ideal_fill_min": 3,
+      "extra_cost_pips": 0.5,
+      "trades": 769,
+      "PF": 1.2118742724,
+      "net_pips": 509.6,
+      "max_drawdown_pips": 171.1
+    },
+    {
+      "delay_after_ideal_fill_min": 5,
+      "extra_cost_pips": 0.5,
+      "trades": 769,
+      "PF": 1.0713780085,
+      "net_pips": 181.5,
+      "max_drawdown_pips": 92
+    },
+    {
+      "delay_after_ideal_fill_min": 0,
+      "extra_cost_pips": 1,
+      "trades": 767,
+      "PF": 1.1137002342,
+      "net_pips": 291.3,
+      "max_drawdown_pips": 142.5
+    },
+    {
+      "delay_after_ideal_fill_min": 1,
+      "extra_cost_pips": 1,
+      "trades": 768,
+      "PF": 1.0615911364,
+      "net_pips": 160.1,
+      "max_drawdown_pips": 198.8
+    },
+    {
+      "delay_after_ideal_fill_min": 3,
+      "extra_cost_pips": 1,
+      "trades": 769,
+      "PF": 1.0482881075,
+      "net_pips": 125.1,
+      "max_drawdown_pips": 286.8
+    },
+    {
+      "delay_after_ideal_fill_min": 5,
+      "extra_cost_pips": 1,
+      "trades": 769,
+      "PF": 0.9258799474,
+      "net_pips": -203,
+      "max_drawdown_pips": 364.8
+    }
+  ],
+  "bootstrap_5min_delay": [
+    {
+      "extra_cost_pips": 0.5,
+      "weeks_including_zero_trade_weeks": 261,
+      "reps": 5000,
+      "seed": 1892526,
+      "mean_weekly_net_pips": 0.6954023,
+      "probability_bootstrap_mean_positive": 0.8876,
+      "ci95_mean_weekly_net_pips": [
+        -0.4444636,
+        1.8486686
+      ]
+    },
+    {
+      "extra_cost_pips": 1,
+      "weeks_including_zero_trade_weeks": 261,
+      "reps": 5000,
+      "seed": 1892510,
+      "mean_weekly_net_pips": -0.7777778,
+      "probability_bootstrap_mean_positive": 0.0838,
+      "ci95_mean_weekly_net_pips": [
+        -1.99659,
+        0.348295
+      ]
+    }
+  ],
+  "diagnostics": {
+    "gap_through_fills": {
+      "delay_0": 27,
+      "delay_1": 32,
+      "delay_3": 34,
+      "delay_5": 28
+    },
+    "overlap_skipped": 0,
+    "spread_cap_checked_at_actual_entry": true
+  },
+  "decision": {
+    "funded_ready": false,
+    "reasons": [
+      "At +5 minute delay PF is only 1.071 at +0.5 pip extra cost and 0.926 at +1.0 pip.",
+      "Both bootstrap 95% intervals include zero.",
+      "Fixed GMT-5 hours are not yet mapped to the actual funded-platform timezone/DST.",
+      "M1 OHLC does not verify Quick Strike close-duration rules.",
+      "This Dukascopy replay is not exact reproduction of the original HistData results."
+    ],
+    "next_step": "Verify platform-time mapping/DST and funded execution/risk constraints, without retuning performance parameters."
+  },
+  "limitations": [
+    "M1 OHLC cannot reconstruct tick-level ordering or actual sub-minute position close durations.",
+    "Extra cost scenarios are assumptions, not measured live broker/prop-firm fill costs.",
+    "Funded timezone, DLL/MLL and Quick Strike compliance are not verified."
+  ]
+}
