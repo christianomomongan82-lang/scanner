@@ -263,3 +263,15 @@ A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now
 - R260–R269 contained no candidate that passed the full gates. High trade count did not repair negative expectancy; retrospective/forward-only PF must not be promoted if discovery, validation, bootstrap or annual stability fails.
 - The 2022–2025 period has been repeatedly inspected across candidate families and should not be called an untouched final holdout. New candidates need an explicit economic rationale, a horizon compatible with five-minute latency, and a genuinely independent/untouched validation window for promotion.
 - Do not produce near-duplicate M1 reversal, intraday momentum, US cash-open ORB, or H4 pullback tests by changing thresholds. Any failed locked candidate remains GAGAL and closed.
+
+
+## Critical correction — intended compounding objective (2026-10-16)
+
+The user's “compound compound” instruction was not satisfied by increasing position size with equity alone. **First priority is strategy/edge composition that improves the risk-normalized PF and net expectancy of the integrated trade stream.** Capital compounding is downstream, after that integrated stream qualifies.
+
+- [Full correction and required workflow](research/COMPOUNDING_OBJECTIVE_CORRECTION_20261016.md).
+- [Updated binary/compounding policy](research/RESEARCH_POLICY_BINARY_COMPOUNDING.md).
+- R268 merely unioned previously failed streams and applied fixed-fractional equity sizing; it was a negative portfolio diagnostic, not a successful strategy-compounding build.
+- R269 was another standalone strategy test and therefore also failed to implement the requested research priority, independent of its own economic GAGAL result.
+- Future candidates must compare integrated signal logic against each component and a no-filter baseline on identical timestamps/costs; show PF/expectancy lift without destroying useful frequency or robustness. Fixed-fractional sizing comes after this.
+- 2022–2025 is repeatedly inspected and cannot be treated as an untouched final holdout. Do not tune old failed candidates to rescue them.
