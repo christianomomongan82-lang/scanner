@@ -1,0 +1,225 @@
+{
+  "study": "R263 US Cash-Open Opening-Range Breakout",
+  "date": "2026-10-16",
+  "verdict": "FAILED",
+  "parameters_locked": true,
+  "data": {
+    "source": "Existing GitHub-stored R205 BID-only M5 files, calculations local Python",
+    "USA500": {
+      "rows": 886206,
+      "start_utc": "2016-01-04T00:00:00Z",
+      "end_utc": "2026-10-09T20:10:00Z",
+      "invalid_ohlc": 0,
+      "duplicate_timestamps": 0
+    },
+    "USATECH": {
+      "rows": 886039,
+      "start_utc": "2016-01-04T00:00:00Z",
+      "end_utc": "2026-10-09T20:10:00Z",
+      "invalid_ohlc": 0,
+      "duplicate_timestamps": 0
+    },
+    "ask_side_available": false,
+    "cost_assumptions_bps": [
+      2,
+      4,
+      6
+    ],
+    "cost_assumption_note": "Fixed additional costs in basis points per equal-notional trade; not measured actual spreads from these BID-only data."
+  },
+  "locked_rules": {
+    "timezone": "America/New_York with DST",
+    "opening_range": "six M5 candles starting 09:30 through 09:55 ET",
+    "signal": "first confirmed M5 close cross above ORH or below ORL from 10:00 to 12:00 ET",
+    "max_trades": "one per index per US trading day",
+    "entry": "next M5 open; latency stress adds 5 minutes",
+    "stop": "opposite opening-range boundary",
+    "target_R": 1.5,
+    "intrabar_policy": "open-gap fill at open, stop first if SL and TP touched within same bar",
+    "exit": "15:55 ET M5 close, no overnight"
+  },
+  "splits": {
+    "discovery_2016_2020": {
+      "USA500": {
+        "trades": 1173,
+        "pf2": 0.872,
+        "net2_bps": -3157.4,
+        "pf4": 0.789,
+        "net4_bps": -5503.4,
+        "pf6": 0.714,
+        "net6_bps": -7849.4
+      },
+      "USATECH": {
+        "trades": 1143,
+        "pf2": 0.894,
+        "net2_bps": -3302,
+        "pf4": 0.828,
+        "net4_bps": -5588,
+        "pf6": 0.767,
+        "net6_bps": -7874
+      },
+      "combined": {
+        "trades": 2316,
+        "pf2": 0.885,
+        "net2_bps": -6459.4,
+        "pf4": 0.811,
+        "net4_bps": -11091.4,
+        "pf6": 0.743,
+        "net6_bps": -15723.4
+      }
+    },
+    "validation_2021": {
+      "USA500": {
+        "trades": 239,
+        "pf2": 0.802,
+        "net2_bps": -887.8,
+        "pf4": 0.712,
+        "net4_bps": -1365.8,
+        "pf6": 0.633,
+        "net6_bps": -1843.8
+      },
+      "USATECH": {
+        "trades": 229,
+        "pf2": 0.992,
+        "net2_bps": -48.9,
+        "pf4": 0.92,
+        "net4_bps": -506.9,
+        "pf6": 0.853,
+        "net6_bps": -964.9
+      },
+      "combined": {
+        "trades": 468,
+        "pf2": 0.911,
+        "net2_bps": -936.7,
+        "pf4": 0.831,
+        "net4_bps": -1872.7,
+        "pf6": 0.757,
+        "net6_bps": -2808.7
+      }
+    },
+    "forward_2022_2025": {
+      "USA500": {
+        "trades": 973,
+        "pf2": 1.058,
+        "net2_bps": 1248.8,
+        "pf4": 0.969,
+        "net4_bps": -697.2,
+        "pf6": 0.888,
+        "net6_bps": -2643.2
+      },
+      "USATECH": {
+        "trades": 952,
+        "pf2": 1.043,
+        "net2_bps": 1229.2,
+        "pf4": 0.977,
+        "net4_bps": -674.8,
+        "pf6": 0.916,
+        "net6_bps": -2578.8
+      },
+      "combined": {
+        "trades": 1925,
+        "pf2": 1.049,
+        "net2_bps": 2478,
+        "pf4": 0.974,
+        "net4_bps": -1372,
+        "pf6": 0.904,
+        "net6_bps": -5222
+      }
+    }
+  },
+  "latency_5min_forward_2022_2025": {
+    "USA500": {
+      "trades": 969,
+      "pf2": 1.059,
+      "net2_bps": 1233.8,
+      "pf4": 0.968,
+      "net4_bps": -704.2,
+      "pf6": 0.885,
+      "net6_bps": -2642.2
+    },
+    "USATECH": {
+      "trades": 951,
+      "pf2": 1.07,
+      "net2_bps": 1976.4,
+      "pf4": 1.003,
+      "net4_bps": 74.4,
+      "pf6": 0.939,
+      "net6_bps": -1827.6
+    },
+    "combined": {
+      "trades": 1920,
+      "pf2": 1.065,
+      "net2_bps": 3210.2,
+      "pf4": 0.988,
+      "net4_bps": -629.8,
+      "pf6": 0.916,
+      "net6_bps": -4469.8
+    }
+  },
+  "bootstrap_cost4_bps": {
+    "ideal": {
+      "weeks": 209,
+      "reps": 10000,
+      "seed": 2632026,
+      "mean_weekly_net_bps": -6.5645,
+      "probability_positive_mean": 0.3426,
+      "ci95_bps_per_week": [
+        -35.7869,
+        23.6967
+      ]
+    },
+    "delay5": {
+      "weeks": 209,
+      "reps": 10000,
+      "seed": 2632031,
+      "mean_weekly_net_bps": -3.0136,
+      "probability_positive_mean": 0.4024,
+      "ci95_bps_per_week": [
+        -30.2511,
+        25.0775
+      ]
+    }
+  },
+  "annual_forward_combined_ideal_entry": {
+    "2022": {
+      "trades": 479,
+      "pf2": 1.161,
+      "pf4": 1.105,
+      "pf6": 1.052
+    },
+    "2023": {
+      "trades": 477,
+      "pf2": 1.11,
+      "pf4": 1.02,
+      "pf6": 0.937
+    },
+    "2024": {
+      "trades": 489,
+      "pf2": 0.944,
+      "pf4": 0.854,
+      "pf6": 0.773
+    },
+    "2025": {
+      "trades": 480,
+      "pf2": 0.911,
+      "pf4": 0.836,
+      "pf6": 0.768
+    }
+  },
+  "gates": {
+    "primary_forward_pf_ge_1_10_at_4bps": false,
+    "minimum_forward_trades_100": true,
+    "each_index_pf_ge_1_at_4bps": false,
+    "bootstrap_ci_excludes_zero_positive": false,
+    "latency5_pf_ge_1_10_at_4bps": false,
+    "discovery_and_validation_positive": false
+  },
+  "oos_2026_run": false,
+  "caveats": [
+    "BID-only M5 snapshot; ASK-side spread not available in this artifact.",
+    "Cost is a fixed sensitivity assumption, not observed current spread.",
+    "PF/drawdown are screening metrics on return bps per equal-notional trade, not FundedNext account % metrics.",
+    "No live broker slippage/commission, DLL/MLL or Quick Strike verification."
+  ],
+  "next_action": "Close R263 without tuning; choose a distinct pre-registered hypothesis."
+}
