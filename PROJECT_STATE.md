@@ -255,3 +255,11 @@ A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now
 - All seven economic gates failed. Do not retune this candidate on the same data. This is an independent Dukascopy feed replay, not an exact reproduction of the missing original HistData R189 archive. The closed-equity replay does not establish funded readiness.
 - Reproducibility note: the detailed trade ledger and annual tables are currently available in the local run output but the repository contains the runner, JSON summary, report and raw-data artifact reference; do not claim the row-level R269 ledger is stored in GitHub until a corresponding ledger file is committed.
 - R269 is closed. Choose any later candidate using a structurally independent hypothesis and a preregistration before results; no R269 parameter rescue.
+
+
+## Family-level research review — R260–R269
+
+- [Failure taxonomy and next-stage decision](research/R260_R269_FAILURE_TAXONOMY.md).
+- R260–R269 contained no candidate that passed the full gates. High trade count did not repair negative expectancy; retrospective/forward-only PF must not be promoted if discovery, validation, bootstrap or annual stability fails.
+- The 2022–2025 period has been repeatedly inspected across candidate families and should not be called an untouched final holdout. New candidates need an explicit economic rationale, a horizon compatible with five-minute latency, and a genuinely independent/untouched validation window for promotion.
+- Do not produce near-duplicate M1 reversal, intraday momentum, US cash-open ORB, or H4 pullback tests by changing thresholds. Any failed locked candidate remains GAGAL and closed.
