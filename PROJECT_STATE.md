@@ -128,3 +128,10 @@ Metrik sejarah R189 yang pernah dikutip (2016–2025: 1.840 trade, PF 1,328; for
 3. Tetap pisahkan kualitas edge, frekuensi, dan kontrol risiko. Tidak ada strategi final yang lulus dan belum ada strategi yang terbukti funded-ready.
 
 **Kesimpulan status:** belum ada strategi final yang lulus. R258 dan R260 GAGAL. R189 tetap belum terverifikasi untuk periode historis karena data M1 asli belum ditemukan. Eksekusi backtest selanjutnya dilakukan di sini; GitHub hanya sumber data/artefak dan penyimpanan.
+
+## Koreksi permanen alur data — 2026-10-15
+
+- Saat data yang dibutuhkan belum tersedia secara lokal, **cari dan unduh sendiri dari file/artefak GitHub yang sudah ada** sebelum meminta apa pun kepada pengguna.
+- Dalam workflow backtest proyek ini, GitHub adalah satu-satunya sumber dataset/artefak yang dipakai secara default. **Jangan beralih ke Massive atau API penyedia data lain** tanpa izin eksplisit pengguna.
+- GitHub bukan tempat menghitung backtest. Tarik data GitHub ke container/sesi ini dan jalankan perhitungan Python secara lokal di sini. Jangan membuat atau men-dispatch GitHub Actions untuk backtest.
+- Jangan menunggu pengguna memerintah langkah pengambilan data yang sudah menjadi bagian normal pekerjaan. Jika data yang dibutuhkan tidak ada di GitHub, laporkan spesifik file/periode apa yang tidak ditemukan dan lanjutkan dengan dataset GitHub yang cocok yang benar-benar tersedia; jangan menggantinya diam-diam dengan timeframe atau feed yang tidak kompatibel.
