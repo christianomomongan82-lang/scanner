@@ -1,0 +1,28 @@
+{
+  "data_rows_per_side": 4415493,
+  "timestamps_identical": true,
+  "start_utc": "2016-01-03T00:00:00Z",
+  "end_utc": "2025-12-31T21:58:00Z",
+  "duplicate_timestamps_removed": 0,
+  "invalid_ohlc_removed": 0,
+  "intrastream_gaps_over_one_minute": 538,
+  "note_about_gaps": "These include weekend and scheduled market closures; not all are unexplained data-loss events.",
+  "spread_pips_all_timestamp_quantiles": {
+    "50%": 0.3,
+    "90%": 3.1,
+    "95%": 5.5,
+    "99%": 8.7
+  },
+  "spread_pips_at_eligible_trade_entries_quantiles": {
+    "0%": 0.1,
+    "10%": 0.1,
+    "25%": 0.2,
+    "50%": 0.3,
+    "75%": 0.5,
+    "90%": 0.6,
+    "95%": 0.7,
+    "100%": 1.1
+  },
+  "monthly_requests": 240,
+  "failed_monthly_downloads": 0
+}
