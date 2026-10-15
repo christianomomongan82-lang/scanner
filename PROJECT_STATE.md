@@ -263,3 +263,10 @@ Active branch record: [full R269 checkpoint and research artifacts](https://gith
 - At +1 pip extra cost: discovery PF 0.758/−73.48R (340 trades), 2021 validation PF 0.632/−19.31R (49), forward 2022–2025 PF 0.657/−78.91R (242). Forward four-week block bootstrap 95% CI for mean weekly net R: [−0.661, −0.078].
 - Fixed fractional 0.25% per trade from $6,000 ended at $4,912.24 (−18.13%); realized-equity path crossed the $5,400 static floor on 2024-09-13 09:27 UTC. This is not tick-level funded replay.
 - **Verdict GAGAL**. Candidate is closed; do not tune it on these dates. Continue from the active branch's failure taxonomy and use pre-registered, structurally justified tests rather than repeated lookalike parameter variations.
+
+
+## R260–R269 family diagnosis
+
+- [Failure taxonomy](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R260_R269_FAILURE_TAXONOMY.md).
+- No candidate in R260–R269 passed all promotion gates. Frequency was not the core bottleneck across the family; negative expectancy, unstable periods and execution stress repeatedly failed.
+- 2022–2025 has been inspected across multiple strategy families, so it must not be treated as an untouched final holdout for a new candidate. Next hypotheses must be structurally distinct, justified by a clear economic mechanism, pre-registered, and compatible with the five-minute execution delay.
