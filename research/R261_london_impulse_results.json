@@ -1,0 +1,275 @@
+{
+  "status": "COMPLETED",
+  "round": "R261",
+  "verdict": "FAIL",
+  "execution_location": "Python in local ChatGPT/container session; no GitHub Actions backtest",
+  "strategy": "EURUSD London-local 05:00-08:00 H1 impulse continuation; stop at 3-bar extreme; 1.5R target; same-day 16:00 London time exit",
+  "source": {
+    "repository": "christianomomongan82-lang/scanner",
+    "artifact_id": 11916174401,
+    "artifact_name": "R258-multihorizon-momentum-audit",
+    "files": [
+      "dl/r251_fx/eurusd_bid_H1.csv",
+      "dl/r251_fx/eurusd_ask_H1.csv"
+    ],
+    "sha256_bid": "68d667ef6e84d4357207da86dc0ffd18453bbfa91837d0dd1349ac82bb6c47bf",
+    "sha256_ask": "8b9d3660213fae55bf0066c42fd093badc4a8092ddb2a0ca1672bbac5bcc7b91"
+  },
+  "parameters": {
+    "timezone": "Europe/London",
+    "training_quantile": 0.75,
+    "fitted_abs_impulse_threshold_pips": 14.5,
+    "R_multiple": 1.5,
+    "extra_costs_per_trade_pips": [
+      0,
+      0.5,
+      1,
+      2
+    ],
+    "periods": {
+      "discovery": "2017-2020",
+      "validation": "2021",
+      "forward": "2022-2025",
+      "oos": "2026-01-01 to 2026-10-13 23:00 UTC"
+    }
+  },
+  "data_quality": {
+    "bid_rows": 85170,
+    "ask_rows": 85170,
+    "duplicate_timestamps_removed": 0,
+    "invalid_ohlc_removed": 0,
+    "common_timestamps": 85170,
+    "expected_hourly_points": 85752,
+    "missing_or_incomplete_hourly_points": 582,
+    "negative_open_spreads": 0,
+    "opening_spread_pips": {
+      "median": 0.4,
+      "p95": 7.4,
+      "p99": 8.9,
+      "max": 23.1,
+      "min": 0.1
+    },
+    "weekend_placeholder_dates_excluded": 1021,
+    "complete_weekday_london_windows": 2552,
+    "complete_training_windows": 1044,
+    "triggered_windows": 612,
+    "closed_trades": 612,
+    "exit_reasons": {
+      "STOP": 275,
+      "TARGET": 178,
+      "TIME_16_LONDON": 159
+    }
+  },
+  "period_metrics": {
+    "discovery_2017_2020": {
+      "extra_cost_0_pip": {
+        "trades": 262,
+        "PF": 1.0091768865938933,
+        "net_pips": 32.70000000001863,
+        "mean_net_pips_per_trade": 0.12480916030541463,
+        "win_rate": 0.44274809160305345,
+        "trades_per_week": 1.2553045859000684,
+        "trades_per_month": 5.4542984257357965
+      },
+      "extra_cost_0_5_pip": {
+        "trades": 262,
+        "PF": 0.972968513680742,
+        "net_pips": -98.29999999998131,
+        "mean_net_pips_per_trade": -0.37519083969458517,
+        "win_rate": 0.4389312977099237,
+        "trades_per_week": 1.2553045859000684,
+        "trades_per_month": 5.4542984257357965
+      },
+      "extra_cost_1_pip": {
+        "trades": 262,
+        "PF": 0.9381940700808672,
+        "net_pips": -229.2999999999813,
+        "mean_net_pips_per_trade": -0.8751908396945851,
+        "win_rate": 0.4389312977099237,
+        "trades_per_week": 1.2553045859000684,
+        "trades_per_month": 5.4542984257357965
+      },
+      "extra_cost_2_pip": {
+        "trades": 262,
+        "PF": 0.8726278129212942,
+        "net_pips": -491.29999999998137,
+        "mean_net_pips_per_trade": -1.8751908396945853,
+        "win_rate": 0.4351145038167939,
+        "trades_per_week": 1.2553045859000684,
+        "trades_per_month": 5.4542984257357965
+      }
+    },
+    "validation_2021": {
+      "extra_cost_0_pip": {
+        "trades": 59,
+        "PF": 1.7172734314485139,
+        "net_pips": 370.40000000001515,
+        "mean_net_pips_per_trade": 6.277966101695172,
+        "win_rate": 0.576271186440678,
+        "trades_per_week": 1.1315068493150684,
+        "trades_per_month": 4.916397260273972
+      },
+      "extra_cost_0_5_pip": {
+        "trades": 59,
+        "PF": 1.6440581900623685,
+        "net_pips": 340.90000000001515,
+        "mean_net_pips_per_trade": 5.777966101695172,
+        "win_rate": 0.559322033898305,
+        "trades_per_week": 1.1315068493150684,
+        "trades_per_month": 4.916397260273972
+      },
+      "extra_cost_1_pip": {
+        "trades": 59,
+        "PF": 1.5742209109162577,
+        "net_pips": 311.40000000001515,
+        "mean_net_pips_per_trade": 5.277966101695172,
+        "win_rate": 0.559322033898305,
+        "trades_per_week": 1.1315068493150684,
+        "trades_per_month": 4.916397260273972
+      },
+      "extra_cost_2_pip": {
+        "trades": 59,
+        "PF": 1.443819236856011,
+        "net_pips": 252.40000000001515,
+        "mean_net_pips_per_trade": 4.277966101695172,
+        "win_rate": 0.5423728813559322,
+        "trades_per_week": 1.1315068493150684,
+        "trades_per_month": 4.916397260273972
+      }
+    },
+    "forward_2022_2025": {
+      "extra_cost_0_pip": {
+        "trades": 249,
+        "PF": 1.0541251859480443,
+        "net_pips": 189.19999999998367,
+        "mean_net_pips_per_trade": 0.7598393574296534,
+        "win_rate": 0.46586345381526106,
+        "trades_per_week": 1.193018480492813,
+        "trades_per_month": 5.183665297741273
+      },
+      "extra_cost_0_5_pip": {
+        "trades": 249,
+        "PF": 1.018160893729294,
+        "net_pips": 64.69999999998373,
+        "mean_net_pips_per_trade": 0.25983935742965353,
+        "win_rate": 0.4538152610441767,
+        "trades_per_week": 1.193018480492813,
+        "trades_per_month": 5.183665297741273
+      },
+      "extra_cost_1_pip": {
+        "trades": 249,
+        "PF": 0.9835288932958695,
+        "net_pips": -59.800000000016155,
+        "mean_net_pips_per_trade": -0.240160642570346,
+        "win_rate": 0.4538152610441767,
+        "trades_per_week": 1.193018480492813,
+        "trades_per_month": 5.183665297741273
+      },
+      "extra_cost_2_pip": {
+        "trades": 249,
+        "PF": 0.9180314814323213,
+        "net_pips": -308.8000000000161,
+        "mean_net_pips_per_trade": -1.2401606425703458,
+        "win_rate": 0.4497991967871486,
+        "trades_per_week": 1.193018480492813,
+        "trades_per_month": 5.183665297741273
+      }
+    },
+    "oos_2026": {
+      "extra_cost_0_pip": {
+        "trades": 42,
+        "PF": 1.3115925589836916,
+        "net_pips": 137.35000000001165,
+        "mean_net_pips_per_trade": 3.2702380952383727,
+        "win_rate": 0.5,
+        "trades_per_week": 1.0279720279720281,
+        "trades_per_month": 4.466538461538462
+      },
+      "extra_cost_0_5_pip": {
+        "trades": 42,
+        "PF": 1.2578107688898987,
+        "net_pips": 116.35000000001163,
+        "mean_net_pips_per_trade": 2.7702380952383723,
+        "win_rate": 0.5,
+        "trades_per_week": 1.0279720279720281,
+        "trades_per_month": 4.466538461538462
+      },
+      "extra_cost_1_pip": {
+        "trades": 42,
+        "PF": 1.206474664356889,
+        "net_pips": 95.35000000001163,
+        "mean_net_pips_per_trade": 2.2702380952383723,
+        "win_rate": 0.5,
+        "trades_per_week": 1.0279720279720281,
+        "trades_per_month": 4.466538461538462
+      },
+      "extra_cost_2_pip": {
+        "trades": 42,
+        "PF": 1.110501242750645,
+        "net_pips": 53.35000000001163,
+        "mean_net_pips_per_trade": 1.2702380952383723,
+        "win_rate": 0.5,
+        "trades_per_week": 1.0279720279720281,
+        "trades_per_month": 4.466538461538462
+      }
+    }
+  },
+  "annual_forward_plus1pip": [
+    {
+      "year": 2022,
+      "trades": 99,
+      "PF": 0.7266200797073716,
+      "net_pips": -500.7500000000085
+    },
+    {
+      "year": 2023,
+      "trades": 46,
+      "PF": 1.2446994748103144,
+      "net_pips": 125.79999999998417
+    },
+    {
+      "year": 2024,
+      "trades": 33,
+      "PF": 1.2658867706528172,
+      "net_pips": 92.05000000000436
+    },
+    {
+      "year": 2025,
+      "trades": 71,
+      "PF": 1.2376944385254662,
+      "net_pips": 223.10000000000386
+    }
+  ],
+  "forward_bootstrap_plus1pip": {
+    "trades": 249,
+    "weeks": 209,
+    "block_weeks": 4,
+    "reps": 5000,
+    "seed": 261,
+    "observed_net_pips": -59.800000000016325,
+    "observed_mean_net_pips_per_week": -0.2861244019139537,
+    "probability_mean_weekly_net_positive": 0.4538,
+    "bootstrap_95pct_ci_mean_weekly_net_pips": [
+      -5.0187559808615285,
+      4.3756100478468385
+    ]
+  },
+  "gates": {
+    "minimum_trades_discovery_100": true,
+    "minimum_trades_validation_50": true,
+    "minimum_trades_forward_50": true,
+    "minimum_trades_oos_50": false,
+    "discovery_pf_ge_1_10": false,
+    "validation_pf_ge_1_10": true,
+    "forward_pf_ge_1_10": false,
+    "oos_pf_ge_1_10": true,
+    "all_forward_years_positive_net_and_pf_ge_1": false,
+    "bootstrap_forward_4week_ci_lower_gt_zero": false
+  },
+  "audit_notes": [
+    "Initial diagnostic run was invalidated and discarded after confirming weekend quote bars were flat closed-market placeholders; official result excludes London-local weekends and recomputes the unchanged 75th percentile on complete weekdays only.",
+    "R261 uses H1 data and does not reproduce R189 M1.",
+    "H1 OHLC does not identify tick-level SL/TP ordering; stop-first used as conservative rule.",
+    "No verified separate broker commission or live slippage. The verdict is not funded-ready."
+  ]
+}
