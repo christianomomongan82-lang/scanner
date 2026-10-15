@@ -192,3 +192,17 @@ A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now
 ### Status after R266
 - **There is still no approved strategy and no funded-ready strategy.** R189 remains separately unverified for full historical reproduction and for live execution constraints; R260–R266 must not be treated as approved strategy candidates.
 - Next experiment must be a structurally different, pre-registered hypothesis; keep the five-minute delay and cost sensitivity in the primary test. Run calculations in local Python, retrieve inputs only from GitHub, do not start GitHub Actions for backtesting, and record a binary verdict. If a pre-registered gate fails, stop that candidate without retuning.
+
+
+### R267 — Last-hour momentum into next RTH open: EXPLORATORY PILOT FAILED
+- [Retrospective pilot report](research/R267_LAST_HOUR_OVERNIGHT_PILOT.md)
+- [Machine-readable summary](research/R267_last_hour_overnight_pilot.json)
+- [Local replay runner](research/r267_last_hour_to_overnight.py)
+- Important research-integrity caveat: this calculation was run before a contemporaneous preregistration was committed to GitHub. It is archived as an exploratory pilot only; do not call it preregistered and do not use it to promote a candidate.
+- Rules: at 15:00 ET, follow the 14:00-open to 14:55-close M5 return in USA500/USATECH; enter 15:00 or 15:05 for latency stress; exit at the next complete RTH 09:30 ET open. BID-only inputs; modeled costs +2/+4/+6 bps are assumptions. Entry and exit dates were capped before 2026-01-01, and 2026 outcomes were not inspected.
+- At +4 bps, ideal forward 2022–2025: 1,986 trades, PF 0.878, net −7,469.5 bps. Delayed forward: PF 0.857, net −8,762.0 bps. Four-week block-bootstrap 95% intervals for weekly net bps include zero (ideal −80.65 to +8.70; delayed −85.98 to +1.35). Discovery negative; most annual cohorts negative; both indices negative. Exploratory candidate FAILED.
+- R267 compact trade ledgers are regenerable via the runner, but the published pilot summary does not include the verbose raw JSON output. The full locally produced JSON is not committed; use the compact summary for its approved interpretation.
+
+### Research process priority after R267
+- Do not immediately invent or optimize another signal just to make a new round number. A large family of prior range breakouts, reversals, momentum and relative-value ideas have already failed; repeated similar experiments add selection bias.
+- Recommended next work item is an execution/reproducibility audit of existing R189 historical replay and signal/exit mechanics, plus explicit separation of verified facts versus feed-specific replication. It must not be described as a fresh preregistered performance test. No candidate is approved or funded-ready.
