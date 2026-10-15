@@ -224,3 +224,16 @@ Raw data collection may use GitHub Actions. All signals, PnL, robustness metrics
 - **Verdict: FAILED.** Primary +4 bps PF gate, per-index gate, discovery/validation gates, positive bootstrap-confidence gate, and latency gate fail. Per preregistration, do not inspect 2026 OOS and do not tune this setup.
 
 Current active conclusion after R189, R262 and R263: no strategy is approved/funded-ready. The next candidate must be a materially different pre-registered hypothesis compatible with several-minute manual latency; keep testing costs and time delay from the outset.
+
+### R264 — U.S. cash-open gap-fade to prior close: FAILED (local test, 2026-10-16)
+
+- Preregistration: [R264 rules](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R264_US_CASH_OPEN_GAP_FADE_PREREGISTRATION.md)
+- Report: [R264 results](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R264_US_CASH_OPEN_GAP_FADE_RESULTS.md)
+- JSON: [R264 machine-readable results](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R264_US_cash_open_gap_fade_results.json)
+- Strategy: >=25 bps opening gap; first M5 candle reverses relative to gap; enter at 09:35 ET or +5-min delayed 09:40; stop at opening candle extreme; target previous RTH close; require reward/risk >=1; no overnight; USA500 and USATECH, one trade per instrument/day.
+- Historical data was from existing GitHub-stored BID-only M5 index artifacts, with signals/PnL locally calculated in Python. No ASK series is available, so +2/+4/+6 bps per trade are assumed cost sensitivities, not observed quoted costs.
+- Ideal entry: discovery 2016–2020 combined 638 trades, PF 0.807 at +2 bps and 0.707 at +4; validation 2021 119 trades, PF 0.909 at +2 and 0.787 at +4; forward 2022–2025 533 trades, PF 1.075 at +2 and 0.953 at +4 (net -433.6 bps at +4).
+- +5-min entry delay forward: 443 trades, combined PF 0.975 at +2, 0.863 at +4 and 0.769 at +6. Bootstrap 95% CI of weekly net returns at +4 crosses zero for ideal [-13.63, +10.25] bps/week and delayed [-16.21, +7.22]. Annual PF at +4 for ideal entry: 2022 1.156, 2023 0.932, 2024 0.809, 2025 0.786.
+- **Verdict: FAILED.** Do not tune parameters and do not inspect 2026 OOS because the pre-registered gates did not pass.
+
+Research sequence so far: R189 (M1, unfit for manual execution), R262 (H4 structural pullback, failed), R263 (US cash-open ORB, failed), R264 (US opening-gap fade, failed). None is approved for the funded challenge.
