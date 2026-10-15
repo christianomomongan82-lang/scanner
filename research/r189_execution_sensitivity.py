@@ -5,14 +5,16 @@ Expected input files: data_exports/eurusd_m1_2016_2025/*.csv.gz
 """
 from pathlib import Path
 import json
+import sys
 import numpy as np
 import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 from research.r189_dukascopy_historical_replay import (
     read_bars, l80_fast, PIP, SL, TP, MFE_TRIGGER, TRAIL,
     TIME_STOP_BARS, MAX_SPREAD_PIPS, COSTS
 )
-
-ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data_exports/eurusd_m1_2016_2025"
 OUT = ROOT / "research/r189_dukascopy_history_local_results"
 
