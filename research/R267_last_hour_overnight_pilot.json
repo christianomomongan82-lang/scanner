@@ -1,0 +1,209 @@
+{
+  "study": "R267 Last-Hour Momentum Into Overnight",
+  "date": "2026-10-16",
+  "research_status": "RETROSPECTIVE EXPLORATORY PILOT",
+  "verdict": "FAILED",
+  "parameters_locked_in_repo_before_test": false,
+  "note": "Run happened before a contemporaneous preregistration was committed. This report is archival only and never promotion-eligible.",
+  "rules": {
+    "timezone": "America/New_York",
+    "signal": "sign of return from 14:00 ET M5 open to 14:55 ET M5 close, known at 15:00",
+    "ideal_entry": "15:00 ET open",
+    "delay_entry": "15:05 ET open",
+    "exit": "next complete regular-session 09:30 ET open",
+    "instruments": [
+      "USA500",
+      "USATECH"
+    ],
+    "one_trade_per_instrument_per_session": true,
+    "holding": "overnight to next RTH open, weekends included",
+    "cost_sensitivity_bps": [
+      2,
+      4,
+      6
+    ],
+    "splits": {
+      "discovery": "2016-2020",
+      "validation": "2021",
+      "forward": "2022-2025"
+    },
+    "oos_2026_outcomes_inspected": false
+  },
+  "data": {
+    "USA500": {
+      "file": "usa500idxusd_m5.csv.gz",
+      "rows": 886206,
+      "valid_rows": 886206,
+      "duplicates_removed": 0,
+      "invalid_ohlc_removed": 0,
+      "complete_rth_sessions": 2757,
+      "start_utc": "2016-01-04T00:00:00+00:00",
+      "end_utc": "2026-10-09T20:10:00+00:00",
+      "sha256": "df2a5edfa49cb15f8bcf5b13577e95907a0f0c54d02c7feed8bdbb7e3b6c49ee"
+    },
+    "USATECH": {
+      "file": "usatechidxusd_m5.csv.gz",
+      "rows": 886039,
+      "valid_rows": 886039,
+      "duplicates_removed": 0,
+      "invalid_ohlc_removed": 0,
+      "complete_rth_sessions": 2756,
+      "start_utc": "2016-01-04T00:00:00+00:00",
+      "end_utc": "2026-10-09T20:10:00+00:00",
+      "sha256": "82b06c38f66cd1387097691baac1d45c9463b6540eea9dfe28a894d85e122f7c"
+    },
+    "ask_side_available": false,
+    "all_entry_and_exit_dates_before_2026": true
+  },
+  "modes": {
+    "ideal": {
+      "total_trades": 4972,
+      "at_4bps": {
+        "discovery": {
+          "trades": 2484,
+          "PF": 0.8635,
+          "net_bps": -9734.8
+        },
+        "validation": {
+          "trades": 502,
+          "PF": 1.0005,
+          "net_bps": 6.2
+        },
+        "forward": {
+          "trades": 1986,
+          "PF": 0.8782,
+          "net_bps": -7469.5
+        },
+        "annual_forward": {
+          "2022": {
+            "trades": 500,
+            "PF": 0.918,
+            "net_bps": -1767.9
+          },
+          "2023": {
+            "trades": 496,
+            "PF": 1.0111,
+            "net_bps": 123.7
+          },
+          "2024": {
+            "trades": 498,
+            "PF": 0.7854,
+            "net_bps": -2710
+          },
+          "2025": {
+            "trades": 492,
+            "PF": 0.8054,
+            "net_bps": -3115.3
+          }
+        },
+        "symbol_forward": {
+          "USA500": {
+            "trades": 993,
+            "PF": 0.8713,
+            "net_bps": -3451.4
+          },
+          "USATECH": {
+            "trades": 993,
+            "PF": 0.8836,
+            "net_bps": -4018.1
+          }
+        }
+      },
+      "bootstrap": {
+        "weeks": 209,
+        "block_weeks": 4,
+        "reps": 10000,
+        "seed": 2672026,
+        "mean_weekly_net_bps": -35.7391,
+        "probability_mean_positive": 0.0575,
+        "ci95_bps_per_week": [
+          -80.6469,
+          8.705
+        ]
+      }
+    },
+    "delay5": {
+      "total_trades": 4972,
+      "at_4bps": {
+        "discovery": {
+          "trades": 2484,
+          "PF": 0.8649,
+          "net_bps": -9563.6
+        },
+        "validation": {
+          "trades": 502,
+          "PF": 0.965,
+          "net_bps": -410.5
+        },
+        "forward": {
+          "trades": 1986,
+          "PF": 0.8573,
+          "net_bps": -8762
+        },
+        "annual_forward": {
+          "2022": {
+            "trades": 500,
+            "PF": 0.889,
+            "net_bps": -2424.4
+          },
+          "2023": {
+            "trades": 496,
+            "PF": 0.978,
+            "net_bps": -242
+          },
+          "2024": {
+            "trades": 498,
+            "PF": 0.775,
+            "net_bps": -2835.3
+          },
+          "2025": {
+            "trades": 492,
+            "PF": 0.7953,
+            "net_bps": -3260.2
+          }
+        },
+        "symbol_forward": {
+          "USA500": {
+            "trades": 993,
+            "PF": 0.8485,
+            "net_bps": -4061.4
+          },
+          "USATECH": {
+            "trades": 993,
+            "PF": 0.8641,
+            "net_bps": -4700.6
+          }
+        }
+      },
+      "bootstrap": {
+        "weeks": 209,
+        "block_weeks": 4,
+        "reps": 10000,
+        "seed": 2672031,
+        "mean_weekly_net_bps": -41.9233,
+        "probability_mean_positive": 0.0286,
+        "ci95_bps_per_week": [
+          -85.978,
+          1.3462
+        ]
+      }
+    }
+  },
+  "failed_gates": [
+    "not contemporaneously preregistered",
+    "discovery expectancy negative",
+    "forward PF below 1.00 at +4 bps",
+    "most forward annual cohorts negative",
+    "both symbols negative in forward",
+    "bootstrap 95% CI includes zero"
+  ],
+  "limitations": [
+    "BID-only data; cost scenarios are not observed spreads",
+    "No live slippage or broker/prop-firm cost confirmation",
+    "No funded timezone, DLL/MLL, or Quick Strike replay",
+    "Exploratory outcome not eligible for strategy promotion"
+  ],
+  "runner_sha256": "d112f2a4f57057ec77c77f9344ecfa28a53afefa9434f10215553cf85942f737",
+  "ideal_compact_ledger_sha256": "e415123009243a76e624f4f4b191713290b960406d2601bb9f9edef2f14dba14",
+  "delay5_compact_ledger_sha256": "bf1b8302b84bbd07237fade3cd8300825265e2077ba1fbb597f5b253edae3880"
+}
