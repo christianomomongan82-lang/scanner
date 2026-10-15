@@ -15,7 +15,7 @@ def daily_sessions(path,sym):
     for c in ['open','high','low','close']: df[c]=pd.to_numeric(df[c],errors='coerce')
     df=df.dropna(subset=['timestamp_utc','open','high','low','close']).sort_values('timestamp_utc')
     dup=int(df.timestamp_utc.duplicated(keep='last').sum()); df=df.drop_duplicates('timestamp_utc',keep='last').copy()
-    valid=(df.high>=df[['open','close']].max(axis=1))&(df.low<=df[['open','close']].min(axis=1))&(df.low<=df[['open','close']].max(axis=1))&(df.high>=df.low)
+    valid=(df.high>=df[['open','close']].max(axis=1))&(df.low<=df[['open','close']].min(axis=1))&(df.low<=df[['open','close']].min(axis=1))&(df.high>=df.low)
     invalid=int((~valid).sum()); df=df.loc[valid].copy()
     df['timestamp_et']=df.timestamp_utc.dt.tz_convert(TZ); df['date_et']=df.timestamp_et.dt.date; df['hhmm']=df.timestamp_et.dt.strftime('%H:%M')
     rth=df.loc[df.hhmm.between('09:30','15:55')].copy()
