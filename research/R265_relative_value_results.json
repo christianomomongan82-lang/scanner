@@ -1,0 +1,245 @@
+{
+  "study": "R265 USA500-USATECH Relative-Value Mean Reversion",
+  "date": "2026-10-16",
+  "final_verdict": "FAILED",
+  "parameters_optimized": false,
+  "preliminary_unfiltered_run": "Discarded and not used; included Sunday and weekday flat placeholder sessions. Final official run excludes them.",
+  "data_cleaning": {
+    "files": {
+      "USA500": {
+        "file": "usa500idxusd_m5.csv.gz",
+        "rows": 886206,
+        "duplicates_removed": 0,
+        "invalid_ohlc_removed": 0,
+        "sha256": "df2a5edfa49cb15f8bcf5b13577e95907a0f0c54d02c7feed8bdbb7e3b6c49ee",
+        "valid_sessions_after_cleaning": 2742
+      },
+      "USATECH": {
+        "file": "usatechidxusd_m5.csv.gz",
+        "rows": 886039,
+        "duplicates_removed": 0,
+        "invalid_ohlc_removed": 0,
+        "sha256": "82b06c38f66cd1387097691baac1d45c9463b6540eea9dfe28a894d85e122f7c",
+        "valid_sessions_after_cleaning": 2741
+      }
+    },
+    "common_paired_sessions": 2741,
+    "start": "2016-01-04",
+    "end": "2026-10-09",
+    "excluded_closed_placeholders": "All Sundays and 15 weekdays with an all-flat RTH range; also exclude sessions missing any of the 78 expected M5 bars."
+  },
+  "input_limitations": {
+    "bid_only": true,
+    "ask_side_available": false,
+    "costs_observed": false,
+    "cost_assumptions_bps": [
+      2,
+      4,
+      6
+    ],
+    "cost_applied": "once per equal-notional pair trade after averaging the two leg returns"
+  },
+  "rules": {
+    "ratio": "log(USATECH RTH close / USA500 RTH close)",
+    "baseline_sessions": 60,
+    "entry_z_thresholds": [
+      -2,
+      2
+    ],
+    "adverse_exit_z_thresholds": [
+      -3,
+      3
+    ],
+    "mean_reversion_exit_z": 0,
+    "max_holding_sessions": 10,
+    "ideal_fill": "next common RTH session open 09:30 ET",
+    "latency_fill": "09:35 ET for entry and scheduled exit",
+    "position_direction": "z>=2: short USATECH/long USA500; z<=-2: long USATECH/short USA500",
+    "one_pair_at_a_time": true,
+    "no_tuning": true
+  },
+  "ideal": {
+    "discovery_2016_2020": {
+      "trades": 45,
+      "cost2": {
+        "PF": 0.9128964,
+        "net_bps": -142.6526
+      },
+      "cost4": {
+        "PF": 0.8618235,
+        "net_bps": -232.6526
+      },
+      "cost6": {
+        "PF": 0.8134803,
+        "net_bps": -322.6526
+      }
+    },
+    "validation_2021": {
+      "trades": 8,
+      "cost2": {
+        "PF": 1.5776403,
+        "net_bps": 122.2429
+      },
+      "cost4": {
+        "PF": 1.4881934,
+        "net_bps": 106.2429
+      },
+      "cost6": {
+        "PF": 1.4035464,
+        "net_bps": 90.2429
+      }
+    },
+    "forward_2022_2025": {
+      "trades": 41,
+      "cost2": {
+        "PF": 1.4961174,
+        "net_bps": 481.9318
+      },
+      "cost4": {
+        "PF": 1.3954213,
+        "net_bps": 399.9318
+      },
+      "cost6": {
+        "PF": 1.3015421,
+        "net_bps": 317.9318
+      }
+    },
+    "all_2016_2025": {
+      "trades": 103,
+      "cost2": {
+        "PF": 1.0517062,
+        "net_bps": 171.4751
+      },
+      "cost4": {
+        "PF": 0.989906,
+        "net_bps": -34.5249
+      },
+      "cost6": {
+        "PF": 0.9318194,
+        "net_bps": -240.5249
+      }
+    }
+  },
+  "delay5": {
+    "discovery_2016_2020": {
+      "trades": 45,
+      "cost2": {
+        "PF": 0.8472631,
+        "net_bps": -254.8035
+      },
+      "cost4": {
+        "PF": 0.7993288,
+        "net_bps": -344.8035
+      },
+      "cost6": {
+        "PF": 0.7541054,
+        "net_bps": -434.8035
+      }
+    },
+    "validation_2021": {
+      "trades": 8,
+      "cost2": {
+        "PF": 1.45406,
+        "net_bps": 97.6956
+      },
+      "cost4": {
+        "PF": 1.3693957,
+        "net_bps": 81.6956
+      },
+      "cost6": {
+        "PF": 1.2892039,
+        "net_bps": 65.6956
+      }
+    },
+    "forward_2022_2025": {
+      "trades": 41,
+      "cost2": {
+        "PF": 1.404343,
+        "net_bps": 414.4273
+      },
+      "cost4": {
+        "PF": 1.3125781,
+        "net_bps": 332.4273
+      },
+      "cost6": {
+        "PF": 1.2266903,
+        "net_bps": 250.4273
+      }
+    },
+    "all_2016_2025": {
+      "trades": 103,
+      "cost2": {
+        "PF": 0.9910136,
+        "net_bps": -30.5148
+      },
+      "cost4": {
+        "PF": 0.932467,
+        "net_bps": -236.5148
+      },
+      "cost6": {
+        "PF": 0.8775357,
+        "net_bps": -442.5148
+      }
+    }
+  },
+  "annual_forward_ideal_cost4": {
+    "2022": {
+      "trades": 12,
+      "PF": 1.7624107,
+      "net_bps": 276.9977
+    },
+    "2023": {
+      "trades": 7,
+      "PF": 0.0937762,
+      "net_bps": -259.1224
+    },
+    "2024": {
+      "trades": 13,
+      "PF": 2.21373298,
+      "net_bps": 257.0245
+    },
+    "2025": {
+      "trades": 9,
+      "PF": 1.3817736,
+      "net_bps": 125.032
+    }
+  },
+  "bootstrap_forward_cost4": {
+    "ideal": {
+      "weeks": 209,
+      "repetitions": 10000,
+      "seed": 2652026,
+      "block_weeks": 4,
+      "mean_weekly_net_bps": 1.9135491,
+      "probability_positive_mean": 0.79,
+      "ci95_bps_per_week": [
+        -2.63717,
+        6.65986
+      ]
+    },
+    "delay5": {
+      "weeks": 209,
+      "repetitions": 10000,
+      "seed": 2652027,
+      "block_weeks": 4,
+      "mean_weekly_net_bps": 1.5905612,
+      "probability_positive_mean": 0.7456,
+      "ci95_bps_per_week": [
+        -3.13718,
+        6.42625
+      ]
+    }
+  },
+  "gates": {
+    "forward_trade_count_at_least_100": false,
+    "forward_pf_at_least_1_10_cost4_ideal": true,
+    "forward_pf_at_least_1_10_cost4_delay5": true,
+    "bootstrap_ci_wholly_positive_ideal": false,
+    "bootstrap_ci_wholly_positive_delay5": false,
+    "discovery_pf_ge_1_10_cost4": false,
+    "overall_pf_ge_1_10_cost4_ideal": false,
+    "overall_pf_ge_1_10_cost4_delay5": false
+  },
+  "oos_2026_run": false,
+  "final_note": "Do not tune or promote. Candidate failed the pre-registered minimum-trade, bootstrap, discovery robustness and overall-PF gates."
+}
