@@ -292,3 +292,14 @@ Active branch record: [full R269 checkpoint and research artifacts](https://gith
 - Primary scorecard: probability of hitting each phase target before loss-rule breach, probability of completing both phases, median/upper-quantile time to target, risk/breach probability, opportunity frequency under 5-minute execution delay, cost robustness and inter-module overlap/correlation.
 - PF, expectancy, win rate, frequency and drawdown remain diagnostics that explain why a portfolio succeeds/fails. Do not select the system solely for highest PF. Do not promote a high-risk lottery on the basis of occasional target hits; quantify repeated-path success and breach distributions.
 - Fixed-fractional capital compounding is part of the challenge path simulation after the integrated opportunity stream is defined; it is not the project's end goal.
+
+
+
+## Latest research update — R270 GAGAL (2026-10-16)
+
+Active research branch: [local-backtest/r189-dukascopy-history](https://github.com/christianomomongan82-lang/scanner/tree/local-backtest/r189-dukascopy-history). R270 preregistration, results report, compact JSON and full checkpoint are on that branch:
+- [R270 preregistration](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R270_SESSION_REGIME_ROUTER_PREREGISTRATION.md)
+- [R270 result report](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R270_SESSION_REGIME_ROUTER_RESULTS.md)
+- [R270 compact JSON](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R270_results_compact.json)
+
+R270 used EURUSD M1 BID/ASK from raw-only GitHub artifact 11959096102 (Dukascopy, 2016–2025; SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`) and was calculated locally, not in GitHub Actions. Module A produced zero trades (observed max Asia ER 0.2101 against a locked minimum 0.30), so the router collapsed to Module B. At +1 pip extra cost, B/router generated 290 discovery trades PF 0.712/-65.97R, 68 validation trades PF 0.639/-20.16R, and 219 forward diagnostic trades PF 0.628/-63.50R; every forward year was negative. Four-week bootstrap mean was -0.304R/week (95% CI [-0.484, -0.115]). Challenge-path proxy did not improve the two-phase completion profile without higher breach risk. **R270 = GAGAL; no retuning.** 2022–2025 is not an untouched holdout, 2026 is absent, and the official funded engine is not fully verified. Full local row-level ledger/runner had not yet been committed at this checkpoint update; do not claim GitHub-only reproducibility until stored.
