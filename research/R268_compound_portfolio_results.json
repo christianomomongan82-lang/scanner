@@ -217,12 +217,29 @@
     "promotion_eligible": false
   },
   "economic_screen_pass": false,
-  "decision": "GAGAL FOR PROMOTION; joint expectancy negative, drawdown exceeds 10%, forward bootstrap is negative, and the combination is retrospective.",
+  "decision": "GAGAL: portfolio economics fail, selection is retrospective, and repository-only reproduction fails because the exact R262/R263 trade-ledger inputs are absent.",
   "limitations": [
     "The components were previously inspected, so this combination cannot be promoted based on these same periods.",
     "Trade ledgers are closed outcomes, not tick-by-tick floating equity; drawdown may understate challenge breaches.",
     "Daily loss limit and Quick Strike are not exactly replayed.",
     "Index +4 bps is a cost assumption, not measured live spread.",
     "No 2026 trade outcomes included."
-  ]
+  ],
+  "repository_reproducibility": {
+    "verdict": "GAGAL",
+    "self_contained_on_repository_branch": false,
+    "runner_requires_local_files": [
+      {
+        "path": "/mnt/data/R262_H4_structure_pullback_results/R262_trades_delay_5m.csv",
+        "sha256": "35ef952871ecef2dad363e47a9dd998d784501baebacb89910e936cb41e256ef",
+        "present_in_repository": false
+      },
+      {
+        "path": "/mnt/data/R263_US_cash_open_ORB_results/R263_ORB_trades_delay_5m.csv",
+        "sha256": "7a3acec0c4dc6c2e973f4ae52fb0d43c53ada7c60d8ad6d70990385430ef4e4b",
+        "present_in_repository": false
+      }
+    ],
+    "note": "R262/R263 reports and summary JSON exist in GitHub, but the exact trade ledgers used in the local R268 combined replay do not. The economics above were calculated locally; do not claim the saved runner can reproduce the exact trade stream from this branch alone."
+  }
 }
