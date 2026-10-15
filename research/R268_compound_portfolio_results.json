@@ -1,0 +1,228 @@
+{
+  "study": "R268 fixed-fractional compound portfolio diagnostic",
+  "date": "2026-10-16",
+  "status": "COMPLETE",
+  "verdict": "GAGAL",
+  "classification": "RETROSPECTIVE_DIAGNOSTIC_NOT_INDEPENDENTLY_VALIDATED",
+  "parameters_locked": true,
+  "preregistration": "research/R268_COMPOUND_PORTFOLIO_PREREGISTRATION.md",
+  "report": "research/R268_COMPOUND_PORTFOLIO_RESULTS.md",
+  "runner": "research/r268_compound_portfolio.py",
+  "method": {
+    "initial_equity_usd": 6000,
+    "risk_per_trade_pct_of_realized_equity": 0.25,
+    "maximum_open_initial_risk_pct": 1,
+    "fx_extra_cost_pips": 1,
+    "index_extra_cost_bps": 4,
+    "components": [
+      "R262 EURUSD H4 structural pullback using 5-minute delayed ledger",
+      "R263 USA500/USATECH cash-open ORB using 5-minute delayed ledger"
+    ],
+    "compounding": "risk dollars fixed at each entry based on current realized equity; PnL added at exit; next positions use updated equity",
+    "max_open_risk_cap_trades_skipped": 0,
+    "no_2026_trades_included": true,
+    "component_outputs_previously_inspected": true
+  },
+  "inputs": {
+    "R262": {
+      "file": "research/R262_H4_structure_pullback_results/R262_trades_delay_5m.csv",
+      "rows": 1224,
+      "entry_start": "2016-01-06T00:05:00Z",
+      "entry_end": "2025-12-29T08:05:00Z",
+      "sha256": "35ef952871ecef2dad363e47a9dd998d784501baebacb89910e936cb41e256ef"
+    },
+    "R263": {
+      "file": "research/R263_US_cash_open_ORB_results/R263_ORB_trades_delay_5m.csv",
+      "rows": 4704,
+      "entry_start": "2016-01-04T15:10:00Z",
+      "entry_end": "2025-12-31T16:00:00Z",
+      "sha256": "7a3acec0c4dc6c2e973f4ae52fb0d43c53ada7c60d8ad6d70990385430ef4e4b"
+    }
+  },
+  "overall_2016_2025": {
+    "trades_accepted": 5928,
+    "skipped_due_open_risk_cap": 0,
+    "starting_equity_usd": 6000,
+    "ending_equity_usd": 1139.26,
+    "total_return_pct": -81.0123,
+    "closed_equity_max_drawdown_pct": 81.3687,
+    "open_positions_at_end": 0
+  },
+  "periods": {
+    "discovery_2016_2020": {
+      "input_trades": 2937,
+      "accepted_trades": 2937,
+      "ending_equity_usd": 2305.82,
+      "total_return_pct": -61.5697,
+      "closed_equity_max_drawdown_pct": 62.14,
+      "PF_net_R": 0.767,
+      "sum_net_R": -376.55,
+      "module_stats": {
+        "R262": {
+          "trades": 621,
+          "PF_net_R": 0.7182,
+          "sum_net_R": -127.0133
+        },
+        "R263_USA500": {
+          "trades": 1173,
+          "PF_net_R": 0.7738,
+          "sum_net_R": -142.8349
+        },
+        "R263_USATECH": {
+          "trades": 1143,
+          "PF_net_R": 0.7989,
+          "sum_net_R": -106.6981
+        }
+      },
+      "bootstrap": {
+        "weeks_including_zero_trade_weeks": 262,
+        "block_weeks": 4,
+        "reps": 10000,
+        "seed": 2682026,
+        "mean_weekly_pnl_pct_reference_equity": -0.235,
+        "prob_bootstrap_mean_positive": 0,
+        "ci95_weekly_pct": [
+          -0.32794,
+          -0.14214
+        ]
+      }
+    },
+    "validation_2021": {
+      "input_trades": 592,
+      "accepted_trades": 592,
+      "ending_equity_usd": 5270.8,
+      "total_return_pct": -12.1533,
+      "closed_equity_max_drawdown_pct": 13.79,
+      "PF_net_R": 0.827,
+      "sum_net_R": -50.87,
+      "module_stats": {
+        "R262": {
+          "trades": 124,
+          "PF_net_R": 0.6717,
+          "sum_net_R": -29.0617
+        },
+        "R263_USA500": {
+          "trades": 239,
+          "PF_net_R": 0.8119,
+          "sum_net_R": -21.8151
+        },
+        "R263_USATECH": {
+          "trades": 229,
+          "PF_net_R": 1.0001,
+          "sum_net_R": 0.0093
+        }
+      },
+      "bootstrap": {
+        "weeks_including_zero_trade_weeks": 53,
+        "block_weeks": 4,
+        "reps": 10000,
+        "seed": 2682027,
+        "mean_weekly_pnl_pct_reference_equity": -0.2293,
+        "prob_bootstrap_mean_positive": 0.0267,
+        "ci95_weekly_pct": [
+          -0.47034,
+          0.00275
+        ]
+      }
+    },
+    "forward_2022_2025": {
+      "input_trades": 2399,
+      "accepted_trades": 2399,
+      "skipped_due_open_risk_cap": 0,
+      "starting_equity_usd": 6000,
+      "ending_equity_usd": 3374.61,
+      "total_return_pct": -43.7565,
+      "closed_equity_max_drawdown_pct": 44.6,
+      "PF_net_R": 0.8229,
+      "sum_net_R": -225.18,
+      "mll_floor_usd": 5400,
+      "mll_first_closed_equity_breach_utc": "2023-05-26T04:06:00Z",
+      "equity_at_breach_usd": 5392.91,
+      "module_stats": {
+        "R262": {
+          "trades": 479,
+          "PF_net_R": 0.5609,
+          "sum_net_R": -169.0083,
+          "pnl_dollars": -2033.23
+        },
+        "R263_USA500": {
+          "trades": 969,
+          "PF_net_R": 0.9116,
+          "sum_net_R": -42.7824,
+          "pnl_dollars": -426.76
+        },
+        "R263_USATECH": {
+          "trades": 951,
+          "PF_net_R": 0.9669,
+          "sum_net_R": -13.3874,
+          "pnl_dollars": -165.4
+        }
+      },
+      "annual_compound_reset_each_year": {
+        "2022": {
+          "trades": 593,
+          "PF_net_R": 1.0087,
+          "ending_equity_usd": 6018.14,
+          "total_return_pct": 0.3024,
+          "closed_equity_max_drawdown_pct": 7.1155,
+          "sum_net_R": 2.394
+        },
+        "2023": {
+          "trades": 604,
+          "PF_net_R": 0.8035,
+          "ending_equity_usd": 5032.73,
+          "total_return_pct": -16.1212,
+          "closed_equity_max_drawdown_pct": 17.5299,
+          "sum_net_R": -68.8226
+        },
+        "2024": {
+          "trades": 598,
+          "PF_net_R": 0.7456,
+          "ending_equity_usd": 4836.73,
+          "total_return_pct": -19.3879,
+          "closed_equity_max_drawdown_pct": 19.6736,
+          "sum_net_R": -85.022
+        },
+        "2025": {
+          "trades": 604,
+          "PF_net_R": 0.7657,
+          "ending_equity_usd": 4975.76,
+          "total_return_pct": -17.0706,
+          "closed_equity_max_drawdown_pct": 17.9193,
+          "sum_net_R": -73.7275
+        }
+      },
+      "bootstrap": {
+        "weeks_including_zero_trade_weeks": 210,
+        "block_weeks": 4,
+        "reps": 10000,
+        "seed": 2682028,
+        "mean_weekly_pnl_pct_reference_equity": -0.20836,
+        "prob_bootstrap_mean_positive": 0,
+        "ci95_weekly_pct": [
+          -0.31517,
+          -0.10171
+        ]
+      }
+    }
+  },
+  "gates": {
+    "discovery_net_positive": false,
+    "validation_net_positive": false,
+    "forward_net_positive_and_PF_ge_1_10": false,
+    "every_forward_year_positive": false,
+    "bootstrap_CI_lower_above_zero": false,
+    "closed_equity_max_drawdown_below_10pct": false,
+    "independent_validation_available": false,
+    "promotion_eligible": false
+  },
+  "economic_screen_pass": false,
+  "decision": "GAGAL FOR PROMOTION; joint expectancy negative, drawdown exceeds 10%, forward bootstrap is negative, and the combination is retrospective.",
+  "limitations": [
+    "The components were previously inspected, so this combination cannot be promoted based on these same periods.",
+    "Trade ledgers are closed outcomes, not tick-by-tick floating equity; drawdown may understate challenge breaches.",
+    "Daily loss limit and Quick Strike are not exactly replayed.",
+    "Index +4 bps is a cost assumption, not measured live spread.",
+    "No 2026 trade outcomes included."
+  ]
+}
