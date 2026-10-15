@@ -65,3 +65,12 @@ The component outputs had already been inspected before the portfolio weights an
 - The test does not exactly replay FundedNext's daily loss limit, the actual funded server/DST mapping, live slippage/commission, or Quick Strike close-duration measurement.
 - The index cost is fixed +4 bps stress, not a directly observed live fill-cost distribution.
 - Both component and combined tests end in 2025. No 2026 outcomes were used.
+
+
+## Repository reproducibility audit — GAGAL
+
+The numerical replay above was executed locally from these environment inputs:
+- R262 trade ledger: R262_trades_delay_5m.csv (SHA-256 35ef952871ecef2dad363e47a9dd998d784501baebacb89910e936cb41e256ef).
+- R263 trade ledger: R263_ORB_trades_delay_5m.csv (SHA-256 7a3acec0c4dc6c2e973f4ae52fb0d43c53ada7c60d8ad6d70990385430ef4e4b).
+
+The exact two input trade-ledger CSVs are **not present as repository files on this branch**. The R268 runner is archived, but it expects those local CSV paths. The R262/R263 reports and result JSONs exist in GitHub; that is not enough to reconstruct the exact combined entry/exit stream. Therefore **repository-only reproduction of R268 is GAGAL**. Do not describe the current GitHub state as fully self-contained for this run. This is a storage/reproducibility failure separate from the economic verdict, which is also GAGAL.
