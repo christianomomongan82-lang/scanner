@@ -288,3 +288,15 @@ The user's “compound compound” instruction was not satisfied by increasing p
 - Primary scorecard: probability of hitting each phase target before loss-rule breach, probability of completing both phases, median/upper-quantile time to target, risk/breach probability, opportunity frequency under 5-minute execution delay, cost robustness and inter-module overlap/correlation.
 - PF, expectancy, win rate, frequency and drawdown remain diagnostics that explain why a portfolio succeeds/fails. Do not select the system solely for highest PF. Do not promote a high-risk lottery on the basis of occasional target hits; quantify repeated-path success and breach distributions.
 - Fixed-fractional capital compounding is part of the challenge path simulation after the integrated opportunity stream is defined; it is not the project's end goal.
+
+
+
+## R270 — Asia-session regime router — GAGAL (2026-10-16)
+
+- [Preregistration](research/R270_SESSION_REGIME_ROUTER_PREREGISTRATION.md) · [results report](research/R270_SESSION_REGIME_ROUTER_RESULTS.md) · [compact JSON](research/R270_results_compact.json).
+- Input: EURUSD M1 BID/ASK Dukascopy raw-only GitHub artifact 11959096102 (data-only run 38697080604), ZIP SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`; local Python calculations, no backtest Actions run.
+- Locked router: Module A continuation only if Asia ER >=0.30 plus close-in-edge direction; Module B fade in low-ER balanced sessions; five-minute entry delay; BID/ASK execution; +1 pip primary cost.
+- Diagnostic: across 2,605 eligible London weekdays, maximum observed ER was 0.2101, so Module A never fired. Module B produced 577 trades; router is exactly identical to B, not a true combined stream.
+- At +1 additional pip, B/router: discovery 2016–2020 290 trades, PF 0.712, -65.97R; 2021 68 trades, PF 0.639, -20.16R; forward 2022–2025 219 trades, PF 0.628, -63.50R. All four forward years were negative. Four-week bootstrap average net was -0.304R/week, 95% CI [-0.484, -0.115]. Even with 0 added pips beyond observed quotes, discovery/validation/forward net R was -14.14/-5.96/-30.99.
+- Challenge reference proxy, not funded-equivalent: router both-phase completion was 0% at 0.25–0.50% risk, 0.4% at 0.75%, and 1.1% at 1.00%, while proxy loss-rule breach rose from 28.1% to 97.9%. Higher risk is not a credible rescue.
+- **Verdict: GAGAL.** The economic/coverage gates failed; 2022–2025 is not independent, 2026 is absent, and official funded implementation/rules remain unverified. Do not retune R270. At checkpoint time, full runner and row-level ledger are preserved locally but have not yet been committed to this branch; do not claim full GitHub-only reproducibility until those files are stored.
