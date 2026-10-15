@@ -189,3 +189,11 @@ A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now
 
 ### Current operating rule (reaffirmed)
 Raw data collection may use GitHub Actions. All signals, PnL, robustness metrics and verdicts must run in local ChatGPT/container Python. GitHub is source/artifact storage, never the backtest compute engine. Do not use Massive. If a stored series is absent, proactively acquire raw data through the established source method and retain explicit feed provenance.
+
+
+### R189 manual execution latency audit — 2026-10-16
+
+- Local replay uses the official intrabar-aware execution model and unchanged R189/L80 signal parameters. No tuning was performed. The delay audit is stored here: [report](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R189_MANUAL_EXECUTION_DELAY_AUDIT.md) and [machine-readable JSON](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R189_manual_execution_delay_audit.json).
+- Delay means additional minutes after the ideal next-M1-open fill: +1/+3/+5 minutes (approximately 2/4/6 minutes from signal-bar close). Forward 2021–2025 with +0.5 pip extra cost: PF 1.284 at ideal fill, 1.225 at +1 minute, 1.212 at +3 minutes, and 1.071 at +5 minutes. With +1 pip extra cost: PF 1.114, 1.062, 1.048, and 0.926 respectively; the +5-minute result has net −203.0 pips.
+- The PF 1.10 annual robustness floor is already breached in 2023 at only +1 minute delay (PF 0.973 at +0.5 pip extra cost); at +5 minutes three forward years fail the floor. At +1 pip extra cost, all latency settings have a weekly-bootstrap 95% interval crossing zero.
+- **Verdict remains NOT PASSED for the user's several-minute manual-phone execution. Do not optimize R189 to fix the latency result.** Next research should use a separate candidate with a longer decision/holding horizon compatible with manual execution, and must pass its own forward/OOS and cost gates before portfolio combination.
