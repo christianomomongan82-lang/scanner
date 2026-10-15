@@ -43,7 +43,7 @@ def load_daily(path, symbol):
     complete_dates = counts.index[(counts == 78) & (unique_times == 78)]
     rc = rth[rth['date_et'].isin(complete_dates)]
     daily = rc.groupby('date_et', sort=True).agg(
-        day_high=('high', 'max'), day_low=('low', 'min),
+        day_high=('high', 'max'), day_low=('low', 'min'),
         bar_count=('open', 'size')
     )
     def at_time(time, field):
