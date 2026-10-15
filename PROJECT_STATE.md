@@ -238,3 +238,5 @@ A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now
 - R268 menggabungkan R262 EURUSD dan R263 indeks memakai ledger delay 5 menit, biaya tambahan +1 pip FX dan +4 bps indeks, risiko 0,25% ekuitas per trade, batas open risk 1%. Forward 2022–2025: 2.399 trade, PF net R 0,823, equity referensi $6.000 menjadi $3.374,61 (−43,76%), closed-equity DD 44,60%. Batas MLL nominal $5.400 pertama kali dilewati di 2023-05-26 04:06 UTC; simulasi akan gagal pada titik itu. Ini diagnostik retrospektif, bukan estimasi peluang lulus funded.
 - R268 membuktikan bahwa gabungan dua modul ini **GAGAL**; jangan retune komponen lama untuk menyelamatkannya. Untuk kandidat baru, praregistrasikan aturan dan gate, lalu uji komposit serta compounding lokal. Hasil yang tidak memenuhi satu gate pun = GAGAL.
 
+
+- **R268 reproducibility status: GAGAL.** The local combined calculation used R262/R263 delayed trade-ledger CSVs that are not present as repository files; result JSON, report, and runner are saved, but this exact run is not self-contained from GitHub alone. Its local input hashes are documented in the report/JSON. Do not claim otherwise.
