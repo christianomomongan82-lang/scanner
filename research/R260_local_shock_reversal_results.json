@@ -1,0 +1,203 @@
+{
+  "status": "COMPLETED",
+  "round": "R260",
+  "verdict": "GAGAL",
+  "execution_location": "local session/container; no backtest executed by GitHub Actions",
+  "input": {
+    "github_artifact_id": 11916174401,
+    "artifact_name": "R258-multihorizon-momentum-audit.zip",
+    "frequency": "H1",
+    "instrument": "EURUSD",
+    "start_utc": "2017-01-01T00:00:00Z",
+    "end_utc": "2026-10-13T23:00:00Z",
+    "bid_sha256": "68d667ef6e84d4357207da86dc0ffd18453bbfa91837d0dd1349ac82bb6c47bf",
+    "ask_sha256": "8b9d3660213fae55bf0066c42fd093badc4a8092ddb2a0ca1672bbac5bcc7b91",
+    "common_valid_rows": 85170,
+    "missing_grid_hours": 582,
+    "negative_open_spread_rows": 0,
+    "spread_pips": {
+      "median": 0.4,
+      "p95": 7.4,
+      "max": 23.1
+    }
+  },
+  "locked_parameters": {
+    "threshold_quantile": 0.9,
+    "threshold_fit_period": [
+      "2017-01-01",
+      "2021-01-01"
+    ],
+    "threshold_body_pips": 12.9,
+    "signal": "fade large completed BID candle",
+    "entry": "next exact H1 open",
+    "stop": "signal candle executable-side extreme",
+    "target_R": 1,
+    "max_hold_hours": 6,
+    "additional_cost_stress_pips": [
+      0,
+      0.5,
+      1,
+      2
+    ]
+  },
+  "diagnostics": {
+    "signal_bars": 8428,
+    "closed_trades": 7961,
+    "exit_counts": {
+      "STOP_GAP": 20,
+      "STOP": 5783,
+      "TARGET": 2049,
+      "TIME": 109
+    },
+    "skipped": {
+      "overlap": 125,
+      "missing_entry_quote": 2,
+      "missing_time_exit_quote": 0,
+      "invalid_stop_side": 22,
+      "risk_below_0_5_pip": 318,
+      "end_of_data": 0
+    }
+  },
+  "periods": {
+    "discovery_2017_2020": {
+      "0.0": {
+        "trades": 3309,
+        "PF": 0.583591,
+        "net_pips": -4559.8
+      },
+      "0.5": {
+        "trades": 3309,
+        "PF": 0.489304,
+        "net_pips": -6214.3
+      },
+      "1.0": {
+        "trades": 3309,
+        "PF": 0.412434,
+        "net_pips": -7868.8
+      },
+      "2.0": {
+        "trades": 3309,
+        "PF": 0.296582,
+        "net_pips": -11177.8
+      }
+    },
+    "validation_2021": {
+      "0.0": {
+        "trades": 589,
+        "PF": 0.435751,
+        "net_pips": -1030.6
+      },
+      "0.5": {
+        "trades": 589,
+        "PF": 0.353452,
+        "net_pips": -1325.1
+      },
+      "1.0": {
+        "trades": 589,
+        "PF": 0.28765,
+        "net_pips": -1619.6
+      },
+      "2.0": {
+        "trades": 589,
+        "PF": 0.191759,
+        "net_pips": -2208.6
+      }
+    },
+    "forward_2022_2025": {
+      "0.0": {
+        "trades": 3633,
+        "PF": 0.605234,
+        "net_pips": -5021.5
+      },
+      "0.5": {
+        "trades": 3633,
+        "PF": 0.513459,
+        "net_pips": -6838
+      },
+      "1.0": {
+        "trades": 3633,
+        "PF": 0.437731,
+        "net_pips": -8654.5
+      },
+      "2.0": {
+        "trades": 3633,
+        "PF": 0.321721,
+        "net_pips": -12287.5
+      }
+    },
+    "oos_2026": {
+      "0.0": {
+        "trades": 430,
+        "PF": 0.64931,
+        "net_pips": -447.2
+      },
+      "0.5": {
+        "trades": 430,
+        "PF": 0.538279,
+        "net_pips": -662.2
+      },
+      "1.0": {
+        "trades": 430,
+        "PF": 0.449755,
+        "net_pips": -877.2
+      },
+      "2.0": {
+        "trades": 430,
+        "PF": 0.318705,
+        "net_pips": -1307.2
+      }
+    }
+  },
+  "forward_annual_plus_1pip": {
+    "2022": {
+      "trades": 1406,
+      "PF": 0.48815,
+      "net_pips": -3205.1
+    },
+    "2023": {
+      "trades": 808,
+      "PF": 0.385313,
+      "net_pips": -1938.6
+    },
+    "2024": {
+      "trades": 508,
+      "PF": 0.500365,
+      "net_pips": -890.5
+    },
+    "2025": {
+      "trades": 911,
+      "PF": 0.375256,
+      "net_pips": -2620.3
+    }
+  },
+  "bootstrap_forward_weekly_plus_1pip": {
+    "trades": 3633,
+    "weeks": 209,
+    "block_weeks": 4,
+    "reps": 5000,
+    "seed": 260,
+    "probability_mean_weekly_net_positive": 0,
+    "ci95_mean_weekly_net_pips": [
+      -49.237,
+      -34.513
+    ],
+    "observed_mean_net_pips_week": -41.409
+  },
+  "acceptance_gates": {
+    "validation_trades_ge_50": true,
+    "validation_PF_ge_1_05_at_plus_1pip": false,
+    "discovery_PF_ge_1_00_at_plus_1pip": false,
+    "forward_trades_ge_150": true,
+    "forward_PF_ge_1_10_at_plus_1pip": false,
+    "forward_PF_ge_1_05_at_plus_2pip": false,
+    "forward_frequency_ge_2_per_week": true,
+    "every_forward_year_with_20plus_trades_PF_ge_1_at_plus_1pip": false,
+    "bootstrap_95pct_lower_bound_weekly_net_gt_zero_at_plus_1pip": false,
+    "oos_trades_ge_30": true,
+    "oos_PF_ge_1_00_at_plus_1pip": false
+  },
+  "limitations": [
+    "Local generated full trade ledger is not included in this compact machine-readable checkpoint.",
+    "This H1 test does not test R189; R189's 2016-2025 M1 raw data are absent from the available GitHub artifacts."
+  ]
+}
