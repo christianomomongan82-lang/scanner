@@ -179,7 +179,7 @@ A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now
 - Forward 2022–2025 contains 41 trades only, below the 100-trade minimum. PF at +4 bps was 1.395 ideal and 1.313 delayed, but four-week block bootstrap 95% intervals crossed zero. No contemporaneous preregistration was found in the repo before audit, and the aggregate output included available data into 2026, so it is not clean OOS evidence. Treat as retrospective exploratory output only; do not tune or promote.
 
 ### R266 — U.S. index afternoon continuation after a strong morning: FAILED
-- [Preregisration / locked hypothesis](research/R266_INTRADAY_DRIFT_PREREGISTRATION.md)
+- [Preregistration / locked hypothesis](research/R266_INTRADAY_DRIFT_PREREGISTRATION.md)
 - [Final report](research/R266_INTRADAY_DRIFT_RESULTS.md)
 - [Machine-readable results and gate ledger](research/R266_intraday_drift_results.json)
 - [Local Python runner](research/r266_intraday_drift.py)
