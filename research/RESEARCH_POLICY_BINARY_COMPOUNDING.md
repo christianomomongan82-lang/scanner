@@ -44,3 +44,14 @@ Bangun portofolio modular:
 - GitHub menjadi sumber input dan penyimpanan kode, preregistrasi, ledger, hasil JSON, laporan, dan checkpoint.
 - Tidak ada strategi yang dipilih hanya berdasarkan total PF. Gate harus mencakup net expectancy setelah biaya, stabilitas lintas periode/tahun, bootstrap, trade count, drawdown, delay, korelasi dan challenge rule compliance.
 - Jika R189, R262, R263, R266 atau R267 digunakan lagi sebagai komponen, jangan mengubah aturan lama. Setiap portfolio test baru harus menjelaskan apakah independen atau retrospektif dan menetapkan putusan biner.
+
+
+## 6. Correct interpretation of compounding — 2026-10-16
+
+**Primary objective: strategy/edge compounding before capital compounding.** The user's request to “compound compound” must not be reduced to fixed-fractional position sizing or a blind union of previously failed trade streams.
+
+- Build an integrated signal/entry system by testing conditional filters, compatible setups and complementary modules. Measure whether the integrated trade stream has a genuinely stronger **risk-normalized PF and net expectancy**, while retaining sufficient sample size and robustness, versus its components and a comparable baseline.
+- Do not call a union of several losing strategies “compounding” and expect PF to rise. R268 was only a loss diagnostic of adding previously failed streams, not a successful implementation of the intended objective. R269 returned to a single standalone setup, also missing that priority.
+- Capital compounding comes **after** edge construction: fixed-fractional sizing computes position size from the latest equity and tests dollar growth / funded-rule survival. This changes the distribution of dollar outcomes; it does not by itself create entry/exit edge.
+- Every composite must lock its logic before validation and show incremental PF, expectancy, trades, annual stability, bootstrap and five-minute latency/cost stress. The 2022–2025 window has been inspected too many times to serve as an untouched promotion holdout.
+- Full correction and workflow: [COMPOUNDING_OBJECTIVE_CORRECTION_20261016.md](COMPOUNDING_OBJECTIVE_CORRECTION_20261016.md).
