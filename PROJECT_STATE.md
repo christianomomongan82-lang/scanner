@@ -166,3 +166,29 @@ A missing stored file must trigger data acquisition, not an immediate BLOCKED co
 5. Never call a market-data provider's analysis/backtest endpoints. Do not use Massive for this workflow. GitHub stores/serves data and research files; the test engine runs locally.
 
 A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now been added in branch data/eurusd-m1-2016-2025. Run 38697080604 (https://github.com/christianomomongan82-lang/scanner/actions/runs/38697080604) is the acquisition step only—not a backtest. After it finishes, inspect/download its raw data artifact and run the locked local replay.
+
+
+## Research continuation — R265 audit and R266 result (2026-10-16)
+
+### R265 — USA500/USATECH relative-value mean reversion: FAILED / EXPLORATORY ONLY
+- [Retrospective audit](research/R265_EXPLORATORY_AUDIT.md)
+- [Machine-readable audit](research/R265_relative_value_audit.json)
+- [Runner](research/r265_relative_value.py)
+- [Ideal-entry ledger](research/ledgers/R265_trades_ideal.csv.gz)
+- [Five-minute delayed ledger](research/ledgers/R265_trades_delay5.csv.gz)
+- Forward 2022–2025 contains 41 trades only, below the 100-trade minimum. PF at +4 bps was 1.395 ideal and 1.313 delayed, but four-week block bootstrap 95% intervals crossed zero. No contemporaneous preregistration was found in the repo before audit, and the aggregate output included available data into 2026, so it is not clean OOS evidence. Treat as retrospective exploratory output only; do not tune or promote.
+
+### R266 — U.S. index afternoon continuation after a strong morning: FAILED
+- [Preregisration / locked hypothesis](research/R266_INTRADAY_DRIFT_PREREGISTRATION.md)
+- [Final report](research/R266_INTRADAY_DRIFT_RESULTS.md)
+- [Machine-readable results and gate ledger](research/R266_intraday_drift_results.json)
+- [Local Python runner](research/r266_intraday_drift.py)
+- [Ideal-entry trade ledger](research/ledgers/R266_trade_ledger_tiny_ideal.csv.gz)
+- [Five-minute delayed trade ledger](research/ledgers/R266_trade_ledger_tiny_delay5.csv.gz)
+- GitHub source inputs: R205 artifact BID-only M5 snapshots for USA500 and USATECH. Data hashes recorded in result JSON. Calculations executed locally; no backtest GitHub Actions workflow was run. 2026 outcomes were not inspected.
+- At +4 bps, ideal discovery 2016–2020 PF 0.934 and net −1,213.5 bps; validation 2021 PF 0.557 and net −1,846.1 bps; forward 2022–2025 PF 1.145 and +2,343.1 bps over 725 trades. The +5-minute entry mode has the same 725 forward trades, PF 1.102 and +1,638.3 bps.
+- Both entry modes failed because discovery and validation were negative, years 2023 and 2024 had negative PnL, and the 4-week block-bootstrap 95% weekly-PnL intervals included zero. Do not tune parameters and do not inspect 2026 to rescue the failed hypothesis.
+
+### Status after R266
+- **There is still no approved strategy and no funded-ready strategy.** R189 remains separately unverified for full historical reproduction and for live execution constraints; R260–R266 must not be treated as approved strategy candidates.
+- Next experiment must be a structurally different, pre-registered hypothesis; keep the five-minute delay and cost sensitivity in the primary test. Run calculations in local Python, retrieve inputs only from GitHub, do not start GitHub Actions for backtesting, and record a binary verdict. If a pre-registered gate fails, stop that candidate without retuning.
