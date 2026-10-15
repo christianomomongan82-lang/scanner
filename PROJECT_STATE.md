@@ -230,7 +230,7 @@ A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now
 
 ## 7. Putusan biner dan compounding — instruksi permanen 2026-10-16
 
-- Status hasil hanya **LULUS** atau **GAGAL**. Tidak ada kategori pending, “belum lolos”, atau kandidat yang dibiarkan tanpa putusan. Bila suatu klaim gagal karena data/implementasi/bukti tidak tersedia, percobaan untuk klaim itu dicatat GAGAL dengan alasan spesifik.
+- Status hasil hanya **LULUS** atau **GAGAL**. Tidak ada kategori pending, status nonbiner, atau kandidat yang dibiarkan tanpa putusan. Bila suatu klaim gagal karena data/implementasi/bukti tidak tersedia, percobaan untuk klaim itu dicatat GAGAL dengan alasan spesifik.
 - [Kebijakan riset biner, portofolio modular, dan compounding](research/RESEARCH_POLICY_BINARY_COMPOUNDING.md).
 - Jangan terus berburu satu strategi tunggal. Riset harus mencakup strategi modular, portfolio replay, korelasi/overlap, shared risk controller dan compounding fractional-risk berdasarkan ekuitas terbaru. Namun, menggabungkan strategi gagal tidak otomatis menciptakan edge; hasil komposit wajib diuji sebagai satu sistem.
 - Compounding dan challenge replay harus menunjukkan trade R, equity curve dalam dolar, daily/max loss, serta peringatan bahwa closed-equity saja tidak menangkap floating DD. Risiko per entry dan cap portfolio dikunci sebelum kalkulasi.
