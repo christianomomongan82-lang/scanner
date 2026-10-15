@@ -93,25 +93,38 @@ Metrik sejarah R189 yang pernah dikutip (2016–2025: 1.840 trade, PF 1,328; for
 - Challenge replay R258 belum setara dengan engine funded yang sebenarnya.
 - Penyimpanan data mentah/periode historis harus memiliki asal-usul, timestamp, sisi BID/ASK, checksum dan versi yang jelas; jangan mengandalkan data yang hanya pernah terunggah di percakapan.
 
-## 6. Langkah berikutnya — status diperbarui 2026-10-15
+## 6. Langkah berikutnya — status diperbarui 2026-10-15 (lokal, bukan Actions)
+
+### Aturan kerja yang harus diikuti
+- **Backtest harus dieksekusi di sesi ChatGPT/container lokal. Jangan dispatch GitHub Actions untuk menghitung backtest.**
+- GitHub tetap menjadi sumber input dan penyimpanan riset: ambil dataset/artefak GitHub ke lingkungan lokal, jalankan engine di sini, lalu simpan kode, konfigurasi, hasil, gate, dan putusan ke repo.
+- Jangan mengklaim uji lokal atas data H1 sebagai hasil R189 yang memerlukan M1.
 
 ### Peta kegagalan R251–R258 selesai
 - [Peta kegagalan kumulatif R251–R258](https://github.com/christianomomongan82-lang/scanner/blob/r251-fx-cross-pair-lead-lag/research/R251_R258_failure_taxonomy.md)
-- Semua delapan jalur berakhir gagal. Pada mayoritas metode, frekuensi bukan masalah inti; expectancy tidak bertahan setelah biaya dan/atau tidak stabil pada forward tahunan. R257 menghasilkan nol trade valid untuk semua konfigurasi pada periode validasi. Jangan retune konfigurasi tersebut memakai hasil forward/OOS yang telah dilihat.
+- Semua delapan jalur berakhir gagal. Pada mayoritas metode, frekuensi bukan masalah inti; expectancy tidak bertahan setelah biaya dan/atau tidak stabil pada forward tahunan. R257 menghasilkan nol trade valid pada periode validasi. Jangan retune konfigurasi lama memakai hasil forward/OOS.
 
-### R259 — R189/L80 cross-feed replay sedang berjalan
-- [Preregistrasi dan gate R259](https://github.com/christianomomongan82-lang/scanner/blob/r259-r189-dukascopy-history/research/R259_R189_cross_feed_test_plan.md)
-- [Skrip R259](https://github.com/christianomomongan82-lang/scanner/blob/r259-r189-dukascopy-history/research/r259_r189_history.py)
-- [GitHub Actions run](https://github.com/christianomomongan82-lang/scanner/actions/runs/38623417685)
-- Status terakhir saat checkpoint: **IN PROGRESS**. Aturan R189 dikunci; R259 menguji lintas-sumber Dukascopy EURUSD M1 BID/ASK 2016–2025, memisahkan discovery 2016–2020, validation 2021, forward 2022–2025, dan interval 2021–2025 yang pernah dilaporkan.
-- Ini bukan reproduksi persis atas laporan historis R189. Data asli `EURUSD_M1_2016-2025.xz`, `spread_2016-2025.csv.xz`, dan ledger transaksi historis tidak ada di repositori. Hasil R259 harus dinilai sebagai cross-feed replication dan tidak boleh menggantikan data atau hasil asli yang hilang.
-- Gate terkunci: forward 2022–2025 minimal 100 trade; PF ≥1,10 setelah tambahan 1 pip; PF ≥1,05 setelah tambahan 2 pip; setiap cohort forward dengan minimal 20 trade punya PF ≥1 setelah tambahan 1 pip; lower bound CI bootstrap blok sirkular 4-minggu atas net pips mingguan harus di atas nol setelah tambahan 1 pip. Semua gate wajib lolos.
-- Bahkan jika R259 lulus, status funded-ready tetap **belum lulus** sampai komisi/slippage aktual, eksekusi riil, aturan DLL/MLL, dan kepatuhan Quick Strike sub-30-detik dapat dibuktikan. Data M1 tidak cukup untuk membuktikan durasi penutupan di bawah 30 detik.
+### R260 — backtest lokal shock reversal: GAGAL
+- [Preregistrasi R260](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r260-hourly-shock-reversal/research/R260_local_shock_reversal_preregistration.md)
+- [Laporan hasil lokal](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r260-hourly-shock-reversal/research/R260_LOCAL_SHOCK_REVERSAL_RESULTS.md)
+- [Runner lokal Python](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r260-hourly-shock-reversal/research/r260_local_shock_reversal.py)
+- [Hasil JSON](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r260-hourly-shock-reversal/research/R260_local_shock_reversal_results.json)
+- Dijalankan di container lokal sesi ini memakai EURUSD H1 BID/ASK dari GitHub Actions artifact 11916174401; 85.170 quote bersama, 582 jam hilang/tidak lengkap tidak diisi, nol spread open negatif. Threshold abs candle body 90th percentile dari 2017–2020 = 12,9 pip; fade candle besar; SL di ekstrem candle, TP 1R, maksimum holding 6 jam.
+- 7.961 trade selesai. Forward 2022–2025 menghasilkan PF 0,438 setelah +1 pip, net -8.654,5 pip, 17,41 trade/minggu. Semua tahun forward negatif; bootstrap 4-minggu pada net mingguan memberi CI 95% [-49,24, -34,51] pip/minggu. PF OOS 2026 setelah +1 pip 0,450. **GAGAL—hipotesis ditutup, tidak dituning.**
 
-### Setelah R259 selesai
-1. Putuskan R189 cross-feed LULUS/GAGAL sesuai gate yang telah ditentukan; jangan mengubah parameter.
-2. Jika gagal, tutup jalur R189 sebagai strategi yang tidak memenuhi cross-feed robustness gate dan pilih hipotesis baru berdasarkan peta kegagalan, bukan tuning ulang hasil OOS.
-3. Jika lulus, dokumentasikan bahwa bukti lintas-sumber memperkuat edge, tetapi jangan menyebut laporan historis lama tereproduksi karena input aslinya tetap hilang.
-4. Baru setelah itu pilih Strategi A dan, bila frekuensi tidak memadai, riset Strategi B independen. Uji strategi terpisah sebelum penggabungan pada satu pengendali risiko akun.
+### R189 — hambatan data belum terselesaikan
+- Laporan historis R189 masih belum bisa direproduksi: GitHub repo/artefak yang tersedia belum memiliki arsip EURUSD M1 2016–2025 asli, file spread aslinya, atau ledger historisnya. Artefak EURUSD H1 yang tersedia tidak kompatibel untuk menguji ulang aturan R189 M1.
+- OOS 2026 R189 tetap bukti terpisah, bukan pengganti data historis tersebut.
+- Jangan jalankan backtest R189 atas H1 atau menyebut data eksternal baru sebagai “data dari GitHub”. Cari artefak/data M1 yang benar-benar tersimpan di GitHub terlebih dahulu. Jika tidak ada, tandai reproduksi sebagai blocked sampai input tersedia.
 
-**Kesimpulan status saat ini:** belum ada strategi final yang lulus. R258 resmi GAGAL. Laporan R189 historis tetap belum terverifikasi dan R189 sendiri berstatus GAGAL untuk klaim pass funded berdasarkan bukti yang ada. R259 sedang menguji apakah edge R189 bertahan pada sumber data independen; belum ada hasilnya. Arah sistem tetap modular: strategi kualitas edge, strategi pelengkap bila diperlukan, dan satu pengendali risiko.
+### Insiden R259 — workflow tak sengaja dibuat dan dijalankan
+- Run [38623417685](https://github.com/christianomomongan82-lang/scanner/actions/runs/38623417685) sempat selesai setelah gue keliru mengirim eksperimen ke GitHub Actions. File workflow pemicu sudah dihapus dari branch `r259-r189-dukascopy-history` agar tidak membuat trigger berikutnya.
+- Jangan menganggap output R259 sebagai hasil riset resmi; ia tidak mengikuti metode eksekusi yang disepakati (local backtest memakai data dari GitHub). Insiden ini dicatat untuk transparansi, bukan sebagai eksperimen yang diterima.
+- Mulai sekarang tidak membuat workflow GitHub Actions untuk backtesting.
+
+### Langkah berikutnya
+1. Pertahankan R260 sebagai GAGAL; jangan ubah threshold/SL/TP untuk menyelamatkannya.
+2. Cari di GitHub artefak yang benar-benar menyimpan EURUSD M1 historis yang cocok untuk R189; jika tidak tersedia, lanjutkan riset lokal pada hipotesis baru dengan dataset H1 GitHub yang tersedia, preregistrasikan dulu, dan simpan verdict biner.
+3. Tetap pisahkan kualitas edge, frekuensi, dan kontrol risiko. Tidak ada strategi final yang lulus dan belum ada strategi yang terbukti funded-ready.
+
+**Kesimpulan status:** belum ada strategi final yang lulus. R258 dan R260 GAGAL. R189 tetap belum terverifikasi untuk periode historis karena data M1 asli belum ditemukan. Eksekusi backtest selanjutnya dilakukan di sini; GitHub hanya sumber data/artefak dan penyimpanan.
