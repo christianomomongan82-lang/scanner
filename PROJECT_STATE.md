@@ -206,3 +206,13 @@ A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now
 ### Research process priority after R267
 - Do not immediately invent or optimize another signal just to make a new round number. A large family of prior range breakouts, reversals, momentum and relative-value ideas have already failed; repeated similar experiments add selection bias.
 - Recommended next work item is an execution/reproducibility audit of existing R189 historical replay and signal/exit mechanics, plus explicit separation of verified facts versus feed-specific replication. It must not be described as a fresh preregistered performance test. No candidate is approved or funded-ready.
+
+
+### R189/L80 — execution-delay audit (2026-10-16)
+- [Execution-delay audit report](research/R189_EXECUTION_DELAY_AUDIT.md)
+- [Machine-readable delay summary](research/R189_execution_delay_audit.json)
+- This is a retrospective audit of an already-run Dukascopy M1 BID/ASK replay, not an exact reproduction of the original HistData results and not a fresh preregistered strategy test.
+- Intrabar-aware stress results, forward 2021–2025: at +0.5 pip additional cost, PF declines from 1.284 at ideal fill to 1.071 after +5 minutes; at +1.0 pip, PF declines from 1.114 to 0.926 and net becomes −203 pips. The +5-minute bootstrap intervals include zero at both costs. This matters for phone/email execution latency.
+- The delay-stress ledger checks spread at the actual delayed entry bar; M1 candles model gaps through stops/targets and stop-before-target ordering but cannot verify tick-level closing duration.
+- R189 remains not funded-ready: fixed GMT-5 session filter still needs exact funded-platform/DST mapping, extra costs are assumptions rather than verified live execution costs, and Quick Strike sub-30-second closing behavior plus DLL/MLL have not been validated.
+- No retuning or parameter selection from this audit. Keep R189 rules locked while verifying mapping and execution constraints.
