@@ -3,7 +3,7 @@
 **Terakhir diperbarui:** 2026-10-16  
 **Status proyek:** SEMUA KANDIDAT YANG DIUJI BERSTATUS GAGAL; TIDAK ADA YANG LULUS.  
 **Repositori sumber utama:** https://github.com/christianomomongan82-lang/scanner  
-**Branch riset aktif saat checkpoint ini:** [r251-fx-cross-pair-lead-lag](https://github.com/christianomomongan82-lang/scanner/tree/r251-fx-cross-pair-lead-lag)
+**Branch riset aktif saat checkpoint ini:** [local-backtest/r189-dukascopy-history](https://github.com/christianomomongan82-lang/scanner/tree/local-backtest/r189-dukascopy-history)
 
 Dokumen ini adalah titik lanjut permanen. Percakapan baru yang menerima instruksi “lanjut” harus membaca dokumen ini terlebih dahulu, lalu memeriksa artefak riset terbaru di branch aktif dan memperbarui checkpoint setelah ada hasil penting. Jangan meminta pengguna membuat prompt khusus atau mengunggah ulang data yang sudah ada di GitHub.
 
@@ -127,7 +127,7 @@ Metrik sejarah R189 yang pernah dikutip (2016–2025: 1.840 trade, PF 1,328; for
 2. Cari di GitHub artefak yang benar-benar menyimpan EURUSD M1 historis yang cocok untuk R189; jika tidak tersedia, lanjutkan riset lokal pada hipotesis baru dengan dataset H1 GitHub yang tersedia, preregistrasikan dulu, dan simpan verdict biner.
 3. Tetap pisahkan kualitas edge, frekuensi, dan kontrol risiko. Tidak ada strategi final yang lulus dan tidak ada strategi yang terbukti funded-ready.
 
-**Kesimpulan status:** tidak ada strategi final yang lulus. R258 dan R260 GAGAL. R189 tetap tidak terverifikasi untuk periode historis karena data M1 asli tidak ditemukan. Eksekusi backtest selanjutnya dilakukan di sini; GitHub hanya sumber data/artefak dan penyimpanan.
+**Kesimpulan status:** tidak ada strategi final yang lulus. R258 dan R260 GAGAL. Reproduksi historis R189 berstatus GAGAL karena data M1 asli tidak ditemukan; funded-readiness R189 berstatus GAGAL akibat batasan eksekusi. Eksekusi backtest selanjutnya dilakukan di sini; GitHub hanya sumber data/artefak dan penyimpanan.
 
 ## Koreksi permanen alur data — 2026-10-15
 
@@ -190,7 +190,7 @@ A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now
 - Both entry modes failed because discovery and validation were negative, years 2023 and 2024 had negative PnL, and the 4-week block-bootstrap 95% weekly-PnL intervals included zero. Do not tune parameters and do not inspect 2026 to rescue the failed hypothesis.
 
 ### Status after R266
-- **All currently evaluated strategies are GAGAL for funded approval.** R189 remains separately unverified for full historical reproduction and for live execution constraints; R260–R266 must not be treated as approved strategy candidates.
+- **All currently evaluated strategies are GAGAL for funded approval.** R189 historical reproduction is GAGAL because the exact required history inputs are absent; funded-readiness is GAGAL on execution constraints; R260–R266 must not be treated as approved strategy candidates.
 - Next experiment must be a structurally different, pre-registered hypothesis; keep the five-minute delay and cost sensitivity in the primary test. Run calculations in local Python, retrieve inputs only from GitHub, do not start GitHub Actions for backtesting, and record a binary verdict. If a pre-registered gate fails, stop that candidate without retuning.
 
 
@@ -214,7 +214,7 @@ A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now
 - This is a retrospective audit of an already-run Dukascopy M1 BID/ASK replay, not an exact reproduction of the original HistData results and not a fresh preregistered strategy test.
 - Intrabar-aware stress results, forward 2021–2025: at +0.5 pip additional cost, PF declines from 1.284 at ideal fill to 1.071 after +5 minutes; at +1.0 pip, PF declines from 1.114 to 0.926 and net becomes −203 pips. The +5-minute bootstrap intervals include zero at both costs. This matters for phone/email execution latency.
 - The delay-stress ledger checks spread at the actual delayed entry bar; M1 candles model gaps through stops/targets and stop-before-target ordering but cannot verify tick-level closing duration.
-- R189 remains GAGAL untuk funded-readiness: fixed GMT-5 session filter still needs exact funded-platform/DST mapping, extra costs are assumptions rather than verified live execution costs, and Quick Strike sub-30-second closing behavior plus DLL/MLL have not been validated.
+- R189 berstatus GAGAL untuk funded-readiness: pemetaan GMT-5 ke server/DST, biaya live, Quick Strike sub-30-detik, serta DLL/MLL tidak memenuhi gate bukti.
 - No retuning or parameter selection from this audit. Keep R189 rules locked while verifying mapping and execution constraints.
 
 
