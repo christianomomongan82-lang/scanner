@@ -166,3 +166,26 @@ A missing stored file must trigger data acquisition, not an immediate BLOCKED co
 5. Never call a market-data provider's analysis/backtest endpoints. Do not use Massive for this workflow. GitHub stores/serves data and research files; the test engine runs locally.
 
 A data-only EURUSD M1 BID/ASK download for 2016-01-01 through 2025-12-31 has now been added in branch data/eurusd-m1-2016-2025. Run 38697080604 (https://github.com/christianomomongan82-lang/scanner/actions/runs/38697080604) is the acquisition step only—not a backtest. After it finishes, inspect/download its raw data artifact and run the locked local replay.
+
+
+## R189 historical Dukascopy replay — checkpoint 2026-10-16
+
+### Acquisition complete
+- Data-only workflow [run 38697080604](https://github.com/christianomomongan82-lang/scanner/actions/runs/38697080604) succeeded. It downloaded raw EURUSD M1 BID/ASK 2016-01 through 2025-12; no signal or PnL calculation ran in Actions.
+- Raw artifact: `EURUSD-M1-Dukascopy-BID-ASK-2016-2025`, ID `11959096102`, about 67.7 MB, currently expires 2027-01-13.
+- Both files contain 4,415,493 rows and matching timestamps; zero duplicate and zero invalid OHLC rows detected. SHA-256 BID `b588b7e07d9fea3748a84a1e3ecf29ccb2ea1d8ea52503f8579928a3cd4990cc`; ASK `52e53dbb22ef11aee2d2c3d5e5b4ded6659d58c086189a327559253727e52f8b`.
+- This is **Dukascopy**, not the missing original HistData M1/spread data. Results must not be described as an exact R189 reproduction.
+
+### Local replay result
+- The locked R189/L80 historical replay and an additional intrabar-zero-trail execution sensitivity pass were executed locally in Python. Strategy thresholds were not optimized or changed.
+- Result report: [R189 historical replay](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R189_DUKASCOPY_HISTORY_RESULTS.md).
+- Machine-readable summary: [summary JSON](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R189_Dukascopy_2016_2025_summary.json).
+- Execution-sensitivity runner: [r189_execution_sensitivity.py](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/r189_execution_sensitivity.py).
+- Intrabar sensitivity variant: all 2016–2025 = 1,673 trades, PF 1.248 at +0.5 pip extra cost and PF 1.082 at +1 pip. Discovery 2016–2020 PF 1.056 at +1 pip. Forward slice 2021–2025 = 767 trades, PF 1.284 at +0.5 and 1.114 at +1 pip. Forward annual PF at +1 pip includes 2022 = 0.976 and 2023 = 1.058. Four-week block bootstrap at +1 pip: probability of positive mean 94.72%, but its 95% interval for mean weekly PnL crosses zero: [-0.223, +2.489] pips.
+- Holding time is incompatible with the current phone/manual workflow: median 2 minutes; 30.7% of exits are in the same M1 minute, 47.5% within one minute and 79.1% within five minutes. Manual alert/order latency was not modelled.
+- **Verdict: NOT PASSED / not approved for the funded challenge.** It fails the project PF 1.10 robustness floor in the full sample at +1 pip (PF 1.082), in discovery (1.056), and in the weakest forward year (0.976). Bootstrap uncertainty includes zero; +2 pip stress is negative. Do not tune parameters to rescue it. It remains an unapproved research result, not a validated portfolio component or funded-ready strategy.
+- Broker-specific commission, live slippage, manual execution delay, FundedNext DLL/MLL behavior and Quick Strike remain unverified.
+- Note: the data artifact is an Actions artifact and expires on 2027-01-13. Save or reacquire it before then if the raw data is needed beyond that date.
+
+### Current operating rule (reaffirmed)
+Raw data collection may use GitHub Actions. All signals, PnL, robustness metrics and verdicts must run in local ChatGPT/container Python. GitHub is source/artifact storage, never the backtest compute engine. Do not use Massive. If a stored series is absent, proactively acquire raw data through the established source method and retain explicit feed provenance.
