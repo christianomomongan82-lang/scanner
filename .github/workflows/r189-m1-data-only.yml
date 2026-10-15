@@ -1,0 +1,50 @@
+name: EURUSD M1 raw history download (data only)
+
+on:
+  push:
+    branches:
+      - data/eurusd-m1-2016-2025
+    paths:
+      - ".github/workflows/r189-m1-data-only.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: eurusd-m1-history-data-only
+  cancel-in-progress: false
+
+jobs:
+  download-market-data:
+    name: Download and archive data only — no backtest
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout data-download code
+        uses: actions/checkout@v4
+        with:
+          ref: data/eurusd-m1-2016-2025
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Download EURUSD M1 BID/ASK from Dukascopy and package raw inputs
+        run: python -u research/download_eurusd_m1_2016_2025.py
+
+      - name: Upload raw market-data artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: EURUSD-M1-Dukascopy-BID-ASK-2016-2025
+          path: data_exports/eurusd_m1_2016_2025/
+          if-no-files-found: warn
+          retention-days: 90
