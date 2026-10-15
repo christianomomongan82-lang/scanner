@@ -39,7 +39,7 @@ Date: 2026-10-16
 | 2024 | 139 | 0.950 | 0.809 | 0.695 |
 | 2025 | 126 | 0.897 | 0.786 | 0.693 |
 
-Four-week circular weekly-PnL bootstrap at +4 bps (10,000 repetitions): ideal entry mean -2.42 bps/week, 36.29% positive means, 95% CI [-15.94, +12.15]. With +5-minute delay, mean -6.54 bps/week, 19.80% positive means, CI [-20.68, +9.42]. Both intervals include zero.
+Four-week circular weekly-PnL bootstrap at +4 bps (10,000 repetitions): ideal entry mean -2.07 bps/week, 36.22% positive means, 95% CI [-13.63, +10.25]. With +5-minute delay, mean -5.10 bps/week, 18.84% positive means, CI [-16.21, +7.22]. Both intervals include zero.
 
 ## Gate decision
 
