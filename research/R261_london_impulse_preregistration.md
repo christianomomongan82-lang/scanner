@@ -44,3 +44,7 @@ Otherwise the binary verdict is **FAIL**. Passing these gates is not a funded-re
 ## Required report
 
 Record source artifact ID, file hashes, quote coverage/duplicates/invalid OHLC, spread quantiles, missing hourly points, fitted threshold, signal/trade counts, skips, exits by reason, PF/net/win rate/frequency at each cost level for every period, forward annual stats, bootstrap output, binary verdict, and any limitations. Save the machine results and full trade ledger alongside the runner.
+
+## Implementation audit addendum (before official result lock)
+
+A first diagnostic pass exposed a source-data issue: the H1 feed contains copied flat weekend quote bars, including Saturdays with zero full-day range. Counting Saturday/Sunday dates in the absolute-impulse threshold sample would treat closed-market placeholders as eligible sessions and distort the percentile. That diagnostic pass is **invalid and superseded**. The official runner excludes London-local Saturday/Sunday dates because FX is closed, leaves all missing/incomplete H1 points unfilled, and recalculates the same preregistered 75th-percentile threshold from complete Monday-Friday sessions in the original 2017–2020 discovery period. This is a data-eligibility correction, not a change to the entry, stop, target, holding time, threshold quantile, cost stresses, periods, or binary gates. The discarded diagnostic results are not used in the official verdict.
