@@ -60,3 +60,7 @@ At the same risks, router completion probability did not outperform both standal
 - **GAGAL:** there is no untouched independent promotion window and official funded mechanics are not fully verified.
 
 **Conclusion:** close this exact R270 configuration. Do not lower the ER threshold, retune exits, or try to rescue the result on the same sample. Next test must use a structurally different hypothesis and be preregistered before validation.
+
+## Reproducibility caveat
+
+The raw-data artifact, preregistration, report, and compact JSON are referenced/stored on GitHub. The exact local Python runner and full row-level CSV ledger have not been committed to this branch in this session, so the complete signal/PnL calculation is **not yet fully reproducible from repository files alone**. The source artifact ZIP hash is recorded above, and the local run files exist in the execution environment; do not describe this result as fully self-contained until the runner and ledger are stored.
