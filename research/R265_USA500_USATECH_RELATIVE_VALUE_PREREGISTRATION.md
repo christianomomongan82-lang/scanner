@@ -29,3 +29,9 @@ When the USA500/USATECH relative-price ratio deviates unusually far from its tra
 
 ## Execution boundary and limitations
 All signal, position, cost, PF, drawdown, bootstrap and verdict calculations run locally in Python. GitHub Actions is not used for backtesting. The stored snapshots are BID-only; this cannot validate ASK quote-side fills, live commission/slippage, exact gap execution, or funded-provider DLL/MLL and Quick Strike rules. A pass would only qualify the candidate for additional verification, not approve it for funded trading.
+
+## Data-cleaning amendment — 2026-10-16, before final report
+
+The first diagnostic replay exposed a storage artifact: the retained M5 snapshots have timestamp rows throughout Sundays, including 78 flat placeholder candles at 09:30–15:55 ET, and 15 weekday dates with entirely flat RTH placeholders. Those are not U.S. RTH trading sessions even though a simple count-only completeness check would accept them. The unfiltered diagnostic results were discarded and are not used in the final report.
+
+Official data-cleaning rule for the final replay: require a Monday–Friday date, all 78 unique expected RTH M5 timestamps, and a nonzero full-session range for each index. Then intersect the valid dates for both indices. This is a source-data integrity correction, not a change to any signal, entry, exit, cost, or promotion parameter. The final report identifies its use explicitly.
