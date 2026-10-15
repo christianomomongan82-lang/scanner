@@ -1,0 +1,223 @@
+{
+  "study": "R264 US cash-open gap-fade to previous RTH close",
+  "date": "2026-10-16",
+  "verdict": "FAILED",
+  "parameters_locked": true,
+  "data": {
+    "source": "Existing GitHub-stored R205 BID-only M5 files; all calculations in local Python",
+    "USA500": {
+      "rows": 886206,
+      "start_utc": "2016-01-04T00:00:00Z",
+      "end_utc": "2026-10-09T20:10:00Z",
+      "duplicates": 0,
+      "invalid_ohlc": 0
+    },
+    "USATECH": {
+      "rows": 886039,
+      "start_utc": "2016-01-04T00:00:00Z",
+      "end_utc": "2026-10-09T20:10:00Z",
+      "duplicates": 0,
+      "invalid_ohlc": 0
+    },
+    "ask_side_available": false,
+    "cost_scenarios_bps": [
+      2,
+      4,
+      6
+    ]
+  },
+  "rules": {
+    "timezone": "America/New_York",
+    "gap_abs_min_bps": 25,
+    "confirmation": "first M5 candle closes opposite the opening gap",
+    "ideal_entry": "09:35 ET",
+    "delay_entry": "09:40 ET",
+    "stop": "first candle high for shorts / low for longs",
+    "target": "previous RTH 15:55 bar close",
+    "min_reward_risk": 1,
+    "max_trades_per_day_per_index": 1,
+    "no_overnight": true
+  },
+  "splits": {
+    "discovery_2016_2020": {
+      "USA500": {
+        "trades": 302,
+        "pf2": 0.868,
+        "net2": -550.9,
+        "pf4": 0.75,
+        "net4": -1154.9,
+        "pf6": 0.654,
+        "net6": -1758.9
+      },
+      "USATECH": {
+        "trades": 336,
+        "pf2": 0.763,
+        "net2": -1374.8,
+        "pf4": 0.675,
+        "net4": -2046.8,
+        "pf6": 0.6,
+        "net6": -2718.8
+      },
+      "combined": {
+        "trades": 638,
+        "pf2": 0.807,
+        "net2": -1925.6,
+        "pf4": 0.707,
+        "net4": -3201.6,
+        "pf6": 0.623,
+        "net6": -4477.6
+      }
+    },
+    "validation_2021": {
+      "USA500": {
+        "trades": 62,
+        "pf2": 0.618,
+        "net2": -295,
+        "pf4": 0.519,
+        "net4": -419,
+        "pf6": 0.439,
+        "net6": -543
+      },
+      "USATECH": {
+        "trades": 57,
+        "pf2": 1.165,
+        "net2": 145.3,
+        "pf4": 1.033,
+        "net4": 31.3,
+        "pf6": 0.919,
+        "net6": -82.7
+      },
+      "combined": {
+        "trades": 119,
+        "pf2": 0.909,
+        "net2": -149.7,
+        "pf4": 0.787,
+        "net4": -387.7,
+        "pf6": 0.685,
+        "net6": -625.7
+      }
+    },
+    "forward_2022_2025": {
+      "USA500": {
+        "trades": 267,
+        "pf2": 1.039,
+        "net2": 135.9,
+        "pf4": 0.896,
+        "net4": -398.1,
+        "pf6": 0.78,
+        "net6": -932.1
+      },
+      "USATECH": {
+        "trades": 266,
+        "pf2": 1.1,
+        "net2": 496.5,
+        "pf4": 0.993,
+        "net4": -35.5,
+        "pf6": 0.9,
+        "net6": -567.5
+      },
+      "combined": {
+        "trades": 533,
+        "pf2": 1.075,
+        "net2": 632.4,
+        "pf4": 0.953,
+        "net4": -433.6,
+        "pf6": 0.849,
+        "net6": -1499.6
+      }
+    }
+  },
+  "delay5_forward_2022_2025": {
+    "USA500": {
+      "trades": 219,
+      "pf2": 0.96,
+      "net2": -116.1,
+      "pf4": 0.829,
+      "net4": -554.1,
+      "pf6": 0.722,
+      "net6": -992.1
+    },
+    "USATECH": {
+      "trades": 224,
+      "pf2": 0.985,
+      "net2": -63.2,
+      "pf4": 0.887,
+      "net4": -511.2,
+      "pf6": 0.803,
+      "net6": -959.2
+    },
+    "combined": {
+      "trades": 443,
+      "pf2": 0.975,
+      "net2": -179.3,
+      "pf4": 0.863,
+      "net4": -1065.3,
+      "pf6": 0.769,
+      "net6": -1951.3
+    }
+  },
+  "annual_forward_combined_ideal": {
+    "2022": {
+      "trades": 142,
+      "pf2": 1.26,
+      "pf4": 1.156,
+      "pf6": 1.065
+    },
+    "2023": {
+      "trades": 126,
+      "pf2": 1.071,
+      "pf4": 0.932,
+      "pf6": 0.817
+    },
+    "2024": {
+      "trades": 139,
+      "pf2": 0.95,
+      "pf4": 0.809,
+      "pf6": 0.695
+    },
+    "2025": {
+      "trades": 126,
+      "pf2": 0.897,
+      "pf4": 0.786,
+      "pf6": 0.693
+    }
+  },
+  "bootstrap_cost4_bps": {
+    "ideal": {
+      "weeks": 209,
+      "reps": 10000,
+      "seed": 2642026,
+      "mean_weekly_net_bps": -2.0746,
+      "probability_positive_mean": 0.3622,
+      "ci95_bps_week": [
+        -13.6308,
+        10.2496
+      ]
+    },
+    "delay5": {
+      "weeks": 209,
+      "reps": 10000,
+      "seed": 2642031,
+      "mean_weekly_net_bps": -5.0972,
+      "probability_positive_mean": 0.1884,
+      "ci95_bps_week": [
+        -16.2143,
+        7.2174
+      ]
+    }
+  },
+  "gates": {
+    "discovery_positive": false,
+    "validation_positive": false,
+    "forward_pf_ge_1_10_at_4bps": false,
+    "per_index_pf_ge_1_at_4bps": false,
+    "bootstrap_ci_positive": false,
+    "delay5_pf_ge_1_10_at_4bps": false
+  },
+  "oos_2026_run": false,
+  "limitations": [
+    "BID-only M5 input, no ASK side.",
+    "Costs are assumed fixed bps scenarios.",
+    "No broker slippage/commission, real fill latency, FundedNext DLL/MLL or Quick Strike validation."
+  ]
+}
