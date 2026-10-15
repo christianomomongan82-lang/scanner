@@ -270,3 +270,12 @@ Active branch record: [full R269 checkpoint and research artifacts](https://gith
 - [Failure taxonomy](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R260_R269_FAILURE_TAXONOMY.md).
 - No candidate in R260–R269 passed all promotion gates. Frequency was not the core bottleneck across the family; negative expectancy, unstable periods and execution stress repeatedly failed.
 - 2022–2025 has been inspected across multiple strategy families, so it must not be treated as an untouched final holdout for a new candidate. Next hypotheses must be structurally distinct, justified by a clear economic mechanism, pre-registered, and compatible with the five-minute execution delay.
+
+
+## Correction: Compounding means strategy/edge composition first (2026-10-16)
+
+- **Primary objective:** compose compatible setups, conditions and strategy modules into an integrated trade stream that improves risk-normalized PF and net expectancy compared with each component and a matched no-filter baseline. Do not interpret “compound compound” as only increasing position size with equity or as blindly unioning weak strategies.
+- [Detailed correction and workflow](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/COMPOUNDING_OBJECTIVE_CORRECTION_20261016.md).
+- R268 was a negative portfolio diagnostic from adding previously failed streams plus fixed-fractional sizing, not a successful strategy-compounding result. R269 returned to a standalone candidate and also missed the intended priority.
+- Capital compounding is downstream: once an integrated stream has qualified, use fixed-fractional sizing to test dollar growth and funded-account survival. Position sizing alone does not create edge.
+- Future composites must show incremental PF/expectancy, sample size, yearly stability, bootstrap, costs and the five-minute latency stress, and be frozen before independent validation. The repeatedly inspected 2022–2025 period is not a clean untouched holdout.
