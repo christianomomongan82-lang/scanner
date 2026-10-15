@@ -250,3 +250,5 @@ Research sequence so far: R189 (M1, unfit for manual execution), R262 (H4 struct
 - Forward 2022–2025: 2.399 trade, PF net R 0,823; compounding dari $6.000 berakhir pada $3.374,61 (−43,76%) dengan closed-equity drawdown 44,60%. Bootstrap mingguan 95% CI adalah −0,315% hingga −0,102%. Batas loss statis $5.400 pertama kali ditembus pada 2023-05-26 04:06 UTC; challenge replay akan gagal pada titik itu. Floating equity/DLL tidak direkonstruksi secara tick-by-tick.
 - R268 bukan calon strategi LULUS; statusnya GAGAL dan komponen R262/R263 tetap ditutup. Jangan retune keduanya. Berikutnya hanya eksperimen baru dengan hipotesis dan/atau struktur risiko berbeda yang dipreregistrasikan, seluruh hitungan dijalankan lokal dan hasil disimpan ke GitHub.
 
+
+- **R268 reproducibility status: GAGAL.** The local combined calculation used R262/R263 delayed trade-ledger CSVs that are not present as repository files; result JSON, report, and runner are saved, but this exact run is not self-contained from GitHub alone. Its local input hashes are documented in the report/JSON. Do not claim otherwise.
