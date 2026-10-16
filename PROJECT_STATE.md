@@ -405,3 +405,15 @@ Continuation instruction: read the latest R270–R274 results and `research/EVOL
 - Reproducibility gap: reports and compact JSONs are stored in GitHub, but the full R276–R279 local runners and row-level ledgers are not yet committed there. Do not claim complete repository-only reproduction until archived.
 - Next action: reject R277–R279 and do not keep changing this same cash-open family. Any new generation must use a genuinely different hypothesis, preregister it before outcomes, compare matched parent/ablation, and optimize actual target-completion/breach profile rather than PF alone.
 
+## Latest research update — R280 Nasdaq-led follower breakout — GAGAL (2026-10-17)
+
+- Pre-registration: [R280 Nasdaq-led cash-open follower breakout](research/R280_NASDAQ_LED_CASH_OPEN_FOLLOWTHROUGH_PREREGISTRATION.md)
+- Results: [R280 final report](research/R280_FINAL_REPORT.md) · [compact metrics and locked gate verdict](research/R280_results_compact.json).
+- Hypothesis: USATECH/Nasdaq 100's first cash-open opening-range breakout leads; take a same-direction first breakout on USA500, USA30 or USSC2000 only if the follower signal is 5–30 minutes later. Exact T+10 entry; OR-edge stop; 2R target; mandatory flat at exact 16:00 New York bar open. Matched parent consists of all first OR breakouts from those three follower indices under identical execution and costs.
+- Child signal set: 1,084 eligible follower signals out of 7,502 first-breakout follower signals; 426 closed trades in exploratory forward 2022–2025. At +1 bp, child forward PF 1.169 / +27.89R vs matched parent PF 1.090 / +108.76R; the filter increased mean net R/trade (0.0655R vs 0.0363R) but sacrificed total net R and trade count. At +2 bp child PF 1.109.
+- **R280 = GAGAL:** discovery PF@+2 bp 0.875; annual 2023/2024 PF@+1 bp 0.977/0.787; four-week bootstrap 95% CI for forward weekly net R [−0.116, +0.381]; diagnostic 2026 PF@+1 bp 0.744. Do not tune the lag window after these results.
+- Inputs are the cached R205 BID-only M5 snapshots for USA500 artifact 11709864394, USATECH 11710370389, USA30 11710730507 and USSC2000 11710111254. Costs are modeled 1/2 bps and do not represent verified FundedNext instrument costs. 2022–2025 is contaminated; 2026 is only diagnostic. No full funded equity-path replay.
+- Overall R276–R280: no candidate promoted. R276 passed the historical screen only but has a negative diagnostic and missing funded-path/swap checks; R277–R280 failed pre-registered gates. Reusable controls are execution/data integrity, not signal edge.
+- Reproducibility gap remains: R276–R280 reports and compact JSON summaries are stored in GitHub, but all full local runners and row-level trade ledgers are not yet stored there. Do not describe GitHub-only reproduction as complete until these are archived.
+- Next search should not keep mutating this US cash-open breakout family. Register a structurally distinct mechanism before calculation and score it against fixed target-completion and breach objectives. Keep all 2026 slices diagnostic only.
+
