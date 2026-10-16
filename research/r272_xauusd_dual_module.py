@@ -173,6 +173,8 @@ def build_trade_for_signal(q: pd.DataFrame, day_positions: dict, i: int, sig: di
     stop = float(sig["stop"])
     risk_dist = (entry - stop) if d == 1 else (stop - entry)
     A = float(sig["A"])
+    if entry_i <= i or q.at[entry_i, "timestamp_utc"] - q.at[i, "timestamp_utc"] != pd.Timedelta(minutes=5):
+        return None
     if not np.isfinite(risk_dist) or risk_dist <= 0:
         return None
     if sig["module"] == "A" and not (0.50*A <= risk_dist <= 2.00*A):
@@ -192,15 +194,21 @@ def build_trade_for_signal(q: pd.DataFrame, day_positions: dict, i: int, sig: di
 
     day = q.at[i, "ny_date"]
     positions = day_positions.get(day, [])
-    cutoff_candidates = [j for j in positions if int(q.at[j, "ny_minute"]) >= 16*60+45]
-    cutoff_i = cutoff_candidates[0] if cutoff_candidates else (positions[-1] if positions else entry_i)
+    exact_cutoff_candidates = [j for j in positions if int(q.at[j, "ny_minute"]) == 16*60+45]
+    exact_cutoff = bool(exact_cutoff_candidates)
+    if exact_cutoff:
+        cutoff_i = exact_cutoff_candidates[0]
+    else:
+        prior_cutoff_candidates = [j for j in positions if int(q.at[j, "ny_minute"]) < 16*60+45]
+        cutoff_i = prior_cutoff_candidates[-1] if prior_cutoff_candidates else entry_i
     if cutoff_i <= entry_i:
         return None
 
     exit_i = None
     exit_price = None
     reason = None
-    for j in range(entry_i, cutoff_i):
+    stop_scan_end = cutoff_i if exact_cutoff else cutoff_i + 1
+    for j in range(entry_i, stop_scan_end):
         if d == 1:
             op, hi, lo = float(q.at[j,"bid_open"]), float(q.at[j,"bid_high"]), float(q.at[j,"bid_low"])
             if op <= stop:
@@ -224,14 +232,12 @@ def build_trade_for_signal(q: pd.DataFrame, day_positions: dict, i: int, sig: di
         if exit_i is not None:
             break
     if exit_i is None:
-        # Exit at the actual 16:45 open if present; otherwise at the prior available M5 close.
-        if int(q.at[cutoff_i, "ny_minute"]) == 16*60+45:
-            exit_i = cutoff_i
+        exit_i = cutoff_i
+        if exact_cutoff:
             exit_price = float(q.at[exit_i, "bid_open"] if d == 1 else q.at[exit_i, "ask_open"])
             exit_ts = q.at[exit_i, "timestamp_utc"]
             reason = "time_exit_1645_open"
         else:
-            exit_i = cutoff_i
             exit_price = float(q.at[exit_i, "bid_close"] if d == 1 else q.at[exit_i, "ask_close"])
             exit_ts = q.at[exit_i, "timestamp_utc"] + pd.Timedelta(minutes=5)
             reason = "time_exit_last_close"
@@ -274,7 +280,7 @@ def metrics(trades: pd.DataFrame, cost: float) -> dict:
     vals = trades[key].to_numpy(float)
     win = vals[vals > 0].sum()
     loss = -vals[vals < 0].sum()
-    pf = None if loss == 0 and win == 0 else (float("inf") if loss == 0 else float(win/loss))
+    pf = None if loss == 0 else float(win/loss)
     return {"trades":int(len(vals)), "net_r":float(vals.sum()), "pf":pf,
             "mean_r":float(vals.mean()), "median_r":float(np.median(vals)),
             "win_rate":float((vals>0).mean()), "positive_profit_r":float(win),
@@ -417,6 +423,20 @@ def main():
       "module_A_positive_50_trades_both_segments":len(a_disc)>=50 and len(a_val)>=50 and metrics(a_disc,PRIMARY_COST)["net_r"]>0 and metrics(a_val,PRIMARY_COST)["net_r"]>0,
       "module_B_positive_50_trades_both_segments":len(b_disc)>=50 and len(b_val)>=50 and metrics(b_disc,PRIMARY_COST)["net_r"]>0 and metrics(b_val,PRIMARY_COST)["net_r"]>0,
       "router_validation_positive_at_0p50_cost":metrics(v_router,0.50)["net_r"]>0,
+      "router_validation_beats_raw_union_and_retains_60pct_trade_count": (
+          metrics(v_router,PRIMARY_COST)["net_r"] > metrics(
+              dev_trades["raw_union"][
+                  (pd.to_datetime(dev_trades["raw_union"]["signal_bar_time_utc"],utc=True)>=validation_start)
+                  & (pd.to_datetime(dev_trades["raw_union"]["signal_bar_time_utc"],utc=True)<validation_end)
+              ] if not dev_trades["raw_union"].empty else dev_trades["raw_union"], PRIMARY_COST
+          )["net_r"]
+          and len(v_router) >= 0.60 * len(
+              dev_trades["raw_union"][
+                  (pd.to_datetime(dev_trades["raw_union"]["signal_bar_time_utc"],utc=True)>=validation_start)
+                  & (pd.to_datetime(dev_trades["raw_union"]["signal_bar_time_utc"],utc=True)<validation_end)
+              ] if not dev_trades["raw_union"].empty else dev_trades["raw_union"]
+          )
+      ),
     }
     hist_pass=all(dev_gate_results["locked_historical_gates"].values())
     summary={
@@ -450,16 +470,31 @@ def main():
         rt=oos_metrics["router"][f"cost_{cost_to_key(PRIMARY_COST)}"]
         rt_stress=oos_metrics["router"]["cost_0p50"]
         bt=oos_metrics["router"]["bootstrap_primary_cost"]
-        monthly=oos_metrics["router"].get("months",{})
+        # Score only the nine completed calendar months Jan-Sep 2026; October is partial.
+        oos_router = all_trades["router"]
+        oos_router = oos_router[(pd.to_datetime(oos_router["signal_bar_time_utc"],utc=True)>=oos_start)
+                                & (pd.to_datetime(oos_router["signal_bar_time_utc"],utc=True)<oos_end)] if not oos_router.empty else oos_router
+        completed_months = [f"2026-{m:02d}" for m in range(1,10)]
+        monthly = {}
+        for month in completed_months:
+            mt = oos_router[oos_router["signal_month"] == month] if not oos_router.empty else oos_router
+            monthly[month] = {f"cost_{cost_to_key(cost)}":metrics(mt,cost) for cost in COSTS}
+        oos_metrics["router"]["completed_months_jan_sep"] = monthly
         positive_months=sum(1 for m in monthly.values() if m[f"cost_{cost_to_key(PRIMARY_COST)}"]["net_r"]>0)
         total_positive=sum(m[f"cost_{cost_to_key(PRIMARY_COST)}"]["positive_profit_r"] for m in monthly.values())
         largest_month=max((m[f"cost_{cost_to_key(PRIMARY_COST)}"]["positive_profit_r"] for m in monthly.values()),default=0.0)
+        a_oos = oos_metrics["A"][f"cost_{cost_to_key(PRIMARY_COST)}"]
+        b_oos = oos_metrics["B"][f"cost_{cost_to_key(PRIMARY_COST)}"]
         oos_gates={
           "router_oos_50_trades":rt["trades"]>=50,
+          "module_A_oos_at_least_20_trades":a_oos["trades"]>=20,
+          "module_B_oos_at_least_20_trades":b_oos["trades"]>=20,
           "router_oos_net_positive_at_primary_cost":rt["net_r"]>0,
           "router_oos_net_positive_at_0p50_cost":rt_stress["net_r"]>0,
+          "module_A_oos_contribution_nonnegative":a_oos["net_r"]>=0,
+          "module_B_oos_contribution_nonnegative":b_oos["net_r"]>=0,
           "bootstrap_lower_bound_positive":bt["ci95"][0] is not None and bt["ci95"][0]>0,
-          "at_least_60_percent_positive_months":len(monthly)>0 and positive_months/len(monthly)>=0.60,
+          "at_least_60_percent_of_9_completed_months_positive":positive_months/9>=0.60,
           "largest_month_not_over_40_percent_positive_profit":total_positive>0 and largest_month/total_positive<=0.40,
         }
         summary["locked_oos_gates"]=oos_gates
