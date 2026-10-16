@@ -82,3 +82,12 @@ If a historical or locked 2026 gate fails, the candidate is **GAGAL** and must n
 
 ## 9. Funded-ready is a separate promotion decision
 Even a successful signal-stream screen is not funded-ready automatically. To claim funded-ready, the project must also pass `FUNDED_READINESS_GATE_20261016.md` with an equity-aware, two-phase Challenge replay including current official DLL/MLL, server-time reset, commission/swap/fees, intratrade floating P&L, Quick Strike, minimum trading days, realistic slippage, and two-phase completion odds. Any missing mandatory implementation evidence means **GAGAL for funded readiness**.
+
+## 10. Pre-result execution-timing and cutoff clarification (2026-10-16)
+
+This implementation clarification is recorded before any R272 performance metrics or 2026 output have been calculated or inspected. It corrects timestamp semantics; it does not change signal thresholds, stops, targets, costs, or promotion gates.
+
+- Dukascopy M5 timestamps are bar **open** times. If signal bar index (t) opens at time (T), its close and decision time is (T+5) minutes. The explicitly locked additional five-minute manual-execution delay therefore requires entry at (T+10) minutes, index (t+2), not at (T+5) (index (t+1)). Both intervening M5 intervals must be exact five-minute steps; otherwise skip the trade. Record the realized delay from the signal-bar close in the ledger.
+- When an exact 16:45 New York bar exists, do not use that bar's post-open high/low because the forced-flat cutoff is its open. At the 16:45 opening executable quote, adverse gaps through a stop fill at that worse opening quote; favorable target gaps fill at the locked target price; otherwise flatten at the actual opening quote. If no exact 16:45 bar exists, continue using the last valid completed bar at or before the cutoff.
+- Zero-trade metrics must return a consistent finite/JSON-safe schema so empty modules/months do not crash the pre-registered summary gates.
+
