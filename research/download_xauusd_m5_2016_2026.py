@@ -97,7 +97,7 @@ def combine_and_compress(side: str, files: list[Path]):
                     continue
                 if header is None:
                     header = this_header
-                    writer = csv.writer(gout, lineterminator="\\n")
+                    writer = csv.writer(gout, lineterminator="\n")
                     writer.writerow(header)
                     lower = [x.strip().lower() for x in header]
                     ti = next((lower.index(k) for k in ("timestamp", "datetime", "date") if k in lower), 0)
@@ -163,7 +163,7 @@ def main():
         "important_scope_note": "The 2026 data will be held back by the local analysis workflow until the strategy rule set and acceptance gates are committed. GitHub Actions here only downloads and archives raw data."
     }
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\\n", encoding="utf-8")
+    (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": manifest["status"], "monthly_requests": manifest["monthly_requests"],
                       "outputs": manifest["outputs"], "manifest": str(OUT / "manifest.json")}, indent=2), flush=True)
 
