@@ -11,7 +11,7 @@ ROOT = Path(".")
 DATA = ROOT / "dl" / "xauusd_m5_2016_2026"
 OUT = ROOT / "data_exports" / "xauusd_m5_2016_2026"
 PATCH = ROOT / "dukascopy_fetch_patch.cjs"
-CLI = os.environ.get("DUKASCOPY_NODE_VERSION", "1.46.4")
+CLI = os.environ.get("DUKASCOPY_NODE_VERSION", "1.50.0")
 
 
 def month_ranges(start: date, end: date):
