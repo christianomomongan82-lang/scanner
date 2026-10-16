@@ -315,3 +315,13 @@ The user's “compound compound” instruction was not satisfied by increasing p
 - At +1 pip: discovery 2016–2020 = 57 trades, PF 0.811, −4.949R; validation 2021 = 14 trades, PF 0.769, −1.437R; diagnostic forward 2022–2025 = 55 trades, PF 0.808, −4.265R. Annual 2022/2023/2024/2025 net R = −2.798 / −1.642 / +2.276 / −2.101. Forward four-week bootstrap: mean −0.0204R/week, 95% CI [−0.0722, +0.0324], 22.06% positive bootstrap means.
 - Cost stress was negative even at +0 pip extra cost (forward −3.892R) and remained −4.638R at +2 pips. Six preregistered gates failed. Challenge replay was not run because the locked spec allowed it only for a net-positive stream. **R271 = GAGAL; no retuning.**
 - The 2022–2025 period is contaminated, and 2026+ was not in this input archive, so no claim of independent promotion-grade evidence is possible even apart from the failed measured gates.
+
+
+## Funded-readiness correction — official rules verified (2026-10-16)
+
+- [Official rule matrix and remaining implementation checks](research/FUNDEDNEXT_STELLAR2_RULES_VERIFIED_20261016.md)
+- [Funded-ready promotion gate](research/FUNDED_READINESS_GATE_20261016.md)
+
+Current public FundedNext CFD Stellar 2-Step documentation verifies: Phase 1 +8%, Phase 2 +5%; 5% daily loss with daily reset at 00:00 server time and realized-today + floating P&L counted (including commissions/swaps/fees); 10% static maximum loss; at least five distinct trading days per phase; no time limit; Quick Strike must be below 30% and measures profit from profitable trades closed in under 30 seconds. Server clock is seasonally GMT+2/GMT+3. The official help center currently requires traders to be at least 18 to open a trading account. Full sources and detailed mechanics are in the linked rule matrix.
+
+**Important correction:** historical challenge proxy metrics are not live-pass odds. Before any strategy can become LULUS for funded readiness, replay the exact phase sequence with intratrade equity, floating loss, costs, server-time reset and Quick Strike. R270/R271 stay GAGAL and must not be retuned. The 2022–2025 window is not an untouched promotion holdout. Until the user reaches age eligibility, all tests remain simulation-only.
