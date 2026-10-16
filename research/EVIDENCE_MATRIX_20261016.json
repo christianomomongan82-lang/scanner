@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-10-16",
-  "status": "NO_EDGE_VALIDATED_FOR_PROMOTION_IN_R270_TO_R274",
+  "as_of": "2026-10-17",
+  "status": "NO_EDGE_VALIDATED_FOR_PROMOTION_IN_R270_TO_R275",
   "execution_blocks": {
     "quote_side_bid_ask": "reusable implementation control; local smoke-checked; not alpha evidence",
     "preserve_gaps": "reusable data-integrity control; not alpha evidence",
@@ -57,11 +57,18 @@
       "id": "R189_M1_micro_pattern",
       "status": "UNCONFIRMED",
       "evidence": "55 OOS-2026 trades PF 1.484 at +0.2pip, low sample and unresolved historical replication/phone latency"
+    },
+    {
+      "id": "R275_L80_phone_delay_T_plus_6",
+      "status": "FAILED",
+      "evidence": "At +1 extra pip in exploratory 2022-2025, 701 trades, PF 0.694, net -786.3 pips, max DD 816.9 pips; four-week weekly-net-pips bootstrap 95% CI [-5.252, -2.398] pips/week. L80 signal unchanged; delay T+6 failed."
     }
   ],
-  "decision": "Do not claim any block from R270-R274 is a proven edge. Next generation should broaden instrument and hypothesis-family coverage with locked discovery gates and explicit component ablations.",
+  "decision": "No signal block in R270-R275 has promotion-grade positive edge. Preserve proven executable/data-integrity controls only; R189/L80 remains unconfirmed and R275 phone-delay child failed. Broaden structural hypothesis/instrument coverage, preregister before calculation, compare matched ablations, and keep the 2026 XAUUSD holdout unopened.",
   "contamination_notes": {
     "2021-2025": "Repeatedly viewed across previous project experiments; use as exploratory screen only, not clean program-level OOS.",
-    "2026_XAUUSD_M5": "Still unopened in R272/R273/R274; do not inspect unless a future preregistered candidate passes all historical gates."
+    "2026_XAUUSD_M5": "Still unopened in R272/R273/R274; do not inspect unless a future preregistered candidate passes all historical gates.",
+    "2022-2025": "Repeatedly inspected across many strategy families and is exploratory only, not program-level clean OOS.",
+    "EURUSD_M1_R275": "Historical raw archive was collected with -fl; conservative flat-row exclusion is heuristic. R275 found no positive stream, and no 2026 EURUSD calculations were run in R275."
   }
 }
