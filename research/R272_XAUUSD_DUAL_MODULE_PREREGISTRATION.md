@@ -54,7 +54,7 @@ Activate only when (ER_t le 0.20); the middle zone (0.20<ER_t<0.45) has no trade
 - No trailing stop, news filter, position scaling, stop/target optimization or parameter sweep.
 
 ## 6. Required comparison
-Report Module A alone, Module B alone, the routed stream A/B and their union without regime routing as a diagnostic baseline. All comparisons use identical timestamps, executable sides, costs and entry delays. Report:
+Report Module A alone under its router gate, Module B alone under its router gate, the routed stream A/B and a raw-union baseline that allows either module's raw trigger in any ER regime (predeclared conflict resolution: Module A takes priority if both trigger on the same bar). All comparisons use identical timestamps, executable sides, costs and entry delays. Report:
 - trade count, net R, PF (diagnostic), mean/median R, win rate and holding time;
 - yearly and monthly results, long/short contribution, stop/target/time-exit mix, trade overlap/skips;
 - 4-week circular block bootstrap of weekly net R, 10,000 resamples with seed 2722026;
