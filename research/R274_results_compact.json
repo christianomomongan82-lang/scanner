@@ -1,0 +1,114 @@
+{
+  "round": "R274",
+  "candidate": "XAUUSD M5 impulse follow-through",
+  "verdict": "GAGAL",
+  "source": "Dukascopy via dukascopy-node; raw-only artifact 12031270051; acquisition run 38859918137",
+  "preregistration": "research/R274_XAUUSD_M5_IMPULSE_FOLLOWTHROUGH_PREREGISTRATION.md",
+  "primary_extra_cost_usd_per_oz": 0.3,
+  "data": {
+    "synthetic_flat_bars_disabled": true,
+    "bid_rows": 947326,
+    "ask_rows": 947326,
+    "matched_rows": 947326,
+    "negative_open_spreads": 0,
+    "median_open_spread_usd_per_oz": 0.358,
+    "p95_open_spread_usd_per_oz": 1.117,
+    "gaps_over_5m_preserved": 572,
+    "rows_calculated_through_2025": 877930,
+    "holdout_2026_opened": false
+  },
+  "metrics": {
+    "discovery_2016_2020": {
+      "trades": 974,
+      "net_r": -655.9439,
+      "pf": 0.3238,
+      "mean_r": -0.6735,
+      "median_r": -1.2663,
+      "win_rate": 0.2772,
+      "cost_0": {
+        "net_r": -295.4429,
+        "pf": 0.5772
+      },
+      "cost_0p10": {
+        "net_r": -415.6099,
+        "pf": 0.4734
+      },
+      "cost_0p50": {
+        "net_r": -896.2779,
+        "pf": 0.2213
+      },
+      "bootstrap": {
+        "mean_weekly_r": -2.513195,
+        "ci95": [
+          -2.884454,
+          -2.135939
+        ],
+        "weeks": 261,
+        "replicates": 10000,
+        "block_weeks": 4,
+        "seed": 2742026
+      }
+    },
+    "validation_2021_2025": {
+      "trades": 997,
+      "net_r": -430.6456,
+      "pf": 0.4834,
+      "mean_r": -0.4319,
+      "median_r": -1.1308,
+      "win_rate": 0.3079,
+      "cost_0": {
+        "net_r": -228.9829,
+        "pf": 0.6672
+      },
+      "cost_0p10": {
+        "net_r": -296.2038,
+        "pf": 0.5978
+      },
+      "cost_0p50": {
+        "net_r": -565.0875,
+        "pf": 0.3928
+      },
+      "bootstrap": {
+        "mean_weekly_r": -1.649983,
+        "ci95": [
+          -1.90632,
+          -1.388912
+        ],
+        "weeks": 261,
+        "replicates": 10000,
+        "block_weeks": 4,
+        "seed": 2742026
+      },
+      "annual_net_r": {
+        "2021": -97.277,
+        "2022": -80.1954,
+        "2023": -95.9297,
+        "2024": -84.9815,
+        "2025": -72.262
+      }
+    }
+  },
+  "signal_counts": {
+    "raw_long": 9594,
+    "raw_short": 9448,
+    "closed_trades": 1971
+  },
+  "execution_skips": {
+    "module_A_stop_distance": 7552,
+    "invalid_stop_distance": 181,
+    "delayed_entry_already_crossed": 16
+  },
+  "historical_gates": {
+    "discovery_count_positive_net_r": false,
+    "discovery_bootstrap_lower_95_positive": false,
+    "validation_count_positive_net_r": false,
+    "validation_positive_at_cost_0p50": false,
+    "at_least_3_of_5_validation_years_positive": false
+  },
+  "holdout_2026_opened": false,
+  "notes": [
+    "No challenge replay.",
+    "2021–2025 is research-contaminated and not clean program-level OOS.",
+    "Full local row-level trade ledger not uploaded."
+  ]
+}
