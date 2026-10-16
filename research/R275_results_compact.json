@@ -1,0 +1,223 @@
+{
+  "round": "R275",
+  "status": "COMPLETE",
+  "candidate": "R189/L80 with exact five-minute manual delay after M1 candle close",
+  "verdict": "GAGAL",
+  "preregistration": "research/R275_R189_L80_MOBILE_DELAY_PREREGISTRATION.md",
+  "report": "research/R275_FINAL_REPORT.md",
+  "runner": "research/r275_r189_l80_mobile_delay.py",
+  "archive": {
+    "artifact_id": 11959096102,
+    "source": "Dukascopy EURUSD M1 BID/ASK 2016-2025",
+    "sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "input_rows_each_side": 4415493,
+    "heuristically_removed_paired_synthetic_flat_candidates": 696795,
+    "remaining_paired_rows": 3718698,
+    "removed_pct": 15.7806840595,
+    "median_open_spread_pips": 0.3,
+    "p95_open_spread_pips": 0.8,
+    "known_limit": "Input archive was collected with -fl; flat-row exclusion is a heuristic and does not prove synthetic data is fully removed."
+  },
+  "locked_rules": {
+    "signals": "R189 L80 unchanged",
+    "parent_entry": "exact T+1 minute after signal-bar open",
+    "child_entry": "exact T+6 minute after signal-bar open",
+    "exact_timestamp_required": true,
+    "stop_loss_pips": 6,
+    "take_profit_pips": 18,
+    "mfe_trailing_trigger_pips": 6,
+    "trailing_distance_pips": 0,
+    "time_stop_observed_bars": 60,
+    "max_entry_spread_pips": 1.5,
+    "extra_cost_stress_pips": [
+      0.2,
+      0.5,
+      1,
+      2
+    ]
+  },
+  "note": "2022-2025 is research-contaminated, only an exploratory forward diagnostic, not a clean holdout. R275 did not use EURUSD 2026; the XAUUSD 2026 holdout stays unopened.",
+  "parent_T_plus_1_2022_2025_at_plus_1_pip": {
+    "trades": 699,
+    "pf": 0.839428,
+    "net_pips": -378.5,
+    "max_drawdown_pips": 440,
+    "trades_per_week": 3.3491
+  },
+  "child_T_plus_6_2022_2025_at_plus_1_pip": {
+    "trades": 701,
+    "pf": 0.694,
+    "net_pips": -786.3,
+    "max_drawdown_pips": 816.9,
+    "trades_per_week": 3.36,
+    "mean_net_pips_per_trade": -1.1217,
+    "median_net_pips_per_trade": -7,
+    "win_rate": 0.4636
+  },
+  "comparison": {
+    "net_pips_worsened_by": 407.8,
+    "max_drawdown_increased_by": 376.9
+  },
+  "child_cost_stress": {
+    "2021": {
+      "1": {
+        "pf": 1.16978,
+        "net_pips": 30.9
+      },
+      "2": {
+        "pf": 0.822,
+        "net_pips": -37.1
+      },
+      "trades": 68,
+      "0.2": {
+        "pf": 1.529156,
+        "net_pips": 85.3
+      },
+      "0.5": {
+        "pf": 1.384024,
+        "net_pips": 64.9
+      }
+    },
+    "2016-2020": {
+      "1": {
+        "pf": 0.749523,
+        "net_pips": -799.6
+      },
+      "2": {
+        "pf": 0.532355,
+        "net_pips": -1710.6
+      },
+      "trades": 911,
+      "0.2": {
+        "pf": 0.974925,
+        "net_pips": -70.8
+      },
+      "0.5": {
+        "pf": 0.883809,
+        "net_pips": -344.1
+      }
+    },
+    "2022-2025": {
+      "1": {
+        "pf": 0.694,
+        "net_pips": -786.3
+      },
+      "2": {
+        "pf": 0.496,
+        "net_pips": -1487.3
+      },
+      "trades": 701,
+      "0.2": {
+        "pf": 0.901,
+        "net_pips": -225.5
+      },
+      "0.5": {
+        "pf": 0.817,
+        "net_pips": -435.8
+      }
+    },
+    "2016-2025": {
+      "1": {
+        "pf": 0.738414,
+        "net_pips": -1555
+      },
+      "2": {
+        "pf": 0.525291,
+        "net_pips": -3235
+      },
+      "trades": 1680,
+      "0.2": {
+        "pf": 0.959855,
+        "net_pips": -211
+      },
+      "0.5": {
+        "pf": 0.870314,
+        "net_pips": -715
+      }
+    }
+  },
+  "annual_child_at_plus_1_pip": [
+    {
+      "year": 2016,
+      "trades": 277,
+      "pf": 0.708,
+      "net_pips": -294.5
+    },
+    {
+      "year": 2017,
+      "trades": 154,
+      "pf": 0.796,
+      "net_pips": -107.6
+    },
+    {
+      "year": 2018,
+      "trades": 172,
+      "pf": 0.55,
+      "net_pips": -308.7
+    },
+    {
+      "year": 2019,
+      "trades": 68,
+      "pf": 0.941,
+      "net_pips": -12.7
+    },
+    {
+      "year": 2020,
+      "trades": 240,
+      "pf": 0.899,
+      "net_pips": -76.1
+    },
+    {
+      "year": 2021,
+      "trades": 68,
+      "pf": 1.1698,
+      "net_pips": 30.9
+    },
+    {
+      "year": 2022,
+      "trades": 321,
+      "pf": 0.722,
+      "net_pips": -331
+    },
+    {
+      "year": 2023,
+      "trades": 146,
+      "pf": 0.634,
+      "net_pips": -200.1
+    },
+    {
+      "year": 2024,
+      "trades": 75,
+      "pf": 0.832,
+      "net_pips": -45
+    },
+    {
+      "year": 2025,
+      "trades": 159,
+      "pf": 0.629,
+      "net_pips": -210.2
+    }
+  ],
+  "bootstrap_2022_2025_at_plus_1_pip": {
+    "trades": 701,
+    "weeks": 209,
+    "block_weeks": 4,
+    "replicates": 10000,
+    "seed": 2752026,
+    "mean_net_pips_per_week": -3.7622,
+    "ci95_pips_per_week": [
+      -5.2517,
+      -2.3981
+    ],
+    "probability_mean_weekly_positive": 0
+  },
+  "gates": {
+    "forward_trades_ge_100": true,
+    "pf_ge_1_10_at_1pip": false,
+    "pf_ge_1_05_at_2pip": false,
+    "annual_stability_at_1pip": false,
+    "bootstrap_lower_ci_positive": false
+  },
+  "challenge_replay_run": false,
+  "next_action": "Reject the delayed L80 child. Broaden to a structurally different instrument/family; do not revive failed L80 or failed XAUUSD M5 signals by tuning."
+}
