@@ -1,0 +1,51 @@
+name: R272 XAUUSD M5 downloader probe (data only)
+
+on:
+  push:
+    branches:
+      - data/r272-xauusd-m5-2016-2026
+    paths:
+      - ".github/workflows/r272-xauusd-probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: data/r272-xauusd-m5-2016-2026
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: One-month XAUUSD M5 BID/ASK probe using current downloader
+        shell: bash
+        env:
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        run: |
+          set +e
+          mkdir -p probe/bid probe/ask logs
+          npx --yes dukascopy-node@1.50.0 -i xauusd -from 2016-01-01 -to 2016-02-01 -t m5 -p bid -utc 0 -f csv -fl -dir probe/bid -fn xauusd_bid_probe -bs 5 -bp 2000 -r 5 -rp 5000 2>&1 | tee logs/bid.log
+          echo "BID_EXIT=${PIPESTATUS[0]}"
+          npx --yes dukascopy-node@1.50.0 -i xauusd -from 2016-01-01 -to 2016-02-01 -t m5 -p ask -utc 0 -f csv -fl -dir probe/ask -fn xauusd_ask_probe -bs 5 -bp 2000 -r 5 -rp 5000 2>&1 | tee logs/ask.log
+          echo "ASK_EXIT=${PIPESTATUS[0]}"
+          find probe logs -type f -printf '%p %s bytes\\n' || true
+          exit 0
+      - name: Upload probe data and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R272-XAUUSD-M5-downloader-probe
+          path: |
+            probe/
+            logs/
+          if-no-files-found: warn
+          retention-days: 14
