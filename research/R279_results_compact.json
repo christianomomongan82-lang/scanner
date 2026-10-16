@@ -1,0 +1,90 @@
+{
+  "round": "R279",
+  "verdict": "GAGAL",
+  "preregistration": "research/R279_LONG_ONLY_BREADTH_INTRADAY_NO_TP_PREREGISTRATION.md",
+  "candidate": "R278 child with fixed 2R target removed; OR-low stop remains; force-flat at exact 16:00 NY open",
+  "child": {
+    "discovery_2017_2021": {
+      "trades": 435,
+      "pf_1bp": 0.92271,
+      "net_R_1bp": -14.6407,
+      "pf_2bp": 0.872896,
+      "net_R_2bp": -24.8555
+    },
+    "exploratory_forward_2022_2025": {
+      "trades": 508,
+      "pf_1bp": 1.395135,
+      "net_R_1bp": 67.7982,
+      "pf_2bp": 1.338531,
+      "net_R_2bp": 59.4397,
+      "mean_net_R_trade_1bp": 0.133461,
+      "max_drawdown_R_1bp": 17.9916,
+      "median_holding_hours": 5.6667,
+      "p95_holding_hours": 5.8333
+    },
+    "diagnostic_2026": {
+      "trades": 67,
+      "pf_1bp": 0.877368,
+      "net_R_1bp": -2.6326,
+      "pf_2bp": 0.82596,
+      "net_R_2bp": -3.8499
+    }
+  },
+  "sibling_R278_child_forward_1bp": {
+    "trades": 508,
+    "pf": 1.4027,
+    "net_R": 69.0962,
+    "mean_net_R_trade": 0.136016,
+    "max_drawdown_R": 17.2613
+  },
+  "bootstrap_forward_1bp": {
+    "trades": 508,
+    "weeks": 209,
+    "block_weeks": 4,
+    "reps": 10000,
+    "seed": 2762026,
+    "mean_R_week": 0.324393,
+    "ci95": [
+      0.042192,
+      0.60872
+    ],
+    "p_mean_positive": 0.9866
+  },
+  "annual_forward_1bp": {
+    "2022": {
+      "trades": 171,
+      "pf": 1.613142,
+      "net_R": 33.1139
+    },
+    "2023": {
+      "trades": 129,
+      "pf": 1.571342,
+      "net_R": 24.9955
+    },
+    "2024": {
+      "trades": 75,
+      "pf": 1.344901,
+      "net_R": 8.4882
+    },
+    "2025": {
+      "trades": 133,
+      "pf": 1.024395,
+      "net_R": 1.2006
+    }
+  },
+  "locked_gates": {
+    "discovery_trades_ge_100": true,
+    "discovery_pf_plus2_ge_1": false,
+    "forward_trades_ge_100": true,
+    "forward_pf_plus1_ge_1_10": true,
+    "forward_pf_plus2_ge_1_05": true,
+    "annual_stability": true,
+    "bootstrap_lower_gt_zero": true,
+    "mean_R_trade_exceeds_unfiltered_parent_T10": true
+  },
+  "limitations": [
+    "Discovery gate fails; forward improvement cannot promote it.",
+    "Removing TP performed worse than R278 sibling on 2022-2025.",
+    "BID-only inputs, modeled costs, previously inspected windows, no funded challenge replay."
+  ]
+}
