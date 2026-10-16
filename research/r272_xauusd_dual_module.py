@@ -58,9 +58,36 @@ def read_side(path: Path, prefix: str) -> pd.DataFrame:
 
 
 def load_quotes() -> tuple[pd.DataFrame, dict]:
+    if not MANIFEST_PATH.exists():
+        raise FileNotFoundError(f"Required provenance manifest is missing: {MANIFEST_PATH}")
+    manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    if manifest.get("status") != "RAW_DATA_COLLECTION_ONLY":
+        raise ValueError("Manifest does not identify a raw-data-only acquisition")
+    if manifest.get("source_feed") != "Dukascopy through dukascopy-node":
+        raise ValueError("Unexpected data-source provenance in manifest")
+    if manifest.get("instrument") != "XAUUSD" or manifest.get("timeframe") != "M5":
+        raise ValueError("Manifest instrument/timeframe mismatch")
+    window = manifest.get("requested_window_utc", {})
+    if window.get("start_inclusive") != "2016-01-01" or window.get("end_exclusive") != "2026-10-16":
+        raise ValueError(f"Unexpected requested data window in manifest: {window}")
+    if manifest.get("include_synthetic_flat_bars") is not False:
+        raise ValueError("Refusing data without explicit proof that synthetic flat bars were disabled")
     bid = read_side(BID_PATH, "bid")
     ask = read_side(ASK_PATH, "ask")
     bid_n, ask_n = len(bid), len(ask)
+    bid_sha = sha256(BID_PATH)
+    ask_sha = sha256(ASK_PATH)
+    for side, path, rows, digest in (
+        ("bid", BID_PATH, bid_n, bid_sha),
+        ("ask", ASK_PATH, ask_n, ask_sha),
+    ):
+        source_meta = manifest.get("outputs", {}).get(side, {})
+        if source_meta.get("file") != path.name:
+            raise ValueError(f"Manifest file-name mismatch for {side}: {source_meta.get('file')!r}")
+        if source_meta.get("rows") != rows:
+            raise ValueError(f"Manifest row-count mismatch for {side}: {source_meta.get('rows')} != {rows}")
+        if source_meta.get("sha256_gzip_file") != digest:
+            raise ValueError(f"Manifest SHA-256 mismatch for {side} gzip file")
     q = bid.merge(ask, on="timestamp_utc", how="inner", sort=True, validate="one_to_one")
     if q.empty:
         raise ValueError("No common BID/ASK timestamps")
@@ -74,15 +101,14 @@ def load_quotes() -> tuple[pd.DataFrame, dict]:
     out_of_grid = int(np.sum((diff % BAR_MS) != 0))
     audit = {
         "bid_rows": bid_n, "ask_rows": ask_n, "common_quote_rows": int(len(q)),
-        "bid_sha256_gzip": sha256(BID_PATH), "ask_sha256_gzip": sha256(ASK_PATH),
+        "bid_sha256_gzip": bid_sha, "ask_sha256_gzip": ask_sha,
         "negative_open_spread_rows": neg, "median_open_spread_usd_per_oz": float(q["spread_open"].median()),
         "p95_open_spread_usd_per_oz": float(q["spread_open"].quantile(.95)),
         "adjacent_five_minute_gaps": grid_step, "non_five_minute_timestamp_deltas": out_of_grid,
         "first_timestamp_utc": q["timestamp_utc"].iloc[0].isoformat(),
         "last_timestamp_utc": q["timestamp_utc"].iloc[-1].isoformat()
     }
-    if MANIFEST_PATH.exists():
-        audit["source_manifest"] = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    audit["source_manifest"] = manifest
     q["ny_time"] = q["timestamp_utc"].dt.tz_convert(NY_TZ)
     q["ny_date"] = q["ny_time"].dt.date
     q["ny_minute"] = q["ny_time"].dt.hour * 60 + q["ny_time"].dt.minute
