@@ -30,7 +30,8 @@ def download_month(side: str, month_start: date, month_end: date):
     cmd = [
         "npx", "--yes", f"dukascopy-node@{CLI}",
         "-i", "xauusd", "-from", month_start.isoformat(), "-to", month_end.isoformat(),
-        "-t", "m5", "-p", side, "-utc", "0", "-f", "csv", "-fl",
+        # Do not pass "-fl": synthetic flat bars would mask real session/data gaps.
+        "-t", "m5", "-p", side, "-utc", "0", "-f", "csv",
         "-dir", str(DATA), "-fn", stem, "-bs", "5", "-bp", "2000", "-r", "5", "-rp", "5000",
     ]
     env = os.environ.copy()
@@ -155,6 +156,8 @@ def main():
         "timeframe": "M5",
         "requested_window_utc": {"start_inclusive": START.isoformat(), "end_exclusive": END_EXCLUSIVE.isoformat()},
         "downloader_version": CLI,
+        "include_synthetic_flat_bars": False,
+        "missing_quote_policy": "preserve gaps; no flat-bar synthesis requested and no timestamps are filled locally",
         "monthly_requests": len(monthly),
         "outputs": {
             side: combine_and_compress(side, paths)
