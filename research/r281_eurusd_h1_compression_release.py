@@ -108,10 +108,10 @@ def replay(x, audit, out):
  d={'round':'R281','verdict':'GAGAL','stage':'STOPPED_AT_PREREGISTERED_VALIDATION_GATE','preregistration':'research/R281_EURUSD_H1_COMPRESSION_RELEASE_PREREGISTRATION.md','data':audit,'threshold_fit':{'fitted_using_only_2017_2020':thresholds,'observations':int(tr.sum())},'selection_rule':'highest validation PF at +1 pip among candidates with >=50 validation trades; tie-break mean then trade count','selected_candidate':selected,'eligible_candidates':eligible,'forward_stage_authorized':bool(selected is not None and all(gates.values())),'grid':results,'stage1_gates':gates,'decision':'No candidate eligible: best validation count is 10, and all eight discovery PFs are below 0.668 at +1 pip. No 2022-2025 outcomes are calculated.','limitations':['2022-2025 is contaminated exploratory data, not pristine OOS.','Dukascopy collector used -fl; flat-row removal is heuristic.','No verified FundedNext fees/swaps or challenge equity-path replay.']}
  with open(out/'R281_results_compact.json','w') as f: json.dump(d,f,indent=2,allow_nan=False)
  with open(out/'R281_grid_summary.csv','w') as f:
-  f.write('config,q,breakout_lookback,rr,discovery_trades,discovery_PF_plus1,discovery_net_pips_plus1,validation_trades,validation_PF_plus1,validation_net_pips_plus1,validation_PF_plus2,validation_net_pips_plus2,eligible_50_validation\\n')
+  f.write('config,q,breakout_lookback,rr,discovery_trades,discovery_PF_plus1,discovery_net_pips_plus1,validation_trades,validation_PF_plus1,validation_net_pips_plus1,validation_PF_plus2,validation_net_pips_plus2,eligible_50_validation\n')
   for k,v in results.items():
    a=v['discovery_plus1']; b=v['validation_cost_stress']['1.0']; c=v['validation_cost_stress']['2.0']
-   f.write(f"{k},{v['q']},{v['breakout_lookback']},{v['rr']},{a['trades']},{a['PF']},{a['net_pips']},{b['trades']},{b['PF']},{b['net_pips']},{c['PF']},{c['net_pips']},{b['trades']>=50}\\n")
+   f.write(f"{k},{v['q']},{v['breakout_lookback']},{v['rr']},{a['trades']},{a['PF']},{a['net_pips']},{b['trades']},{b['PF']},{b['net_pips']},{c['PF']},{c['net_pips']},{b['trades']>=50}\n")
  print(json.dumps({'bars':audit['complete_h1_bars'],'thresholds':d['threshold_fit'],'grid':{k:{'discovery':v['discovery_plus1'],'validation':v['validation_cost_stress']['1.0']} for k,v in results.items()},'selected':selected,'forward_authorized':d['forward_stage_authorized'],'verdict':d['verdict']},indent=2,allow_nan=False))
 
 def main():
