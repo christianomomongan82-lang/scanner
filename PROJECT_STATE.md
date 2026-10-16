@@ -430,3 +430,15 @@ Continuation instruction: read the latest R270–R274 results and `research/EVOL
 - **Verdict: GAGAL.** No candidate selected. To honor the stage gate, 2022-2025 outcomes were not calculated or inspected; XAUUSD M5 2026 holdout remains unopened. No challenge replay was run.
 - Repository artifacts now include preregistration, runner source, report, compact results, and grid summary. Row-level trade ledgers remain local and should be archived before claiming full repository-only reproduction. No Actions backtest workflow was launched.
 - Decision: close this fixed compression-release specification; no signal component retained. Next search must move to another mechanism, not loosen these thresholds.
+
+
+## Latest research update — R282 EURUSD weekend-reopening gap fade — GAGAL / DATA COVERAGE (2026-10-17)
+
+- Preregistration: [R282 design](research/R282_EURUSD_WEEKEND_GAP_FADE_PREREGISTRATION.md)
+- Local runner: [R282 replay source](research/r282_eurusd_weekend_gap_fade.py)
+- Results: [R282 report](research/R282_FINAL_REPORT.md) · [JSON](research/R282_results.json) · [event coverage audit](research/R282_event_coverage_audit.csv)
+- Data source: Dukascopy EURUSD M1 BID/ASK artifact 11959096102, SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`. The source collector used `-fl`; 696,795 paired flat candidates were removed heuristically after alignment/valid-OHLC screening.
+- The event detector saw 4 timestamp gaps ≥36 hours in the full 2016–2025 file; 3 met the locked Friday-to-Sunday/Monday condition. All 3 were timestamps at 00:00 UTC (2018-01-01, 2020-12-27, 2024-01-01) and each lacked exact T+10 timestamp; next observed quote arrived much later. None is a valid executable weekly reopening under the preregistered rules.
+- **Verdict: GAGAL — data/event coverage; alpha untested.** Zero trades, no reportable PF. 2022–2025 outcomes were not computed because discovery/validation gate failed; no challenge replay. Do not relax delay gate post-result.
+- R282 runner, prereg, report, results JSON and event-coverage CSV are archived. No GitHub Actions backtest workflow was launched.
+- Overall status R270–R282: no candidate promoted. R276 is only a historical screening pass with material unresolved failures; R277–R281 fail signal gates; R282 is data-ineligible, not a proven losing strategy.
