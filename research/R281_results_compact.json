@@ -1,0 +1,234 @@
+{
+  "round": "R281",
+  "verdict": "GAGAL",
+  "stage": "STOPPED_AT_PREREGISTERED_VALIDATION_GATE",
+  "preregistration": "research/R281_EURUSD_H1_COMPRESSION_RELEASE_PREREGISTRATION.md",
+  "data": {
+    "source": "Dukascopy EURUSD M1 BID/ASK via dukascopy-node",
+    "archive_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "manifest_status": "DATA_DOWNLOAD_COMPLETE",
+    "requested_window_utc": {
+      "start_inclusive": "2016-01-01",
+      "end_exclusive": "2026-01-01"
+    },
+    "raw_bid_rows": 4415493,
+    "raw_ask_rows": 4415493,
+    "candidate_synthetic_flat_rows_removed": 696795,
+    "paired_m1_rows_post_filter": 3718698,
+    "complete_h1_bars": 57191,
+    "complete_h1_start_utc": "2016-01-03T23:00:00+00:00",
+    "complete_h1_end_utc": "2025-12-31T20:00:00+00:00",
+    "dropped_incomplete_or_missing_h1_groups": 5574,
+    "median_open_spread_pips": 0.3,
+    "p95_open_spread_pips": 0.8,
+    "flat_filter_caveat": "Collector used -fl; paired flat removal is heuristic."
+  },
+  "threshold_fit": {
+    "fitted_using_only_2017_2020": {
+      "0.2": 0.0020799999999998597,
+      "0.3": 0.0024999999999999467
+    },
+    "observations": 18570
+  },
+  "selection_rule": "Highest 2021 validation PF at +1 pip among configurations with >=50 trades; tie-break mean net then trade count.",
+  "selected_candidate": null,
+  "eligible_candidates": [],
+  "forward_stage_authorized": false,
+  "grid": {
+    "Q20_B12_RR1.5": {
+      "q": 0.2,
+      "breakout_lookback": 12,
+      "rr": 1.5,
+      "discovery_plus1": {
+        "trades": 271,
+        "PF": 0.6150280691387158,
+        "net_pips": -1042.35,
+        "mean_net_pips_per_trade": -3.8463099631,
+        "win_rate": 0.3210332103,
+        "max_drawdown_pips": 1143.15
+      },
+      "validation_plus1": {
+        "trades": 4,
+        "PF": 2.0652173913,
+        "net_pips": 58.8
+      },
+      "validation_plus2": {
+        "trades": 4,
+        "PF": 1.941580756,
+        "net_pips": 54.8
+      }
+    },
+    "Q20_B12_RR2": {
+      "q": 0.2,
+      "breakout_lookback": 12,
+      "rr": 2,
+      "discovery_plus1": {
+        "trades": 263,
+        "PF": 0.5755029375,
+        "net_pips": -1192.2,
+        "mean_net_pips_per_trade": -4.5330798479,
+        "win_rate": 0.2623574144,
+        "max_drawdown_pips": 1275.6
+      },
+      "validation_plus1": {
+        "trades": 4,
+        "PF": 2.0652173913,
+        "net_pips": 58.8
+      },
+      "validation_plus2": {
+        "trades": 4,
+        "PF": 1.941580756,
+        "net_pips": 54.8
+      }
+    },
+    "Q20_B24_RR1.5": {
+      "q": 0.2,
+      "breakout_lookback": 24,
+      "rr": 1.5,
+      "discovery_plus1": {
+        "trades": 90,
+        "PF": 0.6217756449,
+        "net_pips": -378.3,
+        "mean_net_pips_per_trade": -4.2033333333,
+        "win_rate": 0.3,
+        "max_drawdown_pips": 416.25
+      },
+      "validation_plus1": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      },
+      "validation_plus2": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      }
+    },
+    "Q20_B24_RR2": {
+      "q": 0.2,
+      "breakout_lookback": 24,
+      "rr": 2,
+      "discovery_plus1": {
+        "trades": 88,
+        "PF": 0.6671939885,
+        "net_pips": -336.6,
+        "mean_net_pips_per_trade": -3.825,
+        "win_rate": 0.2727272727,
+        "max_drawdown_pips": 418.2
+      },
+      "validation_plus1": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      },
+      "validation_plus2": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      }
+    },
+    "Q30_B12_RR1.5": {
+      "q": 0.3,
+      "breakout_lookback": 12,
+      "rr": 1.5,
+      "discovery_plus1": {
+        "trades": 392,
+        "PF": 0.6166430101,
+        "net_pips": -1593.5,
+        "mean_net_pips_per_trade": -4.0650510204,
+        "win_rate": 0.3137755102,
+        "max_drawdown_pips": 1630.75
+      },
+      "validation_plus1": {
+        "trades": 10,
+        "PF": 0.754581476,
+        "net_pips": -49.55
+      },
+      "validation_plus2": {
+        "trades": 10,
+        "PF": 0.714935376,
+        "net_pips": -59.55
+      }
+    },
+    "Q30_B12_RR2": {
+      "q": 0.3,
+      "breakout_lookback": 12,
+      "rr": 2,
+      "discovery_plus1": {
+        "trades": 375,
+        "PF": 0.6143974143,
+        "net_pips": -1622.5,
+        "mean_net_pips_per_trade": -4.3266666667,
+        "win_rate": 0.2693333333,
+        "max_drawdown_pips": 1622.5
+      },
+      "validation_plus1": {
+        "trades": 10,
+        "PF": 0.5137449301,
+        "net_pips": -107.9
+      },
+      "validation_plus2": {
+        "trades": 10,
+        "PF": 0.489389346,
+        "net_pips": -117.9
+      }
+    },
+    "Q30_B24_RR1.5": {
+      "q": 0.3,
+      "breakout_lookback": 24,
+      "rr": 1.5,
+      "discovery_plus1": {
+        "trades": 126,
+        "PF": 0.6004308917,
+        "net_pips": -602.75,
+        "mean_net_pips_per_trade": -4.7837301587,
+        "win_rate": 0.3015873016,
+        "max_drawdown_pips": 719.3
+      },
+      "validation_plus1": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      },
+      "validation_plus2": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      }
+    },
+    "Q30_B24_RR2": {
+      "q": 0.3,
+      "breakout_lookback": 24,
+      "rr": 2,
+      "discovery_plus1": {
+        "trades": 122,
+        "PF": 0.5746414602,
+        "net_pips": -652.5,
+        "mean_net_pips_per_trade": -5.3483606557,
+        "win_rate": 0.2704918033,
+        "max_drawdown_pips": 748.1
+      },
+      "validation_plus1": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      },
+      "validation_plus2": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      }
+    }
+  },
+  "gates": {
+    "minimum_50_validation_trades": false,
+    "discovery_PF_plus1_ge_1_all_candidates": false,
+    "forward_not_calculated_due_validation_gate": true
+  },
+  "decision": "No candidate eligible: best validation count is 10, and all eight discovery PFs are below 0.668 at +1 pip. No 2022-2025 outcomes were calculated.",
+  "limitations": [
+    "2022-2025 is contaminated exploratory data and was not evaluated for R281.",
+    "Dukascopy collector used -fl; flat-row removal is heuristic.",
+    "No verified FundedNext fees/swaps or challenge equity-path replay."
+  ]
+}
