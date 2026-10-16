@@ -1,6 +1,6 @@
 {
   "as_of": "2026-10-17",
-  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R280",
+  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R281",
   "execution_blocks": {
     "quote_side_bid_ask": "reusable implementation control; local smoke-checked; not alpha evidence",
     "preserve_gaps": "reusable data-integrity control; not alpha evidence",
@@ -87,15 +87,21 @@
       "id": "R280_Nasdaq_led_cash_open_follower",
       "status": "FAILED",
       "evidence": "437 discovery trades PF@+2bp 0.875; 426 exploratory-forward trades PF@+2bp 1.109; +1bp forward PF 1.169 but annual 2023/2024 cohorts negative, four-week bootstrap 95% CI [-0.116,0.381] R/week, and diagnostic 2026 PF@+1bp 0.744. Mean R/trade improves versus follower parent but total forward net R falls +108.76R to +27.89R."
+    },
+    {
+      "id": "R281_EURUSD_H1_compression_release",
+      "status": "FAILED",
+      "evidence": "Corrected replay produced trades where R257 had zero because of an eligibility/coverage implementation failure, but every locked configuration lost in 2017-2020 after +1 pip (PF 0.575-0.667; 88-392 trades). In 2021 the best configuration had only 10 closed trades, below the preregistered 50-trade selection gate. 2022-2025 outcomes were not calculated or inspected. No alpha block retained."
     }
   ],
-  "decision": "No candidate from R270-R280 is promoted for funded challenge. R276 passes historical screen only but diagnostic OOS and mandatory challenge-path gates fail/incomplete. R277-R280 fail their locked gates. Keep execution/data-integrity controls only; do not retune the US cash-open breakout family after these failures or treat 2022-2025 as clean OOS.",
+  "decision": "No candidate from R270-R281 is promoted for funded challenge. R276 remains historical-screen-only and not funded-ready; R277-R281 failed locked gates or were not independently promoted. R281 corrected R257's zero-trade eligibility failure, but every discovery PF was <0.668 after +1 pip and no 2021 candidate had 50 validation trades. Keep execution/data-integrity controls only; no signal alpha block retained. No full verified challenge-equity-path replay.",
   "contamination_notes": {
     "2021-2025": "Repeatedly viewed across previous project experiments; use as exploratory screen only, not clean program-level OOS.",
     "2026_XAUUSD_M5": "Still unopened in R272/R273/R274; do not inspect unless a future preregistered candidate passes all historical gates.",
     "2022-2025": "Research-contaminated; R276-R280 forward results are exploratory only, not clean promotion evidence.",
     "EURUSD_M1_R275": "Historical raw archive was collected with -fl; conservative flat-row exclusion is heuristic. R275 found no positive stream, and no 2026 EURUSD calculations were run in R275.",
     "2026_indices": "Diagnostic only; index data have been repeatedly viewed and are not an untouched program-level holdout.",
-    "index_data_costs": "Four cached US index feeds are BID-only; 1/2 bp costs are modeled. Swaps, commissions, actual spread, slippage, contract multipliers and exact funded equity path are not verified."
+    "index_data_costs": "Four cached US index feeds are BID-only; 1/2 bp costs are modeled. Swaps, commissions, actual spread, slippage, contract multipliers and exact funded equity path are not verified.",
+    "EURUSD_M1_R281": "Dukascopy raw M1 BID/ASK archive artifact 11959096102, SHA-256 b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e. Source used -fl; 696,795 paired flat candidates removed heuristically. R281 stopped before 2022-2025 forward scoring because validation gate failed; do not tune this family after result."
   }
 }
