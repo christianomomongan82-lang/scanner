@@ -417,3 +417,16 @@ Continuation instruction: read the latest R270–R274 results and `research/EVOL
 - Reproducibility gap remains: R276–R280 reports and compact JSON summaries are stored in GitHub, but all full local runners and row-level trade ledgers are not yet stored there. Do not describe GitHub-only reproduction as complete until these are archived.
 - Next search should not keep mutating this US cash-open breakout family. Register a structurally distinct mechanism before calculation and score it against fixed target-completion and breach objectives. Keep all 2026 slices diagnostic only.
 
+
+
+## Latest research update — R281 EURUSD H1 compression-release — GAGAL (2026-10-17)
+
+- Preregistration: [R281 design](research/R281_EURUSD_H1_COMPRESSION_RELEASE_PREREGISTRATION.md)
+- Runner: [R281 local Python runner](research/r281_eurusd_h1_compression_release.py)
+- Results: [R281 final report](research/R281_FINAL_REPORT.md) · [compact JSON](research/R281_results_compact.json) · [grid summary](research/R281_grid_summary.csv)
+- Purpose: correct R257's zero-trade eligibility/coverage problem, without changing the original fixed grid. H1 BID/ASK candles were constructed from Dukascopy M1; this is not claimed as a byte-identical reproduction of R257's former H1 file.
+- Input: GitHub data-only artifact 11959096102; archive SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`. Raw archive collector used `-fl`; paired flat-row removal is heuristic. 57,191 complete H1 bars; no missing bars were filled. Fit thresholds from 2017-2020 were 20.8 pips (Q20) and 25.0 pips (Q30).
+- At +1 additional pip, all eight discovery configurations lost: PF 0.575-0.667, 88-392 trades, net -336.6 to -1,622.5 pips. Best 2021 validation sample count was 10, below the required 50. Q20/B12 produced 4 validation trades and PF 2.065 but its discovery PF was 0.575-0.615, so it fails and must not be revived.
+- **Verdict: GAGAL.** No candidate selected. To honor the stage gate, 2022-2025 outcomes were not calculated or inspected; XAUUSD M5 2026 holdout remains unopened. No challenge replay was run.
+- Repository artifacts now include preregistration, runner source, report, compact results, and grid summary. Row-level trade ledgers remain local and should be archived before claiming full repository-only reproduction. No Actions backtest workflow was launched.
+- Decision: close this fixed compression-release specification; no signal component retained. Next search must move to another mechanism, not loosen these thresholds.
