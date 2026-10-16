@@ -85,3 +85,13 @@ R280 keeps the exact T+10 phone-execution assumption, same-day flat, quote-sourc
 - The compact metrics/summary and runner are in GitHub. Row-level per-configuration ledgers were generated locally but are not yet archived in the repository, so repository-only reproducibility remains incomplete. No GitHub Actions backtest was created or dispatched.
 
 Reusable learning: correct R257's implementation failure so it no longer hides possible triggers, but do not infer alpha from raw trade availability. This fixed compression-release specification is now closed; do not loosen its thresholds based on the failed result.
+
+
+## R282 update (2026-10-17) — EURUSD weekend-reopening gap fade: GAGAL / DATA COVERAGE
+
+- Preregistration: [R282 locked design](research/R282_EURUSD_WEEKEND_GAP_FADE_PREREGISTRATION.md)
+- Runner: [local R282 runner](research/r282_eurusd_weekend_gap_fade.py)
+- Results: [final report](research/R282_FINAL_REPORT.md) · [results JSON](research/R282_results.json) · [timestamp coverage audit](research/R282_event_coverage_audit.csv)
+- The preregistered event detector looked for a ≥36-hour gap where the previous observed timestamp was Friday UTC and the current timestamp was Sunday/Monday UTC; entry required an exact T+10 minute timestamp. In the entire archive it found four ≥36-hour timestamp gaps and three matching weekday candidates. All three were at Sunday/Monday 00:00 UTC holiday/data-gap timestamps, not executable FX weekly reopenings; none had an exact T+10 timestamp. Zero trades opened.
+- **Binary verdict: GAGAL at the discovery/validation data gate, but alpha was not tested.** Do not interpret zero trades as proof gap fading loses money. 2022–2025 forward outcomes were not calculated. Dataset provenance is the same Dukascopy M1 BID/ASK archive (artifact 11959096102, SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`); its paired-flat filter remains heuristic because the source used `-fl`.
+- Close this event-detection/execution rule on this archive. Do not loosen the T+10 timestamp requirement or relabel midnight timestamps as a true weekly reopening after seeing the failure. A future gap study needs a separately preregistered, verifiably session-aware input or event definition.
