@@ -70,3 +70,18 @@ Data limitations remain: BID-only index snapshots, modeled 1/2 bps costs, USA Sm
 
 R280 keeps the exact T+10 phone-execution assumption, same-day flat, quote-source timestamps and matched parent. Reusable control lessons are not edge evidence. Do not threshold-tune the 5–30-minute lag after this result.
 
+
+
+## R281 update (2026-10-17) — EURUSD H1 compression-release replay: GAGAL
+
+- Preregistration: [R281 locked design](research/R281_EURUSD_H1_COMPRESSION_RELEASE_PREREGISTRATION.md)
+- Runner: [local replay source](research/r281_eurusd_h1_compression_release.py)
+- Results: [compact machine-readable result](research/R281_results_compact.json) · [candidate grid CSV](research/R281_grid_summary.csv) · [final report](research/R281_FINAL_REPORT.md)
+- R281 repairs the R257 eligibility/coverage implementation failure using strict H1 bars resampled from Dukascopy M1 BID/ASK. This is a same-family corrected replay, not a byte-for-byte reconstruction of R257's original H1 archive. The fixed grid remains Q20/Q30 × 12/24-bar breakout lookback × 1.5R/2R.
+- Data: 57,191 complete H1 bars from 2016-01-03 through 2025-12-31 UTC. Input archive SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`. The source collector used `-fl`; removal of 696,795 paired flat candidates is heuristic, so no future positive result could be promoted without verified no-flat source history.
+- Fitted six-hour-range cutoffs on 2017-2020: Q20 = 20.8 pips; Q30 = 25.0 pips.
+- All eight configurations lost in discovery at +1 pip (PF range 0.575-0.667; 88-392 trades). The best 2021 validation count was 10, below the preregistered 50-trade eligibility gate. Q20/B12 had a validation PF above 2 but only four trades and failed discovery PF; it is not a candidate.
+- **Verdict: GAGAL.** Per the preregistration, the engine did not calculate/inspect 2022-2025 candidate outcomes. No candidate selection, no holdout opened, and no edge block retained.
+- The compact metrics/summary and runner are in GitHub. Row-level per-configuration ledgers were generated locally but are not yet archived in the repository, so repository-only reproducibility remains incomplete. No GitHub Actions backtest was created or dispatched.
+
+Reusable learning: correct R257's implementation failure so it no longer hides possible triggers, but do not infer alpha from raw trade availability. This fixed compression-release specification is now closed; do not loosen its thresholds based on the failed result.
