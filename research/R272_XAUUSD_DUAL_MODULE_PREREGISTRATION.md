@@ -66,7 +66,7 @@ At the primary +$0.30/oz additional-cost assumption, all of the following must p
 1. Discovery 2016–2020 routed stream has at least 100 closed trades and positive net R.
 2. Validation 2021–2025 routed stream has at least 200 closed trades and positive net R.
 3. Each module has at least 50 trades and positive net R in both discovery and validation; a losing module is not kept merely to inflate trade count.
-4. The routed stream improves the preregistered target-completion diagnostic against both standalone modules, without higher loss-limit breach probability under identical risk and latency.
+4. In validation, routed net R at +$0.30/oz exceeds the raw-union baseline's net R and the routed trade count is at least 60% of the raw-union count; otherwise the ER routing has not demonstrated incremental value.
 5. The +$0.50/oz sensitivity remains net positive in the validation segment.
 If any gate fails, **R272 = GAGAL**, do not inspect 2026, and do not alter thresholds.
 
