@@ -50,4 +50,4 @@ All six historical-screen gates failed: discovery was not positive; validation w
 - Pre-registration: R271_DAILY_TREND_BREAKOUT_PREREGISTRATION.md
 - Local runner: r271_daily_trend_breakout.py
 - Machine-readable summary: R271_results_compact.json
-- Trade ledger: R271_trade_ledger.csv
+- Trade ledger: R271_trade_ledger_compact.csv
