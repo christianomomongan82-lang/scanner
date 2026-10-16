@@ -1,0 +1,35 @@
+name: R272 locked source package (no computation)
+
+on:
+  push:
+    branches:
+      - local-backtest/r189-dukascopy-history
+    paths:
+      - ".github/workflows/r272-source-package.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package-reviewed-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: local-backtest/r189-dukascopy-history
+          persist-credentials: false
+      - name: Package R272 source and pre-registration only
+        run: |
+          mkdir -p package/research
+          cp research/r272_xauusd_dual_module.py package/research/
+          cp research/R272_XAUUSD_DUAL_MODULE_PREREGISTRATION.md package/research/
+          cp research/FUNDEDNEXT_STELLAR2_RULES_VERIFIED_20261016.md package/research/
+          cp research/FUNDED_READINESS_GATE_20261016.md package/research/
+          cp PROJECT_STATE.md package/
+          (cd package && zip -qr ../R272-source-package.zip .)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: R272-source-package
+          path: R272-source-package.zip
+          retention-days: 14
