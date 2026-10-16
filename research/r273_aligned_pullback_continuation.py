@@ -131,6 +131,7 @@ def main():
         'child_validation_beats_raw_A_and_retains_40pct_trades': m(child_val, PRIMARY)['net_r'] > m(raw_val, PRIMARY)['net_r'] and len(child_val) >= 0.40 * len(raw_val)
     }
     summary['final_verdict'] = 'GAGAL' if not all(summary['historical_gates'].values()) else 'HISTORICAL_SCREEN_PASS_2026_NOT_OPENED'
+    summary['verdict'] = summary['final_verdict']
     (OUT_DIR / 'R273_results.json').write_text(json.dumps(summary, indent=2, allow_nan=False), encoding='utf-8')
     print(json.dumps({
         'round': 'R273', 'verdict': summary['final_verdict'], 'holdout_2026_opened': False,
