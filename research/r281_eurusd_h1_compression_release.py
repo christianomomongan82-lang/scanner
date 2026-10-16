@@ -56,7 +56,7 @@ def replay(x, audit, out):
   v=np.array([z['gross_pips']-c for z in t],float); eq=np.cumsum(v)
   dd=float(np.max(np.maximum.accumulate(np.r_[0,eq])[1:]-eq)) if len(v) else 0.
   return {'trades':len(v),'PF':pf(v),'net_pips':float(v.sum()) if len(v) else 0.0,'mean_net_pips_per_trade':float(v.mean()) if len(v) else None,'max_drawdown_pips':dd}
- def period(t,lo,hi): return [z for z in t if lo<=pd.Timestamp(z['entry_utc'])<hi and pd.Timestamp(z['exit_utc'])<hi]
+ def period(t,lo,hi): return [z for z in t if lo<=pd.Timestamp(z['entry_utc']).value//1000000<hi and pd.Timestamp(z['exit_utc']).value//1000000<hi]
  results={}; cutoff=END.value//1000000
  for q in QS:
   comp=np.isfinite(r6)&(r6<=thresholds[str(q)])
