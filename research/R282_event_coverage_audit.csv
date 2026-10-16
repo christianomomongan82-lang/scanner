@@ -1,0 +1,5 @@
+previous_timestamp_utc,current_timestamp_utc,gap_hours,previous_weekday_utc,current_weekday_utc,candidate_under_locked_friday_sun_mon_rule,exact_t_plus_10_timestamp_exists,next_timestamp_after_current_utc
+2017-12-29T21:59:00+00:00,2018-01-01T00:00:00+00:00,50.016667,Friday,Monday,true,false,2018-01-01T22:00:00+00:00
+2020-12-25T07:59:00+00:00,2020-12-27T00:00:00+00:00,40.016667,Friday,Sunday,true,false,2020-12-27T22:07:00+00:00
+2020-12-31T21:59:00+00:00,2021-01-03T00:00:00+00:00,50.016667,Thursday,Sunday,false,false,2021-01-03T22:00:00+00:00
+2023-12-29T21:59:00+00:00,2024-01-01T00:00:00+00:00,50.016667,Friday,Monday,true,false,2024-01-01T22:00:00+00:00
