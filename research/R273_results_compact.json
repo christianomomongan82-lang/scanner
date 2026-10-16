@@ -1,0 +1,111 @@
+{
+  "round": "R273",
+  "verdict": "GAGAL",
+  "instrument": "XAUUSD",
+  "timeframe": "M5",
+  "parent_ids": [
+    "R272-A/raw continuation trigger",
+    "R272 executable-side/delay/missing-bar controls",
+    "R271 medium-horizon continuation research diagnosis"
+  ],
+  "mutation": "Replace incompatible ER >= 0.45 gate with sign(M6h) == sign(M12h); retain raw A trigger, stop, 1.5R target and execution controls unchanged.",
+  "source": "Dukascopy via dukascopy-node, raw-only artifact 12031270051, acquisition run 38859918137",
+  "data": {
+    "synthetic_flat_bars_disabled": true,
+    "bid_rows": 947326,
+    "ask_rows": 947326,
+    "matched_timestamps": 947326,
+    "bid_sha256_gzip": "b30eb4864db0777b6df612f3e43ccda9cc59db5ca09974191eabdaca1f6ff575",
+    "ask_sha256_gzip": "b9b174a83df70507be4ab0cd556432a0d14fbac2e596e787325bd1f163772fc9",
+    "negative_open_spreads": 0,
+    "median_open_spread_usd_per_oz": 0.358,
+    "p95_open_spread_usd_per_oz": 1.117,
+    "gaps_over_5m_preserved": 572,
+    "historical_rows_calculated_before_2026_01_01": 877930,
+    "holdout_2026_opened": false
+  },
+  "primary_extra_cost_usd_per_oz": 0.3,
+  "results": {
+    "raw_A": {
+      "discovery_2016_2020": {
+        "trades": 163,
+        "net_r": -101.1658,
+        "pf": 0.2921,
+        "mean_r": -0.6206,
+        "win_rate": 0.2699,
+        "net_r_cost_0": -48.3267,
+        "net_r_cost_0p5": -136.3918
+      },
+      "validation_2021_2025": {
+        "trades": 331,
+        "net_r": -157.5373,
+        "pf": 0.3724,
+        "mean_r": -0.4759,
+        "win_rate": 0.29,
+        "net_r_cost_0": -92.0782,
+        "net_r_cost_0p5": -201.1767
+      }
+    },
+    "aligned_A": {
+      "discovery_2016_2020": {
+        "trades": 131,
+        "net_r": -78.1163,
+        "pf": 0.3092,
+        "mean_r": -0.5963,
+        "win_rate": 0.2824,
+        "net_r_cost_0": -35.4574,
+        "net_r_cost_0p5": -106.5557
+      },
+      "validation_2021_2025": {
+        "trades": 278,
+        "net_r": -128.8604,
+        "pf": 0.3797,
+        "mean_r": -0.4635,
+        "win_rate": 0.2914,
+        "net_r_cost_0": -73.5345,
+        "net_r_cost_0p5": -165.7443
+      }
+    },
+    "aligned_A_bootstrap_primary": {
+      "discovery": {
+        "mean_weekly_r": -0.299296,
+        "ci95": [
+          -0.413421,
+          -0.18945
+        ],
+        "reps": 10000,
+        "seed": 2732026
+      },
+      "validation": {
+        "mean_weekly_r": -0.495617,
+        "ci95": [
+          -0.632797,
+          -0.360451
+        ],
+        "reps": 10000,
+        "seed": 2732026
+      }
+    }
+  },
+  "diagnostics": {
+    "raw_A_trigger_bars": 972,
+    "aligned_triggers": 773,
+    "disagreeing_triggers": 199,
+    "validation_net_r_improvement_vs_raw_A": 28.6769,
+    "validation_trade_count_retained": 278,
+    "validation_trade_count_retained_fraction": 0.8399
+  },
+  "historical_gates": {
+    "child_discovery_50_trades_and_positive_net_r": false,
+    "child_discovery_bootstrap_lower_bound_positive": false,
+    "child_validation_100_trades_and_positive_net_r": false,
+    "child_validation_positive_at_cost_0p50": false,
+    "child_validation_beats_raw_A_and_retains_40pct_trade_count": true
+  },
+  "holdout_2026_opened": false,
+  "notes": [
+    "2021-2025 is research-contaminated and cannot serve as pristine program-level OOS.",
+    "Do not tune R273 or run funded replay.",
+    "The R273 runner is stored separately; full local row-level trade ledgers were not uploaded."
+  ]
+}
