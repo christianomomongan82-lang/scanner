@@ -300,3 +300,18 @@ The user's “compound compound” instruction was not satisfied by increasing p
 - At +1 additional pip, B/router: discovery 2016–2020 290 trades, PF 0.712, -65.97R; 2021 68 trades, PF 0.639, -20.16R; forward 2022–2025 219 trades, PF 0.628, -63.50R. All four forward years were negative. Four-week bootstrap average net was -0.304R/week, 95% CI [-0.484, -0.115]. Even with 0 added pips beyond observed quotes, discovery/validation/forward net R was -14.14/-5.96/-30.99.
 - Challenge reference proxy, not funded-equivalent: router both-phase completion was 0% at 0.25–0.50% risk, 0.4% at 0.75%, and 1.1% at 1.00%, while proxy loss-rule breach rose from 28.1% to 97.9%. Higher risk is not a credible rescue.
 - **Verdict: GAGAL.** The economic/coverage gates failed; 2022–2025 is not independent, 2026 is absent, and official funded implementation/rules remain unverified. Do not retune R270. At checkpoint time, full runner and row-level ledger are preserved locally but have not yet been committed to this branch; do not claim full GitHub-only reproducibility until those files are stored.
+
+
+## R271 — Daily 20-session breakout continuation — GAGAL (2026-10-16)
+
+- Pre-registration: [R271_DAILY_TREND_BREAKOUT_PREREGISTRATION.md](research/R271_DAILY_TREND_BREAKOUT_PREREGISTRATION.md)
+- Results report: [R271_DAILY_TREND_BREAKOUT_RESULTS.md](research/R271_DAILY_TREND_BREAKOUT_RESULTS.md)
+- Exact local runner: [r271_daily_trend_breakout.py](research/r271_daily_trend_breakout.py)
+- Compact metrics: [R271_results_compact.json](research/R271_results_compact.json)
+- Timestamped compact trade ledger (all 126 closed trades): [R271_trade_ledger_compact.csv](research/R271_trade_ledger_compact.csv)
+- Source: Dukascopy EURUSD M1 BID/ASK from data-only GitHub artifact 11959096102 / run 38697080604; ZIP SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`. Local Python only; no GitHub Actions backtest ran.
+- Locked setup: New York-close FX sessions; close strictly beyond prior 20 completed session high/low; exact delayed entry 17:05 NY; stop 2× prior ATR20; target 2R; max hold through the close of the tenth subsequent valid session; side-correct BID/ASK; +1 pip primary incremental cost and 0/0.5/2 pip sensitivity.
+- Data audit: 4,415,493 common BID/ASK minute timestamps, no duplicates or negative open spreads; calendar filter retained 3,749,493 minute rows; median observed open spread ~0.30 pip, p95 ~0.80 pip. 320 raw breakout signals, 266 had a valid exact entry quote, 126 closed trades after position-overlap rules.
+- At +1 pip: discovery 2016–2020 = 57 trades, PF 0.811, −4.949R; validation 2021 = 14 trades, PF 0.769, −1.437R; diagnostic forward 2022–2025 = 55 trades, PF 0.808, −4.265R. Annual 2022/2023/2024/2025 net R = −2.798 / −1.642 / +2.276 / −2.101. Forward four-week bootstrap: mean −0.0204R/week, 95% CI [−0.0722, +0.0324], 22.06% positive bootstrap means.
+- Cost stress was negative even at +0 pip extra cost (forward −3.892R) and remained −4.638R at +2 pips. Six preregistered gates failed. Challenge replay was not run because the locked spec allowed it only for a net-positive stream. **R271 = GAGAL; no retuning.**
+- The 2022–2025 period is contaminated, and 2026+ was not in this input archive, so no claim of independent promotion-grade evidence is possible even apart from the failed measured gates.
