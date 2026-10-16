@@ -1,0 +1,131 @@
+{
+  "round": "R280",
+  "verdict": "GAGAL",
+  "preregistration": "research/R280_NASDAQ_LED_CASH_OPEN_FOLLOWTHROUGH_PREREGISTRATION.md",
+  "candidate": "Nasdaq first OR breakout leads; take same-direction first OR breakout on USA500, USA30 or USSC2000 5-30 minutes later; exact T+10 entry; OR-edge stop; 2R target; force-flat 16:00 New York",
+  "source_artifacts": {
+    "usa500": 11709864394,
+    "usatech": 11710370389,
+    "usa30": 11710730507,
+    "ussc2000": 11710111254
+  },
+  "signal_counts": {
+    "all_instrument_first_breakouts": 10225,
+    "nasdaq_lead_signals": 2723,
+    "follower_parent_signals": 7502,
+    "eligible_follower_signals": 1084,
+    "eligible_assets": {
+      "USA500": 396,
+      "USA30": 406,
+      "USSC2000": 282
+    }
+  },
+  "parent": {
+    "discovery_2017_2021": {
+      "trades": 3046,
+      "pf_1bp": 0.994201,
+      "net_R_1bp": -7.4714,
+      "pf_2bp": 0.931442,
+      "net_R_2bp": -91.6682,
+      "max_drawdown_R_1bp": 93.5914
+    },
+    "exploratory_forward_2022_2025": {
+      "trades": 2994,
+      "pf_1bp": 1.089717,
+      "net_R_1bp": 108.7565,
+      "pf_2bp": 1.032517,
+      "net_R_2bp": 40.6484,
+      "mean_net_R_trade_1bp": 0.036325,
+      "max_drawdown_R_1bp": 51.2267
+    },
+    "diagnostic_2026": {
+      "trades": 578,
+      "pf_1bp": 0.851758,
+      "net_R_1bp": -32.3708,
+      "pf_2bp": 0.800776,
+      "net_R_2bp": -44.8997
+    }
+  },
+  "child": {
+    "discovery_2017_2021": {
+      "trades": 437,
+      "pf_1bp": 0.929598,
+      "net_R_1bp": -13.9682,
+      "pf_2bp": 0.875107,
+      "net_R_2bp": -25.6643,
+      "max_drawdown_R_1bp": 34.773
+    },
+    "exploratory_forward_2022_2025": {
+      "trades": 426,
+      "pf_1bp": 1.1689,
+      "net_R_1bp": 27.8888,
+      "pf_2bp": 1.109428,
+      "net_R_2bp": 18.615,
+      "mean_net_R_trade_1bp": 0.065467,
+      "max_drawdown_R_1bp": 28.5537
+    },
+    "diagnostic_2026": {
+      "trades": 82,
+      "pf_1bp": 0.743952,
+      "net_R_1bp": -8.2081,
+      "pf_2bp": 0.704604,
+      "net_R_2bp": -9.7552,
+      "max_drawdown_R_1bp": 9.36
+    }
+  },
+  "annual_child_forward_1bp": {
+    "2022": {
+      "trades": 116,
+      "pf": 1.187905,
+      "net_R": 8.8664
+    },
+    "2023": {
+      "trades": 105,
+      "pf": 0.977264,
+      "net_R": -0.9894
+    },
+    "2024": {
+      "trades": 98,
+      "pf": 0.787406,
+      "net_R": -9.0251
+    },
+    "2025": {
+      "trades": 107,
+      "pf": 1.908331,
+      "net_R": 29.0369
+    }
+  },
+  "bootstrap_forward_1bp": {
+    "trades": 426,
+    "weeks": 209,
+    "block_weeks": 4,
+    "replicates": 10000,
+    "seed": 2802026,
+    "mean_R_week": 0.133439,
+    "ci95": [
+      -0.115554,
+      0.380514
+    ],
+    "p_mean_positive": 0.8564
+  },
+  "matched_parent_delta_forward_1bp": {
+    "delta_net_R": -80.8677,
+    "delta_mean_net_R_trade": 0.029142
+  },
+  "locked_gates": {
+    "discovery_trades_ge_100": true,
+    "discovery_pf_plus2_ge_1": false,
+    "forward_trades_ge_100": true,
+    "forward_pf_plus1_ge_1_10": true,
+    "forward_pf_plus2_ge_1_05": true,
+    "annual_stability": false,
+    "bootstrap_lower_gt_zero": false,
+    "child_mean_net_R_trade_exceeds_parent": true
+  },
+  "limitations": [
+    "2022-2025 is contaminated and exploratory only.",
+    "2026 is diagnostic and has prior project exposure.",
+    "Source is BID-only with modeled 1/2 bps costs, not actual ask/spreads/commissions.",
+    "No full funded equity-path replay; floating daily loss, official contract costs, overnight swaps and Quick Strike not verified."
+  ]
+}
