@@ -165,15 +165,20 @@ def calc_raw_signals(q: pd.DataFrame, f: pd.DataFrame, i: int) -> tuple[dict | N
 
 
 def build_trade_for_signal(q: pd.DataFrame, day_positions: dict, i: int, sig: dict) -> dict | None:
-    entry_i = i + 1
+    # Signal candle timestamp is its OPEN. The signal is known at t+5m;
+    # the locked five-minute manual execution delay means fill at t+10m (i+2).
+    entry_i = i + 2
     if entry_i >= len(q) or q.at[entry_i, "ny_date"] != q.at[i, "ny_date"]:
+        return None
+    if (q.at[i+1, "timestamp_utc"] - q.at[i, "timestamp_utc"] != pd.Timedelta(minutes=5)
+            or q.at[entry_i, "timestamp_utc"] - q.at[i+1, "timestamp_utc"] != pd.Timedelta(minutes=5)):
         return None
     d = int(sig["direction"])
     entry = float(q.at[entry_i, "ask_open"] if d == 1 else q.at[entry_i, "bid_open"])
     stop = float(sig["stop"])
     risk_dist = (entry - stop) if d == 1 else (stop - entry)
     A = float(sig["A"])
-    if entry_i <= i or q.at[entry_i, "timestamp_utc"] - q.at[i, "timestamp_utc"] != pd.Timedelta(minutes=5):
+    if entry_i != i + 2 or q.at[entry_i, "timestamp_utc"] - q.at[i, "timestamp_utc"] != pd.Timedelta(minutes=10):
         return None
     if not np.isfinite(risk_dist) or risk_dist <= 0:
         return None
@@ -245,9 +250,20 @@ def build_trade_for_signal(q: pd.DataFrame, day_positions: dict, i: int, sig: di
     if exit_i is None:
         exit_i = cutoff_i
         if exact_cutoff:
-            exit_price = float(q.at[exit_i, "bid_open"] if d == 1 else q.at[exit_i, "ask_open"])
+            # At the 16:45 cutoff, use only the opening executable quote; do not
+            # inspect later high/low values from the 16:45–16:50 bar.
+            cutoff_open = float(q.at[exit_i, "bid_open"] if d == 1 else q.at[exit_i, "ask_open"])
+            if d == 1 and cutoff_open <= stop:
+                exit_price, reason = cutoff_open, "stop_gap_at_cutoff"
+            elif d == -1 and cutoff_open >= stop:
+                exit_price, reason = cutoff_open, "stop_gap_at_cutoff"
+            elif d == 1 and cutoff_open >= target:
+                exit_price, reason = target, "target_gap_at_cutoff"
+            elif d == -1 and cutoff_open <= target:
+                exit_price, reason = target, "target_gap_at_cutoff"
+            else:
+                exit_price, reason = cutoff_open, "time_exit_1645_open"
             exit_ts = q.at[exit_i, "timestamp_utc"]
-            reason = "time_exit_1645_open"
         else:
             exit_price = float(q.at[exit_i, "bid_close"] if d == 1 else q.at[exit_i, "ask_close"])
             exit_ts = q.at[exit_i, "timestamp_utc"] + pd.Timedelta(minutes=5)
@@ -272,6 +288,7 @@ def build_trade_for_signal(q: pd.DataFrame, day_positions: dict, i: int, sig: di
         "gross_r": gross_r, "gross_pnl_usd_per_oz": d * (float(exit_price) - entry),
         "worst_floating_r_gross": float(worst_floating_r_gross),
         "exit_reason": reason, "same_m5_bar_exit_qs_upper_bound": same_bar,
+        "execution_delay_after_signal_close_minutes": float((pd.Timestamp(entry_ts) - (pd.Timestamp(q.at[i, "timestamp_utc"]) + pd.Timedelta(minutes=5))).total_seconds()/60.0),
         "holding_minutes_proxy": float((pd.Timestamp(exit_ts) - pd.Timestamp(entry_ts)).total_seconds()/60.0)
     }
     for cost in COSTS:
@@ -288,7 +305,13 @@ def cost_to_key(x: float) -> str:
 def metrics(trades: pd.DataFrame, cost: float) -> dict:
     key = f"net_r_{cost_to_key(cost)}"
     if trades.empty:
-        return {"trades":0, "net_r":0.0, "pf":None, "mean_r":None, "win_rate":None, "positive_profit_r":0.0}
+        # Keep the schema stable for zero-trade months/modules; the OOS month gate
+        # reads positive_profit_r for every calendar month.
+        return {
+            "trades": 0, "net_r": 0.0, "pf": None, "mean_r": None,
+            "median_r": None, "win_rate": None, "positive_profit_r": 0.0,
+            "qs_profit_upper_bound_r": 0.0, "qs_share_upper_bound": 0.0,
+        }
     vals = trades[key].to_numpy(float)
     win = vals[vals > 0].sum()
     loss = -vals[vals < 0].sum()
