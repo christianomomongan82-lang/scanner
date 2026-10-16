@@ -328,3 +328,19 @@ Next research must remain structurally distinct, registered before outcome calcu
 - [Full active-branch checkpoint](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/PROJECT_STATE.md)
 
 Official rule details verified on 2026-10-16: Stellar 2-Step targets +8% then +5%; DLL 5%, static MLL 10%, five separate trading days per phase, no time limit, Quick Strike strictly below 30%; daily loss must include current-day closed P&L plus all open floating P&L, charges, commissions and swaps; the server clock uses seasonal GMT+2/GMT+3. FundedNext's current public help center requires age 18+. Future promotion to funded-ready must use a rule-aware replay, not the older simplified challenge proxies. R270 and R271 remain GAGAL; no tuning or promotion based on repeatedly inspected 2022–2025.
+
+
+## R272 — Gold dual-module research preparation (2026-10-16)
+
+**Status at checkpoint: preregistered; no backtest result yet.** R270/R271 remain GAGAL and are not tuned.
+
+- Active research branch: [local-backtest/r189-dukascopy-history](https://github.com/christianomomongan82-lang/scanner/tree/local-backtest/r189-dukascopy-history)
+- [R272 locked hypothesis](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/R272_XAUUSD_DUAL_MODULE_PREREGISTRATION.md)
+- [Local Python runner](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/r272_xauusd_dual_module.py)
+- [Verified FundedNext Stellar 2-Step rule matrix](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/FUNDEDNEXT_STELLAR2_RULES_VERIFIED_20261016.md)
+- [Mandatory funded readiness gate](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/r189-dukascopy-history/research/FUNDED_READINESS_GATE_20261016.md)
+- Gold raw-data branch: [data/r272-xauusd-m5-2016-2026](https://github.com/christianomomongan82-lang/scanner/tree/data/r272-xauusd-m5-2016-2026)
+- One-month data-only XAUUSD M5 BID/ASK probe succeeded using `dukascopy-node@1.50.0`: [run 38857759446](https://github.com/christianomomongan82-lang/scanner/actions/runs/38857759446). A first full data request with pinned older downloader failed at the transport layer; it did not run a backtest: [run 38857009860](https://github.com/christianomomongan82-lang/scanner/actions/runs/38857009860).
+- Full raw data-only retry is [run 38857936371](https://github.com/christianomomongan82-lang/scanner/actions/runs/38857936371). The job must only fetch/pack BID/ASK; all calculations remain local.
+- Development 2016–2020 and validation 2021–2025 are evaluated first. The held-out 2026-01-01 through 2026-10-15 segment must not be inspected unless every historical gate passes. The R272 runner contains entry-delay/cutoff, raw-union comparison and OOS module/month gating hardening. Do not accept a result until the runner has passed local syntax/functional checks, its complete results/ledger are stored and the binary verdict is updated.
+- No candidate can be honestly called funded-ready until a locked independent signal sample and the rule-aware two-phase replay pass `FUNDED_READINESS_GATE_20261016.md`. This cannot be guaranteed in advance.
