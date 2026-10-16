@@ -62,3 +62,11 @@ Reusable implementation controls: exact M5 timestamps for phone latency; synchro
 
 Data limitations remain: BID-only index snapshots, modeled 1/2 bps costs, USA Small Cap history only from 2018-08-08, and no verified CFD commissions/swaps/contract multipliers. Full row-level ledgers and local runner sources for R276–R279 are not committed to GitHub yet; reports and compact JSONs are stored, so full repository-only reproducibility remains incomplete.
 
+## R280 update (2026-10-17)
+
+| Candidate | Evidence | Disposition |
+|---|---|---|
+| R280 Nasdaq-led US cash-open follower breakout | 437 discovery trades / PF 0.875 at +2 bp; 426 exploratory-forward trades / PF 1.109 at +2 bp; PF@+1 bp 1.169 but 2023 and 2024 cohorts negative; four-week bootstrap 95% CI [−0.116, +0.381] R/week; diagnostic 2026 PF@+1 bp 0.744. | **GAGAL.** Timing filter increases mean R/trade versus matched followers but reduces total forward net R from +108.76R to +27.89R and fails discovery, annual and bootstrap gates. Do not carry this as alpha. |
+
+R280 keeps the exact T+10 phone-execution assumption, same-day flat, quote-source timestamps and matched parent. Reusable control lessons are not edge evidence. Do not threshold-tune the 5–30-minute lag after this result.
+
