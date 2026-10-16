@@ -1,0 +1,128 @@
+{
+  "round": "R282",
+  "candidate": "EURUSD weekend-reopening gap fade",
+  "preregistration": "research/R282_EURUSD_WEEKEND_GAP_FADE_PREREGISTRATION.md",
+  "verdict": "GAGAL — DATA COVERAGE / ALPHA NOT TESTED",
+  "stage": "STOPPED_AT_DISCOVERY_VALIDATION_GATE",
+  "data_audit": {
+    "source": "Dukascopy EURUSD M1 BID/ASK via dukascopy-node; GitHub data-only artifact 11959096102",
+    "archive_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "archive_sha_matches": true,
+    "requested_window_utc": {
+      "start_inclusive": "2016-01-01",
+      "end_exclusive": "2026-01-01"
+    },
+    "raw_rows_per_side": 4415493,
+    "paired_valid_rows_before_flat_filter": 4415493,
+    "paired_synthetic_flat_candidates_removed": 696795,
+    "paired_rows_after_filter": 3718698,
+    "opening_spread_pips": {
+      "median": 0.3,
+      "p95": 0.8,
+      "max": 33.1
+    },
+    "caveat": "Collector used -fl. Paired flat-candidate removal is heuristic."
+  },
+  "event_coverage": {
+    "large_timestamp_gaps_ge_36h": 4,
+    "matching_friday_to_sunday_monday_events": 3,
+    "exact_t_plus_10_entries_available": 0,
+    "matching_events": [
+      {
+        "previous_timestamp_utc": "2017-12-29T21:59:00Z",
+        "candidate_timestamp_utc": "2018-01-01T00:00:00Z",
+        "gap_hours": 50.0167,
+        "exact_t_plus_10": false,
+        "next_timestamp_utc": "2018-01-01T22:00:00Z"
+      },
+      {
+        "previous_timestamp_utc": "2020-12-25T07:59:00Z",
+        "candidate_timestamp_utc": "2020-12-27T00:00:00Z",
+        "gap_hours": 40.0167,
+        "exact_t_plus_10": false,
+        "next_timestamp_utc": "2020-12-27T22:07:00Z"
+      },
+      {
+        "previous_timestamp_utc": "2023-12-29T21:59:00Z",
+        "candidate_timestamp_utc": "2024-01-01T00:00:00Z",
+        "gap_hours": 50.0167,
+        "exact_t_plus_10": false,
+        "next_timestamp_utc": "2024-01-01T22:00:00Z"
+      }
+    ]
+  },
+  "execution_diagnostics": {
+    "events": 3,
+    "not_exact_delay_timestamp": 3,
+    "nonsequential_first_11_minutes": 0,
+    "target_already_filled_at_entry": 0,
+    "invalid_stop_distance": 0,
+    "overlap_skipped": 0,
+    "censored_end": 0,
+    "closed_trades": 0
+  },
+  "discovery_validation_metrics": {
+    "0.0": {
+      "discovery": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      },
+      "validation": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      }
+    },
+    "0.5": {
+      "discovery": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      },
+      "validation": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      }
+    },
+    "1.0": {
+      "discovery": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      },
+      "validation": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      }
+    },
+    "2.0": {
+      "discovery": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      },
+      "validation": {
+        "trades": 0,
+        "PF": null,
+        "net_pips": 0
+      }
+    }
+  },
+  "gates": {
+    "discovery_trades_ge_100": false,
+    "discovery_PF_plus1_ge_1": false,
+    "validation_trades_ge_30": false,
+    "validation_PF_plus1_ge_1p10_and_net_positive": false,
+    "validation_PF_plus2_ge_1": false
+  },
+  "forward_stage_authorized": false,
+  "decision": "No valid event survived to a T+10 entry. This is an event/data coverage failure, not evidence of negative expectancy. Do not relax the rules after observing the result.",
+  "limitations": [
+    "No 2022-2025 outcomes calculated; forward stage gate not met.",
+    "Collector used -fl and paired-flat filter is heuristic.",
+    "No verified FundedNext costs/swaps/challenge equity-path replay."
+  ]
+}
