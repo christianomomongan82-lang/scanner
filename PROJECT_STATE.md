@@ -327,6 +327,14 @@ Current public FundedNext CFD Stellar 2-Step documentation verifies: Phase 1 +8%
 **Important correction:** historical challenge proxy metrics are not live-pass odds. Before any strategy can become LULUS for funded readiness, replay the exact phase sequence with intratrade equity, floating loss, costs, server-time reset and Quick Strike. R270/R271 stay GAGAL and must not be retuned. The 2022–2025 window is not an untouched promotion holdout. Until the user reaches age eligibility, all tests remain simulation-only.
 
 
+
+## Authoritative clarification — “compounding” means evolutionary method search (2026-10-16)
+
+- The user’s intended compounding is **evolution of the method-search process**: each experiment inherits and reuses evidence-backed building blocks and lessons from prior experiments, then creates a better next generation through justified mutations, crossover, ablations, and component composition. It is not merely position-size compounding, blind union of failed strategies, or a sequence of unrelated standalone tests.
+- Read and follow [EVOLUTIONARY_METHOD_COMPOUNDING_20261016.md](research/EVOLUTIONARY_METHOD_COMPOUNDING_20261016.md) as the authoritative workflow. Decompose experiments into context/setup/entry/exit/execution/risk components; preserve failure diagnoses; retain potentially useful blocks only when controlled component/ablation comparisons support them; record parent IDs and child-generation rationale.
+- Optimize the actual target: probability of completing both funded phases and time-to-target before rule breach. Use a risk-aware diverse/Pareto population; PF and expectancy are diagnostics. Keep frozen independent OOS protection because repeated evolutionary search on the same validation period overfits.
+- Honest correction: R272 is one locked dual-module combination test, not yet a full evolutionary-search implementation. Complete the valid locked run without opening its 2026 holdout prematurely; afterward use the candidate/block registry and evidence matrix to generate the next research generation instead of returning to isolated strategy invention.
+
 ## R272 — Gold dual-module test / corrected data acquisition (2026-10-16)
 
 **Strategy verdict: not calculated yet.** No R272 signal/PnL/backtest result has been calculated or inspected in this continuation. Do not infer LULUS/GAGAL from data-acquisition status.
