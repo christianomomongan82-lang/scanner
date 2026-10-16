@@ -1,0 +1,67 @@
+{
+  "as_of": "2026-10-16",
+  "status": "NO_EDGE_VALIDATED_FOR_PROMOTION_IN_R270_TO_R274",
+  "execution_blocks": {
+    "quote_side_bid_ask": "reusable implementation control; local smoke-checked; not alpha evidence",
+    "preserve_gaps": "reusable data-integrity control; not alpha evidence",
+    "T_plus_10_minute_manual_delay": "reusable execution assumption for phone workflow; real fill quality remains unverified",
+    "stop_first_and_1645_flat": "reusable simulator rule in locked XAU M5 candidates; not a verified broker/funded requirement"
+  },
+  "signal_blocks": [
+    {
+      "id": "R270_A",
+      "status": "UNREACHABLE",
+      "evidence": "ER ceiling 0.2101 vs gate 0.30; zero trades"
+    },
+    {
+      "id": "R270_B",
+      "status": "FAILED",
+      "evidence": "Net negative discovery/validation/forward; forward weekly bootstrap CI below zero"
+    },
+    {
+      "id": "R271_daily_breakout",
+      "status": "FAILED",
+      "evidence": "Net negative discovery/validation/forward; 14 validation trades"
+    },
+    {
+      "id": "R257_H1_compression",
+      "status": "UNTESTED_EDGE",
+      "evidence": "No candidate passed validation trade-count gate due grid eligibility; implementation/data coverage failure"
+    },
+    {
+      "id": "R258_multihorizon_momentum",
+      "status": "FAILED",
+      "evidence": "Forward PF 0.785 and net -3848.4 pips at +1 pip; 4/4 years negative"
+    },
+    {
+      "id": "R272_A_pullback",
+      "status": "UNREACHABLE",
+      "evidence": "972 raw triggers, max ER 0.3249; ER >= 0.45 overlap zero"
+    },
+    {
+      "id": "R272_B_failed_sweep_fade",
+      "status": "FAILED",
+      "evidence": "At +0.30 USD/oz: discovery 944 trades -437.47R; validation 957 -401.22R; negative even at zero incremental cost"
+    },
+    {
+      "id": "R273_aligned_pullback",
+      "status": "FAILED",
+      "evidence": "Discovery 131 trades -78.12R; validation 278 trades -128.86R; weekly bootstrap CI negative"
+    },
+    {
+      "id": "R274_impulse_followthrough",
+      "status": "FAILED",
+      "evidence": "Discovery 974 trades -655.94R; validation 997 -430.65R; 0/5 validation years positive"
+    },
+    {
+      "id": "R189_M1_micro_pattern",
+      "status": "UNCONFIRMED",
+      "evidence": "55 OOS-2026 trades PF 1.484 at +0.2pip, low sample and unresolved historical replication/phone latency"
+    }
+  ],
+  "decision": "Do not claim any block from R270-R274 is a proven edge. Next generation should broaden instrument and hypothesis-family coverage with locked discovery gates and explicit component ablations.",
+  "contamination_notes": {
+    "2021-2025": "Repeatedly viewed across previous project experiments; use as exploratory screen only, not clean program-level OOS.",
+    "2026_XAUUSD_M5": "Still unopened in R272/R273/R274; do not inspect unless a future preregistered candidate passes all historical gates."
+  }
+}
