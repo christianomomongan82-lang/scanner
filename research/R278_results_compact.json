@@ -1,0 +1,90 @@
+{
+  "round": "R278",
+  "verdict": "GAGAL",
+  "preregistration": "research/R278_LONG_ONLY_US_CASH_OPEN_BREADTH_PREREGISTRATION.md",
+  "candidate": "R277 mutated to upper breakouts only; 3-of-4 exact-timestamp confirmation; T+10; OR-low stop; 2R target; force-flat 16:00 NY",
+  "child": {
+    "discovery_2017_2021": {
+      "trades": 435,
+      "pf_1bp": 0.939143,
+      "net_R_1bp": -11.4639,
+      "pf_2bp": 0.88851,
+      "net_R_2bp": -21.6786
+    },
+    "exploratory_forward_2022_2025": {
+      "trades": 508,
+      "pf_1bp": 1.4027,
+      "net_R_1bp": 69.0962,
+      "pf_2bp": 1.345923,
+      "net_R_2bp": 60.7377,
+      "mean_net_R_trade_1bp": 0.136016,
+      "max_drawdown_R_1bp": 17.2613,
+      "median_holding_hours": 5.5,
+      "p95_holding_hours": 5.8333
+    },
+    "diagnostic_2026": {
+      "trades": 67,
+      "pf_1bp": 0.877368,
+      "net_R_1bp": -2.6326,
+      "pf_2bp": 0.82596,
+      "net_R_2bp": -3.8499
+    }
+  },
+  "matched_parent_T10_forward_2022_2025": {
+    "trades": 2625,
+    "pf_1bp": 1.133995,
+    "net_R_1bp": 132.0086,
+    "mean_net_R_trade_1bp": 0.050289,
+    "max_drawdown_R_1bp": 29.3269
+  },
+  "bootstrap_forward_1bp": {
+    "trades": 508,
+    "weeks": 209,
+    "block_weeks": 4,
+    "reps": 10000,
+    "seed": 2762026,
+    "mean_R_week": 0.330604,
+    "ci95": [
+      0.052613,
+      0.611996
+    ],
+    "p_mean_positive": 0.988
+  },
+  "annual_forward_1bp": {
+    "2022": {
+      "trades": 171,
+      "pf": 1.582411,
+      "net_R": 31.4542
+    },
+    "2023": {
+      "trades": 129,
+      "pf": 1.527411,
+      "net_R": 23.0736
+    },
+    "2024": {
+      "trades": 75,
+      "pf": 1.413414,
+      "net_R": 10.1743
+    },
+    "2025": {
+      "trades": 133,
+      "pf": 1.089281,
+      "net_R": 4.3941
+    }
+  },
+  "locked_gates": {
+    "discovery_trades_ge_100": true,
+    "discovery_pf_plus2_ge_1": false,
+    "forward_trades_ge_100": true,
+    "forward_pf_plus1_ge_1_10": true,
+    "forward_pf_plus2_ge_1_05": true,
+    "annual_stability": true,
+    "bootstrap_lower_gt_zero": true,
+    "child_mean_R_trade_exceeds_parent": true
+  },
+  "limitations": [
+    "Discovery gate fails even though forward metrics pass.",
+    "2022-2025 contaminated; 2026 diagnostic is negative.",
+    "BID-only inputs, modeled costs and no complete funded rule replay."
+  ]
+}
