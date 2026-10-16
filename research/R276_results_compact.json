@@ -1,0 +1,83 @@
+{
+  "round": "R276",
+  "screen_verdict": "PASS",
+  "overall_verdict": "GAGAL_FOR_FUNDED_PROMOTION_NOT_PROMOTED",
+  "preregistration": "research/R276_US_CASH_OPEN_BREADTH_ROUTER_PREREGISTRATION.md",
+  "candidate": "3-of-4 synchronized same-direction opening-range first breakout; T+10 entry; opposite OR stop; fixed 2R target",
+  "source_artifacts": {
+    "usa500": 11709864394,
+    "usatech": 11710370389,
+    "usa30": 11710730507,
+    "ussc2000": 11710111254
+  },
+  "child": {
+    "discovery_2017_2021": {
+      "trades": 767,
+      "pf_1bp": 1.173429,
+      "net_R_1bp": 84.9445,
+      "pf_2bp": 1.138249,
+      "net_R_2bp": 69.1179
+    },
+    "exploratory_forward_2022_2025": {
+      "trades": 828,
+      "pf_1bp": 1.288881,
+      "net_R_1bp": 147.0564,
+      "pf_2bp": 1.256813,
+      "net_R_2bp": 132.8537,
+      "mean_net_R_trade_1bp": 0.177604,
+      "max_drawdown_R_1bp": 28.9046,
+      "median_holding_hours": 17.8333,
+      "p95_holding_hours": 124.6292,
+      "max_holding_hours": 1439.3333
+    },
+    "diagnostic_2026": {
+      "trades": 102,
+      "pf_1bp": 0.747782,
+      "net_R_1bp": -19.3832,
+      "pf_2bp": 0.728594,
+      "net_R_2bp": -21.2089
+    }
+  },
+  "matched_parent_T10_forward_2022_2025": {
+    "trades": 2446,
+    "pf_1bp": 1.110545,
+    "net_R_1bp": 176.0862,
+    "mean_net_R_trade_1bp": 0.071989,
+    "max_drawdown_R_1bp": 36.2752
+  },
+  "bootstrap_forward_1bp": {
+    "trades": 828,
+    "weeks": 209,
+    "block_weeks": 4,
+    "reps": 10000,
+    "seed": 2762026,
+    "mean_R_week": 0.703619,
+    "ci95": [
+      0.166,
+      1.269019
+    ],
+    "p_mean_positive": 0.9946
+  },
+  "locked_statistical_gates": {
+    "discovery_trades_ge_100": true,
+    "discovery_pf_plus2_ge_1": true,
+    "forward_trades_ge_100": true,
+    "forward_pf_plus1_ge_1_10": true,
+    "forward_pf_plus2_ge_1_05": true,
+    "annual_stability": true,
+    "bootstrap_lower_gt_zero": true,
+    "child_mean_R_trade_exceeds_parent": true
+  },
+  "promotion_gates": {
+    "full_funded_challenge_replay": false,
+    "2026_diagnostic_positive": false,
+    "actual_overnight_swaps_verified": false,
+    "actual_bidask_and_execution_costs_verified": false
+  },
+  "limitations": [
+    "2022-2025 is research-contaminated and exploratory only.",
+    "2026 is diagnostic and has prior project exposure.",
+    "BID-only index inputs; 1/2 bps costs modeled, not measured.",
+    "No full funded challenge-path replay; floating loss, actual fees/swaps and Quick Strike not verified."
+  ]
+}
