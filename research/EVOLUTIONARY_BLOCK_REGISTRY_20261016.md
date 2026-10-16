@@ -48,3 +48,17 @@ Purpose: preserve what evidence supports, rejects, or has not tested. A useful e
 - **Candidate row:**
 
 | R275 L80 + phone-delay T+6 | R189/L80 | The unchanged L80 trigger became strongly negative with exact T+6 entry: 701 exploratory 2022–2025 trades, PF 0.694 and -786.3 pips at +1 pip; four-week bootstrap CI wholly negative | Failed execution-mutant; do not promote L80 or the T+6 stream as an edge |
+
+## R276–R279 update (2026-10-17)
+
+| Block / candidate | Evidence | Disposition |
+|---|---|---|
+| R276 synchronized 3-of-4 US cash-open breakout, two-sided, T+10, 2R | Historical statistical gates passed: 767 discovery trades / PF 1.138 at +2 bp; 828 exploratory-forward trades / PF 1.257 at +2 bp; bootstrap lower bound above zero. But diagnostic 2026 PF@+1 bp = 0.748 / −19.38R, total forward R below parent, and median/p95 holds 17.83h/124.63h with max ≈60 days. Challenge replay, swap and floating-loss checks absent. | **Not promoted.** A conditional screen result is not funded-ready evidence. |
+| R277 same-day-flat two-sided router | Discovery PF@+2 bp 0.989; 2024 annual PF@+1 bp 0.794; four-week bootstrap 95% CI [−0.116, +0.793] R/week. | **GAGAL.** Session-flat fixed holding duration but failed three gates. |
+| R278 long-only upper-breakout router | Forward PF@+1/+2 bp = 1.403/1.346 and bootstrap lower CI >0, but discovery PF@+2 bp = 0.889; diagnostic 2026 PF@+1 bp = 0.877. | **GAGAL.** Do not select/promote based on contaminated forward alone. |
+| R279 R278 with no fixed target | Discovery PF@+2 bp = 0.873. Versus the R278 sibling, forward net fell from +69.10R to +67.80R; PF@+1 bp fell 1.403→1.395 and max DD rose 17.26R→17.99R. | **GAGAL.** Removing fixed TP has no supporting incremental contribution. |
+
+Reusable implementation controls: exact M5 timestamps for phone latency; synchronized event-time coverage across all four instruments; session-close execution at the exact 16:00 New York open without peeking at that bar's range; exit-time attribution for weekly bootstrap; and trade-return drawdown sorted by realized exit order. These are simulator controls, not alpha blocks.
+
+Data limitations remain: BID-only index snapshots, modeled 1/2 bps costs, USA Small Cap history only from 2018-08-08, and no verified CFD commissions/swaps/contract multipliers. Full row-level ledgers and local runner sources for R276–R279 are not committed to GitHub yet; reports and compact JSONs are stored, so full repository-only reproducibility remains incomplete.
+
