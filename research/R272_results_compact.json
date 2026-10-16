@@ -1,0 +1,130 @@
+{
+  "round": "R272",
+  "verdict": "GAGAL",
+  "instrument": "XAUUSD",
+  "timeframe": "M5",
+  "source": "Dukascopy via dukascopy-node",
+  "acquisition": {
+    "workflow_run_id": 38859918137,
+    "artifact_id": 12031270051,
+    "raw_data_only": true,
+    "synthetic_flat_bars_disabled": true,
+    "bid_rows": 947326,
+    "ask_rows": 947326,
+    "matched_timestamps": 947326,
+    "bid_sha256_gzip": "b30eb4864db0777b6df612f3e43ccda9cc59db5ca09974191eabdaca1f6ff575",
+    "ask_sha256_gzip": "b9b174a83df70507be4ab0cd556432a0d14fbac2e596e787325bd1f163772fc9",
+    "negative_open_spreads": 0,
+    "median_spread_usd_per_oz": 0.358,
+    "p95_spread_usd_per_oz": 1.117,
+    "gaps_over_5m_preserved": 572,
+    "first_quote_utc": "2016-01-03T00:00:00Z",
+    "last_quote_utc": "2026-10-15T23:55:00Z",
+    "calculation_rows_before_2026": 877930,
+    "holdout_2026_opened": false
+  },
+  "primary_extra_cost_usd_per_oz": 0.3,
+  "results": {
+    "discovery_2016_2020": {
+      "module_A": {
+        "trades": 0,
+        "net_r": 0,
+        "pf": null
+      },
+      "module_B": {
+        "trades": 944,
+        "net_r": -437.4709,
+        "pf": 0.5253,
+        "mean_r": -0.4634,
+        "win_rate": 0.2394,
+        "net_r_cost_0": -174.8306,
+        "net_r_cost_0p5": -612.5644
+      },
+      "router": {
+        "trades": 944,
+        "net_r": -437.4709,
+        "pf": 0.5253
+      },
+      "raw_union": {
+        "trades": 1073,
+        "net_r": -452.7036,
+        "pf": 0.5638
+      }
+    },
+    "validation_2021_2025": {
+      "module_A": {
+        "trades": 0,
+        "net_r": 0,
+        "pf": null
+      },
+      "module_B": {
+        "trades": 957,
+        "net_r": -401.2162,
+        "pf": 0.5481,
+        "mean_r": -0.4192,
+        "win_rate": 0.2184,
+        "net_r_cost_0": -227.3804,
+        "net_r_cost_0p5": -517.1068
+      },
+      "router": {
+        "trades": 957,
+        "net_r": -401.2162,
+        "pf": 0.5481
+      },
+      "raw_union": {
+        "trades": 1094,
+        "net_r": -439.365,
+        "pf": 0.5641
+      }
+    },
+    "bootstrap_4_week_blocks_cost_0p30": {
+      "discovery": {
+        "mean_weekly_r": -1.67613,
+        "ci95": [
+          -2.08122,
+          -1.25606
+        ],
+        "reps": 10000,
+        "seed": 2722026
+      },
+      "validation": {
+        "mean_weekly_r": -1.53723,
+        "ci95": [
+          -1.95127,
+          -1.11494
+        ],
+        "reps": 10000,
+        "seed": 2722026
+      }
+    }
+  },
+  "signal_diagnostics": {
+    "module_A_raw_trigger_bars": 972,
+    "module_A_raw_triggers_with_er_gte_0p45": 0,
+    "module_A_max_er": 0.3248741417,
+    "module_B_raw_trigger_bars": 7355,
+    "module_B_raw_triggers_with_er_lte_0p20": 5878,
+    "selected_signals_before_fill_validation": 2598,
+    "closed_trades": 1901,
+    "router_execution_rejections": {
+      "reward_risk_below_1": 341,
+      "invalid_stop_distance": 229,
+      "entry_already_crossed_stop_or_target_after_delay": 77,
+      "invalid_target": 50
+    }
+  },
+  "historical_gates": {
+    "router_discovery_count_and_positive_net_r": false,
+    "router_validation_count_and_positive_net_r": false,
+    "module_A_positive_with_min_sample_both_segments": false,
+    "module_B_positive_with_min_sample_both_segments": false,
+    "validation_positive_at_cost_0p50": false,
+    "router_beats_raw_union_and_retains_at_least_60pct_count": true
+  },
+  "interpretation": {
+    "module_A": "Structural incompatibility: its raw trigger never overlaps with ER >= 0.45.",
+    "module_B": "Negative edge even with zero incremental transaction cost.",
+    "relative_router_improvement": "Validation router beats raw union by 38.15R but both are strongly negative.",
+    "rule": "Do not inspect 2026, retune R272, or run funded challenge replay."
+  }
+}
