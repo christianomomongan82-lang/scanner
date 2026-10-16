@@ -350,7 +350,7 @@ def period_metrics(trades: pd.DataFrame, cost: float) -> dict:
     return metrics(trades, cost)
 
 
-def bootstrap_weekly(trades: pd.DataFrame, cost: float, reps=BOOT_REPS, seed=BOOT_SEED) -> dict:
+def bootstrap_weekly(trades: pd.DataFrame, cost: float, reps=BOOT_REPS, seed=BOOT_SEED, sample_end_utc: pd.Timestamp | None = None) -> dict:
     if trades.empty:
         return {"weeks":0,"mean_weekly_r":None,"ci95":[None,None],"positive_fraction":None}
     key=f"net_r_{cost_to_key(cost)}"
@@ -359,6 +359,10 @@ def bootstrap_weekly(trades: pd.DataFrame, cost: float, reps=BOOT_REPS, seed=BOO
     t["week"]=t["entry_dt"].dt.normalize()-pd.to_timedelta(t["entry_dt"].dt.weekday,unit="D")
     start=pd.Timestamp("2026-01-05") if t["signal_year"].min()>=2026 else pd.Timestamp(f"{int(t['signal_year'].min())}-01-04")
     end=t["week"].max()
+    if sample_end_utc is not None:
+        boundary_local = (sample_end_utc - pd.Timedelta(nanoseconds=1)).tz_convert(NY_TZ).tz_localize(None)
+        boundary_week_start = boundary_local.normalize() - pd.to_timedelta(boundary_local.weekday(), unit="D")
+        end = boundary_week_start if boundary_local.dayofweek == 6 else boundary_week_start - pd.Timedelta(days=7)
     weeks=pd.date_range(start=start,end=end,freq="W-MON")
     weekly=t.groupby("week")[key].sum().reindex(weeks,fill_value=0.0).to_numpy(float)
     if len(weekly)<4:
@@ -459,7 +463,7 @@ def main():
             ts=pd.to_datetime(tr["signal_bar_time_utc"],utc=True) if not tr.empty else pd.Series([],dtype="datetime64[ns, UTC]")
             oos=tr[(ts>=oos_start)&(ts<oos_end)] if not tr.empty else tr
             oos_metrics[name]={f"cost_{cost_to_key(cost)}":metrics(oos,cost) for cost in COSTS}
-            oos_metrics[name]["bootstrap_primary_cost"]=bootstrap_weekly(oos,PRIMARY_COST)
+            oos_metrics[name]["bootstrap_primary_cost"]=bootstrap_weekly(oos,PRIMARY_COST,sample_end_utc=oos_end)
             if not oos.empty:
                 oos_metrics[name]["months"]={}
                 for month,mt in oos.groupby("signal_month"):
@@ -483,16 +487,22 @@ def main():
         positive_months=sum(1 for m in monthly.values() if m[f"cost_{cost_to_key(PRIMARY_COST)}"]["net_r"]>0)
         total_positive=sum(m[f"cost_{cost_to_key(PRIMARY_COST)}"]["positive_profit_r"] for m in monthly.values())
         largest_month=max((m[f"cost_{cost_to_key(PRIMARY_COST)}"]["positive_profit_r"] for m in monthly.values()),default=0.0)
-        a_oos = oos_metrics["A"][f"cost_{cost_to_key(PRIMARY_COST)}"]
-        b_oos = oos_metrics["B"][f"cost_{cost_to_key(PRIMARY_COST)}"]
+        a_oos = oos_router[oos_router["module"] == "A"] if not oos_router.empty else oos_router
+        b_oos = oos_router[oos_router["module"] == "B"] if not oos_router.empty else oos_router
+        a_contribution = metrics(a_oos, PRIMARY_COST)
+        b_contribution = metrics(b_oos, PRIMARY_COST)
+        oos_metrics["router"]["module_contribution_in_composite"] = {
+            "A": a_contribution,
+            "B": b_contribution
+        }
         oos_gates={
           "router_oos_50_trades":rt["trades"]>=50,
-          "module_A_oos_at_least_20_trades":a_oos["trades"]>=20,
-          "module_B_oos_at_least_20_trades":b_oos["trades"]>=20,
+          "module_A_oos_contribution_at_least_20_trades":a_contribution["trades"]>=20,
+          "module_B_oos_contribution_at_least_20_trades":b_contribution["trades"]>=20,
           "router_oos_net_positive_at_primary_cost":rt["net_r"]>0,
           "router_oos_net_positive_at_0p50_cost":rt_stress["net_r"]>0,
-          "module_A_oos_contribution_nonnegative":a_oos["net_r"]>=0,
-          "module_B_oos_contribution_nonnegative":b_oos["net_r"]>=0,
+          "module_A_oos_contribution_nonnegative":a_contribution["net_r"]>=0,
+          "module_B_oos_contribution_nonnegative":b_contribution["net_r"]>=0,
           "bootstrap_lower_bound_positive":bt["ci95"][0] is not None and bt["ci95"][0]>0,
           "at_least_60_percent_of_9_completed_months_positive":positive_months/9>=0.60,
           "largest_month_not_over_40_percent_positive_profit":total_positive>0 and largest_month/total_positive<=0.40,
