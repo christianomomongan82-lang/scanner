@@ -207,28 +207,39 @@ def build_trade_for_signal(q: pd.DataFrame, day_positions: dict, i: int, sig: di
     exit_i = None
     exit_price = None
     reason = None
+    worst_floating_r_gross = 0.0
     stop_scan_end = cutoff_i if exact_cutoff else cutoff_i + 1
     for j in range(entry_i, stop_scan_end):
         if d == 1:
             op, hi, lo = float(q.at[j,"bid_open"]), float(q.at[j,"bid_high"]), float(q.at[j,"bid_low"])
             if op <= stop:
                 exit_i, exit_price, reason = j, op, "stop_gap"
+                worst_floating_r_gross = min(worst_floating_r_gross, d * (op-entry) / risk_dist)
             elif op >= target:
                 exit_i, exit_price, reason = j, target, "target_gap"
             elif lo <= stop:
                 exit_i, exit_price, reason = j, stop, "stop"
+                worst_floating_r_gross = min(worst_floating_r_gross, -1.0)
             elif hi >= target:
+                worst_floating_r_gross = min(worst_floating_r_gross, d * (lo-entry) / risk_dist)
                 exit_i, exit_price, reason = j, target, "target"
+            else:
+                worst_floating_r_gross = min(worst_floating_r_gross, d * (lo-entry) / risk_dist)
         else:
             op, hi, lo = float(q.at[j,"ask_open"]), float(q.at[j,"ask_high"]), float(q.at[j,"ask_low"])
             if op >= stop:
                 exit_i, exit_price, reason = j, op, "stop_gap"
+                worst_floating_r_gross = min(worst_floating_r_gross, d * (op-entry) / risk_dist)
             elif op <= target:
                 exit_i, exit_price, reason = j, target, "target_gap"
             elif hi >= stop:
                 exit_i, exit_price, reason = j, stop, "stop"
+                worst_floating_r_gross = min(worst_floating_r_gross, -1.0)
             elif lo <= target:
+                worst_floating_r_gross = min(worst_floating_r_gross, d * (hi-entry) / risk_dist)
                 exit_i, exit_price, reason = j, target, "target"
+            else:
+                worst_floating_r_gross = min(worst_floating_r_gross, d * (hi-entry) / risk_dist)
         if exit_i is not None:
             break
     if exit_i is None:
@@ -259,6 +270,7 @@ def build_trade_for_signal(q: pd.DataFrame, day_positions: dict, i: int, sig: di
         "entry_price": entry, "exit_price": float(exit_price), "stop_price": stop, "target_price": target,
         "stop_distance_usd_per_oz": risk_dist, "A_usd_per_oz": A, "ER": float(sig["ER"]), "context_net_move_usd_per_oz": float(sig["net_move"]),
         "gross_r": gross_r, "gross_pnl_usd_per_oz": d * (float(exit_price) - entry),
+        "worst_floating_r_gross": float(worst_floating_r_gross),
         "exit_reason": reason, "same_m5_bar_exit_qs_upper_bound": same_bar,
         "holding_minutes_proxy": float((pd.Timestamp(exit_ts) - pd.Timestamp(entry_ts)).total_seconds()/60.0)
     }
