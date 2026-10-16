@@ -1,0 +1,83 @@
+{
+  "round": "R277",
+  "verdict": "GAGAL",
+  "preregistration": "research/R277_US_CASH_OPEN_BREADTH_INTRADAY_FLAT_PREREGISTRATION.md",
+  "candidate": "R276 breadth router with forced flat at exact 16:00 New York bar open",
+  "child": {
+    "discovery_2017_2021": {
+      "trades": 842,
+      "pf_1bp": 1.034835,
+      "net_R_1bp": 13.0793,
+      "pf_2bp": 0.988613,
+      "net_R_2bp": -4.3901
+    },
+    "exploratory_forward_2022_2025": {
+      "trades": 969,
+      "pf_1bp": 1.186661,
+      "net_R_1bp": 71.2516,
+      "pf_2bp": 1.138711,
+      "net_R_2bp": 54.2328,
+      "mean_net_R_trade_1bp": 0.073531,
+      "max_drawdown_R_1bp": 40.2967,
+      "median_holding_hours": 5.5833,
+      "p95_holding_hours": 5.8333
+    },
+    "diagnostic_2026": {
+      "trades": 121,
+      "pf_1bp": 0.91592,
+      "net_R_1bp": -3.733,
+      "pf_2bp": 0.871867,
+      "net_R_2bp": -5.8388
+    }
+  },
+  "annual_forward_1bp": {
+    "2022": {
+      "trades": 346,
+      "pf": 1.351902,
+      "net_R": 45.171
+    },
+    "2023": {
+      "trades": 204,
+      "pf": 1.304633,
+      "net_R": 23.607
+    },
+    "2024": {
+      "trades": 186,
+      "pf": 0.794073,
+      "net_R": -18.359
+    },
+    "2025": {
+      "trades": 233,
+      "pf": 1.240265,
+      "net_R": 20.832
+    }
+  },
+  "bootstrap_forward_1bp": {
+    "trades": 969,
+    "weeks": 209,
+    "block_weeks": 4,
+    "reps": 10000,
+    "seed": 2762026,
+    "mean_R_week": 0.340917,
+    "ci95": [
+      -0.11611,
+      0.792779
+    ],
+    "p_mean_positive": 0.928
+  },
+  "locked_gates": {
+    "discovery_trades_ge_100": true,
+    "discovery_pf_plus2_ge_1": false,
+    "forward_trades_ge_100": true,
+    "forward_pf_plus1_ge_1_10": true,
+    "forward_pf_plus2_ge_1_05": true,
+    "annual_stability": false,
+    "bootstrap_lower_gt_zero": false,
+    "child_mean_R_trade_exceeds_parent": true
+  },
+  "limitations": [
+    "2022-2025 contaminated/exploratory; 2026 is not clean OOS.",
+    "BID-only sources and modeled 1/2 bps costs.",
+    "No funded challenge-path replay."
+  ]
+}
