@@ -325,3 +325,18 @@ The user's “compound compound” instruction was not satisfied by increasing p
 Current public FundedNext CFD Stellar 2-Step documentation verifies: Phase 1 +8%, Phase 2 +5%; 5% daily loss with daily reset at 00:00 server time and realized-today + floating P&L counted (including commissions/swaps/fees); 10% static maximum loss; at least five distinct trading days per phase; no time limit; Quick Strike must be below 30% and measures profit from profitable trades closed in under 30 seconds. Server clock is seasonally GMT+2/GMT+3. The official help center currently requires traders to be at least 18 to open a trading account. Full sources and detailed mechanics are in the linked rule matrix.
 
 **Important correction:** historical challenge proxy metrics are not live-pass odds. Before any strategy can become LULUS for funded readiness, replay the exact phase sequence with intratrade equity, floating loss, costs, server-time reset and Quick Strike. R270/R271 stay GAGAL and must not be retuned. The 2022–2025 window is not an untouched promotion holdout. Until the user reaches age eligibility, all tests remain simulation-only.
+
+
+## R272 — locked Gold dual-module test / data acquisition in progress (2026-10-16)
+
+- [R272 preregistration](research/R272_XAUUSD_DUAL_MODULE_PREREGISTRATION.md)
+- [Local-only R272 runner](research/r272_xauusd_dual_module.py)
+- [Official funded rule matrix](research/FUNDEDNEXT_STELLAR2_RULES_VERIFIED_20261016.md)
+- [Funded-readiness promotion gate](research/FUNDED_READINESS_GATE_20261016.md)
+- Raw data branch: `data/r272-xauusd-m5-2016-2026`
+- Data-only full acquisition run: [38857936371](https://github.com/christianomomongan82-lang/scanner/actions/runs/38857936371), currently running at checkpoint time. It downloads only; it must not calculate signals or PnL.
+- One-month data-only probe: [38857759446](https://github.com/christianomomongan82-lang/scanner/actions/runs/38857759446), **PASS**. XAUUSD M5 BID/ASK Jan 2016 downloaded successfully with `dukascopy-node@1.50.0`, ~7,104 rows per side. SHA/manifest for probe artifact is recorded by GitHub; it is a downloader smoke test, not a trading result.
+- First full acquisition attempt [38857009860](https://github.com/christianomomongan82-lang/scanner/actions/runs/38857009860) **failed data collection only** with `fetch failed` using older pinned `1.46.4`. No backtest ran and no strategy verdict was inferred from that transport failure. Retry uses the version verified by the one-month probe.
+- Locked R272 hypothesis: XAUUSD M5; contextual 12-hour trend/pullback continuation and balanced-regime failed-excursion reversal, routed only under mutually exclusive ER regime gates. Entries are on the next exact M5 bar after the signal closes, with an explicit five-minute delay, side-correct BID/ASK execution, no overnight holding and +$0.30/oz primary additional-cost stress (+$0.00/+0.10/+0.50 sensitivities).
+- Discovery 2016–2020 and historical validation 2021–2025 are calculated first. The 2026-01-01 through 2026-10-15 segment must remain unopened unless every locked historical gate passes. R272 has no result yet; no LULUS or GAGAL verdict is assigned until data and local run are available.
+- Important code audit hardening: exact next-bar time must equal 5 minutes; an exit cannot be filled after 16:45 New York; JSON PF stays finite; raw-union baseline comparison and the locked 2026 module/month gates are in the local runner. Local syntax/functional checks are still required before an official result is accepted.
