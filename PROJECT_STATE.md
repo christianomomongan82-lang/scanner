@@ -330,6 +330,14 @@ Next research must remain structurally distinct, registered before outcome calcu
 Official rule details verified on 2026-10-16: Stellar 2-Step targets +8% then +5%; DLL 5%, static MLL 10%, five separate trading days per phase, no time limit, Quick Strike strictly below 30%; daily loss must include current-day closed P&L plus all open floating P&L, charges, commissions and swaps; the server clock uses seasonal GMT+2/GMT+3. FundedNext's current public help center requires age 18+. Future promotion to funded-ready must use a rule-aware replay, not the older simplified challenge proxies. R270 and R271 remain GAGAL; no tuning or promotion based on repeatedly inspected 2022–2025.
 
 
+
+## Authoritative clarification — “compounding” means evolutionary method search (2026-10-16)
+
+- The user’s intended compounding is **evolution of the method-search process**: each experiment inherits and reuses evidence-backed building blocks and lessons from prior experiments, then creates a better next generation through justified mutations, crossover, ablations, and component composition. It is not merely position-size compounding, blind union of failed strategies, or a sequence of unrelated standalone tests.
+- Read and follow [EVOLUTIONARY_METHOD_COMPOUNDING_20261016.md](research/EVOLUTIONARY_METHOD_COMPOUNDING_20261016.md) as the authoritative workflow. Decompose experiments into context/setup/entry/exit/execution/risk components; preserve failure diagnoses; retain potentially useful blocks only when controlled component/ablation comparisons support them; record parent IDs and child-generation rationale.
+- Optimize the actual target: probability of completing both funded phases and time-to-target before rule breach. Use a risk-aware diverse/Pareto population; PF and expectancy are diagnostics. Keep frozen independent OOS protection because repeated evolutionary search on the same validation period overfits.
+- Honest correction: R272 is one locked dual-module combination test, not yet a full evolutionary-search implementation. Complete the valid locked run without opening its 2026 holdout prematurely; afterward use the candidate/block registry and evidence matrix to generate the next research generation instead of returning to isolated strategy invention.
+
 ## R272 — Gold dual-module test / corrected data acquisition (2026-10-16)
 
 **Strategy verdict: not calculated yet.** No R272 signal/PnL/backtest result has been calculated or inspected in this continuation. Do not infer LULUS/GAGAL from data-acquisition status.
