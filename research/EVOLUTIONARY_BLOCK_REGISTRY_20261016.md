@@ -40,3 +40,11 @@ Purpose: preserve what evidence supports, rejects, or has not tested. A useful e
 - [R272 result](R272_FINAL_VERDICT.md)
 - [R273 result](R273_FINAL_REPORT.md)
 - [R274 result](R274_FINAL_REPORT.md)
+
+## R275 update (2026-10-17)
+
+- **Execution controls retained:** require the exact post-delay timestamp, use executable quote sides, process opening gaps before intrabar ranges, and preserve data gaps.
+- **No alpha component inherited:** the L80 signal is unconfirmed and the five-minute-delay child is GAGAL. The observed 2022–2025 interval is contaminated and source rows used a heuristic filter after a collector configured with synthetic flats; keep this as a negative diagnostic only.
+- **Candidate row:**
+
+| R275 L80 + phone-delay T+6 | R189/L80 | The unchanged L80 trigger became strongly negative with exact T+6 entry: 701 exploratory 2022–2025 trades, PF 0.694 and -786.3 pips at +1 pip; four-week bootstrap CI wholly negative | Failed execution-mutant; do not promote L80 or the T+6 stream as an edge |
