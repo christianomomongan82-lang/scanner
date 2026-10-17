@@ -481,3 +481,15 @@ Archived diagnostic artifacts:
 - [Machine-readable diagnostic results](research/R283_DIAGNOSTIC_RESULTS.json)
 
 **Known persistence gap:** the 872-row R283 trade ledger and exact runner were available in the local analysis workspace, but they have not yet been committed to this branch. The report explicitly records that repository-only reproduction is incomplete. Next work should resolve this gap by archiving the row ledger/runner or recreating and committing them from the verified source archives; do not pretend it is already done and do not ask the user to upload data that are available in the current runtime.
+
+
+## Latest research update — R284 late-morning continuation — GAGAL (2026-10-17)
+
+- [Pre-registration](research/R284_US_INDEX_LATE_MORNING_CONTINUATION_PREREGISTRATION.md) was committed before calculating outcomes.
+- [Final report](research/R284_FINAL_REPORT.md) · [machine-readable results](research/R284_results_compact.json).
+- New, structurally distinct hypothesis: direction-following of the 10:00–11:55 ET index move, one selected instrument per New York session, child threshold based only on each instrument's 2017–2020 Q75; T+10 entry at 12:05; 1.0× range stop / 1.5R target / 15:55 bar-open force-flat.
+- Data: four R205 cached GitHub artifacts; M5 BID-only. Eligibility counts: USA500 2,662 sessions; USATECH 2,675; USA30 2,672; USSC2000 2,022. The flat-candidate filter is heuristic; modeled 1/2/4 bp costs are not verified CFD costs.
+- At 2 bp, child discovery 2017–2020 = 380 trades / PF 0.864 / -13.108R / max DD 16.264R. Annual net R: 2017 -3.011; 2018 -0.051; 2019 -6.957; 2020 -3.090 (0/4 positive). Validation 2021 = 114 / PF 1.066 / +1.326R, but this modest result does not rescue negative discovery. At 4 bp the discovery PF falls to 0.797.
+- Matched parent baseline at 2 bp was also negative: discovery 981 trades / PF 0.822 / -47.650R; 2021 251 / PF 0.941 / -3.266R. Child reduces discovery loss versus parent but is still not an edge.
+- **Verdict: GAGAL.** The discovery PF, net-return, positive-year, and 4-bp PF gates failed. 2022–2025 and 2026 outcomes were not computed/opened as required; no funded challenge replay and no Actions backtest were run. Do not lower threshold or alter this exact specification post-result.
+- Persistence gap: result JSON and report are now on GitHub, but the exact local runner and row-level ledger are not yet archived; repository-only exact reproduction remains incomplete. The signal has not been promoted and does not enter the edge-backed block set.
