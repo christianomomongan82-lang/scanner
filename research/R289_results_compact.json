@@ -1,0 +1,175 @@
+{
+  "candidate_id": "R289_CONTINENTAL_EUROPE_GAP_CONTINUATION",
+  "preregistration_commit": "f3dba6084362a2b27855031945ca700521d586bc",
+  "verdict": "GAGAL",
+  "post_2021_pnl_calculated": false,
+  "data": {
+    "DEUIDXEUR": {
+      "artifact_id": 11710710062,
+      "sha256_gz": "7ad37cb19545eef6111b928a97322c06c9f2478030a0c4282669542262303af4",
+      "eligible_sessions": 2481
+    },
+    "FRAIDXEUR": {
+      "artifact_id": 11710800007,
+      "sha256_gz": "cc9e3d3b808d1bd284def820473658aa0ec319fe167b6355e0bcaddc83eebbf4",
+      "eligible_sessions": 2458
+    },
+    "EUSIDXEUR": {
+      "artifact_id": 11710326105,
+      "sha256_gz": "f47aa66caf714570140c63ce4056db4c426b8ff4ff4f65e5fdd9920a402a1d48",
+      "eligible_sessions": 2023
+    },
+    "source_latest_utc": "2026-10-09T19:55:00+00:00",
+    "feed": "R205 cached M5 BID-only data; costs modeled, not observed"
+  },
+  "method": {
+    "session_timezone": "Europe/Berlin",
+    "session": "09:00–17:25, 102 M5 bars",
+    "gap": "current 09:00 open vs prior eligible session 17:25 close; max four calendar days",
+    "thresholds_abs_gap_pct": {
+      "DEUIDXEUR": 0.7209826740617142,
+      "FRAIDXEUR": 0.6455115916203047,
+      "EUSIDXEUR": 0.8747560331003656
+    },
+    "threshold_fit": "per-symbol Q80 absolute gap, 2017–2020 only",
+    "select": "one highest normalized absolute gap per date; deterministic alphabetical tie-break; score >=1",
+    "direction": "follow gap direction; entry 09:10 local open",
+    "take_profit_gap_multiple": 1,
+    "stop_loss_gap_multiple": 0.75,
+    "intrabar": "M5 OHLC; stop-first when both levels hit; if neither level hit exit 17:30 local close",
+    "modeled_round_trip_cost_bps": [
+      1,
+      2,
+      4
+    ]
+  },
+  "results": {
+    "discovery_2017_2020": {
+      "continuation": {
+        "1bp": {
+          "trades": 251,
+          "pf_r": 1.26280849,
+          "net_r": 23.79547647,
+          "net_bps": 3728.14496,
+          "max_dd_r": 6.57495
+        },
+        "2bp": {
+          "trades": 251,
+          "pf_r": 1.22449531,
+          "net_r": 20.68209434,
+          "net_bps": 3477.14496,
+          "max_dd_r": 7.2362
+        },
+        "4bp": {
+          "trades": 251,
+          "pf_r": 1.15166648,
+          "net_r": 14.45533007,
+          "net_bps": 2975.14496,
+          "max_dd_r": 8.55871
+        }
+      },
+      "matched_fade_diagnostic": {
+        "1bp": {
+          "trades": 251,
+          "pf_r": 0.77586843,
+          "net_r": -25.39245073
+        },
+        "2bp": {
+          "trades": 251,
+          "pf_r": 0.7522769,
+          "net_r": -28.50583287
+        },
+        "4bp": {
+          "trades": 251,
+          "pf_r": 0.70740503,
+          "net_r": -34.73259713
+        }
+      },
+      "annual_net_r_2bp": {
+        "2017": -4.75857014,
+        "2018": 5.25236944,
+        "2019": 3.44670176,
+        "2020": 16.74159328
+      }
+    },
+    "validation_2021": {
+      "continuation": {
+        "1bp": {
+          "trades": 61,
+          "pf_r": 1.16575954,
+          "net_r": 3.92880695,
+          "net_bps": 40.71977,
+          "max_dd_r": 5.14714
+        },
+        "2bp": {
+          "trades": 61,
+          "pf_r": 1.12834673,
+          "net_r": 3.08838332,
+          "net_bps": -20.28023,
+          "max_dd_r": 5.32584
+        },
+        "4bp": {
+          "trades": 61,
+          "pf_r": 1.05679042,
+          "net_r": 1.40753606,
+          "net_bps": -142.28023,
+          "max_dd_r": 5.68324
+        }
+      },
+      "matched_fade_diagnostic": {
+        "1bp": {
+          "trades": 61,
+          "pf_r": 0.68550987,
+          "net_r": -9.57385671
+        },
+        "2bp": {
+          "trades": 61,
+          "pf_r": 0.66368816,
+          "net_r": -10.41428034
+        },
+        "4bp": {
+          "trades": 61,
+          "pf_r": 0.62227573,
+          "net_r": -12.0951276
+        }
+      },
+      "weekly_block_bootstrap_2bp": {
+        "mean_r_per_week": 0.05939199,
+        "ci95_low": -0.17672455,
+        "ci95_high": 0.28171188,
+        "weeks": 52,
+        "block_weeks": 4,
+        "replicates": 5000,
+        "seed": 289
+      }
+    },
+    "later_metrics": null
+  },
+  "gates": {
+    "discovery_trades_ge_200": true,
+    "discovery_pf_r_2bp_ge_1_05": true,
+    "discovery_net_r_positive_2bp": true,
+    "discovery_positive_years_ge_3_of_4": true,
+    "discovery_pf_r_4bp_ge_0_90": true,
+    "validation_trades_ge_50": true,
+    "validation_net_r_positive_2bp": true,
+    "validation_pf_r_2bp_ge_1_00": true,
+    "validation_pf_r_4bp_ge_0_90": true,
+    "validation_bootstrap_ci95_lower_gt_0": false
+  },
+  "failed_gates": [
+    "validation_bootstrap_ci95_lower_gt_0"
+  ],
+  "interpretation": {
+    "funded_ready": false,
+    "post_2021_status": "PnL not calculated because the validation bootstrap gate failed",
+    "program_level_holdout_pristine": false,
+    "limitations": [
+      "M5 BID-only; no observed ASK fills",
+      "modeled 1/2/4 bp costs, no verified CFD spread/slippage, commissions, swaps or contract multipliers",
+      "same-bar stop/target ambiguity resolved conservatively using stop-first",
+      "no equity-aware floating DD/DLL/MLL funded challenge replay",
+      "EUSIDXEUR session coverage materially weaker in early years due repeated-flat exclusion"
+    ]
+  }
+}
