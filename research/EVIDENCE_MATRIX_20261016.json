@@ -1,6 +1,6 @@
 {
   "as_of": "2026-10-17",
-  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R283",
+  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R284",
   "execution_blocks": {
     "quote_side_bid_ask": "reusable implementation control; local smoke-checked; not alpha evidence",
     "preserve_gaps": "reusable data-integrity control; not alpha evidence",
@@ -107,6 +107,11 @@
       "id": "R283_US_index_cash_open_gap_fade",
       "status": "FAILED",
       "evidence": "Four US index BID-only M5 feeds; per-index Q80 fit on 2017-2020, T+10 fade to prior RTH close, 0.75x-gap stop. At 2bp: discovery 709 trades PF 0.748, -77.90R; validation 2021 163 trades PF 0.599, -34.83R. Trade-level postmortem: gross PF before modeled costs was only 0.795 discovery / 0.638 validation; target exits 152 vs 237 stops in discovery and 35 vs 72 stops in validation; stop share rose 33.43%→44.17%. Gap-up fades (SHORT) were weaker than gap-down fades in both segments, but both lost. 2022-2025 not scored. Exact 872-row ledger and runner remain local/not yet archived; repo-only reproduction incomplete."
+    },
+    {
+      "id": "R284_late_morning_cross_sectional_continuation",
+      "status": "FAILED",
+      "evidence": "At modeled 2 bp, child had 380 discovery trades PF 0.864 / -13.108R, 0/4 discovery years positive; validation had 114 trades PF 1.066 / +1.326R. Discovery PF at 4 bp was 0.797. Historical gates failed; no forward outcomes calculated."
     }
   ],
   "decision": "No candidate promoted R270-R283. R283 is failed; trade-level failure mechanism was diagnosed post hoc. No funded-ready strategy. Ledger/runner archival gap remains open.",
@@ -120,7 +125,8 @@
     "EURUSD_M1_R281": "Dukascopy raw M1 BID/ASK archive artifact 11959096102, SHA-256 b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e. Source used -fl; 696,795 paired flat candidates removed heuristically. R281 stopped before 2022-2025 forward scoring because validation gate failed; do not tune this family after result.",
     "EURUSD_M1_R282": "Same Dukascopy archive artifact 11959096102 / SHA b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e. Weekly reopening-gap detector yielded only three matching large-gap timestamps, all nontradable 00:00 UTC holiday/data gaps. Exact T+10 timestamp absent at all three. Alpha not tested; no forward results calculated.",
     "EURUSD_weekend_reopen_R282": "Input archive SHA256 b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e was collected with -fl. Weekend reopening is not observable enough for this hypothesis. Do not infer no edge; obtain different source.",
-    "R283_US_indices": "BID-only cached M5 archives; round-trip costs modeled at 1/2/4 bps; source provenance and actual CFD spread/commission/slippage/swaps not verified. R283 failed discovery and validation; 2022-2025 outcomes were not calculated."
+    "R283_US_indices": "BID-only cached M5 archives; round-trip costs modeled at 1/2/4 bps; source provenance and actual CFD spread/commission/slippage/swaps not verified. R283 failed discovery and validation; 2022-2025 outcomes were not calculated.",
+    "R284_US_indices": "Late-morning 10:00-11:55 continuation tested on four M5 BID-only cached R205 artifacts. Costs 1/2/4 bp are modeled; flat-row screening is heuristic. R284 failed discovery gates; no 2022-2025 or 2026 outcomes computed. Exact runner/row ledger not yet archived."
   },
   "diagnostics": [
     {
@@ -139,6 +145,17 @@
         "research/R283_INSTRUMENT_YEAR_DECOMPOSITION.csv",
         "research/R283_DIAGNOSTIC_RESULTS.json"
       ]
+    },
+    {
+      "id": "R284",
+      "status": "FAILED_REPRODUCIBILITY_INCOMPLETE",
+      "finding": "The selected late-morning continuation stream was negative in discovery despite a small positive 2021 result. No signal block retained; one-per-day normalized strongest index selection reduces but does not eliminate losses versus parent.",
+      "artifacts": [
+        "research/R284_US_INDEX_LATE_MORNING_CONTINUATION_PREREGISTRATION.md",
+        "research/R284_FINAL_REPORT.md",
+        "research/R284_results_compact.json"
+      ],
+      "caveat": "M5 BID-only archives, modeled transaction costs, heuristic flat-bar exclusion. Exact local runner and row-level ledger remain unarchived."
     }
   ]
 }
