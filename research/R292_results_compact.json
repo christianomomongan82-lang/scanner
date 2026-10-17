@@ -1,0 +1,138 @@
+{
+  "id": "R292_USA500_OVERNIGHT_LONG_CARRY",
+  "verdict": "GAGAL",
+  "source": {
+    "sha256": "df2a5edfa49cb15f8bcf5b13577e95907a0f0c54d02c7feed8bdbb7e3b6c49ee",
+    "rows": 216508,
+    "eligible_sessions": 2659,
+    "session_count_by_year": {
+      "2017": 241,
+      "2018": 243,
+      "2019": 248,
+      "2020": 247,
+      "2021": 251
+    },
+    "bid_only": true
+  },
+  "rule": "Long at eligible RTH final 15:55 bar close, exit next eligible RTH 09:30 bar open; no SL/TP; no direction filter; costs roundtrip bp of notional.",
+  "discovery_2017_2020": {
+    "trades": 978,
+    "net_bp_1": 2973.4847704133986,
+    "pf_bp_1": 1.1423241964838113,
+    "net_bp_2": 1995.484770413398,
+    "pf_bp_2": 1.0935374147998589,
+    "net_bp_4": 39.48477041339831,
+    "pf_bp_4": 1.0017750858486696,
+    "gross_net_bp": 3951.484770413399,
+    "gross_pf_bp": 1.1930868712439966,
+    "win_rate_2bp_pct": 54.29447852760736,
+    "mean_net_bp_2": 2.04037297588282,
+    "fixed_notional_cumulative_pnl_pct_2bp": 19.954847704133975,
+    "max_closed_pnl_drawdown_pct_of_notional_2bp": 38.57456443457173
+  },
+  "annual_discovery_2bp": {
+    "2017": {
+      "trades": 241,
+      "net_bp_1": 785.4895618163395,
+      "pf_bp_1": 1.3761601669932828,
+      "net_bp_2": 544.4895618163395,
+      "pf_bp_2": 1.247839845102027,
+      "net_bp_4": 62.4895618163394,
+      "pf_bp_4": 1.0257824160418574,
+      "gross_net_bp": 1026.4895618163396,
+      "gross_pf_bp": 1.5179115648112806,
+      "win_rate_2bp_pct": 53.941908713692946,
+      "mean_net_bp_2": 2.259292787619666,
+      "fixed_notional_cumulative_pnl_pct_2bp": 5.444895618163396,
+      "max_closed_pnl_drawdown_pct_of_notional_2bp": 2.689837082251901
+    },
+    "2018": {
+      "trades": 243,
+      "net_bp_1": 644.624498966304,
+      "pf_bp_1": 1.1383483447613525,
+      "net_bp_2": 401.624498966304,
+      "pf_bp_2": 1.0841014655719592,
+      "net_bp_4": -84.37550103369614,
+      "pf_bp_4": 0.9831679265841266,
+      "gross_net_bp": 887.624498966304,
+      "gross_pf_bp": 1.1951844145711674,
+      "win_rate_2bp_pct": 51.85185185185185,
+      "mean_net_bp_2": 1.652775715910716,
+      "fixed_notional_cumulative_pnl_pct_2bp": 4.016244989663045,
+      "max_closed_pnl_drawdown_pct_of_notional_2bp": 5.1825702703645895
+    },
+    "2019": {
+      "trades": 248,
+      "net_bp_1": 1007.0182570154855,
+      "pf_bp_1": 1.2547999712005073,
+      "net_bp_2": 759.0182570154855,
+      "pf_bp_2": 1.186830892307033,
+      "net_bp_4": 263.0182570154857,
+      "pf_bp_4": 1.061215368892325,
+      "gross_net_bp": 1255.0182570154857,
+      "gross_pf_bp": 1.3261621444345895,
+      "win_rate_2bp_pct": 54.43548387096774,
+      "mean_net_bp_2": 3.060557487965667,
+      "fixed_notional_cumulative_pnl_pct_2bp": 7.590182570154858,
+      "max_closed_pnl_drawdown_pct_of_notional_2bp": 9.427434255288869
+    },
+    "2020": {
+      "trades": 246,
+      "net_bp_1": 536.3524526152703,
+      "pf_bp_1": 1.0526220887131326,
+      "net_bp_2": 290.35245261527007,
+      "pf_bp_2": 1.028193570038193,
+      "net_bp_4": -201.6475473847297,
+      "pf_bp_4": 0.980815115489243,
+      "gross_net_bp": 782.3524526152707,
+      "gross_pf_bp": 1.0775576296746263,
+      "win_rate_2bp_pct": 56.91056910569105,
+      "mean_net_bp_2": 1.180294522826301,
+      "fixed_notional_cumulative_pnl_pct_2bp": 2.9035245261527125,
+      "max_closed_pnl_drawdown_pct_of_notional_2bp": 38.57456443457172
+    }
+  },
+  "validation_2021": {
+    "trades": 250,
+    "net_bp_1": 992.2245841149726,
+    "pf_bp_1": 1.2556065923681585,
+    "net_bp_2": 742.2245841149726,
+    "pf_bp_2": 1.1862405111299095,
+    "net_bp_4": 242.22458411497252,
+    "pf_bp_4": 1.0576724065986405,
+    "gross_net_bp": 1242.2245841149725,
+    "gross_pf_bp": 1.3284384486133196,
+    "win_rate_2bp_pct": 57.99999999999999,
+    "mean_net_bp_2": 2.9688983364598904,
+    "fixed_notional_cumulative_pnl_pct_2bp": 7.422245841149724,
+    "max_closed_pnl_drawdown_pct_of_notional_2bp": 3.3737554954689695
+  },
+  "validation_weekly_bootstrap_2bp": {
+    "weeks_including_zero_trade_weeks": 53,
+    "weeks_with_trade": 52,
+    "mean_weekly_net_bp": 14.004237436131556,
+    "ci95_mean_weekly_net_bp": [
+      -2.244892130363588,
+      30.111843762213024
+    ],
+    "positive_mean_bootstrap_share": 0.9524,
+    "block_weeks": 4,
+    "resamples": 5000,
+    "seed": 292
+  },
+  "session_quality_audit_rows": 2792,
+  "skipped_long_gaps": 0,
+  "positive_discovery_years": 4,
+  "gates": {
+    "discovery_min_500_trades": true,
+    "discovery_net_bp_2_positive": true,
+    "discovery_pf_2bp_ge_1_05": true,
+    "at_least_3_of_4_discovery_years_positive": true,
+    "discovery_pf_4bp_ge_0_90": true,
+    "validation_min_100_trades": true,
+    "validation_net_bp_2_positive": true,
+    "validation_pf_2bp_ge_1_05": true,
+    "validation_bootstrap_ci_lower_gt_zero": false,
+    "validation_pf_4bp_ge_0_90": true
+  }
+}
