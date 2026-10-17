@@ -258,28 +258,28 @@ def main():
         "No 2026 strategy outcomes or FundedNext equity-aware challenge replay were run."
     ]
     (args.out_dir/"R297_results_compact.json").write_text(json.dumps(result,indent=2,allow_nan=False))
-    lines=["# R297 — XAUUSD Active Weekend-Reopening Gap Continuation",f"\\n**Verdict: {result['verdict']}**\\n","No strategy PnL after 2025-12-31 was calculated.","",
+    lines=["# R297 — XAUUSD Active Weekend-Reopening Gap Continuation",f"\n**Verdict: {result['verdict']}**\n","No strategy PnL after 2025-12-31 was calculated.","",
       "| Metric | Discovery 2016–2020 | Validation 2021–2025 |","|---|---:|---:|"]
     for key,label in [("trades","Trades"),("net_R","Net R @ +$0.30/oz"),("PF_R","PF_R @ +$0.30/oz"),("win_rate_pct","Win rate %"),
                       ("max_closed_R_drawdown","Max closed R drawdown"),("stop_exits","Stop exits"),("target_exits","Target exits"),("time_exits","4h time exits")]:
         lines.append(f"| {label} | {d30.get(key)} | {v30.get(key)} |")
-    lines += ["\\n## Data-eligibility audit\\n",f"- Active weekend-gap candidates audited: {len(audit)}.",
+    lines += ["\n## Data-eligibility audit\n",f"- Active weekend-gap candidates audited: {len(audit)}.",
               f"- Events passing locked quality/friction/path gates: {len(events)}.",f"- Completed trades: {len(t)}; simulation skips: {len(skips)}.",
-              "\\n## Cost sensitivity at +$0.50/oz\\n",f"- Discovery: {d50['trades']} trades, net {d50['net_R']:.3f}R, PF_R {d50['PF_R']:.3f}.",
+              "\n## Cost sensitivity at +$0.50/oz\n",f"- Discovery: {d50['trades']} trades, net {d50['net_R']:.3f}R, PF_R {d50['PF_R']:.3f}.",
               f"- Validation: {v50['trades']} trades, net {v50['net_R']:.3f}R, PF_R {v50['PF_R']:.3f}.",
-              "\\n## Annual cohorts at +$0.30/oz\\n","| Year | Trades | Net R | PF_R |","|---|---:|---:|---:|"]
+              "\n## Annual cohorts at +$0.30/oz\n","| Year | Trades | Net R | PF_R |","|---|---:|---:|---:|"]
     for year in range(2016,2026):
         split="discovery" if year<=2020 else "validation"
         q=result[split]["yearly"][str(year)]["0.30"]
         lines.append(f"| {year} | {q['trades']} | {q['net_R']:.3f} | {q['PF_R'] if q['PF_R'] is not None else 'n/a'} |")
-    lines += [f"\\n## Validation weekly bootstrap @ +$0.30/oz\\n\\nMean {boot['mean_weekly_net_R']:.5f}R/week; 95% CI [{boot['ci95_low']:.5f}, {boot['ci95_high']:.5f}] across {boot['weeks']} Monday-start weeks, including zero-trade weeks (10,000 circular four-week blocks, seed 297).",
-              "\\n## Locked gates\\n","| Gate | Result |","|---|---|"]
+    lines += [f"\n## Validation weekly bootstrap @ +$0.30/oz\n\nMean {boot['mean_weekly_net_R']:.5f}R/week; 95% CI [{boot['ci95_low']:.5f}, {boot['ci95_high']:.5f}] across {boot['weeks']} Monday-start weeks, including zero-trade weeks (10,000 circular four-week blocks, seed 297).",
+              "\n## Locked gates\n","| Gate | Result |","|---|---|"]
     for key,value in gates.items(): lines.append(f"| {key} | {'PASS' if value else 'FAIL'} |")
-    lines += ["\\n## Interpretation\\n","R296 used a static Sunday quote block and is invalid as alpha evidence. R297 corrects the event to the first active reopening bar; it fails the locked discovery/validation requirements. No 2026 outcomes or funded challenge replay were run.",
-              "\\n## Limitations\\n","- BID/ASK history does not guarantee live funded fills; added costs are modeled.",
+    lines += ["\n## Interpretation\n","R296 used a static Sunday quote block and is invalid as alpha evidence. R297 corrects the event to the first active reopening bar; it fails the locked discovery/validation requirements. No 2026 outcomes or funded challenge replay were run.",
+              "\n## Limitations\n","- BID/ASK history does not guarantee live funded fills; added costs are modeled.",
               "- 2021–2025 has prior XAU research exposure, not pristine program-level OOS.",
               "- 2026 results were not calculated."]
-    (args.out_dir/"R297_FINAL_REPORT.md").write_text("\\n".join(lines)+"\\n")
+    (args.out_dir/"R297_FINAL_REPORT.md").write_text("\n".join(lines)+"\n")
     print(json.dumps({"verdict":result["verdict"],"eligible_events":len(events),"closed_trades":len(t),"gates":gates,
                       "discovery":d30,"validation":v30,"bootstrap":boot},indent=2))
 if __name__=="__main__":
