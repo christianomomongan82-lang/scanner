@@ -1,0 +1,157 @@
+{
+  "candidate_id": "R290_US_CASH_OPEN_BREAKOUT_RETEST",
+  "preregistration_commit": "8476caf1c9953de446ac9713f24625a04b46d206",
+  "verdict": "GAGAL",
+  "post_2021_pnl_calculated": false,
+  "data": {
+    "USA500": {
+      "artifact_id": 11709864394,
+      "sha256_gz": "df2a5edfa49cb15f8bcf5b13577e95907a0f0c54d02c7feed8bdbb7e3b6c49ee",
+      "eligible_sessions": 2659
+    },
+    "USATECH": {
+      "artifact_id": 11710370389,
+      "sha256_gz": "82b06c38f66cd1387097691baac1d45c9463b6540eea9dfe28a894d85e122f7c",
+      "eligible_sessions": 2671
+    },
+    "source_latest_utc": "2026-10-09T20:10:00+00:00",
+    "feed": "R205 cached M5 BID-only files; 2/4/6 bp are modeled costs"
+  },
+  "method": {
+    "timezone": "America/New_York with DST",
+    "opening_range": "High/low of 09:30, 09:35, 09:40 M5 candles",
+    "breakout": "first close beyond OR boundary on 09:45–11:00 bars",
+    "retest": "subsequent M5 touches broken boundary and closes back outside, no later than 12:00 close",
+    "entry": "next M5 open after retest; reject if entry has already reopened inside OR",
+    "stop": "opposite OR boundary",
+    "target_R": 1.5,
+    "max_positions": "one trade across both indices per US date",
+    "same_bar": "stop first",
+    "cost_bps": [
+      2,
+      4,
+      6
+    ]
+  },
+  "coverage": {
+    "eligible_sessions_by_symbol": {
+      "USA500": 2659,
+      "USATECH": 2671
+    },
+    "prefilter_valid_retests_discovery_2016_2020": 1662,
+    "selected_trades_discovery_2016_2020": 1059,
+    "selected_trades_validation_2021": 214
+  },
+  "metrics": {
+    "discovery_2016_2020": {
+      "trades": 1059,
+      "2bp": {
+        "pf_R": 0.8337,
+        "net_R": -95.5951,
+        "net_bps": -4415.95,
+        "max_drawdown_R": 104.38,
+        "win_rate_pct": 0
+      },
+      "4bp": {
+        "pf_R": 0.732,
+        "net_R": -165.0495,
+        "net_bps": -6533.95,
+        "max_drawdown_R": 170.72
+      },
+      "6bp": {
+        "pf_R": 0.6435,
+        "net_R": -234.5039,
+        "net_bps": -8651.95,
+        "max_drawdown_R": 239.68
+      }
+    },
+    "validation_2021": {
+      "trades": 214,
+      "2bp": {
+        "pf_R": 1.2202,
+        "net_R": 20.9254,
+        "net_bps": 973.58,
+        "max_drawdown_R": 13.57
+      },
+      "4bp": {
+        "pf_R": 1.0824,
+        "net_R": 8.3705,
+        "net_bps": 545.58,
+        "max_drawdown_R": 15.85
+      },
+      "6bp": {
+        "pf_R": 0.9613,
+        "net_R": -4.1844,
+        "net_bps": 117.58,
+        "max_drawdown_R": 18.39
+      }
+    },
+    "annual_discovery_2bp": {
+      "2016": {
+        "trades": 210,
+        "pf_R": 0.7848,
+        "net_R": -24.7982
+      },
+      "2017": {
+        "trades": 209,
+        "pf_R": 0.7344,
+        "net_R": -30.599
+      },
+      "2018": {
+        "trades": 219,
+        "pf_R": 0.8315,
+        "net_R": -20.6961
+      },
+      "2019": {
+        "trades": 210,
+        "pf_R": 0.9942,
+        "net_R": -0.6046
+      },
+      "2020": {
+        "trades": 211,
+        "pf_R": 0.8391,
+        "net_R": -18.8972
+      }
+    },
+    "validation_weekly_net_R_bootstrap_2bp": {
+      "mean": 0.4024114016,
+      "ci95_low": -0.1111541394,
+      "ci95_high": 0.8842606407,
+      "weeks": 52,
+      "block_weeks": 4,
+      "replicates": 5000,
+      "seed": 290
+    },
+    "later_metrics": null
+  },
+  "gates": {
+    "discovery_trades_ge_300": true,
+    "discovery_pf_r_2bp_ge_1_05": false,
+    "discovery_net_r_positive_2bp": false,
+    "discovery_positive_years_ge_3_of_5": false,
+    "discovery_pf_r_4bp_ge_0_90": false,
+    "validation_trades_ge_100": true,
+    "validation_pf_r_2bp_ge_1_00": true,
+    "validation_net_r_positive_2bp": true,
+    "validation_pf_r_6bp_ge_0_80": true,
+    "validation_bootstrap_ci95_lower_gt_0": false
+  },
+  "failed_gates": [
+    "discovery_pf_r_2bp_ge_1_05",
+    "discovery_net_r_positive_2bp",
+    "discovery_positive_years_ge_3_of_5",
+    "discovery_pf_r_4bp_ge_0_90",
+    "validation_bootstrap_ci95_lower_gt_0"
+  ],
+  "interpretation": {
+    "funded_ready": false,
+    "later_period_PnL": "Not calculated because historical gates failed",
+    "no_alpha_block_retained": true,
+    "limitations": [
+      "M5 BID-only prices",
+      "2/4/6 bp costs are modeled, not measured executable costs",
+      "2022–2025 is contaminated exploratory evidence even if reached",
+      "no verified CFD point value, spread, commission, swap or funded equity path"
+    ]
+  }
+}
