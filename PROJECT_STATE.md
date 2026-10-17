@@ -545,3 +545,5 @@ Archived diagnostic artifacts:
 - Binary verdict: **GAGAL**. Do not adjust thresholds/direction/timing using these outcomes. The 2022–2025 window is project-contaminated; 2026 is a later chronological check, not claimed as a pristine program-level holdout. No funded equity path was run.
 - Execution/data caveats: M5 BID-only data, modeled rather than observed transaction costs, heuristic repeated-flat exclusion, no verified CFD contract multipliers/commissions/swaps, no ask-side fill reconstruction, and no DLL/MLL challenge replay.
 - Reusable methodological blocks only: synchronized eligible-session construction, frozen threshold fitting, deterministic one-event-per-session selection, matched same-event direction ablation, cost-stress/weekly-bootstrap reporting. No positive alpha block is retained from R288.
+
+- Row-level reproducibility: [paired follow/fade event ledger, compressed CSV](research/R288_trade_ledger_outcome_compact.csv.gz). It stores each selected 2022–2026 event, both directions and gross return; subtract the preregistered 1/2/4 bp modeled cost to reproduce per-trade net diagnostics.
