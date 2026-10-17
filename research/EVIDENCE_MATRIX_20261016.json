@@ -204,9 +204,21 @@
         "research/R296_DATA_QUALITY_INVALIDATION.md"
       ],
       "caveat": "R296 original PnL invalid due static Sunday 00:00 UTC quote block; do not count as a strategy fail or use its outcomes. R297 is valid corrected test but no alpha retained. Historical BID/ASK do not verify broker fills, costs or FundedNext account path. No 2026 strategy PnL and no funded replay."
+    },
+    {
+      "id": "R298_XAUUSD_LONDON_ASIA_RANGE_SWEEP_RECLAIM",
+      "status": "FAILED_DISCOVERY_VALIDATION_BOOTSTRAP_GATES",
+      "evidence": "Pre-registered London-session Asian-range sweep-and-reclaim reversal using active paired XAUUSD M5 BID/ASK, signal +10m entry, signal-bar extreme stop, Asian-midpoint target, min RR 1, four-hour cap. 2026 rows excluded before signal construction. At +$0.30/oz: discovery 313 trades, -285.893R, PF_R 0.297; validation 285 trades, -178.933R, PF_R 0.409. Both periods are negative even at zero added friction; all five annual cohorts in both periods lose. Validation four-week weekly bootstrap mean -0.68557R/week, 95% CI [-0.89792,-0.47209].",
+      "artifacts": [
+        "research/R298_XAUUSD_LONDON_ASIA_RANGE_SWEEP_RECLAIM_PREREGISTRATION.md",
+        "research/R298_FINAL_REPORT.md",
+        "research/R298_results_compact.json",
+        "research/R298_annual_summary.csv"
+      ],
+      "caveat": "Historical XAUUSD BID/ASK does not verify funded fills or actual costs. 2021-2025 contaminated. No 2026 candidate PnL and no FundedNext equity-path replay. No alpha block retained."
     }
   ],
-  "decision": "No candidate promoted R270-R297. R296 was an invalid test because it selected static Sunday 00:00 UTC quotes before actual active reopening and must not be interpreted as alpha evidence. R297 corrected the active-bar event definition but failed on negative discovery expectancy, sparse sample, weak validation PF, bootstrap crossing zero and cost stress. No signal-alpha block is promoted and no R297 2026 outcome or FundedNext equity-path replay was run.",
+  "decision": "No candidate promoted R270-R298. R296 was an invalid test caused by static Sunday quotes; R297 corrected the reopening timestamp but failed locked gates; R298's London Asian-range sweep-reclaim failed both discovery and validation economics and its weekly bootstrap CI was entirely negative. No R297 or R298 2026 candidate PnL and no funded equity-path replay were run.",
   "contamination_notes": {
     "2021-2025": "Repeatedly viewed across previous project experiments; use as exploratory screen only, not clean program-level OOS.",
     "2026_XAUUSD_M5": "Still unopened in R272/R273/R274; do not inspect unless a future preregistered candidate passes all historical gates.",
