@@ -1,0 +1,104 @@
+{
+  "candidate_id": "R297_XAUUSD_ACTIVE_REOPEN_GAP_CONTINUATION",
+  "verdict": "GAGAL",
+  "preregistration": "research/R297_XAUUSD_ACTIVE_REOPEN_GAP_CONTINUATION_PREREGISTRATION.md",
+  "prior_attempt_status": "R296_INVALID_DATA_EVENT_DEFINITION; its PnL is not alpha evidence",
+  "input_provenance": {
+    "artifact_id": 12031270051,
+    "collection_run": 38859918137,
+    "bid_sha256": "b30eb4864db0777b6df612f3e43ccda9cc59db5ca09974191eabdaca1f6ff575",
+    "ask_sha256": "b9b174a83df70507be4ab0cd556432a0d14fbac2e596e787325bd1f163772fc9",
+    "rows_per_side": 947326,
+    "exact_paired_timestamps": true,
+    "rows_scored_before_2026": 877930,
+    "active_rows_before_2026": 708813,
+    "static_rows_before_2026": 169117,
+    "last_used_utc": "2025-12-31T21:55:00+00:00",
+    "rows_from_2026_excluded": 69396
+  },
+  "event_audit": {
+    "candidates": 500,
+    "passed_quality_friction_and_complete_path": 52,
+    "completed_trades": 52,
+    "simulation_skips": 0,
+    "excluded_by_gap_friction": 444,
+    "additional_static_path_rejects": 3,
+    "additional_missing_timestamp_rejects": 1
+  },
+  "discovery_2016_2020": {
+    "trades": 24,
+    "net_R_at_0_30": -6.161241327243974,
+    "PF_R_at_0_30": 0.45962686162780964,
+    "win_rate_pct_at_0_30": 33.33333333333333,
+    "max_closed_R_drawdown": 7.115961725704467,
+    "stop_exits": 10,
+    "target_exits": 5,
+    "time_exits": 9,
+    "net_R_at_0_00": -5.07831260354452,
+    "PF_R_at_0_00": 0.5257739623429876,
+    "net_R_at_0_50": -6.883193809710276,
+    "PF_R_at_0_50": 0.4202193252700147,
+    "annual_net_R_at_0_30": {
+      "2016": 0.8624015954166325,
+      "2017": -1.2865847918333975,
+      "2018": -0.2417960741920233,
+      "2019": -0.24573582660923743,
+      "2020": -5.249526230025948
+    }
+  },
+  "validation_2021_2025": {
+    "trades": 28,
+    "net_R_at_0_30": 0.3852489231466044,
+    "PF_R_at_0_30": 1.041883343987665,
+    "win_rate_pct_at_0_30": 53.57142857142857,
+    "max_closed_R_drawdown": 3.025622692503303,
+    "stop_exits": 7,
+    "target_exits": 8,
+    "time_exits": 13,
+    "net_R_at_0_00": 1.342835432285813,
+    "PF_R_at_0_00": 1.1534097201335405,
+    "net_R_at_0_50": -0.2531420829461999,
+    "PF_R_at_0_50": 0.9733386692044922,
+    "annual_net_R_at_0_30": {
+      "2021": -0.5966814664848595,
+      "2022": 0.6353855973102526,
+      "2023": 1.8854057279811438,
+      "2024": -3.025622692503303,
+      "2025": 1.4867617568433715
+    },
+    "bootstrap_at_0_30": {
+      "weeks": 261,
+      "weeks_with_trades": 27,
+      "mean_weekly_net_R": 0.0014760495139716666,
+      "ci95_low": -0.029394943039749443,
+      "ci95_high": 0.031407671094336446,
+      "resamples": 10000,
+      "block_weeks": 4,
+      "seed": 297
+    }
+  },
+  "gates": {
+    "discovery_min_75_trades": false,
+    "discovery_net_R_positive": false,
+    "discovery_PF_R_ge_1_05": false,
+    "discovery_at_least_3_of_5_years_positive": false,
+    "discovery_cost_0_50_net_positive": false,
+    "discovery_cost_0_50_PF_ge_0_90": false,
+    "validation_min_100_trades": false,
+    "validation_net_R_positive": true,
+    "validation_PF_R_ge_1_05": false,
+    "validation_at_least_3_of_5_years_positive": true,
+    "validation_bootstrap_CI_lower_gt_zero": false,
+    "validation_cost_0_50_net_positive": false,
+    "validation_cost_0_50_PF_ge_0_90": true
+  },
+  "strategy_pnl_2026_calculated": false,
+  "funded_challenge_replay": false,
+  "limitations": [
+    "R296 PnL is invalid because it used the static Sunday 00:00 UTC quote block.",
+    "R297 uses the first active Sunday bar and rejects static data inside the trade path.",
+    "Observed historical BID/ASK is not guaranteed funded execution; added USD/oz costs are modeled stresses.",
+    "2021-2025 was used in other XAU research and is not pristine program-level OOS.",
+    "No 2026 results or FundedNext equity-aware two-phase replay was run."
+  ]
+}
