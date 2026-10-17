@@ -168,3 +168,12 @@ R287 uses 4 correlated US index M5 BID-only snapshots, one index trade maximum p
 - No signal block from either direction. Retain only research methods: synchronized session quality audit, frozen per-symbol threshold calculation, deterministic matched-event ablation, fixed-cost stress, block bootstrap.
 - Artifacts: `R288_US_INDEX_INTRADAY_RESIDUAL_FOLLOW_PREREGISTRATION.md`, `R288_FINAL_REPORT.md`, `R288_results_compact.json`, `r288_us_index_intraday_residual_follow.py`, `R288_annual_follow_2bp.csv`.
 - Data limits: BID-only M5; hypothetical 1/2/4 bp costs, heuristic flat-bar rejection; 2022–2025 is contaminated and 2026 is not claimed as a pristine program holdout. No funded challenge replay.
+
+
+## R289 (2026-10-17) — continental Europe cash-open gap continuation: GAGAL
+- Pre-registered Q80 absolute gap threshold per instrument fit only on 2017–2020; one strongest continental index gap/date; enter 09:10 Europe/Berlin, target 1.0 gap-distance, stop 0.75 gap-distance, M5 stop-first ambiguity.
+- Discovery (251 trades) passes numeric gates: PF_R 1.224 at 2 bp, +20.682R; 4 bp PF_R 1.152; 3/4 positive years. Validation 2021 (61 trades) has PF_R 1.128 and +3.088R at 2 bp; 4 bp PF_R 1.057.
+- **GAGAL** only because four-week circular bootstrap validation mean weekly net R CI [-0.1767, +0.2817] crosses zero. The failure gate was preregistered. No 2022+ outcome was calculated; no threshold or target/stop rescue.
+- Matched gap-fade diagnostic is materially worse at 2 bp in discovery (-28.506R, PF_R 0.752) and validation (-10.414R, PF_R 0.664), but this relative comparison is not sufficient to promote continuation.
+- Keep no signal-alpha block. Retain code/process components: complete cash-session screen, frozen calibration split, one event per date, M5 stop-first ambiguity, bootstrap gate. Data is BID-only, transaction costs modeled, EUSIDXEUR coverage is weaker in early years, and no funded equity replay was run.
+- Artifacts: `R289_CONTINENTAL_EUROPE_GAP_CONTINUATION_PREREGISTRATION.md`, `R289_FINAL_REPORT.md`, `R289_results_compact.json`, `r289_continental_europe_gap_continuation.py`, `R289_annual_summary_2bp.csv`, `R289_validation_weekly_bootstrap_2bp.json`, `R289_session_quality_audit_summary.csv`.
