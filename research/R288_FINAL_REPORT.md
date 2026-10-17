@@ -43,3 +43,7 @@ Eligible sessions in the filtered source: USA500 2,409; USATECH 2,421; USA30 2,4
 The source files are BID-only. Results do not model verified ask-side fills, the provider’s actual spread/slippage, contract multipliers, commissions or swaps. This is not a funded challenge simulation; no account-equity path with floating PnL, daily loss and max loss rules was run. The 2022–2025 period has been repeatedly used elsewhere in the project and is contaminated for program-level OOS; 2026 is only a later chronological diagnostic, not claimed as pristine program-level holdout.
 
 **Evolutionary disposition:** retain the synchronized-session data-quality controls, frozen threshold fitting, deterministic event matching and matched-direction ablation as research methods only. Retain neither direction as an edge-backed signal block. The next generation must begin from structurally distinct/evidence-supported components, be preregistered, and optimize the probability/time profile of completing the two funded targets before breach—not PF in isolation.
+
+## Archived row-level ledger
+
+The paired event outcomes are archived as [R288_trade_ledger_outcome_compact.csv.gz](R288_trade_ledger_outcome_compact.csv.gz): 872 selected events, each stored once for the follow-residual candidate and once for the matched fade diagnostic (1,744 rows). The ledger contains gross basis-point returns; the preregistered modeled 1/2/4 bp costs are subtracted consistently by the replay runner.
