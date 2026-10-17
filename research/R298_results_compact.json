@@ -1,0 +1,117 @@
+{
+  "candidate": "R298_XAUUSD_LONDON_ASIA_RANGE_SWEEP_RECLAIM",
+  "verdict": "GAGAL",
+  "preregistration_commit": "fb59fd7c640fa055e32e6d86e8feee2e0d44eb0d",
+  "data_cutoff_utc_exclusive": "2026-01-01T00:00:00Z",
+  "data_quality": {
+    "rows_per_side_source": 947326,
+    "rows_used_through_2025": 877930,
+    "rows_excluded_2026_plus": 69396,
+    "paired_active_rows": 708724,
+    "eligible_asia_range_dates": 2553,
+    "asia_window_dates_audited": 3109,
+    "first_reclaim_signals": 894,
+    "completed_trades": 598,
+    "skips": {
+      "planned_reward_risk_below_1": 261,
+      "stop_not_adverse_of_entry": 23,
+      "midpoint_target_not_favorable": 12
+    },
+    "bid_sha256": "b30eb4864db0777b6df612f3e43ccda9cc59db5ca09974191eabdaca1f6ff575",
+    "ask_sha256": "b9b174a83df70507be4ab0cd556432a0d14fbac2e596e787325bd1f163772fc9"
+  },
+  "costs_usd_per_oz_round_trip": [
+    0,
+    0.1,
+    0.3,
+    0.5
+  ],
+  "periods": {
+    "discovery_2016_2020": {
+      "0.00": {
+        "trades": 313,
+        "net_R": -132.434084,
+        "PF_R": 0.514608,
+        "win_rate_pct": 23.3227,
+        "max_closed_DD_R": 137.6147
+      },
+      "0.10": {
+        "trades": 313,
+        "net_R": -183.586929,
+        "PF_R": 0.421842,
+        "win_rate_pct": 23.3227,
+        "max_closed_DD_R": 187.9281
+      },
+      "0.30": {
+        "trades": 313,
+        "net_R": -285.892619,
+        "PF_R": 0.297497,
+        "win_rate_pct": 23.0032,
+        "max_closed_DD_R": 288.555
+      },
+      "0.50": {
+        "trades": 313,
+        "net_R": -388.198309,
+        "PF_R": 0.218482,
+        "win_rate_pct": 22.3642,
+        "max_closed_DD_R": 389.48
+      }
+    },
+    "validation_2021_2025": {
+      "0.00": {
+        "trades": 285,
+        "net_R": -100.767828,
+        "PF_R": 0.57533,
+        "win_rate_pct": 20.7018,
+        "max_closed_DD_R": 102.7477
+      },
+      "0.10": {
+        "trades": 285,
+        "net_R": -126.822982,
+        "PF_R": 0.510635,
+        "win_rate_pct": 20.7018,
+        "max_closed_DD_R": 128.7798
+      },
+      "0.30": {
+        "trades": 285,
+        "net_R": -178.933288,
+        "PF_R": 0.409273,
+        "win_rate_pct": 20.7018,
+        "max_closed_DD_R": 180.8438
+      },
+      "0.50": {
+        "trades": 285,
+        "net_R": -231.043595,
+        "PF_R": 0.333495,
+        "win_rate_pct": 20.7018,
+        "max_closed_DD_R": 232.9078
+      }
+    }
+  },
+  "validation_bootstrap_at_0_30": {
+    "weeks": 261,
+    "trade_weeks": 179,
+    "mean_weekly_net_R": -0.685568,
+    "ci95_lower": -0.897918,
+    "ci95_upper": -0.47209,
+    "resamples": 10000,
+    "block_length_weeks": 4,
+    "seed": 298
+  },
+  "gates": {
+    "discovery_min_75_trades": true,
+    "discovery_positive_net_R_at_0_30": false,
+    "discovery_PF_R_ge_1_05": false,
+    "discovery_3_of_5_years_positive": false,
+    "discovery_net_positive_and_PF_ge_0_90_at_0_50": false,
+    "validation_min_100_trades": true,
+    "validation_positive_net_R_at_0_30": false,
+    "validation_PF_R_ge_1_05": false,
+    "validation_3_of_5_years_positive": false,
+    "validation_bootstrap_ci_lower_gt_0": false,
+    "validation_net_positive_and_PF_ge_0_90_at_0_50": false
+  },
+  "no_2026_pnl_calculated": true,
+  "no_funded_challenge_replay": true,
+  "promoted_alpha": false
+}
