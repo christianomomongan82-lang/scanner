@@ -104,3 +104,12 @@ Reusable learning: correct R257's implementation failure so it no longer hides p
 - Results: [compact verdict](research/R282_results_compact.json) · [event audit](research/R282_event_audit.csv) · [report](research/R282_FINAL_REPORT.md)
 - The input archive was collected with Dukascopy `-fl`; most Sunday reopening observations were omitted. Only three >=36-hour closures met the literal Friday-to-Sunday/Monday date rule, and none had exact sequential T+10 data. Zero trades were evaluated.
 - Verdict is **invalid test due data**, not evidence for or against the hypothesis. No forward period outcomes calculated and no holdout opened. Retry only with verified BID/ASK M1 data retaining true weekend reopen observations. No Actions workflow launched.
+
+
+## R283 update (2026-10-17) — US index cash-open gap fade: GAGAL
+
+| Block / candidate | Evidence | Disposition |
+|---|---|---|
+| R283 Q80 cash-open gap fade, T+10 entry, prior-close target, 0.75×gap stop | 709 discovery trades, PF 0.748 and -77.90R at modeled 2 bps; 163 validation trades, PF 0.599 and -34.83R. 1/2/4 bps PF: discovery 0.771/0.748/0.705; validation 0.618/0.599/0.563. | **GAGAL.** Both expectancy gates fail; forward 2022–2025 was not opened. Do not retune this exact specification. |
+
+R283 is not evidence that every gap strategy fails; it closes only this preregistered specification. BID-only archives and modeled costs prevent funded promotion regardless. Report and period summary are archived; runner/full ledger still need repository archiving for full reproducibility.
