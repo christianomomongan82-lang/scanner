@@ -651,3 +651,34 @@ At 2 bp, the child lost in both partitions and underperformed both matched contr
 
 ### Evolutionary disposition
 R293's long-tail result remains the stronger historical diagnostic, but it also failed its robustness gate and is not approved for funded use. R294 shows the negative-breadth short mirror was not beneficial on these sampled windows. Do not retune the 25% short cutoff or rerun the same periods as a rescue. Next research generation must move to another economically distinct hypothesis family, reuse only integrity/execution/paired-comparison controls, retain the registered failed signal blocks as failures, and keep 2022+ R294 PnL unopened. All cached inputs are BID-only; short ASK-side fills, real spreads/slippage/commission/swaps, overnight floating equity, margin and FundedNext loss-rule path remain unverified.
+
+
+## Latest research update — R295 GAGAL (2026-10-17 local replay)
+
+**R295: positive breadth + USA500 own-session direction confirmation — GAGAL.** Preregistration preceded outcome calculation. Research artifacts:
+- [Preregistration](research/R295_BREADTH_PLUS_USA500_DIRECTION_CONFIRMATION_PREREGISTRATION.md)
+- [Final report](research/R295_FINAL_REPORT.md)
+- [Compact result JSON](research/R295_results_compact.json)
+- [Local runner](research/r295_breadth_plus_usa500_direction_confirmation.py)
+- [Updated evolutionary block registry](research/EVOLUTIONARY_BLOCK_REGISTRY_20261016.md)
+- [Updated evidence matrix](research/EVIDENCE_MATRIX_20261016.json)
+
+### Frozen hypothesis and data
+
+R295 adds one component to R293's positive-tail long-only breadth stream: USA500's own 09:30 open to 15:45 M5 close return must also be strictly positive. The >=75% positive breadth rule, 15:55 ET entry, next valid USA500 09:30 exit, four M5 BID inputs and 1/2/4 bp costs were unchanged. Four registered checksums passed; session audits covered 5,531 instrument-session rows. PnL was restricted to discovery 2017–2020 and validation 2021.
+
+### Results at modeled 2 bp
+
+| Metric | Discovery candidate | Discovery R293 parent | Validation candidate | Validation R293 parent |
+|---|---:|---:|---:|---:|
+| Trades | 437 | 442 | 119 | 119 |
+| Net bp | +1,253.10 | +1,320.41 | +249.78 | +249.78 |
+| PF | 1.131 | 1.137 | 1.144 | 1.144 |
+
+The added condition removed five discovery trades and zero validation trades. Those five trades had +67.31 bp net and PF 1.692 at 2 bp cost; the added filter discarded a profitable subset. Validation was identical to R293. The weekly-net-bp bootstrap (5,000 circular four-week resamples, seed 295, all 52 Monday-start weeks including zero-trade weeks) gave mean +4.803 bp/week and 95% CI [-5.557, +14.335], which crosses zero. **R295 = GAGAL.**
+
+No funded challenge replay and no post-2021 candidate PnL were run. No alpha block was retained. The correct next decision is to close this breadth micro-mutation family rather than keep adding overlapping filters; R293 remains a research diagnostic, not approved funded strategy. Inputs are BID-only, modeled costs are not verified execution costs, and no overnight floating loss/swap/account-equity path was modeled.
+
+### Next-generation constraint
+
+Do not promote any candidate from R270–R295. Shift to a materially distinct hypothesis family, freeze it before outcomes, use the established data/timestamp/cost controls, and preserve 2022+ R295 results unopened. The objective remains probability and time of completing both funded targets without DLL/MLL breach; PF and trade count are diagnostics only.
