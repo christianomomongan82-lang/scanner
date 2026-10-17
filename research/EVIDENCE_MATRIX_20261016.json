@@ -106,10 +106,10 @@
     {
       "id": "R283_US_index_cash_open_gap_fade",
       "status": "FAILED",
-      "evidence": "Four US index BID-only M5 feeds; per-index Q80 fitted 2017-2020, T+10 fade to prior RTH close, 0.75x-gap stop. At modeled 2bp: discovery 709 trades PF 0.748, net -77.90R; validation 2021 163 trades PF 0.599, net -34.83R. Failed expectancy gates; 2022-2025 not scored."
+      "evidence": "Four US index BID-only M5 feeds; per-index Q80 fit on 2017-2020, T+10 fade to prior RTH close, 0.75x-gap stop. At 2bp: discovery 709 trades PF 0.748, -77.90R; validation 2021 163 trades PF 0.599, -34.83R. Trade-level postmortem: gross PF before modeled costs was only 0.795 discovery / 0.638 validation; target exits 152 vs 237 stops in discovery and 35 vs 72 stops in validation; stop share rose 33.43%→44.17%. Gap-up fades (SHORT) were weaker than gap-down fades in both segments, but both lost. 2022-2025 not scored. Exact 872-row ledger and runner remain local/not yet archived; repo-only reproduction incomplete."
     }
   ],
-  "decision": "No candidate from R270-R282 is promoted for funded challenge. R276 is historical-screen-only, not funded-ready; R277-R281 failed gates; R282 is invalid due inadequate weekend-reopen data, not a strategy alpha verdict. No verified full challenge-equity-path replay.",
+  "decision": "No candidate promoted R270-R283. R283 is failed; trade-level failure mechanism was diagnosed post hoc. No funded-ready strategy. Ledger/runner archival gap remains open.",
   "contamination_notes": {
     "2021-2025": "Repeatedly viewed across previous project experiments; use as exploratory screen only, not clean program-level OOS.",
     "2026_XAUUSD_M5": "Still unopened in R272/R273/R274; do not inspect unless a future preregistered candidate passes all historical gates.",
@@ -121,5 +121,24 @@
     "EURUSD_M1_R282": "Same Dukascopy archive artifact 11959096102 / SHA b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e. Weekly reopening-gap detector yielded only three matching large-gap timestamps, all nontradable 00:00 UTC holiday/data gaps. Exact T+10 timestamp absent at all three. Alpha not tested; no forward results calculated.",
     "EURUSD_weekend_reopen_R282": "Input archive SHA256 b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e was collected with -fl. Weekend reopening is not observable enough for this hypothesis. Do not infer no edge; obtain different source.",
     "R283_US_indices": "BID-only cached M5 archives; round-trip costs modeled at 1/2/4 bps; source provenance and actual CFD spread/commission/slippage/swaps not verified. R283 failed discovery and validation; 2022-2025 outcomes were not calculated."
-  }
+  },
+  "diagnostics": [
+    {
+      "id": "R283_TRADE_LEVEL_POSTMORTEM",
+      "status": "DIAGNOSTIC_COMPLETE_REPRODUCIBILITY_INCOMPLETE",
+      "finding": "Underlying strategy negative before modeled costs; stop hits outnumber target hits, stop frequency worsens in 2021, and gap-up fades are especially weak.",
+      "cost_drag_R_at_2bp": {
+        "discovery": 16.1504,
+        "validation": 4.3097
+      },
+      "caveat": "Post-hoc diagnostic only. Does not imply continuation has edge. Full ledger and exact runner still need repository archival.",
+      "artifacts": [
+        "research/R283_TRADE_LEVEL_DIAGNOSTIC.md",
+        "research/R283_EXIT_DECOMPOSITION.csv",
+        "research/R283_DIRECTION_DECOMPOSITION.csv",
+        "research/R283_INSTRUMENT_YEAR_DECOMPOSITION.csv",
+        "research/R283_DIAGNOSTIC_RESULTS.json"
+      ]
+    }
+  ]
 }
