@@ -232,6 +232,21 @@
         "research/R288_annual_follow_2bp.csv"
       ],
       "caveat": "BID-only M5; modeled costs; repeated-flat filter is heuristic. 2022-2025 is contaminated and 2026 is not claimed pristine at program level. No funded challenge replay. No alpha block retained; methods only."
+    },
+    {
+      "id": "R289_CONTINENTAL_EUROPE_GAP_CONTINUATION",
+      "status": "FAILED_LOCKED_DISCOVERY_VALIDATION_BOOTSTRAP_GATE",
+      "finding": "Discovery 2017-2020 passes all point-estimate gates (251 trades, PF_R 1.2245 and +20.682R at 2 bp; PF_R 1.1517 at 4 bp; 3/4 positive years). Validation 2021 has 61 trades, PF_R 1.1283 and +3.088R at 2 bp, but weekly four-week block-bootstrap CI lower bound is -0.1767R/week (CI [-0.1767,+0.2817]), failing the preregistered lower-bound >0 gate.",
+      "artifacts": [
+        "research/R289_CONTINENTAL_EUROPE_GAP_CONTINUATION_PREREGISTRATION.md",
+        "research/R289_FINAL_REPORT.md",
+        "research/R289_results_compact.json",
+        "research/r289_continental_europe_gap_continuation.py",
+        "research/R289_annual_summary_2bp.csv",
+        "research/R289_validation_weekly_bootstrap_2bp.json",
+        "research/R289_session_quality_audit_summary.csv"
+      ],
+      "caveat": "Post-2021 PnL intentionally not calculated after validation gate failed. Cached M5 BID-only inputs and modeled costs; stop/target sequence approximate; EUSIDX early session data quality weaker; no funded replay. No alpha block retained."
     }
   ]
 }
