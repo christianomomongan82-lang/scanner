@@ -97,9 +97,14 @@
       "id": "R282_EURUSD_weekend_reopening_gap_fade",
       "status": "FAILED_DATA_ELIGIBILITY_ALPHA_UNTESTED",
       "evidence": "Preregistered detector found 4 >=36h gaps in the 2016-2025 archive, only 3 meeting Friday-to-Sunday/Monday weekday rule. All 3 occurred at 00:00 UTC holiday/data-gap timestamps and lacked exact T+10 entry timestamps; 0 trades. This is a data/event coverage failure, not negative expectancy. No 2022-2025 outcomes calculated."
+    },
+    {
+      "id": "R282_EURUSD_weekend_gap_fade",
+      "status": "INVALID_TEST_DATA_INADEQUATE",
+      "evidence": "Not an alpha pass/fail: source collected with -fl omits most Sunday reopening rows. Three qualifying long-closure candidates were found and none had exact T+10 sequential observations. Zero trades evaluated; no 2022-2025 outcomes calculated. Requires verified raw reopening BID/ASK data."
     }
   ],
-  "decision": "No candidate from R270-R282 is promoted for funded challenge. R276 is historical-screen-only and not funded-ready; R277-R281 failed locked gates; R282 failed data/event eligibility so its alpha is untested. Keep execution/data-integrity controls only. No verified full challenge-equity-path replay.",
+  "decision": "No candidate from R270-R282 is promoted for funded challenge. R276 is historical-screen-only, not funded-ready; R277-R281 failed gates; R282 is invalid due inadequate weekend-reopen data, not a strategy alpha verdict. No verified full challenge-equity-path replay.",
   "contamination_notes": {
     "2021-2025": "Repeatedly viewed across previous project experiments; use as exploratory screen only, not clean program-level OOS.",
     "2026_XAUUSD_M5": "Still unopened in R272/R273/R274; do not inspect unless a future preregistered candidate passes all historical gates.",
@@ -108,6 +113,7 @@
     "2026_indices": "Diagnostic only; index data have been repeatedly viewed and are not an untouched program-level holdout.",
     "index_data_costs": "Four cached US index feeds are BID-only; 1/2 bp costs are modeled. Swaps, commissions, actual spread, slippage, contract multipliers and exact funded equity path are not verified.",
     "EURUSD_M1_R281": "Dukascopy raw M1 BID/ASK archive artifact 11959096102, SHA-256 b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e. Source used -fl; 696,795 paired flat candidates removed heuristically. R281 stopped before 2022-2025 forward scoring because validation gate failed; do not tune this family after result.",
-    "EURUSD_M1_R282": "Same Dukascopy archive artifact 11959096102 / SHA b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e. Weekly reopening-gap detector yielded only three matching large-gap timestamps, all nontradable 00:00 UTC holiday/data gaps. Exact T+10 timestamp absent at all three. Alpha not tested; no forward results calculated."
+    "EURUSD_M1_R282": "Same Dukascopy archive artifact 11959096102 / SHA b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e. Weekly reopening-gap detector yielded only three matching large-gap timestamps, all nontradable 00:00 UTC holiday/data gaps. Exact T+10 timestamp absent at all three. Alpha not tested; no forward results calculated.",
+    "EURUSD_weekend_reopen_R282": "Input archive SHA256 b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e was collected with -fl. Weekend reopening is not observable enough for this hypothesis. Do not infer no edge; obtain different source."
   }
 }
