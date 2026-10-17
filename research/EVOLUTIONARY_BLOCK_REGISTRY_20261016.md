@@ -159,3 +159,12 @@ The signal used Q80 1.7307755% fit on 858 discovery windows. Do not tune Q80 or 
 | Matched residual-following parent | Same 745 events: discovery PF 1.044 / +534.47 bp; validation PF 1.253 / +738.80 bp at 2 bp. | Diagnostic only. Direction selection after seeing this side-by-side result introduces selection bias; it needs an independent pre-registered test, and discovery PF misses 1.05. Do not directly promote. |
 
 R287 uses 4 correlated US index M5 BID-only snapshots, one index trade maximum per session, per-symbol Q75 residual magnitude fitted on discovery 2017–2020, and a five-minute manual-entry delay after bar confirmation. 2022–2026 outcomes were not calculated. No funded replay. Artifacts archived: preregistration, report, results JSON, local engine, paired row ledger, and session-quality summary.
+
+
+## R288 (2026-10-17) — cross-index residual follow-through: GAGAL
+- Parent diagnostic: R287. Mutation: follow residual sign instead of fading it, with all other rules frozen. R288 preregistration committed before scoring 2022–2026.
+- At 2 bp modeled cost, follow residual loses in 2022–2025 (718 trades, PF 0.795, -3,389.34 bp) and in later 2026 check (154 trades, PF 0.943, -116.46 bp). At 4 bp PF is 0.721 and 0.807. Bootstrap lower bound is negative.
+- Matched fade is not retained: its exploratory 2022–2025 result turns negative at 4 bp and loses in 2026.
+- No signal block from either direction. Retain only research methods: synchronized session quality audit, frozen per-symbol threshold calculation, deterministic matched-event ablation, fixed-cost stress, block bootstrap.
+- Artifacts: `R288_US_INDEX_INTRADAY_RESIDUAL_FOLLOW_PREREGISTRATION.md`, `R288_FINAL_REPORT.md`, `R288_results_compact.json`, `r288_us_index_intraday_residual_follow.py`, `R288_annual_follow_2bp.csv`.
+- Data limits: BID-only M5; hypothetical 1/2/4 bp costs, heuristic flat-bar rejection; 2022–2025 is contaminated and 2026 is not claimed as a pristine program holdout. No funded challenge replay.
