@@ -1,6 +1,6 @@
 {
   "as_of": "2026-10-17",
-  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R294",
+  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R295",
   "execution_blocks": {
     "quote_side_bid_ask": "reusable implementation control; local smoke-checked; not alpha evidence",
     "preserve_gaps": "reusable data-integrity control; not alpha evidence",
@@ -179,9 +179,21 @@
         "research/r294_usa500_two_sided_breadth_overnight.py"
       ],
       "caveat": "Four M5 BID-only sources; costs modeled at 1/2/4bp, no actual short ASK-side fill, spread/slippage/commission/swap, overnight floating equity or funded challenge replay. No 2022+ PnL calculated. 2017-2021 contaminated; no signal alpha retained."
+    },
+    {
+      "id": "R295_BREADTH_PLUS_USA500_DIRECTION_CONFIRMATION",
+      "status": "FAILED_NO_IMPROVEMENT_OVER_R293",
+      "evidence": "Added condition to R293's >=75% positive cross-index breadth: USA500's own 09:30→15:45 session return must also be positive. Discovery 2017-2020: 437 trades, +1253.10bp / PF 1.131 vs R293 parent 442 trades, +1320.41bp / PF 1.137. Five removed trades had +67.31bp net at 2bp cost (PF 1.692); validation removed zero trades, leaving exactly the same 119-trade stream and +249.78bp / PF 1.144 as R293. Validation 4-week bootstrap mean +4.803bp/week, CI95 [-5.557,+14.335]; lower bound crosses zero.",
+      "artifacts": [
+        "research/R295_BREADTH_PLUS_USA500_DIRECTION_CONFIRMATION_PREREGISTRATION.md",
+        "research/R295_FINAL_REPORT.md",
+        "research/R295_results_compact.json",
+        "research/r295_breadth_plus_usa500_direction_confirmation.py"
+      ],
+      "caveat": "BID-only M5 with modeled costs; no spread/ASK/slippage/commission/swap verification or funded equity path. No strategy PnL beyond 2021; historical validation contaminated. Mutation is redundant, adds no validated alpha, and must not be tuned on the same dates."
     }
   ],
-  "decision": "No candidate promoted R270-R294. R293 positive-tail long-only improved relative PF and closed-PnL drawdown but failed its bootstrap gate. R294's preregistered symmetric short-tail mutation was net negative in discovery and validation and materially underperformed both R293 long-only and the unconditional long baseline. No alpha block from R270-R294 is promoted; no R294 2022+ PnL or funded replay was run.",
+  "decision": "No candidate promoted R270-R295. R293's positive-breadth overnight long and the R295 own-USA500-direction confirmation both fail validation-bootstrap promotion gates; R295 discarded a profitable subset in discovery and removed no validation events. R294's symmetric short tail was strongly negative. No signal-alpha block is promoted; no R295 PnL after 2021 or funded replay was run.",
   "contamination_notes": {
     "2021-2025": "Repeatedly viewed across previous project experiments; use as exploratory screen only, not clean program-level OOS.",
     "2026_XAUUSD_M5": "Still unopened in R272/R273/R274; do not inspect unless a future preregistered candidate passes all historical gates.",
@@ -198,7 +210,8 @@
     "R286_US500_3SESSION_FADE": "US500 M5 BID-only artifact 11709864394. R286 faded the top-quintile three-active-session absolute move; same-next-session intraday entry/exit. Candidate failed discovery and validation at modeled 2 bp; no 2022-2025 or 2026 PnL computed, no funded replay. Costs not actual observed execution costs.",
     "R287_US_INDEX_INTRADAY_RESIDUAL": "Four R205 US index M5 BID-only archives. Per-symbol Q75 residual magnitude fit on 2017-2020; entry 13:05 ET, flat at 15:55 open. R287 fade failed; 2022-2025 and 2026 PnL not calculated. Parent follows residual and was positive across discovery aggregate/2021 validation, but direction was only diagnostic within this study; selection bias prohibits promotion. Cost stress is modeled only.",
     "R293": "2022+ candidate PnL was not calculated because locked 2017-2021 gate failed; 2017-2021 is contaminated by related research.",
-    "R294": "No candidate PnL after 2021 was calculated because preregistered discovery/validation gates failed; 2017-2021 contaminated by related studies."
+    "R294": "No candidate PnL after 2021 was calculated because preregistered discovery/validation gates failed; 2017-2021 contaminated by related studies.",
+    "R295": "No post-2021 PnL calculated; candidate failed the preregistered validation bootstrap gate. 2017-2021 is research-contaminated."
   },
   "diagnostics": [
     {
