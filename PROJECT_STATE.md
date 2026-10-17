@@ -572,3 +572,12 @@ Archived diagnostic artifacts:
 - Validation 2021: 74 trades; gross PF_R 1.228 / +8.547R, but after modeled 2 bp PF_R 0.178 / −173.679R. Four-week block-bootstrap mean −3.277R/week, 95% CI [−9.525, +0.040], lower bound fails. One trade had a 0.02-point stop and a huge modeled R-cost burden, showing the locked stop definition is not operationally robust.
 - **Binary verdict: GAGAL.** Only trade-count gates passed. No PnL calculated for 2022–2026; do not add a minimum stop filter and retest the same windows. No signal alpha block retained.
 - Inputs: existing R205 cached M5 BID-only USA500 and DEUIDXEUR. Costs are modeled basis-point stresses, not observed broker costs. No actual ask-side execution or FundedNext DLL/MLL equity-path replay. The 2021 validation window is contaminated by other research.
+
+
+## R292 — USA500 overnight-only long carry — GAGAL (2026-10-17)
+- [Preregistration](research/R292_USA500_OVERNIGHT_CARRY_PREREGISTRATION.md) · [Final report](research/R292_FINAL_REPORT.md) · [compact JSON](research/R292_results_compact.json) · [replay runner](research/r292_usa500_overnight_carry.py) · [annual table](research/R292_annual_summary_2bp.csv) · [validation bootstrap](research/R292_validation_weekly_bootstrap_2bp.json).
+- Frozen rule: buy at the close proxy of the eligible USA500 M5 bar starting 15:55 New York, exit at the next eligible RTH session 09:30 open; constant-notional long exposure, no SL/TP, no direction/day filter, no overnight segment other than close-to-next-open. 1/2/4 bp round-trip costs are modeled sensitivities.
+- Discovery 2017–2020: 978 trades; at 2 bp PF in net-bp outcomes 1.094 and +1,995.48 bp; PF at 4 bp 1.002. Four of four years positive on 2 bp net, but 2020 closed-trade drawdown reached 38.57% of fixed notional.
+- Validation 2021: 250 trades; PF 1.186 and +742.22 bp at 2 bp, PF 1.058 at 4 bp. Four-week circular weekly-net-bp bootstrap mean +14.00 bp/week, 95% CI [-2.24, +30.11] bp/week; lower bound crosses zero.
+- **Binary verdict GAGAL** because the preregistered validation bootstrap gate failed. Do not calculate 2022–2026 PnL or tune this same rule on 2017–2021. This is a potentially informative overnight-segment effect but not a promoted alpha block.
+- Limits: cached USA500 M5 BID-only data, modeled costs, no measured spread/slippage/swap, no overnight floating-equity path or FundedNext DLL/MLL replay. Fixed-notional cumulative PnL is not a leveraged account/challenge simulation.
