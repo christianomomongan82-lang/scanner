@@ -1,0 +1,169 @@
+{
+  "candidate_id": "R286_US500_3SESSION_OVEREXTENSION_FADE",
+  "verdict": "GAGAL",
+  "input": {
+    "csv_sha256": "df2a5edfa49cb15f8bcf5b13577e95907a0f0c54d02c7feed8bdbb7e3b6c49ee",
+    "rows": 886206,
+    "first_utc": "2016-01-04T00:00:00+00:00",
+    "last_utc": "2026-10-09T20:10:00+00:00",
+    "artifact_id": 11709864394,
+    "timeframe": "M5 BID-only",
+    "timezone": "America/New_York"
+  },
+  "rule": {
+    "signal": "Three consecutive active-session close-to-close move; fade if absolute value >= discovery Q80 threshold",
+    "threshold_fit_windows": 858,
+    "q80_absolute_three_session_return_pct": 1.730775503277928,
+    "direction": "SHORT after positive extension, LONG after negative extension",
+    "entry": "Next active session, 09:40 ET M5 open",
+    "exit": "Same session, 15:55 ET M5 close",
+    "modeled_round_trip_cost_bps": [
+      1,
+      2,
+      4
+    ],
+    "primary_cost_bps": 2,
+    "forward_2022_2025_calculated": false,
+    "2026_calculated": false,
+    "funded_replay": false
+  },
+  "quality": {
+    "active_rth_sessions": 2777,
+    "quality_eligible_sessions": 2659,
+    "signals_skipped_invalid_entry": 7
+  },
+  "metrics": {
+    "discovery_2017_2020": {
+      "candidate": {
+        "1bp": {
+          "trades": 165,
+          "pf": 1.010477844175629,
+          "net_bps": 77.20803378181176,
+          "max_drawdown_bps": 1927.9735775241204
+        },
+        "2bp": {
+          "trades": 165,
+          "pf": 0.988213778259237,
+          "net_bps": -87.79196621818824,
+          "max_drawdown_bps": 1994.9735775241204
+        },
+        "4bp": {
+          "trades": 165,
+          "pf": 0.9451021345438654,
+          "net_bps": -417.79196621818824,
+          "max_drawdown_bps": 2140.5850305206
+        }
+      },
+      "matched_parent": {
+        "1bp": {
+          "trades": 165,
+          "pf": 0.9465506683946427,
+          "net_bps": -407.20803378181176,
+          "max_drawdown_bps": 2068.8397429379593
+        },
+        "2bp": {
+          "trades": 165,
+          "pf": 0.9257577265718131,
+          "net_bps": -572.2080337818118,
+          "max_drawdown_bps": 2140.8397429379593
+        },
+        "4bp": {
+          "trades": 165,
+          "pf": 0.8856097282682183,
+          "net_bps": -902.2080337818118,
+          "max_drawdown_bps": 2284.8397429379597
+        }
+      }
+    },
+    "validation_2021": {
+      "candidate": {
+        "1bp": {
+          "trades": 47,
+          "pf": 1.027974175764977,
+          "net_bps": 31.748394791906534,
+          "max_drawdown_bps": 488.6174363799077
+        },
+        "2bp": {
+          "trades": 47,
+          "pf": 0.9868929236640528,
+          "net_bps": -15.251605208093466,
+          "max_drawdown_bps": 506.6174363799077
+        },
+        "4bp": {
+          "trades": 47,
+          "pf": 0.9106922183562065,
+          "net_bps": -109.2516052080935,
+          "max_drawdown_bps": 542.6174363799076
+        }
+      },
+      "matched_parent": {
+        "1bp": {
+          "trades": 47,
+          "pf": 0.8957223477560771,
+          "net_bps": -125.74839479190652,
+          "max_drawdown_bps": 625.4249098160233
+        },
+        "2bp": {
+          "trades": 47,
+          "pf": 0.8590844033010239,
+          "net_bps": -172.74839479190652,
+          "max_drawdown_bps": 641.4249098160233
+        },
+        "4bp": {
+          "trades": 47,
+          "pf": 0.7896100913418412,
+          "net_bps": -266.74839479190655,
+          "max_drawdown_bps": 673.4249098160233
+        }
+      }
+    }
+  },
+  "candidate_annual_at_2bp": {
+    "2017": {
+      "trades": 1,
+      "pf": null,
+      "net_bps": 15.953321364452268
+    },
+    "2018": {
+      "trades": 51,
+      "pf": 0.591750759905758,
+      "net_bps": -1315.070538245121
+    },
+    "2019": {
+      "trades": 35,
+      "pf": 1.1314547233148446,
+      "net_bps": 95.69742019128087
+    },
+    "2020": {
+      "trades": 78,
+      "pf": 1.3187997573651973,
+      "net_bps": 1115.627830471199
+    },
+    "2021": {
+      "trades": 47,
+      "pf": 0.9868929236640528,
+      "net_bps": -15.251605208093466
+    }
+  },
+  "gates": {
+    "discovery_count_ge_150": true,
+    "discovery_pf_2bp_ge_1_05": false,
+    "discovery_net_positive_2bp": false,
+    "discovery_positive_years_ge_3_of_4": true,
+    "validation_count_ge_45": true,
+    "validation_pf_2bp_ge_1_00": false,
+    "validation_net_positive_2bp": false,
+    "discovery_pf_4bp_ge_0_90": true,
+    "validation_pf_4bp_ge_0_90": true
+  },
+  "failure_reasons": [
+    "Discovery PF at 2 bp is 0.988 and net return is -87.79 bp",
+    "Validation PF at 2 bp is 0.987 and net return is -15.25 bp"
+  ],
+  "limitations": [
+    "BID-only; no observed spread or ASK-side fills",
+    "Costs are modeled assumptions, not verified CFD/broker/funded costs",
+    "2022-2025 and 2026 outcomes were not calculated or inspected",
+    "No funded challenge replay"
+  ]
+}
