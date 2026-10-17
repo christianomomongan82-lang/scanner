@@ -122,3 +122,12 @@ R283 US-index Q80 cash-open gap fade is **FAILED** and contributes no retained s
 Detailed evidence: `research/R283_TRADE_LEVEL_DIAGNOSTIC.md`, `research/R283_EXIT_DECOMPOSITION.csv`, `research/R283_DIRECTION_DECOMPOSITION.csv`, `research/R283_INSTRUMENT_YEAR_DECOMPOSITION.csv`, and `research/R283_DIAGNOSTIC_RESULTS.json`.
 
 Persistence issue: full R283 ledger and runner still have not been committed to GitHub; repository-only reproduction is incomplete.
+
+
+## R284 update (2026-10-17) — late-morning index continuation: FAILED
+
+| Candidate block | Evidence | Disposition |
+|---|---|---|
+| R284 one-per-day strongest normalized 10:00–11:55 directional move; child gate score >= 1.0; T+10 entry; 1.0× range stop/1.5R target | Child discovery 380 trades / PF 0.864 / -13.108R at 2 bp; 0/4 discovery years positive; validation 114 / PF 1.066 / +1.326R; discovery PF at 4 bp 0.797. Matched parent was negative as well. | **GAGAL.** Do not tune threshold, reverse direction or change time window after results. No signal block retained. |
+
+Reusable controls remain data/time integrity, exact phone-delay entry, one concurrent index position, gap-aware stop fill, same-bar stop-first, and force-flat at 15:55 bar open. These are execution controls, not alpha. The BID-only cost model and heuristic flat-bar filter remain limitations. R284 did not open 2022–2026 and did not run funded replay. Exact Python runner and row-level ledger still need to be archived for repository-only reproducibility.
