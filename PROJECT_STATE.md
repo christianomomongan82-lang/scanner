@@ -531,3 +531,17 @@ Archived diagnostic artifacts:
 - Matched parent direction (following rather than fading the same residual) did better: discovery PF 1.044 / +534.47 bp and validation PF 1.253 / +738.80 bp at 2 bp. This is a diagnostic finding, not an approved replacement: direction was observed to outperform inside the same study, discovery PF was below 1.05, and using it as a chosen strategy creates selection bias.
 - 2022–2025 and 2026 PnL outcomes were not calculated for R287; no funded challenge replay and no GitHub Actions backtest workflow were run. BID-only prices and modeled costs do not verify actual CFD execution or DLL/MLL.
 - Row-level paired candidate/parent ledger and symbol-level source quality summary are now archived. The failed fade signal is not retained as an alpha block; reusable elements are cross-sectional residual calculation, synchronized event matching, data-quality controls and matched-direction ablation as research methods, not a signal.
+
+
+## Latest research update — R288 cross-index residual follow-through — GAGAL (2026-10-17)
+
+- Pre-registration locked before outcome calculation: [R288 preregistration](research/R288_US_INDEX_INTRADAY_RESIDUAL_FOLLOW_PREREGISTRATION.md), commit `5cf412ad6d335d4c8f651750cd312804ef9a0c61`.
+- [Final report](research/R288_FINAL_REPORT.md) · [compact machine results](research/R288_results_compact.json) · [exact local replay runner](research/r288_us_index_intraday_residual_follow.py) · [annual table](research/R288_annual_follow_2bp.csv).
+- Inputs are R205 M5 BID-only cached assets from run 38160487617: USA500 artifact 11709864394, USATECH 11710370389, USA30 11710730507, USSC2000 11710111254. Raw source artifacts have their existing expiry; ZIP and extracted CSV SHA-256 values are recorded in the runner/results JSON. Source latest UTC: 2026-10-09 20:10.
+- Locked method: 10:00 ET open to 12:55 ET close signal return minus same-date median across >=3 eligible symbols; per-symbol Q75 absolute residual from eligible 2017–2020 data only; one top normalized event/date (score>=1); follow residual; enter 13:05 ET open and exit 15:55 ET open. PnL is calculated only for 2022–2026, not 2017–2021.
+- At modeled 2 bp cost, follow candidate 2022–2025: 718 trades, PF 0.795, net -3,389.34 bp; 2026: 154 trades, PF 0.943, net -116.46 bp. 4-bp PF is 0.721 / 0.807, respectively. All gates except trade-count gates failed.
+- The matched fade stream is only a same-event diagnostic: 2022–2025 PF 1.035 / +517.34 bp at 2 bp, but PF 0.940 / -918.66 bp at 4 bp; 2026 loses at all cost levels. Do not promote either direction.
+- Four-week circular bootstrap of the follow candidate’s 2022–2025 weekly net at 2 bp: mean -16.22 bp/week, 95% CI [-32.80, -0.30] (209 weeks, 5,000 replicates, seed 288).
+- Binary verdict: **GAGAL**. Do not adjust thresholds/direction/timing using these outcomes. The 2022–2025 window is project-contaminated; 2026 is a later chronological check, not claimed as a pristine program-level holdout. No funded equity path was run.
+- Execution/data caveats: M5 BID-only data, modeled rather than observed transaction costs, heuristic repeated-flat exclusion, no verified CFD contract multipliers/commissions/swaps, no ask-side fill reconstruction, and no DLL/MLL challenge replay.
+- Reusable methodological blocks only: synchronized eligible-session construction, frozen threshold fitting, deterministic one-event-per-session selection, matched same-event direction ablation, cost-stress/weekly-bootstrap reporting. No positive alpha block is retained from R288.
