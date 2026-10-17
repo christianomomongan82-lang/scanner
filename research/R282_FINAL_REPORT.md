@@ -1,30 +1,27 @@
 # R282 — EURUSD weekend-reopening gap fade
 
-**Binary verdict: GAGAL — data/event coverage gate; alpha was not tested.** The preregistered event detector found only three timestamp gaps matching its Friday-to-Sunday/Monday definition in a decade. All three occur at 00:00 UTC on dates that are holiday/data-gap artifacts rather than the normal Sunday FX reopening, and all three lack the exact +10-minute timestamp required for entry. No trade opened. Per the preregistration, the run stopped before inspecting 2022–2025 outcomes.
+**Verdict: INVALID TEST / DATA INADEQUATE — not evidence that gap-fading has or lacks alpha. No trades were evaluated.**
 
-## What was tested
-The locked hypothesis was to fade a weekly reopening gap toward the previous Friday executable close, enter exactly ten minutes after reopening, set a stop from the first ten-minute range plus 0.5 times the gap, and exit at target, stop, or 48-hour timeout. Costs were registered at +0.5/+1/+2 additional pips beyond observed BID/ASK.
+## What happened
+The locked event detector found only three candidate long closures in nearly ten years, and all three failed the exact T+10-minute data-continuity requirement. The source collector used Dukascopy's `-fl` option; the archive's synthetic/flat-row removal is not merely a small cleaning step here. It has erased most of the opening-period observations required to identify Sunday reopening and execute a ten-minute delayed entry. As a result, this archive cannot validly test the preregistered weekly-reopening hypothesis.
 
-## Data and coverage findings
-- Input: Dukascopy EURUSD M1 BID/ASK data-only archive from GitHub artifact 11959096102.
-- Archive SHA-256: `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e` (matched expected checksum).
-- Requested date range: 2016-01-01 inclusive through 2026-01-01 exclusive.
-- After timestamp alignment, OHLC checks, and the preregistered paired-flat heuristic: 3,718,698 paired rows; 696,795 paired flat candidates removed. The source collector used `-fl`; the paired-flat filter is heuristic.
-- In the filtered data, only four adjacent-timestamp gaps are >=36 hours. Three match the weekday condition, and all three lack an exact +10-minute entry timestamp. The event audit is archived separately.
-- The candidate gaps are 2017-12-29 21:59 -> 2018-01-01 00:00 UTC; 2020-12-25 07:59 -> 2020-12-27 00:00 UTC; and 2023-12-29 21:59 -> 2024-01-01 00:00 UTC. These are not reliable weekly market-reopening event timestamps for the locked entry model. The fourth large gap, 2020-12-31 21:59 -> 2021-01-03 00:00 UTC, fails the previous-Friday weekday condition.
+## Data audit
+- Input archive SHA-256: `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`.
+- Paired M1 rows after heuristic removal: 3,718,698.
+- Detected >=36-hour gaps meeting the literal Friday-to-Sunday/Monday day-of-week rule: 3.
+- Tradable signals after exact T+10 sequence requirement: 0.
+- Closed trades: 0. PF, net pips and drawdown are **undefined**, not zero-edge metrics.
+- Inspection of raw timestamps shows long closures often resume at Monday 00:00 UTC (e.g. 2017-12-29 21:59 to 2018-01-01 00:00) rather than retaining the Sunday reopen rows. This matches the known `-fl` source limitation.
 
-## Results and decision
-- Eligible events: 3; events with exact T+10 minute entry: 0; closed trades: 0.
-- Discovery gates: fail (0/100 trades); validation gates: fail (0/30 trades).
-- No PF is reportable with zero trades. This is **not evidence that weekend gap fading has negative expectancy**; the test never obtained valid entries.
-- No 2022–2025 candidate outcomes were calculated, no forward data were opened for this signal, and no funded challenge replay was run.
-
-## Learning retained
-This specific event-detection + data/entry execution rule is invalid on the current Dukascopy archive. The dataset does not preserve enough valid reopening timestamps for this hypothesis under a strict exact-minute-delay rule. Do not fix this by relaxing the T+10 gate after seeing zero entries or by pretending the midnight timestamps are weekly opens. A future weekend-gap study would require a separately preregistered, verifiably session-aware source or event definition. **R282 is closed as a data-eligibility failure, not an alpha failure.**
-
-## Reproducibility
-- Preregistration: `research/R282_EURUSD_WEEKEND_GAP_FADE_PREREGISTRATION.md`
-- Runner: `research/r282_eurusd_weekend_gap_fade.py`
-- Machine-readable output: `research/R282_results.json`
-- Event-coverage audit: `research/R282_event_coverage_audit.csv`
+## Decision
+- Stop R282. Do not loosen the event rule or substitute Monday reopening for Sunday after observing this failure.
+- Do not claim weekend-gap fading is disproven; the data cannot answer the question.
+- No 2022–2025 strategy outcomes were calculated; no holdout was opened; no candidate was selected.
+- A future retry requires an independently obtained, verified EURUSD BID/ASK M1 source that retains genuine weekend-reopen observations and supports exact delayed entry. The current archive is unsuitable.
 - No GitHub Actions backtest workflow was created or dispatched.
+
+## Artifacts
+- Preregistration: `research/R282_EURUSD_WEEKEND_GAP_FADE_PREREGISTRATION.md`
+- Runner/audit: `research/r282_eurusd_weekend_gap_fade.py`
+- Results: `research/R282_results_compact.json`
+- Event audit: `research/R282_event_audit.csv`
