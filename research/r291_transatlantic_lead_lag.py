@@ -120,7 +120,7 @@ def main():
     pd.DataFrame(skipped).to_csv(a.out/"R291_skipped_signals.csv",index=False)
     d=ledger[ledger.date.between("2017-01-01","2020-12-31")].copy();v=ledger[ledger.date.between("2021-01-01","2021-12-31")].copy()
     calr=ledger.gross_r.to_numpy(float)
-    result={"id":"R291_TRANSATLANTIC_LEAD_LAG","verdict":None,"threshold_q75_abs_US500_RTH_return":threshold,"threshold_calibration_sessions":int(len(cal),"source":{"USA500_SHA256":HASH["USA500"],"DEU_SHA256":HASH["DEU"],"USA500_eligible_sessions":len(us),"DEU_eligible_sessions":len(deu),"prices":"BID-only M5; costs modeled, not observed"},"gross":{"discovery_2017_2020":{"trades":len(d),"pf_r":pf(d.gross_r),"net_r":float(d.gross_r.sum())},"validation_2021":{"trades":len(v),"pf_r":pf(v.gross_r),"net_r":float(v.gross_r.sum())}},"periods":{}}
+    result={"id":"R291_TRANSATLANTIC_LEAD_LAG","verdict":None,"threshold_q75_abs_US500_RTH_return":threshold,"threshold_calibration_sessions":int(len(cal)),"source":{"USA500_SHA256":HASH["USA500"],"DEU_SHA256":HASH["DEU"],"USA500_eligible_sessions":len(us),"DEU_eligible_sessions":len(deu),"prices":"BID-only M5; costs modeled, not observed"},"gross":{"discovery_2017_2020":{"trades":len(d),"pf_r":pf(d.gross_r),"net_r":float(d.gross_r.sum())},"validation_2021":{"trades":len(v),"pf_r":pf(v.gross_r),"net_r":float(v.gross_r.sum())}},"periods":{}}
     for name,x in [("discovery_2017_2020",d),("validation_2021",v)]:
         result["periods"][name]={f"{c}bp":summ(x,c) for c in COSTS}
         if name.startswith("discovery"):result["periods"][name]["annual_2bp"]={str(y):summ(x[x.year==y],2) for y in range(2017,2021)}
