@@ -140,3 +140,12 @@ Reusable controls remain data/time integrity, exact phone-delay entry, one concu
 | First three / last two active US500 RTH sessions each month; LONG from 09:40 ET to 15:55 ET | At 2 bp: discovery 226 trades / PF 1.130 / +785.76 bp, but only 1/4 discovery years positive; 2021 validation 58 trades / PF 0.632 / -669.02 bp. Parent all-session long in 2021 was +539.74 bp. | **GAGAL.** Discovery total is dominated by 2020 and the 2021 validation result reverses sharply. Do not alter the calendar window/direction after outcome. |
 
 Only the calendar-seasonality hypothesis was tested; no 2022–2026 strategy outcomes were calculated. Reusable artifacts: `research/r285_us500_tom_intraday.py`, `research/R285_candidate_ledger_2bp.csv`, and `research/R285_selected_session_skips.csv`. Runner was rerun from the exact extracted CSV and matched candidate/parent aggregate metrics at 1/2/4 bp. Source remains M5 BID-only and cost assumptions are not verified executable costs. No signal block retained.
+
+
+## R286 update (2026-10-17) — US500 three-session overextension fade: FAILED
+
+| Candidate | Evidence | Disposition |
+|---|---|---|
+| Fade the top-quintile absolute three-active-session return; next-session 09:40–15:55 ET intraday holding | At 2 bp: discovery 165 trades / PF 0.988 / -87.79 bp; validation 47 / PF 0.987 / -15.25 bp. Matched continuation parent also lost: -572.21 bp discovery and -172.75 bp validation. | **GAGAL.** Relative loss reduction against a weaker parent is not a positive edge; no signal block retained. |
+
+The signal used Q80 1.7307755% fit on 858 discovery windows. Do not tune Q80 or change direction/time after results. 2022–2026 results were not calculated. Source is M5 BID-only with modeled 1/2/4 bp costs, and no funded replay was run. Artifacts archived: `R286_FINAL_REPORT.md`, `R286_results_compact.json`, `r286_us500_3session_fade.py`, candidate and matched-parent ledgers, and `R286_skipped_signals.csv`.
