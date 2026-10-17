@@ -1,6 +1,6 @@
 {
   "as_of": "2026-10-17",
-  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R292",
+  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R293",
   "execution_blocks": {
     "quote_side_bid_ask": "reusable implementation control; local smoke-checked; not alpha evidence",
     "preserve_gaps": "reusable data-integrity control; not alpha evidence",
@@ -155,9 +155,21 @@
         "research/R292_validation_weekly_bootstrap_2bp.json"
       ],
       "caveat": "Costs are modeled basis-point sensitivities; BID-only M5 does not certify executable entry/exit. No overnight floating DD, swaps, or funded challenge equity replay. Rule failed its locked bootstrap gate; no 2022+ candidate PnL and no alpha block retained."
+    },
+    {
+      "id": "R293_USA500_OVERNIGHT_BREADTH_FILTER",
+      "status": "FAILED_VALIDATION_BOOTSTRAP",
+      "evidence": "Locked child of R292, adding >=75% positive closing breadth across >=3 quality-valid US index CFDs. At modeled 2bp: discovery 2017-2020 442 trades, PF 1.137, +1320.41bp; validation 2021 119 trades, PF 1.144, +249.78bp. Candidate improves PF vs unconditional long parent but yields less aggregate net bp and fewer trades. Validation 4-week bootstrap (52 weeks incl zero weeks, 5000 circular resamples, seed 293) mean +4.803bp/week, 95% CI [-5.548,+14.232], lower bound crosses zero. Locked gate fails.",
+      "artifacts": [
+        "research/R293_USA500_OVERNIGHT_BREADTH_FILTER_PREREGISTRATION.md",
+        "research/R293_FINAL_REPORT.md",
+        "research/R293_results_compact.json",
+        "research/r293_usa500_overnight_breadth_filter.py"
+      ],
+      "caveat": "Four cached index M5 inputs are BID-only, with modeled 1/2/4bp costs. No 2022+ strategy PnL, no FundedNext equity-path replay, and no signal alpha retained. 2017-2021 windows are research-contaminated; no executable ASK/spread/slippage/swap/overnight floating-loss verification."
     }
   ],
-  "decision": "No candidate promoted R270-R292. R291 and R292 failed their locked validation gates. R292 overnight carry has positive point estimates but an inconclusive validation weekly bootstrap and large discovery fixed-notional drawdown; no funded-ready strategy.",
+  "decision": "No candidate promoted R270-R293. R293 improved relative PF and discovery fixed-notional closed-PnL drawdown versus its unconditional overnight parent but had lower aggregate return and failed the locked validation bootstrap lower-bound gate. No signal alpha block is retained; no 2022+ R293 PnL or funded challenge replay was run.",
   "contamination_notes": {
     "2021-2025": "Repeatedly viewed across previous project experiments; use as exploratory screen only, not clean program-level OOS.",
     "2026_XAUUSD_M5": "Still unopened in R272/R273/R274; do not inspect unless a future preregistered candidate passes all historical gates.",
@@ -172,7 +184,8 @@
     "R284_US_indices": "Late-morning 10:00-11:55 continuation tested on four M5 BID-only cached R205 artifacts. Costs 1/2/4 bp are modeled; flat-row screening is heuristic. R284 failed discovery gates; no 2022-2025 or 2026 outcomes computed. Exact runner/row ledger not yet archived.",
     "R285_US500_TOM": "Calendar-seasonality LONG strategy on US500 M5 BID-only artifact 11709864394. Candidate rule first 3 and last 2 observed active RTH sessions each month, 09:40-15:55 ET, modeled 1/2/4 bp costs. R285 failed year-stability and validation gates; no 2022-2025 or 2026 PnL outcomes calculated.",
     "R286_US500_3SESSION_FADE": "US500 M5 BID-only artifact 11709864394. R286 faded the top-quintile three-active-session absolute move; same-next-session intraday entry/exit. Candidate failed discovery and validation at modeled 2 bp; no 2022-2025 or 2026 PnL computed, no funded replay. Costs not actual observed execution costs.",
-    "R287_US_INDEX_INTRADAY_RESIDUAL": "Four R205 US index M5 BID-only archives. Per-symbol Q75 residual magnitude fit on 2017-2020; entry 13:05 ET, flat at 15:55 open. R287 fade failed; 2022-2025 and 2026 PnL not calculated. Parent follows residual and was positive across discovery aggregate/2021 validation, but direction was only diagnostic within this study; selection bias prohibits promotion. Cost stress is modeled only."
+    "R287_US_INDEX_INTRADAY_RESIDUAL": "Four R205 US index M5 BID-only archives. Per-symbol Q75 residual magnitude fit on 2017-2020; entry 13:05 ET, flat at 15:55 open. R287 fade failed; 2022-2025 and 2026 PnL not calculated. Parent follows residual and was positive across discovery aggregate/2021 validation, but direction was only diagnostic within this study; selection bias prohibits promotion. Cost stress is modeled only.",
+    "R293": "2022+ candidate PnL was not calculated because locked 2017-2021 gate failed; 2017-2021 is contaminated by related research."
   },
   "diagnostics": [
     {
