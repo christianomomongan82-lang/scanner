@@ -113,3 +113,12 @@ Reusable learning: correct R257's implementation failure so it no longer hides p
 | R283 Q80 cash-open gap fade, T+10 entry, prior-close target, 0.75×gap stop | 709 discovery trades, PF 0.748 and -77.90R at modeled 2 bps; 163 validation trades, PF 0.599 and -34.83R. 1/2/4 bps PF: discovery 0.771/0.748/0.705; validation 0.618/0.599/0.563. | **GAGAL.** Both expectancy gates fail; forward 2022–2025 was not opened. Do not retune this exact specification. |
 
 R283 is not evidence that every gap strategy fails; it closes only this preregistered specification. BID-only archives and modeled costs prevent funded promotion regardless. Report and period summary are archived; runner/full ledger still need repository archiving for full reproducibility.
+
+
+## R283 postmortem (2026-10-17; diagnostic, not an alpha block)
+
+R283 US-index Q80 cash-open gap fade is **FAILED** and contributes no retained signal block. The local 872-trade ledger shows negative expectancy before modeled cost (gross PF 0.795 discovery; 0.638 validation). Target exits were 152 vs 237 stops in discovery, and 35 vs 72 stops in 2021 validation. Stop share increased from 33.43% to 44.17% while target share held around 21%. Gap-up fades (short positions) were materially worse than gap-down fades, but neither direction was profitable. Costs are not the root cause. This diagnostic does **not** establish that a gap-continuation strategy works; any continuation test requires a new frozen rule set. Do not tune R283.
+
+Detailed evidence: `research/R283_TRADE_LEVEL_DIAGNOSTIC.md`, `research/R283_EXIT_DECOMPOSITION.csv`, `research/R283_DIRECTION_DECOMPOSITION.csv`, `research/R283_INSTRUMENT_YEAR_DECOMPOSITION.csv`, and `research/R283_DIAGNOSTIC_RESULTS.json`.
+
+Persistence issue: full R283 ledger and runner still have not been committed to GitHub; repository-only reproduction is incomplete.
