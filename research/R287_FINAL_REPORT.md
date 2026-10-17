@@ -75,8 +75,7 @@ This is useful directional evidence: on this preregistered event stream, followi
 - Preregistration: [R287 locked hypothesis](R287_US_INDEX_INTRADAY_RESIDUAL_REVERSION_PREREGISTRATION.md)
 - Local replay engine: [r287_intraday_residual_reversion.py](r287_intraday_residual_reversion.py)
 - Machine-readable metrics: [R287 compact results](R287_results_compact.json)
-- Candidate trade ledger: [R287 candidate ledger](R287_candidate_ledger_2017_2021.csv)
-- Matched parent ledger: [R287 parent ledger](R287_matched_parent_ledger_2017_2021.csv)
-- Source quality audit: [R287 session-quality audit](R287_session_quality_audit.csv)
+- Paired candidate/parent row-level ledger (745 matched events): [R287 paired ledger](R287_paired_ledger_2017_2021.csv)
+- Source coverage and exclusions summary: [R287 session-quality summary](R287_session_quality_summary.csv)
 
 All calculations ran locally in Python on GitHub-sourced snapshots. The primary 1/2/4 bp values are modeled cost stresses, not observed spreads or verified broker fees. This signal screen has no provider-rule-aware account equity simulation. No GitHub Actions backtest workflow was created or dispatched.
