@@ -581,3 +581,40 @@ Archived diagnostic artifacts:
 - Validation 2021: 250 trades; PF 1.186 and +742.22 bp at 2 bp, PF 1.058 at 4 bp. Four-week circular weekly-net-bp bootstrap mean +14.00 bp/week, 95% CI [-2.24, +30.11] bp/week; lower bound crosses zero.
 - **Binary verdict GAGAL** because the preregistered validation bootstrap gate failed. Do not calculate 2022–2026 PnL or tune this same rule on 2017–2021. This is a potentially informative overnight-segment effect but not a promoted alpha block.
 - Limits: cached USA500 M5 BID-only data, modeled costs, no measured spread/slippage/swap, no overnight floating-equity path or FundedNext DLL/MLL replay. Fixed-notional cumulative PnL is not a leveraged account/challenge simulation.
+
+
+## Latest research update — R293 GAGAL (2026-10-17 local replay)
+
+**R293: USA500 overnight carry + closing cross-index breadth filter — GAGAL.** The preregistration was committed before candidate outcome calculation. See:
+- [Preregistration](research/R293_USA500_OVERNIGHT_BREADTH_FILTER_PREREGISTRATION.md)
+- [Final report](research/R293_FINAL_REPORT.md)
+- [Compact result JSON](research/R293_results_compact.json)
+- [Local replay runner](research/r293_usa500_overnight_breadth_filter.py)
+- [Updated evolutionary block registry](research/EVOLUTIONARY_BLOCK_REGISTRY_20261016.md)
+- [Updated evidence matrix](research/EVIDENCE_MATRIX_20261016.json)
+
+### Locked experiment
+
+R293 crosses R292's long USA500 final-session-close-to-next-session-open exposure with cross-index breadth as a context filter. Signal is the close of the 15:45 ET M5 bar; enter USA500 at the 15:55 bar open; require >=75% of valid USA500, USATECH, USA30 and USSC2000 feeds (at least three eligible feeds) to have a positive 09:30-open-to-15:45-close session return; exit at the next eligible USA500 09:30 open. The unconditional long at the same timestamps is the matched diagnostic parent. Cached raw M5 BID archives all passed the four preregistered SHA-256 checks. The session-quality audit covered 5,531 instrument-session rows spanning 2016–2021.
+
+### Results at modeled 2 bp round-trip costs
+
+| Metric | Discovery 2017–2020 | Validation 2021 |
+|---|---:|---:|
+| Candidate trades | 442 | 119 |
+| Candidate net bp | +1,320.41 | +249.78 |
+| Candidate PF | 1.137 | 1.144 |
+| Candidate PF at 4 bp | 1.043 | 1.006 |
+| Unconditional parent trades | 975 | 250 |
+| Parent net bp | +1,533.09 | +459.12 |
+| Parent PF | 1.070 | 1.109 |
+
+Candidate max closed-PnL drawdown in discovery was 24.54% of fixed notional vs 37.96% for the parent. Candidate PF and fixed-notional closed DD improved relatively, but total net bp and trade count fell in both periods. Those fixed-notional closed-trade figures do not represent leveraged funded-account drawdown.
+
+The locked 2021 four-week circular bootstrap (5,000 resamples, seed 293; 52 Monday-start weeks including zero-trade weeks) returned +4.803 bp/week with 95% CI [-5.548, +14.232] bp/week. The lower bound crosses zero: **binary verdict GAGAL**. No threshold rescue or second pass on the same periods. Do not calculate 2022+ strategy PnL for R293; no funded challenge replay was run and no signal-alpha block is retained. Preserve only the research lesson that breadth improved relative PF/DD in this sample but failed robustness and reduced aggregate return.
+
+Limitations: four cached index feeds are BID-only; 1/2/4 bp are modeled costs rather than verified quotes. ASK-side fill, actual spread/slippage/commission/contract point value, swap, overnight floating PnL, margin and FundedNext DLL/MLL equity-path behavior are unverified. The 2017–2021 periods are contaminated by related work and are not pristine program-level OOS.
+
+### Next generation
+
+All candidates R270–R293 remain unpromoted. Continue with a materially distinct, preregistered hypothesis family; reuse integrity/latency/session and matched-parent controls, not failed signal blocks. Optimize the two-phase funded target completion probability/time subject to loss-rule breach risk; do not select by PF alone. Require all locked historical gates before any conditional later-period diagnostic, then a separate verified-cost/overnight-risk and FundedNext equity-aware two-phase challenge replay before any funded-ready claim.
