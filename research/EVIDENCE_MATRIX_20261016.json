@@ -127,9 +127,23 @@
       "id": "R287_US_INDEX_INTRADAY_RESIDUAL_REVERSION",
       "status": "FAILED",
       "evidence": "Residual fade: discovery 552 trades PF 0.802/-2742.47 bp and validation 193 trades PF 0.628/-1510.80 bp at modeled 2 bp. The matched residual-following parent was better but is diagnostic only and not independently validated."
+    },
+    {
+      "id": "R291_TRANSATLANTIC_LEAD_LAG",
+      "status": "FAILED_LOCKED_DISCOVERY_VALIDATION",
+      "evidence": "USA500 prior RTH direction -> next eligible German session. 2017-2020 discovery: 246 trades, gross PF_R 0.769 and -36.653R before costs; at modeled 2bp PF_R 0.451/-134.421R, 4bp PF_R 0.302, all four years negative. 2021 validation: 74 trades, gross PF_R 1.228/+8.547R but after 2bp PF_R 0.178/-173.679R; four-week bootstrap weekly-net-R CI [-9.525,+0.040]. Cost model exposes 0.02-point stop pathology on one 2021 trade.",
+      "artifacts": [
+        "research/R291_TRANSATLANTIC_LEAD_LAG_PREREGISTRATION.md",
+        "research/R291_FINAL_REPORT.md",
+        "research/R291_results_compact.json",
+        "research/r291_transatlantic_lead_lag.py",
+        "research/R291_annual_summary_2bp.csv",
+        "research/R291_validation_weekly_bootstrap_2bp.json"
+      ],
+      "caveat": "M5 BID-only cached sources; modeled 1/2/4bp costs; one tiny-stop trade makes R-normalized cost extremely large. No post-2021 PnL, no signal block retained, no funded equity-path replay."
     }
   ],
-  "decision": "No candidate promoted R270-R283. R283 is failed; trade-level failure mechanism was diagnosed post hoc. No funded-ready strategy. Ledger/runner archival gap remains open.",
+  "decision": "No candidate promoted R270-R291. R291 failed locked discovery/validation gates with negative discovery gross expectancy and severe cost/stop sensitivity; no alpha blocks retained. No funded-ready strategy.",
   "contamination_notes": {
     "2021-2025": "Repeatedly viewed across previous project experiments; use as exploratory screen only, not clean program-level OOS.",
     "2026_XAUUSD_M5": "Still unopened in R272/R273/R274; do not inspect unless a future preregistered candidate passes all historical gates.",
