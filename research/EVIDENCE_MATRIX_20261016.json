@@ -148,14 +148,15 @@
     },
     {
       "id": "R284",
-      "status": "FAILED_REPRODUCIBILITY_INCOMPLETE",
+      "status": "FAILED_AGGREGATE_REPLAY_VERIFIED_LEDGER_NOT_ARCHIVED",
       "finding": "The selected late-morning continuation stream was negative in discovery despite a small positive 2021 result. No signal block retained; one-per-day normalized strongest index selection reduces but does not eliminate losses versus parent.",
       "artifacts": [
         "research/R284_US_INDEX_LATE_MORNING_CONTINUATION_PREREGISTRATION.md",
         "research/R284_FINAL_REPORT.md",
-        "research/R284_results_compact.json"
+        "research/R284_results_compact.json",
+        "research/r284_late_morning_continuation_replay.py"
       ],
-      "caveat": "M5 BID-only archives, modeled transaction costs, heuristic flat-bar exclusion. Exact local runner and row-level ledger remain unarchived."
+      "caveat": "Compact replay engine was checked against original local aggregate metrics and matched all parent/child trade counts, PF and net-R totals exactly across discovery/validation and 1/2/4 bp. Row-level ledger remains unarchived. M5 BID-only archives, modeled transaction costs and heuristic flat-bar exclusion remain limitations."
     }
   ]
 }
