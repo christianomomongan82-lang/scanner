@@ -1,0 +1,136 @@
+{
+  "candidate_id": "R295_BREADTH_PLUS_USA500_DIRECTION_CONFIRMATION",
+  "verdict": "GAGAL",
+  "preregistration": "research/R295_BREADTH_PLUS_USA500_DIRECTION_CONFIRMATION_PREREGISTRATION.md",
+  "runner": "research/r295_breadth_plus_usa500_direction_confirmation.py",
+  "inputs": [
+    {
+      "symbol": "usa500idxusd",
+      "artifact_id": 11709864394,
+      "sha256": "df2a5edfa49cb15f8bcf5b13577e95907a0f0c54d02c7feed8bdbb7e3b6c49ee"
+    },
+    {
+      "symbol": "usatechidxusd",
+      "artifact_id": 11710370389,
+      "sha256": "82b06c38f66cd1387097691baac1d45c9463b6540eea9dfe28a894d85e122f7c"
+    },
+    {
+      "symbol": "usa30idxusd",
+      "artifact_id": 11710730507,
+      "sha256": "8fcef9d76b31e99ae8d0175e769307ab13f930ae3ec2c17ef6baf0311ea1783a"
+    },
+    {
+      "symbol": "ussc2000idxusd",
+      "artifact_id": 11710111254,
+      "sha256": "c01c97d8705453d3fa3fd4ac1d386e9c1d72ab27e3b7d57d6cde53da9dfdf6f0"
+    }
+  ],
+  "audited_instrument_session_rows": 5531,
+  "strategy_pnl_2022_plus_calculated": false,
+  "discovery": {
+    "candidate": {
+      "trades": 437,
+      "net_bp_1": 1690.1009699980373,
+      "pf_1bp": 1.1808419128826366,
+      "net_bp_2": 1253.1009699980373,
+      "pf_2bp": 1.1313490916228364,
+      "net_bp_4": 379.10096999803744,
+      "pf_4bp": 1.0381304173810322,
+      "gross_bp": 2127.1009699980373,
+      "win_rate_2bp_pct": 55.1487414187643,
+      "max_closed_pnl_drawdown_pct_fixed_notional_2bp": 24.53849015893363
+    },
+    "matched_R293_parent": {
+      "trades": 442,
+      "net_bp_1": 1762.4080893454998,
+      "pf_1bp": 1.1866750219783504,
+      "net_bp_2": 1320.4080893454998,
+      "pf_2bp": 1.1370066778269443,
+      "net_bp_4": 436.4080893454998,
+      "pf_4bp": 1.043451657340265,
+      "max_closed_pnl_drawdown_pct_fixed_notional_2bp": 24.53849015893363
+    },
+    "annual": {
+      "2017": {
+        "trades": 92,
+        "net_bp_2": 72.7810505638556,
+        "pf_2bp": 1.0845821668164626
+      },
+      "2018": {
+        "trades": 94,
+        "net_bp_2": 679.8432151162974,
+        "pf_2bp": 1.486097817514274
+      },
+      "2019": {
+        "trades": 125,
+        "net_bp_2": -5.3198178191303285,
+        "pf_2bp": 0.9978443467324649
+      },
+      "2020": {
+        "trades": 126,
+        "net_bp_2": 505.79652213701445,
+        "pf_2bp": 1.1050822772289413
+      }
+    }
+  },
+  "validation": {
+    "candidate": {
+      "trades": 119,
+      "net_bp_1": 368.7757612207655,
+      "pf_1bp": 1.2197789126206562,
+      "net_bp_2": 249.7757612207656,
+      "pf_2bp": 1.144065257751434,
+      "net_bp_4": 11.775761220765535,
+      "pf_4bp": 1.0063727919173096,
+      "gross_bp": 487.77576122076556,
+      "win_rate_2bp_pct": 52.94117647058824,
+      "max_closed_pnl_drawdown_pct_fixed_notional_2bp": 4.203497710837889
+    },
+    "matched_R293_parent": {
+      "trades": 119,
+      "net_bp_2": 249.7757612207656,
+      "pf_2bp": 1.144065257751434,
+      "net_bp_4": 11.775761220765535,
+      "pf_4bp": 1.0063727919173096
+    },
+    "bootstrap": {
+      "weeks_including_zero_trade_weeks": 52,
+      "weeks_with_trades": 47,
+      "mean_weekly_net_bp_2": 4.803380023476262,
+      "ci95_low": -5.557289555492591,
+      "ci95_high": 14.335442496682,
+      "resamples": 5000,
+      "block_weeks": 4,
+      "seed": 295
+    }
+  },
+  "filter_diagnostic": {
+    "parent_trades_discovery": 442,
+    "child_trades_discovery": 437,
+    "trades_removed_discovery": 5,
+    "removed_discovery_net_bp_2": 67.3071193474628,
+    "removed_discovery_pf_2bp": 1.6916613570290255,
+    "parent_trades_validation": 119,
+    "child_trades_validation": 119,
+    "trades_removed_validation": 0
+  },
+  "gates": {
+    "discovery_min_200_trades": true,
+    "discovery_net_bp_2_positive": true,
+    "discovery_pf_2bp_ge_1_05": true,
+    "discovery_at_least_2_of_4_years_positive": true,
+    "discovery_pf_4bp_ge_0_90": true,
+    "validation_min_75_trades": true,
+    "validation_net_bp_2_positive": true,
+    "validation_pf_2bp_ge_1_05": true,
+    "validation_bootstrap_ci_lower_gt_zero": false,
+    "validation_pf_4bp_ge_0_90": true
+  },
+  "limitations": [
+    "M5 BID-only source; 1/2/4 bp costs are modeled, not observed executable costs.",
+    "No live ask-side spread, slippage, commission, CFD point value, swaps, margin or overnight floating equity modeled.",
+    "No FundedNext two-phase equity-aware challenge replay.",
+    "2017-2021 are contaminated historical research windows, not pristine program-level OOS.",
+    "No candidate PnL beyond 2021 was calculated."
+  ]
+}
