@@ -1,0 +1,222 @@
+{
+  "candidate_id": "R287_US_INDEX_INTRADAY_RESIDUAL_REVERSION",
+  "verdict": "GAGAL",
+  "source": {
+    "USA500": {
+      "file": "usa500idxusd_m5.csv.gz",
+      "csv_sha256": "df2a5edfa49cb15f8bcf5b13577e95907a0f0c54d02c7feed8bdbb7e3b6c49ee",
+      "bytes": 11754520
+    },
+    "USATECH": {
+      "file": "usatechidxusd_m5.csv.gz",
+      "csv_sha256": "82b06c38f66cd1387097691baac1d45c9463b6540eea9dfe28a894d85e122f7c",
+      "bytes": 13191699
+    },
+    "USA30": {
+      "file": "usa30idxusd_m5.csv.gz",
+      "csv_sha256": "8fcef9d76b31e99ae8d0175e769307ab13f930ae3ec2c17ef6baf0311ea1783a",
+      "bytes": 12760653
+    },
+    "USSC2000": {
+      "file": "ussc2000idxusd_m5.csv.gz",
+      "csv_sha256": "c01c97d8705453d3fa3fd4ac1d386e9c1d72ab27e3b7d57d6cde53da9dfdf6f0",
+      "bytes": 9417440
+    }
+  },
+  "method": {
+    "signal": "Return from 10:00 open to 12:55 close minus same-date median return across at least three valid US index sessions",
+    "threshold_fit": "Per-symbol Q75 absolute residual, fit only on discovery 2017-2020",
+    "thresholds_abs_residual_pct": {
+      "USA500": 0.07046102130376375,
+      "USATECH": 0.2663954936046764,
+      "USA30": 0.14750639353222628,
+      "USSC2000": 0.43405576506670845
+    },
+    "rank": "Highest absolute residual / fitted Q75; ties by symbol; trade only if score >=1",
+    "candidate_direction": "Fade residual",
+    "matched_parent_direction": "Follow residual, diagnostic only",
+    "entry": "13:05 ET bar open",
+    "exit": "15:55 ET bar open",
+    "modeled_round_trip_costs_bps": [
+      1,
+      2,
+      4
+    ],
+    "primary_cost_bps": 2
+  },
+  "coverage": {
+    "valid_session_counts_2017_2021": {
+      "USA500": 1230,
+      "USATECH": 1240,
+      "USA30": 1237,
+      "USSC2000": 836
+    },
+    "common_dates_with_3plus_symbols": 1228,
+    "selected_events": 745,
+    "discovery_trades": 552,
+    "validation_trades": 193,
+    "post_2021_pnl_calculated": false,
+    "2026_pnl_calculated": false
+  },
+  "metrics": {
+    "discovery_2017_2020": {
+      "candidate": {
+        "1bp": {
+          "trades": 552,
+          "pf": 0.8379928547479895,
+          "net_bps": -2190.4659017415656,
+          "max_drawdown_bps": 2591.2358535585013
+        },
+        "2bp": {
+          "trades": 552,
+          "pf": 0.8015933360310017,
+          "net_bps": -2742.4659017415656,
+          "max_drawdown_bps": 2960.961255357139
+        },
+        "4bp": {
+          "trades": 552,
+          "pf": 0.7336872908206313,
+          "net_bps": -3846.465901741566,
+          "max_drawdown_bps": 3942.5186890662
+        }
+      },
+      "matched_parent": {
+        "1bp": {
+          "trades": 552,
+          "pf": 1.091647907497354,
+          "net_bps": 1086.465901741566,
+          "max_drawdown_bps": 1316.4859540113716
+        },
+        "2bp": {
+          "trades": 552,
+          "pf": 1.04408266861508,
+          "net_bps": 534.4659017415659,
+          "max_drawdown_bps": 1441.4859540113712
+        },
+        "4bp": {
+          "trades": 552,
+          "pf": 0.9550753959621611,
+          "net_bps": -569.5340982584345,
+          "max_drawdown_bps": 1691.485954011372
+        }
+      }
+    },
+    "validation_2021": {
+      "candidate": {
+        "1bp": {
+          "trades": 193,
+          "pf": 0.6667398826251302,
+          "net_bps": -1317.7997041384917,
+          "max_drawdown_bps": 1372.09105064857
+        },
+        "2bp": {
+          "trades": 193,
+          "pf": 0.6276106454637782,
+          "net_bps": -1510.7997041384917,
+          "max_drawdown_bps": 1556.0910506485695
+        },
+        "4bp": {
+          "trades": 193,
+          "pf": 0.5554628511295161,
+          "net_bps": -1896.7997041384917,
+          "max_drawdown_bps": 1924.091050648569
+        }
+      },
+      "matched_parent": {
+        "1bp": {
+          "trades": 193,
+          "pf": 1.3301969173095964,
+          "net_bps": 931.7997041384917,
+          "max_drawdown_bps": 312.22330392359856
+        },
+        "2bp": {
+          "trades": 193,
+          "pf": 1.2533722176209037,
+          "net_bps": 738.7997041384917,
+          "max_drawdown_bps": 384.22330392359873
+        },
+        "4bp": {
+          "trades": 193,
+          "pf": 1.1136645664693325,
+          "net_bps": 352.7997041384916,
+          "max_drawdown_bps": 528.2233039235991
+        }
+      }
+    }
+  },
+  "candidate_annual_at_2bp": {
+    "2017": {
+      "trades": 70,
+      "pf": 0.5058408728461424,
+      "net_bps": -508.2517134251582
+    },
+    "2018": {
+      "trades": 150,
+      "pf": 0.7039764633329579,
+      "net_bps": -1334.5845211267533
+    },
+    "2019": {
+      "trades": 133,
+      "pf": 0.5733632381693174,
+      "net_bps": -991.0520995182852
+    },
+    "2020": {
+      "trades": 199,
+      "pf": 1.0153326042903486,
+      "net_bps": 91.42243232863109
+    },
+    "2021": {
+      "trades": 193,
+      "pf": 0.6276106454637782,
+      "net_bps": -1510.7997041384917
+    }
+  },
+  "matched_parent_annual_diagnostic_at_2bp": {
+    "2017": {
+      "trades": 70,
+      "pf": 1.34,
+      "net_bps": 228.3
+    },
+    "2018": {
+      "trades": 150,
+      "pf": 1.212,
+      "net_bps": 734.6
+    },
+    "2019": {
+      "trades": 133,
+      "pf": 1.293,
+      "net_bps": 459.1
+    },
+    "2020": {
+      "trades": 199,
+      "pf": 0.862,
+      "net_bps": -887.4
+    },
+    "2021": {
+      "trades": 193,
+      "pf": 1.253,
+      "net_bps": 738.8
+    }
+  },
+  "gates": {
+    "discovery_count_ge_200": true,
+    "discovery_pf_2bp_ge_1_05": false,
+    "discovery_net_positive_2bp": false,
+    "discovery_positive_years_ge_2_of_4": false,
+    "validation_count_ge_50": true,
+    "validation_pf_2bp_ge_1_00": false,
+    "validation_net_positive_2bp": false,
+    "discovery_pf_4bp_ge_0_90": false,
+    "validation_pf_4bp_ge_0_90": false
+  },
+  "post_2021_pnl_calculated": false,
+  "2026_calculated": false,
+  "funded_replay": false,
+  "limitations": [
+    "M5 BID-only; no actual ASK fills",
+    "1/2/4 bp costs are modeled, not verified broker/funded costs",
+    "No account-equity DLL/MLL replay",
+    "2022-2025 contaminated and not calculated for this candidate",
+    "2026 index outcomes not inspected for this candidate"
+  ]
+}
