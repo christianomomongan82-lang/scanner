@@ -177,3 +177,13 @@ R287 uses 4 correlated US index M5 BID-only snapshots, one index trade maximum p
 - Matched gap-fade diagnostic is materially worse at 2 bp in discovery (-28.506R, PF_R 0.752) and validation (-10.414R, PF_R 0.664), but this relative comparison is not sufficient to promote continuation.
 - Keep no signal-alpha block. Retain code/process components: complete cash-session screen, frozen calibration split, one event per date, M5 stop-first ambiguity, bootstrap gate. Data is BID-only, transaction costs modeled, EUSIDXEUR coverage is weaker in early years, and no funded equity replay was run.
 - Artifacts: `R289_CONTINENTAL_EUROPE_GAP_CONTINUATION_PREREGISTRATION.md`, `R289_FINAL_REPORT.md`, `R289_results_compact.json`, `r289_continental_europe_gap_continuation.py`, `R289_annual_summary_2bp.csv`, `R289_validation_weekly_bootstrap_2bp.json`, `R289_session_quality_audit_summary.csv`.
+
+
+## R290 (2026-10-17) — US cash-open breakout-retest: GAGAL
+- Child mutation relative to R263: add a later boundary retest confirmed by a close back outside, then enter on the next M5 open; keep same OR family, with a frozen 1.5R target / opposite-range-boundary stop and one position total per US date.
+- Discovery (2016–2020), 1,059 trades, at 2 bp: PF_R 0.834, -95.595R; all five years negative. PF_R 0.732 at 4 bp and 0.644 at 6 bp.
+- Validation 2021: 214 trades, PF_R 1.220 and +20.925R at 2 bp, but 4-week block bootstrap weekly-net-R CI [-0.111, +0.884] includes zero and 6 bp PF_R falls to 0.961. The preregistered bootstrap lower-bound gate failed.
+- Verdict **GAGAL**; no post-2021 PnL calculated. No OR/retest/stop/target retuning on the same windows; no signal alpha block retained.
+- Reusable process template only: retest is structurally separate from first breakout entry; delayed next-bar fill; one total correlated-index position/day; stop-first OHLC ambiguity; binary discovery/validation gates.
+- Artifacts: `R290_US_CASH_OPEN_BREAKOUT_RETEST_PREREGISTRATION.md`, `R290_FINAL_REPORT.md`, `R290_results_compact.json`, `r290_us_cash_open_breakout_retest.py`, `R290_annual_summary.csv`, `R290_validation_weekly_bootstrap_2bp.json`, `R290_session_quality_summary.csv`.
+- Inputs M5 BID-only; modeled costs, no verified ask-side spread/point value/commission/swap, and no funded equity-path replay.
