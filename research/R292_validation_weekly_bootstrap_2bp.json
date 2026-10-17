@@ -1,0 +1,13 @@
+{
+  "weeks_including_zero_trade_weeks": 53,
+  "weeks_with_trade": 52,
+  "mean_weekly_net_bp": 14.004237436131556,
+  "ci95_mean_weekly_net_bp": [
+    -2.244892130363588,
+    30.111843762213024
+  ],
+  "positive_mean_bootstrap_share": 0.9524,
+  "block_weeks": 4,
+  "resamples": 5000,
+  "seed": 292
+}
