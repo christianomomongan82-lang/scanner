@@ -1,6 +1,6 @@
 {
   "as_of": "2026-10-17",
-  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R287",
+  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R292",
   "execution_blocks": {
     "quote_side_bid_ask": "reusable implementation control; local smoke-checked; not alpha evidence",
     "preserve_gaps": "reusable data-integrity control; not alpha evidence",
