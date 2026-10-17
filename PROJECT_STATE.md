@@ -449,3 +449,13 @@ Continuation instruction: read the latest R270–R274 results and `research/EVOL
 - [Preregistration](research/R282_EURUSD_WEEKEND_GAP_FADE_PREREGISTRATION.md) · [runner](research/r282_eurusd_weekend_gap_fade.py) · [report](research/R282_FINAL_REPORT.md) · [JSON](research/R282_results_compact.json) · [event audit](research/R282_event_audit.csv)
 - Input archive SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`, collected with `-fl`; most Sunday reopening bars were omitted. Only 3 long-closure candidates detected, none with exact T+10 minute continuity; zero trades evaluated.
 - This is **not** a no-edge result; data is inadequate to test weekly reopen gap fade. No strategy outcomes or forward period metrics were calculated. Do not patch event definition after seeing the issue; retry only with verified raw BID/ASK M1 including true weekend reopen observations. No GitHub Actions workflow launched.
+
+
+## Latest research update — R283 US index cash-open gap fade — GAGAL (2026-10-17)
+
+- Preregistration: [R283 design](research/R283_PREREGISTRATION.md)
+- Results: [final report](research/R283_FINAL_REPORT.md) · [period summary](research/R283_period_summary.csv) · [data audit](research/R283_data_audit.csv)
+- Tested four BID-only US index M5 archives. Rules locked: per-index Q80 gap fitted on 2017–2020; fade 09:30 open gap at 09:40 ET (T+10); target prior RTH close; stop 0.75× original gap; no overnight; modeled round-trip 1/2/4 bps.
+- At 2 bps, discovery 2017–2020 = 709 trades, PF 0.748, net -77.90R; validation 2021 = 163 trades, PF 0.599, net -34.83R. Trade-count gates passed, expectancy gates failed. 2022–2025 deliberately not scored; no forward period opened.
+- Verdict: **GAGAL**, close this exact spec, do not tune it. No alpha retained. Data are BID-only and costs modeled; actual spread/CFD point value/commission/slippage/swaps and funded equity-path replay remain absent. No Actions workflow launched.
+- R283 source runner and full row-level ledger were executed/stored locally in this session but are not yet archived in GitHub; report, preregistration, compact period summary and input audit are archived. Do not claim repository-only full reproducibility until source/ledger are committed.
