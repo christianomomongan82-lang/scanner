@@ -1,0 +1,115 @@
+{
+  "id": "R291_TRANSATLANTIC_LEAD_LAG",
+  "verdict": "GAGAL",
+  "threshold_q75_abs_US500_RTH_return": 0.006737642954667389,
+  "threshold_calibration_sessions": 979,
+  "source": {
+    "USA500_SHA256": "df2a5edfa49cb15f8bcf5b13577e95907a0f0c54d02c7feed8bdbb7e3b6c49ee",
+    "DEU_SHA256": "7ad37cb19545eef6111b928a97322c06c9f2478030a0c4282669542262303af4",
+    "USA500_eligible_sessions": 2659,
+    "DEU_eligible_sessions": 2735,
+    "scope": "M5 BID-only cached R205 data; modeled costs; no post-2021 candidate PnL calculated"
+  },
+  "gross": {
+    "discovery_2017_2020": {
+      "trades": 246,
+      "pf_r": 0.7688695533719785,
+      "net_r": -36.652794103669706
+    },
+    "validation_2021": {
+      "trades": 74,
+      "pf_r": 1.2276209821616042,
+      "net_r": 8.546820651187332
+    }
+  },
+  "discovery_2017_2020": {
+    "1bp": {
+      "trades": 246,
+      "pf_r": 0.574429577965037,
+      "net_r": -85.53693310853889
+    },
+    "2bp": {
+      "trades": 246,
+      "pf_r": 0.45113344644176173,
+      "net_r": -134.42107211340806
+    },
+    "4bp": {
+      "trades": 246,
+      "pf_r": 0.3021746602722063,
+      "net_r": -232.18935012314643
+    },
+    "annual_2bp": {
+      "2017": {
+        "trades": 11,
+        "pf_r": 0.24464578732729428,
+        "net_r": -11.778052711921168
+      },
+      "2018": {
+        "trades": 74,
+        "pf_r": 0.518420548687535,
+        "net_r": -32.29504082522426
+      },
+      "2019": {
+        "trades": 48,
+        "pf_r": 0.33378992808579117,
+        "net_r": -42.47187570337849
+      },
+      "2020": {
+        "trades": 113,
+        "pf_r": 0.5139568523686762,
+        "net_r": -47.87610287288415
+      }
+    }
+  },
+  "validation_2021": {
+    "1bp": {
+      "trades": 74,
+      "pf_r": 0.3324456971918253,
+      "net_r": -82.56619229560266
+    },
+    "2bp": {
+      "trades": 74,
+      "pf_r": 0.17827023978430667,
+      "net_r": -173.67920524239264
+    },
+    "4bp": {
+      "trades": 74,
+      "pf_r": 0.08166147461842065,
+      "net_r": -355.9052311359726
+    },
+    "bootstrap_2bp": {
+      "calendar_weeks_including_zero_trade_weeks": 53,
+      "weeks_with_trade": 37,
+      "mean_weekly_net_r": -3.276966136648918,
+      "block_length_weeks": 4,
+      "resamples": 5000,
+      "seed": 291,
+      "ci95_r_per_week": [
+        -9.52530359701779,
+        0.040432063083401394
+      ],
+      "bootstrap_probability_mean_positive": 0.0342
+    }
+  },
+  "tiny_stop_diagnostic": {
+    "date": "2021-10-07",
+    "risk_points": 0.0200000000004365,
+    "entry_price": 15121.279,
+    "net_r_1bp": -74.10639499834967,
+    "net_r_2bp": -149.71278999669934,
+    "interpretation": "The preregistered stop allows a near-zero distance; cost model makes this nontradable. No post-hoc fix applied."
+  },
+  "gates": {
+    "discovery_min_100_trades": true,
+    "discovery_pf_at_2bp_ge_1_05": false,
+    "discovery_net_r_positive": false,
+    "discovery_at_least_3_of_4_years_positive": false,
+    "discovery_pf_at_4bp_ge_0_90": false,
+    "validation_min_50_trades": true,
+    "validation_pf_at_2bp_ge_1_05": false,
+    "validation_net_r_positive": false,
+    "validation_bootstrap_95pct_CI_lower_gt_zero": false,
+    "validation_pf_at_4bp_ge_0_90": false
+  },
+  "scope_note": "Trade PnL stopped at 2021 after locked gates failed; do not inspect 2022–2026 to rescue this candidate."
+}
