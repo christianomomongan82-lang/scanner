@@ -1,0 +1,4 @@
+candidate_no,previous_timestamp_utc,current_timestamp_utc,gap_hours,exact_tplus10_present,decision
+1,2017-12-29T21:59:00Z,2018-01-01T00:00:00Z,50.0167,false,excluded_missing_sequential_reopen_minutes
+2,2020-12-25T07:59:00Z,2020-12-27T00:00:00Z,40.0167,false,excluded_missing_sequential_reopen_minutes
+3,2020-12-31T21:59:00Z,2021-01-03T00:00:00Z,50.0167,false,excluded_missing_sequential_reopen_minutes
