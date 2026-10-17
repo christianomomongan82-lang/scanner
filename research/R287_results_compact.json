@@ -218,5 +218,14 @@
     "No account-equity DLL/MLL replay",
     "2022-2025 contaminated and not calculated for this candidate",
     "2026 index outcomes not inspected for this candidate"
-  ]
+  ],
+  "artifacts": [
+    "research/R287_US_INDEX_INTRADAY_RESIDUAL_REVERSION_PREREGISTRATION.md",
+    "research/R287_FINAL_REPORT.md",
+    "research/r287_intraday_residual_reversion.py",
+    "research/R287_paired_ledger_2017_2021.csv",
+    "research/R287_session_quality_summary.csv"
+  ],
+  "matched_parent_decision": "diagnostic only; favorable same-sample direction comparison is not an independent candidate pass",
+  "ledger_rows": 745
 }
