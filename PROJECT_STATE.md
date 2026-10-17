@@ -442,3 +442,10 @@ Continuation instruction: read the latest R270–R274 results and `research/EVOL
 - **Verdict: GAGAL — data/event coverage; alpha untested.** Zero trades, no reportable PF. 2022–2025 outcomes were not computed because discovery/validation gate failed; no challenge replay. Do not relax delay gate post-result.
 - R282 runner, prereg, report, results JSON and event-coverage CSV are archived. No GitHub Actions backtest workflow was launched.
 - Overall status R270–R282: no candidate promoted. R276 is only a historical screening pass with material unresolved failures; R277–R281 fail signal gates; R282 is data-ineligible, not a proven losing strategy.
+
+
+## Latest research update — R282 EURUSD weekend-reopening gap fade — INVALID TEST (2026-10-17)
+
+- [Preregistration](research/R282_EURUSD_WEEKEND_GAP_FADE_PREREGISTRATION.md) · [runner](research/r282_eurusd_weekend_gap_fade.py) · [report](research/R282_FINAL_REPORT.md) · [JSON](research/R282_results_compact.json) · [event audit](research/R282_event_audit.csv)
+- Input archive SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`, collected with `-fl`; most Sunday reopening bars were omitted. Only 3 long-closure candidates detected, none with exact T+10 minute continuity; zero trades evaluated.
+- This is **not** a no-edge result; data is inadequate to test weekly reopen gap fade. No strategy outcomes or forward period metrics were calculated. Do not patch event definition after seeing the issue; retry only with verified raw BID/ASK M1 including true weekend reopen observations. No GitHub Actions workflow launched.
