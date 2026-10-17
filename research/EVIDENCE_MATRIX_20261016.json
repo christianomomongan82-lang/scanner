@@ -141,9 +141,23 @@
         "research/R291_validation_weekly_bootstrap_2bp.json"
       ],
       "caveat": "M5 BID-only cached sources; modeled 1/2/4bp costs; one tiny-stop trade makes R-normalized cost extremely large. No post-2021 PnL, no signal block retained, no funded equity-path replay."
+    },
+    {
+      "id": "R292_USA500_OVERNIGHT_LONG_CARRY",
+      "status": "FAILED_VALIDATION_WEEKLY_BOOTSTRAP",
+      "evidence": "Fixed-notional long from final RTH bar close to next eligible RTH open, USA500 M5 BID-only. Discovery 2017-2020: 978 trades, gross PF 1.193, +3951.48 bp; at modeled 2 bp PF 1.094/+1995.48 bp and at 4 bp PF 1.002/+39.48 bp. Validation 2021: 250 trades, 2 bp PF 1.186/+742.22 bp; but 4-week weekly-net bootstrap 95% CI [-2.24,+30.11] bp/week crosses zero. Closed-trade drawdown 38.57% of fixed notional in discovery (2020).",
+      "artifacts": [
+        "research/R292_USA500_OVERNIGHT_CARRY_PREREGISTRATION.md",
+        "research/R292_FINAL_REPORT.md",
+        "research/R292_results_compact.json",
+        "research/r292_usa500_overnight_carry.py",
+        "research/R292_annual_summary_2bp.csv",
+        "research/R292_validation_weekly_bootstrap_2bp.json"
+      ],
+      "caveat": "Costs are modeled basis-point sensitivities; BID-only M5 does not certify executable entry/exit. No overnight floating DD, swaps, or funded challenge equity replay. Rule failed its locked bootstrap gate; no 2022+ candidate PnL and no alpha block retained."
     }
   ],
-  "decision": "No candidate promoted R270-R291. R291 failed locked discovery/validation gates with negative discovery gross expectancy and severe cost/stop sensitivity; no alpha blocks retained. No funded-ready strategy.",
+  "decision": "No candidate promoted R270-R292. R291 and R292 failed their locked validation gates. R292 overnight carry has positive point estimates but an inconclusive validation weekly bootstrap and large discovery fixed-notional drawdown; no funded-ready strategy.",
   "contamination_notes": {
     "2021-2025": "Repeatedly viewed across previous project experiments; use as exploratory screen only, not clean program-level OOS.",
     "2026_XAUUSD_M5": "Still unopened in R272/R273/R274; do not inspect unless a future preregistered candidate passes all historical gates.",
