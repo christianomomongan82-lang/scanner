@@ -198,3 +198,13 @@ R287 uses 4 correlated US index M5 BID-only snapshots, one index trade maximum p
 - Reusable research-method components only: previous-session date alignment using IANA local zones, frozen Q75 calibration, explicit cost stress, and bootstrap gate. These are process controls, not edge.
 - Artifacts: `R291_TRANSATLANTIC_LEAD_LAG_PREREGISTRATION.md`, `R291_FINAL_REPORT.md`, `R291_results_compact.json`, `r291_transatlantic_lead_lag.py`, `R291_annual_summary_2bp.csv`, `R291_validation_weekly_bootstrap_2bp.json`.
 - Data caveats: cached M5 BID-only USA500 and DEUIDXEUR; modeled 1/2/4 bp cost assumptions; no verified ask-side spread/slippage, swap/commission, stop tick ordering or FundedNext equity-path replay. Validation is not an untouched project holdout.
+
+
+## R292 update (2026-10-17) — USA500 overnight-only long carry: GAGAL
+- Hypothesis family: equity-index overnight/intraday return decomposition. Long USA500 at the close proxy of the M5 bar starting 15:55 New York and exit at the next eligible session's 09:30 RTH open; no SL/TP or signal filters.
+- Discovery 2017–2020: 978 trades; at modeled 2 bp PF 1.094 and +1,995.48 bp; at 4 bp PF 1.002 and +39.48 bp; 4/4 annual cohorts positive at 2 bp.
+- Validation 2021: 250 trades; at modeled 2 bp PF 1.186 / +742.22 bp; at 4 bp PF 1.058. However, the four-week circular bootstrap of weekly net bp gives 95% CI [-2.24,+30.11] bp/week, lower bound crosses zero. The preregistered gate fails.
+- Maximum closed-trade drawdown reaches 38.57% of fixed notional in the discovery sequence, concentrated in 2020. This is not a funded-account drawdown estimate; notional-to-equity sizing and overnight floating losses were not modeled.
+- **Disposition: GAGAL, no alpha block retained, no 2022+ candidate PnL.** Do not tune the holding interval or inspect later years as a rescue.
+- Artifacts: `R292_USA500_OVERNIGHT_CARRY_PREREGISTRATION.md`, `R292_FINAL_REPORT.md`, `R292_results_compact.json`, `r292_usa500_overnight_carry.py`, `R292_annual_summary_2bp.csv`, `R292_validation_weekly_bootstrap_2bp.json`.
+- Data caveats: cached M5 BID-only, modeled 1/2/4 bp costs, no verified CFD ask-side fills/slippage/swaps, no overnight floating equity, and no FundedNext DLL/MLL equity-path replay.
