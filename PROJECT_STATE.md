@@ -545,3 +545,12 @@ Archived diagnostic artifacts:
 - Binary verdict: **GAGAL**. Do not adjust thresholds/direction/timing using these outcomes. The 2022–2025 window is project-contaminated; 2026 is a later chronological check, not claimed as a pristine program-level holdout. No funded equity path was run.
 - Execution/data caveats: M5 BID-only data, modeled rather than observed transaction costs, heuristic repeated-flat exclusion, no verified CFD contract multipliers/commissions/swaps, no ask-side fill reconstruction, and no DLL/MLL challenge replay.
 - Reusable methodological blocks only: synchronized eligible-session construction, frozen threshold fitting, deterministic one-event-per-session selection, matched same-event direction ablation, cost-stress/weekly-bootstrap reporting. No positive alpha block is retained from R288.
+
+
+## R289 — Continental Europe cash-open gap continuation — GAGAL (2026-10-17)
+- Locked rules and pre-outcome timestamp clarification: [R289 preregistration](research/R289_CONTINENTAL_EUROPE_GAP_CONTINUATION_PREREGISTRATION.md), final amendment commit `f3dba6084362a2b27855031945ca700521d586bc`.
+- [Final report](research/R289_FINAL_REPORT.md) · [compact results JSON](research/R289_results_compact.json) · [Python replay runner](research/r289_continental_europe_gap_continuation.py) · [annual return summary](research/R289_annual_summary_2bp.csv) · [validation bootstrap output](research/R289_validation_weekly_bootstrap_2bp.json) · [session-quality audit summary](research/R289_session_quality_audit_summary.csv).
+- Continuation discovery 2017–2020: 251 trades; at modeled 2 bp, PF in R 1.2245, +20.682R. Validation 2021: 61 trades; PF in R 1.1283, +3.088R. The four-week block-bootstrap validation 95% CI was [-0.1767R, +0.2817R] per week, so its lower-bound gate failed.
+- **Binary verdict GAGAL**; no 2022–2026 PnL was calculated. No parameter retuning or promotion.
+- R205 cached M5 BID-only source artifacts: DEUIDXEUR 11710710062, FRAIDXEUR 11710800007, EUSIDXEUR 11710326105; hashes and eligible-session counts are in the results JSON. EUSIDXEUR has materially poorer early coverage because repeated-flat bars were excluded.
+- Limits: modeled costs rather than observed executable costs, no verified CFD multiplier/fees/swaps, M5 intrabar stop/target order approximated stop-first, no equity-aware DLL/MLL funded replay. No alpha block promoted; retain only session quality, frozen quantile calibration and bootstrap gate as research process.
