@@ -1,0 +1,182 @@
+{
+  "candidate_id": "R284_LATE_MORNING_CROSS_SECTIONAL_CONTINUATION",
+  "verdict": "GAGAL",
+  "locked_outcome_scope": {
+    "discovery": "2017-2020",
+    "validation": "2021",
+    "2022-2025 outcomes calculated": false,
+    "2026 outcomes calculated": false,
+    "funded challenge replay": false
+  },
+  "hypothesis": {
+    "signal": "same-direction continuation of 10:00 open to 11:55 close move",
+    "daily_selection": "select one highest absolute return / instrument Q75 score across eligible indexes; parent always takes; child requires score >= 1",
+    "entry": "12:05 America/New_York bar open (T+10 from 11:55 bar open)",
+    "stop": "1.0x range across 10:00-11:55 bars",
+    "target": "1.5x stop distance",
+    "exit": "stop-first same-bar conflict; adverse stop gap fill; force flat at 15:55 bar open",
+    "costs_bps_round_trip": [
+      1,
+      2,
+      4
+    ],
+    "primary_cost_bps": 2
+  },
+  "data": {
+    "timeframe": "M5",
+    "side": "BID-only OHLC",
+    "source": "cached GitHub Actions artifacts from R205",
+    "symbols": {
+      "USA500": {
+        "artifact_id": 11709864394,
+        "zip_sha256": "21d37f9b6faf12094cba2243d8b13ecf9973468e2b09b24e16a9cfa67ed4ceac",
+        "eligible_sessions": 2662,
+        "q75_abs_return": 0.0038934769288850313
+      },
+      "USATECH": {
+        "artifact_id": 11710370389,
+        "zip_sha256": "91c7d44b0487e98eeea021712528910475e626bf433220a007629f3005fc66ad",
+        "eligible_sessions": 2675,
+        "q75_abs_return": 0.005380544141918353
+      },
+      "USA30": {
+        "artifact_id": 11710730507,
+        "zip_sha256": "53a54804f0584c69d52f41af08534e00effea66e7cc31872ae0438e7907e0fe6",
+        "eligible_sessions": 2672,
+        "q75_abs_return": 0.003900364331497874
+      },
+      "USSC2000": {
+        "artifact_id": 11710111254,
+        "zip_sha256": "52216f5623a974dfaa0fb19e3cb28e2b2db589f1c07cef5cc8e5e2b383638872",
+        "eligible_sessions": 2022,
+        "q75_abs_return": 0.006786227581939475
+      }
+    },
+    "limitations": [
+      "BID-only; no actual BID/ASK replay",
+      "modeled 1/2/4 bp cost, not verified broker/funded costs",
+      "flat-bar exclusion is heuristic",
+      "full executed runner and row-level ledger not archived on GitHub yet"
+    ]
+  },
+  "metrics_at_2bp": {
+    "parent": {
+      "discovery_2017_2020": {
+        "trades": 981,
+        "pf": 0.8219131171061093,
+        "net_r": -47.6496335129347,
+        "max_dd_r": 53.51715973937151
+      },
+      "validation_2021": {
+        "trades": 251,
+        "pf": 0.9409855842777651,
+        "net_r": -3.2655901085546075,
+        "max_dd_r": 10.063600598221223
+      }
+    },
+    "child": {
+      "discovery_2017_2020": {
+        "trades": 380,
+        "pf": 0.8643954010191007,
+        "net_r": -13.107864357797935,
+        "max_dd_r": 16.26414757342548
+      },
+      "validation_2021": {
+        "trades": 114,
+        "pf": 1.0664416861953576,
+        "net_r": 1.3264203668131005,
+        "max_dd_r": 4.840419174339685
+      }
+    }
+  },
+  "child_annual_at_2bp": {
+    "2017": {
+      "trades": 34,
+      "pf": 0.60358,
+      "net_r": -3.011
+    },
+    "2018": {
+      "trades": 116,
+      "pf": 0.998293,
+      "net_r": -0.051
+    },
+    "2019": {
+      "trades": 77,
+      "pf": 0.609157,
+      "net_r": -6.957
+    },
+    "2020": {
+      "trades": 153,
+      "pf": 0.925698,
+      "net_r": -3.09
+    },
+    "2021": {
+      "trades": 114,
+      "pf": 1.0664416861953576,
+      "net_r": 1.3264203668131005
+    }
+  },
+  "metrics_by_cost": {
+    "child_discovery": {
+      "1bp": {
+        "trades": 380,
+        "pf": 0.9002079230423831,
+        "net_r": -9.453012627263405,
+        "max_dd_r": 13.422373910246543
+      },
+      "2bp": {
+        "trades": 380,
+        "pf": 0.8643954010191007,
+        "net_r": -13.107864357797935,
+        "max_dd_r": 16.26414757342548
+      },
+      "4bp": {
+        "trades": 380,
+        "pf": 0.7972357834542543,
+        "net_r": -20.417567818866985,
+        "max_dd_r": 21.94769489978335
+      }
+    },
+    "child_validation": {
+      "1bp": {
+        "trades": 114,
+        "pf": 1.1211132540871849,
+        "net_r": 2.361799003713215,
+        "max_dd_r": 4.6677004314482655
+      },
+      "2bp": {
+        "trades": 114,
+        "pf": 1.0664416861953576,
+        "net_r": 1.3264203668131005,
+        "max_dd_r": 4.840419174339685
+      },
+      "4bp": {
+        "trades": 114,
+        "pf": 0.9644479486801176,
+        "net_r": -0.7443369069871386,
+        "max_dd_r": 5.531204607957003
+      }
+    }
+  },
+  "gates": {
+    "discovery_trade_count": true,
+    "discovery_pf_2bp": false,
+    "discovery_net_positive_2bp": false,
+    "discovery_at_least_2_of_4_years_positive": false,
+    "validation_trade_count": true,
+    "validation_pf_2bp": true,
+    "validation_net_positive_2bp": true,
+    "discovery_pf_4bp_at_least_0_90": false,
+    "validation_pf_4bp_at_least_0_90": true
+  },
+  "final_failure_reasons": [
+    "discovery_pf_2bp",
+    "discovery_net_positive_2bp",
+    "discovery_at_least_2_of_4_years_positive",
+    "discovery_pf_4bp_at_least_0_90"
+  ],
+  "forward_outcomes_computed": false,
+  "source_commit": "206694cefe652b1dadd7e2a9723b9e52b18f8f0f",
+  "computed_locally": true,
+  "no_github_actions_backtest_run": true
+}
