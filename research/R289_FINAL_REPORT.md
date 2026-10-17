@@ -5,7 +5,7 @@
 ## Locked hypothesis and execution
 The study tested whether an unusually large 09:00 Europe/Berlin cash-open gap in one of DEUIDXEUR, FRAIDXEUR and EUSIDXEUR tends to continue rather than fill. Each symbol's Q80 absolute gap threshold was fit on 2017–2020 only. The top normalized gap per date was selected deterministically; a position followed the gap direction, entered at the 09:10 M5 open after a five-minute decision/phone-execution delay, targeted one gap-distance and stopped at 0.75 gap-distance. One event maximum per date. Same-bar stop/target overlap was resolved stop-first. Cost stresses of 1/2/4 bp are assumptions, not observed costs.
 
-Preregistration: [locked R289 design](R289_CONTINENTAL_EUROPE_GAP_CONTINUATION_PREREGISTRATION.md), including the timestamp clarification committed before rerunning. Exact replay implementation is archived compressed as [Python runner (.py.gz)](r289_continental_europe_gap_continuation.py.gz).
+Preregistration: [locked R289 design](R289_CONTINENTAL_EUROPE_GAP_CONTINUATION_PREREGISTRATION.md), including the timestamp clarification committed before rerunning. Exact replay implementation is archived compressed as [Python runner (.py.gz)](r289_continental_europe_gap_continuation.py).
 
 ## Results
 
