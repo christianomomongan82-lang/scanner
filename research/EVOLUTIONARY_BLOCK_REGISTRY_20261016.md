@@ -187,3 +187,14 @@ R287 uses 4 correlated US index M5 BID-only snapshots, one index trade maximum p
 - Reusable process template only: retest is structurally separate from first breakout entry; delayed next-bar fill; one total correlated-index position/day; stop-first OHLC ambiguity; binary discovery/validation gates.
 - Artifacts: `R290_US_CASH_OPEN_BREAKOUT_RETEST_PREREGISTRATION.md`, `R290_FINAL_REPORT.md`, `R290_results_compact.json`, `r290_us_cash_open_breakout_retest.py`, `R290_annual_summary.csv`, `R290_validation_weekly_bootstrap_2bp.json`, `R290_session_quality_summary.csv`.
 - Inputs M5 BID-only; modeled costs, no verified ask-side spread/point value/commission/swap, and no funded equity-path replay.
+
+
+## R291 update (2026-10-17) — USA500-to-German cash-session lead/lag: GAGAL
+- **Frozen hypothesis:** previous eligible USA500 cash-session return sign predicts the next German index cash session; absolute-return threshold Q75 fixed on 2017–2020, German entry 09:20 Berlin, initial stop uses the 09:00–09:15 range, target 1.5R and flat by session close.
+- Discovery 2017–2020: 246 trades; gross PF_R 0.769 and -36.653R before any cost. At modeled 2 bp PF_R 0.451 and -134.421R; 4 bp PF_R 0.302. All four discovery years lose.
+- Validation 2021: 74 trades; gross PF_R 1.228 / +8.547R, but 2 bp PF_R collapses to 0.178 / -173.679R. Four-week weekly-net-R bootstrap 95% CI [-9.525,+0.040] R/week; lower bound fails.
+- One trade has only 0.02 index points of initial risk, making notional-based modeled fees approximately 75.6R at 1bp; this is an operational design flaw exposed by the locked rule, not a license to add a new distance filter on these same periods.
+- **Disposition: GAGAL; do not tune or reverse the sign after inspecting results.** No 2022–2026 candidate PnL calculated. No alpha block retained.
+- Reusable research-method components only: previous-session date alignment using IANA local zones, frozen Q75 calibration, explicit cost stress, and bootstrap gate. These are process controls, not edge.
+- Artifacts: `R291_TRANSATLANTIC_LEAD_LAG_PREREGISTRATION.md`, `R291_FINAL_REPORT.md`, `R291_results_compact.json`, `r291_transatlantic_lead_lag.py`, `R291_annual_summary_2bp.csv`, `R291_validation_weekly_bootstrap_2bp.json`.
+- Data caveats: cached M5 BID-only USA500 and DEUIDXEUR; modeled 1/2/4 bp cost assumptions; no verified ask-side spread/slippage, swap/commission, stop tick ordering or FundedNext equity-path replay. Validation is not an untouched project holdout.
