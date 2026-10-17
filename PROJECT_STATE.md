@@ -682,3 +682,41 @@ No funded challenge replay and no post-2021 candidate PnL were run. No alpha blo
 ### Next-generation constraint
 
 Do not promote any candidate from R270–R295. Shift to a materially distinct hypothesis family, freeze it before outcomes, use the established data/timestamp/cost controls, and preserve 2022+ R295 results unopened. The objective remains probability and time of completing both funded targets without DLL/MLL breach; PF and trade count are diagnostics only.
+
+
+## Data-quality incident — R296 INVALID TEST (2026-10-17)
+
+R296's first attempt incorrectly took the first raw Sunday timestamp (usually 00:00 UTC) as the executable weekly reopening. The paired XAUUSD BID/ASK source has static O=H=L=C rows repeated through Sunday 22:55 UTC; real active M5 bars start around 23:00 UTC. R296's positions and bootstrap therefore used non-tradable closed-market quote snapshots. Its performance statistics are invalid and must not be used as evidence for/against gap continuation, nor treated as a valid signal-family failure. See [R296 data-quality invalidation](research/R296_DATA_QUALITY_INVALIDATION.md). This exposed a data-validation gap: manifest include_synthetic_flat_bars=false is insufficient without checking observed row activity.
+
+## Latest research update — R297 GAGAL (2026-10-17 local replay)
+
+**R297: XAUUSD active-weekend-reopening gap continuation — GAGAL.** This candidate was separately preregistered before its new outcome calculation and corrects R296's event timestamp to the first actually active Sunday M5 bar; it does not tune R296's signal performance. Artifacts:
+- [Locked preregistration](research/R297_XAUUSD_ACTIVE_REOPEN_GAP_CONTINUATION_PREREGISTRATION.md)
+- [Final report](research/R297_FINAL_REPORT.md)
+- [Compact results](research/R297_results_compact.json)
+- [Local runner](research/r297_active_reopen_gap_continuation.py)
+- [R296 invalid-test report](research/R296_DATA_QUALITY_INVALIDATION.md)
+- [Updated evidence matrix](research/EVIDENCE_MATRIX_20261016.json)
+- [Updated evolutionary block registry](research/EVOLUTIONARY_BLOCK_REGISTRY_20261016.md)
+
+### R297 frozen methodology and source
+
+Use XAUUSD M5 BID/ASK archive 12031270051 (collection run 38859918137). Both gzip SHA-256 hashes and the exact 947,326 timestamp pairs passed. Before signal calculation the replay excluded every timestamp >=2026-01-01, so 69,396 later rows were held back. The corrected event finder uses the first active M5 bar after the Sunday static quote block, compares that with the last active Friday close, requires a gap larger than twice the sum of those active bid/ask spreads, enters with T+10 execution delay, uses a gap-sized 1R stop/target and an exact T+4h max hold. No bars were synthesized.
+
+### Results at modeled +$0.30/oz additional cost
+
+| Metric | Discovery 2016–2020 | Validation 2021–2025 |
+|---|---:|---:|
+| Completed trades | 24 | 28 |
+| Net R | -6.161 | +0.385 |
+| PF_R | 0.460 | 1.042 |
+| Maximum closed R DD | 7.116R | 3.026R |
+| Stop / target / time exits | 10 / 5 / 9 | 7 / 8 / 13 |
+
+Only 52 of 500 active weekend-gap candidates passed the locked combined-spread, quote and complete active-path conditions. Discovery PF/expectancy failed. The validation point estimate is slightly positive but under PF_R 1.05; its 4-week block bootstrap mean was +0.00148R/week, 95% CI [-0.02939, +0.03141], crossing zero. At +$0.50/oz, validation turns negative (-0.253R, PF_R 0.973). The discovery and validation minimum-trade gates also fail; at least 3/5 validation years were positive but the remaining gates dominate the decision.
+
+**R297 = GAGAL.** No 2026 PnL was calculated, no gap-fade side was tested as a rescue, and no funded challenge replay was run. No alpha block is retained. R297 is not funded-ready.
+
+### Evolutionary decision
+
+Preserve R296 as a data-quality incident, not a negative signal result. Preserve R297 as a valid corrected but failed signal candidate. Do not change the 2x spread filter, reverse gap direction or retune the 4-hour exit on these same dates. Future candidates must identify active quote bars independently of the manifest flag before creating signals. Funded readiness remains blocked without verified account-specific costs and a separate equity-aware two-phase replay.
