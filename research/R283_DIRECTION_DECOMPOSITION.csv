@@ -1,0 +1,5 @@
+period,direction,meaning,trades,net_R_2bp,gross_R,PF_2bp,positive_trade_pct,target_exit_pct,stop_exit_pct,session_close_avg_net_R
+discovery_2017_2020,LONG,fade_gap_down,316,-17.159,-10.459,0.870,47.47,23.73,34.81,0.1382
+discovery_2017_2020,SHORT,fade_gap_up,393,-60.741,-51.290,0.658,37.40,19.59,32.32,-0.0903
+validation_2021,LONG,fade_gap_down,82,-10.738,-8.677,0.732,46.34,17.07,45.12,0.3097
+validation_2021,SHORT,fade_gap_up,81,-24.092,-21.843,0.486,32.10,25.93,43.21,-0.3625
