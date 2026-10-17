@@ -1,0 +1,140 @@
+{
+  "candidate_id": "R294_USA500_TWO_SIDED_BREADTH_OVERNIGHT",
+  "verdict": "GAGAL",
+  "preregistration": "research/R294_USA500_TWO_SIDED_BREADTH_OVERNIGHT_PREREGISTRATION.md",
+  "inputs": [
+    {
+      "symbol": "usa500idxusd",
+      "artifact_id": 11709864394,
+      "sha256": "df2a5edfa49cb15f8bcf5b13577e95907a0f0c54d02c7feed8bdbb7e3b6c49ee"
+    },
+    {
+      "symbol": "usatechidxusd",
+      "artifact_id": 11710370389,
+      "sha256": "82b06c38f66cd1387097691baac1d45c9463b6540eea9dfe28a894d85e122f7c"
+    },
+    {
+      "symbol": "usa30idxusd",
+      "artifact_id": 11710730507,
+      "sha256": "8fcef9d76b31e99ae8d0175e769307ab13f930ae3ec2c17ef6baf0311ea1783a"
+    },
+    {
+      "symbol": "ussc2000idxusd",
+      "artifact_id": 11710111254,
+      "sha256": "c01c97d8705453d3fa3fd4ac1d386e9c1d72ab27e3b7d57d6cde53da9dfdf6f0"
+    }
+  ],
+  "discovery": {
+    "candidate": {
+      "trades": 786,
+      "long_trades": 442,
+      "short_trades": 344,
+      "net_bp_2": -137.7202,
+      "pf_2bp": 0.9931,
+      "net_bp_4": -1709.7202,
+      "pf_4bp": 0.9179,
+      "gross_bp": 1434.2798,
+      "max_closed_pnl_drawdown_pct_fixed_notional_2bp": 29.3583
+    },
+    "r293_positive_tail_long_only": {
+      "trades": 442,
+      "net_bp_2": 1320.4081,
+      "pf_2bp": 1.137,
+      "net_bp_4": 436.4081,
+      "pf_4bp": 1.0435
+    },
+    "unconditional_long": {
+      "trades": 975,
+      "net_bp_2": 1533.0862,
+      "pf_2bp": 1.07,
+      "net_bp_4": -416.9138,
+      "pf_4bp": 0.9817
+    },
+    "annual": {
+      "2017": {
+        "trades": 152,
+        "long_trades": 92,
+        "short_trades": 60,
+        "net_bp_2": -327.4874,
+        "pf_2bp": 0.8135
+      },
+      "2018": {
+        "trades": 186,
+        "long_trades": 95,
+        "short_trades": 91,
+        "net_bp_2": 609.1918,
+        "pf_2bp": 1.1671
+      },
+      "2019": {
+        "trades": 227,
+        "long_trades": 129,
+        "short_trades": 98,
+        "net_bp_2": -1249.1204,
+        "pf_2bp": 0.7549
+      },
+      "2020": {
+        "trades": 221,
+        "long_trades": 126,
+        "short_trades": 95,
+        "net_bp_2": 829.6957,
+        "pf_2bp": 1.0873
+      }
+    }
+  },
+  "validation": {
+    "candidate": {
+      "trades": 216,
+      "long_trades": 119,
+      "short_trades": 97,
+      "net_bp_2": -448.4291,
+      "pf_2bp": 0.8906,
+      "net_bp_4": -880.4291,
+      "pf_4bp": 0.7969,
+      "gross_bp": -16.4291,
+      "max_closed_pnl_drawdown_pct_fixed_notional_2bp": 9.3122
+    },
+    "r293_positive_tail_long_only": {
+      "trades": 119,
+      "net_bp_2": 249.7758,
+      "pf_2bp": 1.1441,
+      "net_bp_4": 11.7758,
+      "pf_4bp": 1.0064
+    },
+    "unconditional_long": {
+      "trades": 250,
+      "net_bp_2": 459.1157,
+      "pf_2bp": 1.1092,
+      "net_bp_4": -40.8843,
+      "pf_4bp": 0.9907
+    },
+    "bootstrap": {
+      "weeks": 52,
+      "weeks_with_trades": 52,
+      "mean_weekly_net_bp_2": -8.6236,
+      "ci95_low": -26.0117,
+      "ci95_high": 7.1954,
+      "resamples": 5000,
+      "block_weeks": 4,
+      "seed": 294
+    }
+  },
+  "gates": {
+    "discovery_min_200_trades": true,
+    "discovery_net_bp_2_positive": false,
+    "discovery_pf_2bp_ge_1_05": false,
+    "discovery_at_least_2_of_4_years_positive": true,
+    "discovery_pf_4bp_ge_0_90": true,
+    "validation_min_75_trades": true,
+    "validation_net_bp_2_positive": false,
+    "validation_pf_2bp_ge_1_05": false,
+    "validation_bootstrap_ci_lower_gt_zero": false,
+    "validation_pf_4bp_ge_0_90": false
+  },
+  "strategy_pnl_2022_plus_calculated": false,
+  "limitations": [
+    "M5 BID-only; short ASK-side execution is not observed.",
+    "1/2/4bp costs are modeled, not verified broker/prop costs.",
+    "No swaps, margin, overnight floating equity or FundedNext challenge replay.",
+    "2017-2021 is research-contaminated, not pristine OOS."
+  ]
+}
