@@ -1,0 +1,15 @@
+{
+  "cost_bp": 2,
+  "weeks_including_zero_trade_weeks": 53,
+  "weeks_with_trade": 37,
+  "observed_mean_weekly_net_r": -3.276966136648918,
+  "bootstrap_replicates": 5000,
+  "block_length_weeks": 4,
+  "seed": 291,
+  "mean_weekly_net_r_ci95": [
+    -9.52530359701779,
+    0.040432063083401394
+  ],
+  "bootstrap_probability_mean_positive": 0.0342,
+  "diagnostic": "Full weekly series not embedded here; recompute from locked runner and trade ledger."
+}
