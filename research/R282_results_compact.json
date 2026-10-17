@@ -1,0 +1,22 @@
+{
+  "round": "R282",
+  "verdict": "INVALID_TEST_DATA_INADEQUATE",
+  "stage": "STOPPED_BEFORE_STRATEGY_OUTCOME_EVALUATION",
+  "preregistration": "research/R282_EURUSD_WEEKEND_GAP_FADE_PREREGISTRATION.md",
+  "source": {
+    "archive_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "source_collector_option": "-fl",
+    "paired_m1_rows_after_heuristic": 3718698,
+    "observed_weekend_closure_candidates": 3,
+    "tradable_events_after_exact_t_plus_10": 0,
+    "closed_trades": 0
+  },
+  "reason": "The -fl source has omitted most Sunday reopening rows. Only three qualifying long-gap candidates remained, and none had a complete exact T+10 sequence.",
+  "interpretation": "Not evidence for or against weekend gap fade. No strategy outcome metrics calculated; PF/net/DD undefined.",
+  "decision": "Close this data attempt. Do not alter the event definition post hoc. Retry only with verified BID/ASK M1 data retaining actual weekend reopening observations.",
+  "limitations": [
+    "Synthetic-flat row removal is heuristic.",
+    "No forward period outcomes were calculated.",
+    "No FundedNext challenge replay."
+  ]
+}
