@@ -44,3 +44,8 @@ Locked: 2026-10-17, before calculating gap thresholds, trades, returns, or PnL.
 ## Reproducibility
 - No GitHub Actions backtest will be run. Signal/stop simulation and statistics execute locally in Python.
 - Archive exact runner, aggregate JSON, discovery/validation trade ledger, yearly and weekly summaries, session-quality audit, hashes and binary verdict in GitHub.
+
+
+## Implementation clarification — 2026-10-17 (timestamp fields only; no PnL-rule change)
+
+The first locked-screen run exposed a reporting-label issue: M5 rows are timestamped at bar start, whereas the forced session-close fill uses the 17:25 bar's close, which occurs at 17:30 local. On the corrected runner, the trade ledger will label stop/target event times only to the triggering M5 bar (not claim an exact tick timestamp), and the forced close as 17:30 local. This changes no entry, exit price, intrabar ordering, PnL, cost, gate or signal rule. The identical historical metric calculation will be rerun to verify the corrected implementation after this amendment.
