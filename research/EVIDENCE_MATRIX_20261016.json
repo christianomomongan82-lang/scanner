@@ -219,6 +219,19 @@
         "research/R287_session_quality_summary.csv"
       ],
       "caveat": "M5 BID-only, modeled transaction costs, no funded account equity replay, no post-2021 outcome calculation."
+    },
+    {
+      "id": "R288_US_INDEX_INTRADAY_RESIDUAL_FOLLOW",
+      "status": "FAILED_LOCKED_REPLAY_RESULTS_ARCHIVED",
+      "finding": "Following same-date cross-index return residual loses in 2022-2025 (718 trades, PF 0.795, -3389.34 bp at 2 bp modeled cost) and the 2026 later check (154 trades, PF 0.943, -116.46 bp). Four-week weekly-net bootstrap 95% CI is entirely below zero. Matched fade direction only performs better in contaminated 2022-2025 and also fails 4 bp robustness and 2026.",
+      "artifacts": [
+        "research/R288_US_INDEX_INTRADAY_RESIDUAL_FOLLOW_PREREGISTRATION.md",
+        "research/R288_FINAL_REPORT.md",
+        "research/R288_results_compact.json",
+        "research/r288_us_index_intraday_residual_follow.py",
+        "research/R288_annual_follow_2bp.csv"
+      ],
+      "caveat": "BID-only M5; modeled costs; repeated-flat filter is heuristic. 2022-2025 is contaminated and 2026 is not claimed pristine at program level. No funded challenge replay. No alpha block retained; methods only."
     }
   ]
 }
