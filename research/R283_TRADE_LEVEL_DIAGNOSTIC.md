@@ -50,7 +50,7 @@ At 2 bp, net R by instrument:
 
 Annual discovery net R was negative in every year: 2017 -0.832R (only 28 trades), 2018 -8.103R, 2019 -25.076R, and 2020 -43.889R. Validation 2021 was -34.830R.
 
-A descriptive four-week block bootstrap on weekly aggregated net R at 2 bp gave mean weekly net R / 95% interval of -0.590 / [-1.152, -0.072] for discovery (132 weeks) and -0.941 / [-1.458, -0.433] for validation (37 weeks). This is a post-hoc diagnostic, not a preregistered gate; summing R across simultaneous instruments is not a funded-account exposure simulation.
+A descriptive four-week block bootstrap on weekly aggregated net R at 2 bp (50,000 resamples; seed 283) gave mean weekly net R / 95% interval of -0.590 / [-1.152, -0.072] for discovery (132 weeks) and -0.941 / [-1.458, -0.433] for validation (37 weeks). This is a post-hoc diagnostic, not a preregistered gate; summing R across simultaneous instruments is not a funded-account exposure simulation.
 
 ## Decision and next use
 
