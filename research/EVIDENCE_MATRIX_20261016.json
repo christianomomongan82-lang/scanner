@@ -1,6 +1,6 @@
 {
   "as_of": "2026-10-17",
-  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R286",
+  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R287",
   "execution_blocks": {
     "quote_side_bid_ask": "reusable implementation control; local smoke-checked; not alpha evidence",
     "preserve_gaps": "reusable data-integrity control; not alpha evidence",
@@ -122,6 +122,11 @@
       "id": "R286_US500_3SESSION_OVEREXTENSION_FADE",
       "status": "FAILED",
       "evidence": "Q80 three-session absolute move 1.7307755%; at 2 bp, 165 discovery trades PF 0.9882/-87.79 bp; 47 validation trades PF 0.9869/-15.25 bp. The matched continuation parent loses more but candidate remains negative."
+    },
+    {
+      "id": "R287_US_INDEX_INTRADAY_RESIDUAL_REVERSION",
+      "status": "FAILED",
+      "evidence": "Residual fade: discovery 552 trades PF 0.802/-2742.47 bp and validation 193 trades PF 0.628/-1510.80 bp at modeled 2 bp. The matched residual-following parent was better but is diagnostic only and not independently validated."
     }
   ],
   "decision": "No candidate promoted R270-R283. R283 is failed; trade-level failure mechanism was diagnosed post hoc. No funded-ready strategy. Ledger/runner archival gap remains open.",
@@ -138,7 +143,8 @@
     "R283_US_indices": "BID-only cached M5 archives; round-trip costs modeled at 1/2/4 bps; source provenance and actual CFD spread/commission/slippage/swaps not verified. R283 failed discovery and validation; 2022-2025 outcomes were not calculated.",
     "R284_US_indices": "Late-morning 10:00-11:55 continuation tested on four M5 BID-only cached R205 artifacts. Costs 1/2/4 bp are modeled; flat-row screening is heuristic. R284 failed discovery gates; no 2022-2025 or 2026 outcomes computed. Exact runner/row ledger not yet archived.",
     "R285_US500_TOM": "Calendar-seasonality LONG strategy on US500 M5 BID-only artifact 11709864394. Candidate rule first 3 and last 2 observed active RTH sessions each month, 09:40-15:55 ET, modeled 1/2/4 bp costs. R285 failed year-stability and validation gates; no 2022-2025 or 2026 PnL outcomes calculated.",
-    "R286_US500_3SESSION_FADE": "US500 M5 BID-only artifact 11709864394. R286 faded the top-quintile three-active-session absolute move; same-next-session intraday entry/exit. Candidate failed discovery and validation at modeled 2 bp; no 2022-2025 or 2026 PnL computed, no funded replay. Costs not actual observed execution costs."
+    "R286_US500_3SESSION_FADE": "US500 M5 BID-only artifact 11709864394. R286 faded the top-quintile three-active-session absolute move; same-next-session intraday entry/exit. Candidate failed discovery and validation at modeled 2 bp; no 2022-2025 or 2026 PnL computed, no funded replay. Costs not actual observed execution costs.",
+    "R287_US_INDEX_INTRADAY_RESIDUAL": "Four R205 US index M5 BID-only archives. Per-symbol Q75 residual magnitude fit on 2017-2020; entry 13:05 ET, flat at 15:55 open. R287 fade failed; 2022-2025 and 2026 PnL not calculated. Parent follows residual and was positive across discovery aggregate/2021 validation, but direction was only diagnostic within this study; selection bias prohibits promotion. Cost stress is modeled only."
   },
   "diagnostics": [
     {
@@ -199,6 +205,20 @@
         "research/R286_skipped_signals.csv"
       ],
       "caveat": "M5 BID-only source, modeled transaction cost stresses, no DLL/MLL equity-path challenge replay. Later outcomes were not calculated."
+    },
+    {
+      "id": "R287_US_INDEX_INTRADAY_RESIDUAL_REVERSION",
+      "status": "FAILED_REPLAY_AND_PAIRED_LEDGER_ARCHIVED",
+      "finding": "The fade direction was negative in both historical discovery and validation. The matched follow-residual direction was superior on identical events (discovery PF 1.044, validation PF 1.253 at 2 bp), but was not a preselected primary candidate and remains a biased diagnostic lead requiring independent testing.",
+      "artifacts": [
+        "research/R287_US_INDEX_INTRADAY_RESIDUAL_REVERSION_PREREGISTRATION.md",
+        "research/R287_FINAL_REPORT.md",
+        "research/R287_results_compact.json",
+        "research/r287_intraday_residual_reversion.py",
+        "research/R287_paired_ledger_2017_2021.csv",
+        "research/R287_session_quality_summary.csv"
+      ],
+      "caveat": "M5 BID-only, modeled transaction costs, no funded account equity replay, no post-2021 outcome calculation."
     }
   ]
 }
