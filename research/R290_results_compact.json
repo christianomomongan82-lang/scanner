@@ -38,7 +38,7 @@
       "USA500": 2659,
       "USATECH": 2671
     },
-    "prefilter_valid_retests_discovery_2016_2020": 1662,
+    "prefilter_valid_retests_discovery_2016_2020": 1680,
     "selected_trades_discovery_2016_2020": 1059,
     "selected_trades_validation_2021": 214
   },
@@ -50,19 +50,24 @@
         "net_R": -95.5951,
         "net_bps": -4415.95,
         "max_drawdown_R": 104.38,
-        "win_rate_pct": 0
+        "win_rate_pct": 41.92634560906516,
+        "mean_R": -0.09026924242602005,
+        "median_R": -0.5245677319587482,
+        "pf_notional_bps": 0.8184060510716927
       },
       "4bp": {
         "pf_R": 0.732,
         "net_R": -165.0495,
         "net_bps": -6533.95,
-        "max_drawdown_R": 170.72
+        "max_drawdown_R": 170.72,
+        "win_rate_pct": 40.8876298394712
       },
       "6bp": {
         "pf_R": 0.6435,
         "net_R": -234.5039,
         "net_bps": -8651.95,
-        "max_drawdown_R": 239.68
+        "max_drawdown_R": 239.68,
+        "win_rate_pct": 39.75448536355052
       }
     },
     "validation_2021": {
@@ -71,19 +76,22 @@
         "pf_R": 1.2202,
         "net_R": 20.9254,
         "net_bps": 973.58,
-        "max_drawdown_R": 13.57
+        "max_drawdown_R": 13.57,
+        "win_rate_pct": 51.401869158878505
       },
       "4bp": {
         "pf_R": 1.0824,
         "net_R": 8.3705,
         "net_bps": 545.58,
-        "max_drawdown_R": 15.85
+        "max_drawdown_R": 15.85,
+        "win_rate_pct": 49.532710280373834
       },
       "6bp": {
         "pf_R": 0.9613,
         "net_R": -4.1844,
         "net_bps": 117.58,
-        "max_drawdown_R": 18.39
+        "max_drawdown_R": 18.39,
+        "win_rate_pct": 47.66355140186916
       }
     },
     "annual_discovery_2bp": {
