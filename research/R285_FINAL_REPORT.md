@@ -54,8 +54,8 @@ FAIL: at least 3/4 positive discovery years (1/4); validation PF at 2 bp and net
 - Pre-outcome data amendment: [R285_DQ1](R285_DQ1_PREOUTCOME_CALENDAR_AMENDMENT.md)
 - Machine metrics: [R285 results JSON](R285_results_compact.json)
 - Replay source: [r285_us500_tom_intraday.py](r285_us500_tom_intraday.py)
-- Candidate ledger: [2017–2021 candidate trades](R285_candidate_ledger_2017_2021.csv)
-- Matched parent ledger: [2017–2021 all-session trades](R285_parent_ledger_2017_2021.csv)
-- Quality audit: [session eligibility audit](R285_session_quality_audit.csv) and [selected-date skip log](R285_selected_session_skips.csv)
+- Candidate ledger: [Candidate trade ledger at 2 bp](R285_candidate_ledger_2bp.csv)
+- Matched parent baseline metrics are recorded in the JSON; the archived replay runner reconstructs this baseline.
+- Quality audit: [selected-date skip log](R285_selected_session_skips.csv)
 
-All signal returns were calculated locally in Python. No GitHub Actions backtest was created or dispatched.
+Replay runner `r285_us500_tom_intraday.py` is archived and was rerun from the extracted CSV; counts, PF and net bps matched the local result for candidate and parent at all 1/2/4 bp cost levels. The row-level candidate ledger contains all 284 trades through validation 2021. No GitHub Actions backtest was created or dispatched.
