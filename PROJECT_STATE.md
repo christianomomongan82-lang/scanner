@@ -459,3 +459,25 @@ Continuation instruction: read the latest R270–R274 results and `research/EVOL
 - At 2 bps, discovery 2017–2020 = 709 trades, PF 0.748, net -77.90R; validation 2021 = 163 trades, PF 0.599, net -34.83R. Trade-count gates passed, expectancy gates failed. 2022–2025 deliberately not scored; no forward period opened.
 - Verdict: **GAGAL**, close this exact spec, do not tune it. No alpha retained. Data are BID-only and costs modeled; actual spread/CFD point value/commission/slippage/swaps and funded equity-path replay remain absent. No Actions workflow launched.
 - R283 source runner and full row-level ledger were executed/stored locally in this session but are not yet archived in GitHub; report, preregistration, compact period summary and input audit are archived. Do not claim repository-only full reproducibility until source/ledger are committed.
+
+
+## 2026-10-17 — R283 trade-level postmortem
+
+**R283 remains GAGAL; no strategy was promoted.** The locked local trade ledger was decomposed after the fail decision; this was diagnostic only, not parameter tuning.
+
+- Discovery 2017–2020: 709 trades, gross PF 0.795 and gross -61.75R before modeled costs; at 2 bp PF 0.748 and -77.90R.
+- Validation 2021: 163 trades, gross PF 0.638 and gross -30.52R; at 2 bp PF 0.599 and -34.83R.
+- Discovery exits: 152 target fills versus 237 stop exits; session-close exits were 320 trades and contributed only +1.04R after 2-bp cost.
+- Validation exits: 35 target fills versus 72 stop exits; the stop share rose from 33.43% in discovery to 44.17%, while the target share stayed near 21.3–21.5%.
+- The strategy is negative before modeled costs; costs worsen it but do not explain the underlying failure.
+- Fading gap-ups (SHORT) was materially weaker than fading gap-downs (LONG) in both segments. Both directions remained negative. This asymmetry is a hypothesis lead only; it is not evidence for gap continuation.
+- 2022–2025 was not scored, and 2026 remains unopened under the existing contamination rules. R283's exact spec must not be tuned.
+
+Archived diagnostic artifacts:
+- [Trade-level diagnostic](research/R283_TRADE_LEVEL_DIAGNOSTIC.md)
+- [Exit decomposition](research/R283_EXIT_DECOMPOSITION.csv)
+- [Direction decomposition](research/R283_DIRECTION_DECOMPOSITION.csv)
+- [Instrument/year decomposition](research/R283_INSTRUMENT_YEAR_DECOMPOSITION.csv)
+- [Machine-readable diagnostic results](research/R283_DIAGNOSTIC_RESULTS.json)
+
+**Known persistence gap:** the 872-row R283 trade ledger and exact runner were available in the local analysis workspace, but they have not yet been committed to this branch. The report explicitly records that repository-only reproduction is incomplete. Next work should resolve this gap by archiving the row ledger/runner or recreating and committing them from the verified source archives; do not pretend it is already done and do not ask the user to upload data that are available in the current runtime.
