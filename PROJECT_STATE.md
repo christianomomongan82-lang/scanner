@@ -554,3 +554,12 @@ Archived diagnostic artifacts:
 - **Binary verdict GAGAL**; no 2022–2026 PnL was calculated. No parameter retuning or promotion.
 - R205 cached M5 BID-only source artifacts: DEUIDXEUR 11710710062, FRAIDXEUR 11710800007, EUSIDXEUR 11710326105; hashes and eligible-session counts are in the results JSON. EUSIDXEUR has materially poorer early coverage because repeated-flat bars were excluded.
 - Limits: modeled costs rather than observed executable costs, no verified CFD multiplier/fees/swaps, M5 intrabar stop/target order approximated stop-first, no equity-aware DLL/MLL funded replay. No alpha block promoted; retain only session quality, frozen quantile calibration and bootstrap gate as research process.
+
+
+## R290 — US cash-open breakout-retest — GAGAL (2026-10-17)
+- Pre-registration committed before testing: [R290 rules](research/R290_US_CASH_OPEN_BREAKOUT_RETEST_PREREGISTRATION.md). Exact local replay runner: [r290_us_cash_open_breakout_retest.py](research/r290_us_cash_open_breakout_retest.py).
+- [Final report](research/R290_FINAL_REPORT.md) · [exact compact results JSON](research/R290_results_compact.json) · [annual summary](research/R290_annual_summary.csv) · [validation block-bootstrap output](research/R290_validation_weekly_bootstrap_2bp.json) · [session-quality summary](research/R290_session_quality_summary.csv).
+- New child relative to R263: require a separate retest of the opening-range boundary, close back outside, then enter next M5 open (5-minute delay); stop is opposite OR boundary, target 1.5R, one trade total across USA500/USATECH per day, stop-first if both levels touched in one M5 bar.
+- Discovery 2016–2020: 1,059 trades; at 2 bp modeled cost, PF_R 0.834, net −95.595R, max closed-trade DD 104.38R; all five years negative. At 4 bp PF_R 0.732; at 6 bp 0.644.
+- Validation 2021: 214 trades; at 2 bp PF_R 1.220, net +20.925R, but block-bootstrap weekly-net-R 95% CI [-0.111, +0.884] crosses zero; at 6 bp PF_R 0.961. Binary verdict **GAGAL**.
+- Post-2021 PnL was intentionally not calculated after preregistered gates failed. Data is cached R205 M5 BID-only USA500 / USATECH, latest source 2026-10-09 20:10 UTC; 2/4/6 bp are modeled cost stress, not measured broker costs. No funded-equity DLL/MLL replay. No alpha block retained.
