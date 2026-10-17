@@ -1,6 +1,6 @@
 {
   "as_of": "2026-10-17",
-  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R285",
+  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R286",
   "execution_blocks": {
     "quote_side_bid_ask": "reusable implementation control; local smoke-checked; not alpha evidence",
     "preserve_gaps": "reusable data-integrity control; not alpha evidence",
@@ -117,6 +117,11 @@
       "id": "R285_US500_turn_of_month_intraday",
       "status": "FAILED",
       "evidence": "At 2 bp, discovery 226 trades PF 1.130 / +785.76 bp but only 1/4 years positive; 2021 validation 58 trades PF 0.632 / -669.02 bp. Validation PF at 4 bp 0.583. Parent all-session long returned +539.74 bp in 2021."
+    },
+    {
+      "id": "R286_US500_3SESSION_OVEREXTENSION_FADE",
+      "status": "FAILED",
+      "evidence": "Q80 three-session absolute move 1.7307755%; at 2 bp, 165 discovery trades PF 0.9882/-87.79 bp; 47 validation trades PF 0.9869/-15.25 bp. The matched continuation parent loses more but candidate remains negative."
     }
   ],
   "decision": "No candidate promoted R270-R283. R283 is failed; trade-level failure mechanism was diagnosed post hoc. No funded-ready strategy. Ledger/runner archival gap remains open.",
@@ -132,7 +137,8 @@
     "EURUSD_weekend_reopen_R282": "Input archive SHA256 b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e was collected with -fl. Weekend reopening is not observable enough for this hypothesis. Do not infer no edge; obtain different source.",
     "R283_US_indices": "BID-only cached M5 archives; round-trip costs modeled at 1/2/4 bps; source provenance and actual CFD spread/commission/slippage/swaps not verified. R283 failed discovery and validation; 2022-2025 outcomes were not calculated.",
     "R284_US_indices": "Late-morning 10:00-11:55 continuation tested on four M5 BID-only cached R205 artifacts. Costs 1/2/4 bp are modeled; flat-row screening is heuristic. R284 failed discovery gates; no 2022-2025 or 2026 outcomes computed. Exact runner/row ledger not yet archived.",
-    "R285_US500_TOM": "Calendar-seasonality LONG strategy on US500 M5 BID-only artifact 11709864394. Candidate rule first 3 and last 2 observed active RTH sessions each month, 09:40-15:55 ET, modeled 1/2/4 bp costs. R285 failed year-stability and validation gates; no 2022-2025 or 2026 PnL outcomes calculated."
+    "R285_US500_TOM": "Calendar-seasonality LONG strategy on US500 M5 BID-only artifact 11709864394. Candidate rule first 3 and last 2 observed active RTH sessions each month, 09:40-15:55 ET, modeled 1/2/4 bp costs. R285 failed year-stability and validation gates; no 2022-2025 or 2026 PnL outcomes calculated.",
+    "R286_US500_3SESSION_FADE": "US500 M5 BID-only artifact 11709864394. R286 faded the top-quintile three-active-session absolute move; same-next-session intraday entry/exit. Candidate failed discovery and validation at modeled 2 bp; no 2022-2025 or 2026 PnL computed, no funded replay. Costs not actual observed execution costs."
   },
   "diagnostics": [
     {
@@ -178,6 +184,21 @@
         "research/R285_selected_session_skips.csv"
       ],
       "caveat": "All data are M5 BID-only and transaction costs are modeled, not observed. 2022-2025 and 2026 outcomes were not computed; no funded replay performed."
+    },
+    {
+      "id": "R286_US500_3SESSION_OVEREXTENSION_FADE",
+      "status": "FAILED_REPLAY_AND_LEDGERS_ARCHIVED",
+      "finding": "The candidate reduced losses versus the same-event continuation parent but remains net-negative in discovery (-87.79 bp) and validation (-15.25 bp) at modeled 2 bp costs. No signal block retained.",
+      "artifacts": [
+        "research/R286_US500_3SESSION_OVEREXTENSION_FADE_PREREGISTRATION.md",
+        "research/R286_FINAL_REPORT.md",
+        "research/R286_results_compact.json",
+        "research/r286_us500_3session_fade.py",
+        "research/R286_candidate_ledger_2017_2021.csv",
+        "research/R286_matched_parent_ledger_2017_2021.csv",
+        "research/R286_skipped_signals.csv"
+      ],
+      "caveat": "M5 BID-only source, modeled transaction cost stresses, no DLL/MLL equity-path challenge replay. Later outcomes were not calculated."
     }
   ]
 }
