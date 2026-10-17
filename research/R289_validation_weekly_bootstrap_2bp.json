@@ -1,0 +1,9 @@
+{
+  "mean_r_per_week": 0.05939199,
+  "ci95_low": -0.17672455,
+  "ci95_high": 0.28171188,
+  "weeks": 52,
+  "block_weeks": 4,
+  "replicates": 5000,
+  "seed": 289
+}
