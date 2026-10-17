@@ -1,0 +1,125 @@
+{
+  "candidate_id": "R293_USA500_OVERNIGHT_BREADTH_FILTER",
+  "verdict": "GAGAL",
+  "preregistration": "research/R293_USA500_OVERNIGHT_BREADTH_FILTER_PREREGISTRATION.md",
+  "inputs": [
+    {
+      "symbol": "usa500idxusd",
+      "artifact_id": 11709864394,
+      "sha256": "df2a5edfa49cb15f8bcf5b13577e95907a0f0c54d02c7feed8bdbb7e3b6c49ee",
+      "valid_sessions_2016_2021": 1480
+    },
+    {
+      "symbol": "usatechidxusd",
+      "artifact_id": 11710370389,
+      "sha256": "82b06c38f66cd1387097691baac1d45c9463b6540eea9dfe28a894d85e122f7c",
+      "valid_sessions_2016_2021": 1490
+    },
+    {
+      "symbol": "usa30idxusd",
+      "artifact_id": 11710730507,
+      "sha256": "8fcef9d76b31e99ae8d0175e769307ab13f930ae3ec2c17ef6baf0311ea1783a",
+      "valid_sessions_2016_2021": 1487
+    },
+    {
+      "symbol": "ussc2000idxusd",
+      "artifact_id": 11710111254,
+      "sha256": "c01c97d8705453d3fa3fd4ac1d386e9c1d72ab27e3b7d57d6cde53da9dfdf6f0",
+      "valid_sessions_2016_2021": 836
+    }
+  ],
+  "discovery": {
+    "period": "2017-2020",
+    "candidate": {
+      "trades": 442,
+      "gross_bp": 2204.4080893455,
+      "net_bp_1": 1762.4080893454998,
+      "pf_1bp": 1.1866750219783504,
+      "net_bp_2": 1320.4080893454998,
+      "pf_2bp": 1.1370066778269443,
+      "net_bp_4": 436.4080893454998,
+      "pf_4bp": 1.043451657340265,
+      "max_closed_pnl_drawdown_pct_fixed_notional_2bp": 24.53849015893363
+    },
+    "parent": {
+      "trades": 975,
+      "net_bp_2": 1533.086226462369,
+      "pf_2bp": 1.0700292541016854,
+      "net_bp_4": -416.91377353763085,
+      "pf_4bp": 0.981704411931291,
+      "max_closed_pnl_drawdown_pct_fixed_notional_2bp": 37.956632705279375
+    },
+    "annual_candidate": {
+      "2017": {
+        "trades": 92,
+        "pf_2bp": 1.0845821668164626,
+        "net_bp_2": 72.7810505638556,
+        "pf_4bp": 0.8836011865767182
+      },
+      "2018": {
+        "trades": 95,
+        "pf_2bp": 1.4660657938616055,
+        "net_bp_2": 660.7334011239699,
+        "pf_4bp": 1.3129375234645417
+      },
+      "2019": {
+        "trades": 129,
+        "pf_2bp": 1.0318521639655471,
+        "net_bp_2": 81.09711552066005,
+        "pf_4bp": 0.9337376372722453
+      },
+      "2020": {
+        "trades": 126,
+        "pf_2bp": 1.1050822772289413,
+        "net_bp_2": 505.79652213701445,
+        "pf_4bp": 1.0516470380353085
+      }
+    }
+  },
+  "validation": {
+    "period": "2021",
+    "candidate": {
+      "trades": 119,
+      "gross_bp": 487.77576122076556,
+      "net_bp_2": 249.7757612207656,
+      "pf_2bp": 1.144065257751434,
+      "net_bp_4": 11.775761220765535,
+      "pf_4bp": 1.0063727919173096,
+      "max_closed_pnl_drawdown_pct_fixed_notional_2bp": 4.203497710837889
+    },
+    "parent": {
+      "trades": 250,
+      "net_bp_2": 459.11574344939027,
+      "pf_2bp": 1.1092155287008665,
+      "net_bp_4": -40.88425655060978,
+      "pf_4bp": 0.9907475105880651,
+      "max_closed_pnl_drawdown_pct_fixed_notional_2bp": 3.398092194771989
+    },
+    "bootstrap_4week_5000": {
+      "candidate_mean_weekly_bp_2": 4.803380023476262,
+      "ci95_low": -5.547958201325787,
+      "ci95_high": 14.231790408566225,
+      "weeks": 52,
+      "weeks_with_trades": 47,
+      "seed": 293
+    }
+  },
+  "gates": {
+    "discovery_min_200_trades": true,
+    "discovery_net_bp_2_positive": true,
+    "discovery_pf_2bp_ge_1_05": true,
+    "discovery_at_least_2_of_4_years_positive": true,
+    "discovery_pf_4bp_ge_0_90": true,
+    "validation_min_75_trades": true,
+    "validation_net_bp_2_positive": true,
+    "validation_pf_2bp_ge_1_05": true,
+    "validation_bootstrap_ci_lower_gt_zero": false,
+    "validation_pf_4bp_ge_0_90": true
+  },
+  "no_strategy_pnl_calculated_2022_plus": true,
+  "limitations": [
+    "M5 BID-only sources; costs modeled rather than verified execution costs",
+    "No swaps, margin, floating overnight equity or FundedNext two-phase equity-path replay",
+    "2017-2021 historical periods are contaminated development/validation data"
+  ]
+}
