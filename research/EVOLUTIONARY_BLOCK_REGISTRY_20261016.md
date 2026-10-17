@@ -131,3 +131,12 @@ Persistence issue: full R283 ledger and runner still have not been committed to 
 | R284 one-per-day strongest normalized 10:00–11:55 directional move; child gate score >= 1.0; T+10 entry; 1.0× range stop/1.5R target | Child discovery 380 trades / PF 0.864 / -13.108R at 2 bp; 0/4 discovery years positive; validation 114 / PF 1.066 / +1.326R; discovery PF at 4 bp 0.797. Matched parent was negative as well. | **GAGAL.** Do not tune threshold, reverse direction or change time window after results. No signal block retained. |
 
 Reusable controls remain data/time integrity, exact phone-delay entry, one concurrent index position, gap-aware stop fill, same-bar stop-first, and force-flat at 15:55 bar open. These are execution controls, not alpha. The BID-only cost model and heuristic flat-bar filter remain limitations. R284 did not open 2022–2026 and did not run funded replay. Compact replay engine is archived as `research/r284_late_morning_continuation_replay.py` and its aggregate results were verified against the original local run (all discovery/validation parent/child counts, PF and net R matched exactly at 1/2/4 bp). Row-level ledger remains local and not archived.
+
+
+## R285 update (2026-10-17) — US500 turn-of-month intraday seasonality: FAILED
+
+| Candidate | Evidence | Disposition |
+|---|---|---|
+| First three / last two active US500 RTH sessions each month; LONG from 09:40 ET to 15:55 ET | At 2 bp: discovery 226 trades / PF 1.130 / +785.76 bp, but only 1/4 discovery years positive; 2021 validation 58 trades / PF 0.632 / -669.02 bp. Parent all-session long in 2021 was +539.74 bp. | **GAGAL.** Discovery total is dominated by 2020 and the 2021 validation result reverses sharply. Do not alter the calendar window/direction after outcome. |
+
+Only the calendar-seasonality hypothesis was tested; no 2022–2026 strategy outcomes were calculated. Reusable artifacts: `research/r285_us500_tom_intraday.py`, `research/R285_candidate_ledger_2bp.csv`, and `research/R285_selected_session_skips.csv`. Runner was rerun from the exact extracted CSV and matched candidate/parent aggregate metrics at 1/2/4 bp. Source remains M5 BID-only and cost assumptions are not verified executable costs. No signal block retained.
