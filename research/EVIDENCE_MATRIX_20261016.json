@@ -247,6 +247,21 @@
         "research/R289_session_quality_audit_summary.csv"
       ],
       "caveat": "Post-2021 PnL intentionally not calculated after validation gate failed. Cached M5 BID-only inputs and modeled costs; stop/target sequence approximate; EUSIDX early session data quality weaker; no funded replay. No alpha block retained."
+    },
+    {
+      "id": "R290_US_CASH_OPEN_BREAKOUT_RETEST",
+      "status": "FAILED_LOCKED_DISCOVERY_VALIDATION_BOOTSTRAP",
+      "finding": "Separate retest entry does not repair the opening-range breakout family in discovery: 1,059 trades, PF_R 0.8337 and -95.595R at 2 bp; all five discovery years negative. Validation 2021: 214 trades, PF_R 1.2202 and +20.925R at 2 bp, but 4-week block-bootstrap weekly-net-R CI [-0.1112,+0.8843] crosses zero, and 6 bp PF_R is 0.9613.",
+      "artifacts": [
+        "research/R290_US_CASH_OPEN_BREAKOUT_RETEST_PREREGISTRATION.md",
+        "research/R290_FINAL_REPORT.md",
+        "research/R290_results_compact.json",
+        "research/r290_us_cash_open_breakout_retest.py",
+        "research/R290_annual_summary.csv",
+        "research/R290_validation_weekly_bootstrap_2bp.json",
+        "research/R290_session_quality_summary.csv"
+      ],
+      "caveat": "No post-2021 PnL calculated after preregistered gates failed. M5 BID-only, 2/4/6 bp modeled cost assumptions, no verified live execution costs or funded equity-path replay. No signal alpha block retained."
     }
   ]
 }
