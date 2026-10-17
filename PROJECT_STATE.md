@@ -618,3 +618,36 @@ Limitations: four cached index feeds are BID-only; 1/2/4 bp are modeled costs ra
 ### Next generation
 
 All candidates R270–R293 remain unpromoted. Continue with a materially distinct, preregistered hypothesis family; reuse integrity/latency/session and matched-parent controls, not failed signal blocks. Optimize the two-phase funded target completion probability/time subject to loss-rule breach risk; do not select by PF alone. Require all locked historical gates before any conditional later-period diagnostic, then a separate verified-cost/overnight-risk and FundedNext equity-aware two-phase challenge replay before any funded-ready claim.
+
+
+## Latest research update — R294 GAGAL (2026-10-17 local replay)
+
+**R294 USA500 Two-Sided Extreme-Breadth Overnight Direction — GAGAL.** The preregistration was committed before candidate outcomes were calculated.
+
+- [Preregistration](research/R294_USA500_TWO_SIDED_BREADTH_OVERNIGHT_PREREGISTRATION.md)
+- [Final report](research/R294_FINAL_REPORT.md)
+- [Compact results JSON](research/R294_results_compact.json)
+- [Local replay runner](research/r294_usa500_two_sided_breadth_overnight.py)
+- [Updated evolutionary block registry](research/EVOLUTIONARY_BLOCK_REGISTRY_20261016.md)
+- [Updated evidence matrix](research/EVIDENCE_MATRIX_20261016.json)
+
+### Locked hypothesis
+R294 crosses R293's positive-tail long-only breadth condition with a mirrored short tail: long when at least 75% of valid US-index feeds rose from 09:30 open to 15:45 close, short when at most 25% rose, otherwise flat. Entry is the USA500 15:55 M5 bar open; exit is the next quality-valid USA500 09:30 open. This tests whether closing breadth provides overnight directional information in both tails, without modifying R293's entry/exit or thresholds. Four cached R205 M5 BID feeds passed their registered SHA-256 checks; the local session-quality audit covered 5,531 instrument-date rows. PnL outcomes were restricted to discovery 2017–2020 and validation 2021; no 2022+ outcome was calculated.
+
+### Results at modeled 2 bp round-trip cost
+| Metric | Discovery 2017–2020 | Validation 2021 |
+|---|---:|---:|
+| Candidate trades | 786 | 216 |
+| Long / short trades | 442 / 344 | 119 / 97 |
+| Candidate net bp | -137.72 | -448.43 |
+| Candidate PF | 0.993 | 0.891 |
+| Candidate PF at 4 bp | 0.918 | 0.797 |
+| R293 positive-tail long-only net bp | +1,320.41 | +249.78 |
+| R293 positive-tail long-only PF | 1.137 | 1.144 |
+| Unconditional-long net bp | +1,533.09 | +459.12 |
+| Unconditional-long PF | 1.070 | 1.109 |
+
+At 2 bp, the child lost in both partitions and underperformed both matched controls. Annual discovery child PnL was negative in 2017 (-327.49 bp) and 2019 (-1,249.12 bp), positive in 2018 (+609.19 bp) and 2020 (+829.70 bp). The 2021 weekly-net-bp bootstrap mean was -8.624 bp/week with 95% CI [-26.012, +7.195] over 52 weeks including zero weeks, 5,000 circular four-week block resamples, seed 294. Multiple preregistered gates failed. **R294 = GAGAL; no alpha block retained and no FundedNext replay run.**
+
+### Evolutionary disposition
+R293's long-tail result remains the stronger historical diagnostic, but it also failed its robustness gate and is not approved for funded use. R294 shows the negative-breadth short mirror was not beneficial on these sampled windows. Do not retune the 25% short cutoff or rerun the same periods as a rescue. Next research generation must move to another economically distinct hypothesis family, reuse only integrity/execution/paired-comparison controls, retain the registered failed signal blocks as failures, and keep 2022+ R294 PnL unopened. All cached inputs are BID-only; short ASK-side fills, real spreads/slippage/commission/swaps, overnight floating equity, margin and FundedNext loss-rule path remain unverified.
