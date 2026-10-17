@@ -95,3 +95,12 @@ Reusable learning: correct R257's implementation failure so it no longer hides p
 - The preregistered event detector looked for a ≥36-hour gap where the previous observed timestamp was Friday UTC and the current timestamp was Sunday/Monday UTC; entry required an exact T+10 minute timestamp. In the entire archive it found four ≥36-hour timestamp gaps and three matching weekday candidates. All three were at Sunday/Monday 00:00 UTC holiday/data-gap timestamps, not executable FX weekly reopenings; none had an exact T+10 timestamp. Zero trades opened.
 - **Binary verdict: GAGAL at the discovery/validation data gate, but alpha was not tested.** Do not interpret zero trades as proof gap fading loses money. 2022–2025 forward outcomes were not calculated. Dataset provenance is the same Dukascopy M1 BID/ASK archive (artifact 11959096102, SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`); its paired-flat filter remains heuristic because the source used `-fl`.
 - Close this event-detection/execution rule on this archive. Do not loosen the T+10 timestamp requirement or relabel midnight timestamps as a true weekly reopening after seeing the failure. A future gap study needs a separately preregistered, verifiably session-aware input or event definition.
+
+
+## R282 update (2026-10-17) — weekend-reopening gap fade: INVALID TEST / DATA INADEQUATE
+
+- Preregistration: [R282 design](research/R282_EURUSD_WEEKEND_GAP_FADE_PREREGISTRATION.md)
+- Runner: [R282 local source](research/r282_eurusd_weekend_gap_fade.py)
+- Results: [compact verdict](research/R282_results_compact.json) · [event audit](research/R282_event_audit.csv) · [report](research/R282_FINAL_REPORT.md)
+- The input archive was collected with Dukascopy `-fl`; most Sunday reopening observations were omitted. Only three >=36-hour closures met the literal Friday-to-Sunday/Monday date rule, and none had exact sequential T+10 data. Zero trades were evaluated.
+- Verdict is **invalid test due data**, not evidence for or against the hypothesis. No forward period outcomes calculated and no holdout opened. Retry only with verified BID/ASK M1 data retaining true weekend reopen observations. No Actions workflow launched.
