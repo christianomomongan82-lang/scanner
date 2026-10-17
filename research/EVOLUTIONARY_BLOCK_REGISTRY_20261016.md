@@ -149,3 +149,13 @@ Only the calendar-seasonality hypothesis was tested; no 2022–2026 strategy out
 | Fade the top-quintile absolute three-active-session return; next-session 09:40–15:55 ET intraday holding | At 2 bp: discovery 165 trades / PF 0.988 / -87.79 bp; validation 47 / PF 0.987 / -15.25 bp. Matched continuation parent also lost: -572.21 bp discovery and -172.75 bp validation. | **GAGAL.** Relative loss reduction against a weaker parent is not a positive edge; no signal block retained. |
 
 The signal used Q80 1.7307755% fit on 858 discovery windows. Do not tune Q80 or change direction/time after results. 2022–2026 results were not calculated. Source is M5 BID-only with modeled 1/2/4 bp costs, and no funded replay was run. Artifacts archived: `R286_FINAL_REPORT.md`, `R286_results_compact.json`, `r286_us500_3session_fade.py`, candidate and matched-parent ledgers, and `R286_skipped_signals.csv`.
+
+
+## R287 update (2026-10-17) — intraday cross-index residual fade: FAILED
+
+| Candidate / component | Evidence | Disposition |
+|---|---|---|
+| Fade the highest normalized 10:00–12:55 index residual versus same-day cross-sectional median; enter 13:05, flat 15:55 | At 2 bp, fade PF 0.802 / -2,742.47 bp on 552 discovery trades; validation PF 0.628 / -1,510.80 bp on 193 trades. | **GAGAL.** Clear negative residual-fade edge; no signal block retained. |
+| Matched residual-following parent | Same 745 events: discovery PF 1.044 / +534.47 bp; validation PF 1.253 / +738.80 bp at 2 bp. | Diagnostic only. Direction selection after seeing this side-by-side result introduces selection bias; it needs an independent pre-registered test, and discovery PF misses 1.05. Do not directly promote. |
+
+R287 uses 4 correlated US index M5 BID-only snapshots, one index trade maximum per session, per-symbol Q75 residual magnitude fitted on discovery 2017–2020, and a five-minute manual-entry delay after bar confirmation. 2022–2026 outcomes were not calculated. No funded replay. Artifacts archived: preregistration, report, results JSON, local engine, paired row ledger, and session-quality summary.
