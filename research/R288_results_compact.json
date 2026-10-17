@@ -1,0 +1,220 @@
+{
+  "candidate_id": "R288_US_INDEX_INTRADAY_RESIDUAL_FOLLOW",
+  "preregistration_commit": "5cf412ad6d335d4c8f651750cd312804ef9a0c61",
+  "verdict": "GAGAL",
+  "source": {
+    "run_id": 38160487617,
+    "source_latest_utc": "2026-10-09T20:10:00+00:00",
+    "instruments": {
+      "USA500": {
+        "artifact_id": 11709864394,
+        "sha256_gz": "df2a5edfa49cb15f8bcf5b13577e95907a0f0c54d02c7feed8bdbb7e3b6c49ee",
+        "eligible_sessions": 2409
+      },
+      "USATECH": {
+        "artifact_id": 11710370389,
+        "sha256_gz": "82b06c38f66cd1387097691baac1d45c9463b6540eea9dfe28a894d85e122f7c",
+        "eligible_sessions": 2421
+      },
+      "USA30": {
+        "artifact_id": 11710730507,
+        "sha256_gz": "8fcef9d76b31e99ae8d0175e769307ab13f930ae3ec2c17ef6baf0311ea1783a",
+        "eligible_sessions": 2417
+      },
+      "USSC2000": {
+        "artifact_id": 11710111254,
+        "sha256_gz": "c01c97d8705453d3fa3fd4ac1d386e9c1d72ab27e3b7d57d6cde53da9dfdf6f0",
+        "eligible_sessions": 2018
+      }
+    },
+    "feed": "GitHub Actions R205 cached M5 BID-only index files"
+  },
+  "method": {
+    "signal": "10:00 ET bar open to 12:55 ET bar close return minus same-date median of 3+ eligible symbols",
+    "direction": "follow signed residual",
+    "event_selection": "highest per-symbol normalized absolute residual per date; alphabetical tie-break; score >= 1",
+    "frozen_threshold_fit": "per-symbol Q75 absolute residual fitted on eligible 2017-2020 rows only",
+    "thresholds_abs_residual_pct": {
+      "USA500": 0.07046102130376375,
+      "USATECH": 0.2663954936046764,
+      "USA30": 0.14750639353222628,
+      "USSC2000": 0.43405576506670845
+    },
+    "entry": "13:05 ET bar open (5 minutes after 13:00 ET decision)",
+    "exit": "15:55 ET bar open",
+    "max_positions": 1,
+    "modeled_round_trip_costs_bps": [
+      1,
+      2,
+      4
+    ],
+    "pnl_years": "2022-2026 only; no post-entry PnL scored on 2017-2021"
+  },
+  "coverage": {
+    "eligible_dates_with_3plus_symbols_2022_2025": 990,
+    "eligible_dates_with_3plus_symbols_2026": 193,
+    "selected_trades_2022_2025": 718,
+    "selected_trades_2026": 154,
+    "valid_sessions_by_symbol": {
+      "USA500": 2409,
+      "USATECH": 2421,
+      "USA30": 2417,
+      "USSC2000": 2018
+    }
+  },
+  "metrics": {
+    "exploratory_2022_2025": {
+      "follow_candidate": {
+        "1bp": {
+          "trades": 718,
+          "pf": 0.8347553404570802,
+          "net_bps": -2671.342824505031,
+          "mean_bps": -3.7205331817618816,
+          "max_drawdown_bps": 3218.6502693242255,
+          "win_rate_pct": 49.58217270194986
+        },
+        "2bp": {
+          "trades": 718,
+          "pf": 0.7950162323624805,
+          "net_bps": -3389.342824505031,
+          "mean_bps": -4.720533181761882,
+          "max_drawdown_bps": 3923.6195893691056,
+          "win_rate_pct": 47.910863509749305
+        },
+        "4bp": {
+          "trades": 718,
+          "pf": 0.7210632930866676,
+          "net_bps": -4825.34282450503,
+          "mean_bps": -6.72053318176188,
+          "max_drawdown_bps": 5333.619589369099,
+          "win_rate_pct": 45.26462395543175
+        }
+      },
+      "matched_fade_parent": {
+        "1bp": {
+          "trades": 718,
+          "pf": 1.0868877152729313,
+          "net_bps": 1235.342824505031,
+          "mean_bps": 1.7205331817618819,
+          "max_drawdown_bps": 2006.1550746982139,
+          "win_rate_pct": 48.8857938718663
+        },
+        "2bp": {
+          "trades": 718,
+          "pf": 1.035463930693916,
+          "net_bps": 517.3428245050312,
+          "mean_bps": 0.720533181761882,
+          "max_drawdown_bps": 2316.809236001515,
+          "win_rate_pct": 48.05013927576602
+        },
+        "4bp": {
+          "trades": 718,
+          "pf": 0.940129389557192,
+          "net_bps": -918.6571754949688,
+          "mean_bps": -1.2794668182381181,
+          "max_drawdown_bps": 3166.7187260675055,
+          "win_rate_pct": 46.51810584958218
+        }
+      }
+    },
+    "later_check_2026": {
+      "follow_candidate": {
+        "1bp": {
+          "trades": 154,
+          "pf": 1.0192958948213153,
+          "net_bps": 37.543251633543605,
+          "mean_bps": 0.24378734826976367,
+          "max_drawdown_bps": 466.5634208818731,
+          "win_rate_pct": 48.701298701298704
+        },
+        "2bp": {
+          "trades": 154,
+          "pf": 0.9425085910461792,
+          "net_bps": -116.4567483664564,
+          "mean_bps": -0.7562126517302363,
+          "max_drawdown_bps": 530.0457548827162,
+          "win_rate_pct": 48.05194805194805
+        },
+        "4bp": {
+          "trades": 154,
+          "pf": 0.8066703256745285,
+          "net_bps": -424.4567483664565,
+          "mean_bps": -2.756212651730237,
+          "max_drawdown_bps": 701.1197082041506,
+          "win_rate_pct": 43.506493506493506
+        }
+      },
+      "matched_fade_parent": {
+        "1bp": {
+          "trades": 154,
+          "pf": 0.8384611360588099,
+          "net_bps": -345.54325163354355
+        },
+        "2bp": {
+          "trades": 154,
+          "pf": 0.7751047515119401,
+          "net_bps": -499.5432516335436
+        },
+        "4bp": {
+          "trades": 154,
+          "pf": 0.6622840220080347,
+          "net_bps": -807.5432516335436
+        }
+      }
+    }
+  },
+  "annual_follow_candidate_2bp": {
+    "2022": {
+      "trades": 196,
+      "pf": 0.7176908428831805,
+      "net_bps": -2070.0974480986197
+    },
+    "2023": {
+      "trades": 174,
+      "pf": 1.2234802203844526,
+      "net_bps": 623.6317976556253
+    },
+    "2024": {
+      "trades": 187,
+      "pf": 0.9224074010315518,
+      "net_bps": -212.09820488895335
+    },
+    "2025": {
+      "trades": 161,
+      "pf": 0.5294143934659973,
+      "net_bps": -1730.7789691730834
+    }
+  },
+  "weekly_bootstrap_2022_2025_at_2bp": {
+    "mean_weekly_net_bps": -16.2169513134212,
+    "ci95_low": -32.80079954759934,
+    "ci95_high": -0.3009963410057235,
+    "weeks": 209,
+    "block_weeks": 4,
+    "replicates": 5000,
+    "seed": 288
+  },
+  "failed_gates": [
+    "2022_2025_net_positive_2bp",
+    "2022_2025_pf_2bp_ge_1_05",
+    "2022_2025_positive_years_ge_3_of_4",
+    "2022_2025_pf_4bp_ge_0_90",
+    "2022_2025_bootstrap_ci95_lower_gt_0",
+    "2026_net_positive_2bp",
+    "2026_pf_2bp_ge_1_00",
+    "2026_net_positive_4bp"
+  ],
+  "interpretation": {
+    "program_level_holdout": false,
+    "2022_2025_status": "contaminated exploratory period; not clean program-level OOS",
+    "2026_status": "later chronological check; not claimed pristine program-level holdout",
+    "funded_ready": false,
+    "limitations": [
+      "M5 BID-only inputs; executable ask-side fills cannot be reconstructed",
+      "1/2/4 bp costs are assumptions, not verified CFD costs",
+      "repeated-flat-bar exclusion is heuristic",
+      "official CFD contract multipliers, swap and commission model not verified",
+      "no equity-aware daily-loss / max-loss two-phase challenge replay"
+    ]
+  }
+}
