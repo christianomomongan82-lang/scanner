@@ -720,3 +720,12 @@ Only 52 of 500 active weekend-gap candidates passed the locked combined-spread, 
 ### Evolutionary decision
 
 Preserve R296 as a data-quality incident, not a negative signal result. Preserve R297 as a valid corrected but failed signal candidate. Do not change the 2x spread filter, reverse gap direction or retune the 4-hour exit on these same dates. Future candidates must identify active quote bars independently of the manifest flag before creating signals. Funded readiness remains blocked without verified account-specific costs and a separate equity-aware two-phase replay.
+
+
+## R298 — XAUUSD London Asian-range sweep-and-reclaim reversal — GAGAL (2026-10-17)
+
+The R298 preregistration was committed before candidate PnL was calculated. It tests the first London-local 07:00–10:00 M5 sweep beyond 0.10× the completed UTC 00:00–05:55 Asian range that closes back inside; entry is the signal bar start +10 minutes, stop at the executable-side signal-bar extreme, target the Asian midpoint, minimum planned reward/risk 1.00 and four-hour maximum hold.
+
+The XAUUSD M5 BID/ASK hashes passed, timestamps paired one-to-one, 69,396 rows at/after 2026-01-01 were excluded before signal construction, and 598 trades completed in 2016–2025. At +$0.30/oz extra cost, discovery had 313 trades, −285.893R and PF_R 0.297; validation had 285 trades, −178.933R and PF_R 0.409. Zero-added-cost outcomes were also negative in both partitions. All ten annual cohorts were negative at +$0.30/oz. Validation weekly bootstrap mean was −0.68557R/week, 95% CI [−0.89792, −0.47209].
+
+**R298 = GAGAL.** Do not tune the existing dates or reverse direction as a rescue. No 2026 candidate PnL was calculated; no alpha block was promoted and no funded challenge replay was run. See [preregistration](research/R298_XAUUSD_LONDON_ASIA_RANGE_SWEEP_RECLAIM_PREREGISTRATION.md), [report](research/R298_FINAL_REPORT.md), [compact results](research/R298_results_compact.json) and [annual summary](research/R298_annual_summary.csv). Full local runner, trade ledger and data-quality audits are included in the research package. Historical BID/ASK results do not verify actual FundedNext fills or account-equity/DLL/MLL behavior.
