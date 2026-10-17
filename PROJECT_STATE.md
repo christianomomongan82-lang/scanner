@@ -1,6 +1,6 @@
 # Proyek Backtest — Checkpoint Utama
 
-**Terakhir diperbarui:** 2026-10-16  
+**Terakhir diperbarui:** 2026-10-17  
 **Status proyek:** SEMUA KANDIDAT YANG DIUJI BERSTATUS GAGAL; TIDAK ADA YANG LULUS.  
 **Repositori sumber utama:** https://github.com/christianomomongan82-lang/scanner  
 **Branch riset aktif saat checkpoint ini:** [local-backtest/r189-dukascopy-history](https://github.com/christianomomongan82-lang/scanner/tree/local-backtest/r189-dukascopy-history)
@@ -563,3 +563,12 @@ Archived diagnostic artifacts:
 - Discovery 2016–2020: 1,059 trades; at 2 bp modeled cost, PF_R 0.834, net −95.595R, max closed-trade DD 104.38R; all five years negative. At 4 bp PF_R 0.732; at 6 bp 0.644.
 - Validation 2021: 214 trades; at 2 bp PF_R 1.220, net +20.925R, but block-bootstrap weekly-net-R 95% CI [-0.111, +0.884] crosses zero; at 6 bp PF_R 0.961. Binary verdict **GAGAL**.
 - Post-2021 PnL was intentionally not calculated after preregistered gates failed. Data is cached R205 M5 BID-only USA500 / USATECH, latest source 2026-10-09 20:10 UTC; 2/4/6 bp are modeled cost stress, not measured broker costs. No funded-equity DLL/MLL replay. No alpha block retained.
+
+
+## R291 — US-to-German cross-session lead/lag — GAGAL (2026-10-17)
+- [Preregistration](research/R291_TRANSATLANTIC_LEAD_LAG_PREREGISTRATION.md) · [Final report](research/R291_FINAL_REPORT.md) · [Compact results JSON](research/R291_results_compact.json) · [Local replay runner](research/r291_transatlantic_lead_lag.py) · [Annual summary](research/R291_annual_summary_2bp.csv) · [Validation bootstrap](research/R291_validation_weekly_bootstrap_2bp.json).
+- Hypothesis: direction of the previous eligible USA500 RTH session predicts German index same-day session direction; threshold is Q75 absolute USA500 cash-session return, fitted 2017–2020, next eligible German-local session only, entry 09:20 Berlin, initial stop from first 20 minutes, target 1.5R, session-close exit, no overnight.
+- Discovery 2017–2020: 246 trades, **gross PF_R 0.769 / −36.653R before costs**; at modeled 2 bp, PF_R 0.451 / −134.421R; 4 bp PF_R 0.302. All four years negative at 2 bp.
+- Validation 2021: 74 trades; gross PF_R 1.228 / +8.547R, but after modeled 2 bp PF_R 0.178 / −173.679R. Four-week block-bootstrap mean −3.277R/week, 95% CI [−9.525, +0.040], lower bound fails. One trade had a 0.02-point stop and a huge modeled R-cost burden, showing the locked stop definition is not operationally robust.
+- **Binary verdict: GAGAL.** Only trade-count gates passed. No PnL calculated for 2022–2026; do not add a minimum stop filter and retest the same windows. No signal alpha block retained.
+- Inputs: existing R205 cached M5 BID-only USA500 and DEUIDXEUR. Costs are modeled basis-point stresses, not observed broker costs. No actual ask-side execution or FundedNext DLL/MLL equity-path replay. The 2021 validation window is contaminated by other research.
