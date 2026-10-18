@@ -10,12 +10,12 @@
 - [Validation weekly bootstrap result](R301_validation_weekly_bootstrap.json)
 - [Pre-outcome data audit](R301_preoutcome_data_audit.json)
 - [Data manifest](R301_DATA_MANIFEST.md)
-- [Session eligibility summary](R301_session_eligibility_summary.csv.gz)
-- [Exact replay runner (compressed Python source)](r301_xau_safe_haven_delayed_response.py.gz)
-- [Candidate primary-cost trade ledger (compressed CSV)](R301_candidate_trade_ledger_primary_cost030.csv.gz)
-- [Validation bootstrap input series (compressed CSV)](R301_validation_weekly_net_R.csv.gz)
+- Session eligibility summary: generated in the current ChatGPT run as a local audit artifact; it is not committed in this GitHub branch.
+- Exact replay runner: available as a session artifact at `/mnt/data/r301_xau_safe_haven_delayed_response.py`; it is not committed in this GitHub branch.
+- Candidate primary-cost trade ledger: generated locally; the compact 903-trade score-period ledger is available at `/mnt/data/r301_results/R301_candidate_trade_ledger_compact.csv`, but it is not committed in this GitHub branch.
+- Validation weekly bootstrap input series: available locally at `/mnt/data/r301_results/R301_validation_weekly_net_R.csv.gz`; it is not committed in this GitHub branch. The bootstrap result itself is in the JSON above.
 
-The full 38,480-row all-cost/all-delay/all-stream trade ledger and 4.8 MB pre-outcome timestamp eligibility audit remain as session artifacts because they are too large for the repository contents API payload. They are available in the current ChatGPT session output package.
+The full 38,480-row all-cost/all-delay/all-stream trade ledger and 4.8 MB pre-outcome timestamp eligibility audit remain as session artifacts because the repository writes available in this run did not safely commit binary payloads. They are available in the current ChatGPT session output package. The text report, preregistration, compact JSON, annual summary, gate summary, data manifest, family map, master ledger and project checkpoint are committed to this branch.
 
 ## Locked result
 
