@@ -52,7 +52,7 @@ At **$0 extra cost**, discovery still lost −89.822R (PF_R 0.547) and validatio
 | Ten-minute delay expectancy | FAIL |
 | Execution-path integrity | PASS |
 
-**Two of nine gates passed. R301 is closed as GAGAL.** No parameter tuning, direction flip, or second attempt on the same dates is permitted under this candidate. No alpha block is retained. Do not open XAUUSD 2026 to rescue this hypothesis.
+**Three of nine gates passed. R301 is closed as GAGAL.** No parameter tuning, direction flip, or second attempt on the same dates is permitted under this candidate. No alpha block is retained. Do not open XAUUSD 2026 to rescue this hypothesis.
 
 ## Interpretation and limits
 
