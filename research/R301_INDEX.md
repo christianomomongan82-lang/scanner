@@ -19,4 +19,4 @@ The full 38,480-row all-cost/all-delay/all-stream trade ledger and 4.8 MB pre-ou
 
 ## Locked result
 
-At +$0.30/oz, discovery (2017–2020) has 315 trades, −170.908R and PF_R 0.327; validation (2021–2025) has 588 trades, −189.406R and PF_R 0.509. Both partitions are negative at zero added cost. Validation bootstrap mean is −0.72293R/week, 95% CI [−0.91609R, −0.53769R]. Two of nine gates passed. No 2026 outcome was calculated.
+At +$0.30/oz, discovery (2017–2020) has 315 trades, −170.908R and PF_R 0.327; validation (2021–2025) has 588 trades, −189.406R and PF_R 0.509. Both partitions are negative at zero added cost. Validation bootstrap mean is −0.72293R/week, 95% CI [−0.91609R, −0.53769R]. Three of nine gates passed. No 2026 outcome was calculated.
