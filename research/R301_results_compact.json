@@ -1,0 +1,167 @@
+{
+  "experiment": "R301_XAUUSD_SAFE_HAVEN_DELAYED_HEDGE_RESPONSE",
+  "verdict": "GAGAL",
+  "hypothesis": "After an extreme 30m USA500 downside shock, long XAUUSD only if gold has not risen over the same 30m window; ATR(12) 1R stop/1R target, max 60m hold, one trade/session.",
+  "cutoff_exclusive_utc": "2026-01-01T00:00:00Z",
+  "discovery": "2017-2020",
+  "validation": "2021-2025",
+  "protected_2026_outcomes_calculated": false,
+  "cost_grid_USD_per_oz": [
+    0,
+    0.1,
+    0.3,
+    0.5
+  ],
+  "primary_cost_USD_per_oz": 0.3,
+  "base_delay_min_after_signal_close": 5,
+  "delay_stress_min_after_signal_close": 10,
+  "data": {
+    "xau_bid_rows_before_cutoff": 877930,
+    "xau_ask_rows_before_cutoff": 877930,
+    "usa500_rows_before_cutoff": 818601,
+    "xau_bid_ask_timestamps_match": true,
+    "invalid_ohlc_rows": 0,
+    "negative_open_close_spreads": 0,
+    "complete_usa500_RTH_sessions": 2558,
+    "incomplete_sessions_excluded": 33,
+    "discovery_candidate_trades": 315,
+    "validation_candidate_trades": 588
+  },
+  "candidate": {
+    "primary_cost_0_30": {
+      "discovery": {
+        "trades": 315,
+        "net_R": -170.90757724645198,
+        "PF_R": 0.3266574663786433,
+        "win_rate": 0.35555555555555557,
+        "max_closed_R_DD": 171.77503426202566
+      },
+      "validation": {
+        "trades": 588,
+        "net_R": -189.40648913037447,
+        "PF_R": 0.5086735246757389,
+        "win_rate": 0.4064625850340136,
+        "max_closed_R_DD": 192.57518839722442
+      }
+    },
+    "cost_sensitivity": {
+      "0.00": {
+        "discovery": {
+          "net_R": -89.82227745063958,
+          "PF_R": 0.5471082077116851
+        },
+        "validation": {
+          "net_R": -108.35067271551654,
+          "PF_R": 0.6794431150025165
+        }
+      },
+      "0.10": {
+        "discovery": {
+          "net_R": -116.85071071591038,
+          "PF_R": 0.46107164122014177
+        },
+        "validation": {
+          "net_R": -135.36927818713588,
+          "PF_R": 0.6173833724787577
+        }
+      },
+      "0.30": {
+        "discovery": {
+          "net_R": -170.90757724645198,
+          "PF_R": 0.326657466451
+        },
+        "validation": {
+          "net_R": -189.40648913037447,
+          "PF_R": 0.5086735246757389
+        }
+      },
+      "0.50": {
+        "discovery": {
+          "net_R": -224.96444377699353,
+          "PF_R": 0.22710955203378205
+        },
+        "validation": {
+          "net_R": -243.44370007361312,
+          "PF_R": 0.4168187858084647
+        }
+      }
+    },
+    "delay_10m_cost_0_30": {
+      "discovery": {
+        "net_R": -162.81067864667423,
+        "PF_R": 0.3493503988884867
+      },
+      "validation": {
+        "net_R": -166.5591762319006,
+        "PF_R": 0.5497501590262248
+      }
+    },
+    "discovery_annual_net_R_at_0_30": {
+      "2017": -44.06352624912947,
+      "2018": -69.84023918852476,
+      "2019": -31.254892959240625,
+      "2020": -25.748918849557107
+    },
+    "validation_annual_net_R_at_0_30": {
+      "2021": -41.69871295286792,
+      "2022": -29.49858689569703,
+      "2023": -49.07136487766079,
+      "2024": -35.28954018034213,
+      "2025": -33.8482842238066
+    }
+  },
+  "controls_at_cost_0_30": {
+    "matched_parent_without_gold_underreaction_filter": {
+      "discovery": {
+        "trades": 487,
+        "net_R": -228.52576641492573,
+        "PF_R": 0.37819697772214245
+      },
+      "validation": {
+        "trades": 708,
+        "net_R": -202.58375508241141,
+        "PF_R": 0.5495323268056955
+      }
+    },
+    "unconditional_10_05_clock_control": {
+      "discovery": {
+        "trades": 1015,
+        "net_R": -427.1393447638048,
+        "PF_R": 0.4219560036044868
+      },
+      "validation": {
+        "trades": 1281,
+        "net_R": -318.2897331568272,
+        "PF_R": 0.6010141780877064
+      }
+    }
+  },
+  "validation_bootstrap": {
+    "weeks": 262,
+    "mean_weekly_net_R": -0.7229255310319636,
+    "ci95_low": -0.9160889600646667,
+    "ci95_high": -0.5376852016492721,
+    "resamples": 10000,
+    "block_weeks": 4,
+    "seed": 301
+  },
+  "gates": {
+    "data_event_integrity": true,
+    "minimum_trades": true,
+    "positive_expectancy_both": false,
+    "PF_R_at_least_1_05_both": false,
+    "cost_stress_0_50": false,
+    "discovery_year_stability": false,
+    "validation_bootstrap_lower_bound": false,
+    "phone_delay_10m": false,
+    "execution_path_integrity": true
+  },
+  "passed_gate_count": 2,
+  "total_gate_count": 9,
+  "limitations": [
+    "USA500 was BID-only signal context, not traded.",
+    "2021-2025 is program-contaminated, not pristine OOS.",
+    "Costs are incremental stress assumptions, not verified FundedNext live costs.",
+    "No equity-aware two-phase FundedNext DLL/MLL replay was run."
+  ]
+}
