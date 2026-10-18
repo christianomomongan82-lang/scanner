@@ -86,3 +86,7 @@ Costs are modeled round-trip basis points of USA500 entry price. Source archives
 No candidate promoted; do not tune or reverse if any locked gate fails.
 
 No 2022–2026 candidate PnL was calculated. These BID-only price series and modeled costs do not verify broker-side fills, actual spread, slippage, commissions, swaps, contract point value, margin or FundedNext equity/DLL/MLL. No funded challenge replay was performed.
+
+## Independent local reproduction — 2026-10-18
+
+The report's frozen Q95, selected/completed counts, 1/2/4 bp discovery and validation aggregates, exit counts and 2021 weekly bootstrap were independently reproduced from the exact source-member SHA-256 values in [R299_REPRODUCTION_AUDIT_20261018.md](R299_REPRODUCTION_AUDIT_20261018.md). The runner and artifact entry point are now indexed in [R299_INDEX.md](R299_INDEX.md). The verdict remains **GAGAL**; no method changes or 2022+ PnL were introduced by this audit.
