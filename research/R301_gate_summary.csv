@@ -1,0 +1,10 @@
+gate,pass,details
+data_event_integrity,true,"Preregistered SHA hashes, exact XAU quote pairing, valid OHLC/spread, pre-2026 cutoff passed; incomplete sessions excluded."
+minimum_trades,true,"315 discovery; 588 validation."
+positive_expectancy_both,false,"Discovery -170.908R; validation -189.406R at +$0.30/oz."
+PF_R_at_least_1_05_both,false,"Discovery 0.327; validation 0.509."
+cost_stress_0_50,false,"Discovery -224.964R / PF 0.227; validation -243.444R / PF 0.417."
+discovery_year_stability,false,"0 of 4 discovery years positive."
+validation_bootstrap_lower_bound,false,"Mean -0.72293R/week; 95% CI [-0.91609,-0.53769]."
+phone_delay_10m,false,"At +$0.30/oz, discovery -162.811R and validation -166.559R."
+execution_path_integrity,true,"No candidate path skips; all same-bar stop/target collisions were resolved stop-first."
