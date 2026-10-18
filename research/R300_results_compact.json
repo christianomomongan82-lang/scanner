@@ -1,0 +1,176 @@
+{
+  "candidate": "R300_EURUSD_LONDON_FIX_POST_EVENT_REVERSAL",
+  "verdict": "GAGAL",
+  "preregistered_before_pnl": true,
+  "source": {
+    "artifact_id": 11959096102,
+    "collection_run_id": 38697080604,
+    "archive_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "bid_member_sha256": "b588b7e07d9fea3748a84a1e3ecf29ccb2ea1d8ea52503f8579928a3cd4990cc",
+    "ask_member_sha256": "52e53dbb22ef11aee2d2c3d5e5b4ded6659d58c086189a327559253727e52f8b"
+  },
+  "cutoff_utc_exclusive": "2022-01-01T00:00:00Z",
+  "data_quality": {
+    "bid_m1_rows": 2650553,
+    "ask_m1_rows": 2650553,
+    "paired_m1_rows": 2650553,
+    "valid_active_m5_bars": 422289,
+    "eligible_dates_2017_2021": 1283,
+    "zero_return_dates_skipped": 2,
+    "completed_trades_per_stream": 1281,
+    "eligible_1605_spread_pips": {
+      "median": 0.3,
+      "p95": 0.4,
+      "max": 0.8
+    }
+  },
+  "rule": {
+    "signal": "M5 midpoint return from 15:40 to 15:55 Europe/London",
+    "entry": "16:05 London",
+    "stop_R": 1,
+    "target_R": 1,
+    "max_exit": "16:35 London bar open",
+    "primary_extra_cost_pips": 1,
+    "cost_stress_pips": [
+      0,
+      0.5,
+      1,
+      2
+    ]
+  },
+  "primary_fade": {
+    "discovery_2017_2020": {
+      "cost_0pip": {
+        "trades": 1024,
+        "net_R": -68.029588,
+        "PF_R": 0.863401,
+        "max_closed_DD_R": 75.312638
+      },
+      "cost_0_5pip": {
+        "trades": 1024,
+        "net_R": -162.520122,
+        "PF_R": 0.704221,
+        "max_closed_DD_R": 168.435466
+      },
+      "cost_1pip": {
+        "trades": 1024,
+        "net_R": -257.010656,
+        "PF_R": 0.572722,
+        "max_closed_DD_R": 261.558295
+      },
+      "cost_2pip": {
+        "trades": 1024,
+        "net_R": -445.991723,
+        "PF_R": 0.369945,
+        "max_closed_DD_R": 447.803951
+      }
+    },
+    "validation_2021": {
+      "cost_0pip": {
+        "trades": 257,
+        "net_R": -11.165961,
+        "PF_R": 0.904282,
+        "max_closed_DD_R": 16.639158
+      },
+      "cost_0_5pip": {
+        "trades": 257,
+        "net_R": -35.573488,
+        "PF_R": 0.725572,
+        "max_closed_DD_R": 37.971104
+      },
+      "cost_1pip": {
+        "trades": 257,
+        "net_R": -59.981015,
+        "PF_R": 0.57966,
+        "max_closed_DD_R": 60.91079
+      },
+      "cost_2pip": {
+        "trades": 257,
+        "net_R": -108.796069,
+        "PF_R": 0.361991,
+        "max_closed_DD_R": 109.61
+      }
+    }
+  },
+  "matched_follow_diagnostic": {
+    "discovery_2017_2020": {
+      "cost_0pip": {
+        "trades": 1024,
+        "net_R": -39.202091,
+        "PF_R": 0.918624
+      },
+      "cost_0_5pip": {
+        "trades": 1024,
+        "net_R": -133.692625,
+        "PF_R": 0.748191
+      },
+      "cost_1pip": {
+        "trades": 1024,
+        "net_R": -228.183159,
+        "PF_R": 0.607065
+      },
+      "cost_2pip": {
+        "trades": 1024,
+        "net_R": -417.164226,
+        "PF_R": 0.389075
+      }
+    },
+    "validation_2021": {
+      "cost_0pip": {
+        "trades": 257,
+        "net_R": -15.556858,
+        "PF_R": 0.870102
+      },
+      "cost_0_5pip": {
+        "trades": 257,
+        "net_R": -39.964385,
+        "PF_R": 0.699385
+      },
+      "cost_1pip": {
+        "trades": 257,
+        "net_R": -64.371912,
+        "PF_R": 0.560447
+      },
+      "cost_2pip": {
+        "trades": 257,
+        "net_R": -113.186965,
+        "PF_R": 0.350843
+      }
+    }
+  },
+  "validation_weekly_bootstrap_1pip": {
+    "weeks": 52,
+    "trade_weeks": 52,
+    "mean_weekly_net_R": -1.153481,
+    "ci95_lower": -1.588385,
+    "ci95_upper": -0.672312,
+    "resamples": 10000,
+    "block_len": 4,
+    "seed": 300
+  },
+  "passed_gates": 4,
+  "total_gates": 14,
+  "gates": {
+    "data_integrity": true,
+    "discovery_trades_ge_200": true,
+    "validation_trades_ge_100": true,
+    "discovery_net_R_positive_at_1pip": false,
+    "discovery_PF_ge_1_05_at_1pip": false,
+    "validation_net_R_positive_at_1pip": false,
+    "validation_PF_ge_1_05_at_1pip": false,
+    "at_least_3_of_4_discovery_years_positive_at_1pip": false,
+    "discovery_net_R_positive_at_2pip": false,
+    "discovery_PF_ge_1_at_2pip": false,
+    "validation_net_R_positive_at_2pip": false,
+    "validation_PF_ge_1_at_2pip": false,
+    "validation_weekly_bootstrap_lower_gt_zero_at_1pip": false,
+    "all_entry_exit_timestamps_exact_active": true
+  },
+  "limitations": [
+    "2017–2021 is programme-contaminated",
+    "Costs beyond observed BID/ASK are modeled stresses",
+    "Actual provider fees/slippage/swaps are unverified",
+    "No provider-equivalent floating-equity/DLL/MLL challenge replay",
+    "No 2022+ PnL calculated"
+  ]
+}
