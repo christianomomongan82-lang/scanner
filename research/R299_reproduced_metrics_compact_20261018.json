@@ -1,0 +1,68 @@
+{
+  "candidate": "R299_USATECH_LEADS_USA500_30M",
+  "verdict": "GAGAL",
+  "calibration_2016": {
+    "valid_windows": 15293,
+    "absolute_return_q95": 0.004476037999318304
+  },
+  "coverage": {
+    "selected_events": 704,
+    "completed_trades": 704,
+    "skips": 0
+  },
+  "discovery_2017_2020": {
+    "cost_1bp": {
+      "trades": 541,
+      "net_R": -28.268345919473653,
+      "PF_R": 0.9032096061066581
+    },
+    "cost_2bp": {
+      "trades": 541,
+      "net_R": -65.08032284332442,
+      "PF_R": 0.7922541049283143,
+      "max_closed_DD_R": 75.44236912118322
+    },
+    "cost_4bp": {
+      "trades": 541,
+      "net_R": -138.704276691026,
+      "PF_R": 0.612302054177086
+    }
+  },
+  "validation_2021": {
+    "cost_1bp": {
+      "trades": 163,
+      "net_R": -9.095421280554149,
+      "PF_R": 0.8907319782968689
+    },
+    "cost_2bp": {
+      "trades": 163,
+      "net_R": -21.375755346619894,
+      "PF_R": 0.7638253887458296,
+      "max_closed_DD_R": 28.91578176564106
+    },
+    "cost_4bp": {
+      "trades": 163,
+      "net_R": -45.93642347875135,
+      "PF_R": 0.564755727012514
+    }
+  },
+  "validation_weekly_bootstrap_2bp": {
+    "weeks": 52,
+    "trade_weeks": 51,
+    "mean_weekly_net_R": -0.4110722182042285,
+    "ci95_lower": -0.9582618769875517,
+    "ci95_upper": 0.12893636085197016,
+    "resamples": 10000,
+    "block_len": 4,
+    "seed": 299
+  },
+  "source_archive_sha256": {
+    "usa500": "21d37f9b6faf12094cba2243d8b13ecf9973468e2b09b24e16a9cfa67ed4ceac",
+    "usatech": "91c7d44b0487e98eeea021712528910475e626bf433220a007629f3005fc66ad"
+  },
+  "source_member_sha256": {
+    "usa500": "df2a5edfa49cb15f8bcf5b13577e95907a0f0c54d02c7feed8bdbb7e3b6c49ee",
+    "usatech": "82b06c38f66cd1387097691baac1d45c9463b6540eea9dfe28a894d85e122f7c"
+  },
+  "cutoff_utc_exclusive": "2022-01-01T00:00:00Z"
+}
