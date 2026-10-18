@@ -750,3 +750,8 @@ The XAUUSD M5 BID/ASK hashes passed, timestamps paired one-to-one, 69,396 rows a
 The user requested GitHub as the primary record and no more recurring local ZIP-download handoffs. For every new backtest generation, commit the preregistration before scoring, then commit the report, exact runner, compact JSON, annual summary, full trade ledger, all relevant quality/skip audits, and any bootstrap input series to `research/`. Add an index page and update this checkpoint. Final replies should link to the GitHub files and summarize the verdict; do not provide a sandbox ZIP by default. If a large raw binary input cannot be put in the repository through available tools, document its original artifact ID, source hashes and limitation in a committed data manifest instead of claiming the raw input is in GitHub.
 
 R298's all-in-one entry point: [R298_INDEX.md](research/R298_INDEX.md). All report/code/ledger/audit files are individually present there; the original ~20 MB raw input ZIP remains external and is explicitly documented in [R298_DATA_MANIFEST.md](research/R298_DATA_MANIFEST.md).
+
+
+## R299 local reproduction audit — 2026-10-18
+
+R299 was independently replayed from exact source-member hashes with [the archived runner](research/r299_usatech_leads_usa500_30m.py). Q95 was 0.4476037999%, with 704 selected events / 704 completed trades. Discovery 2017–2020 at 2 bp was −65.080R / PF_R 0.792; validation 2021 was −21.376R / PF_R 0.764; validation bootstrap 95% CI was [−0.95826, +0.12894]R/week. **R299 remains GAGAL and closed.** No thresholds were retuned and no 2022+ PnL was calculated. Read the [reproduction audit](research/R299_REPRODUCTION_AUDIT_20261018.md) and [R299 index](research/R299_INDEX.md).
