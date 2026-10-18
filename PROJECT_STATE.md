@@ -1,6 +1,6 @@
 # Proyek Backtest — Checkpoint Utama
 
-**Terakhir diperbarui:** 2026-10-17  
+**Terakhir diperbarui:** 2026-10-19  
 **Status proyek:** SEMUA KANDIDAT YANG DIUJI BERSTATUS GAGAL; TIDAK ADA YANG LULUS.  
 **Repositori sumber utama:** https://github.com/christianomomongan82-lang/scanner  
 **Branch riset aktif saat checkpoint ini:** [local-backtest/r189-dukascopy-history](https://github.com/christianomomongan82-lang/scanner/tree/local-backtest/r189-dukascopy-history)
@@ -764,3 +764,18 @@ R299 was independently replayed from exact source-member hashes with [the archiv
 - **Data audit:** 2,650,553 paired M1 rows per side; 422,289 valid active M5 bars; 1,283 eligible event dates and 1,281 completed trades per direction. Entry-time spread median 0.30 pip, p95 0.40, max 0.80.
 - **Primary result at +1 pip:** fade discovery 1,024 trades, −257.011R / PF 0.573; validation 257 trades, −59.981R / PF 0.580. Even with zero extra friction, net R was negative in both partitions. Matched follow control also lost. Validation weekly bootstrap at +1 pip: mean −1.1535R/week, 95% CI [−1.5884, −0.6723].
 - **Verdict: GAGAL; close both signal directions.** Four of fourteen locked gates passed. Do not tune or direction-flip on these dates. Reuse only engineering controls; no alpha module is retained. This is not an equity-aware FundedNext challenge replay. No 2022+ PnL was calculated.
+
+## Latest research update — R301 GAGAL (2026-10-19)
+
+**R301: XAUUSD safe-haven delayed hedge response — GAGAL.** The preregistration was committed before outcomes. See:
+- [R301 index](research/R301_INDEX.md)
+- [Locked preregistration](research/R301_XAUUSD_SAFE_HAVEN_DELAYED_HEDGE_RESPONSE_PREREGISTRATION.md)
+- [Final report](research/R301_FINAL_REPORT.md)
+- [Compact metrics and gates](research/R301_results_compact.json)
+- [Data manifest](research/R301_DATA_MANIFEST.md)
+- [Annual cost/delay summary](research/R301_candidate_annual_summary.csv)
+- [Validation bootstrap result](research/R301_validation_weekly_bootstrap.json)
+
+At +$0.30/oz, discovery 2017–2020 had 315 trades, −170.908R and PF_R 0.327; validation 2021–2025 had 588 trades, −189.406R and PF_R 0.509. Both were negative at zero incremental cost. The 10-minute entry-delay stress remained negative. Validation bootstrap mean was −0.72293R/week, 95% CI [−0.91609R, −0.53769R]. Only two of nine gates passed (data/event integrity and trade/path coverage). No signal block is retained.
+
+Data checks passed: 877,930 XAU BID and ASK rows per side before cutoff with exact paired timestamps and zero invalid OHLC/negative open-close spreads; 2,558 complete USA500 New York RTH sessions, with 33 incomplete sessions excluded. The exclusive 2026-01-01 UTC cutoff was applied before features and outcomes; **XAUUSD 2026 remains unopened**. The result is a historical signal failure, not a funded-account equity/DLL/MLL replay.
