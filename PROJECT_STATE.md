@@ -776,6 +776,6 @@ R299 was independently replayed from exact source-member hashes with [the archiv
 - [Annual cost/delay summary](research/R301_candidate_annual_summary.csv)
 - [Validation bootstrap result](research/R301_validation_weekly_bootstrap.json)
 
-At +$0.30/oz, discovery 2017–2020 had 315 trades, −170.908R and PF_R 0.327; validation 2021–2025 had 588 trades, −189.406R and PF_R 0.509. Both were negative at zero incremental cost. The 10-minute entry-delay stress remained negative. Validation bootstrap mean was −0.72293R/week, 95% CI [−0.91609R, −0.53769R]. Only two of nine gates passed (data/event integrity and trade/path coverage). No signal block is retained.
+At +$0.30/oz, discovery 2017–2020 had 315 trades, −170.908R and PF_R 0.327; validation 2021–2025 had 588 trades, −189.406R and PF_R 0.509. Both were negative at zero incremental cost. The 10-minute entry-delay stress remained negative. Validation bootstrap mean was −0.72293R/week, 95% CI [−0.91609R, −0.53769R]. Three of nine gates passed: data/event integrity, minimum trade count, and execution-path integrity. No signal block is retained.
 
 Data checks passed: 877,930 XAU BID and ASK rows per side before cutoff with exact paired timestamps and zero invalid OHLC/negative open-close spreads; 2,558 complete USA500 New York RTH sessions, with 33 incomplete sessions excluded. The exclusive 2026-01-01 UTC cutoff was applied before features and outcomes; **XAUUSD 2026 remains unopened**. The result is a historical signal failure, not a funded-account equity/DLL/MLL replay.
