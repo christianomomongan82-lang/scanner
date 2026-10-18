@@ -5,6 +5,19 @@
 **Repositori sumber utama:** https://github.com/christianomomongan82-lang/scanner  
 **Branch riset aktif saat checkpoint ini:** [local-backtest/r189-dukascopy-history](https://github.com/christianomomongan82-lang/scanner/tree/local-backtest/r189-dukascopy-history)
 
+## Search-system registry — 2026-10-18
+
+The following files are now the operating reference for candidate selection and next-generation research:
+- [Normalized master ledger R251–R299](research/MASTER_SEARCH_LEDGER_R251_R299.csv)
+- [Family/lineage map and closed-family stop rules](research/SEARCH_FAMILY_MAP_R251_R299.md)
+- [Common search governance and scoring contract v1](research/SEARCH_GOVERNANCE_AND_SCORING_V1.md)
+- [Immutable experiment registration-card template v1](research/EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V1.md)
+- [Search-process audit R276–R299](research/SEARCH_PROCESS_AUDIT_R299.md)
+- [Evolutionary method compounding workflow](research/EVOLUTIONARY_METHOD_COMPOUNDING_20261016.md)
+- [Primary funded-target objective and scorecard](research/PRIMARY_OBJECTIVE_FUNDED_TARGET_COMPLETION_20261016.md)
+
+Audit coverage: 47 report/experiment records with independently retrieved evidence across R251–R299. R259 is excluded because the checkpoint marks it as an accidental workflow incident, not an accepted backtest; no standalone R267 report/result was surfaced, so no metrics are inferred. This is not an exhaustive inventory of R1–R250. No strategy is approved as funded-ready. The next candidate must use the v1 registration card and scoring contract; do not launch a near-duplicate U.S. cash-open candidate, retune any closed candidate on its old periods, or open the reserved XAUUSD 2026 outcome window except for one frozen final test after pre-2026 gates pass.
+
 Dokumen ini adalah titik lanjut permanen. Percakapan baru yang menerima instruksi “lanjut” harus membaca dokumen ini terlebih dahulu, lalu memeriksa artefak riset terbaru di branch aktif dan memperbarui checkpoint setelah ada hasil penting. Jangan meminta pengguna membuat prompt khusus atau mengunggah ulang data yang sudah ada di GitHub.
 
 ## 1. Protokol penyimpanan dan kelanjutan
