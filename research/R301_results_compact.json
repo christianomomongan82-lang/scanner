@@ -156,7 +156,7 @@
     "phone_delay_10m": false,
     "execution_path_integrity": true
   },
-  "passed_gate_count": 2,
+  "passed_gate_count": 3,
   "total_gate_count": 9,
   "limitations": [
     "USA500 was BID-only signal context, not traded.",
