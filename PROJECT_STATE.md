@@ -755,3 +755,12 @@ R298's all-in-one entry point: [R298_INDEX.md](research/R298_INDEX.md). All repo
 ## R299 local reproduction audit — 2026-10-18
 
 R299 was independently replayed from exact source-member hashes with [the archived runner](research/r299_usatech_leads_usa500_30m.py). Q95 was 0.4476037999%, with 704 selected events / 704 completed trades. Discovery 2017–2020 at 2 bp was −65.080R / PF_R 0.792; validation 2021 was −21.376R / PF_R 0.764; validation bootstrap 95% CI was [−0.95826, +0.12894]R/week. **R299 remains GAGAL and closed.** No thresholds were retuned and no 2022+ PnL was calculated. Read the [reproduction audit](research/R299_REPRODUCTION_AUDIT_20261018.md) and [R299 index](research/R299_INDEX.md).
+
+## R300 — EURUSD London fixing-window post-event reversal — GAGAL (2026-10-18)
+
+- **Locked preregistration:** [R300 hypothesis and rules](research/R300_EURUSD_LONDON_FIX_POST_EVENT_REVERSAL_PREREGISTRATION.md). The exact runner and pre-outcome dataset audit were committed before signal PnL was calculated.
+- **Report/index:** [R300 final report](research/R300_FINAL_REPORT.md) · [artifact index](research/R300_INDEX.md) · [compact metrics JSON](research/R300_results_compact.json) · [annual summary](research/R300_annual_summary.csv) · [2021 weekly bootstrap input](research/R300_validation_weekly_net_R.csv).
+- **Method:** EURUSD M1 BID/ASK, active contiguous M5 aggregation, signal return from 15:40 to 15:55 London, entry at 16:05, 1R stop/target, maximum exit at 16:35. Primary extra-cost grid 0/0.5/1/2 pips, with 2022+ excluded before outcomes.
+- **Data audit:** 2,650,553 paired M1 rows per side; 422,289 valid active M5 bars; 1,283 eligible event dates and 1,281 completed trades per direction. Entry-time spread median 0.30 pip, p95 0.40, max 0.80.
+- **Primary result at +1 pip:** fade discovery 1,024 trades, −257.011R / PF 0.573; validation 257 trades, −59.981R / PF 0.580. Even with zero extra friction, net R was negative in both partitions. Matched follow control also lost. Validation weekly bootstrap at +1 pip: mean −1.1535R/week, 95% CI [−1.5884, −0.6723].
+- **Verdict: GAGAL; close both signal directions.** Four of fourteen locked gates passed. Do not tune or direction-flip on these dates. Reuse only engineering controls; no alpha module is retained. This is not an equity-aware FundedNext challenge replay. No 2022+ PnL was calculated.
