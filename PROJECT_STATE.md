@@ -11,6 +11,7 @@ The following files are now the operating reference for candidate selection and 
 - [Normalized master ledger R251–R299](research/MASTER_SEARCH_LEDGER_R251_R299.csv)
 - [Family/lineage map and closed-family stop rules](research/SEARCH_FAMILY_MAP_R251_R299.md)
 - [Common search governance and scoring contract v1](research/SEARCH_GOVERNANCE_AND_SCORING_V1.md)
+- [Component block library, separating reusable engineering from unvalidated alpha](research/COMPONENT_BLOCK_LIBRARY_R251_R299.md)
 - [Immutable experiment registration-card template v1](research/EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V1.md)
 - [Search-process audit R276–R299](research/SEARCH_PROCESS_AUDIT_R299.md)
 - [Evolutionary method compounding workflow](research/EVOLUTIONARY_METHOD_COMPOUNDING_20261016.md)
