@@ -1,0 +1,31 @@
+{
+  "source_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+  "bid_sha256": "b588b7e07d9fea3748a84a1e3ecf29ccb2ea1d8ea52503f8579928a3cd4990cc",
+  "ask_sha256": "52e53dbb22ef11aee2d2c3d5e5b4ded6659d58c086189a327559253727e52f8b",
+  "raw_rows_per_side": 4415493,
+  "paired_exact_timestamps": true,
+  "duplicate_timestamps": 0,
+  "invalid_ohlc_rows": 0,
+  "negative_open_or_close_spread_rows": 0,
+  "repeated_flat_rows_removed": 696795,
+  "active_rows_after_filter": 3718698,
+  "active_gaps_gt_1m": 12018,
+  "eligible_events_2017_2021": 2572,
+  "discovery_events": 2059,
+  "validation_events": 513,
+  "module_E_eligible_by_year": {
+    "2017": 256,
+    "2018": 258,
+    "2019": 257,
+    "2020": 257,
+    "2021": 256
+  },
+  "module_U_eligible_by_year": {
+    "2017": 258,
+    "2018": 258,
+    "2019": 256,
+    "2020": 259,
+    "2021": 257
+  },
+  "cutoff_2022_plus_pnl_calculated": false
+}
