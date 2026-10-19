@@ -1,0 +1,92 @@
+{
+  "experiment": "R302_XAUUSD_PM_BENCHMARK_PRE_AUCTION_EXTENSION_FADE",
+  "verdict": "GAGAL",
+  "all_pre2026_promotion_gates_pass": false,
+  "historical_gates_passed": 3,
+  "historical_gates_total": 8,
+  "official_iba_nonpublication_calendar_applied": false,
+  "protected_2026_test_unlocked": false,
+  "cutoff_exclusive_utc": "2026-01-01T00:00:00Z",
+  "primary_cost_added_usd_oz": 0.3,
+  "discovery_2017_2020": {
+    "trades": 179,
+    "net_R": -32.964457645869985,
+    "PF_R": 0.639759502046036,
+    "mean_R": -0.1841589812618435,
+    "median_R": -0.23559653990534232,
+    "max_closed_R_drawdown": 34.80247924721791,
+    "positive_years": 0
+  },
+  "validation_2021_2025": {
+    "trades": 208,
+    "net_R": -26.991431300789987,
+    "PF_R": 0.7298630668171587,
+    "mean_R": -0.1297664966384134,
+    "median_R": -0.28392903731583063,
+    "max_closed_R_drawdown": 31.18732853283815,
+    "positive_years": 1
+  },
+  "validation_zero_extra_cost": {
+    "trades": 208,
+    "net_R": -14.573030379070879,
+    "PF_R": 0.8433565668403027
+  },
+  "validation_cost_0_50": {
+    "trades": 208,
+    "net_R": -35.270365248602744,
+    "PF_R": 0.6628455537599022
+  },
+  "validation_T15_cost_0_30": {
+    "trades": 207,
+    "net_R": -32.917109136885294,
+    "PF_R": 0.6736098400632636
+  },
+  "continuation_control_discovery_0_30": {
+    "net_R": -50.897595
+  },
+  "continuation_control_validation_0_30": {
+    "net_R": -27.3964
+  },
+  "validation_bootstrap": {
+    "calendar_weeks_including_zero_trade_weeks": 262,
+    "block_weeks": 4,
+    "resamples": 10000,
+    "seed": 302,
+    "observed_mean_weekly_net_R": -0.10302073015568698,
+    "ci95_lower_mean_weekly_net_R": -0.1894478452971306,
+    "ci95_upper_mean_weekly_net_R": -0.015572510961809366,
+    "probability_bootstrap_mean_positive": 0.0103
+  },
+  "gates": {
+    "data_integrity": true,
+    "minimum_trade_counts_both_periods": true,
+    "positive_net_and_pf_floor_both_periods_at_0_30": false,
+    "at_least_3_of_5_validation_years_positive": false,
+    "validation_weekly_bootstrap_lower_bound_positive": false,
+    "validation_net_R_positive_at_0_50_cost": false,
+    "validation_net_R_positive_with_T15_delay": false,
+    "execution_path_integrity": true
+  },
+  "data": {
+    "raw_bid_rows": 947326,
+    "raw_ask_rows": 947326,
+    "pre_cutoff_rows_per_side": 877930,
+    "common_pre_cutoff_timestamps": 877930,
+    "bid_only_timestamps": 0,
+    "ask_only_timestamps": 0,
+    "duplicates": 0,
+    "invalid_ohlc_rows": 0,
+    "negative_open_or_close_spreads": 0,
+    "weekday_window_count": 2595,
+    "complete_preauction_windows": 2595,
+    "signal_events_before_entry_checks": 392,
+    "eligible_candidate_events": 387
+  },
+  "limitations": [
+    "Scheduled-clock weekday proxy; official IBA non-publication calendar not applied.",
+    "2021–2025 is program-contaminated, not pristine OOS.",
+    "2026 rows were excluded before all feature and outcome calculations.",
+    "No FundedNext equity-aware two-phase challenge replay was run.",
+    "Incremental $/oz costs are stress assumptions, not verified live commission/slippage/swap amounts."
+  ]
+}
