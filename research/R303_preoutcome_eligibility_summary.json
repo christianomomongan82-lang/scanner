@@ -1,0 +1,38 @@
+{
+  "candidate_id": "R303",
+  "audit_type": "PREOUTCOME_ELIGIBILITY_ONLY",
+  "outcome_pnl_calculated": false,
+  "source_archive_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+  "paired_source_rows_per_side": 4415493,
+  "repeat_flat_rows_excluded": 696795,
+  "active_rows": 3718698,
+  "feature_rows_through_2021": 2236981,
+  "active_feature_first_utc": "2016-01-03T00:00:00Z",
+  "active_feature_last_utc": "2021-12-31T21:59:00Z",
+  "raw_signal_events": 1226,
+  "by_period": {
+    "DISCOVERY": 1129,
+    "VALIDATION": 97
+  },
+  "t5_eligible_pre_overlap": {
+    "total": 932,
+    "DISCOVERY": 856,
+    "VALIDATION": 76
+  },
+  "t5_skips": {
+    "SPREAD_NOT_NORMALIZED_ON_FIRST_ACTIVE_QUOTE": 291,
+    "NO_ACTIVE_QUOTE_IN_ENTRY_WINDOW": 1,
+    "INCOMPLETE_ACTIVE_30M_PATH": 2
+  },
+  "t10_eligible_pre_overlap": {
+    "total": 921,
+    "DISCOVERY": 845,
+    "VALIDATION": 76
+  },
+  "t10_skips": {
+    "SPREAD_NOT_NORMALIZED_ON_FIRST_ACTIVE_QUOTE": 301,
+    "NO_ACTIVE_QUOTE_IN_ENTRY_WINDOW": 2,
+    "INCOMPLETE_ACTIVE_30M_PATH": 2
+  },
+  "candidate_pnl_post_2021": false
+}
