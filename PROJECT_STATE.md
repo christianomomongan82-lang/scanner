@@ -824,3 +824,29 @@ The source was existing GitHub artifact #11959096102, EURUSD M1 paired BID/ASK a
 At the registered +1 pip incremental round-trip friction and T+5 manual-compatible entry, discovery had 739 closed trades, -93.407R, PF_R 0.769; validation had 66 trades, -7.360R, PF_R 0.777. Validation four-week circular weekly-net bootstrap: mean -0.14153R/week, 95% CI [-0.40550,+0.11319], positive-mean share 13.92%. At +0.5 pip incremental cost both periods turn negative; T+10 stress is also negative. Only 2/13 locked gates passed, including a failed minimum validation-sample gate (76 entry-eligible before overlap; 66 final closed trades). **R303 GAGAL; no signal block retained and no FundedNext replay run.**
 
 **Archive limitation:** report, index, normalized aggregate JSON, data/eligibility summary, period/annual summary, and bootstrap summary are committed. The exact local runner source and full row-level trade/skip/eligibility CSVs remain identified by SHA-256 in the manifest but are not yet stored as decoded row-level GitHub files. The reproducibility gate is therefore explicitly failed. Do not claim R303 is repository-only reproducible or funded-ready until exact source and row-level artifacts are restored and checksum-verified.
+
+## Latest authoritative objective update — 2026-10-19
+
+The user replaced the ambiguous “as fast as possible” wording with an explicit deadline: **reach funded status after completing both Stellar 2-Step phases in fewer than 180 calendar days**, measured from the first paid challenge attempt to successful Phase 2 completion. Future scorecards must report probability of completing both phases by day 179 before a daily/max-loss breach, plus time-to-funded quantiles. This is a research objective, not a promise of success. Until the known age eligibility date 2026-12-25, research remains simulation-only; do not advise purchasing now.
+
+## Latest research update — R304 FX local-session depreciation — GAGAL (2026-10-19 local replay)
+
+**R304 is closed as GAGAL.** The fixed-clock, two-module hypothesis was locked before outcomes: short EURUSD from 08:05–12:00 Europe/London and long EURUSD from 08:05–12:00 America/New_York. It was motivated by local-trading-hour return literature but was not assumed to have an edge.
+
+Artifacts:
+- [Artifact index](research/R304_INDEX.md)
+- [Locked preregistration](research/R304_FX_LOCAL_SESSION_CURRENCY_DEPRECIATION_PREREGISTRATION.md)
+- [Full-session range-history amendment](research/R304_DQ1_FULL_SESSION_RANGE_AMENDMENT.md)
+- [Pre-outcome audit](research/R304_PREOUTCOME_AUDIT.md)
+- [Final report](research/R304_FINAL_REPORT.md)
+- [Normalized compact results](research/R304_results_compact.json)
+- [Period/year scorecard](research/R304_period_annual_summary.csv)
+- [Validation weekly bootstrap](research/R304_validation_weekly_bootstrap.json)
+- [Data integrity summary](research/R304_data_audit.json)
+- [Data and local-output manifest](research/R304_DATA_MANIFEST.md)
+
+The input was existing paired EURUSD M1 BID/ASK data artifact #11959096102, ZIP SHA-256 b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e. After the registered repeated-flat filter, 3,718,698 active paired timestamps remained. The pre-outcome audit yielded 2,572 eligible module-events across 2017–2021 (2,059 discovery trades; 513 validation events). The locked screen used only discovery 2017–2020 and validation 2021. No R304 PnL was calculated for 2022–2025 or 2026.
+
+At +1 pip incremental round-trip cost, discovery lost 42.390R with PF_R 0.926; validation lost 15.560R with PF_R 0.889. Both periods turned negative at +0.5 pip extra friction. Only one of four discovery years was positive; the validation weekly bootstrap mean was -0.29359R/week with 95% CI [-0.64112,+0.06233]R. The preregistered mirror-direction control was also negative. Only 2/11 candidate/data gates passed (minimum sample gates). **No FundedNext challenge replay was run** because the strategy gate failed; no <180-day pass probability is claimed.
+
+**Reproducibility limitation:** normalized report and scorecards are archived; local runner and full row-level ledgers are identified by hashes in the manifest but were not verified as regular decoded files in this branch. Repository-only reproduction remains a failed gate. Do not describe R304 as funded-ready or rescue it by retuning its hours/direction on these periods.
