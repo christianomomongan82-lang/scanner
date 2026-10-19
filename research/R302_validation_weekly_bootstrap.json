@@ -1,0 +1,11 @@
+{
+  "period": "2021-2025",
+  "calendar_weeks_including_zero_trade_weeks": 262,
+  "block_weeks": 4,
+  "resamples": 10000,
+  "seed": 302,
+  "observed_mean_weekly_net_R": -0.10302073015568698,
+  "ci95_lower_mean_weekly_net_R": -0.1894478452971306,
+  "ci95_upper_mean_weekly_net_R": -0.015572510961809366,
+  "probability_bootstrap_mean_positive": 0.0103
+}
