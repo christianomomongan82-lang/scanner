@@ -55,4 +55,4 @@ Only 2 of 13 gates passed: data-integrity checks and minimum discovery trade cou
 
 ## Artifact navigation
 
-See `R303_INDEX.md` and `R303_DATA_MANIFEST.md` for current repository artifacts and file hashes.
+See `R303_INDEX.md` and `R303_DATA_MANIFEST.md` for archived summaries and source/output hashes. The exact runner and raw row-level ledgers remain unarchived; repository-only reproduction is not complete.
