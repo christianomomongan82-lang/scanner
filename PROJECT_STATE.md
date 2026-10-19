@@ -802,3 +802,25 @@ At +$0.30/oz additional friction, discovery 2017–2020 produced 179 trades, −
 The archive had 877,930 exactly paired BID/ASK timestamps before the exclusive 2026-01-01 UTC cutoff; no duplicate or invalid OHLC rows and no synthetic bars were used. The strategy used a scheduled-clock weekday proxy, not the historical official IBA non-publication calendar, and 2021–2025 is program-contaminated. Therefore the protected XAUUSD 2026 window remains unopened; R302 is not funded-ready.
 
 **Reproducibility limitation:** the full high-volume row-level primary trade ledger, pre-outcome eligibility audit, and all-cost/delay ledger have local SHA-256 hashes recorded in the manifest, but are not yet present as row-level GitHub files. The compact results, period/annual summary, data audit, bootstrap summary and weekly bootstrap input are in GitHub. Do not call repository-only row-level reproduction complete until the large ledgers are transferred or deterministically rebuilt and checksum-matched.
+
+
+## Latest research update — R303 GAGAL (2026-10-19 local replay)
+
+**R303: EURUSD spread-shock reversion — GAGAL.** The new quote-state hypothesis was preregistered before signal PnL. See:
+- [Locked preregistration](research/R303_EURUSD_SPREAD_SHOCK_REVERSION_PREREGISTRATION.md)
+- [Entry eligibility amendment](research/R303_DQ1_ENTRY_ELIGIBILITY_AMENDMENT.md)
+- [Daily volatility-threshold amendment](research/R303_DQ2_VOLATILITY_THRESHOLD_AMENDMENT.md)
+- [Bootstrap aggregation correction log](research/R303_IMPL1_BOOTSTRAP_AGGREGATION_CORRECTION.md)
+- [Artifact index](research/R303_INDEX.md)
+- [Final report](research/R303_FINAL_REPORT.md)
+- [Compact aggregate result summary](research/R303_results_compact.json)
+- [Data / pre-outcome eligibility summary](research/R303_data_audit.json)
+- [Annual/period scorecard](research/R303_period_annual_summary.csv)
+- [Validation bootstrap](research/R303_validation_weekly_bootstrap.json)
+- [Data and output manifest](research/R303_DATA_MANIFEST.md)
+
+The source was existing GitHub artifact #11959096102, EURUSD M1 paired BID/ASK archive SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`. Audit found 4,415,493 paired timestamp rows, zero duplicate/invalid OHLC/negative spreads, and 696,795 repeated flat-fill rows excluded. No missing bars were synthesized. Signal/PnL outcomes were limited to discovery 2017–2020 and validation 2021; 2022+ candidate PnL was not calculated.
+
+At the registered +1 pip incremental round-trip friction and T+5 manual-compatible entry, discovery had 739 closed trades, -93.407R, PF_R 0.769; validation had 66 trades, -7.360R, PF_R 0.777. Validation four-week circular weekly-net bootstrap: mean -0.14153R/week, 95% CI [-0.40550,+0.11319], positive-mean share 13.92%. At +0.5 pip incremental cost both periods turn negative; T+10 stress is also negative. Only 2/13 locked gates passed, including a failed minimum validation-sample gate (76 entry-eligible before overlap; 66 final closed trades). **R303 GAGAL; no signal block retained and no FundedNext replay run.**
+
+**Archive limitation:** report, index, normalized aggregate JSON, data/eligibility summary, period/annual summary, and bootstrap summary are committed. The exact local runner source and full row-level trade/skip/eligibility CSVs remain identified by SHA-256 in the manifest but are not yet stored as decoded row-level GitHub files. The reproducibility gate is therefore explicitly failed. Do not claim R303 is repository-only reproducible or funded-ready until exact source and row-level artifacts are restored and checksum-verified.
