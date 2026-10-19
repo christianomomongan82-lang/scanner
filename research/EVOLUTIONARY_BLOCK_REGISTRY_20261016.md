@@ -268,3 +268,13 @@ R287 uses 4 correlated US index M5 BID-only snapshots, one index trade maximum p
 - **R298 = GAGAL.** Do not tune thresholds/exits or reverse direction on these dates. No 2026 PnL and no funded challenge replay. No alpha block retained.
 - Artifacts: `R298_XAUUSD_LONDON_ASIA_RANGE_SWEEP_RECLAIM_PREREGISTRATION.md`, `R298_FINAL_REPORT.md`, `R298_results_compact.json`, `R298_annual_summary.csv`. Full local runner, trade ledger and audit tables are in the R298 research ZIP.
 - Limitations: 2021–2025 is research-contaminated; data are historical BID/ASK quotes, not verified FundedNext execution. Broker costs, contract value, slippage, swaps, margin and two-phase account-equity/DLL/MLL behavior remain unverified.
+
+
+## R303 — EURUSD spread shock: FAILED signal block
+
+- **Mechanism tested:** fade the five-minute EURUSD midpoint displacement when paired-quote spread reaches >=2× its prior baseline, subject to normalization on the first T+5 executable quote.
+- **Evidence:** at +1 pip extra round-trip friction, 739 discovery trades / -93.407R / PF_R 0.769 and 66 validation trades / -7.360R / PF_R 0.777. A four-week circular bootstrap on all 52 validation weeks gives mean -0.14153R/week, 95% CI [-0.40550, +0.11319]. +0.5 pip stress is negative in both periods; T+10 delay stress is also negative.
+- **Disposition:** signal block closed; no alpha retained, no funded challenge replay. Do not retune the exact thresholds on the same data.
+- **Reusable engineering only:** paired BID/ASK alignment, repeat-flat-row audit, preserving missing bars, and bootstrap including zero-trade weeks. These controls are not alpha.
+- **Reproducibility caveat:** normalized aggregate report/JSON and weekly bootstrap input are in GitHub; exact local runner source and full row-level trade/skip ledgers remain unarchived, so repo-only reproducibility fails.
+- Report: [R303_FINAL_REPORT.md](R303_FINAL_REPORT.md).
