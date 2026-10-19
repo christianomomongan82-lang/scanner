@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-10-17",
-  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R297",
+  "as_of": "2026-10-19",
+  "status": "NO_CANDIDATE_PROMOTED_R270_TO_R303",
   "execution_blocks": {
     "quote_side_bid_ask": "reusable implementation control; local smoke-checked; not alpha evidence",
     "preserve_gaps": "reusable data-integrity control; not alpha evidence",
@@ -216,9 +216,22 @@
         "research/R298_annual_summary.csv"
       ],
       "caveat": "Historical XAUUSD BID/ASK does not verify funded fills or actual costs. 2021-2025 contaminated. No 2026 candidate PnL and no FundedNext equity-path replay. No alpha block retained."
+    },
+    {
+      "id": "R303_EURUSD_SPREAD_SHOCK_REVERSION",
+      "status": "FAILED_EXPECTANCY_COST_SAMPLE_AND_BOOTSTRAP_GATES",
+      "evidence": "At +1 pip incremental round-trip cost, T+5 fade discovery 2017-2020: 739 trades, -93.407R, PF_R 0.769; validation 2021: 66 trades, -7.360R, PF_R 0.777. Validation weekly 4-week circular bootstrap mean -0.1415R/week, 95% CI [-0.4055,+0.1132]. Zero-extra-cost aggregates are slightly positive but both periods turn negative at +0.5 pip. T+10 stress and matched follow diagnostic are negative.",
+      "artifacts": [
+        "research/R303_EURUSD_SPREAD_SHOCK_REVERSION_PREREGISTRATION.md",
+        "research/R303_FINAL_REPORT.md",
+        "research/R303_results_compact.json",
+        "research/R303_validation_weekly_bootstrap.json",
+        "research/R303_DATA_MANIFEST.md"
+      ],
+      "caveat": "T+5 pre-overlap eligible validation events are only 76, final stream has 66 trades, below the 100-trade gate. 2017-2021 are program-level contaminated; no 2022+ PnL or FundedNext replay. Exact runner and row-level output archival remains incomplete; repository reproducibility gate fails. No alpha retained."
     }
   ],
-  "decision": "No candidate promoted R270-R298. R296 was an invalid test caused by static Sunday quotes; R297 corrected the reopening timestamp but failed locked gates; R298's London Asian-range sweep-reclaim failed both discovery and validation economics and its weekly bootstrap CI was entirely negative. No R297 or R298 2026 candidate PnL and no funded equity-path replay were run.",
+  "decision": "No candidate promoted R270-R298. R296 was an invalid test caused by static Sunday quotes; R297 corrected the reopening timestamp but failed locked gates; R298's London Asian-range sweep-reclaim failed both discovery and validation economics and its weekly bootstrap CI was entirely negative. No R297 or R298 2026 candidate PnL and no funded equity-path replay were run. R303 failed its pre-registered sample, expectancy, cost, delay and bootstrap gates; only 2/13 gates passed. No R303 alpha was retained, no funded challenge replay was run, and its 2022+ outcome period remained unopened.",
   "contamination_notes": {
     "2021-2025": "Repeatedly viewed across previous project experiments; use as exploratory screen only, not clean program-level OOS.",
     "2026_XAUUSD_M5": "Still unopened in R272/R273/R274; do not inspect unless a future preregistered candidate passes all historical gates.",
