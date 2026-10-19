@@ -169,3 +169,12 @@ No portfolio composition using unverified/failed streams as if they were establi
 - Only open the protected XAU 2026 window if a single candidate passes all frozen pre-2026 gates and is explicitly nominated as the one final test.
 
 The system's evolution should improve because past experiments narrow the choices and inform which *new mechanism* to test—not because a failed candidate is mutated until one historical chart turns green.
+
+
+## R303 — EURUSD spread-shock reversion: CLOSED / GAGAL
+
+R303 tested a distinct quote-state mechanism: fade a large five-minute midpoint move only when observed EURUSD BID/ASK spread simultaneously reaches at least twice its trailing baseline and then normalizes at the first manual-compatible executable quote. The hypothesis was frozen before outcomes; T+5 was primary, T+10 was a fixed latency stress.
+
+At +1 pip incremental round-trip cost, discovery 2017–2020 was 739 trades / -93.407R / PF_R 0.769; validation 2021 was 66 trades / -7.360R / PF_R 0.777. Validation's four-week weekly-net bootstrap 95% CI [-0.406, +0.113] crosses zero. Even the zero-extra-cost point estimate turns negative at +0.5 pip. Only 2/13 registered gates pass. **Close the R303 parameterization and do not retune this exact spread ratio, threshold, delay or exit on the same years.** The broader economic class is not universally disproved, but no R303 alpha block is retained.
+
+Historical FX windows 2017–2021 have extensive program-level contamination. Exact runner and row-level ledger transfer to GitHub remains incomplete, so repository-only reproducibility is an additional failed gate. See [R303 report](R303_FINAL_REPORT.md), [index](R303_INDEX.md), and [manifest](R303_DATA_MANIFEST.md).
