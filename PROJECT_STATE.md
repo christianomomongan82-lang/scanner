@@ -8,8 +8,8 @@
 ## Search-system registry — 2026-10-19
 
 The following files are now the operating reference for candidate selection and next-generation research:
-- [Normalized master ledger R251–R299](research/MASTER_SEARCH_LEDGER_R251_R303.csv)
-- [Family/lineage map and closed-family stop rules](research/SEARCH_FAMILY_MAP_R251_R303.md)
+- [Normalized master ledger R251–R299](research/MASTER_SEARCH_LEDGER_R251_R304.csv)
+- [Family/lineage map and closed-family stop rules](research/SEARCH_FAMILY_MAP_R251_R304.md)
 - [Common search governance and scoring contract v1](research/SEARCH_GOVERNANCE_AND_SCORING_V1.md)
 - [Component block library, separating reusable engineering from unvalidated alpha](research/COMPONENT_BLOCK_LIBRARY_R251_R299.md)
 - [Immutable experiment registration-card template v1](research/EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V1.md)
