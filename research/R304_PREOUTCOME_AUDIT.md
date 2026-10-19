@@ -20,6 +20,6 @@
 
 Entry is the first active quote at/after 08:05 local and no later than 08:10; exit must have an exact active 12:00 local quote. Stop-monitoring path must be contiguous in the retained active M1 series; no path gaps are accepted. The prior-session median range requires at least 15 prior eligible ranges. Median session coverage was 100% in every module/year shown.
 
-**Eligible total across discovery 2017–2020 and validation 2021: 2,573 module-events** (1,284 module E; 1,288 module U; the discrepancy with the summed row counts is due to an event overlapping the 2017–2021 date boundary being filtered from combined reporting; raw eligibility records remain canonical).
+**Eligible total across discovery 2017–2020 and validation 2021: 2,572 module-events** (1,284 Module E; 1,288 Module U). These are eligible scheduled events before outcome calculation, not trades with known profitability.
 
 The audit ledger is `R304_preoutcome_event_eligibility.csv`. The runner `r304_preoutcome_audit.py` records the filter, timestamp logic, event eligibility and all skip reasons. The exact raw data is the identified GitHub artifact, not a new data source. No outcomes after 2021 are calculated unless all locked discovery/validation gates pass.
