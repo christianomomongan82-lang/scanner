@@ -1,0 +1,48 @@
+{
+  "candidate_id": "R303",
+  "source": {
+    "artifact_id": 11959096102,
+    "archive": "EURUSD_M1_BID_ASK_archive.zip",
+    "sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "rows_per_side": 4415493,
+    "paired_timestamps": 4415493,
+    "source_range_utc": [
+      "2016-01-03T00:00:00Z",
+      "2025-12-31T21:58:00Z"
+    ]
+  },
+  "checks": {
+    "duplicate_timestamps": 0,
+    "invalid_ohlc_rows": 0,
+    "negative_spread_rows": 0,
+    "repeat_flat_rows_excluded": 696795,
+    "active_rows_after_filter": 3718698,
+    "gaps_over_one_minute_preserved": 538,
+    "synthetic_bars": 0,
+    "archive_hash_matches_preregistration": true
+  },
+  "eligibility": {
+    "raw_signal_events": 1226,
+    "signal_counts": {
+      "2017": 457,
+      "2018": 257,
+      "2019": 227,
+      "2020": 188,
+      "2021": 97
+    },
+    "t5_eligible_before_overlap": {
+      "total": 932,
+      "discovery": 856,
+      "validation": 76
+    },
+    "t10_eligible_before_overlap": {
+      "total": 921,
+      "discovery": 845,
+      "validation": 76
+    }
+  },
+  "feature_cutoff": "2021-12-31T23:59:59Z",
+  "candidate_pnl_2022_plus_calculated": false,
+  "data_quality_gate": "PASS",
+  "end_to_end_repository_reproduction": "FAIL — exact runner and row-level ledgers were not yet archived as decoded files when this summary was written"
+}
