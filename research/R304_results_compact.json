@@ -1,0 +1,198 @@
+{
+  "candidate": "R304",
+  "verdict": "GAGAL",
+  "scored_periods": {
+    "discovery": "2017-2020",
+    "validation": "2021"
+  },
+  "protected_periods": {
+    "candidate_pnl_2022_2025": false,
+    "candidate_pnl_2026": false
+  },
+  "source": {
+    "provider": "Dukascopy EURUSD M1 BID/ASK",
+    "github_artifact_id": 11959096102,
+    "acquisition_run_id": 38697080604,
+    "zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "bid_sha256": "b588b7e07d9fea3748a84a1e3ecf29ccb2ea1d8ea52503f8579928a3cd4990cc",
+    "ask_sha256": "52e53dbb22ef11aee2d2c3d5e5b4ded6659d58c086189a327559253727e52f8b",
+    "raw_rows_per_side": 4415493,
+    "flat_rows_removed": 696795,
+    "active_rows": 3718698,
+    "active_gaps_gt_1m": 12018
+  },
+  "eligible_event_counts": {
+    "total_2017_2021": 2572,
+    "discovery_2017_2020": 2059,
+    "validation_2021": 513
+  },
+  "rules": {
+    "module_E": "SHORT 08:05-12:00 Europe/London",
+    "module_U": "LONG 08:05-12:00 America/New_York",
+    "risk_distance": "median of prior 20 complete 240-minute local sessions; at least 15 required",
+    "stop": "1R",
+    "take_profit": null,
+    "time_exit": "12:00 local",
+    "costs_added_round_trip_pips": [
+      0,
+      0.5,
+      1,
+      2
+    ],
+    "primary_cost_pips": 1
+  },
+  "primary": {
+    "discovery": {
+      "0": {
+        "trades": 2059,
+        "net_R": 18.058,
+        "PF_R": 1.0335,
+        "net_pips": 966.8,
+        "max_closed_R_drawdown": 35.534
+      },
+      "1": {
+        "trades": 2059,
+        "net_R": -42.3895,
+        "PF_R": 0.9256,
+        "net_pips": -1092.2,
+        "max_closed_R_drawdown": 77.9593
+      },
+      "2": {
+        "trades": 2059,
+        "net_R": -102.8371,
+        "PF_R": 0.8291,
+        "net_pips": -3151.2,
+        "max_closed_R_drawdown": 128.3916
+      },
+      "0.5": {
+        "trades": 2059,
+        "net_R": -12.1658,
+        "PF_R": 0.978,
+        "net_pips": -62.7,
+        "max_closed_R_drawdown": 52.8364
+      }
+    },
+    "validation": {
+      "0": {
+        "trades": 513,
+        "net_R": 1.1102,
+        "PF_R": 1.0084,
+        "net_pips": 57.175,
+        "max_closed_R_drawdown": 9.1844
+      },
+      "1": {
+        "trades": 513,
+        "net_R": -15.5604,
+        "PF_R": 0.8892,
+        "net_pips": -455.825,
+        "max_closed_R_drawdown": 20.3444
+      },
+      "2": {
+        "trades": 513,
+        "net_R": -32.231,
+        "PF_R": 0.784,
+        "net_pips": -968.825,
+        "max_closed_R_drawdown": 35.3361
+      },
+      "0.5": {
+        "trades": 513,
+        "net_R": -7.2251,
+        "PF_R": 0.9469,
+        "net_pips": -199.325,
+        "max_closed_R_drawdown": 13.6065
+      }
+    },
+    "annual_1_pip": {
+      "2017": {
+        "net_R": 25.5604,
+        "PF_R": 1.2137
+      },
+      "2018": {
+        "net_R": -20.3148,
+        "PF_R": 0.8647
+      },
+      "2019": {
+        "net_R": -33.2055,
+        "PF_R": 0.7855
+      },
+      "2020": {
+        "net_R": -14.4296,
+        "PF_R": 0.9006
+      },
+      "2021": {
+        "net_R": -15.5604,
+        "PF_R": 0.8892
+      }
+    },
+    "module_combined_2017_2021_1_pip": {
+      "E": {
+        "net_R": -27.116,
+        "PF_R": 0.9221,
+        "trades": 1284
+      },
+      "U": {
+        "net_R": -30.8339,
+        "PF_R": 0.9148,
+        "trades": 1288
+      }
+    }
+  },
+  "mirror_direction_control": {
+    "discovery_2017_2020": {
+      "cost_0": {
+        "net_R": -65.611,
+        "PF_R": 0.887
+      },
+      "cost_1": {
+        "net_R": -126.059,
+        "PF_R": 0.795
+      }
+    },
+    "validation_2021": {
+      "cost_0": {
+        "net_R": -11.055,
+        "PF_R": 0.92
+      },
+      "cost_1": {
+        "net_R": -27.726,
+        "PF_R": 0.812
+      }
+    },
+    "disposition": "diagnostic only; no direction switching or post-hoc promotion"
+  },
+  "bootstrap_validation": {
+    "weeks": 53,
+    "weeks_with_trades": 52,
+    "zero_trade_weeks": 1,
+    "block_weeks": 4,
+    "resamples": 10000,
+    "seed": 304,
+    "mean_weekly_net_R": -0.2935923,
+    "ci95_mean_weekly_net_R": [
+      -0.6411187,
+      0.0623269
+    ],
+    "bootstrap_probability_positive_mean": 0.0535
+  },
+  "gates_passed": 2,
+  "gates_total": 11,
+  "gate_results": {
+    "discovery_minimum_trades": true,
+    "discovery_primary_netR_and_PF": false,
+    "discovery_2pip_stress": false,
+    "validation_minimum_trades": true,
+    "validation_primary_netR_and_PF": false,
+    "validation_2pip_stress": false,
+    "module_E_positive_2017_2021": false,
+    "module_U_positive_2017_2021": false,
+    "discovery_positive_years_at_least_3_of_4": false,
+    "validation_bootstrap_lower_bound_positive": false,
+    "repository_reproducibility": false
+  },
+  "challenge_replay": {
+    "run": false,
+    "reason": "Strategy screen failed locked expectancy/cost/robustness gates",
+    "pass_probability_within_179_days": null
+  },
+  "project_objective": "Maximize realistic probability of completing both FundedNext Stellar 2-Step targets (+8% then +5%) before any loss-rule breach and in <180 calendar days."
+}
