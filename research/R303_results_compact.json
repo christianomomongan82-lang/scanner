@@ -1,0 +1,144 @@
+{
+  "candidate_id": "R303",
+  "name": "EURUSD spread-shock reversion",
+  "binary_verdict": "GAGAL",
+  "final": true,
+  "runner_local_sha256": "cbfeafcd474acac8f11e7f286518114d422efdc030bae067cf072504e6aac8f9",
+  "source_archive_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+  "primary": {
+    "direction": "fade",
+    "entry_delay_minutes": 5,
+    "extra_round_trip_cost_pips": 1,
+    "max_hold_minutes": 30
+  },
+  "periods": {
+    "discovery_2017_2020": {
+      "trades": 739,
+      "net_R": -93.40711959770425,
+      "PF_R": 0.7689213675768507,
+      "mean_R": -0.12639664356928856,
+      "median_R": -0.35766423357659594,
+      "max_closed_drawdown_R": 93.40711959770417,
+      "max_losing_streak": 9,
+      "trades_per_week": 3.536
+    },
+    "validation_2021": {
+      "trades": 66,
+      "net_R": -7.35975638931718,
+      "PF_R": 0.7773551558292278,
+      "mean_R": -0.1115114604441997,
+      "median_R": -0.2491263819252923,
+      "max_closed_drawdown_R": 14.497070085506486,
+      "max_losing_streak": 6,
+      "trades_per_week": 1.245
+    }
+  },
+  "cost_stress": {
+    "t5_fade_plus0pip": {
+      "discovery_net_R": 19.066351921612522,
+      "discovery_PF_R": 1.05584533866,
+      "validation_net_R": 1.3384455276395981,
+      "validation_PF_R": 1.04790388038
+    },
+    "t5_fade_plus0_5pip": {
+      "discovery_net_R": -37.170383838,
+      "discovery_PF_R": 0.9002,
+      "validation_net_R": -3.0106554308,
+      "validation_PF_R": 0.9013
+    },
+    "t5_fade_plus2pip": {
+      "discovery_net_R": -205.880591117,
+      "discovery_PF_R": 0.5621,
+      "validation_net_R": -16.0579583063,
+      "validation_PF_R": 0.58
+    }
+  },
+  "delay_stress_t10_plus1pip": {
+    "discovery": {
+      "trades": 727,
+      "net_R": -117.01632946643097,
+      "PF_R": 0.7094876918
+    },
+    "validation": {
+      "trades": 65,
+      "net_R": -5.486560052522775,
+      "PF_R": 0.8266321
+    }
+  },
+  "matched_follow_diagnostic_plus1pip": {
+    "discovery": {
+      "trades": 745,
+      "net_R": -155.50302623136213,
+      "PF_R": 0.64585
+    },
+    "validation": {
+      "trades": 64,
+      "net_R": -13.78278089995716,
+      "PF_R": 0.59862
+    }
+  },
+  "validation_weekly_bootstrap": {
+    "mean_R_per_week": -0.141533776717638,
+    "ci95_low": -0.405500898965025,
+    "ci95_high": 0.11319250668368176,
+    "positive_mean_share": 0.1392,
+    "resamples": 5000,
+    "block_weeks": 4,
+    "seed": 303
+  },
+  "annual_primary_t5_fade": [
+    {
+      "year": 2017,
+      "trades": 293,
+      "net_R": -42.17,
+      "PF_R": 0.738
+    },
+    {
+      "year": 2018,
+      "trades": 184,
+      "net_R": -4.303,
+      "PF_R": 0.952
+    },
+    {
+      "year": 2019,
+      "trades": 150,
+      "net_R": -32.554,
+      "PF_R": 0.659
+    },
+    {
+      "year": 2020,
+      "trades": 112,
+      "net_R": -14.379,
+      "PF_R": 0.756
+    },
+    {
+      "year": 2021,
+      "trades": 66,
+      "net_R": -7.36,
+      "PF_R": 0.777
+    }
+  ],
+  "locked_gates": {
+    "data_integrity": true,
+    "minimum_trade_count_discovery": true,
+    "minimum_trade_count_validation": false,
+    "discovery_net_R_positive": false,
+    "validation_net_R_positive": false,
+    "discovery_PF_at_least_1_05": false,
+    "validation_PF_at_least_1_05": false,
+    "discovery_plus2pip_net_positive_and_PF_at_least_1": false,
+    "validation_plus2pip_net_positive_and_PF_at_least_1": false,
+    "at_least_3_of_4_discovery_years_positive": false,
+    "validation_weekly_bootstrap_lower_bound_positive": false,
+    "T10_delay_stress_net_R_positive_in_both_periods": false,
+    "reproducible_locked_input_and_code": false
+  },
+  "gate_pass_count": "2/13",
+  "challenge_replay": "not run; locked signal gates failed",
+  "limitations": [
+    "EURUSD 2017–2021 is research-contaminated, not pristine program-level OOS.",
+    "The exact local run's full row-level ledgers and source were not yet present as decoded repository files at the time of summary.",
+    "No 2022+ candidate PnL was calculated."
+  ],
+  "note": "Repository machine-readable summary compiled from the corrected local run's aggregate output; see R303_DATA_MANIFEST.md for the output hashes and row-level archival limitation."
+}
