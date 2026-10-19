@@ -1,0 +1,12 @@
+{
+  "candidate_id": "R303",
+  "method": "circular moving-block bootstrap; four consecutive calendar weeks per block; all 52 Monday-start validation weeks including zero-trade weeks",
+  "n_resamples": 5000,
+  "block_weeks": 4,
+  "seed": 303,
+  "weekly_net_R_mean": -0.141533776717638,
+  "ci95_low": -0.405500898965025,
+  "ci95_high": 0.11319250668368176,
+  "positive_mean_probability": 0.1392,
+  "verdict_gate_passed": false
+}
