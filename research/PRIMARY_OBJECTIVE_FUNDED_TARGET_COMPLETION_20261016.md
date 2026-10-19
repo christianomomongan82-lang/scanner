@@ -57,3 +57,9 @@ For every candidate system:
 ## Correct interpretation in one sentence
 
 **Combine and coordinate strategies to maximize realistic probability of passing the actual funded targets quickly without violating loss limits; measure PF as one diagnostic, not as the target.**
+
+## Authoritative timing clarification — 2026-10-19
+
+The user has now set a concrete ceiling instead of the ambiguous wording “as fast as possible”: **complete both phases and reach funded status in fewer than 180 calendar days**, counted from the first paid challenge attempt start through successful Phase 2 completion. The research score must therefore report P(both phases complete before any loss-rule breach and by day 179), plus time-to-funded quantiles. This is a search/acceptance target, not a guarantee. A candidate that fails the locked historical expectancy/cost/robustness gates does not get a challenge replay or a claimed pass probability.
+
+The smallest reference account remains $6,000 with +8% then +5% targets under the current research reference. This remains simulation-only before the known age-eligibility date of 2026-12-25; do not recommend buying a challenge before eligibility. Verify provider rules, platform reset time, checkout price and account terms again at the point they become applicable.
