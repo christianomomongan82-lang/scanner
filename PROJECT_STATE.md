@@ -779,3 +779,26 @@ R299 was independently replayed from exact source-member hashes with [the archiv
 At +$0.30/oz, discovery 2017–2020 had 315 trades, −170.908R and PF_R 0.327; validation 2021–2025 had 588 trades, −189.406R and PF_R 0.509. Both were negative at zero incremental cost. The 10-minute entry-delay stress remained negative. Validation bootstrap mean was −0.72293R/week, 95% CI [−0.91609R, −0.53769R]. Three of nine gates passed: data/event integrity, minimum trade count, and execution-path integrity. No signal block is retained.
 
 Data checks passed: 877,930 XAU BID and ASK rows per side before cutoff with exact paired timestamps and zero invalid OHLC/negative open-close spreads; 2,558 complete USA500 New York RTH sessions, with 33 incomplete sessions excluded. The exclusive 2026-01-01 UTC cutoff was applied before features and outcomes; **XAUUSD 2026 remains unopened**. The result is a historical signal failure, not a funded-account equity/DLL/MLL replay.
+
+
+## Latest research update — R302 XAUUSD PM benchmark pre-auction extension fade — GAGAL (2026-10-19)
+
+**R302 is closed as GAGAL.** A new, preregistered hypothesis tested whether unusually large absolute gold moves in the 25 minutes before the scheduled 15:00 London PM benchmark tended to reverse after a delayed manual-compatible entry. Signal, thresholds, period split and execution rules were frozen in [the preregistration](research/R302_XAUUSD_PM_AUCTION_EXTENSION_FADE_PREREGISTRATION.md) before calculating outcomes. No threshold/direction/exit tuning was done after results.
+
+- [Artifact index](research/R302_INDEX.md)
+- [Preregistration](research/R302_XAUUSD_PM_AUCTION_EXTENSION_FADE_PREREGISTRATION.md)
+- [Exact runner bootstrap](research/r302_xauusd_pm_auction_extension_fade.py)
+- [Final report](research/R302_FINAL_REPORT.md)
+- [Compact JSON](research/R302_results_compact.json)
+- [Data-integrity audit](research/R302_data_audit.json)
+- [Period / annual scorecard](research/R302_period_annual_summary.csv)
+- [Validation weekly bootstrap summary](research/R302_validation_weekly_bootstrap.json)
+- [Exact validation weekly input including zero-trade weeks](research/R302_validation_weekly_net_R.csv)
+- [Data manifest / artifact hashes](research/R302_DATA_MANIFEST.md)
+- [Detailed ledger restoration / completeness note](research/R302_LEDGER_REASSEMBLY.md)
+
+At +$0.30/oz additional friction, discovery 2017–2020 produced 179 trades, −32.964R and PF_R 0.640; validation 2021–2025 produced 208 trades, −26.991R and PF_R 0.730. Validation was also negative at zero extra cost (−14.573R), at +$0.50/oz (−35.270R), and under T+15 entry delay at +$0.30/oz (−32.917R). The four-week circular bootstrap over 262 validation calendar weeks had mean −0.10302R/week, 95% CI [−0.18945, −0.01557]. Three of eight preregistered historical gates passed; expectancy/robustness gates failed. No FundedNext challenge replay was run.
+
+The archive had 877,930 exactly paired BID/ASK timestamps before the exclusive 2026-01-01 UTC cutoff; no duplicate or invalid OHLC rows and no synthetic bars were used. The strategy used a scheduled-clock weekday proxy, not the historical official IBA non-publication calendar, and 2021–2025 is program-contaminated. Therefore the protected XAUUSD 2026 window remains unopened; R302 is not funded-ready.
+
+**Reproducibility limitation:** the full high-volume row-level primary trade ledger, pre-outcome eligibility audit, and all-cost/delay ledger have local SHA-256 hashes recorded in the manifest, but are not yet present as row-level GitHub files. The compact results, period/annual summary, data audit, bootstrap summary and weekly bootstrap input are in GitHub. Do not call repository-only row-level reproduction complete until the large ledgers are transferred or deterministically rebuilt and checksum-matched.
