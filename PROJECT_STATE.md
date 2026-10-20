@@ -918,3 +918,8 @@ No FundedNext challenge replay was run: R307 failed expectancy/cost/stability ga
 - Exact Python runner and full row-level trade ledgers have local hashes recorded in the R309/R310 audit context but are not yet committed as normal repository files. End-to-end repository-only reproduction remains explicitly failed; do not claim complete reproduction.
 
 **Next-step lock:** close the exact FX/gold snapback family. No direction flip, z-threshold/beta-lookback/exit-barrier/holding-time sweep on the inspected dates. Use a genuinely distinct economic mechanism in the next generation, and do not run the protected XAUUSD 2026 window until a frozen candidate clears all pre-2026 gates. Maintain the primary criterion: both challenge phases completed before any rule breach and in fewer than 180 calendar days; that is an acceptance criterion, not a promise.
+
+
+## 2026-10-20 — R311 process repair: common funded replay engine
+
+The search-process fault was that research continued through R300–R310 even though the audit called for a common funded-path scorer before further loosely comparable tests. Infrastructure repair is committed: [R311 process repair](research/R311_PROCESS_REPAIR.md), [chronological two-phase replay engine](research/funded_challenge_simulator.py), and [six synthetic tests](research/test_funded_challenge_simulator.py). Local test result: **6/6 passed**. This is not a strategy backtest. The engine requires exact OPEN/MARK/EXIT paths; source-specific conservative intrabar adapters, account/platform time verification, broker execution specifications, 10,000 dependence-preserving sequential paths, and full reproducibility are still mandatory. No candidate is promoted and no challenge pass probability is claimed from this patch.
