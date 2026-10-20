@@ -28,6 +28,7 @@ class ChallengeRules:
     daily_loss_reference: str = "initial_balance"
     server_timezone: str = "Europe/Helsinki"  # DST proxy; verify against actual account
     max_open_risk_pct: float = 0.03            # project-level portfolio cap, not a challenge rule
+    max_calendar_days: int = 179               # project speed gate: complete before day 180
 
     def validate(self) -> None:
         if self.initial_balance <= 0:
@@ -44,6 +45,8 @@ class ChallengeRules:
             raise ValueError("unsupported daily_loss_reference")
         if self.max_open_risk_pct <= 0:
             raise ValueError("max_open_risk_pct must be positive")
+        if self.max_calendar_days < 0:
+            raise ValueError("max_calendar_days must be zero or greater")
         ZoneInfo(self.server_timezone)
 
 
@@ -117,7 +120,10 @@ def simulate_challenge(
     balance = initial
     phase_no = 1
     phase_start_balance = initial
-    phase_start_time = prepared[0]["_dt"]
+    attempt_start_time = next((r["_dt"] for r in prepared if r["_event"] == "OPEN"), prepared[0]["_dt"])
+    phase_start_time = attempt_start_time
+    completion_time = None
+    calendar_days_elapsed = None
     phase_entry_days: set[str] = set()
     phase_gross_wins = 0.0
     phase_quick_wins = 0.0
@@ -274,7 +280,13 @@ def simulate_challenge(
             completed_phase = phase_no
             finish_phase(dt)
             if completed_phase == 2:
-                status = "PASS_BOTH_PHASES"
+                completion_time = dt
+                calendar_days_elapsed = (dt.date() - attempt_start_time.date()).days
+                status = (
+                    "PASS_BOTH_PHASES_WITHIN_179D"
+                    if calendar_days_elapsed <= rules.max_calendar_days
+                    else "PASS_BOTH_PHASES_TOO_SLOW"
+                )
                 break
 
     if status.startswith("BREACH_"):
@@ -287,7 +299,7 @@ def simulate_challenge(
             "phase_start_balance": phase_start_balance,
             "max_loss_floor": phase_start_balance * (1.0 - rules.max_loss_pct),
         })
-    elif status != "PASS_BOTH_PHASES":
+    elif status not in {"PASS_BOTH_PHASES_WITHIN_179D", "PASS_BOTH_PHASES_TOO_SLOW"}:
         phase_results.append({
             "phase": phase_no, "status": "BELUM_SELESAI",
             "closed_balance": balance, "phase_start_balance": phase_start_balance,
@@ -303,6 +315,10 @@ def simulate_challenge(
         "status": status,
         "failure_reason": failure_reason,
         "breach_time_utc": breach_time,
+        "attempt_start_time_utc": attempt_start_time.isoformat(),
+        "completion_time_utc": completion_time.isoformat() if completion_time else None,
+        "calendar_days_elapsed": calendar_days_elapsed,
+        "speed_gate_max_calendar_days": rules.max_calendar_days,
         "phases_completed": sum(x["status"] == "LULUS" for x in phase_results),
         "events_processed": events_processed,
         "trades_closed": trades_closed,
