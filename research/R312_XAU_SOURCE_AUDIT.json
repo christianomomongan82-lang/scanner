@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-20",
+  "scope": "source-data integrity and adapter smoke test only; no strategy signals, trade outcomes, or funded pass probability calculated",
+  "source": "Dukascopy XAUUSD M5 BID/ASK GitHub Actions artifact #12031270051",
+  "zip_sha256": "2cde8338800fd7f4d5d4628512201c16757ef06bd90d51ffdc8ef9bea425ba1a",
+  "bid_member_sha256": "b30eb4864db0777b6df612f3e43ccda9cc59db5ca09974191eabdaca1f6ff575",
+  "ask_member_sha256": "b9b174a83df70507be4ab0cd556432a0d14fbac2e596e787325bd1f163772fc9",
+  "cutoff_exclusive_utc": "2026-01-01T00:00:00Z",
+  "paired_rows_before_cutoff": 877930,
+  "first_timestamp_utc": "2016-01-03T00:00:00Z",
+  "last_timestamp_utc": "2025-12-31T21:55:00Z",
+  "bid_only_timestamps": 0,
+  "ask_only_timestamps": 0,
+  "duplicate_timestamps": 0,
+  "invalid_bid_ohlc_rows": 0,
+  "invalid_ask_ohlc_rows": 0,
+  "ask_below_bid_open_count": 0,
+  "ask_below_bid_close_count": 0,
+  "gap_gt_5m_count": 530,
+  "gaps_synthesized_or_filled": 0,
+  "adapter_unit_tests": {
+    "passed": 9,
+    "failed": 0,
+    "cases": [
+      "apply cutoff before paired-row matching",
+      "long entry uses ASK and mark uses BID low",
+      "short entry uses BID and mark uses ASK high",
+      "time/open exit is processed before new entry",
+      "favorable target gap is filled at target cap",
+      "missing M5 bar grid fails closed",
+      "wrong executable entry price fails closed",
+      "stop on wrong side of entry fails closed",
+      "adverse mark sorts before intrabar exit"
+    ]
+  },
+  "real_data_smoke_test": {
+    "status": "PASS_INFRASTRUCTURE_ONLY",
+    "synthetic_position_count": 1,
+    "challenge_events_emitted": 5,
+    "grid_gaps": 0,
+    "strategy_pnl_scored": false
+  },
+  "limitations": [
+    "This is not a strategy backtest or a FundedNext challenge replay.",
+    "The trade ledger must come from a separately frozen and reproducible strategy runner.",
+    "Added per-unit round-trip friction is charged from entry for conservative intratrade risk checks.",
+    "Broker/account commission, swap, contract-size conversion and exact server reset mapping still need verification.",
+    "Source adapter emits conservative adverse OHLC checkpoints; it cannot recover true tick order inside a candle."
+  ]
+}
