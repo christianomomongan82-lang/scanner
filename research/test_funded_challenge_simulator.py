@@ -26,10 +26,32 @@ class ChallengeSimulatorTests(unittest.TestCase):
         for d in range(8, 13):
             events += win_trade(d, f"p2_{d}")
         result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
-        self.assertEqual(result["status"], "PASS_BOTH_PHASES")
+        self.assertEqual(result["status"], "PASS_BOTH_PHASES_WITHIN_179D")
         self.assertEqual(result["phases_completed"], 2)
         self.assertEqual([x["phase"] for x in result["phase_results"]], [1, 2])
         self.assertTrue(all(x["trading_days"] >= 5 for x in result["phase_results"]))
+
+    def test_pass_within_179_calendar_days(self):
+        events = []
+        for d in range(8):
+            events += win_trade(d, f"p1fast_{d}")
+        for d in range(175, 180):
+            events += win_trade(d, f"p2fast_{d}")
+        result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
+        self.assertEqual(result["status"], "PASS_BOTH_PHASES_WITHIN_179D")
+        self.assertEqual(result["phases_completed"], 2)
+        self.assertEqual(result["calendar_days_elapsed"], 179)
+
+    def test_pass_too_slow_fails_project_speed_gate(self):
+        events = []
+        for d in range(8):
+            events += win_trade(d, f"p1slow_{d}")
+        for d in range(176, 181):
+            events += win_trade(d, f"p2slow_{d}")
+        result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
+        self.assertEqual(result["status"], "PASS_BOTH_PHASES_TOO_SLOW")
+        self.assertEqual(result["phases_completed"], 2)
+        self.assertEqual(result["calendar_days_elapsed"], 180)
 
     def test_daily_loss_includes_floating_loss(self):
         events = [
