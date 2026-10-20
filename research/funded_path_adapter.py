@@ -242,12 +242,11 @@ def build_challenge_events(
         if direction not in {"LONG", "SHORT"}:
             raise ValueError(f"{tid}: direction must be LONG or SHORT")
         entry_ts, planned_exit_ts = tr["_entry"], tr["_exit"]
-        # Stop/target may trigger inside the same M5 candle as entry at that candle's
-        # open. Equal timestamps are valid only for an intrabar fill, never a time/open exit.
+        # Stop/target can trigger in the entry candle, at its opening gap price or
+        # intrabar. Equal timestamps are valid; the event sorter handles OPEN before
+        # an immediate EXIT so a position is never closed before it is opened.
         if planned_exit_ts < entry_ts:
             raise ValueError(f"{tid}: exit cannot precede entry")
-        if planned_exit_ts == entry_ts and str(tr.get("exit_fill_type", "INTRABAR")).strip().upper() != "INTRABAR":
-            raise ValueError(f"{tid}: same-bar exit requires exit_fill_type=INTRABAR")
         if entry_ts not in bars.index:
             raise ValueError(f"{tid}: entry timestamp must map to an exact observed bar open")
 
@@ -387,7 +386,9 @@ def build_challenge_events(
         for ts in observed_times:
             if ts == exit_ts and exit_at_open:
                 event_rows.append({
-                    "timestamp_utc": ts.isoformat(), "event_seq": 5, "event": "EXIT", "trade_id": tid,
+                    "timestamp_utc": ts.isoformat(),
+                    "event_seq": 15 if ts == entry_ts else 5,
+                    "event": "EXIT", "trade_id": tid,
                     "realized_r": realized_r, "hold_seconds": hold_seconds, "exit_reason": reason,
                     "exit_price": exit_price, "raw_exit_r": raw_exit_r, "cost_r": cost_r,
                     "exit_at_open": True, "exit_fill_type": fill_type,
