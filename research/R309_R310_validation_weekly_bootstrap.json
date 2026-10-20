@@ -1,0 +1,16 @@
+{
+  "resampling": "circular 4-calendar-week block bootstrap",
+  "validation_weeks": 261,
+  "resamples": 10000,
+  "seed": 309,
+  "R309": {
+    "observed_mean_R_per_week": -2.4691062245195647,
+    "ci95_mean_R_per_week": [-2.93925470179396, -2.0054313312740035],
+    "bootstrap_mean_positive_fraction": 0.0
+  },
+  "R310": {
+    "observed_mean_R_per_week": -2.0848490903134507,
+    "ci95_mean_R_per_week": [-2.57849241170969, -1.6043737143422805],
+    "bootstrap_mean_positive_fraction": 0.0
+  }
+}
