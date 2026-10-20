@@ -21,12 +21,10 @@
 | `R311_data_audit.json` | 31,304 | `1e802d1c74902708acc5f2593843608725070a0fc5a9356c1f781af6d5ae29f1` |
 | `R311_preoutcome_data_audit.json` | 24,236 | `0de0e8d295a9c1ea115aa2f6636ef6579034b512eb2bcea059754fd58985bac1` |
 
-## Partitioned repository artifacts
+## Full output storage status — repository gate currently FAILS
 
-The complete row-level ledger is split by Tokyo-local year into:
-`R311_trade_ledger_2017.csv.gz` through `R311_trade_ledger_2021.csv.gz`. It preserves all rows and columns across fade T+5, follow T+5 and fade T+10 streams. The eligibility audit is similarly split into `R311_event_eligibility_audit_2017.csv.gz` through `R311_event_eligibility_audit_2021.csv.gz`. `R311_simulation_skip_audit.csv.gz` preserves all runtime skip reasons. The annual summary and weekly bootstrap input are kept as CSV; compact result and full audit JSON are kept separately.
-
-After transfer, compare each gzip artifact SHA-256 with the partition hashes recorded in this manifest addendum and verify each raw source input hash before any replay.
+The original local run outputs are identified by the SHA-256 values above, and the exact original source ZIP and BID/ASK members are in the existing GitHub data artifact. However, the six files `R311_trade_ledger.csv`, `R311_event_eligibility_audit.csv`, `R311_simulation_skip_audit.csv`, `R311_annual_summary.csv`, `R311_validation_weekly_net_R.csv` and `R311_data_audit.json` are **local run artifacts, not yet stored as row-level outputs in the active GitHub tree**. The pre-outcome audit JSON also remains identified by its local hash. Do not describe R311 as repository-self-contained until their compressed copies or original files are committed and read back.
+The checked-in compact result therefore correctly sets `repository_artifacts_committed_and_readback_verified=false`. This is a reproducibility/storage status, separate from the negative strategy evidence. The candidate remains GAGAL regardless.
 
 ## Outcome summary
 At +1 pip extra round-trip friction: discovery 750 trades / -360.843R / PF_R 0.3445; validation 143 / -73.799R / PF_R 0.3161. The validation weekly bootstrap 95% CI is [-1.8635R, -0.9933R]. R311 is **GAGAL**. No 2022+ PnL was calculated.
