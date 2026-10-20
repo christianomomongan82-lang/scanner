@@ -109,7 +109,7 @@ def simulate_challenge(
     prepared.sort(key=lambda x: (x["_dt"], x["_seq"], x["_ordinal"]))
     if not prepared:
         return {
-            "status": "PATH_EXHAUSTED", "phases_completed": 0,
+            "status": "PATH_EXHAUSTED", "binary_verdict": "GAGAL", "phases_completed": 0,
             "events_processed": 0, "trades_closed": 0, "skipped_entries": [],
             "phase_results": [], "failure_reason": "empty_event_stream",
             "rules": asdict(rules),
@@ -313,6 +313,7 @@ def simulate_challenge(
 
     return {
         "status": status,
+        "binary_verdict": "LULUS" if status == "PASS_BOTH_PHASES_WITHIN_179D" else "GAGAL",
         "failure_reason": failure_reason,
         "breach_time_utc": breach_time,
         "attempt_start_time_utc": attempt_start_time.isoformat(),
