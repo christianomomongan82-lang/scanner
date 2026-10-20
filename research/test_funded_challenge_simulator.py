@@ -116,17 +116,35 @@ class ChallengeSimulatorTests(unittest.TestCase):
         self.assertLess(phase1["quick_strike_share"], 0.30)
         self.assertGreater(phase1["phase_quick_strike_share_all_trades"], 0.30)
 
-    def test_open_position_at_cycle_cutoff_fails_closed(self):
+    def test_cycle_auto_close_at_2345_is_not_misclassified_as_a_breach(self):
         events = [
             event(0, "OPEN", "carry", risk_pct=0.005),
             {
                 "timestamp_utc": datetime(2025, 1, 19, 23, 31, tzinfo=timezone.utc).isoformat(),
                 "event_seq": 1, "event": "MARK", "trade_id": "carry", "floating_r": 0.0,
             },
+            {
+                "timestamp_utc": datetime(2025, 1, 19, 23, 45, tzinfo=timezone.utc).isoformat(),
+                "event_seq": 1, "event": "EXIT", "trade_id": "carry", "realized_r": -0.2,
+                "hold_seconds": 13 * 86400 + 11 * 3600 + 45 * 60,
+            },
         ]
         result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
-        self.assertEqual(result["status"], "BREACH_QUICK_STRIKE_CYCLE_OPEN_POSITION")
-        self.assertEqual(result["failure_reason"], "position_open_at_quick_strike_cycle_cutoff")
+        self.assertEqual(result["status"], "PATH_EXHAUSTED")
+        self.assertIsNone(result["failure_reason"])
+        self.assertEqual(result["open_positions_at_end"], [])
+
+    def test_missing_cycle_auto_close_is_invalid_path_not_rule_breach(self):
+        events = [
+            event(0, "OPEN", "carry", risk_pct=0.005),
+            {
+                "timestamp_utc": datetime(2025, 1, 19, 23, 45, tzinfo=timezone.utc).isoformat(),
+                "event_seq": 1, "event": "MARK", "trade_id": "carry", "floating_r": -0.2,
+            },
+        ]
+        result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
+        self.assertEqual(result["status"], "INVALID_PATH_QUICK_STRIKE_CYCLE_OPEN_POSITION")
+        self.assertEqual(result["failure_reason"], "missing_cycle_auto_close_event")
 
 
 if __name__ == "__main__":
