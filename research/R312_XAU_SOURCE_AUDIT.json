@@ -1,7 +1,9 @@
 {
   "date": "2026-10-20",
-  "scope": "source-data integrity and adapter smoke test only; no strategy signals, trade outcomes, or funded pass probability calculated",
+  "scope": "source-data integrity and adapter integration smoke tests only; no strategy signals, strategy outcomes, PnL, or funded pass probability calculated",
   "source": "Dukascopy XAUUSD M5 BID/ASK GitHub Actions artifact #12031270051",
+  "source_artifact_run_id": 38859918137,
+  "source_artifact_id": 12031270051,
   "zip_sha256": "2cde8338800fd7f4d5d4628512201c16757ef06bd90d51ffdc8ef9bea425ba1a",
   "bid_member_sha256": "b30eb4864db0777b6df612f3e43ccda9cc59db5ca09974191eabdaca1f6ff575",
   "ask_member_sha256": "b9b174a83df70507be4ab0cd556432a0d14fbac2e596e787325bd1f163772fc9",
@@ -18,33 +20,67 @@
   "ask_below_bid_close_count": 0,
   "gap_gt_5m_count": 530,
   "gaps_synthesized_or_filled": 0,
+  "gap_policy": "allow only observed Friday-close to Sunday-reopen closures matching the archived session pattern; reject unexpected weekday/holiday gaps; never synthesize bars",
   "adapter_unit_tests": {
-    "passed": 9,
+    "passed": 12,
     "failed": 0,
     "cases": [
       "apply cutoff before paired-row matching",
       "long entry uses ASK and mark uses BID low",
       "short entry uses BID and mark uses ASK high",
       "time/open exit is processed before new entry",
-      "favorable target gap is filled at target cap",
-      "missing M5 bar grid fails closed",
+      "favorable target gap fills at target cap",
+      "missing weekday M5 bar grid fails closed",
       "wrong executable entry price fails closed",
       "stop on wrong side of entry fails closed",
-      "adverse mark sorts before intrabar exit"
+      "adverse mark sorts before intrabar exit",
+      "force-close a position at exact cycle-end executable open",
+      "missing cycle-end quote fails closed",
+      "allow weekend closure without synthesizing bars"
     ]
   },
-  "real_data_smoke_test": {
+  "challenge_engine_unit_tests": {
+    "passed": 13,
+    "failed": 0
+  },
+  "real_archive_smoke_tests": {
     "status": "PASS_INFRASTRUCTURE_ONLY",
-    "synthetic_position_count": 1,
-    "challenge_events_emitted": 5,
-    "grid_gaps": 0,
-    "strategy_pnl_scored": false
+    "passed": 3,
+    "failed": 0,
+    "ci_run_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/39408537778",
+    "scenarios": [
+      {
+        "name": "one synthetic intraday position over real archived bars",
+        "entry_utc": "2016-01-06T11:20:00Z",
+        "exit_utc": "2016-01-06T11:35:00Z",
+        "emitted_events": 5,
+        "strategy_pnl_scored": false
+      },
+      {
+        "name": "one synthetic position spanning the real weekly market closure",
+        "entry_utc": "2016-01-08T21:40:00Z",
+        "friday_last_bar_utc": "2016-01-08T21:55:00Z",
+        "sunday_first_bar_utc": "2016-01-10T00:00:00Z",
+        "weekend_closures_crossed": 1,
+        "bars_synthesized": false,
+        "strategy_pnl_scored": false
+      }
+    ]
+  },
+  "ci_summary": {
+    "adapter_tests": 12,
+    "challenge_engine_tests": 13,
+    "real_archive_smoke_tests": 3,
+    "total_tests": 28,
+    "conclusion": "success",
+    "run_id": 39408537778
   },
   "limitations": [
     "This is not a strategy backtest or a FundedNext challenge replay.",
-    "The trade ledger must come from a separately frozen and reproducible strategy runner.",
-    "Added per-unit round-trip friction is charged from entry for conservative intratrade risk checks.",
-    "Broker/account commission, swap, contract-size conversion and exact server reset mapping still need verification.",
-    "Source adapter emits conservative adverse OHLC checkpoints; it cannot recover true tick order inside a candle."
+    "A frozen strategy runner must provide the exact entry/exit ledger; none was evaluated here.",
+    "Per-unit additional friction is charged from entry for conservative intratrade risk checks; this is a model, not broker billing.",
+    "Broker/account commission, swap, contract-size conversion and exact server-time configuration remain unverified.",
+    "Adverse OHLC checkpoints cannot recover true tick order inside each candle.",
+    "Weekend gap handling is limited to the observed Friday-close/Sunday-reopen pattern. Other irregular closures fail closed."
   ]
 }
