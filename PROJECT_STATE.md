@@ -8,8 +8,8 @@
 ## Search-system registry — 2026-10-19
 
 The following files are now the operating reference for candidate selection and next-generation research:
-- [Normalized master ledger R251–R299](research/MASTER_SEARCH_LEDGER_R251_R306.csv)
-- [Family/lineage map and closed-family stop rules](research/SEARCH_FAMILY_MAP_R251_R306.md)
+- [Normalized master ledger R251–R299](research/MASTER_SEARCH_LEDGER_R251_R308.csv)
+- [Family/lineage map and closed-family stop rules](research/SEARCH_FAMILY_MAP_R251_R308.md)
 - [Common search governance and scoring contract v1](research/SEARCH_GOVERNANCE_AND_SCORING_V1.md)
 - [Component block library, separating reusable engineering from unvalidated alpha](research/COMPONENT_BLOCK_LIBRARY_R251_R299.md)
 - [Immutable experiment registration-card template v1](research/EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V1.md)
@@ -877,3 +877,29 @@ At +$0.30/oz extra friction:
 **Reproducibility caveat:** locked preregistrations, pre-outcome audit summary, final report, compact output and scorecards are committed. The exact local runner and row-level audit/trade CSVs are identified by hashes in the manifest but not verified as committed repository files. Repository-only reproduction remains failed; don't describe the result set as completely reproducible from GitHub alone.
 
 The user’s concrete objective remains: complete both FundedNext Stellar 2-Step phases in **fewer than 180 calendar days** before any loss-rule breach. These failures do not estimate pass probability because no challenge replay was warranted after the strategy gates failed. The next batch must change the source of information/economic mechanism, not tune either closed rule.
+
+## Latest research update — R307/R308 weekday drift + weekend carry batch — 2026-10-20
+
+**R307 GAGAL; R308 GAGAL at pre-outcome DATA/SAMPLE gate.** The user asked to accelerate progress by testing more than one hypothesis per response. This batch froze both registrations first and used the existing GitHub EURUSD M1 paired BID/ASK artifact #11959096102. No GitHub Actions backtest ran. The 2026 cutoff was applied before features/outcomes.
+
+Artifacts:
+- [Batch index](research/R307_R308_INDEX.md)
+- [Final report](research/R307_R308_BATCH_FINAL_REPORT.md)
+- [R307 preregistration](research/R307_INTRADAY_OF_THE_WEEK_FX_DRIFT_PREREGISTRATION.md)
+- [R308 preregistration](research/R308_FRIDAY_CLOSE_MONDAY_REOPEN_CARRY_PREREGISTRATION.md)
+- [R308 reopen timing amendment](research/R308_DQ1_REOPEN_EXIT_CLARIFICATION.md)
+- [Pre-outcome audit](research/R307_R308_PREOUTCOME_AUDIT.md)
+- [R308 data/sample verdict](research/R308_DATA_ELIGIBILITY_VERDICT.md)
+- [Compact results](research/R307_R308_batch_results_compact.json)
+- [Cost/delay scorecard](research/R307_R308_cost_delay_scorecard.csv)
+- [Annual scorecard](research/R307_period_annual_summary.csv)
+- [Validation bootstrap](research/R307_validation_weekly_bootstrap.json)
+- [Data/output manifest](research/R307_R308_DATA_MANIFEST.md)
+
+Input audit: 4,415,493 paired M1 rows per side before cutoff; 0 invalid OHLC/negative-spread rows; registered filter removed 696,795 repeated flat rows; 3,718,698 active M1 and 736,076 complete M5 bars remained; 7,882 gaps >5 minutes were preserved. No bars were synthesized.
+
+R307 shorted EURUSD Monday/Tuesday and went long Wednesday–Friday from 08:05–12:00 Europe/London, with prior-only range stop and side-correct BID/ASK execution. It generated 1,028 discovery trades and 1,281 validation/diagnostic trades. At +1 pip extra cost it lost -74.491R / PF_R 0.755 in discovery and -53.462R / PF_R 0.854 in validation. Both periods were negative at zero added costs. The 08:10 latency stress was worse; the validation weekly-bootstrap 95% CI was [-0.37108,-0.03328]R/week. Only 2/8 gates passed (data integrity and minimum sample).
+
+R308's registered weekend-carry rule required an observed active >=24h Friday-to-Monday gap. Only two qualifying events existed in 2017–2025 (one in discovery, one in validation), both around New Year closures, not a normal weekly reopening sequence. It failed the minimum sample/data gate **before PnL**, and no outcome metrics were calculated for R308.
+
+No FundedNext challenge replay was run: R307 failed expectancy/cost/stability gates; R308 failed data coverage. Neither has a defensible pass-probability estimate for the user's target of both phases complete before any loss-rule breach and in <180 calendar days. XAUUSD 2026 remains protected. Full row-level ledgers and the exact local runner are identified by hashes in the manifest but were not verified as ordinary decoded files in the repo, so repository-only end-to-end reproducibility remains a failed gate.
