@@ -1,0 +1,186 @@
+{
+  "batch": "R305/R306",
+  "binary_verdicts": {
+    "R305": {
+      "verdict": "GAGAL",
+      "gates_passed": 2,
+      "gates_total": 8,
+      "primary_T10_plus_0_30": {
+        "discovery": {
+          "trades": 12338,
+          "net_R": -6974.0532,
+          "PF_R": 0.340309,
+          "mean_R": -0.56525,
+          "win_rate": 0.286513,
+          "max_closed_R_DD": 6977.6563
+        },
+        "validation_2021_2025": {
+          "trades": 14201,
+          "net_R": -4486.2654,
+          "PF_R": 0.535906,
+          "mean_R": -0.315912,
+          "win_rate": 0.344201,
+          "max_closed_R_DD": 4495.6156
+        }
+      },
+      "added_cost_0": {
+        "discovery": {
+          "net_R": -3466.7783,
+          "PF_R": 0.567617
+        },
+        "validation": {
+          "net_R": -2493.5094,
+          "PF_R": 0.700808
+        }
+      },
+      "added_cost_0_50": {
+        "discovery": {
+          "net_R": -9312.2365,
+          "PF_R": 0.244369
+        },
+        "validation": {
+          "net_R": -5814.7695,
+          "PF_R": 0.450288
+        }
+      },
+      "T15_validation_plus_0_30": {
+        "trades": 14112,
+        "net_R": -4393.5015,
+        "PF_R": 0.540458
+      },
+      "validation_weekly_bootstrap": {
+        "weeks": 261,
+        "weeks_with_trades": 260,
+        "zero_trade_weeks": 1,
+        "block_weeks": 4,
+        "resamples": 10000,
+        "seed": 305,
+        "mean_weekly_net_R": -17.1887564,
+        "ci95": [
+          -18.7661093,
+          -15.5937496
+        ],
+        "probability_positive_mean": 0
+      },
+      "discovery_positive_years": 0,
+      "gates": {
+        "discovery_trade_min_100": true,
+        "validation_trade_min_150": true,
+        "primary_expectancy_pf_both_periods": false,
+        "cost_0_50_both_periods": false,
+        "discovery_positive_years_3_of_4": false,
+        "validation_bootstrap_lower_bound_positive": false,
+        "t15_stress_positive": false,
+        "repository_reproducibility": false
+      }
+    },
+    "R306": {
+      "verdict": "GAGAL",
+      "gates_passed": 2,
+      "gates_total": 8,
+      "primary_T10_plus_0_30": {
+        "discovery": {
+          "trades": 3322,
+          "net_R": -2058.5988,
+          "PF_R": 0.303633,
+          "mean_R": -0.619687,
+          "win_rate": 0.279651,
+          "max_closed_R_DD": 2061.1997
+        },
+        "validation_2021_2025": {
+          "trades": 4004,
+          "net_R": -1398.5039,
+          "PF_R": 0.496698,
+          "mean_R": -0.349277,
+          "win_rate": 0.335664,
+          "max_closed_R_DD": 1402.307
+        }
+      },
+      "added_cost_0": {
+        "discovery": {
+          "net_R": -1027.458,
+          "PF_R": 0.531791
+        },
+        "validation": {
+          "net_R": -801.652,
+          "PF_R": 0.662441
+        }
+      },
+      "added_cost_0_50": {
+        "discovery": {
+          "net_R": -2746.026,
+          "PF_R": 0.211551
+        },
+        "validation": {
+          "net_R": -1796.4052,
+          "PF_R": 0.412057
+        }
+      },
+      "T15_validation_plus_0_30": {
+        "trades": 4014,
+        "net_R": -1322.3888,
+        "PF_R": 0.522083
+      },
+      "validation_weekly_bootstrap": {
+        "weeks": 261,
+        "weeks_with_trades": 260,
+        "zero_trade_weeks": 1,
+        "block_weeks": 4,
+        "resamples": 10000,
+        "seed": 306,
+        "mean_weekly_net_R": -5.3582526,
+        "ci95": [
+          -5.9689321,
+          -4.7169769
+        ],
+        "probability_positive_mean": 0
+      },
+      "discovery_positive_years": 0,
+      "gates": {
+        "discovery_trade_min_100": true,
+        "validation_trade_min_150": true,
+        "primary_expectancy_pf_both_periods": false,
+        "cost_0_50_both_periods": false,
+        "discovery_positive_years_3_of_4": false,
+        "validation_bootstrap_lower_bound_positive": false,
+        "t15_stress_positive": false,
+        "repository_reproducibility": false
+      }
+    }
+  },
+  "data": {
+    "eurusd_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "xauusd_zip_sha256": "2cde8338800fd7f4d5d4628512201c16757ef06bd90d51ffdc8ef9bea425ba1a",
+    "eurusd_raw_rows_per_side": 4415493,
+    "eurusd_repeat_flat_removed": 696795,
+    "eurusd_active_m1_rows": 3718698,
+    "eurusd_complete_m5_rows": 736076,
+    "xauusd_rows_per_side": 877930,
+    "exact_shared_m5_timestamps": 732199,
+    "protected_cutoff_utc": "2026-01-01T00:00:00Z",
+    "candidate_pnl_2026_calculated": false
+  },
+  "preoutcome_events": {
+    "R305": {
+      "discovery_events": 16270,
+      "discovery_T10_eligible": 16196,
+      "discovery_T15_path_eligible": 16191,
+      "validation_events": 18973,
+      "validation_T10_eligible": 18928,
+      "validation_T15_path_eligible": 18926
+    },
+    "R306": {
+      "discovery_events": 3834,
+      "discovery_T10_eligible": 3796,
+      "discovery_T15_path_eligible": 3795,
+      "validation_events": 4529,
+      "validation_T10_eligible": 4515,
+      "validation_T15_path_eligible": 4516
+    }
+  },
+  "challenge_replay": {
+    "run": false,
+    "reason": "Both registered strategy screens failed strongly; no pass-probability claim."
+  },
+  "objective": "Maximize realistic probability of completing both FundedNext Stellar 2-Step phases before any loss-rule breach and in fewer than 180 calendar days."
+}
