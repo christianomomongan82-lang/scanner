@@ -1,0 +1,46 @@
+{
+  "batch": "R309-R310",
+  "verdicts": {"R309": "GAGAL", "R310": "GAGAL"},
+  "source": {
+    "EURUSD_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "XAUUSD_zip_sha256": "2cde8338800fd7f4d5d4628512201c16757ef06bd90d51ffdc8ef9bea425ba1a"
+  },
+  "EURUSD": {
+    "raw_rows_per_side": 4415493,
+    "repeated_flat_placeholders_removed": 696795,
+    "active_paired_minutes": 3718698,
+    "complete_active_M5_bars": 736076,
+    "duplicate_timestamps": 0,
+    "invalid_OHLC_checks": 0,
+    "negative_open_or_close_spreads": 0
+  },
+  "XAUUSD": {
+    "paired_M5_rows_before_cutoff": 877930,
+    "duplicate_timestamps": 0,
+    "invalid_OHLC_checks": 0,
+    "negative_open_or_close_spreads": 0
+  },
+  "join": {
+    "exact_common_M5_timestamps": 732199,
+    "feature_rows_with_valid_z": 636722,
+    "feature_rows_with_positive_beta_and_valid_z": 624271,
+    "no_2026_rows_scored": true
+  },
+  "primary_costs": {"XAUUSD_extra_round_trip": "$0.30/oz", "EURUSD_extra_round_trip": "1 pip"},
+  "stress_costs": {"XAUUSD_extra_round_trip": "$0.50/oz", "EURUSD_extra_round_trip": "2 pips"},
+  "delay_stress": "entry at signal timestamp +15 minutes",
+  "validation_weekly_bootstrap": {
+    "weeks": 261,
+    "resamples": 10000,
+    "circular_block_weeks": 4,
+    "seed": 309,
+    "R309_mean_R_per_week": -2.4691062245,
+    "R309_ci95": [-2.9392547018, -2.0054313313],
+    "R309_positive_bootstrap_fraction": 0.0,
+    "R310_mean_R_per_week": -2.0848490903,
+    "R310_ci95": [-2.5784924117, -1.6043737143],
+    "R310_positive_bootstrap_fraction": 0.0
+  },
+  "runner_sha256_local": "10fca91b807ef42d9542ce333c440223642c9435adc256df5351de2b5f3dafbc",
+  "repository_reproduction_status": "FAIL: full runner and row-level trade ledgers have not yet been committed as ordinary files on the active branch"
+}
