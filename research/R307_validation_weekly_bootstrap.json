@@ -1,0 +1,18 @@
+{
+  "candidate": "R307",
+  "entry": "08:05 London",
+  "extra_cost_pips": 1,
+  "validation_period": "2021-2025",
+  "weeks": 261,
+  "weeks_with_trades": 260,
+  "zero_trade_weeks": 1,
+  "block_weeks": 4,
+  "resamples": 10000,
+  "seed": 307,
+  "mean_weekly_net_R": -0.20483701120763825,
+  "ci95_mean_weekly_net_R": [
+    -0.37108459387612897,
+    -0.03327748397663927
+  ],
+  "bootstrap_share_positive": 0.0098
+}
