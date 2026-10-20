@@ -1,0 +1,136 @@
+{
+  "batch": "R307/R308",
+  "R307": {
+    "verdict": "GAGAL",
+    "hypothesis": "EURUSD short Monday/Tuesday and long Wednesday/Thursday/Friday, 08:05-12:00 Europe/London.",
+    "primary_cost_added_pips": 1,
+    "T5": {
+      "discovery_2017_2020": {
+        "trades": 1028,
+        "net_R": -74.49056997203479,
+        "PF_R": 0.754934562502755,
+        "net_pips": -2398.425,
+        "max_closed_R_DD": 78.06662049209078
+      },
+      "validation_2021_2025": {
+        "trades": 1281,
+        "net_R": -53.462459925193585,
+        "PF_R": 0.8539613078326556,
+        "net_pips": -1823.1499999999314,
+        "max_closed_R_DD": 55.043428338411665
+      }
+    },
+    "zero_extra_cost": {
+      "discovery": {
+        "trades": 1028,
+        "net_R": -41.327985403351484,
+        "PF_R": 0.8553322568173828
+      },
+      "validation": {
+        "trades": 1281,
+        "net_R": -10.993543365783939,
+        "PF_R": 0.9680540100161545
+      }
+    },
+    "cost_0_5": {
+      "discovery": {
+        "net_R": -57.909277687693134,
+        "PF_R": 0.8035164197950204
+      },
+      "validation": {
+        "net_R": -32.22800164548876,
+        "PF_R": 0.9092223480999684
+      }
+    },
+    "cost_2": {
+      "discovery": {
+        "net_R": -107.65315454071808,
+        "PF_R": 0.6666733455102153
+      },
+      "validation": {
+        "net_R": -95.93137648460322,
+        "PF_R": 0.7533073236187707
+      }
+    },
+    "delayed_0810_plus1_pip": {
+      "discovery": {
+        "net_R": -77.21824385957575,
+        "PF_R": 0.745169385172614
+      },
+      "validation": {
+        "net_R": -55.756338965028036,
+        "PF_R": 0.845707308411553
+      }
+    },
+    "discovery_years_net_R_at_plus1": {
+      "2017": -17.994308239414288,
+      "2018": -13.480959563155388,
+      "2019": -18.093014583718645,
+      "2020": -24.922287585746467
+    },
+    "validation_years_net_R_at_plus1": {
+      "2021": -22.78949043157057,
+      "2022": -16.552827932133177,
+      "2023": -8.52975032889709,
+      "2024": 4.247416593368539,
+      "2025": -9.837807825961288
+    },
+    "bootstrap_validation": {
+      "weeks": 261,
+      "weeks_with_trades": 260,
+      "zero_trade_weeks": 1,
+      "mean_weekly_net_R": -0.20483701120763825,
+      "ci95": [
+        -0.37108459387612897,
+        -0.03327748397663927
+      ],
+      "probability_positive_mean": 0.0098,
+      "block_weeks": 4,
+      "resamples": 10000,
+      "seed": 307
+    },
+    "gates": {
+      "passed": 2,
+      "total": 8,
+      "data_integrity": true,
+      "minimum_sample_size": true,
+      "positive_net_R_and_PF_at_plus1": false,
+      "positive_cost_stress_at_plus2": false,
+      "at_least_3_of_4_discovery_years_positive": false,
+      "bootstrap_ci_lower_positive": false,
+      "delay_stress_positive": false,
+      "repository_only_reproducibility": false
+    },
+    "challenge_replay": {
+      "run": false,
+      "pass_probability_within_179_days": null
+    }
+  },
+  "R308": {
+    "verdict": "GAGAL — DATA/SAMPLE BEFORE PNL",
+    "complete_friday_risk_windows": 503,
+    "exact_friday_2100_entries": 178,
+    "qualifying_friday_to_monday_gaps": 2,
+    "discovery_events": 1,
+    "validation_events": 1,
+    "minimum_validation_trades_required": 150,
+    "pnl_calculated": false,
+    "explanation": "Only two >=24h Friday-to-Monday active timestamp gaps occurred; they coincide with New Year's holiday closures rather than a recurring weekly reopening series.",
+    "challenge_replay": {
+      "run": false,
+      "pass_probability_within_179_days": null
+    }
+  },
+  "data": {
+    "zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "raw_rows_per_side": 4415493,
+    "repeat_flat_rows_removed": 696795,
+    "active_m1_rows": 3718698,
+    "complete_active_m5_bars": 736076,
+    "m5_gaps_gt_5min": 7882,
+    "invalid_ohlc_rows": 0,
+    "negative_spreads": 0,
+    "cutoff_exclusive": "2026-01-01T00:00:00Z"
+  },
+  "objective": "Pass both FundedNext Stellar 2-Step phases (+8%, then +5%) before any loss-rule breach in fewer than 180 calendar days."
+}
