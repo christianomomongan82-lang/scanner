@@ -923,3 +923,18 @@ No FundedNext challenge replay was run: R307 failed expectancy/cost/stability ga
 ## 2026-10-20 — R311 process repair: common funded replay engine
 
 The search-process fault was that research continued through R300–R310 even though the audit called for a common funded-path scorer before further loosely comparable tests. Infrastructure repair is committed: [R311 process repair](research/R311_PROCESS_REPAIR.md), [chronological two-phase replay engine](research/funded_challenge_simulator.py), and [eight synthetic tests](research/test_funded_challenge_simulator.py). Local test result: **8/8 passed**. The engine now has a hard project-speed gate: successful completion must be by calendar day 179; day 180 receives PASS_BOTH_PHASES_TOO_SLOW and binary_verdict=GAGAL; only completion by day 179 returns binary_verdict=LULUS. This is not a strategy backtest. The engine requires exact OPEN/MARK/EXIT paths; source-specific conservative intrabar adapters, account/platform time verification, broker execution specifications, 10,000 dependence-preserving sequential paths, and full reproducibility are still mandatory. No candidate is promoted and no challenge pass probability is claimed from this patch.
+
+
+## 2026-10-20 — R312: strategy-search pause and unblock contract
+
+**Decision: pause new strategy backtests and parameter searches.** Do not create another signal hypothesis until the real-data funded replay is reproducible.
+
+The review separated three causes: (1) recent candidate failures include negative expectancy even at zero incremental cost, so this cannot be fixed by simulator changes alone; (2) R311's eight reported synthetic tests cover only the core challenge engine and no verified source adapter yet creates conservative chronological OPEN/MARK/EXIT events from real trades; (3) full row-level ledgers and exact runners for several recent local replays are absent as ordinary repository files, so end-to-end GitHub-only reproduction is still a failed gate.
+
+- [R312 stop/unblock contract](research/R312_STOP_AND_UNBLOCK_20261020.md)
+- R302 primary result: discovery 179 trades, PF_R 0.6398, mean -0.1842R; validation 208 trades, PF_R 0.7299, mean -0.1298R. Validation was also negative at zero added XAU cost, and a 15-minute delay worsened results. R302 remains GAGAL; the protected 2026 interval stays unopened.
+- Do not describe R311 as a funded challenge pass or a pass-probability estimate. The adapter must handle conservative intrabar equity marks, side-correct execution, gaps, fees/swaps, actual platform server time and DST, and exact event-path storage before a market replay can be trusted.
+- The project speed gate of completion by day 179 is a project objective; FundedNext's current public Stellar 2-Step rules state there is no firm-imposed time limit.
+- Resume only after input hashes, exact runner, full row-level ledgers, source adapters and the common challenge-path contract are reproducible. Then use at least 10,000 dependence-preserving sequential paths to report both-phase completion and rule-breach probabilities.
+
+This is an infrastructure/process decision, not a new strategy result. **No candidate is currently funded-ready.**
