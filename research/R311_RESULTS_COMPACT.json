@@ -1,0 +1,126 @@
+{
+  "candidate": "R311_EURUSD_TOKYO_FIX_POST_EVENT_REVERSAL",
+  "verdict": "GAGAL",
+  "data": {
+    "source_artifact_id": 11959096102,
+    "source_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "bid_member_sha256": "b588b7e07d9fea3748a84a1e3ecf29ccb2ea1d8ea52503f8579928a3cd4990cc",
+    "ask_member_sha256": "52e53dbb22ef11aee2d2c3d5e5b4ded6659d58c086189a327559253727e52f8b",
+    "cutoff_utc_exclusive": "2022-01-01T00:00:00Z",
+    "paired_m1_rows_per_side": 2650553,
+    "active_both_m1_rows": 2202782,
+    "static_or_one_side_inactive_rows": 447771,
+    "valid_active_m5_bars": 422289,
+    "discovery_2017_2020": {
+      "eligible_t5": 750,
+      "eligible_t10": 746
+    },
+    "validation_2021": {
+      "eligible_t5": 143,
+      "eligible_t10": 143
+    }
+  },
+  "primary_fade_t5": {
+    "discovery_2017_2020": {
+      "cost_0pip": {
+        "trades": 750,
+        "net_R": -75.981392,
+        "PF_R": 0.804179
+      },
+      "cost_0_5pip": {
+        "trades": 750,
+        "net_R": -218.412189,
+        "PF_R": 0.533755
+      },
+      "cost_1pip": {
+        "trades": 750,
+        "net_R": -360.842986,
+        "PF_R": 0.344475
+      },
+      "cost_2pip": {
+        "trades": 750,
+        "net_R": -645.70458,
+        "PF_R": 0.119899
+      },
+      "positive_years_at_1pip": 0
+    },
+    "validation_2021": {
+      "cost_0pip": {
+        "trades": 143,
+        "net_R": -13.584127,
+        "PF_R": 0.818373
+      },
+      "cost_0_5pip": {
+        "trades": 143,
+        "net_R": -43.691718,
+        "PF_R": 0.520758
+      },
+      "cost_1pip": {
+        "trades": 143,
+        "net_R": -73.799309,
+        "PF_R": 0.316065
+      },
+      "cost_2pip": {
+        "trades": 143,
+        "net_R": -134.014491,
+        "PF_R": 0.080061
+      }
+    }
+  },
+  "delayed_fade_t10": {
+    "discovery_2017_2020": {
+      "trades": 746,
+      "net_R_cost1pip": -340.720699,
+      "PF_R_cost1pip": 0.362729
+    },
+    "validation_2021": {
+      "trades": 143,
+      "net_R_cost1pip": -75.24505,
+      "PF_R_cost1pip": 0.325379
+    }
+  },
+  "follow_control_t5": {
+    "discovery_2017_2020": {
+      "trades": 750,
+      "net_R_cost0pip": -139.617943,
+      "PF_R_cost0pip": 0.66913
+    },
+    "validation_2021": {
+      "trades": 143,
+      "net_R_cost0pip": -23.558949,
+      "PF_R_cost0pip": 0.705923
+    }
+  },
+  "validation_weekly_bootstrap": {
+    "weeks": 52,
+    "weeks_with_trades": 50,
+    "mean_weekly_net_R": -1.419217,
+    "ci95_lower": -1.863539,
+    "ci95_upper": -0.993327,
+    "resamples": 10000,
+    "block_weeks": 4,
+    "seed": 311,
+    "cost_pips": 1
+  },
+  "gates": {
+    "data_integrity_and_exact_paths": true,
+    "discovery_trades_ge_200": true,
+    "validation_trades_ge_100": true,
+    "discovery_net_R_positive_at_1pip": false,
+    "discovery_PF_ge_1_05_at_1pip": false,
+    "validation_net_R_positive_at_1pip": false,
+    "validation_PF_ge_1_05_at_1pip": false,
+    "at_least_3_of_4_discovery_years_positive_at_1pip": false,
+    "discovery_net_R_positive_at_2pip": false,
+    "discovery_PF_ge_1_at_2pip": false,
+    "validation_net_R_positive_at_2pip": false,
+    "validation_PF_ge_1_at_2pip": false,
+    "validation_weekly_bootstrap_lower_gt_zero_at_1pip": false,
+    "validation_net_R_positive_with_T10_at_1pip": false,
+    "local_output_files_complete": true,
+    "repository_artifacts_committed_and_readback_verified": false
+  },
+  "economic_gates_passed": 0,
+  "preregistered_gates_total": 16,
+  "caveat": "Historical screen only; 2017-2021 programme-contaminated; not funded-ready. No PnL after 2021."
+}
