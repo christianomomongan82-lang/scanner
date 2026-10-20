@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   unit-tests:
@@ -37,9 +38,24 @@ jobs:
       - name: Compile infrastructure modules
         run: python -m py_compile research/funded_path_adapter.py research/funded_challenge_simulator.py
 
+      - name: Download archived XAUUSD source data (data only)
+        uses: actions/download-artifact@v4
+        with:
+          name: XAUUSD-M5-Dukascopy-BID-ASK-2016-2026
+          path: raw
+          repository: ${{ github.repository }}
+          run-id: 38859918137
+          github-token: ${{ github.token }}
+
       - name: Run adapter tests
         working-directory: research
         run: python -m unittest -v test_funded_path_adapter.py
+
+      - name: Smoke-test adapter against exact archived XAU source
+        working-directory: research
+        env:
+          RAW_DATA_DIR: ${{ github.workspace }}/raw
+        run: python -m unittest -v test_funded_path_adapter_real_data_smoke.py
 
       - name: Run challenge-engine tests
         working-directory: research
