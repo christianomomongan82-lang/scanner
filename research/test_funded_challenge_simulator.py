@@ -98,5 +98,36 @@ class ChallengeSimulatorTests(unittest.TestCase):
             simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
 
 
+    def test_quick_strike_share_resets_each_14_day_challenge_cycle(self):
+        events = []
+        for d in range(8):
+            events += win_trade(d, f"quick_{d}", hold=10)
+        # A first non-Quick-Strike win is needed in cycle 2 before the cycle-specific
+        # ratio falls below 30%; the phase-wide ratio should still remain above 30%.
+        events += win_trade(14, "normal_after_rollover", hold=60)
+        for d in range(15, 20):
+            events += win_trade(d, f"p2_normal_{d}", hold=60)
+
+        result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
+        self.assertEqual(result["status"], "PASS_BOTH_PHASES_WITHIN_179D")
+        self.assertEqual(result["phases_completed"], 2)
+        phase1 = result["phase_results"][0]
+        self.assertEqual(phase1["quick_strike_cycle_index"], 1)
+        self.assertLess(phase1["quick_strike_share"], 0.30)
+        self.assertGreater(phase1["phase_quick_strike_share_all_trades"], 0.30)
+
+    def test_open_position_at_cycle_cutoff_fails_closed(self):
+        events = [
+            event(0, "OPEN", "carry", risk_pct=0.005),
+            {
+                "timestamp_utc": datetime(2025, 1, 19, 23, 31, tzinfo=timezone.utc).isoformat(),
+                "event_seq": 1, "event": "MARK", "trade_id": "carry", "floating_r": 0.0,
+            },
+        ]
+        result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
+        self.assertEqual(result["status"], "BREACH_QUICK_STRIKE_CYCLE_OPEN_POSITION")
+        self.assertEqual(result["failure_reason"], "position_open_at_quick_strike_cycle_cutoff")
+
+
 if __name__ == "__main__":
     unittest.main()
