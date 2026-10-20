@@ -3,16 +3,20 @@
 **Binary verdict: GAGAL.** No alpha block retained. No funded challenge replay was run. Protected XAUUSD 2026 remains unopened.
 
 - [Locked preregistration](R302_XAUUSD_PM_AUCTION_EXTENSION_FADE_PREREGISTRATION.md)
-- [Exact local runner bootstrap](r302_xauusd_pm_auction_extension_fade.py) — expands to the checksum-locked local Python implementation. Backtest results are not computed by GitHub Actions.
+- [Locked runner bootstrap](r302_xauusd_pm_auction_extension_fade.py) — expands to the checksum-locked implementation. A one-shot recovery replay was used to publish the missing rows after the original hashes were reproduced; that workflow has been removed.
 - [Final report](R302_FINAL_REPORT.md)
 - [Compact metrics and gate JSON](R302_results_compact.json)
 - [Data-integrity audit](R302_data_audit.json)
 - [Period and annual scorecard](R302_period_annual_summary.csv)
 - [Validation weekly bootstrap result](R302_validation_weekly_bootstrap.json)
 - [Data/ledger manifest and local-output hashes](R302_DATA_MANIFEST.md)
-- [Ledger restoration notes and exact local replay verification](R302_LEDGER_REASSEMBLY.md)
+- [Ledger restoration notes and repository readback verification](R302_LEDGER_REASSEMBLY.md)
+- [Primary-cost trade ledger — 387 rows](R302_primary_cost_trade_ledger.csv)
+- [Pre-outcome eligibility audit — 2,336 rows](R302_preoutcome_eligibility_audit.csv)
+- [All cost/delay streams and skip audit — 4,644 rows](R302_all_cost_delay_streams_and_skips.csv)
+- [All valid trade variants — 4,638 rows](R302_all_valid_trade_ledger.csv)
 
-The checksum-locked local runner has now reproduced all four missing detailed CSVs byte-for-byte against the original manifest hashes. Their rows are still not transferred as files into this branch; the restoration notes distinguish that remaining storage task from verified local reproducibility.
+All four detailed CSVs are committed in this branch, with pre-commit SHA-256 values matching the original manifest and post-push GitHub tree metadata confirming the files and exact byte sizes. See the restoration notes for the commit and verification record.
 
 ## Locked result
 
