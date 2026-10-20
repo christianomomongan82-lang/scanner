@@ -1,3 +1,11 @@
+# Latest search checkpoint — 2026-10-21 (R311 GAGAL)
+
+- Executed new, preregistered EURUSD Tokyo 09:55-fixing post-event fade, not a threshold/clock mutation of an old technical strategy. Registered 2017–2020 discovery and 2021 validation; no R311 PnL at/after 2022.
+- Result: **GAGAL**. At +1 pip extra round-trip friction: discovery 750 trades / −360.843R / PF_R 0.3445; validation 143 / −73.799R / PF_R 0.3161. Both periods were negative even at zero extra cost; validation weekly block-bootstrap 95% CI [−1.8635, −0.9933]R/week. T+10 fade and same-event follow control were also negative. No R311 alpha block retained.
+- Files committed: [R311 locked preregistration](research/R311_EURUSD_TOKYO_FIX_POST_EVENT_REVERSAL_PREREGISTRATION.md), [runner](research/r311_eurusd_tokyo_fix.py), [final report](research/R311_FINAL_REPORT.md), [compact result](research/R311_RESULTS_COMPACT.json), [manifest](research/R311_DATA_MANIFEST.md), [index](research/R311_INDEX.md), amendments, [registry R251–R311](research/MASTER_SEARCH_LEDGER_R251_R311.csv), [family map](research/SEARCH_FAMILY_MAP_R251_R311.md), and [component-block library](research/COMPONENT_BLOCK_LIBRARY_R251_R311.md).
+- Full run generated the original trade ledger, eligibility audit, skip audit, annual summary, weekly net-R series and audit JSON locally with recorded SHA-256 hashes; the row-level artifacts have **not** all been committed/read-back verified in GitHub. The compact result correctly keeps `repository_artifacts_committed_and_readback_verified=false`. Do not claim the candidate is end-to-end repository-reproducible yet.
+- This candidate result does not override the R312 stop/unblock contract below. No R312/next strategy signal search is to launch until exact runner/row-level artifact storage and real-data funded-path replay are reproducible. Do not open the protected XAUUSD 2026 interval.
+
 # Proyek Backtest — Checkpoint Utama
 
 ## Ledger storage checkpoint — 2026-10-20 (complete)
