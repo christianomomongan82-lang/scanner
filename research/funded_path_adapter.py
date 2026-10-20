@@ -10,8 +10,10 @@ from __future__ import annotations
 
 import argparse
 import math
+from datetime import datetime, time, timedelta
 from pathlib import Path
 from typing import Any, Iterable
+from zoneinfo import ZoneInfo
 
 import pandas as pd
 
@@ -138,6 +140,8 @@ def build_challenge_events(
     default_risk_pct: float = 0.005,
     default_added_cost_price_units: float = 0.0,
     entry_price_tolerance: float = 0.001,
+    server_timezone: str = "Europe/Helsinki",
+    quick_strike_cycle_days: int = 14,
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
     """Convert a fixed price ledger into conservative challenge-engine events.
 
@@ -155,6 +159,11 @@ def build_challenge_events(
     locked strategy's intrabar fill, after a conservative adverse mark; TARGET_CAP means a
     favorable target gap filled at the locked target price. The strategy runner must already
     resolve same-bar stop/target ambiguity as stop-first.
+
+    Open trades are forcibly closed at the executable quote at 23:45 server time on the final
+    date of each 14-day cycle if their registered exit would occur later. Cycle anchors are
+    derived from each phase's first entry when a "phase" column exists; otherwise the ledger is
+    treated as a single evaluation phase. Missing close quotes fail closed, never forward-fill.
     """
     if not 0 < default_risk_pct < 1:
         raise ValueError("default_risk_pct must be between 0 and 1")
@@ -162,6 +171,9 @@ def build_challenge_events(
         raise ValueError("added cost cannot be negative")
     if entry_price_tolerance < 0:
         raise ValueError("entry_price_tolerance cannot be negative")
+    if quick_strike_cycle_days < 1:
+        raise ValueError("quick_strike_cycle_days must be positive")
+    server_tz = ZoneInfo(server_timezone)
     if not isinstance(trades, pd.DataFrame):
         trades = pd.DataFrame(list(trades))
     missing = [c for c in TRADE_COLUMNS if c not in trades.columns]
@@ -185,8 +197,19 @@ def build_challenge_events(
     work = trades.copy()
     work["_entry"] = work["entry_time_utc"].map(lambda x: _dt(x, "entry_time_utc"))
     work["_exit"] = work["exit_time_utc"].map(lambda x: _dt(x, "exit_time_utc"))
-    work = work.sort_values(["_entry", "_exit", "trade_id"], kind="stable")
+    work = work.sort_values(["_entry", "_exit", "trade_id"], kind="stable").reset_index(drop=True)
+    if "phase" in work.columns:
+        work["_phase_cycle_key"] = work["phase"].fillna("phase_1").astype(str)
+    else:
+        work["_phase_cycle_key"] = "single_phase"
+    cycle_anchor_dates = (
+        work.groupby("_phase_cycle_key")["_entry"]
+        .min()
+        .map(lambda ts: ts.tz_convert(server_timezone).date())
+        .to_dict()
+    )
 
+    cycle_auto_close_count = 0
     for _, tr in work.iterrows():
         tid = str(tr["trade_id"]).strip()
         if not tid or tid.lower() == "nan" or tid in seen_ids:
@@ -195,16 +218,42 @@ def build_challenge_events(
         direction = str(tr["direction"]).strip().upper()
         if direction not in {"LONG", "SHORT"}:
             raise ValueError(f"{tid}: direction must be LONG or SHORT")
-        entry_ts, exit_ts = tr["_entry"], tr["_exit"]
-        if exit_ts <= entry_ts:
+        entry_ts, planned_exit_ts = tr["_entry"], tr["_exit"]
+        if planned_exit_ts <= entry_ts:
             raise ValueError(f"{tid}: exit must be later than entry")
-        if entry_ts not in bars.index or exit_ts not in bars.index:
-            raise ValueError(f"{tid}: entry/exit timestamp must map to exact observed bar opens")
+        if entry_ts not in bars.index:
+            raise ValueError(f"{tid}: entry timestamp must map to an exact observed bar open")
+
+        phase_key = str(tr["_phase_cycle_key"])
+        anchor_date = cycle_anchor_dates[phase_key]
+        entry_local = entry_ts.tz_convert(server_timezone)
+        elapsed_days = (entry_local.date() - anchor_date).days
+        if elapsed_days < 0:
+            raise ValueError(f"{tid}: entry precedes phase cycle anchor")
+        cycle_index = elapsed_days // quick_strike_cycle_days
+        cycle_end_date = anchor_date + timedelta(days=(cycle_index + 1) * quick_strike_cycle_days - 1)
+        cutoff_local = pd.Timestamp(datetime.combine(cycle_end_date, time(23, 45), tzinfo=server_tz))
+        cutoff_ts = cutoff_local.tz_convert("UTC")
+
+        if entry_local.date() == cycle_end_date and entry_local.time().replace(tzinfo=None) >= time(23, 45):
+            raise ValueError(f"{tid}: entry at or after trading-cycle end is invalid")
+        forced_cycle_close = planned_exit_ts >= cutoff_ts
+        exit_ts = cutoff_ts if forced_cycle_close else planned_exit_ts
+        if exit_ts not in bars.index:
+            if forced_cycle_close:
+                raise ValueError(
+                    f"{tid}: cycle auto-close quote missing at exact 23:45 server time ({cutoff_ts.isoformat()})"
+                )
+            raise ValueError(f"{tid}: exit timestamp must map to an exact observed bar open")
         risk_pct = float(tr.get("risk_pct", default_risk_pct))
         if not 0 < risk_pct < 1:
             raise ValueError(f"{tid}: risk_pct must be between 0 and 1")
         entry = float(tr["entry_price"])
-        exit_price = float(tr["exit_price"])
+        if forced_cycle_close:
+            exit_prefix_for_close = "bid" if direction == "LONG" else "ask"
+            exit_price = float(bars.loc[exit_ts, f"{exit_prefix_for_close}_open"])
+        else:
+            exit_price = float(tr["exit_price"])
         stop = float(tr["stop_price"])
         stop_distance = abs(entry - stop)
         if not all(math.isfinite(x) for x in (entry, exit_price, stop, stop_distance)) or stop_distance <= 0:
@@ -220,8 +269,8 @@ def build_challenge_events(
             )
         entry_side_checks += 1
 
-        requested_open = _as_bool(tr.get("exit_at_open"), default=False)
-        fill_type = str(tr.get("exit_fill_type", "OPEN" if requested_open else "INTRABAR")).strip().upper()
+        requested_open = True if forced_cycle_close else _as_bool(tr.get("exit_at_open"), default=False)
+        fill_type = "OPEN" if forced_cycle_close else str(tr.get("exit_fill_type", "OPEN" if requested_open else "INTRABAR")).strip().upper()
         if fill_type not in {"OPEN", "INTRABAR", "TARGET_CAP"}:
             raise ValueError(f"{tid}: exit_fill_type must be OPEN, INTRABAR or TARGET_CAP")
         if requested_open and fill_type == "INTRABAR":
@@ -280,7 +329,9 @@ def build_challenge_events(
         hold_seconds = float((exit_ts - entry_ts).total_seconds())
         raw_exit_r = ((exit_price - entry) if direction == "LONG" else (entry - exit_price)) / stop_distance
         realized_r = raw_exit_r - cost_r
-        reason = str(tr["exit_reason"]).strip()
+        reason = "CYCLE_AUTO_CLOSE" if forced_cycle_close else str(tr["exit_reason"]).strip()
+        if forced_cycle_close:
+            cycle_auto_close_count += 1
 
         event_rows.append({
             "timestamp_utc": entry_ts.isoformat(), "event_seq": 10, "event": "OPEN", "trade_id": tid,
@@ -330,10 +381,14 @@ def build_challenge_events(
         "exit_at_open_count": open_exit_count,
         "target_cap_exit_count": target_cap_exit_count,
         "intrabar_exit_count": intrabar_exit_count,
+        "cycle_auto_close_count": cycle_auto_close_count,
+        "quick_strike_cycle_days": quick_strike_cycle_days,
+        "server_timezone": server_timezone,
+        "phase_cycle_anchors": {k: v.isoformat() for k, v in cycle_anchor_dates.items()},
         "grid_gaps": grid_gaps,
         "cutoff_utc": bars.attrs.get("cutoff_utc"),
         "bar_minutes": int(bars.attrs.get("bar_minutes", 5)),
-        "mark_policy": "executable-side adverse OHLC extreme first; missing bars rejected; no synthetic bars",
+        "mark_policy": "executable-side adverse OHLC extreme first; cycle positions closed at 23:45 server time; missing bars rejected; no synthetic bars",
         "extra_cost_policy": "full declared round-trip extra cost deducted from every mark for conservative risk checks and once from realized R",
     }
     return events, report
@@ -349,12 +404,16 @@ def main() -> int:
     parser.add_argument("--bar-minutes", type=int, default=5)
     parser.add_argument("--risk-pct", type=float, default=0.005)
     parser.add_argument("--added-cost-price-units", type=float, default=0.0)
+    parser.add_argument("--server-timezone", default="Europe/Helsinki")
+    parser.add_argument("--quick-strike-cycle-days", type=int, default=14)
     args = parser.parse_args()
     bars = load_paired_bars(args.bid_csv, args.ask_csv, cutoff_utc=args.cutoff_utc, bar_minutes=args.bar_minutes)
     trades = pd.read_csv(args.trades_csv)
     events, report = build_challenge_events(
         trades, bars, default_risk_pct=args.risk_pct,
         default_added_cost_price_units=args.added_cost_price_units,
+        server_timezone=args.server_timezone,
+        quick_strike_cycle_days=args.quick_strike_cycle_days,
     )
     events.to_csv(args.output_csv, index=False)
     report_path = str(Path(args.output_csv).with_suffix(".audit.json"))
