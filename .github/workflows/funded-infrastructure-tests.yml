@@ -7,6 +7,7 @@ on:
     paths:
       - "research/funded_path_adapter.py"
       - "research/test_funded_path_adapter.py"
+      - "research/test_funded_path_adapter_real_data_smoke.py"
       - "research/funded_challenge_simulator.py"
       - "research/test_funded_challenge_simulator.py"
       - ".github/workflows/funded-infrastructure-tests.yml"
