@@ -946,3 +946,11 @@ This is an infrastructure/process decision, not a new strategy result. **No cand
 - Independently verified XAUUSD M5 archive #12031270051: source ZIP and both gzip member hashes match the R302 manifest; 877,930 exactly paired rows remain before the exclusive 2026 cutoff; no timestamp mismatches, duplicates, invalid OHLC rows, or negative open/close spreads. The 530 gaps over five minutes are preserved, never filled.
 - Adapter unit tests: 9/9 passed locally. One synthetic-position smoke test over real historical quotes emitted a valid five-event OPEN/MARK/EXIT path. No strategy outcome was calculated.
 - This closes only the price-path-conversion component. The adapter still needs the frozen runner ledger, broker/account costs and contract sizing, server reset verification, end-to-end replay through the shared challenge engine, and the sequential-path ensemble. **No strategy is funded-ready.**
+
+
+## 2026-10-20 — R312 follow-up: Quick Strike and automatic cycle close
+
+- Current official references: [Quick Strike is per-cycle and uses profitable trades](https://help.fundednext.com/en/articles/14702484-understanding-the-quick-strike-parameter-on-fundednext); [Stellar evaluation cycle starts at first trade, lasts 14 days, ends at 23:45 server time, with automatic closure for remaining positions](https://help.fundednext.com/en/articles/8020083-when-does-my-trading-cycle-start).
+- Fixed shared simulator to score Quick Strike per 14-day cycle, not phase-wide cumulative totals. Position still open across cycle boundary without explicit closure now makes the path invalid/GAGAL, not a fabricated DLL/MLL breach. New entries at/after cycle end and end-of-path open positions are rejected.
+- Paired-quote adapter now closes trades whose planned exit would overrun the cycle at the exact observed 23:45 server-time executable-side open; if the quote is absent, it fails closed. Phase-labelled ledgers get separate cycle anchors.
+- Added simulator edge-case tests and adapter auto-close/missing-quote tests, plus a test-only GitHub Actions workflow (no backtesting). Initial run exposed a workflow setup issue (pip cache assumes a dependency manifest); the workflow has been corrected and is running again. Do not treat code validation as complete until the follow-up run returns green.
