@@ -52,7 +52,7 @@ jobs:
       - name: Rebuild the exact R302 ledger outputs
         run: |
           set -euo pipefail
-          python -m pip install --disable-pip-version-check numpy pandas
+          python -m pip install --disable-pip-version-check numpy==2.3.5 pandas==2.2.3
           python research/r302_xauusd_pm_auction_extension_fade.py \
             --data-dir "$RUNNER_TEMP/r302-data" \
             --out-dir "$RUNNER_TEMP/r302-out"
