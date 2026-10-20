@@ -197,5 +197,38 @@ class AdapterTests(unittest.TestCase):
             )
 
 
+    def test_weekend_market_closure_is_skipped_without_synthetic_bars(self):
+        idx = pd.DatetimeIndex([
+            "2025-01-03T23:40:00Z",
+            "2025-01-03T23:45:00Z",
+            "2025-01-03T23:50:00Z",
+            "2025-01-03T23:55:00Z",
+            "2025-01-05T02:00:00Z",
+            "2025-01-05T02:05:00Z",
+        ])
+        base = [100.0, 100.1, 100.2, 100.3, 100.4, 100.5]
+        bars = pd.DataFrame(index=idx)
+        bars["bid_open"] = base
+        bars["bid_high"] = [x + 0.1 for x in base]
+        bars["bid_low"] = [x - 0.1 for x in base]
+        bars["bid_close"] = [x + 0.02 for x in base]
+        for col in ("open", "high", "low", "close"):
+            bars[f"ask_{col}"] = bars[f"bid_{col}"] + 0.2
+        bars.attrs["bar_minutes"] = 5
+        entry_ts, exit_ts = idx[0], idx[4]
+        trades = [{
+            "trade_id": "WEEKEND", "direction": "LONG",
+            "entry_time_utc": entry_ts.isoformat(), "exit_time_utc": exit_ts.isoformat(),
+            "entry_price": bars.loc[entry_ts, "ask_open"], "stop_price": bars.loc[entry_ts, "ask_open"] - 1,
+            "exit_price": bars.loc[exit_ts, "bid_open"], "exit_reason": "WEEKEND_OPEN_EXIT",
+            "exit_at_open": True,
+        }]
+        events, report = build_challenge_events(trades, bars, server_timezone="UTC")
+        self.assertEqual(report["weekend_closures_crossed"], 1)
+        self.assertEqual(len(events), 6)
+        self.assertEqual(int((events.event == "MARK").sum()), 4)
+        self.assertFalse(any(pd.Timestamp(x).date().isoformat() == "2025-01-04" for x in events.timestamp_utc))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
