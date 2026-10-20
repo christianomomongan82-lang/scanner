@@ -8,8 +8,8 @@
 ## Search-system registry — 2026-10-19
 
 The following files are now the operating reference for candidate selection and next-generation research:
-- [Normalized master ledger R251–R299](research/MASTER_SEARCH_LEDGER_R251_R304.csv)
-- [Family/lineage map and closed-family stop rules](research/SEARCH_FAMILY_MAP_R251_R304.md)
+- [Normalized master ledger R251–R299](research/MASTER_SEARCH_LEDGER_R251_R306.csv)
+- [Family/lineage map and closed-family stop rules](research/SEARCH_FAMILY_MAP_R251_R306.md)
 - [Common search governance and scoring contract v1](research/SEARCH_GOVERNANCE_AND_SCORING_V1.md)
 - [Component block library, separating reusable engineering from unvalidated alpha](research/COMPONENT_BLOCK_LIBRARY_R251_R299.md)
 - [Immutable experiment registration-card template v1](research/EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V1.md)
@@ -850,3 +850,30 @@ The input was existing paired EURUSD M1 BID/ASK data artifact #11959096102, ZIP 
 At +1 pip incremental round-trip cost, discovery lost 42.390R with PF_R 0.926; validation lost 15.560R with PF_R 0.889. Both periods turned negative at +0.5 pip extra friction. Only one of four discovery years was positive; the validation weekly bootstrap mean was -0.29359R/week with 95% CI [-0.64112,+0.06233]R. The preregistered mirror-direction control was also negative. Only 2/11 candidate/data gates passed (minimum sample gates). **No FundedNext challenge replay was run** because the strategy gate failed; no <180-day pass probability is claimed.
 
 **Reproducibility limitation:** normalized report and scorecards are archived; local runner and full row-level ledgers are identified by hashes in the manifest but were not verified as regular decoded files in this branch. Repository-only reproduction remains a failed gate. Do not describe R304 as funded-ready or rescue it by retuning its hours/direction on these periods.
+ 
+## Latest batch update — R305/R306 cross-asset common-USD tests — GAGAL (2026-10-20 local replay)
+
+**Both R305 and R306 are closed as GAGAL.** This batch tested two distinct, pre-registered mechanisms on synchronized EURUSD M1 and XAUUSD M5 paired BID/ASK data. Thresholds and trade rules were frozen before candidate outcome calculation. No 2026 XAU PnL was calculated; protected XAU 2026 remains unopened.
+
+Artifacts:
+- [Batch index](research/R305_R306_INDEX.md)
+- [Preregistration R305 — common-USD impulse transmission](research/R305_EURUSD_TO_XAUUSD_USD_FACTOR_TRANSMISSION_PREREGISTRATION.md)
+- [R305 threshold amendment](research/R305_DQ1_THRESHOLD_AMENDMENT.md)
+- [Preregistration R306 — XAU underreaction catch-up](research/R306_EURUSD_SHOCK_XAU_UNDERREACTION_CATCHUP_PREREGISTRATION.md)
+- [Pre-outcome audit](research/R305_R306_PREOUTCOME_AUDIT.md)
+- [Final report](research/R305_R306_BATCH_FINAL_REPORT.md)
+- [Compact JSON](research/R305_R306_batch_results_compact.json)
+- [Cost/delay scorecard](research/R305_R306_cost_delay_scorecard.csv)
+- [Annual scorecard](research/R305_R306_period_annual_summary.csv)
+- [Input/output manifest](research/R305_R306_DATA_MANIFEST.md)
+
+Input integrity was checked on the existing GitHub artifacts #11959096102 (EURUSD) and #12031270051 (XAUUSD). EURUSD had 4,415,493 rows/side before cutoff, 696,795 registered repeat-flat rows removed, 3,718,698 active M1 rows and 736,076 complete M5 bars. XAUUSD had 877,930 rows/side. There were 732,199 exact shared M5 timestamps. Paired timestamps were exact; no duplicate/invalid OHLC rows or negative open/close spreads were observed. Missing rows were not synthesized. Cutoff >= 2026-01-01 UTC was applied before features/events/outcomes.
+
+At +$0.30/oz extra friction:
+- R305: discovery 12,338 trades, -6,974.05R, PF_R 0.340; validation/diagnostic 2021–2025 14,201 trades, -4,486.27R, PF_R 0.536. Both periods were negative at zero added cost. Validation weekly bootstrap mean -17.1888R/week, 95% CI [-18.7661, -15.5937]R.
+- R306: discovery 3,322 trades, -2,058.60R, PF_R 0.304; validation/diagnostic 2021–2025 4,004 trades, -1,398.50R, PF_R 0.497. Both periods were negative at zero added cost. Validation weekly bootstrap mean -5.3583R/week, 95% CI [-5.9689, -4.7170]R.
+- Both are **GAGAL (2/8 hard gates)**. Cost stress and T+15-minute delay are also strongly negative. No alpha block is retained; no FundedNext challenge replay was run.
+
+**Reproducibility caveat:** locked preregistrations, pre-outcome audit summary, final report, compact output and scorecards are committed. The exact local runner and row-level audit/trade CSVs are identified by hashes in the manifest but not verified as committed repository files. Repository-only reproduction remains failed; don't describe the result set as completely reproducible from GitHub alone.
+
+The user’s concrete objective remains: complete both FundedNext Stellar 2-Step phases in **fewer than 180 calendar days** before any loss-rule breach. These failures do not estimate pass probability because no challenge replay was warranted after the strategy gates failed. The next batch must change the source of information/economic mechanism, not tune either closed rule.
