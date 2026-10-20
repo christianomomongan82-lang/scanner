@@ -1,0 +1,28 @@
+{
+  "candidate": "R307/R308",
+  "pnl_calculated_at_audit_time": false,
+  "source": {
+    "artifact_id": 11959096102,
+    "sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "raw_rows_per_side": 4415493,
+    "invalid_ohlc": 0,
+    "negative_spreads": 0,
+    "repeat_flat_removed": 696795,
+    "active_m1_rows": 3718698,
+    "complete_m5_bars": 736076,
+    "gaps_gt_5m": 7882,
+    "cutoff_exclusive": "2026-01-01T00:00:00Z"
+  },
+  "R307": {
+    "eligible_discovery": 1028,
+    "eligible_validation": 1281
+  },
+  "R308": {
+    "complete_friday_ranges": 503,
+    "exact_friday_2100_entries": 178,
+    "qualifying_weekend_gaps": 2,
+    "eligible_discovery": 1,
+    "eligible_validation": 1,
+    "decision": "FAIL_DATA_SAMPLE_BEFORE_PNL"
+  }
+}
