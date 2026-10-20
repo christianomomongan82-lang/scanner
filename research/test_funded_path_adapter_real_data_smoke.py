@@ -102,5 +102,57 @@ class RealArchiveSmokeTests(unittest.TestCase):
         }, sort_keys=True))
 
 
+    def test_adapter_accepts_real_weekend_closure_without_filling_bars(self):
+        bars = self.bars
+        index = bars.index
+        chosen = None
+        for i in range(1, len(index)):
+            previous, current = index[i - 1], index[i]
+            gap = current - previous
+            if gap <= pd.Timedelta(minutes=5):
+                continue
+            previous_local = previous.tz_convert("Europe/Helsinki")
+            current_local = current.tz_convert("Europe/Helsinki")
+            prev_clock = previous_local.time().replace(tzinfo=None)
+            next_clock = current_local.time().replace(tzinfo=None)
+            regular_weekend = (
+                previous_local.weekday() == 4
+                and current_local.weekday() == 6
+                and prev_clock >= pd.Timestamp("19:30").time()
+                and pd.Timestamp("01:00").time() <= next_clock <= pd.Timestamp("03:05").time()
+            )
+            if regular_weekend and i >= 4:
+                entry_ts = index[i - 4]
+                prior_window = index[i - 4:i]
+                if prior_window.equals(pd.date_range(entry_ts, periods=4, freq="5min", tz="UTC")):
+                    chosen = (entry_ts, previous, current)
+                    break
+        self.assertIsNotNone(chosen, "no source-confirmed Friday-close/Sunday-reopen window found")
+        entry_ts, friday_last, sunday_first = chosen
+        entry_price = float(bars.loc[entry_ts, "ask_open"])
+        trades = [{
+            "trade_id": "REAL-SOURCE-WEEKEND-SMOKE-ONLY", "phase": 1, "direction": "LONG",
+            "entry_time_utc": entry_ts.isoformat(), "exit_time_utc": sunday_first.isoformat(),
+            "entry_price": entry_price, "stop_price": entry_price - 5.0,
+            "exit_price": float(bars.loc[sunday_first, "bid_open"]),
+            "exit_reason": "SMOKE_WEEKEND_OPEN_EXIT", "exit_at_open": True,
+        }]
+        events, report = build_challenge_events(trades, bars)
+        self.assertEqual(report["weekend_closures_crossed"], 1)
+        self.assertEqual(report["trade_count"], 1)
+        self.assertFalse(any(pd.Timestamp(x).date() == (friday_last + pd.Timedelta(days=1)).date()
+                             for x in events.timestamp_utc))
+        self.assertEqual(events.iloc[-1]["event"], "EXIT")
+        print(json.dumps({
+            "scope": "real-source weekly closure adapter smoke; no strategy outcome scored",
+            "entry_utc": entry_ts.isoformat(),
+            "friday_last_bar_utc": friday_last.isoformat(),
+            "sunday_first_bar_utc": sunday_first.isoformat(),
+            "weekend_closures_crossed": report["weekend_closures_crossed"],
+            "bars_synthesized": False,
+            "strategy_pnl_scored": False,
+        }, sort_keys=True))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
