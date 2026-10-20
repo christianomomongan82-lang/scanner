@@ -191,21 +191,25 @@ def simulate_challenge(
             raise ValueError("event precedes the current phase's Quick Strike cycle anchor")
         cycle_index = elapsed_days // rules.quick_strike_cycle_days
 
-        # FundedNext's cycle documentation says running positions must be closed
-        # 15 minutes before the cycle ends (cycle end: 23:45 server time).
-        # Fail closed if exposure is still open at/after 23:30; the source adapter
-        # must emit the actual conservative forced-close event.
+        # FundedNext closes any remaining position automatically at cycle end
+        # (23:45 server time); being open at 23:30 is not itself a loss-rule breach.
+        # The adapter must emit that actual forced EXIT from the executable quote.
+        # If the event is absent, fail the replay as invalid instead of fabricating
+        # a FundedNext rule violation.
         is_last_cycle_day = elapsed_days % rules.quick_strike_cycle_days == rules.quick_strike_cycle_days - 1
-        if is_last_cycle_day and local_dt.time().replace(tzinfo=None) >= time(23, 30) and active:
-            failure_reason = "position_open_at_quick_strike_cycle_cutoff"
-            breach_time = dt.isoformat()
-            return "BREACH_QUICK_STRIKE_CYCLE_OPEN_POSITION"
+        local_clock = local_dt.time().replace(tzinfo=None)
+        if is_last_cycle_day and local_clock >= time(23, 45) and active:
+            allowed_cycle_exit = event == "EXIT" and local_clock == time(23, 45)
+            if not allowed_cycle_exit:
+                failure_reason = "missing_cycle_auto_close_event"
+                breach_time = dt.isoformat()
+                return "INVALID_PATH_QUICK_STRIKE_CYCLE_OPEN_POSITION"
 
         if current_cycle_index is not None and cycle_index > current_cycle_index:
             if active:
-                failure_reason = "position_open_across_quick_strike_cycle_boundary"
+                failure_reason = "position_open_across_cycle_boundary_missing_auto_close"
                 breach_time = dt.isoformat()
-                return "BREACH_QUICK_STRIKE_CYCLE_OPEN_POSITION"
+                return "INVALID_PATH_QUICK_STRIKE_CYCLE_OPEN_POSITION"
             current_cycle_index = cycle_index
             cycle_gross_wins = 0.0
             cycle_quick_wins = 0.0
