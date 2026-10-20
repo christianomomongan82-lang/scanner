@@ -957,3 +957,13 @@ This is an infrastructure/process decision, not a new strategy result. **No cand
 - Latest verified CI run [39409091872](https://github.com/christianomomongan82-lang/scanner/actions/runs/39409091872): **12 adapter tests + 14 challenge-engine tests + 3 real-archive smoke tests = 29 total, all passing**. The Quick Strike cycle anchor now starts only at the first accepted trade, not a rejected/skipped signal.
 - The exact archived XAU BID/ASK hashes match; 877,930 pre-2026 paired bars and 530 unfilled gaps >5m were verified. One synthetic trade passed through the real weekday quotes and another crossed the actual Friday/Sunday market closure with no fabricated bars. No strategy PnL was scored.
 - Still outstanding: connect a frozen reproducible candidate runner/ledger; verify broker/account contract size, commission/swap, and actual platform server reset timezone; then run the rule-aware two-phase path ensemble. This CI result validates infrastructure only, not a trading edge or funded pass probability. The source artifact expires on 2027-01-14 and must be refreshed/migrated for long-term replay.
+
+
+## 2026-10-20 — R312 ledger-to-account replay progress
+
+- Added \`research/replay_funded_challenge_from_ledger.py\`, a reusable **local** normalizer/runner that turns a locked trade ledger and exact paired BID/ASK bars into OPEN/MARK/EXIT events and calls the shared funded challenge engine. It does not generate signals or tune candidates.
+- Added ledger-normalization tests and same-M5-entry/exit ordering. Latest [CI run 39412962243](https://github.com/christianomomongan82-lang/scanner/actions/runs/39412962243) passed 35 tests: 14 adapter, 14 challenge engine, 4 ledger normalization, 3 real-source integration smoke tests.
+- Local R298 reconstruction from the archived XAU source produced 598 trades and reproduced its headline discovery/validation counts and +$0.30/oz metrics. The local event path contains 6,364 events (598 OPEN / 5,168 MARK / 598 EXIT), with no missing five-minute grid in any trade.
+- Integration-only challenge replay at 0.5% risk on the already GAGAL R298 candidate hit max loss on 2016-06-15 08:30 UTC after 26 closed trades; equity was $5,388.94 below the $5,400 static floor. This does not make R298 eligible again and does not estimate pass probability.
+- [R312 ledger replay audit](research/R312_LEDGER_REPLAY_AUDIT.json) stores source hashes, counts, metrics, event-path hash and replay result.
+- **Still open:** the missing R302 full row-level CSV artifacts have not been restored/committed; row-by-row identity of the reconstructed R298 ledger against the existing repo CSV is not yet byte-verified; broker/account fees and exact server-time configuration remain unverified. No strategy is funded-ready.
