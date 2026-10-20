@@ -61,3 +61,20 @@ Only after Gates A–C pass and the candidate has positive, sufficiently robust 
 New signal research resumes only after the real-data adapter, reproducible path artifacts, and challenge replay contract above have passed. Every later candidate must be preregistered with its economic mechanism, parent/component lineage, data windows already viewed, and binary gates. Failed families stay closed; improvements discovered after looking at outcomes are diagnostics, not fresh validation.
 
 **Current status:** no candidate is funded-ready; strategy search remains paused; R311 is an infrastructure starting point, not a completed funded-readiness solution.
+
+
+## Progress update — paired-quote event adapter added (2026-10-20)
+
+Two infrastructure artifacts have now been added to this branch:
+
+- \`research/funded_path_adapter.py\`: loads paired BID/ASK OHLC, applies an exclusive cutoff before pairing/validation, refuses missing trade-time grids, verifies side-correct entry/exit prices, and emits \`OPEN/MARK/EXIT\` events. It uses BID-low checkpoints for longs and ASK-high checkpoints for shorts; adverse checkpoints are processed before intrabar exits. Time/open exits are processed before new entries. Favorable target gaps can be capped at the registered target.
+- \`research/test_funded_path_adapter.py\`: nine unit tests covering the core path-conversion and fail-closed cases.
+- \`research/R312_XAU_SOURCE_AUDIT.json\`: independent source integrity and smoke-test record.
+
+The existing XAUUSD M5 paired data artifact #12031270051 was downloaded and its ZIP/BID/ASK SHA-256 hashes matched the manifest. After the exclusive 2026 cutoff, 877,930 exact paired bars remained from 2016-01-03 00:00 UTC through 2025-12-31 21:55 UTC. No duplicate timestamps, invalid OHLC rows, ASK-below-BID open/close rows, or unmatched timestamps were found. There are 530 gaps longer than five minutes; the loader does not fill them, and a trade touching an incomplete five-minute grid is rejected.
+
+Local unit-test result for the adapter implementation: **9/9 passed**. A separate smoke test built five challenge events from one deliberately synthetic position placed on real archived quote bars. This was only an infrastructure test: **no strategy PnL or funded pass probability was calculated**.
+
+### What this does and does not fix
+
+The adapter closes one infrastructure gap, but it does not finish R312. The adapter still needs to be bound to a frozen strategy runner that outputs the required price ledger; exact broker contract/commission/swap mapping and account server-time reset must be verified; and the generated event stream must be replayed through the challenge engine. Only after those checks pass can sequential challenge-path simulations be run. No candidate is funded-ready based on this update.
