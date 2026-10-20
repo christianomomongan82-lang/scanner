@@ -171,5 +171,20 @@ class ChallengeSimulatorTests(unittest.TestCase):
         self.assertEqual(result["failure_reason"], "position_path_ends_with_open_position")
 
 
+    def test_quick_strike_cycle_anchor_uses_first_accepted_trade_not_skipped_signal(self):
+        events = [event(0, "OPEN", "rejected_signal", risk_pct=0.04)]
+        for d in range(1, 9):
+            events += win_trade(d, f"accepted_p1_{d}", risk_pct=0.01, hold=60)
+        for d in range(9, 14):
+            events += win_trade(d, f"p2_{d}", risk_pct=0.01, hold=60)
+        result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
+        self.assertEqual(result["status"], "PASS_BOTH_PHASES_WITHIN_179D")
+        self.assertEqual(result["skipped_entries"][0]["trade_id"], "rejected_signal")
+        self.assertEqual(
+            result["phase_results"][0]["quick_strike_cycle_anchor_date"],
+            (T0 + timedelta(days=1)).date().isoformat(),
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
