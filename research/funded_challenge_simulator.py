@@ -12,7 +12,7 @@ or manufacture a Monte Carlo probability from a single historical path.
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from datetime import datetime
+from datetime import datetime, time, timedelta
 from typing import Any, Iterable
 from zoneinfo import ZoneInfo
 
@@ -29,6 +29,7 @@ class ChallengeRules:
     server_timezone: str = "Europe/Helsinki"  # DST proxy; verify against actual account
     max_open_risk_pct: float = 0.03            # project-level portfolio cap, not a challenge rule
     max_calendar_days: int = 179               # project speed gate: complete before day 180
+    quick_strike_cycle_days: int = 14            # FundedNext evaluation cycle anchored at first trade
 
     def validate(self) -> None:
         if self.initial_balance <= 0:
@@ -47,6 +48,8 @@ class ChallengeRules:
             raise ValueError("max_open_risk_pct must be positive")
         if self.max_calendar_days < 0:
             raise ValueError("max_calendar_days must be zero or greater")
+        if self.quick_strike_cycle_days < 1:
+            raise ValueError("quick_strike_cycle_days must be positive")
         ZoneInfo(self.server_timezone)
 
 
@@ -127,6 +130,10 @@ def simulate_challenge(
     phase_entry_days: set[str] = set()
     phase_gross_wins = 0.0
     phase_quick_wins = 0.0
+    cycle_gross_wins = 0.0
+    cycle_quick_wins = 0.0
+    cycle_anchor_date = None
+    current_cycle_index = None
     daily_closed_pnl: dict[str, float] = {}
     active: dict[str, dict[str, Any]] = {}
     skipped_ids: set[str] = set()
@@ -164,7 +171,45 @@ def simulate_challenge(
         return None
 
     def quick_share() -> float:
-        return _quick_strike_share(phase_gross_wins, phase_quick_wins)
+        # FundedNext evaluates Quick Strike on the active 14-day challenge cycle,
+        # not cumulatively across the entire phase.
+        return _quick_strike_share(cycle_gross_wins, cycle_quick_wins)
+
+    def update_quick_cycle(dt: datetime, event: str) -> str | None:
+        nonlocal cycle_anchor_date, current_cycle_index, cycle_gross_wins, cycle_quick_wins
+        nonlocal failure_reason, breach_time
+        local_dt = dt.astimezone(tz)
+        local_date = local_dt.date()
+        if cycle_anchor_date is None:
+            if event == "OPEN" and phase_no <= 2:
+                cycle_anchor_date = local_date
+                current_cycle_index = 0
+            return None
+
+        elapsed_days = (local_date - cycle_anchor_date).days
+        if elapsed_days < 0:
+            raise ValueError("event precedes the current phase's Quick Strike cycle anchor")
+        cycle_index = elapsed_days // rules.quick_strike_cycle_days
+
+        # FundedNext's cycle documentation says running positions must be closed
+        # 15 minutes before the cycle ends (cycle end: 23:45 server time).
+        # Fail closed if exposure is still open at/after 23:30; the source adapter
+        # must emit the actual conservative forced-close event.
+        is_last_cycle_day = elapsed_days % rules.quick_strike_cycle_days == rules.quick_strike_cycle_days - 1
+        if is_last_cycle_day and local_dt.time().replace(tzinfo=None) >= time(23, 30) and active:
+            failure_reason = "position_open_at_quick_strike_cycle_cutoff"
+            breach_time = dt.isoformat()
+            return "BREACH_QUICK_STRIKE_CYCLE_OPEN_POSITION"
+
+        if current_cycle_index is not None and cycle_index > current_cycle_index:
+            if active:
+                failure_reason = "position_open_across_quick_strike_cycle_boundary"
+                breach_time = dt.isoformat()
+                return "BREACH_QUICK_STRIKE_CYCLE_OPEN_POSITION"
+            current_cycle_index = cycle_index
+            cycle_gross_wins = 0.0
+            cycle_quick_wins = 0.0
+        return None
 
     def can_finish_phase() -> bool:
         target = phase_start_balance * (1.0 + rules.phase_targets[phase_no - 1])
@@ -178,6 +223,7 @@ def simulate_challenge(
     def finish_phase(dt: datetime) -> None:
         nonlocal phase_no, balance, phase_start_balance, phase_start_time
         nonlocal phase_entry_days, phase_gross_wins, phase_quick_wins, daily_closed_pnl
+        nonlocal cycle_gross_wins, cycle_quick_wins, cycle_anchor_date, current_cycle_index
         phase_results.append({
             "phase": phase_no,
             "status": "LULUS",
@@ -190,7 +236,17 @@ def simulate_challenge(
             "trading_days": len(phase_entry_days),
             "gross_winning_profit": phase_gross_wins,
             "quick_strike_profit": phase_quick_wins,
+            "phase_quick_strike_share_all_trades": _quick_strike_share(phase_gross_wins, phase_quick_wins),
             "quick_strike_share": quick_share(),
+            "quick_strike_cycle_days": rules.quick_strike_cycle_days,
+            "quick_strike_cycle_anchor_date": cycle_anchor_date.isoformat() if cycle_anchor_date else None,
+            "quick_strike_cycle_start_date": (
+                (cycle_anchor_date + timedelta(days=(current_cycle_index or 0) * rules.quick_strike_cycle_days)).isoformat()
+                if cycle_anchor_date else None
+            ),
+            "quick_strike_cycle_index": current_cycle_index,
+            "quick_strike_cycle_gross_winning_profit": cycle_gross_wins,
+            "quick_strike_cycle_profit": cycle_quick_wins,
         })
         if phase_no == 2:
             return
@@ -202,6 +258,10 @@ def simulate_challenge(
         phase_entry_days = set()
         phase_gross_wins = 0.0
         phase_quick_wins = 0.0
+        cycle_gross_wins = 0.0
+        cycle_quick_wins = 0.0
+        cycle_anchor_date = None
+        current_cycle_index = None
         daily_closed_pnl = {}
 
     for row in prepared:
@@ -209,6 +269,11 @@ def simulate_challenge(
         event = row["_event"]
         tid = str(row["trade_id"])
         events_processed += 1
+
+        cycle_status = update_quick_cycle(dt, event)
+        if cycle_status:
+            status = cycle_status
+            break
 
         if event == "OPEN":
             if tid in active or tid in skipped_ids:
@@ -268,9 +333,11 @@ def simulate_challenge(
             trades_closed += 1
             if pnl > 0:
                 phase_gross_wins += pnl
+                cycle_gross_wins += pnl
                 duration = float(row.get("hold_seconds", (dt - pos["entry_time"]).total_seconds()))
                 if duration < 30.0:
                     phase_quick_wins += pnl
+                    cycle_quick_wins += pnl
             breach = check_breaches(dt)
             if breach:
                 status = breach
@@ -307,7 +374,17 @@ def simulate_challenge(
             "trading_days": len(phase_entry_days),
             "gross_winning_profit": phase_gross_wins,
             "quick_strike_profit": phase_quick_wins,
+            "phase_quick_strike_share_all_trades": _quick_strike_share(phase_gross_wins, phase_quick_wins),
             "quick_strike_share": quick_share(),
+            "quick_strike_cycle_days": rules.quick_strike_cycle_days,
+            "quick_strike_cycle_anchor_date": cycle_anchor_date.isoformat() if cycle_anchor_date else None,
+            "quick_strike_cycle_start_date": (
+                (cycle_anchor_date + timedelta(days=(current_cycle_index or 0) * rules.quick_strike_cycle_days)).isoformat()
+                if cycle_anchor_date else None
+            ),
+            "quick_strike_cycle_index": current_cycle_index,
+            "quick_strike_cycle_gross_winning_profit": cycle_gross_wins,
+            "quick_strike_cycle_profit": cycle_quick_wins,
             "open_positions_at_end": sorted(active.keys()),
         })
 
