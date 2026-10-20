@@ -191,9 +191,8 @@ def simulate_challenge(
         local_dt = dt.astimezone(tz)
         local_date = local_dt.date()
         if cycle_anchor_date is None:
-            if event == "OPEN" and phase_no <= 2:
-                cycle_anchor_date = local_date
-                current_cycle_index = 0
+            # The cycle starts on the first accepted position, not a candidate
+            # OPEN that the risk controller will skip below.
             return None
 
         elapsed_days = (local_date - cycle_anchor_date).days
@@ -322,6 +321,9 @@ def simulate_challenge(
                 "entry_time": dt, "entry_day": daily_key(dt),
                 "phase": phase_no,
             }
+            if cycle_anchor_date is None:
+                cycle_anchor_date = dt.astimezone(tz).date()
+                current_cycle_index = 0
             phase_entry_days.add(daily_key(dt))
             breach = check_breaches(dt)
             if breach:
