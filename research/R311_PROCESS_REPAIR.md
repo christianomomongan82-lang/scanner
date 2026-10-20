@@ -11,7 +11,7 @@ The existing search-process audit explicitly called for a pause until the candid
 
 - Added `funded_challenge_simulator.py`, a chronological two-phase account-equity replay.
 - Added eight synthetic unit tests covering sequential +8%/+5% phase completion, the five-day rule, floating-equity daily loss, static maximum loss, Quick Strike gating, open-risk cap, timezone-aware input, completion on day 179, and rejection of a day-180 result by the project speed gate.
-- The engine sizes risk from current closed balance at entry, checks floating equity on every MARK event, resets the phase reference balance for phase 2, applies the project's 3% aggregate open-risk cap, and returns a separate project verdict for two-phase completion within 179 calendar days.
+- The engine sizes risk from current closed balance at entry, checks floating equity on every MARK event, resets the phase reference balance for phase 2, applies the project's 3% aggregate open-risk cap, and returns the required binary verdict: LULUS only if both phases finish by calendar day 179; otherwise GAGAL. It separately reports rule-level phase completion so a day-180 pass cannot be confused with meeting the project objective.
 - Replay input must be an event path (OPEN/MARK/EXIT), not a closed-trade summary. It does not fill data gaps or infer intrabar prices.
 
 ## Verification
