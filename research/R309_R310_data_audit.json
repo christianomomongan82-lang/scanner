@@ -41,6 +41,17 @@
     "R310_ci95": [-2.5784924117, -1.6043737143],
     "R310_positive_bootstrap_fraction": 0.0
   },
-  "runner_sha256_local": "10fca91b807ef42d9542ce333c440223642c9435adc256df5351de2b5f3dafbc",
-  "repository_reproduction_status": "FAIL: full runner and row-level trade ledgers have not yet been committed as ordinary files on the active branch"
+  "local_artifact_hashes_not_yet_archived_in_repo": {
+    "runner_py_sha256": "10fca91b807ef42d9542ce333c440223642c9435adc256df5351de2b5f3dafbc",
+    "R309_primary_trade_ledger_sha256": "8f3251e0ea58dff7f1aeecd784dd83396d512229bccb144bc25b26011000c349",
+    "R309_T10_trade_ledger_sha256": "b57c835d9f30d7da071058916aed6d9054ba090200322f6bcba6d6b60980e454",
+    "R310_primary_trade_ledger_sha256": "d1445ffafe2ce32b92cdae264416d97d0183f6030bd3b5a53d487e8efaba8ff7",
+    "R310_T10_trade_ledger_sha256": "4a20e2ff242d9ba0f352c1f106f0e4a3e9774b16d257b365391c8f57e48843f7",
+    "R309_R310_combined_scorecard_local_sha256": "66e651eba26453cab23a3f745ddce7c8660f0ffcbe1ed763554fdb36bb380aff",
+    "R309_annual_summary_local_sha256": "c326edc0d838f206ff45c780c17c27433d9ffa7a9934cf8590d7718dbb1f072f",
+    "R310_annual_summary_local_sha256": "5136f4e51e46afe6ac18b0169e6cf7dbc3d45a94f74b9a62c60b58dcfd2ef810",
+    "R309_bootstrap_local_sha256": "daf5116156ec6921b9866b918dcf229437b25ea7fe542943102d77017025169f",
+    "R310_bootstrap_local_sha256": "4283048a850a18ea115bc23ca3c13be5bae38d5e8afe74121cba92503ee29f1e"
+  },
+  "repository_reproduction_status": "FAIL: full runner and row-level trade ledgers are present in the local compute session and hashed here, but have not been committed as ordinary files on the active branch"
 }
