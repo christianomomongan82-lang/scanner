@@ -230,5 +230,31 @@ class AdapterTests(unittest.TestCase):
         self.assertFalse(any(pd.Timestamp(x).date().isoformat() == "2025-01-04" for x in events.timestamp_utc))
 
 
+    def test_same_bar_intrabar_stop_is_open_mark_exit_order(self):
+        trades = [{
+            "trade_id": "SAME-INTRABAR", "direction": "LONG",
+            "entry_time_utc": self.idx[0].isoformat(), "exit_time_utc": self.idx[0].isoformat(),
+            "entry_price": 100.2, "stop_price": 99.2, "exit_price": 99.8,
+            "exit_reason": "STOP", "exit_at_open": False, "exit_fill_type": "INTRABAR",
+        }]
+        events, _ = build_challenge_events(trades, self.bars)
+        same = events[events.timestamp_utc == self.idx[0].isoformat()]
+        self.assertEqual(list(same.event), ["OPEN", "MARK", "EXIT"])
+        self.assertAlmostEqual(float(same.iloc[-1].realized_r), -0.4)
+
+    def test_same_bar_open_gap_exit_occurs_after_open_event(self):
+        trades = [{
+            "trade_id": "SAME-OPEN", "direction": "LONG",
+            "entry_time_utc": self.idx[0].isoformat(), "exit_time_utc": self.idx[0].isoformat(),
+            "entry_price": 100.2, "stop_price": 100.1, "exit_price": 100.0,
+            "exit_reason": "STOP_GAP_AT_ENTRY", "exit_at_open": True, "exit_fill_type": "OPEN",
+        }]
+        events, _ = build_challenge_events(trades, self.bars)
+        same = events[events.timestamp_utc == self.idx[0].isoformat()]
+        self.assertEqual(list(same.event), ["OPEN", "EXIT"])
+        self.assertEqual(list(same.event_seq), [10, 15])
+        self.assertAlmostEqual(float(same.iloc[-1].realized_r), -2.0)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
