@@ -133,6 +133,28 @@ def _price_row(bars: pd.DataFrame, ts: pd.Timestamp, direction: str) -> dict[str
     return {col: float(row[f"{prefix}_{col}"]) for col in OHLC}
 
 
+def _is_expected_weekend_closure(
+    previous_utc: pd.Timestamp,
+    next_utc: pd.Timestamp,
+    server_timezone: str,
+) -> bool:
+    """Allow the source's observed Friday-close -> Sunday-reopen gap only.
+
+    This is a session exception, not bar synthesis. Other missing intratrade bars
+    (including weekday gaps and holiday gaps not covered by this rule) are rejected.
+    """
+    previous_local = previous_utc.tz_convert(server_timezone)
+    next_local = next_utc.tz_convert(server_timezone)
+    previous_clock = previous_local.time().replace(tzinfo=None)
+    next_clock = next_local.time().replace(tzinfo=None)
+    return (
+        previous_local.weekday() == 4
+        and next_local.weekday() == 6
+        and previous_clock >= time(19, 30)
+        and time(1, 0) <= next_clock <= time(3, 5)
+    )
+
+
 def build_challenge_events(
     trades: pd.DataFrame | Iterable[dict[str, Any]],
     bars: pd.DataFrame,
@@ -187,6 +209,7 @@ def build_challenge_events(
     event_rows: list[dict[str, Any]] = []
     seen_ids: set[str] = set()
     grid_gaps = 0
+    weekend_closures_crossed = 0
     entry_side_checks = 0
     open_exit_count = 0
     target_cap_exit_count = 0
@@ -310,13 +333,29 @@ def build_challenge_events(
                 )
             intrabar_exit_count += 1
 
-        expected = pd.date_range(entry_ts, exit_ts, freq=step, tz="UTC")
-        observed = bars.index[(bars.index >= entry_ts) & (bars.index <= exit_ts)]
-        if len(expected) != len(observed) or not expected.equals(observed):
+        # Iterate only observed bars. The exact archived XAU source closes weekly;
+        # expected market-closed Friday->Sunday gaps are allowed, but never filled.
+        observed_times = bars.index[(bars.index >= entry_ts) & (bars.index <= exit_ts)]
+        if (
+            len(observed_times) == 0
+            or observed_times[0] != entry_ts
+            or observed_times[-1] != exit_ts
+        ):
+            grid_gaps += 1
+            raise ValueError(f"{tid}: entry/exit missing from observed timestamp grid")
+
+        for previous_utc, next_utc in zip(observed_times[:-1], observed_times[1:]):
+            delta = next_utc - previous_utc
+            if delta == step:
+                continue
+            if _is_expected_weekend_closure(previous_utc, next_utc, server_timezone):
+                weekend_closures_crossed += 1
+                continue
             grid_gaps += 1
             raise ValueError(
-                f"{tid}: missing/inconsistent {step} timestamp grid between entry and exit; "
-                f"expected={len(expected)} observed={len(observed)}"
+                f"{tid}: unexpected missing/inconsistent {step} bars between "
+                f"{previous_utc.isoformat()} and {next_utc.isoformat()} (gap={delta}); "
+                "only observed Friday-close to Sunday-reopen gaps are allowed"
             )
 
         extra_cost = tr.get("added_cost_price_units", default_added_cost_price_units)
@@ -341,7 +380,7 @@ def build_challenge_events(
 
         # Each bar is treated conservatively: adverse executable-side extreme occurs first.
         # Exit-at-open events close before new entries and do not inspect that candle's later range.
-        for ts in expected:
+        for ts in observed_times:
             if ts == exit_ts and exit_at_open:
                 event_rows.append({
                     "timestamp_utc": ts.isoformat(), "event_seq": 5, "event": "EXIT", "trade_id": tid,
@@ -382,13 +421,14 @@ def build_challenge_events(
         "target_cap_exit_count": target_cap_exit_count,
         "intrabar_exit_count": intrabar_exit_count,
         "cycle_auto_close_count": cycle_auto_close_count,
+        "weekend_closures_crossed": weekend_closures_crossed,
         "quick_strike_cycle_days": quick_strike_cycle_days,
         "server_timezone": server_timezone,
         "phase_cycle_anchors": {k: v.isoformat() for k, v in cycle_anchor_dates.items()},
         "grid_gaps": grid_gaps,
         "cutoff_utc": bars.attrs.get("cutoff_utc"),
         "bar_minutes": int(bars.attrs.get("bar_minutes", 5)),
-        "mark_policy": "executable-side adverse OHLC extreme first; cycle positions closed at 23:45 server time; missing bars rejected; no synthetic bars",
+        "mark_policy": "executable-side adverse OHLC extreme first; cycle positions closed at 23:45 server time; only observed Friday-close to Sunday-reopen gaps allowed; no synthetic bars",
         "extra_cost_policy": "full declared round-trip extra cost deducted from every mark for conservative risk checks and once from realized R",
     }
     return events, report
