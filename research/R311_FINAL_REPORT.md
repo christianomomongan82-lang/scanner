@@ -31,8 +31,10 @@ The candidate passed the basic data-integrity and minimum-sample gates only. It 
 - Screen windows: discovery 2017–2020 and validation 2021. Earlier programme FX research reused these years, so this is not pristine OOS.
 - Signals use a 15-minute midpoint return ending at 09:55 Tokyo. Entries use observed executable ASK for longs and BID for shorts at T+5, stop/target checks use the executable exit side, 1R stop/target, max 30-minute hold, and +0/+0.5/+1/+2 pip added-cost sensitivities. All outcomes are on exact timestamp paths; no synthetic rows or future fills.
 
-## Archived outputs
+## Reproducibility and stored artifacts
 
-See [R311 index](R311_INDEX.md), [data manifest](R311_DATA_MANIFEST.md), and [the locked preregistration](R311_EURUSD_TOKYO_FIX_POST_EVENT_REVERSAL_PREREGISTRATION.md). Detailed ledgers and eligibility audits are partitioned by year and stored as gzip CSVs to preserve all rows without creating oversized repository text files. JSON audits, annual scorecards, skip audit and weekly bootstrap input are retained separately.
+See [R311 index](R311_INDEX.md), [data/output manifest](R311_DATA_MANIFEST.md), [locked preregistration](R311_EURUSD_TOKYO_FIX_POST_EVENT_REVERSAL_PREREGISTRATION.md), [master experiment registry](MASTER_SEARCH_LEDGER_R251_R311.csv), and [family map](SEARCH_FAMILY_MAP_R251_R311.md).
 
-R311 is closed. Do not invert its direction, move the event clock, alter return horizon, or re-optimize stop/target on these dates. Next search must use a distinct causal mechanism.
+The locked runner, preregistration, compact results and human-readable report are committed in GitHub. The exact run also created the full local trade ledger, pre-outcome eligibility audit, runtime skip audit, annual scorecard, weekly validation input and full data audit; their original byte sizes and SHA-256 values are recorded in the manifest. **The full row-level result files are not yet committed/read-back verified in the GitHub tree**, so the repository-artifact reproducibility gate is explicitly false. This gap does not affect the failed economic verdict and does not authorize changing the R311 rule.
+
+R311 is closed. Do not invert its direction, move the event clock, alter return horizon, or re-optimize stop/target on these dates. Under the existing R312 search governance, do not launch another signal hypothesis until the reproducible real-data funded-path pipeline and required artifact storage are complete.
