@@ -28,3 +28,10 @@
 ## Repository completeness limitation
 
 Compact results, report, core data-integrity statistics, period/annual summary, weekly bootstrap summary and the 262-week bootstrap input CSV are committed in this branch. The original multi-configuration trade/skip ledger and full pre-outcome event audit were generated and checksummed in the local execution environment but are **not yet stored as row-level files in GitHub**. Their checksums above are supplied for integrity, not as a claim that the repo is fully self-contained. Repository-only reproduction of every row is therefore incomplete until these larger ledgers are transferred into GitHub or the raw data archive is reacquired and the runner is rerun.
+
+
+## Exact output replay check — 2026-10-20
+
+The locked local runner was rerun against source members whose BID/ASK SHA-256 matched the values above. Its expanded implementation SHA-256 matched the pinned value `646d2c552ab5855af6bbaa0e683ecc34cc707230cadea1e3e02bcada2fee8bdc`. The four detailed CSVs listed in the missing-row-artifact section were regenerated locally and their exact byte sizes and SHA-256 values match the original output manifest; counts are 387 primary trades, 2,336 eligibility-audit rows, 4,644 all-variant/skip rows, and 4,638 valid variant rows. The local runner completed in 26.53 seconds.
+
+This confirms reproducibility, not repository completeness: the four CSVs remain absent from the active GitHub tree until their bytes are transferred. See [ledger reassembly notes](R302_LEDGER_REASSEMBLY.md). The candidate remains GAGAL and protected 2026 remains unopened.
