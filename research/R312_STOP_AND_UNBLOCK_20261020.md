@@ -78,3 +78,19 @@ Local unit-test result for the adapter implementation: **9/9 passed**. A separat
 ### What this does and does not fix
 
 The adapter closes one infrastructure gap, but it does not finish R312. The adapter still needs to be bound to a frozen strategy runner that outputs the required price ledger; exact broker contract/commission/swap mapping and account server-time reset must be verified; and the generated event stream must be replayed through the challenge engine. Only after those checks pass can sequential challenge-path simulations be run. No candidate is funded-ready based on this update.
+
+
+## Progress update — Quick Strike cycle accounting and forced close (2026-10-20)
+
+Official FundedNext guidance confirms the 30-second Quick Strike share is calculated from profitable trades and evaluated per cycle, not cumulatively across the entire phase: https://help.fundednext.com/en/articles/14702484-understanding-the-quick-strike-parameter-on-fundednext. The cycle starts with the account's first trade; for Stellar evaluation it runs 14 days and ends at 23:45 server time. Running trades are automatically closed at cycle end if not closed at least 15 minutes earlier: https://help.fundednext.com/en/articles/8020083-when-does-my-trading-cycle-start.
+
+Corrections committed:
+- The shared simulator now tracks Quick Strike gross profit and under-30-second profit per 14-day cycle and resets it at each new evaluation phase/cycle.
+- It no longer labels an open position at 23:30 as a FundedNext loss-rule breach. It accepts a 23:45 exit only when the event is explicitly marked as an executable-open fill; a missing forced-close path, a new entry at/after cycle end, or a path ending with an open position is classified as invalid/incomplete input and returns GAGAL, not a fabricated rule breach.
+- The paired-quote adapter now forces an existing trade closed at the executable BID open for longs / ASK open for shorts at 23:45 server time when the candidate's planned exit is later. If the exact cycle-end quote is missing, it raises an error instead of forward-filling. Where a \`phase\` column exists, cycle anchors are per phase; absent such a column, the input ledger is explicitly treated as one phase.
+- New challenge-engine tests cover cycle rollover, auto-close handling, cycle-end entries, and incomplete open paths; new adapter tests cover exact 23:45 auto-close pricing and missing close-quote rejection.
+- Added a test-only GitHub Actions workflow to compile and run both infrastructure test suites. It does not download trading data, produce strategy signals, compute PnL, or run a backtest.
+
+Verification caveat: the first CI attempt failed before tests because \`setup-python\`'s pip cache expected a requirements/pyproject file that this repository does not have. The workflow was corrected by removing that cache option; the follow-up run is the authoritative test result. Until it finishes successfully, do not mark the combined code change as test-passing.
+
+This remains infrastructure work. Auto-close prices are historical feed proxies, not independently verified live broker fills; account contract sizes, commissions, swaps, and exact server-time behavior still require verification. No strategy or challenge probability is promoted by these changes.
