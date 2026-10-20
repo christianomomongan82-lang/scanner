@@ -1,0 +1,123 @@
+{
+  "date": "2026-10-20",
+  "scope": "Local ledger-to-account-path integration replay using already-closed R298; no new signal search or strategy promotion.",
+  "source": {
+    "candidate": "R298_XAUUSD_LONDON_ASIA_RANGE_SWEEP_RECLAIM",
+    "historical_verdict": "GAGAL",
+    "source_artifact_id": 12031270051,
+    "source_run_id": 38859918137,
+    "raw_zip_sha256": "2cde8338800fd7f4d5d4628512201c16757ef06bd90d51ffdc8ef9bea425ba1a",
+    "bid_sha256": "b30eb4864db0777b6df612f3e43ccda9cc59db5ca09974191eabdaca1f6ff575",
+    "ask_sha256": "b9b174a83df70507be4ab0cd556432a0d14fbac2e596e787325bd1f163772fc9",
+    "cutoff_exclusive_utc": "2026-01-01T00:00:00Z",
+    "raw_rows_per_side": 947326,
+    "paired_rows_before_cutoff_per_side": 877930,
+    "excluded_2026_plus_rows_per_side": 69396,
+    "paired_active_rows": 708724,
+    "gaps_over_5m_preserved": 530,
+    "gaps_filled": 0
+  },
+  "ledger_reconstruction": {
+    "source_runner": "research/r298_xauusd_london_sweep_reclaim.py",
+    "locked_spec": "research/R298_XAUUSD_LONDON_ASIA_RANGE_SWEEP_RECLAIM_PREREGISTRATION.md",
+    "committed_trade_ledger": "research/R298_trade_ledger.csv",
+    "reconstructed_trade_rows": 598,
+    "first_reclaim_signals": 894,
+    "skips": {
+      "planned_reward_risk_below_1": 261,
+      "stop_not_adverse_of_entry": 23,
+      "midpoint_target_not_favorable": 12
+    },
+    "discovery_trades_2016_2020": 313,
+    "validation_trades_2021_2025": 285,
+    "same_bar_entry_exit_trades": 147,
+    "reconstructed_ledger_local_sha256": "fb1a9589b760c3ca77eefc3eb57b5885b9fb15b2b949d21b4a6bf960ec6ce650",
+    "reconstructed_ledger_bytes": 161658,
+    "row_by_row_hash_match_against_existing_repo_csv": false,
+    "aggregate_metrics_match_committed_report": true
+  },
+  "reproduced_locked_metrics_at_0_30_usd_per_oz": {
+    "discovery": {
+      "trades": 313,
+      "net_R": -285.8926191972657,
+      "PF_R": 0.2974971486005267,
+      "max_closed_drawdown_R": 288.5550298747598
+    },
+    "validation": {
+      "trades": 285,
+      "net_R": -178.93328810231222,
+      "PF_R": 0.40927326865814845,
+      "max_closed_drawdown_R": 180.84376263934905
+    }
+  },
+  "generated_challenge_event_path": {
+    "trades": 598,
+    "events": 6364,
+    "OPEN": 598,
+    "MARK": 5168,
+    "EXIT": 598,
+    "missing_m5_timestamp_grids": 0,
+    "open_price_exits": 45,
+    "intrabar_exits": 553,
+    "event_path_local_sha256": "e8e5f0cc7c0e02599e297885031f21e1d62ed9b5f1165c39f4835b96ad8340b2",
+    "event_path_local_bytes": 853664
+  },
+  "single_path_challenge_replay": {
+    "initial_balance": 6000,
+    "extra_cost_usd_per_oz_round_trip": 0.30,
+    "risk_pct": 0.005,
+    "server_timezone_sensitivity": ["UTC", "Europe/Helsinki"],
+    "status": "BREACH_MAX_LOSS",
+    "phase": 1,
+    "failure_reason": "maximum_loss_limit",
+    "breach_time_utc": "2016-06-15T08:30:00+00:00",
+    "trades_closed_before_breach": 26,
+    "events_processed": 289,
+    "closed_balance_at_breach": 5424.639939828566,
+    "floating_pnl_at_breach": -35.701807617625015,
+    "equity_at_breach": 5388.938132210941,
+    "static_max_loss_floor": 5400,
+    "phases_completed": 0,
+    "pass_probability_estimated": false
+  },
+  "risk_sensitivity": [
+    {
+      "risk_pct": 0.005,
+      "timezone": "UTC",
+      "failure": "maximum_loss_limit",
+      "breach_time_utc": "2016-06-15T08:30:00+00:00",
+      "trades_closed": 26
+    },
+    {
+      "risk_pct": 0.01,
+      "timezone": "UTC",
+      "failure": "maximum_loss_limit",
+      "breach_time_utc": "2016-02-19T07:35:00+00:00",
+      "trades_closed": 10
+    },
+    {
+      "risk_pct": 0.015,
+      "timezone": "UTC",
+      "failure": "daily_loss_limit",
+      "breach_time_utc": "2016-02-03T07:55:00+00:00",
+      "trades_closed": 6
+    }
+  ],
+  "ci": {
+    "run_id": 39412962243,
+    "url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/39412962243",
+    "adapter_tests": 14,
+    "challenge_engine_tests": 14,
+    "ledger_normalization_tests": 4,
+    "real_archive_smoke_tests": 3,
+    "all_tests": 35,
+    "conclusion": "success"
+  },
+  "limitations": [
+    "R298 is already GAGAL and is used strictly as an integration test, not a funded candidate.",
+    "This file records a separate local ledger reconstruction; it does not claim the large missing R302 row-level CSV files have been restored.",
+    "The generated event-path CSV is local and checksum-recorded; the repository runner is now available to regenerate it locally.",
+    "This is one historical path, not a 10000-path pass-probability estimate.",
+    "Broker-specific commission, swap, contract point value, and actual account server-time configuration remain unverified."
+  ]
+}
