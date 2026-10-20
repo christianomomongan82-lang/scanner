@@ -145,5 +145,57 @@ class AdapterTests(unittest.TestCase):
         self.assertLess(list(same.event).index("MARK"), list(same.event).index("EXIT"))
 
 
+    def _cycle_test_bars(self):
+        idx = pd.date_range("2025-01-02T00:00:00Z", "2025-01-04T00:00:00Z", freq="5min")
+        base = 100.0 + pd.Series(range(len(idx)), dtype=float).to_numpy() * 0.001
+        bars = pd.DataFrame(index=idx)
+        bars["bid_open"] = base
+        bars["bid_high"] = base + 0.10
+        bars["bid_low"] = base - 0.10
+        bars["bid_close"] = base + 0.02
+        for col in ("open", "high", "low", "close"):
+            bars[f"ask_{col}"] = bars[f"bid_{col}"] + 0.20
+        bars.attrs["bar_minutes"] = 5
+        return bars
+
+    def test_trade_is_forced_closed_at_cycle_end_executable_open(self):
+        bars = self._cycle_test_bars()
+        cutoff = pd.Timestamp("2025-01-03T23:45:00Z")
+        end = pd.Timestamp("2025-01-04T00:00:00Z")
+        trades = [{
+            "trade_id": "AUTO", "phase": 1, "direction": "LONG",
+            "entry_time_utc": bars.index[0].isoformat(), "exit_time_utc": end.isoformat(),
+            "entry_price": bars.iloc[0]["ask_open"], "stop_price": bars.iloc[0]["ask_open"] - 1,
+            "exit_price": bars.loc[end, "bid_open"], "exit_reason": "PLANNED_TIME_EXIT",
+            "exit_at_open": True, "added_cost_price_units": 0.1,
+        }]
+        events, report = build_challenge_events(
+            trades, bars, server_timezone="UTC", quick_strike_cycle_days=2,
+        )
+        exit_event = events[(events.event == "EXIT") & (events.trade_id == "AUTO")].iloc[0]
+        self.assertEqual(pd.Timestamp(exit_event.timestamp_utc), cutoff)
+        self.assertAlmostEqual(exit_event.exit_price, bars.loc[cutoff, "bid_open"])
+        self.assertEqual(exit_event.exit_reason, "CYCLE_AUTO_CLOSE")
+        self.assertTrue(bool(exit_event.exit_at_open))
+        self.assertEqual(report["cycle_auto_close_count"], 1)
+
+    def test_missing_cycle_end_quote_fails_closed(self):
+        bars = self._cycle_test_bars()
+        cutoff = pd.Timestamp("2025-01-03T23:45:00Z")
+        end = pd.Timestamp("2025-01-04T00:00:00Z")
+        bars = bars.drop(cutoff)
+        trades = [{
+            "trade_id": "NOCUTOFF", "phase": 1, "direction": "LONG",
+            "entry_time_utc": pd.Timestamp("2025-01-02T00:00:00Z").isoformat(),
+            "exit_time_utc": end.isoformat(),
+            "entry_price": 100.2, "stop_price": 99.2,
+            "exit_price": 101.0, "exit_reason": "PLANNED_TIME_EXIT", "exit_at_open": True,
+        }]
+        with self.assertRaisesRegex(ValueError, "cycle auto-close quote missing"):
+            build_challenge_events(
+                trades, bars, server_timezone="UTC", quick_strike_cycle_days=2,
+            )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
