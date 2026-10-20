@@ -1,5 +1,13 @@
 # Proyek Backtest — Checkpoint Utama
 
+## Ledger backlog checkpoint — 2026-10-20 (local replay verified)
+
+- R302's exact local runner has been reconstructed from the committed bootstrap; expanded source checksum matches the locked SHA-256.
+- Re-running against the cached, hash-verified XAUUSD M5 BID/ASK source reproduced all four missing detailed CSV outputs byte-for-byte against the original output hashes: primary trade ledger (387 rows), pre-outcome audit (2,336 rows), all cost/delay streams plus skips (4,644 rows), and all valid trades (4,638 rows).
+- R302 remains **GAGAL**: discovery −32.9644576R (179 trades, PF_R 0.63976); validation −26.9914313R (208 trades, PF_R 0.72986); 3/8 historical gates passed. 2026 remains unopened.
+- Important distinction: detailed rows are now reproducible locally, but are still not committed as row-level files in the active repository tree. See [R302 ledger reassembly verification](research/R302_LEDGER_REASSEMBLY.md).
+
+
 **Terakhir diperbarui:** 2026-10-20  
 **Status proyek:** SEMUA KANDIDAT YANG DIUJI BERSTATUS GAGAL; TIDAK ADA YANG LULUS.  
 **Repositori sumber utama:** https://github.com/christianomomongan82-lang/scanner  
