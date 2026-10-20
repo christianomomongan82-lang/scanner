@@ -938,3 +938,11 @@ The review separated three causes: (1) recent candidate failures include negativ
 - Resume only after input hashes, exact runner, full row-level ledgers, source adapters and the common challenge-path contract are reproducible. Then use at least 10,000 dependence-preserving sequential paths to report both-phase completion and rule-breach probabilities.
 
 This is an infrastructure/process decision, not a new strategy result. **No candidate is currently funded-ready.**
+
+
+## 2026-10-20 — R312 implementation progress: paired-quote event adapter
+
+- Added [paired BID/ASK-to-challenge event adapter](research/funded_path_adapter.py), [nine adapter unit tests](research/test_funded_path_adapter.py), and [XAU source integrity audit](research/R312_XAU_SOURCE_AUDIT.json) on the active research branch.
+- Independently verified XAUUSD M5 archive #12031270051: source ZIP and both gzip member hashes match the R302 manifest; 877,930 exactly paired rows remain before the exclusive 2026 cutoff; no timestamp mismatches, duplicates, invalid OHLC rows, or negative open/close spreads. The 530 gaps over five minutes are preserved, never filled.
+- Adapter unit tests: 9/9 passed locally. One synthetic-position smoke test over real historical quotes emitted a valid five-event OPEN/MARK/EXIT path. No strategy outcome was calculated.
+- This closes only the price-path-conversion component. The adapter still needs the frozen runner ledger, broker/account costs and contract sizing, server reset verification, end-to-end replay through the shared challenge engine, and the sequential-path ensemble. **No strategy is funded-ready.**
