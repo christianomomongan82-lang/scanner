@@ -242,8 +242,12 @@ def build_challenge_events(
         if direction not in {"LONG", "SHORT"}:
             raise ValueError(f"{tid}: direction must be LONG or SHORT")
         entry_ts, planned_exit_ts = tr["_entry"], tr["_exit"]
-        if planned_exit_ts <= entry_ts:
-            raise ValueError(f"{tid}: exit must be later than entry")
+        # Stop/target may trigger inside the same M5 candle as entry at that candle's
+        # open. Equal timestamps are valid only for an intrabar fill, never a time/open exit.
+        if planned_exit_ts < entry_ts:
+            raise ValueError(f"{tid}: exit cannot precede entry")
+        if planned_exit_ts == entry_ts and str(tr.get("exit_fill_type", "INTRABAR")).strip().upper() != "INTRABAR":
+            raise ValueError(f"{tid}: same-bar exit requires exit_fill_type=INTRABAR")
         if entry_ts not in bars.index:
             raise ValueError(f"{tid}: entry timestamp must map to an exact observed bar open")
 
