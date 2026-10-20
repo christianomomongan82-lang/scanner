@@ -1,6 +1,6 @@
 # Proyek Backtest — Checkpoint Utama
 
-**Terakhir diperbarui:** 2026-10-19  
+**Terakhir diperbarui:** 2026-10-20  
 **Status proyek:** SEMUA KANDIDAT YANG DIUJI BERSTATUS GAGAL; TIDAK ADA YANG LULUS.  
 **Repositori sumber utama:** https://github.com/christianomomongan82-lang/scanner  
 **Branch riset aktif saat checkpoint ini:** [local-backtest/r189-dukascopy-history](https://github.com/christianomomongan82-lang/scanner/tree/local-backtest/r189-dukascopy-history)
@@ -8,8 +8,8 @@
 ## Search-system registry — 2026-10-19
 
 The following files are now the operating reference for candidate selection and next-generation research:
-- [Normalized master ledger R251–R299](research/MASTER_SEARCH_LEDGER_R251_R308.csv)
-- [Family/lineage map and closed-family stop rules](research/SEARCH_FAMILY_MAP_R251_R308.md)
+- [Normalized master ledger R251–R299](research/MASTER_SEARCH_LEDGER_R251_R310.csv)
+- [Family/lineage map and closed-family stop rules](research/SEARCH_FAMILY_MAP_R251_R310.md)
 - [Common search governance and scoring contract v1](research/SEARCH_GOVERNANCE_AND_SCORING_V1.md)
 - [Component block library, separating reusable engineering from unvalidated alpha](research/COMPONENT_BLOCK_LIBRARY_R251_R299.md)
 - [Immutable experiment registration-card template v1](research/EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V1.md)
@@ -903,3 +903,18 @@ R307 shorted EURUSD Monday/Tuesday and went long Wednesday–Friday from 08:05�
 R308's registered weekend-carry rule required an observed active >=24h Friday-to-Monday gap. Only two qualifying events existed in 2017–2025 (one in discovery, one in validation), both around New Year closures, not a normal weekly reopening sequence. It failed the minimum sample/data gate **before PnL**, and no outcome metrics were calculated for R308.
 
 No FundedNext challenge replay was run: R307 failed expectancy/cost/stability gates; R308 failed data coverage. Neither has a defensible pass-probability estimate for the user's target of both phases complete before any loss-rule breach and in <180 calendar days. XAUUSD 2026 remains protected. Full row-level ledgers and the exact local runner are identified by hashes in the manifest but were not verified as ordinary decoded files in the repo, so repository-only end-to-end reproducibility remains a failed gate.
+
+
+## Latest authoritative update — 2026-10-20: R309/R310
+
+**Verdict: R309 GAGAL; R310 GAGAL. No candidate is funded-ready.** The batch tested a new EURUSD/XAUUSD relative-value residual snapback mechanism and one structural exit correction. The latter reduced losses but did not create positive expectancy, even before incremental trading costs.
+
+- R309 baseline cost: discovery 2017–2020, 3,576 trades / -991.56R / PF 0.338; diagnostic 2021–2025, 3,665 trades / -644.44R / PF 0.512.
+- R310 baseline cost: discovery, 3,003 trades / -804.58R / PF 0.553; diagnostic, 3,125 trades / -544.15R / PF 0.681.
+- Both candidates were negative at zero additional costs, all annual results were negative from 2017–2025, and four-week validation-bootstrap 95% intervals were wholly negative: R309 [-2.939, -2.005]R/week; R310 [-2.578, -1.604]R/week.
+- Both passed only 2/8 gates (source integrity and minimum sample count). They fail expectancy, stronger cost stress, annual stability, bootstrap, latency stress and repository-only complete reproducibility. No funded challenge replay was run.
+- EURUSD data filter reproduces the manifest: 696,795 repeated flat placeholders removed; 3,718,698 active paired M1 timestamps; 736,076 complete EURUSD M5 bars; 732,199 exact common EURUSD/XAUUSD M5 timestamps. No 2026 XAU outcome rows were scored.
+- Report and supporting scorecards are committed: [R309/R310 final report](research/R309_R310_BATCH_FINAL_REPORT.md), [cost/delay scorecard](research/R309_R310_cost_delay_scorecard.csv), [annual summary](research/R309_R310_annual_summary.csv), [data audit](research/R309_R310_data_audit.json), [weekly bootstrap](research/R309_R310_validation_weekly_bootstrap.json).
+- Exact Python runner and full row-level trade ledgers have local hashes recorded in the R309/R310 audit context but are not yet committed as normal repository files. End-to-end repository-only reproduction remains explicitly failed; do not claim complete reproduction.
+
+**Next-step lock:** close the exact FX/gold snapback family. No direction flip, z-threshold/beta-lookback/exit-barrier/holding-time sweep on the inspected dates. Use a genuinely distinct economic mechanism in the next generation, and do not run the protected XAUUSD 2026 window until a frozen candidate clears all pre-2026 gates. Maintain the primary criterion: both challenge phases completed before any rule breach and in fewer than 180 calendar days; that is an acceptance criterion, not a promise.
