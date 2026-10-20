@@ -39,6 +39,7 @@ class ChallengeSimulatorTests(unittest.TestCase):
             events += win_trade(d, f"p2fast_{d}")
         result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
         self.assertEqual(result["status"], "PASS_BOTH_PHASES_WITHIN_179D")
+        self.assertEqual(result["binary_verdict"], "LULUS")
         self.assertEqual(result["phases_completed"], 2)
         self.assertEqual(result["calendar_days_elapsed"], 179)
 
@@ -50,6 +51,7 @@ class ChallengeSimulatorTests(unittest.TestCase):
             events += win_trade(d, f"p2slow_{d}")
         result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
         self.assertEqual(result["status"], "PASS_BOTH_PHASES_TOO_SLOW")
+        self.assertEqual(result["binary_verdict"], "GAGAL")
         self.assertEqual(result["phases_completed"], 2)
         self.assertEqual(result["calendar_days_elapsed"], 180)
 
