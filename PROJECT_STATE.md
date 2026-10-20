@@ -1,12 +1,12 @@
 # Proyek Backtest — Checkpoint Utama
 
-## Ledger backlog checkpoint — 2026-10-20 (local replay verified)
+## Ledger storage checkpoint — 2026-10-20 (complete)
 
-- R302's exact local runner has been reconstructed from the committed bootstrap; expanded source checksum matches the locked SHA-256.
-- Re-running against the cached, hash-verified XAUUSD M5 BID/ASK source reproduced all four missing detailed CSV outputs byte-for-byte against the original output hashes: primary trade ledger (387 rows), pre-outcome audit (2,336 rows), all cost/delay streams plus skips (4,644 rows), and all valid trades (4,638 rows).
-- R302 remains **GAGAL**: discovery −32.9644576R (179 trades, PF_R 0.63976); validation −26.9914313R (208 trades, PF_R 0.72986); 3/8 historical gates passed. 2026 remains unopened.
-- Important distinction: detailed rows are now reproducible locally, but are still not committed as row-level files in the active repository tree. See [R302 ledger reassembly verification](research/R302_LEDGER_REASSEMBLY.md).
-
+- R302's checksum-locked runner was reconstructed, and the original raw-data ZIP plus both BID/ASK members passed their recorded SHA-256 checks.
+- All four missing row-level CSVs are now committed under `research/`. Their pre-commit SHA-256 values exactly match the original output manifest; post-push GitHub tree metadata confirms the paths and exact byte sizes. Restoration commit: [cd42a9a4c5092ff34705d17580706b6a2ac8628f](https://github.com/christianomomongan82-lang/scanner/commit/cd42a9a4c5092ff34705d17580706b6a2ac8628f).
+- The one-shot recovery run initially exposed a pandas 3.0 incompatibility; pinning the output-producing environment to NumPy 2.3.5 and pandas 2.2.3 reproduced the original four hashes. The temporary recovery workflow was removed after publication; no persistent backtest workflow remains.
+- R302 remains **GAGAL**: discovery −32.9644576R (179 trades, PF_R 0.63976); validation −26.9914313R (208 trades, PF_R 0.72986); 3/8 historical gates passed. Protected 2026 remains unopened.
+- Detailed artifacts and checksums: [R302 artifact index](research/R302_INDEX.md), [ledger storage/replay verification](research/R302_LEDGER_REASSEMBLY.md), [data manifest](research/R302_DATA_MANIFEST.md).
 
 **Terakhir diperbarui:** 2026-10-20  
 **Status proyek:** SEMUA KANDIDAT YANG DIUJI BERSTATUS GAGAL; TIDAK ADA YANG LULUS.  
