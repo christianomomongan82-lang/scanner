@@ -10,7 +10,9 @@
 - [Period and annual scorecard](R302_period_annual_summary.csv)
 - [Validation weekly bootstrap result](R302_validation_weekly_bootstrap.json)
 - [Data/ledger manifest and local-output hashes](R302_DATA_MANIFEST.md)
-- [Ledger restoration notes](R302_LEDGER_REASSEMBLY.md)
+- [Ledger restoration notes and exact local replay verification](R302_LEDGER_REASSEMBLY.md)
+
+The checksum-locked local runner has now reproduced all four missing detailed CSVs byte-for-byte against the original manifest hashes. Their rows are still not transferred as files into this branch; the restoration notes distinguish that remaining storage task from verified local reproducibility.
 
 ## Locked result
 
