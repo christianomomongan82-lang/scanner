@@ -40,14 +40,30 @@
     ]
   },
   "challenge_engine_unit_tests": {
-    "passed": 13,
-    "failed": 0
+    "passed": 14,
+    "failed": 0,
+    "cases": [
+      "sequential two-phase completion requires five trading days per phase",
+      "completion by day 179 passes the project speed gate",
+      "completion on day 180 fails the project speed gate",
+      "daily loss includes current floating loss",
+      "static maximum loss floor",
+      "Quick Strike ratio can block phase completion",
+      "overlapping open-risk cap rejects second position",
+      "timezone-naive timestamps are rejected",
+      "Quick Strike share resets on a 14-day cycle rollover",
+      "positions auto-closed at 23:45 do not become fabricated rule breaches",
+      "missing cycle auto-close makes event path invalid",
+      "new entry at or after cycle end makes event path invalid",
+      "incomplete open-position path cannot count as a pass",
+      "cycle anchor derives from first accepted trade, not skipped signal"
+    ]
   },
   "real_archive_smoke_tests": {
     "status": "PASS_INFRASTRUCTURE_ONLY",
     "passed": 3,
     "failed": 0,
-    "ci_run_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/39408537778",
+    "ci_run_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/39409091872",
     "scenarios": [
       {
         "name": "one synthetic intraday position over real archived bars",
@@ -69,11 +85,12 @@
   },
   "ci_summary": {
     "adapter_tests": 12,
-    "challenge_engine_tests": 13,
+    "challenge_engine_tests": 14,
     "real_archive_smoke_tests": 3,
-    "total_tests": 28,
+    "total_tests": 29,
     "conclusion": "success",
-    "run_id": 39408537778
+    "run_id": 39409091872,
+    "commit_sha": "cd46d3dd8b4a8e6fe2d61afd12ce2e022b7400b4"
   },
   "limitations": [
     "This is not a strategy backtest or a FundedNext challenge replay.",
