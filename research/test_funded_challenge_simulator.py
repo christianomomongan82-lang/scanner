@@ -126,7 +126,7 @@ class ChallengeSimulatorTests(unittest.TestCase):
             {
                 "timestamp_utc": datetime(2025, 1, 19, 23, 45, tzinfo=timezone.utc).isoformat(),
                 "event_seq": 1, "event": "EXIT", "trade_id": "carry", "realized_r": -0.2,
-                "hold_seconds": 13 * 86400 + 11 * 3600 + 45 * 60,
+                "hold_seconds": 13 * 86400 + 11 * 3600 + 45 * 60, "exit_at_open": True,
             },
         ]
         result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
@@ -145,6 +145,30 @@ class ChallengeSimulatorTests(unittest.TestCase):
         result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
         self.assertEqual(result["status"], "INVALID_PATH_QUICK_STRIKE_CYCLE_OPEN_POSITION")
         self.assertEqual(result["failure_reason"], "missing_cycle_auto_close_event")
+
+
+    def test_entry_at_or_after_cycle_end_is_invalid(self):
+        events = [
+            event(0, "OPEN", "first", risk_pct=0.005),
+            event(0, "EXIT", "first", realized_r=0.0, hold=60),
+            {
+                "timestamp_utc": datetime(2025, 1, 19, 23, 45, tzinfo=timezone.utc).isoformat(),
+                "event_seq": 1, "event": "OPEN", "trade_id": "late", "risk_pct": 0.005,
+            },
+        ]
+        result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
+        self.assertEqual(result["status"], "INVALID_PATH_ENTRY_AT_CYCLE_END")
+        self.assertEqual(result["failure_reason"], "entry_at_or_after_cycle_end")
+
+    def test_path_ending_with_open_position_is_invalid_not_a_pass(self):
+        events = [
+            event(0, "OPEN", "left_open", risk_pct=0.005),
+            event(1, "MARK", "left_open", floating_r=-0.1),
+        ]
+        result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
+        self.assertEqual(result["status"], "INVALID_PATH_OPEN_POSITION_AT_END")
+        self.assertEqual(result["binary_verdict"], "GAGAL")
+        self.assertEqual(result["failure_reason"], "position_path_ends_with_open_position")
 
 
 if __name__ == "__main__":
