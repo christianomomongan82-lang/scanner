@@ -12,7 +12,7 @@ class AdapterTests(unittest.TestCase):
         self.root = Path(self.tmp.name)
         self.idx = pd.date_range("2025-01-02T00:00:00Z", periods=5, freq="5min")
         bid = pd.DataFrame({
-            "timestamp": (self.idx.astype("int64") // 1_000_000),
+            "timestamp": [int(ts.timestamp() * 1000) for ts in self.idx],
             "open": [100, 100.0, 100.1, 100.2, 100.3],
             "high": [100.5, 100.6, 100.7, 101.2, 100.8],
             "low": [99.8, 99.9, 100.0, 98.8, 100.2],
