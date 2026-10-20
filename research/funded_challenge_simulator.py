@@ -69,6 +69,16 @@ def _quick_strike_share(gross_winning_profit: float, quick_winning_profit: float
     return quick_winning_profit / gross_winning_profit
 
 
+def _as_event_bool(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return False
+    if isinstance(value, (int, float)):
+        return value != 0
+    return str(value).strip().lower() in {"true", "1", "yes", "y"}
+
+
 def simulate_challenge(
     events: Iterable[dict[str, Any]],
     rules: ChallengeRules | None = None,
@@ -175,7 +185,7 @@ def simulate_challenge(
         # not cumulatively across the entire phase.
         return _quick_strike_share(cycle_gross_wins, cycle_quick_wins)
 
-    def update_quick_cycle(dt: datetime, event: str) -> str | None:
+    def update_quick_cycle(dt: datetime, event: str, row: dict[str, Any]) -> str | None:
         nonlocal cycle_anchor_date, current_cycle_index, cycle_gross_wins, cycle_quick_wins
         nonlocal failure_reason, breach_time
         local_dt = dt.astimezone(tz)
@@ -198,12 +208,21 @@ def simulate_challenge(
         # a FundedNext rule violation.
         is_last_cycle_day = elapsed_days % rules.quick_strike_cycle_days == rules.quick_strike_cycle_days - 1
         local_clock = local_dt.time().replace(tzinfo=None)
-        if is_last_cycle_day and local_clock >= time(23, 45) and active:
-            allowed_cycle_exit = event == "EXIT" and local_clock == time(23, 45)
-            if not allowed_cycle_exit:
-                failure_reason = "missing_cycle_auto_close_event"
+        if is_last_cycle_day and local_clock >= time(23, 45):
+            if event == "OPEN":
+                failure_reason = "entry_at_or_after_cycle_end"
                 breach_time = dt.isoformat()
-                return "INVALID_PATH_QUICK_STRIKE_CYCLE_OPEN_POSITION"
+                return "INVALID_PATH_ENTRY_AT_CYCLE_END"
+            if active:
+                allowed_cycle_exit = (
+                    event == "EXIT"
+                    and local_clock == time(23, 45)
+                    and bool(_as_event_bool(row.get("exit_at_open", False)))
+                )
+                if not allowed_cycle_exit:
+                    failure_reason = "missing_cycle_auto_close_event"
+                    breach_time = dt.isoformat()
+                    return "INVALID_PATH_QUICK_STRIKE_CYCLE_OPEN_POSITION"
 
         if current_cycle_index is not None and cycle_index > current_cycle_index:
             if active:
@@ -274,7 +293,7 @@ def simulate_challenge(
         tid = str(row["trade_id"])
         events_processed += 1
 
-        cycle_status = update_quick_cycle(dt, event)
+        cycle_status = update_quick_cycle(dt, event, row)
         if cycle_status:
             status = cycle_status
             break
@@ -359,6 +378,10 @@ def simulate_challenge(
                     else "PASS_BOTH_PHASES_TOO_SLOW"
                 )
                 break
+
+    if status == "PATH_EXHAUSTED" and active:
+        failure_reason = "position_path_ends_with_open_position"
+        status = "INVALID_PATH_OPEN_POSITION_AT_END"
 
     if status.startswith("BREACH_"):
         phase_results.append({
