@@ -1,3 +1,18 @@
+# Latest checkpoint — 2026-10-21 (R317/R318 GAGAL)
+
+- **R317 and R318 both failed the clean EURUSD M5 forward comparison. No candidate in this batch is approved for funded use.**
+- R317's earlier preliminary result table was superseded: it had failed to remove 696,795 repeated-flat placeholder rows. The corrected pipeline keeps 3,718,698 M1 rows and 736,076 exact complete M5 bars; 7,882 gaps >5 minutes remain gaps. Raw ZIP is source artifact 11959096102 from run 38697080604, SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`.
+- R317 discovery-selected stop/target configuration: 374 trades, +39.398R, PF 1.1376 at +0.5 pip incremental cost in 2016–2020; 2021–2025 validation: 397 trades, −37.264R, PF 0.8881 at the same cost. Zero added cost still gave −3.862R/PF 0.9874. **Close family; no rescue/tuning on validation.**
+- R318 screened 972 raw-price/auction/candle-shape configurations; only 5 were net-positive at +0.5 pip in discovery, and only 3 had PF ≥1.05. The five strongest discovery-ranked rules were frozen; all failed 2021–2025 validation at +0.5 pip, producing validation net R/PF of −24.05/0.855, −16.48/0.787, −29.90/0.860, −27.69/0.828, and −30.23/0.867. The second-ranked rule's bootstrap mean was −0.063R/week (four-week blocks; 95% interval [−0.160, +0.034]).
+- Reports/results currently committed on this branch:
+  - [Clean R317/R318 search report](research/R317_R318_EURUSD_M5_CLEAN_SEARCH_REPORT_20261021.md)
+  - [Compact machine-readable outcomes](research/R318_RESULTS_COMPACT.json)
+  - [Frozen five-candidate validation shortlist](research/R318_VALIDATION_SHORTLIST.csv)
+- Do not use the preliminary pre-cleaning R317 figures. The full 972-row discovery grid, complete raw trade ledgers, and exact source runner still have not been committed and read-back-verified, so repository-complete reproduction is **not** confirmed. 2021–2025 has also been reused across previous project experiments; it is not a pristine project-wide untouched OOS period. Do not open reserved 2026 data for this search.
+- Current research conclusion remains: **no funded-ready strategy has been found**. Do not solve negative expectancy by increasing risk. Continue only with a genuinely distinct, properly archived experiment; no near-duplicate parameter rescue of R317/R318.
+
+---
+
 # Latest search checkpoint — 2026-10-21 (R311 GAGAL)
 
 - Executed new, preregistered EURUSD Tokyo 09:55-fixing post-event fade, not a threshold/clock mutation of an old technical strategy. Registered 2017–2020 discovery and 2021 validation; no R311 PnL at/after 2022.
