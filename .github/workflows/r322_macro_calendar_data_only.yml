@@ -32,12 +32,19 @@ jobs:
       - name: Validate source and make minimal event-only subset
         run: |
           python research/r322_prepare_calendar.py --input /tmp/r322-calendar/source.csv --output-dir /tmp/r322-calendar/output
-      - name: Upload calendar subset and source manifest
+      - name: Correct scheduled event timestamps and cluster episodes (calendar data only)
+        run: |
+          python research/r322_correct_event_times.py --input-csv /tmp/r322-calendar/output/R322_USD_HIGH_IMPACT_CALENDAR.csv --output-dir /tmp/r322-calendar/corrected
+      - name: Upload calendar subsets and pre-outcome audit
         uses: actions/upload-artifact@v4
         with:
           name: R322-USD-high-impact-calendar
           path: |
             /tmp/r322-calendar/output/R322_USD_HIGH_IMPACT_CALENDAR.csv
             /tmp/r322-calendar/output/R322_CALENDAR_SOURCE_MANIFEST.json
+            /tmp/r322-calendar/corrected/R322_CORRECTED_CALENDAR_EVENTS.csv
+            /tmp/r322-calendar/corrected/R322_CORRECTED_EVENT_EPISODES.csv
+            /tmp/r322-calendar/corrected/R322_TIMESTAMP_CORRECTION_AUDIT.csv
+            /tmp/r322-calendar/corrected/R322_TIMESTAMP_PREFLIGHT_MANIFEST.json
           retention-days: 7
           if-no-files-found: error
