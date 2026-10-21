@@ -136,3 +136,12 @@ A timed, instrumented **data-only** run showed the remaining delay was the panda
 - Runner commit: `e7104d0cd737d33e3e6b73223611e97a25b74ae6`
 - Runner Git blob SHA-1: `269a3d1467570493658833c569a85f5031ab20a6`
 - No R321 outcome metric was calculated.
+
+
+## Pre-outcome timestamp-audit performance correction — 2026-10-21 UTC
+
+Instrumentation showed the data-only preflight was spending its remaining time in pandas' index duplicate check on two 4.4M-row series. This check is replaced with a linear NumPy strict-monotonicity test (`diff(timestamp) > 0`) before setting each index, and paired timestamps are compared as integer arrays. Duplicates and unordered rows still fail closed; this does not change data or signal rules.
+
+- Runner commit: `1fc7f74151f0a58b0c43565f0497c5d04eea0783`
+- Runner Git blob SHA-1: `ef514188c59e8c461e67835da9dc7b14a109dc4e`
+- Still pre-outcome; no R321 prediction metrics have been calculated.
