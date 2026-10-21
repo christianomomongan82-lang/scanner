@@ -55,12 +55,13 @@ def read_source():
         ask = pd.read_csv(z.open("eurusd_ask_M1_2016-2025.csv.gz"), compression="gzip")
     for df in (bid, ask):
         df["timestamp"] = pd.to_numeric(df["timestamp"], errors="raise").astype("int64")
-        df.set_index("timestamp", inplace=True)
-        if not df.index.is_monotonic_increasing or df.index.has_duplicates:
+        timestamp_values = df["timestamp"].to_numpy(dtype=np.int64)
+        if np.any(np.diff(timestamp_values) <= 0):
             raise RuntimeError("Source timestamps unsorted or duplicated.")
-        for c in ("open", "high", "low", "close"):
-            df[c] = pd.to_numeric(df[c], errors="raise").astype("float64")
-    if not bid.index.equals(ask.index):
+        df.set_index("timestamp", inplace=True)
+        for col in ("open", "high", "low", "close"):
+            df[col] = pd.to_numeric(df[col], errors="raise").astype("float64")
+    if not np.array_equal(bid.index.to_numpy(dtype=np.int64), ask.index.to_numpy(dtype=np.int64)):
         raise RuntimeError("BID/ASK timestamp sets differ; paired feed gate failed.")
     cutoff_ms = int(CUTOFF.timestamp() * 1000)
     # The pinned archive is manifest-scoped to end-exclusive 2026-01-01; assert rather than copy-filter it.
