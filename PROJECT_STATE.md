@@ -1,3 +1,15 @@
+# ACTIVE GOVERNANCE — 2026-10-21
+
+**Search status: BLOCKED pending v2 preflight for the next candidate. Do not calculate new strategy PnL until the complete pre-outcome registration, data-gate and output-archive plan are committed and pass review.** This block enforces process reliability; it does not claim no market edge can exist.
+
+Authoritative process contract: [SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md](research/SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md). Required registration card: [EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V2.md](research/EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V2.md). Baseline / invariant targets: [PROCESS_QUALITY_BASELINE_20261021.json](research/PROCESS_QUALITY_BASELINE_20261021.json). The older v1 governance is retained for context but explicitly superseded.
+
+Non-negotiable outcome: no signal PnL before a read-back-verified GitHub preregistration. No run is called DONE until clean rerun hashes match, complete required artifacts are stored or restored with byte-hash proof, and the master ledger, family map and this checkpoint are read back from GitHub. If any process invariant fails, no new signal search is allowed until fixed. Strategy PnL may vary; process reliability must not regress.
+
+Current research verdict: no strategy is approved for the funded challenge. R317/R318 have historical archive gaps; R319/R320 were committed after calculations and did not meet v2's pre-registration/full-static-archive requirements. Their results remain GAGAL and exploratory, not silently promoted. See [consolidated master ledger R251–R320](research/MASTER_SEARCH_LEDGER_R251_R320.csv) and [family map R251–R320](research/SEARCH_FAMILY_MAP_R251_R320.md).
+
+---
+
 
 ### Consolidated experiment ledger — 2026-10-21
 
