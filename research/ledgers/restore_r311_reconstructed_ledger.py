@@ -37,7 +37,7 @@ EXPECTED_DATA_ROWS = 2608
 
 
 def git_blob_sha1(data: bytes) -> str:
-    header = f"blob {len(data)}\\0".encode("ascii")
+    header = f"blob {len(data)}\0".encode("ascii")
     return hashlib.sha1(header + data).hexdigest()
 
 
@@ -72,7 +72,7 @@ def main() -> None:
             f"FAIL CSV bytes={len(csv_bytes)} sha256={csv_sha}; "
             f"expected bytes={EXPECTED_CSV_BYTES} sha256={EXPECTED_CSV_SHA256}"
         )
-    lines = csv_bytes.count(b"\\n")
+    lines = csv_bytes.count(b"\n")
     if lines - 1 != EXPECTED_DATA_ROWS:
         raise SystemExit(f"FAIL row count {lines - 1} != {EXPECTED_DATA_ROWS}")
 
