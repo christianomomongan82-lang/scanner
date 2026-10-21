@@ -43,3 +43,10 @@ These are independently reconstructed outputs, not byte-for-byte copies of the m
 ## Resume gate
 
 The common funded challenge simulator and paired BID/ASK source adapter pass their committed synthetic/integration tests (35 total in CI run [39412962243](https://github.com/christianomomongan82-lang/scanner/actions/runs/39412962243)); this validates infrastructure only. No strategy currently qualifies for funded-path Monte Carlo. Before resuming new signal search, archive the exact R311 row-level outputs (or formally supersede them with a committed, tested reconstruction), verify the actual intended account's symbol contract sizes, commissions/swaps, and server reset timezone/DST, and keep the protected XAUUSD 2026 sample closed until every pre-2026 gate is cleared.
+
+
+## Ledger payload persisted — 2026-10-21
+
+The reconstructed 2,608-row eligibility/event ledger is now stored in GitHub as ten base64 payload fragments under `research/ledgers/`. Every fragment's byte count and Git blob SHA-1 was checked against the corresponding local source slice, including the corrected chunk boundaries. The expected assembled base64 length (90,184 chars), gzip hash (67,636 bytes; SHA-256 `e6c4e60f82703f37d83e9f7078612577e046e7c4545f054eb7aef4148846dfa2`) and CSV hash (449,552 bytes; SHA-256 `bb98d010e2dfcabd6ea34908c1d167ce864f0d36f8ce5c7df0408f247055f5c8`) are pinned in the restoration script. See [ledger storage manifest](ledgers/R311_RECONSTRUCTED_LEDGER_STORAGE_MANIFEST.md) and [restore script](ledgers/restore_r311_reconstructed_ledger.py).
+
+**Status correction:** the gate that reconstructed R311 outputs were not committed is closed. The still-unresolved distinction is narrower: the original local output file is unavailable, so exact row-by-row identity against that old file cannot be checked. The committed reconstruction has verifiable provenance and a reproducible restore path. R311 remains **GAGAL** and provides no funded edge.
