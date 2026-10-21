@@ -1,3 +1,8 @@
+
+### Consolidated experiment ledger — 2026-10-21
+
+A new consolidated [MASTER_SEARCH_LEDGER_R251_R320.csv](research/MASTER_SEARCH_LEDGER_R251_R320.csv) now includes all 56 records present in the prior R251–R311 ledger plus explicit R312–R320 entries. The added entries record the binary decision, metrics, dataset contamination, and exact reproducibility/archive status. R313/R316 and the earlier R317/R318 batch are marked archive-incomplete where no complete runner/row ledger could be verified; these records are excluded from strategy promotion, not considered hidden pending candidates. R319/R320 have reproducible archived source, deterministic output generation and repeat-run hash checks.
+
 ### R319/R320 process audit update — reproducible reruns verified
 
 Both runners have now been executed twice from the local Python/container session with the checksum-pinned raw data. The complete 972-row R319 configuration grid and 162-row R320 grid, scorecards, top-candidate outputs, and trade ledgers regenerated. Grid, scorecard, candidate JSON, and compressed-ledger hashes matched across runs. A real non-determinism bug was found and fixed: gzip output used wall-clock header timestamps. The repository restore script now patches both runners to fixed gzip mtime=0; expected restored runner SHA-256 values are R319 `6acc5bf9e6f317ff50c22c5db8c1a9cfe9bf8e21af792ad207a34c63797f0e6a` and R320 `df20cfaf25176e9c2022983c72d3809026b4a512c98fdd6f20557b92f3fb2f7c`.
