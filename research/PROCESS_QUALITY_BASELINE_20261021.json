@@ -13,7 +13,8 @@
     "R317/R318 repeated-flat data defect documented and cleaned-result report supersedes preliminary table",
     "R319/R320 runners were archived and deterministic outputs were recalculated twice; key grid and scorecard hashes matched",
     "Master ledger consolidated through R320 and read-back-verified",
-    "R319/R320 results and project state read back from GitHub"
+    "R319/R320 results and project state read back from GitHub",
+    "Fail-closed local package gate validator and regression tests added to repository; local test suite passed 6/6"
   ],
   "process_defects_still_present": [
     {
@@ -31,6 +32,14 @@
       ],
       "defect": "Runner/preregistration was archived after PnL calculation, not committed as pre-outcome preregistration; row-level outputs regenerate but were not retained as standalone files",
       "disposition": "Exploratory and not formally preregistered; reproducible computation does not erase selection/archival deficiencies"
+    },
+    {
+      "experiments": [
+        "R319",
+        "R320"
+      ],
+      "defect": "The complete per-period row-level output ledgers are reproducibly generated and hash-pinned, but not all files are persisted as static ordinary GitHub files",
+      "disposition": "Current rounds remain short of the v2 static-artifact contract; keep next search blocked until package completeness requirements are met or the archive is upgraded"
     }
   ],
   "quality_invariants_next_run": {
