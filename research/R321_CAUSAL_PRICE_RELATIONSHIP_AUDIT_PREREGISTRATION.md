@@ -118,3 +118,12 @@ A further data-only run reached the confirmed placeholder count (696,795) but st
 - Runner commit: `2d01851279819f01c385b8308c9aaf21c3f4911d`
 - Runner Git blob SHA-1: `89569692e8276b964388b37d8ba4be0eec7c44b2`
 - The data gate is still pending; no relationship outcomes have been calculated.
+
+
+## Pre-outcome memory-path correction — 2026-10-21 UTC
+
+Two data-only runs exceeded the runtime limit while copying the filtered 3.7M-row pandas frame, before the data audit reached the row-count gate. The runner now keeps the original paired arrays, applies the keep mask while hashing each cleaned column, and builds M5 bars directly from filtered arrays. This removes the large intermediate clean M1 frame while preserving byte-equivalent cleaned values and the exact five-minute completeness rule.
+
+- Runner commit: `72e9a4ec551d89d9b34d0625897c6bf7eb5d5020`
+- Runner Git blob SHA-1: `8428f438db01231934b1d1aded7f8d0a90db2178`
+- Still pre-outcome: no R321 relationship/forward-return metrics calculated.
