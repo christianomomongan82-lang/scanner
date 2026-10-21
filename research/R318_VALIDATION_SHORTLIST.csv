@@ -1,0 +1,6 @@
+rank,id,discovery_trades,discovery_net_R,discovery_PF,validation_trades,validation_net_R,validation_PF,cost_extra_pips,verdict
+1,large_range_2xTR_body80_clv90_fade_short_overlap,262,15.93296,1.10585,265,-24.05319,0.85474,0.5,GAGAL
+2,prior_down12_ge4TR_bullish_close_top10_long_overlap,132,10.65634,1.16620,128,-16.47858,0.78674,0.5,GAGAL
+3,large_range_2xTR_body60_clv90_fade_short_overlap,332,8.32986,1.04204,337,-29.90452,0.86000,0.5,GAGAL
+4,prior_down6_ge4TR_bearish_close_bottom10_short_NY,200,6.37965,1.05126,237,-27.69489,0.82754,0.5,GAGAL
+5,large_range_2xTR_body40_clv90_fade_short_overlap,361,3.74262,1.01729,357,-30.22596,0.86703,0.5,GAGAL
