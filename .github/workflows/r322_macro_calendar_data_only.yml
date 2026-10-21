@@ -1,0 +1,43 @@
+name: R322 historical calendar acquisition (data only)
+
+on:
+  push:
+    branches:
+      - "local-backtest/r189-dukascopy-history"
+    paths:
+      - ".github/workflows/r322_macro_calendar_data_only.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire-filter-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download published historical calendar snapshot (data only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/r322-calendar
+          curl --location --fail --retry 3 --retry-delay 2 --max-time 240 \
+            "https://huggingface.co/datasets/Ehsanrs2/Forex_Factory_Calendar/resolve/main/forex_factory_cache.csv" \
+            --output /tmp/r322-calendar/source.csv
+          echo "f4e92bca4168cfe6e4598d3d2a69ac933dfd6c7c94550e056498a418e3efaf5e  /tmp/r322-calendar/source.csv" | sha256sum --check
+      - name: Validate source and make minimal event-only subset
+        run: |
+          python research/r322_prepare_calendar.py --input /tmp/r322-calendar/source.csv --output-dir /tmp/r322-calendar/output
+      - name: Upload calendar subset and source manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: R322-USD-high-impact-calendar
+          path: |
+            /tmp/r322-calendar/output/R322_USD_HIGH_IMPACT_CALENDAR.csv
+            /tmp/r322-calendar/output/R322_CALENDAR_SOURCE_MANIFEST.json
+          retention-days: 7
+          if-no-files-found: error
