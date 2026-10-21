@@ -51,17 +51,23 @@ def parse_aware(raw: str):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--input-zip", required=True, type=Path)
+    src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--input-zip", type=Path)
+    src.add_argument("--input-csv", type=Path)
     ap.add_argument("--output-dir", required=True, type=Path)
     args = ap.parse_args()
-    raw_zip = args.input_zip.read_bytes()
-    zip_sha = sha_bytes(raw_zip)
-    if zip_sha != SOURCE_ZIP_SHA:
-        raise SystemExit(f"FAIL_CLOSED input ZIP hash mismatch: {zip_sha}")
-    with zipfile.ZipFile(args.input_zip) as z:
-        if EXPECTED_INPUT not in z.namelist():
-            raise SystemExit("FAIL_CLOSED filtered calendar CSV missing from archive")
-        raw_csv = z.read(EXPECTED_INPUT)
+    zip_sha = None
+    if args.input_zip:
+        raw_zip = args.input_zip.read_bytes()
+        zip_sha = sha_bytes(raw_zip)
+        if zip_sha != SOURCE_ZIP_SHA:
+            raise SystemExit(f"FAIL_CLOSED input ZIP hash mismatch: {zip_sha}")
+        with zipfile.ZipFile(args.input_zip) as z:
+            if EXPECTED_INPUT not in z.namelist():
+                raise SystemExit("FAIL_CLOSED filtered calendar CSV missing from archive")
+            raw_csv = z.read(EXPECTED_INPUT)
+    else:
+        raw_csv = args.input_csv.read_bytes()
     csv_sha = sha_bytes(raw_csv)
     if csv_sha != CSV_SHA:
         raise SystemExit(f"FAIL_CLOSED calendar subset hash mismatch: {csv_sha}")
@@ -187,6 +193,7 @@ def main():
     manifest = {
         "purpose": "timestamp/coverage preflight only; no prices, signals, returns, PnL, or trade outcomes read",
         "locked_preregistration_amendment": "Amendment A, R322_NEWS_CASCADE_PREREGISTRATION.md",
+        "input_mode": "verified_filtered_calendar_csv" if args.input_csv else "verified_calendar_artifact_zip",
         "source_zip_sha256_verified": zip_sha,
         "source_calendar_csv_sha256_verified": csv_sha,
         "source_calendar_rows_audited": len(audits),
