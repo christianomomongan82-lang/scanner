@@ -105,21 +105,27 @@ def read_source():
     if bool(bad_spread.any()):
         raise RuntimeError(f"ASK below BID at open/close on {int(bad_spread.sum())} rows.")
     clean_hash = sha_clean(paired)
-    paired["_bucket"] = (paired.index.to_numpy(dtype=np.int64) // FREQ) * FREQ
-    agg_map = {}
+    # Fast exact five-minute aggregation: each bucket has exactly five possible UTC minute starts.
+    ts_clean = paired.index.to_numpy(dtype=np.int64)
+    if np.any(ts_clean % 60_000 != 0):
+        raise RuntimeError("Source timestamps are not UTC-minute aligned.")
+    buckets = (ts_clean // FREQ) * FREQ
+    bucket_ts, starts, counts = np.unique(buckets, return_index=True, return_counts=True)
+    good = counts == 5
+    bar_ts = bucket_ts[good]
+    bars = pd.DataFrame(index=np.asarray(bar_ts, dtype=np.int64))
     for side in ("bid", "ask"):
-        agg_map[f"{side}_open"] = "first"
-        agg_map[f"{side}_high"] = "max"
-        agg_map[f"{side}_low"] = "min"
-        agg_map[f"{side}_close"] = "last"
-    grouped = paired.groupby("_bucket", sort=True)
-    sizes = grouped.size()
-    bars = grouped.agg(agg_map)
-    # A bucket is tradable only when all five distinct minute timestamps are present.
-    # Source timestamps are unique and minute-aligned; each bucket has exactly five possible starts.
-    good_idx = sizes.index[sizes.eq(5)]
-    bars = bars.loc[good_idx].copy()
-    bars.index = bars.index.astype("int64")
+        for field in ("open", "high", "low", "close"):
+            arr = paired[f"{side}_{field}"].to_numpy(dtype=np.float64)
+            if field == "open":
+                by_bucket = arr[starts]
+            elif field == "high":
+                by_bucket = np.maximum.reduceat(arr, starts)
+            elif field == "low":
+                by_bucket = np.minimum.reduceat(arr, starts)
+            else:
+                by_bucket = arr[starts + counts - 1]
+            bars[f"{side}_{field}"] = by_bucket[good]
     # Ensure first and last minute timestamp cover the exact full five-minute bin.
     # (With five unique timestamps assigned to this bucket, this implies all five are present.)
     mid = pd.DataFrame(index=bars.index)
