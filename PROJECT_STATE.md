@@ -1,3 +1,9 @@
+### R319/R320 process audit update — reproducible reruns verified
+
+Both runners have now been executed twice from the local Python/container session with the checksum-pinned raw data. The complete 972-row R319 configuration grid and 162-row R320 grid, scorecards, top-candidate outputs, and trade ledgers regenerated. Grid, scorecard, candidate JSON, and compressed-ledger hashes matched across runs. A real non-determinism bug was found and fixed: gzip output used wall-clock header timestamps. The repository restore script now patches both runners to fixed gzip mtime=0; expected restored runner SHA-256 values are R319 `6acc5bf9e6f317ff50c22c5db8c1a9cfe9bf8e21af792ad207a34c63797f0e6a` and R320 `df20cfaf25176e9c2022983c72d3809026b4a512c98fdd6f20557b92f3fb2f7c`.
+
+Stable outputs and SHA-256 values are fully listed in [R319/R320 archive manifest](research/R319_R320_ARCHIVE_MANIFEST.md). R319/R320 detailed grids and ledger files are regenerated on demand, not all stored as standalone repository rows. The exact source chunks, reconstruction/patch script, machine-result JSON, scorecards' expected hashes, source archive identity and decision report are in GitHub. This resolves the reproducibility gap for these two newer batches, but the report was committed after their calculations, so they were exploratory rather than formally preregistered before execution. **It does not fix the older R317/R318 archived-runner/ledger gap.**
+
 # CURRENT CHECKPOINT — 2026-10-21 (R319/R320 CLOSED)
 
 Decision: R319 GAGAL, R320 GAGAL; no funded-ready edge identified. Do not deploy either. The protected 2026 sample remains unopened.
