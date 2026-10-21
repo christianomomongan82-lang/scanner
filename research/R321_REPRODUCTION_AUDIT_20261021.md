@@ -29,3 +29,7 @@ This is **not** a byte-for-byte execution of the runner currently stored at `res
 
 ## Required repair before next strategy search
 Execute the exact checked-in runner from the registered source, compare its deterministic outputs against the listed row/aggregate hashes, and ensure every required output either exists and is read-back verified in the branch or has a verified restoration process. Then update this audit and run the v2 closeout validator. This repair is process work, not parameter tuning, and must not access the protected 2026 outcome window.
+
+
+## Superseding verification — 2026-10-21
+The former open-gate statement above described the state before the exact committed runner was executed. It is superseded by [R321 official-source reproduction audit](R321_OFFICIAL_REPRODUCTION_AUDIT_20261021.md). The checked-in runner blob `8afc5bd8b9206f4d772e585446228daa2640707b` was run twice locally against GitHub data artifact `11959096102`; both runs reproduced all eight generated output files with identical byte sizes and SHA-256 values. The artifact ZIP digest matched locally and on GitHub. **The process/reproducibility gate is now PASS; the signal verdict remains GAGAL.** Do not interpret this as funded readiness; no account-path replay was run.
