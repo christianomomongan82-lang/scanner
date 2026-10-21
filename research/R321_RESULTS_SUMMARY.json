@@ -107,5 +107,38 @@
     "This audit is not a funded challenge pass-probability estimate.",
     "Full local ledger was validated, but repository-only archival of all outputs remains incomplete."
   ],
-  "local_bundle_sha256": "a317a44af33dea156313905ea00afc177576aac869ac702a1ab2642caddb92a2"
+  "local_bundle_sha256": "a317a44af33dea156313905ea00afc177576aac869ac702a1ab2642caddb92a2",
+  "official_reproduction": {
+    "status": "PASS",
+    "verdict": "GAGAL",
+    "source_artifact_id": 11959096102,
+    "source_artifact_name": "EURUSD-M1-Dukascopy-BID-ASK-2016-2025",
+    "source_artifact_expiry_utc": "2027-01-13T07:11:24Z",
+    "source_zip_bytes": 67719731,
+    "source_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "runner_commit": "25d8c2ac93b62f728fe68041a6b4804777077a8e",
+    "runner_git_blob_sha1": "8afc5bd8b9206f4d772e5855773580b",
+    "runner_sha256": "8647e7e8d6cedf011c8b36d7dbd773e4c35650d91cd13d196fff6fdcc207d41c",
+    "environment": {
+      "python": "3.13.5",
+      "pandas": "2.2.3",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    },
+    "exact_source_runs": 2,
+    "deterministic_outputs_match": true,
+    "output_hash_manifest": {
+      "R321_ANNUAL_COHORT_SCORECARD.csv": "004fbd9f7006a015ca25cf0eb4405b2cbbea04aef66ec5169901891f77b91a83",
+      "R321_BLOCK_BOOTSTRAP.csv": "111e018dc17ade409cb06031ed77551cc43825bdc06d27bbd551a1b654dfec4c",
+      "R321_DATA_AUDIT.json": "b3c7203e0593e2e270f61ef94341adcaebd687d7a1b9287fd97e9ba0aa1ce311",
+      "R321_ENVIRONMENT.json": "8278c00d57433905231dcfb75439dfddb3d63b09fd2e4f32785292b67f315fcf",
+      "R321_OUTPUT_MANIFEST.json": "3ba8afa4fea21ee640481437835b48161d1fbe8138f34467747033128e466987",
+      "R321_PREDICTION_EVENT_LEDGER.csv.gz": "35b4796557a109f14148861b300286c4b86a90ec2817a82b1714c4855773580b",
+      "R321_SCORECARD_ALL_COSTS.csv": "8457cd9a572384636b43555c6047c56f9edc1fcb6d901c0ba010f05a5099c054",
+      "R321_WEEKLY_NET_PIPS_ZERO_INCLUSIVE.csv.gz": "5644983332996e648f350299fbbc67a186ac8addb2778642e046b7d17c31e3e8"
+    },
+    "restoration_command": "python /mnt/data/R321_price_relationship_audit.py",
+    "restore_source_to": "/mnt/data/eurusd_raw_source.zip",
+    "output_restoration": "all registered row-level outputs deterministically regenerated and hash-verified twice"
+  }
 }
