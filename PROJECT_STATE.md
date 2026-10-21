@@ -999,3 +999,11 @@ An independent local R311 reconstruction now reproduces the committed aggregate 
 - Report: [R314 final report](research/R314_FINAL_REPORT_20261021.md); machine summary: [R314 discovery result](research/R314_DISCOVERY_RESULT.json). Full trade grid was generated locally (8,707,973-byte gzip, SHA-256 `0be5a087f8d2dc6611330fa4f41cacddf83a5f77e737d853f055726c3befdf37`); candidate table SHA-256 `95469a7098064afa63a91a6ada43d90a63d5f03e8e51b5ee8df3c48c67873243`. The compact report preserves decisive results/checksums, while the bulk discovery ledger itself remains a local run artifact rather than a committed Git blob.
 - R313 remains GAGAL even at zero additional friction (validation 2021–2025 −189.1R, PF 0.51); R311 and R302 remain GAGAL. Do not invert or post-hoc filter any of these failed families.
 - Current search resumes with a separately preregistered XAUUSD M5 volatility-compression breakout family; 2026 remains protected. No strategy is funded-ready.
+
+
+## 2026-10-21 — R315 discovery rejection
+
+- Registered `research/R315_XAUUSD_COMPRESSION_BREAKOUT_PREREGISTRATION.md` before the PnL run. Setup: 12-active-bar compression relative to trailing 288 observed active range values; close beyond previous 12-active-bar channel by >=0.10 × prior 12-active-bar median BID true range; entry after the five-minute manual delay; 1R stop/1.5R target; 60-minute maximum hold; quote-side BID/ASK fills.
+- **R315 = GAGAL at discovery.** 1,513 qualifying signal events produced 1,280 completed trades. At zero additional cost net R was −1,102.961R; at primary +$0.30/oz cost net R was −2,254.931R and PF_R 0.0459; at +$0.50/oz net R was −3,022.912R. Win rate at primary cost 9.53%; 1,157 stops vs 122 targets. All five discovery years were negative. No candidate-specific validation was run and 2026 remains protected.
+- Report: [R315 final report](research/R315_FINAL_REPORT_20261021.md); machine metrics: [R315 discovery result](research/R315_DISCOVERY_RESULT.json). Detailed compressed event/trade ledger generated locally and hashes recorded in report. The report/summary are committed; bulk ledgers are local run artifacts rather than committed Git blobs.
+- R311, R313, R314 and R315 are all GAGAL; don't tune or invert failed variants post hoc. Search continues on distinct preregistered mechanisms with 2026 data held out. No strategy is funded-ready.
