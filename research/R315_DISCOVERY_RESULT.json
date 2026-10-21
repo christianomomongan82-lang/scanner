@@ -1,0 +1,31 @@
+{
+  "experiment": "R315 XAUUSD M5 compression-to-range breakout",
+  "phase": "discovery",
+  "period": "2016-2020",
+  "verdict": "GAGAL_DISCOVERY",
+  "source_zip_sha256": "2cde8338800fd7f4d5d4628512201c16757ef06bd90d51ffdc8ef9bea425ba1a",
+  "bid_gzip_sha256": "b30eb4864db0777b6df612f3e43ccda9cc59db5ca09974191eabdaca1f6ff575",
+  "ask_gzip_sha256": "b9b174a83df70507be4ab0cd556432a0d14fbac2e596e787325bd1f163772fc9",
+  "cutoff_exclusive_utc": "2026-01-01T00:00:00Z",
+  "active_rows_used": 354177,
+  "candidate_events": 1513,
+  "completed_trades": 1280,
+  "net_R_cost_0.00": -1102.9610164332335,
+  "net_R_cost_0.30": -2254.9313302688292,
+  "net_R_cost_0.50": -3022.911539492559,
+  "PF_R_cost_0.30": 0.04593352742421806,
+  "PF_R_cost_0.50": 0.0202164672906992,
+  "win_rate_cost_0.30": 0.0953125,
+  "exit_reasons": {"stop": 1157, "target": 122, "data_gap_time": 1},
+  "by_year_net_R_cost_0.30": {
+    "2016": -389.79705323368955,
+    "2017": -543.4315149426739,
+    "2018": -474.7876048048274,
+    "2019": -570.9588704915387,
+    "2020": -275.9562867960993
+  },
+  "event_ledger_gzip": {"bytes": 136027, "sha256": "6708a6657dcb07b65546d61a329c793d047a1566864e342108f149876b401353"},
+  "trade_ledger_gzip": {"bytes": 123343, "sha256": "cdfcb1e264467eee65ff53401aeb44a37d34c8e8a25b90073d327344dc6a1909"},
+  "validation_run": false,
+  "protected_2026_outcomes_scored": false
+}
