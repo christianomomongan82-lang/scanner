@@ -64,3 +64,15 @@ Target horizons from the delayed entry: 5/15/30/60 minutes. No additional featur
 ## H. Binary decision
 - No relationship is funded-ready from this audit. Its only possible positive decision is: **GAGAL to falsify the registered research claim / proceed to a separate preregistered, challenge-aware strategy evaluation**. Otherwise verdict is **GAGAL — no cost-surviving predictive relationship**. A result with missing gates/artifacts is GAGAL — DATA/PROCESS, never a soft pass.
 - Registration is committed before the first outcome calculation. Any needed correction must be an append-only dated amendment committed before rerunning outcomes.
+
+
+## Pre-outcome implementation lock — 2026-10-21 UTC
+
+Before any outcome calculation, the implementation was committed and read back:
+- Runner path: `research/R321_price_relationship_audit.py`
+- Runner commit: `57d1427177cc1cd95829154ff13cbad2fdd25106`
+- Runner Git blob SHA-1: `1192419baf92f4795ce75c886e67095d1495c7b9`
+- Configuration path: `research/R321_CAUSAL_PRICE_RELATIONSHIP_AUDIT_CONFIG.json`; config commit `111d0ed2bf7eee7e4941fd2cdedbe72dc50ca50e`
+- Initial card commit: `67a8de40dafed467cddf00ab52ddbc1a85ee37ca`
+- Implementation clarification: F7's 48 trailing 3-return volatility estimates require an uninterrupted history of 50 M5 bars so no nested volatility window can reach across a missing-bar gap. This is a stricter data-validity condition, not a new signal parameter.
+- No R321 signal-outcome metrics had been calculated when this amendment was committed.
