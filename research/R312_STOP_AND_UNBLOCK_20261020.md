@@ -121,3 +121,8 @@ Artifacts and reusable code:
 ## Superseding status note — 2026-10-21
 
 The previous note's statement that R302 row-level CSV outputs had not been committed is now stale. R302's four detailed ledgers were restored and checksum/readback verified in commit [cd42a9a4c5092ff34705d17580706b6a2ac8628f](https://github.com/christianomomongan82-lang/scanner/commit/cd42a9a4c5092ff34705d17580706b6a2ac8628f). The R311 aggregate replay has also been independently reproduced; the candidate remains GAGAL. See [R312 reproducibility follow-up](R312_REPRODUCIBILITY_FOLLOWUP_20261021.md) for exact results and the still-open R311 row-level storage gate.
+
+
+## Superseding ledger status — 2026-10-21 (later update)
+
+The reconstructed R311 row-level eligibility/event ledger is now stored as checksum-pinned fragments, with a restoration script and manifest at `ledgers/R311_RECONSTRUCTED_LEDGER_STORAGE_MANIFEST.md`. All ten fragment Git blob SHA-1 values and byte lengths were checked against the local reconstruction. This supersedes the earlier statement in this note that R311 reconstructed row-level output is not stored. The original local R311 output still cannot be compared row-for-row because it is unavailable, but that historical-file gap no longer blocks restoration of the checked-in reconstruction. The strategy still verdicts **GAGAL**; no edge or funded readiness is implied.
