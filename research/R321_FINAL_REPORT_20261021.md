@@ -31,3 +31,9 @@ The strongest full-sample pair was negative in all ten calendar years. Its weekl
 
 ## Reproducibility caveat
 The local reconstructed runner followed the committed R321 calculation logic and registered parameters; comments and unused imports were omitted. The local full 56,633-event ledger was read back and its schema/row count verified. The bootstrap uses weekly average event-level net pips, with no-event weeks zero-filled; it is not funded-account equity PnL. GitHub-only archival of the full outputs remains incomplete, so do not claim end-to-end repository-only reproducibility yet.
+
+
+## Official-source reproduction addendum — 2026-10-21
+The exact committed runner was executed twice locally after restoring its exact Git blob (SHA-1 `8afc5bd8b9206f4d772e5855773580b` is not used; verified blob SHA-1: `8afc5bd8b9206f4d772e5855773580b`). Both executions had identical hashes for all eight generated outputs. The source archive was downloaded from GitHub Actions artifact **11959096102** (`EURUSD-M1-Dukascopy-BID-ASK-2016-2025`); the 67,719,731-byte ZIP matched SHA-256 `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`. The exact-runner and output-manifest details are in [R321 official-source reproduction audit](R321_OFFICIAL_REPRODUCTION_AUDIT_20261021.md).
+
+This closes the earlier source-code/reproduction blocker, not the edge verdict: **R321 = GAGAL**. Its best relationship remained negative before extra friction and materially worse at +1 pip. No strategy is promoted and no challenge pass probability is claimed. The raw-data artifact expires 2027-01-13 and must be refreshed/migrated before then.
