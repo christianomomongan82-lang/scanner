@@ -67,6 +67,7 @@ def read_source():
     if not bid.index.equals(ask.index):
         raise RuntimeError("BID/ASK pairing changed after cutoff.")
     names = [f"{s}_{c}" for s in ("bid", "ask") for c in ("open", "high", "low", "close")]
+    source_paired_rows = int(len(bid))
     paired = pd.concat([bid.add_prefix("bid_"), ask.add_prefix("ask_")], axis=1)
     paired = paired[names]
     ts = paired.index.to_numpy(dtype=np.int64)
@@ -105,11 +106,8 @@ def read_source():
     grouped = paired.groupby("_bucket", sort=True)
     sizes = grouped.size()
     bars = grouped.agg(agg_map)
-    minimum = grouped.apply(lambda g: int(g.index.min()), include_groups=False) if False else None
     # A bucket is tradable only when all five distinct minute timestamps are present.
-    good = sizes.eq(5) & sizes.index.to_series().map(lambda b: True)
-    good &= (grouped.apply(lambda g: int(g.index.min()), include_groups=False) == sizes.index) if False else True
-    # Source timestamps are unique; each bucket has only five possible starts.
+    # Source timestamps are unique and minute-aligned; each bucket has exactly five possible starts.
     good_idx = sizes.index[sizes.eq(5)]
     bars = bars.loc[good_idx].copy()
     bars.index = bars.index.astype("int64")
@@ -120,8 +118,11 @@ def read_source():
         mid[x] = (bars[f"bid_{x}"] + bars[f"ask_{x}"]) / 2.0
     gap_ms = np.diff(bars.index.to_numpy(dtype=np.int64))
     m5_gaps = int((gap_ms != FREQ).sum())
+    if len(paired) != 3_718_698 or len(bars) != 736_076:
+        raise RuntimeError(f"Cleaned row/bar counts differ from registered baseline: M1={len(paired)}, M5={len(bars)}")
     audit = {
-        "status":"DATA_PASS" if len(paired) == 3_718_698 and len(bars) == 736_076 else "DATA_COUNT_REVIEW_REQUIRED",
+        "status":"DATA_PASS",
+        "source_paired_m1_rows":source_paired_rows,
         "raw_zip_sha256":EXPECTED_ZIP_SHA,
         "clean_paired_m1_rows":int(len(paired)),
         "joint_repeated_flat_rows_removed":removed,
@@ -172,7 +173,7 @@ def add_features(bars: pd.DataFrame, mid: pd.DataFrame):
     })
     # Rolling windows must remain inside a single uninterrupted M5 segment.
     need = {"F1_RET15":3,"F2_RET30":6,"F3_RET60":12,"F4_ACCEL15":6,
-            "F5_EFFICIENCY60":12,"F6_AUTOCORR_STATE":12,"F7_VOL_CONDITIONED_RET15":48}
+            "F5_EFFICIENCY60":12,"F6_AUTOCORR_STATE":12,"F7_VOL_CONDITIONED_RET15":50}
     for f,n in need.items():
         valid = np.zeros(len(seg),dtype=bool)
         valid[n:] = seg[n:] == seg[:-n]
@@ -202,6 +203,9 @@ def build_ledger(bars, mid, scores):
             "entry_open_ms":entry_ts if entry_i is not None else np.nan,
             "entry_open_utc":pd.to_datetime(entry_ts,unit="ms",utc=True).isoformat() if entry_i is not None else "",
             "entry_skip_reason":"" if entry_i is not None else "MISSING_EXACT_DELAY_ENTRY_BAR",
+            "entry_bid_open":float(bid_o[entry_i]) if entry_i is not None else np.nan,
+            "entry_ask_open":float(ask_o[entry_i]) if entry_i is not None else np.nan,
+            "entry_mid_open":float(mid_o[entry_i]) if entry_i is not None else np.nan,
         }
         for j,f in enumerate(FEATURES):
             row[f+"_score"] = float(feats[k,j]) if np.isfinite(feats[k,j]) else np.nan
@@ -213,11 +217,17 @@ def build_ledger(bars, mid, scores):
                 row[f"exit_{h}m_utc"]=""
                 row[f"skip_{h}m"]="MISSING_EXACT_HORIZON_EXIT_BAR"
                 row[f"mid_fwd_{h}m_pips"]=np.nan
+                row[f"exit_bid_close_{h}m"]=np.nan
+                row[f"exit_ask_close_{h}m"]=np.nan
+                row[f"exit_mid_close_{h}m"]=np.nan
                 for f in FEATURES: row[f"gross_exec_{f}_{h}m_pips"]=np.nan
                 continue
             row[f"exit_{h}m_utc"]=pd.to_datetime(int(ts[ex_i]+FREQ),unit="ms",utc=True).isoformat()
             row[f"skip_{h}m"]=""
             row[f"mid_fwd_{h}m_pips"]=(mid_c[ex_i]-mid_o[entry_i])*10000.0
+            row[f"exit_bid_close_{h}m"]=float(bid_c[ex_i])
+            row[f"exit_ask_close_{h}m"]=float(ask_c[ex_i])
+            row[f"exit_mid_close_{h}m"]=float(mid_c[ex_i])
             for j,f in enumerate(FEATURES):
                 score=feats[k,j]
                 if not np.isfinite(score) or score == 0:
