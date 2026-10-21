@@ -1085,7 +1085,7 @@ An independent local R311 reconstruction now reproduces the committed aggregate 
 ## Superseding R321 process closeout — 2026-10-21
 
 - The prior R321 status said the exact runner had not been executed and strict-v2 reproducibility was still open. **That statement is now superseded.**
-- Exact runner `research/R321_price_relationship_audit.py` (Git blob `8afc5bd8b9206f4d772e5855773580b`, file SHA-256 `8647e7e8d6cedf011c8b36d7dbd773e4c35650d91cd13d196fff6fdcc207d41c`) completed two local executions with identical hashes for all eight generated outputs.
+- Exact runner `research/R321_price_relationship_audit.py` (Git blob `8afc5bd8b9206f4d772e585446228daa2640707b`, file SHA-256 `8647e7e8d6cedf011c8b36d7dbd773e4c35650d91cd13d196fff6fdcc207d41c`) completed two local executions with identical hashes for all eight generated outputs.
 - Input source restoration passed: downloaded GitHub Actions artifact `11959096102`, source size 67,719,731 bytes, hash `b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e`. The official artifact metadata digest matched the actual downloaded bytes. Current artifact expiry is `2027-01-13T07:11:24Z`; refresh or migrate before expiry.
 - **R321 process/reproduction status = PASS; R321 signal verdict = GAGAL.** Runner, source artifact, environment, deterministic outputs and row-level ledger restoration have a verified regeneration path. See [official reproduction audit](research/R321_OFFICIAL_REPRODUCTION_AUDIT_20261021.md).
 - R321 result remains unchanged: best causal state/horizon was negative even before extra friction and strongly negative at +1 pip. No funded challenge replay was run. Do not tune or reverse the family.
