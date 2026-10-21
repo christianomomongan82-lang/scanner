@@ -1,3 +1,11 @@
+# V2 VALIDATOR ADDED — 2026-10-21
+
+Fail-closed gate tool and tests are now committed: [validator](research/verify_experiment_package_v2.py), [6 regression tests](research/test_verify_experiment_package_v2.py). The local suite passed 6/6 tests, covering valid preflight/closeout, grid-over-100 plan requirement, post-result registration rejection, checksum mismatch detection and non-identical rerun blocking. Commands and limitations are in [Search Process Improvement Protocol v2](research/SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md).
+
+**Do not start another strategy PnL search yet.** The validator reduces process regression risk, but it does not retroactively make R317/R318 or R319/R320 fully compliant with the new static-artifact + pre-outcome-registration contract. The next candidate remains blocked until its own V2 package passes preflight and the prior required repository issues are explicitly closed/dispositioned.
+
+---
+
 # ACTIVE GOVERNANCE — 2026-10-21
 
 **Search status: BLOCKED pending v2 preflight for the next candidate. Do not calculate new strategy PnL until the complete pre-outcome registration, data-gate and output-archive plan are committed and pass review.** This block enforces process reliability; it does not claim no market edge can exist.
