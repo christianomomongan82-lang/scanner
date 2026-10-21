@@ -117,7 +117,7 @@
     "source_zip_bytes": 67719731,
     "source_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
     "runner_commit": "25d8c2ac93b62f728fe68041a6b4804777077a8e",
-    "runner_git_blob_sha1": "8afc5bd8b9206f4d772e5855773580b",
+    "runner_git_blob_sha1": "8afc5bd8b9206f4d772e585446228daa2640707b",
     "runner_sha256": "8647e7e8d6cedf011c8b36d7dbd773e4c35650d91cd13d196fff6fdcc207d41c",
     "environment": {
       "python": "3.13.5",
