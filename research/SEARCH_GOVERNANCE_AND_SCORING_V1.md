@@ -1,3 +1,5 @@
+> **Superseded notice — 2026-10-21:** New experiments must follow [Search Process Improvement Protocol v2](SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md) and [Experiment Registration Card Template v2](EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V2.md). V2 is stricter and authoritative for preregistration timing, maximum grid size, reproducibility gates, complete artifact archiving and stopping search on a process regression. This v1 file is retained as historical governance, not the highest-priority contract.
+
 # Search Governance and Scoring Contract v1
 
 Effective: 2026-10-18  
