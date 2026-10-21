@@ -1,0 +1,86 @@
+{
+  "experiment_id": "R322",
+  "stage": "PRE_OUTCOME_PRICE_EVENT_ELIGIBILITY_GATE",
+  "timestamp": "2026-10-21",
+  "binary_verdict": "GAGAL — DATA/SAMPLE",
+  "pnl_computed": false,
+  "stop_before_trade_outcome_calculation": true,
+  "rationale": "There are fewer pre-outcome eligible setups than the registered minimum completed-trade counts in both discovery and confirmation. Every episode can generate at most one trade, so the required sample cannot be reached. No stop/target hit, realized trade outcome, PnL, PF or drawdown was computed.",
+  "registered_sample_gates": {
+    "discovery_completed_trades_min": 200,
+    "confirmation_completed_trades_min": 100
+  },
+  "observed_pre_outcome_eligible_setups": {
+    "discovery_2016_2018": 131,
+    "confirmation_2019_2020": 49,
+    "diagnostic_2021_2025_04_07": 179
+  },
+  "source_and_data": {
+    "raw_price_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "raw_paired_m1_rows": 4415493,
+    "clean_paired_m1_rows": 3718698,
+    "joint_repeated_flat_rows_removed": 696795,
+    "exact_complete_m5_bars": 736076,
+    "gaps_over_5_minutes_preserved": 7882,
+    "r321_source_cleaner_git_blob_sha1": "8afc5bd8b9206f4d772e585446228daa2640707b",
+    "r321_source_cleaner_sha256": "8647e7e8d6cedf011c8b36d7dbd773e4c35650d91cd13d196fff6fdcc207d41c",
+    "price_event_preflight_runner_git_blob_sha1": "78ae1ed35837d0bf8a93818ba9d2789f1866a4ca",
+    "price_event_preflight_runner_sha256": "f0a2793561d3fa5ca59681683fb9ecf2c566ba8f65750331f8dc8979c2aedbcf",
+    "raw_calendar_sha256": "f4e92bca4168cfe6e4598d3d2a69ac933dfd6c7c94550e056498a418e3efaf5e",
+    "raw_calendar_bytes": 68231084,
+    "raw_calendar_rows": 83427,
+    "calendar_filter_csv_sha256": "6fb6481fa4b8cb83b67461d20db757689bf77df2818122fa2a32a2d148e59ebd",
+    "filtered_rows": 2828,
+    "timestamp_audit_sha256": "c2fa10d16109549a8a9bbd845da19d27961f7b4a0441c0f0cf7c16ed1bf4d2c1",
+    "corrected_events_sha256": "a953d6e364194c7abbc044c99c7c7d926b25062ce002a6103892e611445fd434",
+    "corrected_episodes_sha256": "5e746bd3d8afccbc6ffb511b4a05d858ef06a17242e0a804a0cc168cec254b81",
+    "timestamp_corrections": {
+      "midnight_clock_replaced_by_schedule": 1199,
+      "original_offset_timestamp_validated": 544,
+      "nonmidnight_conflicting_schedule_excluded": 107,
+      "nonmidnight_eastern_date_mismatch_excluded": 1,
+      "outside_allowlist": 977,
+      "accepted_rows": 1743,
+      "episodes_40min": 973,
+      "discovery_2016_2018": 359,
+      "confirmation_2019_2020": 167,
+      "diagnostic_2021_2025_04_07": 447
+    }
+  },
+  "preflight_decision_counts": {
+    "discovery_2016_2018": {
+      "episode_rows": 359,
+      "eligible_setups": 131,
+      "gap_in_pre_event_60_change_baseline": 5,
+      "no_continuation_at_manual_delay": 138,
+      "no_registered_1p5x_impulse": 85
+    },
+    "confirmation_2019_2020": {
+      "episode_rows": 167,
+      "eligible_setups": 49,
+      "event_not_on_exact_m5_grid": 1,
+      "no_continuation_at_manual_delay": 71,
+      "no_registered_1p5x_impulse": 46
+    },
+    "diagnostic_2021_2025_04_07": {
+      "episode_rows": 447,
+      "eligible_setups": 179,
+      "gap_in_pre_event_60_change_baseline": 6,
+      "no_continuation_at_manual_delay": 195,
+      "no_exact_event_m5_bar": 5,
+      "no_registered_1p5x_impulse": 62
+    }
+  },
+  "deterministic_reproduction": {
+    "clean_runs": 2,
+    "csv_bytes": 276071,
+    "csv_sha256": "5b58b271e20c0453e241e7a6f0259c453f0b3949fe04deada38a51dc31a90edf",
+    "csv_hashes_identical": true,
+    "json_bytes": 2184,
+    "json_sha256": "8546f87e94e3e3241110f91165fa5aeecd620ddef6856803c5a1d776a4f09a0b",
+    "json_hashes_identical": true
+  },
+  "key_interpretation": "This is a sample/execution-feasibility failure under the frozen rule, not evidence that market news has no predictive content. Do not widen the event list, lower the impulse threshold or alter the delay after seeing this result. A changed mechanism must be a fresh independently justified registration.",
+  "contaminated_periods": "2021-2025 price outcomes have been viewed in other project studies and are diagnostic only. 2026 price outcomes remained unopened.",
+  "no_funded_challenge_replay": true
+}
