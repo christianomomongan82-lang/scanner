@@ -18,7 +18,6 @@ A discovery-selected configuration was chosen using 2016–2020, including a 960
 
 | Segment | Cost beyond observed BID/ASK | Trades | Net R | PF |
 |---|---:|---:|---:|---:|
-| Discovery 2016–2020 | 0.0 pip | 374 | +143.9R* | — |
 | Discovery 2016–2020 | 0.5 pip | 374 | +39.40R | 1.138 |
 | Validation 2021–2025 | 0.0 pip | 397 | −3.862R | 0.987 |
 | Validation 2021–2025 | 0.5 pip | 397 | −37.264R | 0.888 |
