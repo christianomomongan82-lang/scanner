@@ -83,8 +83,6 @@ def validate_registration(package: Path, phase: str) -> tuple[dict[str, Any], li
                 issues.append("PREREGISTRATION VIOLATION: registration commit is not before first outcome compute")
             if phase == "preflight":
                 issues.append("preflight cannot be passed after first_outcome_compute_at_utc is populated")
-        elif phase == "closeout":
-            issues.append("closeout requires first_outcome_compute_at_utc to be recorded")
     except GateError as exc:
         issues.append(str(exc))
     for key in ("registration_commit_sha", "runner_commit_sha"):
@@ -104,7 +102,7 @@ def validate_registration(package: Path, phase: str) -> tuple[dict[str, Any], li
         if not all(isinstance(x, str) and x.strip() for x in (justification, nested, correction)):
             issues.append("candidate_count >100 requires large_grid_justification, nested_selection_plan and multiple_testing_correction")
     if str(reg.get("holdout_status", "")).upper() not in {"CLOSED", "LOCKED", "UNOPENED"}:
-        issues.append("holdout_status must be CLOSED/LOCKED/UNOPENED before registered gates pass")
+        issues.append("holdout_status must be CLOSED/LOCKED/UNOPENED before the registered gates pass")
     for key in ("selection_rule", "discovery_period_utc", "confirmation_period_utc", "cost_model", "falsification_gates", "output_contract_version"):
         if key not in reg or reg[key] in (None, "", [], {}):
             issues.append(f"registration.json: {key} must be explicitly defined")
@@ -159,6 +157,8 @@ def run_gate(package: Path, phase: str) -> dict[str, Any]:
         if not (package / name).is_file():
             issues.append(f"Missing required file: {name}")
     if phase == "closeout":
+        if not reg.get("first_outcome_compute_at_utc"):
+            issues.append("closeout requires first_outcome_compute_at_utc to be recorded")
         listed, manifest_issues = read_manifest(package)
         issues.extend(manifest_issues)
         missing_manifest_entries = sorted((CLOSEOUT_REQUIRED_FILES - {"output_sha256_manifest.json"}) - listed)
