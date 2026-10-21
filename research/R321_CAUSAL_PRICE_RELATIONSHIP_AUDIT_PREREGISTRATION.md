@@ -89,3 +89,14 @@ Updated runner:
 - Git blob SHA-1: `0778287acd50ed38243fdc2b202de8ad3c9ebe16`
 
 No R321 feature-outcome correlation, directional return, costed return, or candidate score was calculated before this amendment. The only inspected numbers from the stopped attempt were source-cleaning and complete-bar counts.
+
+
+## Pre-outcome filter-definition clarification — 2026-10-21 UTC
+
+A second data-only audit compared alternative repeated-flat definitions against the established baseline count; no features or forward outcomes were computed. The canonical 696,795-row count is matched by the following exact predicate: remove the current row only when all four current BID OHLC values equal the preceding source row's BID close **and** all four current ASK OHLC values equal the preceding source row's ASK close. This predicate is independent of timestamp continuity. The previous two implementations (matching each current OHLC to the respective previous OHLC columns, and matching all current OHLC to themselves) are rejected and were never used to calculate outcomes.
+
+Updated runner identity:
+- Commit: `fbc46d8e604445d73619e7ceb34b5667cf017623`
+- Git blob SHA-1: `7c68218694f75f8e1f8532b23ee1e9c8a54f76f0`
+
+The registered repeated-flat rule is now the predicate above. Reproducible M1/M5 count and hash gates must pass before any return/relationship metrics are calculated.
