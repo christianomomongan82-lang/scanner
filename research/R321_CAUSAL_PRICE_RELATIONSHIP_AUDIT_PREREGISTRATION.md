@@ -127,3 +127,12 @@ Two data-only runs exceeded the runtime limit while copying the filtered 3.7M-ro
 - Runner commit: `72e9a4ec551d89d9b34d0625897c6bf7eb5d5020`
 - Runner Git blob SHA-1: `8428f438db01231934b1d1aded7f8d0a90db2178`
 - Still pre-outcome: no R321 relationship/forward-return metrics calculated.
+
+
+## Pre-outcome cutoff-read performance correction — 2026-10-21 UTC
+
+A timed, instrumented **data-only** run showed the remaining delay was the pandas boolean copy used to filter dates. The registered raw archive is already manifest-scoped to 2016-01-01 inclusive through 2026-01-01 exclusive. The runner now verifies that both sides' maximum timestamp is before the cutoff and fails closed if not, rather than making an unnecessary copy. This enforces the same registered boundary without changing the included source rows.
+
+- Runner commit: `e7104d0cd737d33e3e6b73223611e97a25b74ae6`
+- Runner Git blob SHA-1: `269a3d1467570493658833c569a85f5031ab20a6`
+- No R321 outcome metric was calculated.
