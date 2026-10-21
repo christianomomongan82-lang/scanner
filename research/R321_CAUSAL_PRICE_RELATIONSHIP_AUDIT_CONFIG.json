@@ -1,0 +1,63 @@
+{
+  "experiment_id": "R321",
+  "experiment_type": "causal_price_relationship_audit",
+  "status": "REGISTERED_BEFORE_OUTCOME_CALCULATION",
+  "source_archive_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+  "source_members": [
+    "eurusd_bid_M1_2016-2025.csv.gz",
+    "eurusd_ask_M1_2016-2025.csv.gz"
+  ],
+  "protected_cutoff_utc": "2026-01-01T00:00:00Z",
+  "splits": {
+    "discovery": [
+      "2016-01-01T00:00:00Z",
+      "2019-01-01T00:00:00Z"
+    ],
+    "confirmation": [
+      "2019-01-01T00:00:00Z",
+      "2021-01-01T00:00:00Z"
+    ],
+    "diagnostic": [
+      "2021-01-01T00:00:00Z",
+      "2026-01-01T00:00:00Z"
+    ]
+  },
+  "features": [
+    "F1_RET15",
+    "F2_RET30",
+    "F3_RET60",
+    "F4_ACCEL15",
+    "F5_EFFICIENCY60",
+    "F6_AUTOCORR_STATE",
+    "F7_VOL_CONDITIONED_RET15"
+  ],
+  "horizons_minutes": [
+    5,
+    15,
+    30,
+    60
+  ],
+  "primary_incremental_round_trip_cost_pips": 1,
+  "cost_stress_pips": [
+    0,
+    0.5,
+    1,
+    1.5
+  ],
+  "sample_cadence_minutes": 65,
+  "signal_delay_minutes": 5,
+  "bootstrap": {
+    "method": "four-week moving-block bootstrap of UTC weekly series",
+    "replications": 2000,
+    "seed": 3212026
+  },
+  "multiple_testing": {
+    "n_primary_tests": 28,
+    "method": "Bonferroni",
+    "familywise_alpha": 0.05,
+    "per_test_alpha": 0.0017857142857142857
+  },
+  "protected_holdout": "all data at/after 2026-01-01 UTC",
+  "grid_size": 28,
+  "notes": "Relationship audit only; not a candidate strategy and not a funded-pass estimate. 2021-2025 is project-contaminated and cannot support pristine OOS claims."
+}
