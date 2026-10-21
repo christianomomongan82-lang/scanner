@@ -72,12 +72,22 @@ def read_source():
     paired = paired[names]
     ts = paired.index.to_numpy(dtype=np.int64)
     values = [paired[c].to_numpy(dtype=np.float64) for c in names]
-    # Remove current source row if all eight BID/ASK OHLC values exactly repeat the preceding row.
-    # The project’s baseline placeholder rule does not condition this comparison on timestamp continuity.
-    same = np.ones(len(paired), dtype=bool)
-    for arr in values:
-        same[1:] &= arr[1:] == arr[:-1]
-    repeated = same
+    # Remove a current paired placeholder only when each side’s current OHLC all carry forward
+    # the preceding row close: BID O/H/L/C == prior BID close and likewise for ASK.
+    repeated = np.zeros(len(paired), dtype=bool)
+    for side in ("bid", "ask"):
+        prior_close = paired[f"{side}_close"].to_numpy(dtype=np.float64)[:-1]
+        for col in ("open", "high", "low", "close"):
+            current = paired[f"{side}_{col}"].to_numpy(dtype=np.float64)[1:]
+            repeated[1:] |= False
+            if col == "open":
+                side_match = current == prior_close
+            else:
+                side_match &= current == prior_close
+        if side == "bid":
+            repeated[1:] = side_match
+        else:
+            repeated[1:] &= side_match
     repeated[0] = False
     removed = int(repeated.sum())
     paired = paired.loc[~repeated].copy()
@@ -135,7 +145,7 @@ def read_source():
         "clean_paired_m1_sha256":clean_hash,
         "cutoff_utc_exclusive":"2026-01-01T00:00:00Z",
         "m5_rule":"Only five unique contiguous paired M1 timestamps in exact UTC five-minute bucket; never synthesize bars.",
-        "placeholder_rule":"Drop current row when all eight BID/ASK OHLC values exactly match the preceding source row, regardless of the timestamp gap; never synthesize missing timestamps."
+        "placeholder_rule":"Drop current row when current BID O/H/L/C all equal the preceding BID close and current ASK O/H/L/C all equal the preceding ASK close; this joint repeated-flat placeholder rule is independent of timestamp continuity. Never synthesize missing timestamps."
     }
     return paired, bars, mid, audit
 
