@@ -1,0 +1,39 @@
+{
+  "experiment": "R314 XAUUSD NY clock-time drift search",
+  "phase": "discovery",
+  "verdict": "GAGAL_DISCOVERY_NO_POSITIVE_CANDIDATE",
+  "source_zip_sha256": "2cde8338800fd7f4d5d4628512201c16757ef06bd90d51ffdc8ef9bea425ba1a",
+  "bid_gzip_sha256": "b30eb4864db0777b6df612f3e43ccda9cc59db5ca09974191eabdaca1f6ff575",
+  "ask_gzip_sha256": "b9b174a83df70507be4ab0cd556432a0d14fbac2e596e787325bd1f163772fc9",
+  "data_cutoff_utc_exclusive": "2026-01-01T00:00:00Z",
+  "discovery_period": "2016-2020",
+  "protected_2026_outcomes_scored": false,
+  "grid_size": 96,
+  "active_candidates": 92,
+  "positive_net_R_candidates_at_cost_0.30": 0,
+  "eligible_candidates_min_200_trades_and_positive_net_R_at_cost_0.30": 0,
+  "aggregate_candidate_stream_trade_rows": 118036,
+  "best_active_candidate_by_t_stat": {
+    "slot_local": "10:00 America/New_York",
+    "direction": "LONG",
+    "trades": 1290,
+    "net_R_at_cost_0.30": -605.8662812848858,
+    "PF_R": 0.4269928893105538,
+    "win_rate": 0.35348837209302325,
+    "mean_week_R": -2.321326748217953,
+    "HAC_t_stat_weekly_R_4_lags": -11.192438976878222,
+    "one_sided_p_positive_mean": 1.0,
+    "holm_adjusted_p": 1.0
+  },
+  "full_grid_trade_ledger_local": {
+    "bytes_gzip": 8707973,
+    "sha256": "0be5a087f8d2dc6611330fa4f41cacddf83a5f77e737d853f055726c3befdf37"
+  },
+  "candidate_selection_table_local": {
+    "bytes": 23723,
+    "sha256": "95469a7098064afa63a91a6ada43d90a63d5f03e8e51b5ee8df3c48c67873243"
+  },
+  "result_json_sha256_after_serialization": "5d5b99d86b33388bc384d9d8b019bfe804144159b702c966511b547146087c86",
+  "selection": null,
+  "validation_run": false
+}
