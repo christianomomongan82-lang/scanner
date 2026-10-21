@@ -109,3 +109,12 @@ A data-only preflight timed out during pandas group aggregation before returning
 - Updated runner commit: `5b6ec6e202c94eacf483ffd9ea529e57fedfd0d4`
 - Updated runner Git blob SHA-1: `1cbb7ae4a64291f5610130ef0e264465f6f12f76`
 - This is implementation performance work only. No relationship score, forward return, costed outcome, selection, or PnL has been viewed.
+
+
+## Pre-outcome row-filter performance correction — 2026-10-21 UTC
+
+A further data-only run reached the confirmed placeholder count (696,795) but stalled during a large pandas boolean-index copy before the data audit completed. The runner now constructs the filtered paired frame directly from the eight source arrays and the precomputed keep mask. This is a memory/performance implementation change only; it does not change the placeholder predicate or selection logic.
+
+- Runner commit: `2d01851279819f01c385b8308c9aaf21c3f4911d`
+- Runner Git blob SHA-1: `89569692e8276b964388b37d8ba4be0eec7c44b2`
+- The data gate is still pending; no relationship outcomes have been calculated.
