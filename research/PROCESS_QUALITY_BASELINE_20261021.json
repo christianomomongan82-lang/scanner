@@ -1,0 +1,50 @@
+{
+  "date_utc": "2026-10-21",
+  "policy_version": "SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2",
+  "branch": "local-backtest/r189-dukascopy-history",
+  "baseline_experiments": [
+    "R317",
+    "R318",
+    "R319",
+    "R320"
+  ],
+  "confirmed_improvements": [
+    "EURUSD input archive checksum verified",
+    "R317/R318 repeated-flat data defect documented and cleaned-result report supersedes preliminary table",
+    "R319/R320 runners were archived and deterministic outputs were recalculated twice; key grid and scorecard hashes matched",
+    "Master ledger consolidated through R320 and read-back-verified",
+    "R319/R320 results and project state read back from GitHub"
+  ],
+  "process_defects_still_present": [
+    {
+      "experiments": [
+        "R317",
+        "R318"
+      ],
+      "defect": "Exact original runner and complete row-level artifacts were not recovered and read-back-verified",
+      "disposition": "Archive-incomplete; cannot be promoted or described as fully end-to-end reproducible"
+    },
+    {
+      "experiments": [
+        "R319",
+        "R320"
+      ],
+      "defect": "Runner/preregistration was archived after PnL calculation, not committed as pre-outcome preregistration; row-level outputs regenerate but were not retained as standalone files",
+      "disposition": "Exploratory and not formally preregistered; reproducible computation does not erase selection/archival deficiencies"
+    }
+  ],
+  "quality_invariants_next_run": {
+    "preoutcome_preregistration_rate": 1,
+    "source_hash_checks_before_pnl": 1,
+    "registered_grid_compliance": 1,
+    "required_artifact_commit_readback_rate": 1,
+    "deterministic_clean_rerun_match_rate": 1,
+    "unexplained_output_mismatches": 0,
+    "unclosed_archival_gates_before_next_signal_search": 0,
+    "protected_holdout_opened_without_gates": 0,
+    "closed_family_posthoc_rescues": 0,
+    "premature_challenge_pass_probability_claims": 0
+  },
+  "next_search_status": "BLOCKED_UNTIL_V2_PREFLIGHT_AND_ARCHIVE_GATES_PASS",
+  "critical_interpretation": "A GAGAL edge result with all process gates passing is valid progress. Strategy PnL need not monotonically increase; research process quality must not regress."
+}
