@@ -76,3 +76,16 @@ Before any outcome calculation, the implementation was committed and read back:
 - Initial card commit: `67a8de40dafed467cddf00ab52ddbc1a85ee37ca`
 - Implementation clarification: F7's 48 trailing 3-return volatility estimates require an uninterrupted history of 50 M5 bars so no nested volatility window can reach across a missing-bar gap. This is a stricter data-validity condition, not a new signal parameter.
 - No R321 signal-outcome metrics had been calculated when this amendment was committed.
+
+
+## Pre-outcome data-gate amendment — 2026-10-21 UTC
+
+The first **data-only** preflight stopped before feature-to-outcome calculations: the initial implementation retained 3,726,929 M1 rows and 742,194 complete M5 bars, inconsistent with the already registered source-cleaning baseline. The cause was a new timestamp-continuity condition added to repeated-flat removal. That condition was not part of the project's canonical cleaning rule.
+
+Before any outcome metric was computed, the runner was corrected to drop the current row whenever all eight BID/ASK OHLC values exactly equal the preceding source row, regardless of the timestamp gap. This does not fill gaps; it only removes the existing joint repeated-flat placeholder pattern. The prior sentence in section C that conditioned removal on a 60,000 ms timestamp difference is superseded by this amendment.
+
+Updated runner:
+- Commit: `0d2fc3c037d5084879b8d9a5b51f56465efa3f08`
+- Git blob SHA-1: `0778287acd50ed38243fdc2b202de8ad3c9ebe16`
+
+No R321 feature-outcome correlation, directional return, costed return, or candidate score was calculated before this amendment. The only inspected numbers from the stopped attempt were source-cleaning and complete-bar counts.
