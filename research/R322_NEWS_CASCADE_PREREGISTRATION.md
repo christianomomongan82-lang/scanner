@@ -76,3 +76,32 @@ A standard screen must meet every applicable gate at the primary +1 pip cost:
 ## 6. Required archive
 
 Before any PnL calculation, commit and read back this preregistration and the calendar/data-preflight source. The data-only acquisition stage may run on GitHub Actions, but it must not calculate signals or PnL. The signal runner and all outcome calculations run in local Python only. Archive the source manifest, event calendar subset checksum, source-data hash, full event/skip audit, M5 audit, locked runner, full trade ledger, weekly and annual scorecards, cost sensitivity, bootstrap, environment, hashes, deterministic second-run comparison, final binary verdict, master ledger, family map and PROJECT_STATE update.
+
+
+## Amendment A — scheduled-time repair for known midnight placeholders (registered before outcome computation; 2026-10-21 UTC)
+
+### Why this amendment is necessary
+A source-only inspection of the filtered calendar (no price outcomes, signals, or PnL calculated) found that many otherwise named high-impact releases are recorded with local source date and a clock time of exactly `00:00` in the source's Asia/Tehran timezone. Example: the 2016-01-08 rows for "Non-Farm Employment Change", "Unemployment Rate" and "Average Hourly Earnings m/m" are all timestamped `2016-01-08T00:00:00+03:30`, whereas the BLS official calendar places Employment Situation at 08:30 Eastern. Blind timezone conversion would incorrectly move these scheduled US releases to the preceding UTC date and wrong market session. This is a calendar-data defect; it is not market outcome evidence. No signal calculation or PnL has been run.
+
+Official schedule cross-check references:
+- BLS Schedule of Releases for Employment Situation and CPI lists releases at 08:30 ET: https://www.bls.gov/schedule/news_release/empsit.htm and https://www.bls.gov/schedule/news_release/cpi.htm
+- BLS schedule pages identify JOLTS and Employment Cost Index at 10:00 ET and 08:30 ET respectively: https://www.bls.gov/schedule/2025/
+- BEA publishes GDP and Personal Income and Outlays on the official schedule at 08:30 ET: https://www.bea.gov/news/schedule/
+- U.S. Census lists the Advance Monthly Retail Trade Report release at 08:30 ET: https://www.census.gov/retail/release_schedule.html
+- ISM says Manufacturing PMI and Services PMI release at 10:00 ET: https://www.ismworld.org/supply-management-news-and-reports/reports/ism-pmi-reports/
+- The input data card describes the calendar source's timezone as Asia/Tehran and its historical snapshot ending 2025-04-07: https://huggingface.co/datasets/Ehsanrs2/Forex_Factory_Calendar
+
+### Frozen event-name mapping and timestamp policy
+1. The timestamp correction applies only to the fixed allowlist already registered in Section 2. "ADP Non-Farm Employment Change" is explicitly excluded: it is not the BLS Employment Situation release. FOMC Meeting Minutes, FOMC Economic Projections, Fed speeches/testimony, other central-bank speakers, and any non-allowlisted event remain excluded.
+2. Preserve the original `DateTime` calendar date string's first ten characters as the source-local calendar date. Do not derive the event date by converting a midnight placeholder to UTC.
+3. For an allowlisted event whose source-local clock is exactly `00:00:00`, substitute the fixed release time below on that same source-local calendar date, interpreted in `America/New_York`, then convert with IANA timezone/DST rules to UTC:
+   - **08:30 ET:** Non-Farm Employment Change / non-farm payrolls, Unemployment Rate, Average Hourly Earnings, CPI / Core CPI, PPI / Core PPI, PCE / Core PCE Price Index, Personal Income / Personal Spending / Outlays, Retail Sales / Core Retail Sales, Durable Goods Orders / Core Durable Goods, GDP / Advance / Preliminary / Final GDP, Initial Jobless Claims / Unemployment Claims, Employment Cost Index.
+   - **10:00 ET:** ISM Manufacturing PMI, ISM Services PMI / ISM Non-Manufacturing PMI, JOLTS Job Openings.
+   - **14:00 ET:** Federal Funds Rate and FOMC Statement.
+   - **14:30 ET:** FOMC Press Conference.
+4. For allowlisted rows whose original source-local clock is not midnight, parse the original offset-aware timestamp and retain it only if its converted America/New_York time matches the event-name's fixed release time within ±15 minutes. This is a validation gate, not a shift; any mismatch is excluded and written to the timestamp audit with reason. The local date must remain the same as the source date after converting to Eastern Time; otherwise exclude and audit. Rows whose event name cannot be assigned unambiguously to the registered categories are excluded with a reason, never guessed.
+5. Do not use or export actual, forecast, previous or revised values in the event selection/strategy. Excluded source dates/times and the correction reason must be preserved in the pre-outcome audit.
+6. Cluster only after timestamps are corrected and validated. Sort in UTC; group events no more than 40 minutes from each cluster's earliest timestamp; use earliest timestamp as episode anchor. No event is duplicated across episodes.
+7. Store, read back and verify the correction-map version, calendar source SHA-256, input subset hash, corrected output hash, all 2,828 source row decisions, and the exact event-level audit before any price outcome metrics are computed.
+
+This amendment supersedes any conflicting implication in Sections 2 or 3 that raw source clock time is trusted unchanged when it is midnight. It does not change the registered signal direction, five-minute manual delay, stop/target geometry, cost grid, period split, gates, bootstrap seed or any strategy parameter. The calendar repair is based only on timestamp correctness and official release schedules. It must be committed before PnL, and any inability to produce enough correctly scheduled events leads to **GAGAL — DATA/SAMPLE**, with no outcome rescue.
