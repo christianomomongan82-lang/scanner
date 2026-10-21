@@ -91,33 +91,38 @@ def read_source():
     repeated[0] = False
     removed = int(repeated.sum())
     keep = ~repeated
-    paired = pd.DataFrame({name: arr[keep] for name, arr in zip(names, values)}, index=ts[keep])
-    ts = paired.index.to_numpy(dtype=np.int64)
-    # Reject, don't silently remove, malformed retained source rows.
+    array_map = dict(zip(names, values))
+    # Validate only rows that survive the registered joint placeholder filter.
     invalid = 0
     for side in ("bid", "ask"):
-        o, h, l, c = (paired[f"{side}_{x}"].to_numpy() for x in ("open","high","low","close"))
-        invalid += int((~np.isfinite(o) | ~np.isfinite(h) | ~np.isfinite(l) | ~np.isfinite(c) |
-                        (h < np.maximum(o,c)) | (l > np.minimum(o,c)) | (h < l)).sum())
+        o, h, l, close_arr = (array_map[f"{side}_{x}"] for x in ("open","high","low","close"))
+        bad = (~np.isfinite(o) | ~np.isfinite(h) | ~np.isfinite(l) | ~np.isfinite(close_arr) |
+               (h < np.maximum(o,close_arr)) | (l > np.minimum(o,close_arr)) | (h < l))
+        invalid += int(np.sum(keep & bad))
     if invalid:
         raise RuntimeError(f"Invalid retained OHLC rows: {invalid}")
-    bad_spread = ((paired["ask_open"] < paired["bid_open"]) |
-                  (paired["ask_close"] < paired["bid_close"]))
+    bad_spread = keep & ((array_map["ask_open"] < array_map["bid_open"]) |
+                         (array_map["ask_close"] < array_map["bid_close"]))
     if bool(bad_spread.any()):
-        raise RuntimeError(f"ASK below BID at open/close on {int(bad_spread.sum())} rows.")
-    clean_hash = sha_clean(paired)
+        raise RuntimeError(f"ASK below BID at open/close on {int(bad_spread.sum())} retained rows.")
+    # Hash cleaned rows as canonical little-endian arrays without materializing another 3.7M-row frame.
+    clean_ts = ts[keep]
+    clean_hash_obj = hashlib.sha256()
+    clean_hash_obj.update(np.asarray(clean_ts, dtype="<i8").tobytes())
+    for name in names:
+        clean_hash_obj.update(np.asarray(array_map[name][keep], dtype="<f8").tobytes())
+    clean_hash = clean_hash_obj.hexdigest()
     # Fast exact five-minute aggregation: each bucket has exactly five possible UTC minute starts.
-    ts_clean = paired.index.to_numpy(dtype=np.int64)
-    if np.any(ts_clean % 60_000 != 0):
+    if np.any(clean_ts % 60_000 != 0):
         raise RuntimeError("Source timestamps are not UTC-minute aligned.")
-    buckets = (ts_clean // FREQ) * FREQ
+    buckets = (clean_ts // FREQ) * FREQ
     bucket_ts, starts, counts = np.unique(buckets, return_index=True, return_counts=True)
     good = counts == 5
     bar_ts = bucket_ts[good]
     bars = pd.DataFrame(index=np.asarray(bar_ts, dtype=np.int64))
     for side in ("bid", "ask"):
         for field in ("open", "high", "low", "close"):
-            arr = paired[f"{side}_{field}"].to_numpy(dtype=np.float64)
+            arr = array_map[f"{side}_{field}"][keep]
             if field == "open":
                 by_bucket = arr[starts]
             elif field == "high":
@@ -134,19 +139,19 @@ def read_source():
         mid[x] = (bars[f"bid_{x}"] + bars[f"ask_{x}"]) / 2.0
     gap_ms = np.diff(bars.index.to_numpy(dtype=np.int64))
     m5_gaps = int((gap_ms != FREQ).sum())
-    if len(paired) != 3_718_698 or len(bars) != 736_076:
-        raise RuntimeError(f"Cleaned row/bar counts differ from registered baseline: M1={len(paired)}, M5={len(bars)}")
+    if len(clean_ts) != 3_718_698 or len(bars) != 736_076:
+        raise RuntimeError(f"Cleaned row/bar counts differ from registered baseline: M1={len(clean_ts)}, M5={len(bars)}")
     audit = {
         "status":"DATA_PASS",
         "source_paired_m1_rows":source_paired_rows,
         "raw_zip_sha256":EXPECTED_ZIP_SHA,
-        "clean_paired_m1_rows":int(len(paired)),
+        "clean_paired_m1_rows":int(len(clean_ts)),
         "joint_repeated_flat_rows_removed":removed,
         "m1_invalid_retained_rows":invalid,
         "complete_m5_bars":int(len(bars)),
         "m5_gaps_over_5m":m5_gaps,
-        "m1_first_utc":pd.to_datetime(paired.index.min(),unit="ms",utc=True).isoformat(),
-        "m1_last_utc":pd.to_datetime(paired.index.max(),unit="ms",utc=True).isoformat(),
+        "m1_first_utc":pd.to_datetime(int(clean_ts[0]),unit="ms",utc=True).isoformat(),
+        "m1_last_utc":pd.to_datetime(int(clean_ts[-1]),unit="ms",utc=True).isoformat(),
         "m5_first_utc":pd.to_datetime(bars.index.min(),unit="ms",utc=True).isoformat(),
         "m5_last_utc":pd.to_datetime(bars.index.max(),unit="ms",utc=True).isoformat(),
         "clean_paired_m1_sha256":clean_hash,
@@ -154,7 +159,7 @@ def read_source():
         "m5_rule":"Only five unique contiguous paired M1 timestamps in exact UTC five-minute bucket; never synthesize bars.",
         "placeholder_rule":"Drop current row when current BID O/H/L/C all equal the preceding BID close and current ASK O/H/L/C all equal the preceding ASK close; this joint repeated-flat placeholder rule is independent of timestamp continuity. Never synthesize missing timestamps."
     }
-    return paired, bars, mid, audit
+    return None, bars, mid, audit
 
 def add_features(bars: pd.DataFrame, mid: pd.DataFrame):
     ts = bars.index.to_numpy(dtype=np.int64)
