@@ -63,7 +63,9 @@ def read_source():
     if not bid.index.equals(ask.index):
         raise RuntimeError("BID/ASK timestamp sets differ; paired feed gate failed.")
     cutoff_ms = int(CUTOFF.timestamp() * 1000)
-    bid, ask = bid.loc[bid.index < cutoff_ms], ask.loc[ask.index < cutoff_ms]
+    # The pinned archive is manifest-scoped to end-exclusive 2026-01-01; assert rather than copy-filter it.
+    if int(bid.index.max()) >= cutoff_ms or int(ask.index.max()) >= cutoff_ms:
+        raise RuntimeError("Source archive contains rows at/after protected cutoff.")
     if not bid.index.equals(ask.index):
         raise RuntimeError("BID/ASK pairing changed after cutoff.")
     names = [f"{s}_{c}" for s in ("bid", "ask") for c in ("open", "high", "low", "close")]
