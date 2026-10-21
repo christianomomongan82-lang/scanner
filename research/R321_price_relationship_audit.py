@@ -72,13 +72,12 @@ def read_source():
     paired = paired[names]
     ts = paired.index.to_numpy(dtype=np.int64)
     values = [paired[c].to_numpy(dtype=np.float64) for c in names]
-    # Remove current minute only if all eight paired OHLC values repeat and minute continuity is exact.
+    # Remove current source row if all eight BID/ASK OHLC values exactly repeat the preceding row.
+    # The project’s baseline placeholder rule does not condition this comparison on timestamp continuity.
     same = np.ones(len(paired), dtype=bool)
     for arr in values:
         same[1:] &= arr[1:] == arr[:-1]
-    consecutive = np.zeros(len(paired), dtype=bool)
-    consecutive[1:] = np.diff(ts) == 60_000
-    repeated = same & consecutive
+    repeated = same
     repeated[0] = False
     removed = int(repeated.sum())
     paired = paired.loc[~repeated].copy()
@@ -136,7 +135,7 @@ def read_source():
         "clean_paired_m1_sha256":clean_hash,
         "cutoff_utc_exclusive":"2026-01-01T00:00:00Z",
         "m5_rule":"Only five unique contiguous paired M1 timestamps in exact UTC five-minute bucket; never synthesize bars.",
-        "placeholder_rule":"Drop current row only when all eight BID/ASK OHLC values exactly match prior row and timestamps differ by exactly 60,000 ms."
+        "placeholder_rule":"Drop current row when all eight BID/ASK OHLC values exactly match the preceding source row, regardless of the timestamp gap; never synthesize missing timestamps."
     }
     return paired, bars, mid, audit
 
