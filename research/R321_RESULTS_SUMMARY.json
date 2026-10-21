@@ -1,0 +1,111 @@
+{
+  "experiment": "R321",
+  "date_utc": "2026-10-21",
+  "verdict": "GAGAL",
+  "funded_ready": false,
+  "challenge_replay_run": false,
+  "protected_2026_data_used": false,
+  "data_gate": "PASS",
+  "source_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+  "data_audit": {
+    "raw_paired_m1_rows": 4415493,
+    "repeated_flat_placeholders_removed": 696795,
+    "clean_paired_m1_rows": 3718698,
+    "complete_m5_bars": 736076,
+    "preserved_gaps_over_5m": 7882,
+    "clean_paired_m1_sha256": "b4e24c2b7078808b13e4c0cc38e130a99a449fdb441d5362e2dbd9254a45ee21",
+    "cutoff_exclusive_utc": "2026-01-01T00:00:00Z"
+  },
+  "test_design": {
+    "causal_features": 7,
+    "horizons_minutes": [
+      5,
+      15,
+      30,
+      60
+    ],
+    "registered_pairs": 28,
+    "sample_cadence_minutes": 65,
+    "entry_delay_minutes_after_signal_close": 5,
+    "cost_stress_pips": [
+      0,
+      0.5,
+      1,
+      1.5
+    ],
+    "primary_added_roundtrip_cost_pips": 1,
+    "cohorts": {
+      "discovery": "2016-2018",
+      "confirmation": "2019-2020",
+      "diagnostic": "2021-2025, contaminated"
+    }
+  },
+  "result": {
+    "pairs_with_negative_mean_net_pips_at_zero_added_cost": 28,
+    "total_registered_pairs": 28,
+    "best_pair_zero_added_cost": {
+      "feature": "F6_AUTOCORR_STATE",
+      "horizon_minutes": 60,
+      "n": 48879,
+      "mean_net_pips_per_event": -0.2568035,
+      "net_profit_factor": 0.93383
+    },
+    "best_pair_primary_cost": {
+      "feature": "F6_AUTOCORR_STATE",
+      "horizon_minutes": 60,
+      "n": 48879,
+      "mean_net_pips_per_event": -1.2568035,
+      "median_net_pips": -1.3,
+      "win_rate": 0.422124,
+      "net_profit_factor": 0.716125,
+      "spearman_rho_midpoint_forward": 0.0126804
+    },
+    "best_by_cohort_primary_cost": {
+      "discovery": {
+        "feature": "F6_AUTOCORR_STATE",
+        "horizon_minutes": 15,
+        "n": 16045,
+        "mean_net_pips_per_event": -1.262356,
+        "net_profit_factor": 0.519965
+      },
+      "confirmation": {
+        "feature": "F6_AUTOCORR_STATE",
+        "horizon_minutes": 60,
+        "n": 10287,
+        "mean_net_pips_per_event": -1.237883,
+        "net_profit_factor": 0.687546
+      },
+      "diagnostic": {
+        "feature": "F6_AUTOCORR_STATE",
+        "horizon_minutes": 60,
+        "n": 23057,
+        "mean_net_pips_per_event": -1.247187,
+        "net_profit_factor": 0.724222
+      }
+    },
+    "strongest_pair_all_years_negative": true,
+    "all_28_relationships_failed_positive_cost_expectancy_gates": true
+  },
+  "bootstrap": {
+    "metric": "weekly average event-level net pips; empty weeks zero-filled, not account equity PnL",
+    "strongest_pair": "F6_AUTOCORR_STATE/60m",
+    "overall_ci95_pips": [
+      -1.36676,
+      -1.177065
+    ],
+    "discovery_ci95_pips": [
+      -1.481949,
+      -1.109147
+    ],
+    "confirmation_ci95_pips": [
+      -1.421008,
+      -1.073548
+    ]
+  },
+  "limitations": [
+    "History was previously inspected within this research project; diagnostic period cannot serve as pristine OOS.",
+    "This audit is not a funded challenge pass-probability estimate.",
+    "Full local ledger was validated, but repository-only archival of all outputs remains incomplete."
+  ],
+  "local_bundle_sha256": "a317a44af33dea156313905ea00afc177576aac869ac702a1ab2642caddb92a2"
+}
