@@ -1090,3 +1090,13 @@ An independent local R311 reconstruction now reproduces the committed aggregate 
 - **R321 process/reproduction status = PASS; R321 signal verdict = GAGAL.** Runner, source artifact, environment, deterministic outputs and row-level ledger restoration have a verified regeneration path. See [official reproduction audit](research/R321_OFFICIAL_REPRODUCTION_AUDIT_20261021.md).
 - R321 result remains unchanged: best causal state/horizon was negative even before extra friction and strongly negative at +1 pip. No funded challenge replay was run. Do not tune or reverse the family.
 - New research may resume, but only under Process Protocol v2 with a distinct economic mechanism, explicit contamination declaration, and preregistration committed before any candidate PnL. Historical EURUSD 2021–2025 remains contaminated; 2026 outcomes stayed unopened. No strategy is currently funded-ready.
+
+
+## Latest status — R322 closed before PnL (2026-10-21)
+
+- **R321:** official-source reproduction PASS; edge verdict GAGAL. Exact committed runner was executed twice with identical hashes; its raw input archive hash was checked.
+- **R322:** timestamp/data preflight and price/event eligibility preflight completed. Calendar timestamp repair was preregistered before signal eligibility count. Source calendar 2,828 USD-high rows audited; 1,743 rows retained, clustered to 973 episodes (359 discovery, 167 confirmation, 447 contaminated diagnostic).
+- The exact committed price/event preflight runner (Git blob SHA-1 `78ae1ed35837d0bf8a93818ba9d2789f1866a4ca`) was run twice locally, with identical row-level CSV (276,071 bytes; SHA-256 `5b58b271e20c0453e241e7a6f0259c453f0b3949fe04deada38a51dc31a90edf`) and summary JSON (2,184 bytes; SHA-256 `8546f87e94e3e3241110f91165fa5aeecd620ddef6856803c5a1d776a4f09a0b`).
+- **R322 = GAGAL — DATA/SAMPLE.** Only 131 discovery and 49 confirmation eligible setups before inspecting trade outcomes, against minimums of 200 and 100 completed trades. Outcome/PnL calculation was prohibited by the preregistered gate and was not performed. No PF, drawdown or pass probability is available for this test; do not infer edge from it.
+- No 2026 price outcome has been calculated. EURUSD 2021-2025 is only a contaminated diagnostic period. This family is closed; do not rescue it using post-hoc parameter or calendar changes.
+- Reports: [R322 preflight report](research/R322_PREFLIGHT_REPORT_20261021.md) · [machine summary](research/R322_PRICE_EVENT_ELIGIBILITY_PREFLIGHT.json) · [master ledger R251-R322](research/MASTER_SEARCH_LEDGER_R251_R322.csv) · [family map R251-R322](research/SEARCH_FAMILY_MAP_R251_R322.md).
