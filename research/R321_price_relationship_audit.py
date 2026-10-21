@@ -90,7 +90,8 @@ def read_source():
             repeated[1:] &= side_match
     repeated[0] = False
     removed = int(repeated.sum())
-    paired = paired.loc[~repeated].copy()
+    keep = ~repeated
+    paired = pd.DataFrame({name: arr[keep] for name, arr in zip(names, values)}, index=ts[keep])
     ts = paired.index.to_numpy(dtype=np.int64)
     # Reject, don't silently remove, malformed retained source rows.
     invalid = 0
