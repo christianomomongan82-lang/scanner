@@ -145,3 +145,23 @@ Before calling any run DONE, answer YES to each:
 If any answer is NO, the run is not fully complete and no next signal search may launch.
 
 Final rule: **Never sacrifice process integrity to produce a better-looking strategy result.**
+
+
+## 11. Run the gate validator, not just the checklist
+
+The reference validator is `research/verify_experiment_package_v2.py`; its regression tests are `research/test_verify_experiment_package_v2.py`. It fails closed if mandatory preregistration fields or pre-outcome files are absent, a candidate grid exceeds 100 without a documented nested-selection/statistical plan, the registration is after the first outcome timestamp, the final output manifest omits files or hashes/sizes differ, the final verdict is not binary, or rerun comparisons are missing/non-identical.
+
+Run the test suite locally before adopting a validator revision:
+
+```sh
+python -m unittest -v research/test_verify_experiment_package_v2.py
+```
+
+For a candidate package directory, run both stages explicitly:
+
+```sh
+python research/verify_experiment_package_v2.py preflight path/to/experiment_package
+python research/verify_experiment_package_v2.py closeout path/to/experiment_package
+```
+
+A `BLOCKED` response is a hard stop, not a warning. The validator supplements rather than replaces human review of GitHub commit order, data semantics, hidden leakage and the economic hypothesis. The current local reference suite passed 6/6 tests on 2026-10-21; this is process-tool testing, not evidence for a market edge.
