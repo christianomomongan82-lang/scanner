@@ -1,13 +1,13 @@
-# Search Family Map — R251–R303
+# Search Family Map — R251–R320
 
-Date audited: 2026-10-18  
-Canonical ledger: [MASTER_SEARCH_LEDGER_R251_R303.csv](MASTER_SEARCH_LEDGER_R251_R299.csv)  
-Scoring contract: [SEARCH_GOVERNANCE_AND_SCORING_V1.md](SEARCH_GOVERNANCE_AND_SCORING_V1.md)  
-Experiment template: [EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V1.md](EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V1.md)
+Date audited: 2026-10-21  
+Canonical ledger: [MASTER_SEARCH_LEDGER_R251_R320.csv](MASTER_SEARCH_LEDGER_R251_R320.csv)  
+Scoring contract: [SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md](SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md)  
+Experiment template: [EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V2.md](EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V2.md)
 
 ## Coverage statement
 
-The normalized ledger contains 47 verified experiment/report records across R251–R299. R259 is excluded because the checkpoint explicitly calls it an accidental workflow incident, not an accepted experiment. No standalone R267 report/result was surfaced in this audit, so no R267 metrics or verdict are inferred. The index covers the audited recent generation; it is not an exhaustive ledger of every experiment numbered below R251.
+The original audited base contains 47 verified experiment/report records across R251–R299. The expanded canonical ledger now contains 65 records through R320 (including records R300–R320 and process/data-validity entries); R259 remains excluded as a workflow incident and no metrics are inferred for R267. The index covers this audited research generation; it is not an exhaustive ledger of every experiment numbered below R251. Older historical sections below retain their original audit context; addenda at the end cover R312–R320.
 
 **Audited verdict: zero candidates promoted as funded-ready.** R276 had a historical screen pass but was not promoted. Data-invalid tests are labeled separately from economic failures so a missing-data problem is not mistaken for evidence that alpha is absent.
 
