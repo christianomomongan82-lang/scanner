@@ -1,3 +1,19 @@
+# CURRENT CHECKPOINT — 2026-10-21 (R319/R320 CLOSED)
+
+Decision: R319 GAGAL, R320 GAGAL; no funded-ready edge identified. Do not deploy either. The protected 2026 sample remains unopened.
+
+R319: 972 EURUSD M15 pullback-continuation configurations screened. Eleven passed the 2016–2018 discovery gate; zero of those 11 had both positive net R and PF >= 1.05 in 2019–2020 confirmation, and zero did so in 2021–2025 diagnostic. Selected R319-0555: +17.038R/PF 1.208 discovery; -25.860R/PF 0.555 confirmation; -67.757R/PF 0.632 diagnostic at +1 pip incremental round-trip cost.
+
+R320: 162 EURUSD H4 channel-breakout configurations screened. One passed the discovery gate; it failed confirmation (-5.173R/PF 0.917) and diagnostic (-2.286R/PF 0.983) at +1 pip incremental cost. At zero additional cost diagnostic was +5.677R/PF 1.045, still too weak and unstable for funded use.
+
+Data source is artifact 11959096102 in workflow run 38697080604; SHA-256 b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e. Audit: 4,415,493 source rows per side; remove 696,795 joint repeated-flat placeholders; 3,718,698 clean paired M1 rows; exact complete bars M5 736,076, M15 240,883, H1 57,191, H4 12,348; gaps are preserved, not filled.
+
+R319/R320 source restore parts and script: research/archive/restore_r319_r320_runners.sh plus R319_runner_source_b64.part01–08 and R320_runner_source_b64_small.part01–08. Results/report: research/R319_R320_EDGE_SEARCH_REPORT_20261021.md, research/R319_R320_ARCHIVE_MANIFEST.md, research/archive/R319_RESULTS_COMPACT.json, research/archive/R320_RESULTS_COMPACT.json. These runners regenerate full grid/scorecards/trade ledgers from the pinned raw artifact; the compact JSON files record the decision metrics. Results committed after calculation, so not a formal pre-outcome GitHub preregistration. The 2019–2025 periods are project-contaminated, not pristine OOS.
+
+The older R317/R318 run's exact runner and complete row-level artifacts were not recovered in this turn. Do not present those historical runs as end-to-end reproducible; use the newly archived runner/data-audit method for fresh research. R319/R320 itself is reproducible from its source archive and pinned data artifact.
+
+---
+
 # Latest checkpoint — 2026-10-21 (R317/R318 GAGAL)
 
 - **R317 and R318 both failed the clean EURUSD M5 forward comparison. No candidate in this batch is approved for funded use.**
