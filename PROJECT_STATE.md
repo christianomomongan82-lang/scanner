@@ -983,3 +983,12 @@ This is an infrastructure/process decision, not a new strategy result. **No cand
 - Integration-only challenge replay at 0.5% risk on the already GAGAL R298 candidate hit max loss on 2016-06-15 08:30 UTC after 26 closed trades; equity was $5,388.94 below the $5,400 static floor. This does not make R298 eligible again and does not estimate pass probability.
 - [R312 ledger replay audit](research/R312_LEDGER_REPLAY_AUDIT.json) stores source hashes, counts, metrics, event-path hash and replay result.
 - **Still open:** the missing R302 full row-level CSV artifacts have not been restored/committed; row-by-row identity of the reconstructed R298 ledger against the existing repo CSV is not yet byte-verified; broker/account fees and exact server-time configuration remain unverified. No strategy is funded-ready.
+
+
+## Follow-up recorded 2026-10-21
+
+The R302 ledger-storage blocker has been cleared: all four detailed CSV outputs were restored and checksum/readback verified in commit [cd42a9a4c5092ff34705d17580706b6a2ac8628f](https://github.com/christianomomongan82-lang/scanner/commit/cd42a9a4c5092ff34705d17580706b6a2ac8628f). Do not repeat the older claim that R302 outputs are still missing.
+
+An independent local R311 reconstruction now reproduces the committed aggregate trades, net-R, PF_R, and weekly bootstrap results from the raw paired EURUSD archive with verified source hashes. R311 remains **GAGAL**. Its original row-level local outputs still are not available for byte/row-by-row comparison and the reconstructed outputs generated in this session have not been committed as row-level repository files. Therefore this repairs the aggregate-evidence ambiguity but does not close the repository row-ledger gate.
+
+Detailed current evidence: [R312 reproducibility follow-up, 2026-10-21](research/R312_REPRODUCIBILITY_FOLLOWUP_20261021.md). No protected XAUUSD 2026 prices were scored; no strategy candidate is funded-ready; no new hypothesis is authorized until the remaining repository-ledger and account execution-configuration gates are closed.
