@@ -105,3 +105,10 @@ Official schedule cross-check references:
 7. Store, read back and verify the correction-map version, calendar source SHA-256, input subset hash, corrected output hash, all 2,828 source row decisions, and the exact event-level audit before any price outcome metrics are computed.
 
 This amendment supersedes any conflicting implication in Sections 2 or 3 that raw source clock time is trusted unchanged when it is midnight. It does not change the registered signal direction, five-minute manual delay, stop/target geometry, cost grid, period split, gates, bootstrap seed or any strategy parameter. The calendar repair is based only on timestamp correctness and official release schedules. It must be committed before PnL, and any inability to produce enough correctly scheduled events leads to **GAGAL — DATA/SAMPLE**, with no outcome rescue.
+
+
+## Closeout — pre-outcome sample gate (2026-10-21)
+
+The event timestamp and exact-price alignment preflight has been completed using the locked rule and the Amendment A release-time correction. It produced 973 event episodes: 359 in 2016-2018 discovery, 167 in 2019-2020 confirmation, and 447 in the 2021-2025-04-07 contaminated diagnostic period. The exact committed preflight found only **131 eligible discovery setups and 49 eligible confirmation setups** after the locked impulse, five-minute manual delay, continuation and path-quality rules. The registered minimums require at least 200 and 100 completed trades, respectively. Since a cluster can generate at most one trade, the required sample cannot be reached.
+
+**Binary verdict: GAGAL — DATA/SAMPLE. The experiment stops before any trade-outcome calculation.** No stop/target hit, realized trade ledger outcome, PnL, PF, drawdown, bootstrap of trading returns, or funded pass probability was computed. This verdict is a failure of sample/execution-feasibility for the frozen rule, not proof that macro news is never predictive. No post-hoc widening of the event list, lowering of the trigger threshold, schedule edits, delay reduction or exit changes are permitted.
