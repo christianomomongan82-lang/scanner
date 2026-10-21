@@ -179,13 +179,23 @@ def add_features(bars: pd.DataFrame, mid: pd.DataFrame):
     abs12 = pd.Series(np.abs(r)).rolling(12, min_periods=12).sum().to_numpy()
     eff = np.divide(roll12, abs12, out=np.full(len(r), np.nan), where=abs12 > 0)
     accel = roll3 - pd.Series(roll3).shift(3).to_numpy()
-    # Lag-1 autocorrelation among the trailing 12 five-minute returns.
-    def lagcorr(x):
-        a, b = x[:-1], x[1:]
-        if len(a) < 2 or np.std(a) == 0 or np.std(b) == 0:
-            return np.nan
-        return float(np.corrcoef(a, b)[0,1])
-    ac = rs.rolling(12, min_periods=12).apply(lagcorr, raw=True).to_numpy()
+    # Vectorized lag-1 Pearson autocorrelation among the trailing 12 returns (11 adjacent pairs).
+    # The shift aligns each statistic at the latest return in the feature window; no future value is used.
+    sum11 = rs.rolling(11, min_periods=11).sum()
+    sumsq11 = rs.pow(2).rolling(11, min_periods=11).sum()
+    adjacent_products = rs * rs.shift(-1)
+    sumprod11 = adjacent_products.rolling(11, min_periods=11).sum().shift(1)
+    sa = sum11.shift(1).to_numpy()
+    sb = sum11.to_numpy()
+    sqa = sumsq11.shift(1).to_numpy()
+    sqb = sumsq11.to_numpy()
+    sab = sumprod11.to_numpy()
+    cov = sab - sa * sb / 11.0
+    var_a = np.maximum(sqa - sa * sa / 11.0, 0.0)
+    var_b = np.maximum(sqb - sb * sb / 11.0, 0.0)
+    denom = np.sqrt(var_a * var_b)
+    ac = np.divide(cov, denom, out=np.full(len(r), np.nan), where=denom > 0)
+    ac[(ac < -1.0) | (ac > 1.0)] = np.nan
     ac_state = np.sign(roll12) * ac
     vol3 = rs.rolling(3, min_periods=3).std(ddof=0)
     volmedian = vol3.shift(1).rolling(48, min_periods=24).median()
@@ -323,20 +333,23 @@ def weekly_series(ledger):
     first=int(MONDAY_ANCHOR_MS + ((ANCHOR_MS-MONDAY_ANCHOR_MS)//WEEK_MS)*WEEK_MS)
     last=int(MONDAY_ANCHOR_MS + ((int(CUTOFF.timestamp()*1000)-MONDAY_ANCHOR_MS)//WEEK_MS)*WEEK_MS)
     weeks=np.arange(first,last+1,WEEK_MS,dtype=np.int64)
+    week_iso={int(w):pd.to_datetime(int(w),unit="ms",utc=True).date().isoformat() for w in weeks}
+    all_weeks=pd.Index(weeks,name="week_start_ms")
     records=[]
+    w=ledger["week_start_ms"].to_numpy(dtype=np.int64)
     for f in FEATURES:
         s=ledger[f+"_score"].to_numpy(dtype=float)
         for h in HORIZONS:
             gross=ledger[f"gross_exec_{f}_{h}m_pips"].to_numpy(dtype=float)
-            w=ledger["week_start_ms"].to_numpy(dtype=np.int64)
-            for week in weeks:
-                mask=(w==week)&np.isfinite(gross)&np.isfinite(s)&(s!=0)
-                v=gross[mask]-1.0
+            mask=np.isfinite(gross)&np.isfinite(s)&(s!=0)
+            temp=pd.DataFrame({"week_start_ms":w[mask],"net_pips":gross[mask]-1.0})
+            grouped=temp.groupby("week_start_ms")["net_pips"].agg(["count","sum","mean"]).reindex(all_weeks,fill_value=0)
+            for week,row in grouped.iterrows():
                 records.append({"feature":f,"horizon_minutes":h,"week_start_ms":int(week),
-                                "week_start_utc":pd.to_datetime(int(week),unit="ms",utc=True).date().isoformat(),
-                                "trade_count":int(mask.sum()),
-                                "net_pips_sum":float(np.sum(v)) if len(v) else 0.0,
-                                "mean_net_pips":float(np.mean(v)) if len(v) else 0.0})
+                                "week_start_utc":week_iso[int(week)],
+                                "trade_count":int(row["count"]),
+                                "net_pips_sum":float(row["sum"]),
+                                "mean_net_pips":float(row["mean"]) if row["count"] else 0.0})
     return pd.DataFrame(records)
 
 def block_bootstrap(weekly: pd.DataFrame):
