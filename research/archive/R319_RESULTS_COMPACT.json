@@ -1,15 +1,1 @@
-{
-  "round": "R319",
-  "configs": 972,
-  "discovery_screen_passes": 11,
-  "selected_passes_confirmation": 0,
-  "selected_passes_diagnostic": 0,
-  "primary_added_cost_pips": 1.0,
-  "selected_candidate": "R319-0555",
-  "discovery_2016_2018": {"trades":163,"net_R":17.0382005124,"PF":1.2084361612,"maxDD_R":9.8097451373},
-  "confirmation_2019_2020": {"trades":86,"net_R":-25.8601579349,"PF":0.5552319401,"maxDD_R":31.654127315},
-  "diagnostic_2021_2025": {"trades":270,"net_R":-67.7569550182,"PF":0.632482265,"maxDD_R":72.9459965428,"cost0_net_R":-36.8092216957,"cost0_PF":0.7748976527,"cost05_net_R":-52.283088357,"cost05_PF":0.6993922439},
-  "source_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
-  "protected_2026_opened": false,
-  "verdict": "GAGAL"
-}
+{"contamination":"2019-2025 have been used in earlier project research. These are not pristine project-wide OOS. Protected 2026 remained unopened.","discovery_positive_candidates":11,"execution":{"cost_stresses_pips":[0.0,0.5,1.0,1.5],"entry_delay_after_signal_close_minutes":10,"entry_spread_cap_pips":1.2,"gaps":"no timestamp filling; rolling features reset across missing higher-timeframe bars","incremental_round_trip_cost_primary_pips":1.0,"observed_bid_ask_executable":true,"overlap":"one position per config; later signal skipped until prior exit","period_cutoff":"close at last available executable close before split boundary","stop_first_same_bar":true,"stop_gap_fill":"worse executable open","target_gap_fill":"target price, no improvement credit","time_exit":"first available M5 opening quote at or after elapsed hold deadline"},"exit_geometries":18,"frozen_pre2026_passes":0,"grid_size":972,"hypothesis":"M15 pullback against a sustained H1 raw-price displacement, followed by close-confirmed M15 reclaim/break of the preceding candle, T+10m executable entry","periods_utc":{"confirmation_2019_2020":{"end_exclusive_ms":1609459200000,"start_inclusive_ms":1546300800000},"diagnostic_2021_2025":{"end_exclusive_ms":1767225600000,"start_inclusive_ms":1609459200000},"discovery_2016_2018":{"end_exclusive_ms":1546300800000,"start_inclusive_ms":1451606400000}},"round":"R319","selection":"top 20 rank based only on discovery 2016-2018 net mean R/trade, subject to >=120 trades, positive net R, PF>=1.05; frozen checks use 2019-2020 and diagnostic 2021-2025","signal_rule_families":54,"source_audit":{"complete_h1_bars":57191,"complete_m15_bars":240883,"complete_m5_bars":736076,"gaps_over_5m":7882,"h1_gaps":3227,"joint_flat_placeholders_removed":696795,"m15_gaps":5665,"m5_end_start_utc":"2025-12-31T21:50:00+00:00","m5_start_utc":"2016-01-03T22:00:00+00:00","raw_rows_per_side":4415493,"remaining_m1_rows":3718698,"zip_sha256":"b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e"},"top20_candidates_archived":11,"top20_ids":["R319-0555","R319-0558","R319-0554","R319-0557","R319-0549","R319-0552","R319-0546","R319-0548","R319-0591","R319-0553","R319-0551"],"verdict":"GAGAL"}
