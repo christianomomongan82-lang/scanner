@@ -100,3 +100,12 @@ Updated runner identity:
 - Git blob SHA-1: `7c68218694f75f8e1f8532b23ee1e9c8a54f76f0`
 
 The registered repeated-flat rule is now the predicate above. Reproducible M1/M5 count and hash gates must pass before any return/relationship metrics are calculated.
+
+
+## Pre-outcome implementation-speed correction — 2026-10-21 UTC
+
+A data-only preflight timed out during pandas group aggregation before returning a completed data audit; no outcome tables or signal metrics were produced. To make the local research loop practical, M1-to-M5 aggregation was rewritten using NumPy timestamp buckets while preserving the exact registered rule: only UTC five-minute buckets with five distinct minute rows are admitted; gaps remain gaps; no forward-fill or synthesized OHLC is allowed.
+
+- Updated runner commit: `5b6ec6e202c94eacf483ffd9ea529e57fedfd0d4`
+- Updated runner Git blob SHA-1: `1cbb7ae4a64291f5610130ef0e264465f6f12f76`
+- This is implementation performance work only. No relationship score, forward return, costed outcome, selection, or PnL has been viewed.
