@@ -1,0 +1,9 @@
+test_closeout_allows_registered_sample_gate_failure_before_pnl ... ok
+test_closeout_detects_hash_mismatch ... ok
+test_closeout_manifest_passes ... ok
+test_closeout_requires_two_identical_runs ... ok
+test_grid_over_100_requires_plan ... ok
+test_post_result_card_cannot_pass_preflight ... ok
+test_preflight_minimum_valid ... ok
+
+Ran 7 tests. OK
