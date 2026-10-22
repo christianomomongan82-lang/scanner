@@ -1,13 +1,13 @@
-# Search Family Map — R251–R320
+# Search Family Map — R251–R328 (Canonical)
 
 Date audited: 2026-10-21  
-Canonical ledger: [MASTER_SEARCH_LEDGER_R251_R320.csv](MASTER_SEARCH_LEDGER_R251_R320.csv)  
+Canonical ledger: [MASTER_SEARCH_LEDGER_R251_R328.csv](MASTER_SEARCH_LEDGER_R251_R328.csv)  
 Scoring contract: [SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md](SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md)  
 Experiment template: [EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V2.md](EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V2.md)
 
 ## Coverage statement
 
-The original audited base contains 47 verified experiment/report records across R251–R299. The expanded canonical ledger now contains 65 records through R320 (including records R300–R320 and process/data-validity entries); R259 remains excluded as a workflow incident and no metrics are inferred for R267. The index covers this audited research generation; it is not an exhaustive ledger of every experiment numbered below R251. Older historical sections below retain their original audit context; addenda at the end cover R312–R320.
+The reconciled canonical ledger contains 76 unique experiment records across R251–R328; only R259 (workflow incident) and R267 (no standalone source record located) are absent. Records R300–R302 and R323–R328 were restored/reconstructed from their archived source reports and package summaries, with provenance links preserved. The index covers this audited research generation; it is not an exhaustive ledger of every experiment numbered below R251. Older historical sections below retain their original audit context; dated addenda cover R312–R328.
 
 **Audited verdict: zero candidates promoted as funded-ready.** R276 had a historical screen pass but was not promoted. Data-invalid tests are labeled separately from economic failures so a missing-data problem is not mistaken for evidence that alpha is absent.
 
@@ -327,15 +327,29 @@ The binding process rule is now [Search Process Improvement Protocol v2](SEARCH_
 - Restore/verify the exact R326 runner, normalized trade ledger, zero-inclusive weekly-R series, output manifest and package test evidence, or explicitly record the archive gate as irrecoverable. Also reconcile the pre-V2 R317/R318 and R319/R320 static archive gaps. Close/disposition the five old open scanner smoke-test issues.
 - **Until these are done: no additional PnL search.** A compliance-blocked run is GAGAL — DATA/PROCESS; it cannot be converted into edge evidence by changing the strategy.
 
-## Superseding archive disposition — 2026-10-22
+## Canonical reconciliation and research reset — 2026-10-22
 
-This section supersedes earlier lines above that leave the historical archive debt indefinitely open. It does not change any strategy PnL or promote any strategy.
+**Canonical ledger:** [MASTER_SEARCH_LEDGER_R251_R328.csv](MASTER_SEARCH_LEDGER_R251_R328.csv). The CSV was rebuilt and read back from GitHub: 76 experiment rows, 15 columns each, unique IDs in ascending order from R251 through R328, with only R259/R267 absent for the reasons above. R300/R301 were restored from the prior preserved ledger; R302 was rebuilt from its linked final report. R312–R320 schema omissions were repaired by splitting combined period fields; R323–R328 were rewritten as correctly quoted CSV records. The file was parsed and verified after commit.
 
-- **R317/R318:** retain their recorded negative research outcomes, but classify the missing exact runner/full row-level archive as a historical reproducibility failure and permanently non-promotable unless the exact original artifacts are recovered. Do not reconstruct unknown original rows or advertise full reproduction.
-- **R319/R320:** deterministic runner reconstruction and compact results exist, but their registration followed calculation, so they remain exploratory, not preregistered. Their historical full-ledger storage gap is an archive exception; do not retroactively certify preregistration or promote either strategy.
-- **R326:** current repository package contains a single encoded archive fragment plus compact report/results, not a complete verified runner, trade ledger, zero-inclusive weekly series and output manifest. Classify the missing V2 archive as non-promotable from current repo evidence. The negative outcome metrics remain exploratory diagnostics, not a formally closed EDGE verdict.
-- **R323–R328:** preserve the precise per-round dispositions listed above. Sample-gate failures without PnL do not establish negative expectancy; process/novelty failures do not establish alpha either.
-- The five legacy scanner smoke-test issues (#1, #2, #3, #5, #6) were dispositioned and closed on 2026-10-22; they are no longer blockers.
-- Canonical consolidated records are now named `MASTER_SEARCH_LEDGER_R251_R328.csv` and `SEARCH_FAMILY_MAP_R251_R328.md`; their GitHub read-back and record coverage are verified in the current research branch.
+### Missing archive dispositions are now explicit, not an indefinite blocker
 
-**Updated stop condition:** no new signal PnL until a genuinely distinct candidate has an immutable V2 preregistration, exact data/runner environment and output contract, and the candidate-specific V2 preflight passes. The historical archive exceptions above remain excluded from strategy promotion and must not be reopened to tune old candidates.
+- **R317/R318:** historical signal outcomes remain GAGAL. Exact runner/full row-level output archives are absent from current repository evidence. Treat both as historical non-promotable records unless original artifacts are recovered; never claim end-to-end reproducibility or retune these families on inspected periods.
+- **R319/R320:** deterministic runner/source restoration evidence exists, but the original registrations followed outcome calculation. They remain exploratory/non-promotable; no retroactive preregistration claim. Preserve the static-ledger gap as an exception, not as a reason to keep repeating the same archive audit.
+- **R326:** current repository package lacks a complete verified runner + normalized trade ledger + zero-inclusive weekly series + complete output manifest. The negative outcome metrics are exploratory diagnostics only. Mark the package archive non-promotable from currently available repository evidence; do not use it to justify a parameter rescue.
+- **R323:** the data gate and 7/7 process smoke tests passed, but the pre-outcome sample gate did not (410 discovery legs vs 1,000; 270 confirmation vs 600). No PnL was calculated. This is not a negative-edge finding.
+- **R324/R325/R327/R328:** sample counts failed and/or the V2/novelty process was incomplete. No PnL was calculated. These are not evidence of negative expectancy; their overlapping/repeated families must not be mutated on the same inspected periods.
+- **R300/R301/R302:** now represented in the canonical ledger. R300 and R301 lost their registered tests; R302 failed 5 of 8 historical promotion gates and remains GAGAL. These do not constitute promotable alpha.
+- **R321:** process/reproduction PASS, signal GAGAL; all 28 registered raw-price/horizon relations were negative at +1 pip, and the best tested relation was negative even at zero added cost.
+- **R322:** GAGAL at the frozen pre-outcome sample gate (131 eligible discovery setups vs 200 required; 49 confirmation vs 100); no PnL was calculated.
+
+The five old scanner smoke-test issues (#1, #2, #3, #5, #6) were already dispositioned and closed in commit [aa3782f867dd4dcfc0dc7855987ad979b52c9056](https://github.com/christianomomongan82-lang/scanner/commit/aa3782f867dd4dcfc0dc7855987ad979b52c9056). They are not a current blocker.
+
+### New search rules
+
+1. Stop round-number variations of the existing EURUSD candle, session breakout, compression, sweep/reclaim and short-horizon momentum families.
+2. Before any new signal PnL, require a candidate-specific immutable V2 registration and successful V2 preflight/readback, exact data manifest and runner/environment, source-time causal checks, frozen selection rule/cost grid/latency, and complete output plan.
+3. The next research hypothesis should be a **portfolio-level economic mechanism**, not a renamed single-session trigger. A currency winner/loser relative-strength portfolio is a literature-backed lead only if the novelty audit proves it is materially different from R323's five-session intraday signal and a defensible fee/swap model is available. If not, reject it before PnL and choose another family.
+4. Keep the primary objective tied to the real funded target: P(both phases completed by day 179 with no daily/max-loss breach), time-to-funded distribution, risk tails and costs. PF/expectancy remain necessary economic gates, not the end goal.
+5. XAUUSD 2026 remains protected. Do not unlock it to select or rescue a candidate.
+
+**Governance result:** the *historical ledger/family-map reconciliation* is now closed with explicit exceptions. This does not approve a new signal run. The continuing PnL stop is candidate-specific: no new outcome calculation until a genuinely distinct candidate's own V2 preflight passes. This is meant to be a one-time historical archive closeout, not another loop.
