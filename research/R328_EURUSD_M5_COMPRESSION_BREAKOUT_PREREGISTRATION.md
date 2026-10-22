@@ -11,7 +11,7 @@ This tests a rolling volatility-compression -> range-breakout structure. It is n
 - 2016 is implementation/warm-up only; discovery 2017–2020; confirmation A 2021–2023; holdout B 2024–2025. The holdout is strategy-specific, not globally untouched across all project experiments.
 
 ## Frozen signal
-1. Candidate M5 signal bars open from 06:00 through 09:50 UTC Monday–Friday. The M5 bar and the 72 complete M5 bars preceding it must be consecutive at five-minute intervals; otherwise no setup.
+1. Candidate M5 signal bars open from 06:00 through 09:50 UTC Monday–Friday. The signal M5 bar and the 83 complete M5 bars preceding it (84 M5 bars including the signal bar) must be consecutive at five-minute intervals; otherwise no setup. This supplies 60 historical rolling 12-bar ranges that end before the current 12-bar compression zone.
 2. Define the compression zone from the 12 complete midpoint M5 bars immediately preceding the signal candle: compression high = maximum midpoint high, compression low = minimum midpoint low, height = high - low. Require positive height.
 3. Compute 60 historical rolling 12-bar ranges from the previous 60 eligible contiguous M5 windows, all ending before the current 12-bar compression zone. The current compression height must be <= the 25th percentile (linear quantile) of those previous 60 ranges. No current or future range may enter its threshold.
 4. LONG signal if the current M5 midpoint close is >= compression high + 0.05 × compression height. SHORT if close <= compression low - 0.05 × height. First qualifying signal per UTC day is the sole attempt; if that attempt becomes invalid, do not substitute a later setup.
