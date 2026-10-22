@@ -1,0 +1,28 @@
+{
+  "experiment_id": "R329",
+  "family_id": "FX_PORTFOLIO_TIME_SERIES_MOMENTUM",
+  "hypothesis": "A seven-pair portfolio using each pair's own 13/26/39 eligible-weekly-observation return direction, inverse-volatility risk weights and a 30% net USD-factor cap may generate positive executable risk-normalized returns after observed spread, commission, adverse slippage and swap-cost stress.",
+  "registered_at_utc": "2026-10-22T19:44:00Z",
+  "registration_commit_sha": "83120c04b3ba8bb58312f5ad491699653e0b9999",
+  "registration_commit_utc": "2026-10-22T19:45:25Z",
+  "runner_commit_sha": "786c9ec2dc17c33191c60cee34b1653942009997",
+  "candidate_count": 3,
+  "selection_rule": "On discovery only, select the horizon with highest mean weekly net R after observed BID/ASK + $10 round-trip standard-lot commission + +1 pip adverse slippage + 2 pip-equivalent adverse swap per 7-day hold; tie-break by higher Holm-adjusted four-week block-bootstrap lower bound, then lower portfolio maximum drawdown. Confirmation does not choose a replacement horizon.",
+  "discovery_period_utc": "2017-01-01T00:00:00Z/2021-01-01T00:00:00Z",
+  "confirmation_period_utc": "2021-01-01T00:00:00Z/2024-01-01T00:00:00Z",
+  "diagnostic_period_utc": "2024-01-01T00:00:00Z/2026-01-01T00:00:00Z (contaminated; diagnostic only)",
+  "cost_model": "Native observed BID/ASK executable sides; FundedNext official Stellar Forex commission $5/side/standard lot; assumed standard lot 100,000 units for normalized-R pre-screen, exact platform contract size not verified; extra slippage 0/0.5/1/2 pips per round trip; adverse swap proxy 2 pips/7-day hold primary and 4 pips/7-day stress, explicitly not the actual symbol swap.",
+  "manual_delay_minutes": 5,
+  "falsification_gates": [
+    "Preflight requires valid source hashes, timestamp integrity and exact cross-pair joins; no PnL before candidate-specific V2 preflight passes.",
+    "Every horizon requires >=200 eligible position legs and >=100 eligible weekly rebalance dates in discovery; >=100 legs and >=70 eligible dates in confirmation.",
+    "Primary-cost outcomes, if authorized, require net R > 0 and PF_R >= 1.05 in discovery and confirmation; stress-cost outcomes require net R > 0 and PF_R >= 1.00.",
+    "At least 2 of 3 complete discovery years 2018-2020 positive; no year contributes >70% of positive discovery net R.",
+    "Four-week block bootstrap, 10000 replicates, zero-trade weeks included; 95% lower bound >0 in discovery and confirmation; Holm adjustment across 3 discovery configurations."
+  ],
+  "holdout_status": "UNOPENED",
+  "data_source_sha256": "2db7c7d88b2f31965ff956dd5e017ce7f0b76a4ac1792dca4896833b884e85e0",
+  "output_contract_version": "v2",
+  "first_outcome_compute_at_utc": null,
+  "note": "Registered economic mechanism only. Current H1 source supports an exact T+60-minute bar-open proxy, not actual T+5-minute execution; actual contract size/swaps require verification before promotion."
+}
