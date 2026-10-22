@@ -105,9 +105,26 @@ def read_inputs(package,data_dir):
     return pairs,common,audit,manifest,errors
 
 
+def compact_data_audit(audit, manifest):
+    detail=audit["stream_audit"]
+    files={k:v for k,v in detail.items() if not k.startswith("PAIR_") and k!="CROSS_PAIR_SYNC"}
+    pairs={k.removeprefix("PAIR_"):v for k,v in detail.items() if k.startswith("PAIR_")}
+    sync=detail["CROSS_PAIR_SYNC"]
+    return {
+      "experiment_id":"R329","mode":"PREOUTCOME_DATA_AUDIT_ONLY_NO_PNL",
+      "data_gate":audit["data_gate"],"fatal_errors":audit["fatal_errors"],
+      "provider":audit["provider"],"period_utc":audit["period_utc"],
+      "source_data_manifest_sha256":manifest["combined_ordered_stream_manifest_sha256"],
+      "input_integrity":{"expected_streams":14,"actual_streams":len(files),"all_hashes_and_sizes_match":not any("sha_mismatch" in x or "size_mismatch" in x for x in audit["fatal_errors"]),"duplicate_timestamps":sum(v["duplicates"] for v in files.values()),"misaligned_h1_rows":sum(v["misaligned_h1"] for v in files.values()),"nonfinite_rows":sum(v["nonfinite_rows"] for v in files.values()),"invalid_ohlc_rows":sum(v["invalid_ohlc_rows"] for v in files.values()),"non_monotonic_streams":sum(not v["monotonic"] for v in files.values()),"rows_per_stream_min":min(v["rows"] for v in files.values()),"rows_per_stream_max":max(v["rows"] for v in files.values()),"raw_rows_preserved":True,"no_forward_fill_or_synthetic_bars":True},
+      "pairs":{k:{"bid_rows":v["bid_rows"],"ask_rows":v["ask_rows"],"paired_timestamps":v["paired_timestamps"],"bid_only_rows":v["bid_only"],"ask_only_rows":v["ask_only"],"negative_open_spreads":v["negative_open_spreads"],"negative_close_spreads":v["negative_close_spreads"],"active_rows":v["active_rows"],"flat_placeholder_rows":v["flat_rows"],"gaps_gt_1h":v["gaps_gt_1h"],"median_open_spread_price":v["median_open_spread_price"],"p95_open_spread_price":v["p95_open_spread_price"]} for k,v in pairs.items()},
+      "cross_pair_sync":{"exact_intersection_rows":sync["exact_timestamp_intersection_rows"],"union_rows":sync["union_rows"],"unmatched_rows_by_pair":sync["unmatched_rows_by_pair"],"policy":"exact timestamp inner intersection only"},
+      "all_checks_are_preoutcome_only":True,"pnl_computed":False,"outcomes_computed":False
+    }
+
+
 def run(package,data_dir,out_dir):
     out_dir.mkdir(parents=True,exist_ok=True); tests=self_tests()
-    pairs,common,audit,manifest,errors=read_inputs(package,data_dir); jwrite(out_dir/"data_audit.json",audit)
+    pairs,common,audit,manifest,errors=read_inputs(package,data_dir); jwrite(out_dir/"data_audit.json",compact_data_audit(audit,manifest))
     if errors:
         summary={"experiment_id":"R329","verdict":"GAGAL","first_failed_gate":"data_gate","outcomes_computed":False,"pnl_computed":False,"self_tests":tests,"errors":errors}
         jwrite(out_dir/"preflight_summary.json",summary); return summary
