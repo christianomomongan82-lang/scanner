@@ -1,57 +1,54 @@
-# RESEARCH RESET — 2026-10-22 (supersedes search approach, NOT the hard stop)
+# AUTHORITATIVE RESEARCH RESET — 2026-10-22
 
-The active research plan is [EDGE_SEARCH_RESET_PLAN_20261022.md](research/EDGE_SEARCH_RESET_PLAN_20261022.md). Core decision: stop repeated single-market candle/session variants and redirect toward economically grounded, portfolio-level return sources. **This is a plan, not an edge result; no new signal PnL is authorized by this note.**
+**This section supersedes older status snapshots and blocker lists further below.** The point of this change is to stop repeating the same historical archive audit forever and resume research only under the stricter candidate-specific V2 protocol.
 
-Before any new PnL, reconcile master ledger/family map through R328; classify irrecoverable R317/R318/R326 archive gaps as permanently non-promotable if exact artifacts cannot be recovered; mark R319/R320 as exploratory (registration followed outcomes); preserve sample/process distinctions for R323–R328; then read back and verify the consolidated records and pass V2 preflight on a new candidate package. No failed candidate may be rescued by changing its inspected parameters.
+Plan: [EDGE_SEARCH_RESET_PLAN_20261022.md](research/EDGE_SEARCH_RESET_PLAN_20261022.md).
 
-The first literature-backed research lead is a genuinely distinct **portfolio-level** currency winner/loser relative-strength design, only if the novelty audit shows it is not a renamed R323 variant and cost/swap modeling is defensible. Otherwise choose a separate mechanism. The final objective remains realistic P(both phases by day 179 without breach), not a monotonic sequence of backtest PnL values. XAUUSD 2026 stays protected until pre-2026 gates pass.
+## Verified historical-record reconciliation
 
----
+Canonical files:
+- [MASTER_SEARCH_LEDGER_R251_R328.csv](research/MASTER_SEARCH_LEDGER_R251_R328.csv)
+- [SEARCH_FAMILY_MAP_R251_R328.md](research/SEARCH_FAMILY_MAP_R251_R328.md)
 
-# ACTIVE HARD STOP — 2026-10-22: V2 ARCHIVE/GOVERNANCE BLOCK
+The master ledger was reconstructed and read back from GitHub. It contains **76 unique experiment records**, 15 columns per row, in ascending order through R328. The only absent IDs are **R259**, an accidental workflow incident explicitly excluded from strategy search, and **R267**, for which no standalone experiment source/report was surfaced; no metrics are inferred for either. R300–R302 were restored from their preserved rows/report evidence, R312–R320 period columns repaired, and R323–R328 rewritten as valid consistently quoted CSV. Post-commit readback verified byte identity and zero malformed rows.
 
-**Search status: BLOCKED. No R329 or other new strategy PnL run is permitted.** The R323–R328 batch has been dispositioned below. This state supersedes earlier text suggesting that a next candidate may start.
+The family map was updated to refer to the canonical ledger, add R300–R302 and R321–R322 dispositions, and classify archive exceptions. Five old smoke-test issues (#1, #2, #3, #5, #6) were already dispositioned/closed in commit [aa3782f867dd4dcfc0dc7855987ad979b52c9056](https://github.com/christianomomongan82-lang/scanner/commit/aa3782f867dd4dcfc0dc7855987ad979b52c9056).
 
-## Current official dispositions
-- **R323: GAGAL — DATA/PROCESS / NOT CLOSED.** Underlying pre-outcome finding: DATA/SAMPLE (410 discovery legs vs 1,000; 270 confirmation vs 600); no PnL. Its prior archive manifest claiming "closed" has been superseded.
-- **R324: GAGAL — DATA/PROCESS.** Diagnostic sample counts 341 discovery / 222 confirmation; no PnL. Overlaps prior sweep/reclaim families; V2 package/novelty review incomplete.
-- **R325: GAGAL — DATA/PROCESS.** Diagnostic counts 593 discovery / 441 confirmation / 306 holdout; no PnL. Overlaps earlier Asia/session breakout family.
-- **R326: GAGAL — DATA/PROCESS / NOT CLOSED.** Two local result generations matched hashes and exploratory results were negative in all three cohorts and all nine years. These are not a formally closed EDGE verdict because the complete V2 pre-outcome/preflight review and static archive were not satisfied; complete runner, full trade ledger and zero-inclusive weekly-R rows still need commit/readback verification.
-- **R327: GAGAL — DATA/PROCESS.** Diagnostic sample counts 342 / 272 / 187; no PnL.
-- **R328: GAGAL — DATA/PROCESS.** Diagnostic counts 298 / 233 / 183; no PnL. Overlaps prior range/compression family.
+Historical outcomes/archives:
+- **R317/R318:** preserve their signal failures; exact complete runner/row-output archive is missing in the current repo. Classified as historical non-promotable records unless exact originals are recovered. Never claim full reproduction or tune on those windows.
+- **R319/R320:** deterministic reconstruction evidence exists, but registration happened after outcome calculations. They remain exploratory and cannot be retroactively called preregistered; static-ledger gaps are recorded as historical archive exceptions.
+- **R326:** current repo does not contain a fully verified complete runner, normalized trade ledger, zero-inclusive weekly-R series, and output manifest. Its strong negative metrics remain exploratory diagnostics only; this candidate is non-promotable from available repo evidence.
+- **R323:** sample gate failed before PnL (410 discovery legs vs 1,000; 270 confirmation vs 600). No alpha conclusion.
+- **R324/R325/R327/R328:** sample and/or V2 novelty/package gates failed before PnL. No negative-expectancy claim is inferred from missing outcomes.
+- **R300/R301/R302:** restored into the canonical ledger; their tested signals failed their economic gates. None is promoted.
+- **R321:** process/reproduction passed; signal failed, all 28 registered raw-price relation/horizon cases negative at +1 pip and best case negative even at zero added friction.
+- **R322:** stopped at the preregistered sample gate (131 eligible discovery vs 200; 49 confirmation vs 100). No PnL was calculated.
 
-**Smoke-test issue audit — 2026-10-22:** issues [#1](https://github.com/christianomomongan82-lang/scanner/issues/1), [#2](https://github.com/christianomomongan82-lang/scanner/issues/2), [#3](https://github.com/christianomomongan82-lang/scanner/issues/3), [#5](https://github.com/christianomomongan82-lang/scanner/issues/5), and [#6](https://github.com/christianomomongan82-lang/scanner/issues/6) now have explicit disposition comments and are closed as completed historical test notices. I verified their closed states and comments directly. This clears that notification blocker only; it does not permit new strategy PnL runs while the remaining blockers below persist.
+**The historical ledger/family-map blocker is resolved by reconciliation plus explicit non-promotable exceptions. The original missing artifacts were not fabricated or claimed recovered.** These exceptions do not need to be reopened to begin a *new* properly governed research candidate.
 
-## Blockers before any further signal search
-1. R326 full V2 archive: exact source runner, normalized row-level ledger, full zero-inclusive weekly series, output/hash manifest and package-closeout evidence must be committed as normal repository files/chunks and readback/hash verified. Local output hashes alone are not a static archive.
-2. Legacy archive disposition: R317/R318 source and row-level package gaps are not fully recoverable from the repo state seen during audit; formally mark them non-promotable historical archive failures or recover the exact artifacts. R319/R320 were not preregistered before PnL and cannot be retroactively presented as preregistered; record their full-ledger static archive gap/resolution.
-3. Reconcile the master ledger and family map through R322 plus R323–R328; read back and verify IDs, row counts and hashes.
-4. Run the V2 package preflight/closeout validator only against a compliant package. A clean unit-test suite is not a candidate package pass.
+## Current research decision
 
-**No further PnL search until these blockers are fixed or individually classified as irrecoverable and excluded from promotion.** Do not solve this block by opening another strategy or tuning an old family. EURUSD 2017–2025 and US indices 2017–2026 are project-contaminated. XAUUSD 2026 remains protected.
+**No new signal PnL has yet been run from this reset. No strategy is approved as funded-ready.** The remaining stop is candidate-specific: do not calculate PnL until a genuinely distinct hypothesis has an immutable V2 pre-registration, a novelty/contamination review, source and environment hashes, and a successful candidate-specific V2 preflight/readback. The existing validator is at [verify_experiment_package_v2.py](research/verify_experiment_package_v2.py); validator unit tests alone do not approve a candidate package.
 
----
+Stop further single-market EURUSD candle/session threshold mutations, especially already covered impulse, compression, sweep/reclaim, session breakout and short-horizon momentum families. A possible new lead is **portfolio-level currency winner/loser relative strength with scheduled rebalancing**, but it is only a lead if a written novelty audit shows that the multi-week cross-sectional portfolio is materially different from R323's five-session, delayed intraday directional screen and a defensible fees/swap model exists. If not, reject it before PnL and choose a distinct mechanism. No promise that results/PnL will increase every iteration; only research quality and process integrity can be monotonic.
 
-# V2 VALIDATOR ADDED — 2026-10-21
+The objective remains the user's $6,000 reference challenge: achieve Phase 1 +8%, then Phase 2 +5%, while avoiding daily/max-loss breaches and targeting both phases completed by day 179. The actual scorecard is P(both phases completed within 179 days without breach), time-to-funded quantiles and risk tails, not PF alone. Keep challenge research simulation-only before age eligibility, reverify firm rules before any purchase, and keep XAUUSD 2026 protected until every pre-2026 promotion gate passes.
 
-Fail-closed gate tool and tests are now committed: [validator](research/verify_experiment_package_v2.py), [6 regression tests](research/test_verify_experiment_package_v2.py). The local suite passed 6/6 tests, covering valid preflight/closeout, grid-over-100 plan requirement, post-result registration rejection, checksum mismatch detection and non-identical rerun blocking. Commands and limitations are in [Search Process Improvement Protocol v2](research/SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md).
-
-**Do not start another strategy PnL search yet.** The validator reduces process regression risk, but it does not retroactively make R317/R318 or R319/R320 fully compliant with the new static-artifact + pre-outcome-registration contract. The next candidate remains blocked until its own V2 package passes preflight and the remaining legacy archive, ledger/family-map, and closeout blockers are resolved.
+Research reset details: [EDGE_SEARCH_RESET_PLAN_20261022.md](research/EDGE_SEARCH_RESET_PLAN_20261022.md). Full process contract: [SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md](research/SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md).
 
 ---
 
-# ACTIVE GOVERNANCE — 2026-10-21
+# V2 VALIDATOR — historical note
 
-**Search status: BLOCKED pending v2 preflight for the next candidate. Do not calculate new strategy PnL until the complete pre-outcome registration, data-gate and output-archive plan are committed and pass review.** This block enforces process reliability; it does not claim no market edge can exist.
-
-Authoritative process contract: [SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md](research/SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md). Required registration card: [EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V2.md](research/EXPERIMENT_REGISTRATION_CARD_TEMPLATE_V2.md). Baseline / invariant targets: [PROCESS_QUALITY_BASELINE_20261021.json](research/PROCESS_QUALITY_BASELINE_20261021.json). The older v1 governance is retained for context but explicitly superseded.
-
-Non-negotiable outcome: no signal PnL before a read-back-verified GitHub preregistration. No run is called DONE until clean rerun hashes match, complete required artifacts are stored or restored with byte-hash proof, and the master ledger, family map and this checkpoint are read back from GitHub. If any process invariant fails, no new signal search is allowed until fixed. Strategy PnL may vary; process reliability must not regress.
-
-Current research verdict: no strategy is approved for the funded challenge. R317/R318 have historical archive gaps; R319/R320 were committed after calculations and did not meet v2's pre-registration/full-static-archive requirements. Their results remain GAGAL and exploratory, not silently promoted. See [consolidated master ledger R251–R320](research/MASTER_SEARCH_LEDGER_R251_R320.csv) and [family map R251–R320](research/SEARCH_FAMILY_MAP_R251_R320.md).
+The fail-closed validator and its six regression tests are committed at [validator](research/verify_experiment_package_v2.py) and [tests](research/test_verify_experiment_package_v2.py). The suite passed 6/6 tests. This validates process code only, not any strategy or candidate package.
 
 ---
 
+# HISTORICAL CHECKPOINTS BELOW
+
+The following dated notes are retained for traceability. Their status/checklist language is a historical snapshot and is superseded where it conflicts with the authoritative 2026-10-22 decision above.
+
+---
 
 ### Consolidated experiment ledger — 2026-10-21
 
