@@ -1,0 +1,16 @@
+{
+  "comparison_scope": "two independent clean local Python processes; all deterministic data-audit, eligibility, skip-ledger and terminal sample-gate report outputs",
+  "experiment_id": "R323",
+  "files_compared_sha256": {
+    "R323_DATA_AUDIT.json": "fd3aa23402fd29fcbb67170973db1dbfa2d7d449a710c1e18fdaaeaac1139fcf",
+    "R323_ELIGIBILITY_LEDGER.csv": "b69fbe389806f21718b7be4d9d07e76d464abfe71338b3aee72ec53701678b63",
+    "R323_FINAL_REPORT.md": "208bdcd01f5e7091113cfac3a9e02bba03372ac2e7b84b0077077edad4a6003f",
+    "R323_FINAL_RESULT.json": "0d2ee0b54bd5ecf8a2c1690b1d5f889d91346bab3ed50d100b6861747290d51c",
+    "R323_GAPS_GT_1H.csv": "9aec13233935824dd1154f609ab59db32c8a5f41110e6527c83e24135b89d4ac",
+    "R323_PAIR_COVERAGE.csv": "ad2d6a5461a626bed41d39e5c3439ddcc04de3637d73c00e3ef903730f74eef3"
+  },
+  "mismatches": [],
+  "runs_compared": 2,
+  "sample_gate": "failed identically in both runs before any PnL calculation",
+  "two_runs_identical": true
+}
