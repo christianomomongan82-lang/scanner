@@ -78,7 +78,7 @@ def read_inputs(package,data_dir):
             if d.timestamp.isna().any(): errors.append(f"bad_timestamp:{name}")
             d.timestamp=d.timestamp.astype("int64")
             vals=d[["open","high","low","close"]].apply(pd.to_numeric,errors="coerce").to_numpy(float)
-            dup=int(d.timestamp.duplicated().sum()); aligned=int((d.timestamp%H1).sum()!=0); nonfinite=int((~np.isfinite(vals)).any(axis=1).sum())
+            dup=int(d.timestamp.duplicated().sum()); aligned=int((d.timestamp%H1 != 0).sum()); nonfinite=int((~np.isfinite(vals)).any(axis=1).sum())
             bad=int(((d.high<d.low)|(d.high<d[["open","close"]].max(axis=1))|(d.low>d[["open","close"]].min(axis=1))).sum())
             mono=bool(d.timestamp.is_monotonic_increasing)
             if dup or aligned or nonfinite or bad or not mono: errors.append(f"row_integrity:{name}:dup={dup},align={aligned},nonfinite={nonfinite},bad_ohlc={bad},monotonic={mono}")
