@@ -1,0 +1,136 @@
+{
+  "id": "MRM-V1-CLOSED-MARKET-CLEAN-REPLAY",
+  "run_date": "2026-10-23",
+  "verdict": "GAGAL",
+  "funded_approved": false,
+  "root_cause_audit": {
+    "input_rows": 4415493,
+    "flat_ohlc_both_sides": 713969,
+    "flat_rows_repeating_previous_close_both_sides": 696795,
+    "rows_flagged_in_flat_runs_ge_30_minutes": 682472,
+    "candidate_points_before_filter": 140188,
+    "excluded_points_due_to_closure": 22793,
+    "clean_candidate_points": 117395,
+    "original_event_lookback_closure_over_5pct_fraction": 0.1766,
+    "original_event_forward_path_has_closure_fraction": 0.2722
+  },
+  "input": {
+    "artifact_id": 11959096102,
+    "artifact_name": "EURUSD-M1-Dukascopy-BID-ASK-2016-2025",
+    "bid_gzip_sha256": "b588b7e07d9fea3748a84a1e3ecf29ccb2ea1d8ea52503f8579928a3cd4990cc",
+    "ask_gzip_sha256": "52e53dbb22ef11aee2d2c3d5e5b4ded6659d58c086189a327559253727e52f8b"
+  },
+  "method": {
+    "model": "LightGBM regression",
+    "features": 82,
+    "model_columns_with_side_interactions": 92,
+    "entry_delay_min": 5,
+    "cadence_min": 30,
+    "tp_pips": 15,
+    "sl_pips": 10,
+    "max_hold_min": 120,
+    "extra_cost_primary_pips": 0.5,
+    "stop_first_intrabar": true,
+    "flat_market_rule": "Exclude sample if lookback or outcome path intersects a run of 30+ flat BID and ASK M1 candles.",
+    "train": "2016-2019",
+    "validation": "2020-2021",
+    "forward_diagnostic": "2022-2025; not pristine program-level OOS"
+  },
+  "prediction_diagnostics": {
+    "train": {
+      "n_events": 47037,
+      "spearman": 0.26224,
+      "mean_chosen_side_net_pips": 1.6186,
+      "top_quartile_mean_pips": 5.5352
+    },
+    "validation": {
+      "n_events": 23550,
+      "spearman": -0.03842,
+      "mean_chosen_side_net_pips": -0.8287,
+      "top_quartile_mean_pips": -0.9553
+    },
+    "forward": {
+      "n_events": 46808,
+      "spearman": -0.01466,
+      "mean_chosen_side_net_pips": -0.8734,
+      "top_quartile_mean_pips": -0.8166
+    }
+  },
+  "policy_results": {
+    "validation_selected": {
+      "trades": 992,
+      "net_pips": -398.507,
+      "mean_pips": -0.4017,
+      "pf": 0.9259,
+      "bootstrap_weekly_ci95_mean_pips": [
+        -10.0355,
+        2.3277
+      ]
+    },
+    "forward_selected_plus_0_5": {
+      "trades": 1751,
+      "net_pips": -1795.69,
+      "mean_pips": -1.0255,
+      "pf": 0.8208,
+      "max_drawdown_pips": 1815.089,
+      "weekly_bootstrap_ci95_mean_pips": [
+        -13.277,
+        -4.1401
+      ],
+      "bootstrap_positive_mean_fraction": 0
+    },
+    "forward_selected_without_extra_0_5": {
+      "trades": 1751,
+      "net_pips": -920.19,
+      "mean_pips": -0.5255,
+      "pf": 0.9031
+    },
+    "forward_model_direction_unfiltered": {
+      "trades": 16011,
+      "net_pips": -12418.654,
+      "mean_pips": -0.7756,
+      "pf": 0.8462
+    },
+    "forward_momentum_baseline": {
+      "trades": 16143,
+      "net_pips": -17159.098,
+      "mean_pips": -1.0629,
+      "pf": 0.7954
+    }
+  },
+  "forward_years": {
+    "2022": {
+      "trades": 566,
+      "net_pips": -418.596,
+      "pf": 0.8767
+    },
+    "2023": {
+      "trades": 467,
+      "net_pips": -534.097,
+      "pf": 0.8008
+    },
+    "2024": {
+      "trades": 380,
+      "net_pips": -427.897,
+      "pf": 0.7838
+    },
+    "2025": {
+      "trades": 338,
+      "net_pips": -415.098,
+      "pf": 0.789
+    }
+  },
+  "conclusions": [
+    "Original V1 results contaminated by static market-closure bars; do not use old aggregate as clean estimate.",
+    "After closure cleaning, prediction ranking fails out of sample and all forward years are negative.",
+    "Selected policy remains negative after removing the extra 0.5 pip stress (observed BID/ASK costs remain).",
+    "V2 shares closure defect and uses an asynchronous BID/ASK OHLC midpoint proxy; its gross-alpha diagnosis is weaker evidence."
+  ],
+  "limitations": [
+    "2020-2025 is not a pristine program-level holdout",
+    "not an equity-aware funded challenge replay",
+    "flat-run >=30min is a conservative closure heuristic",
+    "M1 OHLC cannot identify exact intrabar path",
+    "extra friction is assumed, not broker-verified"
+  ]
+}
