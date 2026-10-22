@@ -410,9 +410,9 @@ def build_pnl_outputs(candidates,skips,audit):
     yrs=[x for x in yearly if x["extra_cost_pips"]==1.0 and 2017<=x["year"]<=2020]
     positive_years=sum(x["net_R"]>0 for x in yrs)
     disc_net=sc.get(("discovery",1.0),{}).get("net_R",0)
-    concentration=max((x["net_R"]/disc_net for x in yrs),default=math.inf) if disc_net>0 else math.inf
+    concentration=max((x["net_R"]/disc_net for x in yrs),default=math.inf) if disc_net>0 else None
     gates["at_least_3_of_4_discovery_years_positive"]=positive_years>=3
-    gates["no_discovery_year_over_70pct_of_net_R"]=concentration<=0.70
+    gates["no_discovery_year_over_70pct_of_net_R"]=(concentration is not None and concentration<=0.70)
     if not all(gates.values()):
         verdict="GAGAL — EDGE/ROBUSTNESS"
     else: verdict="LULUS"
