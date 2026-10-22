@@ -157,8 +157,25 @@ def run_gate(package: Path, phase: str) -> dict[str, Any]:
         if not (package / name).is_file():
             issues.append(f"Missing required file: {name}")
     if phase == "closeout":
-        if not reg.get("first_outcome_compute_at_utc"):
-            issues.append("closeout requires first_outcome_compute_at_utc to be recorded")
+        early_stop = False
+        result_for_closeout = {}
+        result_path = package / "results.json"
+        if result_path.is_file():
+            try:
+                result_for_closeout = load_json(result_path)
+                early_stop = (
+                    str(result_for_closeout.get("verdict", "")).upper() == "GAGAL"
+                    and result_for_closeout.get("outcomes_computed") is False
+                    and result_for_closeout.get("first_failed_gate") in {
+                        "data_gate", "sample_gate", "minimum_sample_gate", "v2_preflight"
+                    }
+                )
+            except GateError as exc:
+                issues.append(str(exc))
+        if not reg.get("first_outcome_compute_at_utc") and not early_stop:
+            issues.append("closeout requires first_outcome_compute_at_utc unless the registered run stopped before outcomes at a named data/sample/preflight gate")
+        if early_stop and reg.get("first_outcome_compute_at_utc"):
+            issues.append("pre-outcome GAGAL package must leave first_outcome_compute_at_utc empty")
         listed, manifest_issues = read_manifest(package)
         issues.extend(manifest_issues)
         missing_manifest_entries = sorted((CLOSEOUT_REQUIRED_FILES - {"output_sha256_manifest.json"}) - listed)
@@ -171,6 +188,13 @@ def run_gate(package: Path, phase: str) -> dict[str, Any]:
                     issues.append("results.json verdict must be exactly LULUS or GAGAL")
                 if not result.get("first_failed_gate") and str(result.get("verdict", "")).upper() == "GAGAL":
                     issues.append("GAGAL result must name first_failed_gate")
+                if result.get("outcomes_computed") is False:
+                    if str(result.get("verdict", "")).upper() != "GAGAL":
+                        issues.append("pre-outcome stop must have verdict GAGAL")
+                    if result.get("first_failed_gate") not in {"data_gate", "sample_gate", "minimum_sample_gate", "v2_preflight"}:
+                        issues.append("pre-outcome stop must name the first data/sample/preflight gate")
+                    if reg.get("first_outcome_compute_at_utc"):
+                        issues.append("pre-outcome stop must not claim a PnL outcome computation time")
             except GateError as exc:
                 issues.append(str(exc))
         if (package / "rerun_hash_check.json").is_file():
