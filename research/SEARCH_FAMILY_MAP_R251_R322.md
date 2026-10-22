@@ -303,3 +303,26 @@ The binding process rule is now [Search Process Improvement Protocol v2](SEARCH_
 - **Disposition: R322 = GAGAL — DATA/SAMPLE.** Stop before outcome calculation. Do not tune thresholds, widen the calendar family, modify the schedule mapping, flip direction, or shorten delay on these dates. This is sample/execution feasibility failure, not evidence that no news edge can exist. No PnL, PF, drawdown or challenge pass probability was calculated; 2026 stayed unopened.
 - The exact committed price/event preflight was run twice; its 973-row eligibility CSV hash matched both times: `5b58b271e20c0453e241e7a6f0259c453f0b3949fe04deada38a51dc31a90edf`. Its 2,184-byte summary JSON hash matched twice: `8546f87e94e3e3241110f91165fa5aeecd620ddef6856803c5a1d776a4f09a0b`. Outputs are deterministically regenerated from the committed scripts and independently hash-pinned input artifacts.
 - Supporting files: [preflight report](R322_PREFLIGHT_REPORT_20261021.md), [machine summary](R322_PRICE_EVENT_ELIGIBILITY_PREFLIGHT.json), [official-source timestamp correction logic](r322_correct_event_times.py), [price/event preflight source](r322_price_event_preflight.py). Data-only calendar action: [run 39601019683](https://github.com/christianomomongan82-lang/scanner/actions/runs/39601019683).
+
+
+## R323–R328 governance disposition — 2026-10-22
+
+**Search is BLOCKED. No new strategy PnL, challenge replay or R329 registration is allowed until V2 package/ledger gaps are closed or explicitly recorded as unrecoverable.** EURUSD 2017–2025 is already contaminated across this project.
+
+| ID | Mechanism | Underlying observed data/sample finding | Official project disposition |
+|---|---|---|---|
+| R323 | Cross-sectional USD-relative currency strength | 410 discovery legs vs 1,000; 270 confirmation vs 600; no PnL. | GAGAL — DATA/PROCESS; archive package is not V2 CLOSED. |
+| R324 | Asian-range sweep then close-back-inside | 341 discovery vs 400; 222 confirmation vs 250; no PnL. | GAGAL — DATA/PROCESS; overlaps closed sweep/reclaim family and V2 preflight/novelty gate absent. |
+| R325 | Fixed Asian-range breakout | 593 discovery vs 600; confirmation 441; holdout 306; no PnL. | GAGAL — DATA/PROCESS; overlaps R253 session breakout and R281 range/compression family. |
+| R326 | Raw M5 impulse continuation | Exploratory local calculation was negative across discovery, confirmation and holdout: at +0.5 pip expectancy/PF = -0.250R/0.659, -0.209R/0.708, -0.264R/0.644; every year negative. | GAGAL — DATA/PROCESS / NOT CLOSED. Metrics are preserved as exploratory only because V2 pre-outcome review and complete repository archive were missing. |
+| R327 | Overnight stretch fade | 342 discovery vs 500; 272 confirmation vs 300; 187 holdout vs 200; no PnL. | GAGAL — DATA/PROCESS; session/reversal novelty review not completed. |
+| R328 | Rolling M5 compression breakout | 298 discovery vs 350; 233 confirmation vs 250; holdout 183; no PnL. | GAGAL — DATA/PROCESS; overlaps existing compression/session-breakout family. |
+
+### Lessons and hard stop
+
+- Data-quality passing and deterministic sample counts are not an experiment-level V2 pass. Preregistration, novelty review, V2 preflight, runner/dependency archive, row-level outputs, hash manifest and readback-verified closeout are separate mandatory gates.
+- R323–R328 reused already-inspected EURUSD quote history. None creates a pristine project-level OOS result.
+- R324, R325 and R328 are variants of already-covered session/range/rejection/breakout ideas; R326 is a near-duplicate momentum/impulse idea; R327 is a session-conditioned reversal idea. Do not produce more round-number variants of these mechanisms.
+- R326's negative metrics are useful warnings but not a formally closed EDGE verdict under V2; preserve that distinction. Do not claim a funded-ready strategy exists.
+- Restore/verify the exact R326 runner, normalized trade ledger, zero-inclusive weekly-R series, output manifest and package test evidence, or explicitly record the archive gate as irrecoverable. Also reconcile the pre-V2 R317/R318 and R319/R320 static archive gaps. Close/disposition the five old open scanner smoke-test issues.
+- **Until these are done: no additional PnL search.** A compliance-blocked run is GAGAL — DATA/PROCESS; it cannot be converted into edge evidence by changing the strategy.
