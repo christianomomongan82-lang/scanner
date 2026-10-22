@@ -22,3 +22,8 @@ The 5-session ranking and the prior-20-session risk window use UTC weekdays only
 This result does **not** establish that currency strength lacks a tradable edge. It establishes that this specific R323 setup does not meet its predeclared evidence-size gate. R323 is closed without tuning or relaxing its thresholds.
 
 Historical data through 2025 is project-contaminated, and 2026 remains excluded. No funded-readiness or pass-probability claim is supported.
+
+
+## V2 governance correction — 2026-10-22
+
+This report's sample gate failure remains: 410 discovery legs vs 1,000 required and 270 confirmation legs vs 600; no PnL was computed. Separately, the overall V2 archive state is **GAGAL — DATA/PROCESS / NOT CLOSED** because its runner is available only as a workflow artifact and the full V2 package and readback closeout are incomplete. The sample result must not be promoted to an officially CLOSED experiment until the repository-level V2 archive contract is reconciled.
