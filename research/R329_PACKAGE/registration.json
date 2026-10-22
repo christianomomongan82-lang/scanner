@@ -5,7 +5,7 @@
   "registered_at_utc": "2026-10-22T19:44:00Z",
   "registration_commit_sha": "83120c04b3ba8bb58312f5ad491699653e0b9999",
   "registration_commit_utc": "2026-10-22T19:45:25Z",
-  "runner_commit_sha": "786c9ec2dc17c33191c60cee34b1653942009997",
+  "runner_commit_sha": "957bb4166efdffdc3fc890c460ad2ea49f900001",
   "candidate_count": 3,
   "selection_rule": "On discovery only, select the horizon with highest mean weekly net R after observed BID/ASK + $10 round-trip standard-lot commission + +1 pip adverse slippage + 2 pip-equivalent adverse swap per 7-day hold; tie-break by higher Holm-adjusted four-week block-bootstrap lower bound, then lower portfolio maximum drawdown. Confirmation does not choose a replacement horizon.",
   "discovery_period_utc": "2017-01-01T00:00:00Z/2021-01-01T00:00:00Z",
@@ -26,6 +26,7 @@
   "first_outcome_compute_at_utc": null,
   "note": "Registered economic mechanism only. Current H1 source supports an exact T+60-minute bar-open proxy, not actual T+5-minute execution; actual contract size/swaps require verification before promotion.",
   "preoutcome_amendments": [
-    "R329_PREOUTCOME_AMENDMENT_A_SOURCE_HASH.md: corrected copied NZDUSD ASK source hash before V2 preflight; no candidate rule changed."
+    "R329_PREOUTCOME_AMENDMENT_A_SOURCE_HASH.md: corrected copied NZDUSD ASK source hash before V2 preflight; no candidate rules changed.",
+    "R329_PREOUTCOME_AMENDMENT_B_COMPACT_LEDGER.md: compressed eligibility audit archive to deterministic short-code schema before outcomes; no economics/signal rule changed."
   ]
 }
