@@ -1,3 +1,5 @@
+> **SUPERSEDED:** This first-pass result included static market-closure placeholder rows in some feature and outcome windows. Use [the closure-clean corrected replay](MRM_V1_CLOSED_MARKET_CLEAN_REPLAY.md) and its machine-readable summary as the current V1 result. The initial metrics below are retained for audit history only.
+
 # Market Response Model v1 — Final Report
 
 **Verdict: GAGAL — no cost-surviving positive edge found. Do not promote to funded challenge.**  
