@@ -1,0 +1,138 @@
+{
+  "id": "MRM-V1-EURUSD-M1-2016-2025",
+  "run_date": "2026-10-23",
+  "verdict": "GAGAL",
+  "status": "NOT_FUNDED_APPROVED",
+  "input": {
+    "repo": "christianomomongan82-lang/scanner",
+    "artifact_id": 11959096102,
+    "artifact_name": "EURUSD-M1-Dukascopy-BID-ASK-2016-2025",
+    "rows": 4415493,
+    "start_utc": "2016-01-03T00:00:00Z",
+    "end_utc": "2025-12-31T21:58:00Z",
+    "bid_gzip_sha256": "b588b7e07d9fea3748a84a1e3ecf29ccb2ea1d8ea52503f8579928a3cd4990cc",
+    "ask_gzip_sha256": "52e53dbb22ef11aee2d2c3d5e5b4ded6659d58c086189a327559253727e52f8b"
+  },
+  "method": {
+    "decision_cadence_min": 30,
+    "entry_delay_after_signal_close_min": 5,
+    "tp_pips": 15,
+    "sl_pips": 10,
+    "max_hold_min": 120,
+    "observed_bid_ask_used": true,
+    "extra_cost_primary_pips": 0.5,
+    "extra_cost_stress_pips": 1,
+    "barrier_tie_break": "stop first",
+    "valid_decision_points": 140188,
+    "raw_features": 82,
+    "model_columns": 92,
+    "model": "LightGBM regression estimating executable net trade pips",
+    "train": "2016-2019",
+    "validation": "2020-2021 (score threshold only)",
+    "diagnostic": "2022-2025 (not pristine program-level OOS)",
+    "threshold_pips": 0.5
+  },
+  "prediction_diagnostics": {
+    "train": {
+      "events": 56145,
+      "spearman": 0.30123,
+      "mean_chosen_side_pips": 0.7634,
+      "top_quartile_mean_pips": 5.0669,
+      "bottom_quartile_mean_pips": -2.907
+    },
+    "validation": {
+      "events": 28047,
+      "spearman": 0.01991,
+      "mean_chosen_side_pips": -1.2041,
+      "top_quartile_mean_pips": -0.7067,
+      "bottom_quartile_mean_pips": -2.553
+    },
+    "forward_diagnostic": {
+      "events": 55996,
+      "spearman": 0.05591,
+      "mean_chosen_side_pips": -1.5297,
+      "top_quartile_mean_pips": -0.7314,
+      "bottom_quartile_mean_pips": -3.6022
+    }
+  },
+  "policies": {
+    "validation_selective": {
+      "trades": 964,
+      "net_pips": -399.81,
+      "mean_pips": -0.4147,
+      "pf": 0.9232,
+      "max_drawdown_pips": 691.607
+    },
+    "validation_selective_1pip": {
+      "trades": 964,
+      "net_pips": -881.81,
+      "mean_pips": -0.9147,
+      "pf": 0.8392,
+      "max_drawdown_pips": 1040.107
+    },
+    "forward_selective": {
+      "trades": 1907,
+      "net_pips": -2065.888,
+      "mean_pips": -1.0833,
+      "pf": 0.8138,
+      "max_drawdown_pips": 2138.494,
+      "weekly_bootstrap_95ci_mean_pips": [
+        -14.3366,
+        -5.5747
+      ],
+      "positive_bootstrap_fraction": 0
+    },
+    "forward_selective_1pip": {
+      "trades": 1907,
+      "net_pips": -3019.388,
+      "mean_pips": -1.5833,
+      "pf": 0.7413,
+      "weekly_bootstrap_95ci_mean_pips": [
+        -19.1491,
+        -9.9564
+      ]
+    },
+    "forward_model_unfiltered": {
+      "trades": 18483,
+      "net_pips": -28125.059,
+      "mean_pips": -1.5217,
+      "pf": 0.7116
+    },
+    "forward_60m_momentum_baseline": {
+      "trades": 18592,
+      "net_pips": -30874.45,
+      "mean_pips": -1.6606,
+      "pf": 0.6893
+    }
+  },
+  "forward_years": {
+    "2022": {
+      "trades": 682,
+      "net_pips": -890.599,
+      "pf": 0.7917
+    },
+    "2023": {
+      "trades": 472,
+      "net_pips": -301.997,
+      "pf": 0.8848
+    },
+    "2024": {
+      "trades": 406,
+      "net_pips": -540.899,
+      "pf": 0.7475
+    },
+    "2025": {
+      "trades": 347,
+      "net_pips": -332.393,
+      "pf": 0.8384
+    }
+  },
+  "conclusion": "GAGAL: the model ranking collapses out of sample and selected forward trades are negative after the registered cost model. Not a funded-ready strategy.",
+  "limitations": [
+    "2020-2025 are not pristine program-level holdouts.",
+    "Not a FundedNext equity-aware challenge simulation.",
+    "+0.5/+1.0 incremental costs are stress assumptions, not verified broker costs.",
+    "M1 OHLC path ambiguity handled conservatively stop-first.",
+    "Protected XAUUSD 2026 window was not opened."
+  ]
+}
