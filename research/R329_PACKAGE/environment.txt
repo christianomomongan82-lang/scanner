@@ -1,0 +1,6 @@
+Python: 3.13.5
+NumPy: 2.3.5
+pandas: 2.2.3
+Timezone: UTC
+Compute policy: local Python/container only; GitHub used for source storage/versioning
+Runner scope: pre-outcome source integrity, feature-history and eligibility only; no PnL/outcome code
