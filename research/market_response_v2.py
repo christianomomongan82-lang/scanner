@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np,pandas as pd
 from lightgbm import LGBMRegressor
 from scipy.stats import spearmanr
-sys.path.insert(0,'/mnt/data')
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 import market_response_v1 as v1
 OUT=Path('/mnt/data/market_response_v2_results'); OUT.mkdir(exist_ok=True)
 PIP=v1.PIP; DELAY=v1.ENTRY_DELAY_ROWS; HOLD=v1.MAX_HOLD; TP=v1.TP_PIPS; SL=v1.SL_PIPS
