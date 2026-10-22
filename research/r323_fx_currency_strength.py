@@ -167,7 +167,10 @@ def period_name(ts):
     if DIAGNOSTIC[0] <= ts < DIAGNOSTIC[1]: return "diagnostic"
     return "excluded"
 
-def time_at(day, hour): return pd.Timestamp(day, tz="UTC")+pd.Timedelta(hours=hour)
+def time_at(day, hour):
+    ts=pd.Timestamp(day)
+    ts=ts.tz_localize("UTC") if ts.tzinfo is None else ts.tz_convert("UTC")
+    return ts.normalize()+pd.Timedelta(hours=hour)
 
 def make_ranges(bars):
     ranges={}
@@ -311,7 +314,8 @@ def metric(rows,cost):
     x=np.array([t["gross_R"]-cost*t["pip_size"]/t["risk_distance_price"] for t in rows],dtype=float)
     pos=x[x>0]; neg=x[x<0]
     eq=np.cumsum(x)
-    dd=float(np.max(np.maximum.accumulate(np.r_[0.0,eq])-np.r_[0.0,eq][1:])) if len(x) else 0.0
+    curve=np.r_[0.0,eq]
+    dd=float(np.max(np.maximum.accumulate(curve)-curve)) if len(x) else 0.0
     return {"legs":int(len(x)),"net_R":float(x.sum()),"mean_R":float(x.mean()) if len(x) else None,
       "median_R":float(np.median(x)) if len(x) else None,"PF_R":pf_value(x),
       "win_rate":float((x>0).mean()) if len(x) else None,"max_drawdown_sequential_R":dd,
