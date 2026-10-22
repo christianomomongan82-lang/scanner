@@ -126,3 +126,10 @@ Artinya laporan ringkas cukup untuk mencatat verdict saat ini, tetapi belum semu
 - [R311 process repair](R311_PROCESS_REPAIR.md)
 - [R312 stop/unblock protocol](R312_STOP_AND_UNBLOCK_20261020.md), [ledger replay audit](R312_LEDGER_REPLAY_AUDIT.json), [source audit](R312_XAU_SOURCE_AUDIT.json)
 - [R251–R310 master ledger](MASTER_SEARCH_LEDGER_R251_R310.csv)
+
+
+## 6. Process contradiction found in the newest chronology
+
+R312 dated 2026-10-20 explicitly orders a pause on all new strategy backtests until the reproducible real-data adapter, full event path, and challenge replay are complete. The MRM V1/V2 signal experiments were nevertheless run on 2026-10-23, before the report documents those gates as complete. The MRM reports themselves confirm that the candidate still was not fully repository-reproducible and no FundedNext challenge path was run.
+
+This is a direct process-control failure: the project identified the correct stop condition, but did not enforce it. The MRM findings remain valid evidence against those tested models, but running more signal research before closing the R312 prerequisites added more negative results without solving the stated blocker. The next step must follow the pause criteria rather than open another signal family.
