@@ -65,5 +65,10 @@
   "candidate_rejections": {
     "stop_touched_during_delay": 113
   },
-  "interpretation": "Sample/frequency gate failed. This is not evidence for or against profitability; PnL was not computed."
+  "interpretation": "Sample/frequency gate failed. This is not evidence for or against profitability; PnL was not computed.",
+  "official_v2_disposition": "GAGAL — DATA/PROCESS",
+  "v2_package_state": "NOT_CLOSED",
+  "pnl_calculated": false,
+  "reason": "V2 preflight/novelty review and complete package contract were not met before the sample screen. Counts below are diagnostics only.",
+  "observed_sample_gate_finding": "FAIL — DATA/SAMPLE: 342 discovery, 272 confirmation and 187 holdout vs 500/300/200."
 }
