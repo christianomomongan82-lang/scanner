@@ -467,16 +467,57 @@ def build_pnl_outputs(candidates,skips,audit):
     files["R323_FINAL_REPORT.md"]="\n".join(lines)+"\n"
     return files,report
 
+def verify_preflight_package(package: Path, data_dir: Path, audit: dict):
+    """Fail-closed v2 package verification; must pass before any strategy outcomes."""
+    package=package.resolve()
+    validator_root=None
+    for parent in Path(__file__).resolve().parents:
+        if (parent/"verify_experiment_package_v2.py").is_file():
+            validator_root=parent
+            break
+    if validator_root is None:
+        raise GateError("V2 validator source is not available beside the runner")
+    if str(validator_root) not in sys.path:
+        sys.path.insert(0,str(validator_root))
+    from verify_experiment_package_v2 import run_gate
+    gate=run_gate(package,"preflight")
+    if gate.get("status")!="PASS":
+        raise GateError("V2 preflight BLOCKED: "+"; ".join(gate.get("issues",[])))
+    reg=json.loads((package/"registration.json").read_text(encoding="utf-8"))
+    manifest=json.loads((package/"data_manifest.json").read_text(encoding="utf-8"))
+    packaged_runner=package/"runner.py"
+    local_runner=Path(__file__).resolve()
+    if not packaged_runner.is_file() or sha256_file(packaged_runner)!=sha256_file(local_runner):
+        raise GateError("Package runner SHA-256 differs from executed runner")
+    if reg.get("data_source_sha256")!=manifest.get("combined_ordered_stream_manifest_sha256"):
+        raise GateError("registration data_source_sha256 does not match exact raw input manifest")
+    if manifest.get("raw_stream_count")!=14 or len(manifest.get("streams",[]))!=14:
+        raise GateError("package data manifest must list exactly 14 raw streams")
+    audit_path=package/"data_audit.json"
+    pkg_audit=json.loads(audit_path.read_text(encoding="utf-8"))
+    if pkg_audit.get("data_gate")!="PASS" or audit.get("data_gate")!="PASS":
+        raise GateError("package or in-memory raw data audit did not pass")
+    for item in manifest["streams"]:
+        path=data_dir/item["name"]
+        if not path.is_file():
+            raise GateError("required raw source file missing at execution: "+item["name"])
+        if path.stat().st_size!=item["bytes"] or sha256_file(path)!=item["sha256"]:
+            raise GateError("raw source size/SHA-256 mismatch at execution: "+item["name"])
+    return gate
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--data-dir",default="dl/r323")
     ap.add_argument("--out-dir",default="research/R323_RESULTS")
     ap.add_argument("--audit-only",action="store_true",help="data validation only; do not build signals or outcomes")
+    ap.add_argument("--execute",action="store_true",help="compute PnL only after fail-closed V2 preflight passes")
+    ap.add_argument("--package-dir",default="research/R323_PACKAGE",help="V2 preflight package path required with --execute")
     args=ap.parse_args()
     data_dir=Path(args.data_dir); out_dir=Path(args.out_dir); out_dir.mkdir(parents=True,exist_ok=True)
     bars,audit=load_all(data_dir)
     if args.audit_only:
-        (out_dir/"R323_DATA_AUDIT.json").write_text(json_text(audit),encoding="utf-8")
+        for name,txt in audit_outputs(bars,audit,out_dir).items():
+            (out_dir/name).write_text(txt,encoding="utf-8")
         print(json.dumps({"mode":"data_audit_only","data_gate":audit["data_gate"],
           "fatal_errors":audit["fatal_errors"],"streams":len(audit["streams"]),"pairs":len(bars)},indent=2))
         return 0 if audit["data_gate"]=="PASS" else 2
@@ -504,6 +545,35 @@ def main():
         for name,txt in datafiles.items(): (out_dir/name).write_text(txt,encoding="utf-8")
         print(json.dumps(report,indent=2))
         return 1
+    # By default this is an outcome-free preflight run. PnL is prohibited until
+    # a complete v2 package is committed, read back, and passes the validator.
+    if not args.execute:
+        preoutcome={
+          "experiment":"R323","mode":"PRE_OUTCOME_ELIGIBILITY_ONLY",
+          "data_gate":"PASS","eligibility":audit["eligibility"],
+          "sample_gates":{
+            "discovery_1000_legs_500_days":elig["discovery"]["legs"]>=1000 and elig["discovery"]["active_days"]>=500,
+            "confirmation_600_legs_300_days":elig["confirmation"]["legs"]>=600 and elig["confirmation"]["active_days"]>=300},
+          "sample_gate":"PASS" if sample_ok else "GAGAL — DATA/SAMPLE",
+          "outcome_computation_performed":False,
+          "source_stream_sha256":{name:item["sha256"] for name,item in audit["streams"].items()},
+          "note":"No PnL/PF/drawdown/bootstrap has been calculated in this mode."
+        }
+        datafiles["R323_PREOUTCOME_GATE.json"]=json_text(preoutcome)
+        datafiles["R323_PREOUTCOME_GATE.md"]="# R323 pre-outcome eligibility gate\\n\\n"
+        if sample_ok:
+            datafiles["R323_PREOUTCOME_GATE.md"]+="**Sample gate: PASS.** No strategy outcomes were calculated. V2 package preflight must pass before a separate --execute run.\\n"
+        else:
+            datafiles["R323_PREOUTCOME_GATE.md"]+="**Verdict: GAGAL — DATA/SAMPLE.** PnL was not calculated.\\n"
+        for name,txt in datafiles.items(): (out_dir/name).write_text(txt,encoding="utf-8")
+        print(json.dumps(preoutcome,indent=2,allow_nan=False))
+        return 0 if sample_ok else 1
+    try:
+        gate=verify_preflight_package(Path(args.package_dir),data_dir,audit)
+        print(json.dumps({"v2_preflight":"PASS","package":gate.get("package"),"checks":gate.get("checks")},indent=2))
+    except Exception as exc:
+        print(json.dumps({"verdict":"GAGAL — DATA/PROCESS","first_failed_gate":"v2_preflight","reason":str(exc)},indent=2))
+        return 2
     # Run the same frozen calculation twice in fresh function calls and compare exact text bytes.
     files1,report1=build_pnl_outputs(candidates,skips,audit)
     files2,report2=build_pnl_outputs(candidates,skips,audit)
