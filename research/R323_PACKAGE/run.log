@@ -1,0 +1,13 @@
+R323 local pre-outcome execution log
+
+Runner SHA-256: 61b1a9e1d0febba7748bc91570274567307fe558bd0369a624a5840044a16f6f
+Python: 3.13.5
+NumPy: 2.3.5
+pandas: 2.2.3
+Raw stream composite SHA-256: 2db7c7d88b2f31965ff956dd5e017ce7f0b76a4ac1792dca4896833b884e85e0
+Data gate: PASS
+Run 1 exit: 1 (expected terminal sample-gate failure)
+Run 2 exit: 1 (expected terminal sample-gate failure)
+Eligibility files compared: 6/6 matching SHA-256 values in separate clean processes
+Expected counts: discovery 410 legs/205 dates, confirmation 270 legs/135 dates, diagnostic 166 legs/83 dates
+Outcome status: no PnL/PF/DD/bootstrap calculated.
