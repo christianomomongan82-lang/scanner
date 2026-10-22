@@ -1,0 +1,166 @@
+{
+  "id": "MRM-V2-GROSS-ALPHA-COST-DECOMPOSITION",
+  "run_date": "2026-10-23",
+  "verdict": "GAGAL",
+  "funded_approved": false,
+  "input": {
+    "artifact_id": 11959096102,
+    "artifact_name": "EURUSD-M1-Dukascopy-BID-ASK-2016-2025",
+    "rows": 4415493,
+    "start_utc": "2016-01-03T00:00:00Z",
+    "end_utc": "2025-12-31T21:58:00Z",
+    "bid_gzip_sha256": "b588b7e07d9fea3748a84a1e3ecf29ccb2ea1d8ea52503f8579928a3cd4990cc",
+    "ask_gzip_sha256": "52e53dbb22ef11aee2d2c3d5e5b4ded6659d58c086189a327559253727e52f8b",
+    "decision_points": 140188,
+    "price_features": 74,
+    "removed_features": [
+      "spread_now_pips",
+      "spread_mean_15m",
+      "spread_ratio_15m",
+      "spread_mean_60m",
+      "spread_ratio_60m",
+      "spread_mean_240m",
+      "spread_ratio_240m",
+      "spread_over_vol15"
+    ]
+  },
+  "method": {
+    "model": "LightGBM regression of midpoint gross TP/SL/time-stop outcome",
+    "parameters": {
+      "n_estimators": 350,
+      "learning_rate": 0.035,
+      "num_leaves": 23,
+      "min_child_samples": 800,
+      "reg_lambda": 8,
+      "reg_alpha": 0.2,
+      "subsample": 0.85,
+      "colsample_bytree": 0.85,
+      "random_state": 20261023
+    },
+    "train": "2016-2019",
+    "validation": "2020-2021; score percentile only",
+    "forward_diagnostic": "2022-2025, not pristine program-level holdout",
+    "cadence_minutes": 30,
+    "entry_delay_minutes": 5,
+    "tp_pips": 15,
+    "sl_pips": 10,
+    "max_hold_minutes": 120,
+    "score_threshold_gross_pips": 1,
+    "training_entry_spread_p90_pips": 2.0003,
+    "extra_cost_primary_pips": 0.5,
+    "extra_cost_stress_pips": 1,
+    "barrier_fill": "nominal barriers, stop-first intrabar"
+  },
+  "diagnostics": {
+    "train": {
+      "events": 56145,
+      "spearman_gross": 0.24409,
+      "spearman_net": 0.26194,
+      "mean_gross": 1.9915,
+      "mean_net": 0.6846,
+      "top_quartile_gross": 5.6556,
+      "top_quartile_net": 4.748
+    },
+    "validation": {
+      "events": 28047,
+      "spearman_gross": -0.03739,
+      "spearman_net": -0.01201,
+      "mean_gross": 0.076,
+      "mean_net": -1.2173,
+      "top_quartile_gross": -0.0791,
+      "top_quartile_net": -0.9054
+    },
+    "forward": {
+      "events": 55996,
+      "spearman_gross": -0.03842,
+      "spearman_net": -0.00332,
+      "mean_gross": 0.0571,
+      "mean_net": -1.5262,
+      "top_quartile_gross": 0.1361,
+      "top_quartile_net": -0.8398
+    }
+  },
+  "policy": {
+    "validation_selected_plus_0_5": {
+      "trades": 2020,
+      "net_pips": -1722.402,
+      "mean_pips": -0.8527,
+      "pf": 0.8484,
+      "max_drawdown_pips": 1980.001
+    },
+    "validation_selected_plus_1_0": {
+      "trades": 2020,
+      "net_pips": -2732.402,
+      "mean_pips": -1.3527,
+      "pf": 0.7717,
+      "max_drawdown_pips": 2895.701
+    },
+    "forward_selected_plus_0_5": {
+      "trades": 4415,
+      "net_pips": -4039.285,
+      "mean_pips": -0.9149,
+      "pf": 0.841,
+      "max_drawdown_pips": 4123.78,
+      "weekly_bootstrap_ci95_mean_pips": [
+        -26.0202,
+        -12.8708
+      ],
+      "bootstrap_positive_fraction": 0
+    },
+    "forward_selected_plus_1_0": {
+      "trades": 4415,
+      "net_pips": -6246.785,
+      "mean_pips": -1.4149,
+      "pf": 0.7663,
+      "max_drawdown_pips": 6299.985,
+      "weekly_bootstrap_ci95_mean_pips": [
+        -37.1981,
+        -22.8816
+      ]
+    },
+    "forward_model_direction_cost_gate": {
+      "trades": 16553,
+      "net_pips": -15413.206,
+      "mean_pips": -0.9311,
+      "pf": 0.8162,
+      "max_drawdown_pips": 15532.405
+    },
+    "forward_60m_momentum_same_gate": {
+      "trades": 16660,
+      "net_pips": -17326.488,
+      "mean_pips": -1.04,
+      "pf": 0.7976,
+      "max_drawdown_pips": 17377.487
+    }
+  },
+  "yearly_forward": {
+    "2022": {
+      "trades": 1744,
+      "net_pips": -1739.398,
+      "pf": 0.8345
+    },
+    "2023": {
+      "trades": 959,
+      "net_pips": -722.004,
+      "pf": 0.865
+    },
+    "2024": {
+      "trades": 575,
+      "net_pips": -554.693,
+      "pf": 0.8206
+    },
+    "2025": {
+      "trades": 1137,
+      "net_pips": -1023.19,
+      "pf": 0.8415
+    }
+  },
+  "limits": [
+    "2020-2025 not pristine program-level holdouts",
+    "not an equity-aware funded challenge replay",
+    "nominal barrier fill; no gap-through slippage",
+    "stop-first when both SL/TP occur in same M1 bar",
+    "extra costs not broker-verified",
+    "protected XAUUSD 2026 not opened"
+  ]
+}
