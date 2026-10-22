@@ -1,0 +1,56 @@
+{
+  "experiment_id": "R329",
+  "format": "Concatenate chunk files in listed order to form base64; decode strictly; verify SHA256 of reconstructed gzip.",
+  "outcomes_computed": false,
+  "pnl_computed": false,
+  "parts": [
+    {
+      "path": "archive_chunks/eligibility_skip_audit.part01.b64",
+      "chars": 4000,
+      "sha256": "1175628b664ad3f6b2414a443d42e4b507d19489ade8312cd66b9aba602c786a"
+    },
+    {
+      "path": "archive_chunks/eligibility_skip_audit.part02.b64",
+      "chars": 4000,
+      "sha256": "8966ae21a29fdb56787c27a08af66ab06aa382d4d7fcbedabeef1b56bb7a7828"
+    },
+    {
+      "path": "archive_chunks/eligibility_skip_audit.part03.b64",
+      "chars": 3110,
+      "sha256": "14fd6a33e56a65032fe7c497dad69c411c3b29d090609c88d23539cab75c5205"
+    },
+    {
+      "path": "archive_chunks/eligibility_skip_audit.part03_tail.b64",
+      "chars": 890,
+      "sha256": "2e729a44f920db0deb86adcb0f033c78fe72c0051869e15f80abcdd53828edcd"
+    },
+    {
+      "path": "archive_chunks/eligibility_skip_audit.part04.b64",
+      "chars": 4000,
+      "sha256": "0fdef43151a68d1c2873e7ae4289679ecd21b23cdec1ada3d0781d8c0d501ec0"
+    },
+    {
+      "path": "archive_chunks/eligibility_skip_audit.part05.b64",
+      "chars": 876,
+      "sha256": "f6af450be26250abd0529a7106c1a69395a77d96847e0b53189b1839b33728d9"
+    }
+  ],
+  "reconstructed_bytes": 12656,
+  "reconstructed_filename": "eligibility_skip_audit.csv.gz",
+  "reconstructed_sha256": "4ab971fd25ef668cd6b89da24f8420b3555004edea6cefeded217d4fa8864620",
+  "base64_chars": 16876,
+  "row_count": 1410,
+  "columns": [
+    "h",
+    "t",
+    "en",
+    "ex",
+    "p",
+    "ok",
+    "why",
+    "n",
+    "days",
+    "usd",
+    "gross"
+  ]
+}
