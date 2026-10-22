@@ -1,0 +1,10 @@
+{
+  "independent_processes": 2,
+  "byte_identical": true,
+  "hashes": {
+    "R326_trade_ledger.csv": "ee34a03a720cb980cd363f312a1690deb472b8a58e9d5b69673c89437ddc5d92",
+    "R326_results.json": "c67befa7755b0aca395ba1beafbaf1848ec269337b9eb12e105cff5e7646f50d",
+    "R326_FINAL_REPORT.md": "9d788fec219ec56318babc27116a2a718da398fb067d15eff0beda565c0bce8c",
+    "R326_annual_scorecard.csv": "986a726521c210841fcbdeeb79d3539287ec29ac0946e5efcda57870ceeda11c"
+  }
+}
