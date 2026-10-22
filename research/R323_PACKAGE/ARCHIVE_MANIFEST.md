@@ -1,3 +1,10 @@
+# R323 archive status — V2 audit, 2026-10-22
+
+**Official disposition: GAGAL — DATA/PROCESS for package closure.**  
+**Underlying pre-outcome finding: GAGAL — DATA/SAMPLE. PnL was not calculated.**
+
+The earlier line that this archive was "closed for reproducibility" is superseded by this V2 audit. Reports, config, eligibility audit and logs exist, but the project-wide V2 contract requires an exact runner committed as a normal repository file, all required artifacts/readbacks, and reconciled master ledger/family map/PROJECT_STATE. The runner was attached only as an Actions artifact, and no complete V2 card/preflight/closeout was read-back-verified for R323. Therefore R323 is not CLOSED and blocks further search until its missing archive elements are restored or explicitly dispositioned as unresolvable.
+
 # R323 archive closeout
 
 Archive review date: 2026-10-22 UTC.
