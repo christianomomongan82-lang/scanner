@@ -1,0 +1,4 @@
+period,years,eligible_legs,eligible_active_dates,minimum_legs,minimum_active_dates,sample_gate,net_R,PF_R,max_drawdown_R,bootstrap,reason
+discovery,2017-2020,410,205,1000,500,FAIL,NOT_CALCULATED,NOT_CALCULATED,NOT_CALCULATED,NOT_CALCULATED,sample gate stopped before PnL
+confirmation,2021-2023,270,135,600,300,FAIL,NOT_CALCULATED,NOT_CALCULATED,NOT_CALCULATED,NOT_CALCULATED,sample gate stopped before PnL
+diagnostic,2024-2025,166,83,diagnostic_only,diagnostic_only,DIAGNOSTIC_ONLY,NOT_CALCULATED,NOT_CALCULATED,NOT_CALCULATED,NOT_CALCULATED,sample gate stopped before PnL
