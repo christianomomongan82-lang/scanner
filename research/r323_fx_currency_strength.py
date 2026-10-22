@@ -80,7 +80,11 @@ def load_stream(path: Path):
     uniq=vals.loc[~vals.index.duplicated(keep="last")]
     times=uniq.index.unique().sort_values()
     diffs=np.diff(times.asi8)/1e9 if len(times)>1 else np.array([],dtype=float)
-    gaps=diffs[diffs>3600.0]
+    gap_indexes=np.flatnonzero(diffs>3600.0)
+    gaps=diffs[gap_indexes]
+    gap_rows=[{"stream":path.name,"previous_bar_utc":times[int(i)].isoformat(),
+      "next_bar_utc":times[int(i)+1].isoformat(),"gap_hours":float(diffs[int(i)]/3600.0)}
+      for i in gap_indexes]
     info={
       "file":path.name,"bytes":int(path.stat().st_size),"sha256":sha256_file(path),
       "raw_rows":int(raw_rows),"invalid_timestamps":invalid_ts,"out_of_range_rows":out_of_range,
@@ -94,22 +98,23 @@ def load_stream(path: Path):
     }
     # Return a unique diagnostic series only to allow a complete manifest to be written.
     # Any duplicate/malformed timestamp remains a fatal pre-outcome gate.
-    return uniq, info
+    return uniq, info, gap_rows
 
 def load_all(data_dir: Path):
     streams={}; audit={"experiment":"R323","mode":"data_audit","range_utc":[START.isoformat(),END.isoformat()],
        "source":"Dukascopy H1 BID/ASK","expected_streams":len(PAIRS)*2,"streams":{},"pairs":{},
-       "fatal_errors":[],"cleaning":{"no_fill_forward":True,"exact_timestamp_intersection":True,
+       "fatal_errors":[],"timestamp_gaps_gt_1h":[],"cleaning":{"no_fill_forward":True,"exact_timestamp_intersection":True,
        "invalid_ohlc":"excluded and counted","duplicate_timestamps":"fatal data gate",
        "repeated_flat_bars":"preserved; no placeholder deletion"}}
     for pair in PAIRS:
         for side in ("bid","ask"):
             p=data_dir/f"{pair}_h1_{side}.csv"
-            try: d,info=load_stream(p)
+            try: d,info,gap_rows=load_stream(p)
             except Exception as e:
                 audit["fatal_errors"].append(str(e)); continue
             streams[(pair,side)]=d
             audit["streams"][p.name]=info
+            audit["timestamp_gaps_gt_1h"].extend(gap_rows)
             if info["invalid_timestamps"] or info["misaligned_h1_rows"] or info["duplicate_rows_detected"]:
                 audit["fatal_errors"].append(
                   f"{p.name}: invalid_ts={info['invalid_timestamps']}, misaligned={info['misaligned_h1_rows']}, duplicates={info['duplicate_rows_detected']}")
@@ -132,6 +137,14 @@ def load_all(data_dir: Path):
         sp_open=(a.loc[common,"open"]-b.loc[common,"open"])
         sp_close=(a.loc[common,"close"]-b.loc[common,"close"])
         spreads=pd.concat([sp_open.rename("open"),sp_close.rename("close")])
+        if len(common)>1:
+            common_diffs=np.diff(common.asi8)/1e9
+            for gi in np.flatnonzero(common_diffs>3600.0):
+                audit["timestamp_gaps_gt_1h"].append({
+                  "stream":pair+":BID_ASK_EXACT_COMMON",
+                  "previous_bar_utc":common[int(gi)].isoformat(),
+                  "next_bar_utc":common[int(gi)+1].isoformat(),
+                  "gap_hours":float(common_diffs[int(gi)]/3600.0)})
         audit["pairs"][pair]={
           "bid_rows":len(b),"ask_rows":len(a),"common_exact_timestamps":len(common),
           "bid_unmatched_rows":len(b)-len(common),"ask_unmatched_rows":len(a)-len(common),
@@ -198,7 +211,7 @@ def entry_candidates(bars, audit):
     # eligible common date for the 5-active-session currency-strength score.
     rows={pair:{t:row for t,row in z.iterrows()} for pair,z in bars.items()}
     candidates=[]; skips=[]
-    min_history=max(20,5)
+    common_session_set=set(common_dates)
     for k,day in enumerate(common_dates):
         if k<5:
             skips.append({"date":day.date().isoformat(),"reason":"less_than_five_prior_common_signal_sessions"})
@@ -227,7 +240,7 @@ def entry_candidates(bars, audit):
             if (entry_mid-sig_close)*pair_dir <= 0:
                 reasons.append(f"{role}_continuation_gate_failed"); continue
             # Median range of 20 pair-specific complete 12:00–16:00 prior sessions.
-            hist=sorted((d,r) for d,r in ranges[pair].items() if d<day)
+            hist=sorted((d,r) for d,r in ranges[pair].items() if d<day and d in common_session_set)
             if len(hist)<20:
                 reasons.append(f"{role}_fewer_than_20_prior_risk_sessions"); continue
             risk=float(np.median([r for _,r in hist[-20:]]))
@@ -344,6 +357,8 @@ def audit_outputs(bars,audit,out_dir):
                     "median_spread_pips":float(np.median(np.r_[((z.bid_open-z.ask_open)/pip_size(pair)).abs().values,
                                                                ((z.bid_close-z.ask_close)/pip_size(pair)).abs().values])) if len(z) else None})
     files["R323_PAIR_COVERAGE.csv"]=csv_text(pd.DataFrame(cov))
+    gaps=audit.get("timestamp_gaps_gt_1h",[])
+    files["R323_GAPS_GT_1H.csv"]=csv_text(pd.DataFrame(gaps,columns=["stream","previous_bar_utc","next_bar_utc","gap_hours"]))
     return files
 
 def eligibility_csv(candidates,skips):
