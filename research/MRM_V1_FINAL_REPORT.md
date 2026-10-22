@@ -17,7 +17,7 @@ Replace manually nominated chart patterns with one nonlinear model that directly
 - 140,188 valid decision points after requiring 240 exact contiguous historical minutes, a five-minute delay after the completed signal bar, and a complete 120-minute forward path. 82 raw/context features; 92 model columns after side and signed-direction interactions.
 - Decision cadence: every 30 minutes. Entry is five minutes after the signal bar closes. TP 15 pips, SL 10 pips, maximum holding 120 minutes.
 - Long fills: entry Ask, exit Bid. Short fills: entry Bid, exit Ask. A candle touching both stop and target is resolved against the strategy (stop first). PnL includes observed BID/ASK spread and +0.5 pip extra round-turn friction; +1.0 pip total incremental friction is also reported.
-- The extra friction is a stress assumption, not a verified live broker commission/slippage schedule.
+- The extra friction is a stress assumption, not a verified live broker commission/slippage schedule. Barrier exits are booked at their nominal SL/TP level; gap-through fills and stop slippage beyond that level are not separately modeled.
 
 ## Frozen modeling protocol
 
@@ -72,6 +72,7 @@ For the selective policy's 2022–2025 weekly net PnL, the four-week circular bl
 
 - This is not a FundedNext two-phase equity-aware replay and does not estimate the probability of passing a challenge.
 - Intrabar ordering is unknowable from M1 OHLC; stop-first is conservative but still approximate.
+- Barrier fills are assumed to occur at the nominal TP/SL price; gap-through losses and live slippage beyond that price are not modeled and can make actual results worse.
 - The cost stress does not claim to reproduce a particular broker's actual commissions, swaps, or live slippage.
 - The retained EURUSD artifact ends in 2025. The protected XAUUSD 2026 outcome window was not opened.
 - No candidate is promoted. The correct conclusion is narrow: **this Market Response Model v1 did not discover a funded-usable EURUSD edge**. That does not prove every possible trading edge is absent.
