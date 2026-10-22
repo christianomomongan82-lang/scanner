@@ -1,3 +1,19 @@
+# PROJECT-LEVEL SOLUTION — 2026-10-23 (supersedes the 2026-10-22 reset note below)
+
+The user's instruction is to solve why the project is looping—not to propose another strategy. The authoritative solution is now documented in [PROJECT_LEVEL_SOLUTION_20261023.md](research/PROJECT_LEVEL_SOLUTION_20261023.md). It defines the bounded research-to-decision pipeline: permanently disposition historic archive exceptions, separate process/sample/edge failures, verify the candidate-independent challenge engine once, freeze a candidate-specific V2 preflight before PnL, and promote only against the real target metric P(both funded phases by day 179 without a loss-rule breach).
+
+**Important correction to the prior reset note:** the relative-strength portfolio described below is only an example lead, not the answer or next mandatory candidate. No particular strategy is selected by the project-level solution. Do not conflate this process fix with evidence of a market edge.
+
+What is resolved: the canonical ledger/family-map reconciliation through R328 and explicit non-promotable dispositions for unavailable historic archives. What is not yet proved: any profitable edge or funded-ready system. No new signal PnL has been run by this update.
+
+Canonical files:
+- [Project-level solution](research/PROJECT_LEVEL_SOLUTION_20261023.md)
+- [Master experiment ledger R251–R328](research/MASTER_SEARCH_LEDGER_R251_R328.csv)
+- [Family map R251–R328](research/SEARCH_FAMILY_MAP_R251_R328.md)
+- [Full V2 research protocol](research/SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md)
+
+---
+
 # AUTHORITATIVE RESEARCH RESET — 2026-10-22
 
 **This section supersedes older status snapshots and blocker lists further below.** The point of this change is to stop repeating the same historical archive audit forever and resume research only under the stricter candidate-specific V2 protocol.
