@@ -37,5 +37,10 @@
     "invalid_zero_asia_range": 8,
     "no_qualifying_rejection": 235,
     "stop_breached_during_delay": 54
-  }
+  },
+  "official_v2_disposition": "GAGAL — DATA/PROCESS",
+  "v2_package_state": "NOT_CLOSED",
+  "pnl_calculated": false,
+  "reason": "Only the preregistration and sample-screen output were archived; V2 preflight/novelty review, exact runner package and mandatory closeout artifacts were not completed. Counts below are pre-outcome diagnostics, not an accepted closed experiment.",
+  "observed_sample_gate_finding": "FAIL — DATA/SAMPLE: discovery 341 < 400; confirmation 222 < 250."
 }
