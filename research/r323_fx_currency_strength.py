@@ -79,7 +79,7 @@ def load_stream(path: Path):
     dup_unique=int(vals.index[vals.index.duplicated(keep=False)].nunique())
     uniq=vals.loc[~vals.index.duplicated(keep="last")]
     times=uniq.index.unique().sort_values()
-    diffs=np.diff(times.asi8)/1e9 if len(times)>1 else np.array([],dtype=float)
+    diffs=np.diff(times.as_unit("ns").asi8)/1e9 if len(times)>1 else np.array([],dtype=float)
     gap_indexes=np.flatnonzero(diffs>3600.0)
     gaps=diffs[gap_indexes]
     gap_rows=[{"stream":path.name,"previous_bar_utc":times[int(i)].isoformat(),
@@ -138,7 +138,7 @@ def load_all(data_dir: Path):
         sp_close=(a.loc[common,"close"]-b.loc[common,"close"])
         spreads=pd.concat([sp_open.rename("open"),sp_close.rename("close")])
         if len(common)>1:
-            common_diffs=np.diff(common.asi8)/1e9
+            common_diffs=np.diff(common.as_unit("ns").asi8)/1e9
             for gi in np.flatnonzero(common_diffs>3600.0):
                 audit["timestamp_gaps_gt_1h"].append({
                   "stream":pair+":BID_ASK_EXACT_COMMON",
@@ -205,7 +205,7 @@ def entry_candidates(bars, audit):
     ranges=make_ranges(bars)
     date_sets=[]
     for pair,z in bars.items():
-        date_sets.append(set(z.index[z.index.hour==10].normalize()))
+        date_sets.append(set(z.index[(z.index.hour==10)&(z.index.dayofweek<5)].normalize()))
     common_dates=sorted(set.intersection(*date_sets)) if date_sets else []
     # Require all seven exact, common 10:00 signal bars; then use the fifth prior
     # eligible common date for the 5-active-session currency-strength score.
