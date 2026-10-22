@@ -60,10 +60,10 @@ def main():
         diagnostics[name]={'events':int(mask.sum()),'spearman_gross':round(float(spearmanr(pg,rg).statistic),5),'spearman_net':round(float(spearmanr(pg,rn).statistic),5),'mean_gross':round(float(rg.mean()),4),'mean_net':round(float(rn.mean()),4),'top_quartile_gross':round(float(rg[pg>=np.quantile(pg,.75)].mean()),4),'top_quartile_net':round(float(rn[pg>=np.quantile(pg,.75)].mean()),4)}
     policy={}; periods={'validation':(pd.Timestamp('2020-01-01',tz='UTC').value//10**6,pd.Timestamp('2022-01-01',tz='UTC').value//10**6,valid),'forward':(pd.Timestamp('2022-01-01',tz='UTC').value//10**6,pd.Timestamp('2026-01-01',tz='UTC').value//10**6,fwd)}
     for name,(start,end,mask) in periods.items():
-        selected=v1.run_policy(mask,idx,ts,netp,ex,reason,choice,eligible,start,end,'mrm_v2_selected')
-        cost_only=v1.run_policy(mask,idx,ts,netp,ex,reason,choice,cost_ok,start,end,'mrm_v2_direction_no_score_filter')
+        selected=v1.run_policy(mask,idx,ts,netp,ex,reason,choice,eligible,start,end)
+        cost_only=v1.run_policy(mask,idx,ts,netp,ex,reason,choice,cost_ok,start,end)
         mom=(X['ret_60m'].to_numpy()>0).astype(np.int8)
-        baseline=v1.run_policy(mask,idx,ts,netp,ex,reason,mom,cost_ok,start,end,'baseline_60m_momentum_cost_gate')
+        baseline=v1.run_policy(mask,idx,ts,netp,ex,reason,mom,cost_ok,start,end)
         policy[name]={'selected_plus_0_5':v1.metrics(selected,'selected_plus_0_5'),'selected_plus_1_0':v1.metrics([{**z,'pnl':z['pnl']-0.5} for z in selected],'selected_plus_1_0'),'model_direction_cost_gate':v1.metrics(cost_only,'model_direction_cost_gate'),'momentum_cost_gate':v1.metrics(baseline,'momentum_cost_gate'),'threshold_gross_pips':round(float(threshold),4),'spread_p90_training_pips':round(spread_limit,4),'eligible_fraction':round(float((eligible&mask).sum()/max(1,mask.sum())),4)}
         if name=='forward': pd.DataFrame(selected).to_csv(OUT/'market_response_v2_forward_trades.csv',index=False)
     fi=pd.DataFrame({'feature':list(X.columns)+['side_sign']+[f'signed_{X.columns[j]}' for j in ret_cols],'importance_gain':model.booster_.feature_importance(importance_type='gain'),'importance_split':model.booster_.feature_importance(importance_type='split')}).sort_values('importance_gain',ascending=False)
