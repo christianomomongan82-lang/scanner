@@ -1,0 +1,33 @@
+{
+  "candidate_count": 1,
+  "confirmation_period_utc": "2021-01-01/2023-12-31",
+  "cost_model": "Observed native bid/ask side-correct fills plus extra round-trip cost stresses 0, 0.5, 1.0, 2.0 pair pips; primary +1 pip.",
+  "data_source_sha256": "2db7c7d88b2f31965ff956dd5e017ce7f0b76a4ac1792dca4896833b884e85e0",
+  "diagnostic_period_utc": "2024-01-01/2025-12-31 (contaminated and diagnostic only)",
+  "discovery_period_utc": "2017-01-01/2020-12-31",
+  "experiment_id": "R323",
+  "falsification_gates": [
+    "minimum 1000 discovery legs and 500 active dates",
+    "minimum 600 confirmation legs and 300 active dates",
+    "net R positive and PF_R >=1.05 in discovery and confirmation at +1 pip",
+    "net R positive and PF_R >=1.00 in discovery and confirmation at +2 pips",
+    "at least 3/4 discovery years positive; no year contributes over 70% of discovery net R",
+    "28-day circular bootstrap lower 95% bound >0, 10000 replicates, seed 323"
+  ],
+  "family_id": "FX_CROSS_SECTIONAL_CURRENCY_STRENGTH_CONTINUATION",
+  "first_outcome_compute_at_utc": null,
+  "historical_contamination": "2017-2025 has prior project exposure; no historical pass alone would establish funded readiness.",
+  "holdout_status": "CLOSED",
+  "hypothesis": "At 12:00 UTC, the strongest and weakest foreign currencies by 5-active-weekday-session USD-relative return predict a same-day continuation move that survives one-hour signal delay and executable bid/ask fills.",
+  "manual_delay_minutes": 60,
+  "output_contract_version": "v2",
+  "preoutcome_amendments": [
+    "Exclude UTC weekends from active signal/lookback/risk sessions; retain raw weekend bars.",
+    "Normalize pandas datetime indexes to nanoseconds for gap detection."
+  ],
+  "registered_at_utc": "2026-10-22T04:06:16Z",
+  "registration_commit_sha": "e999874fc2596dd1bef96f679e7a3b2e417953d0",
+  "registration_commit_utc": "2026-10-22T04:06:16Z",
+  "runner_commit_sha": "c43f86fed39bbe0dc448696c72ac68b1169e4793",
+  "selection_rule": "Single locked configuration; top/bottom currency rank; alphabetic currency-code tie break; no parameter optimization."
+}
