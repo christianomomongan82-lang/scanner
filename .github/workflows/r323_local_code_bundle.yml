@@ -7,6 +7,8 @@ on:
       - ".github/workflows/r323_local_code_bundle.yml"
       - "research/r323_fx_currency_strength.py"
       - "research/R323_FX_CURRENCY_STRENGTH_PREREGISTRATION.md"
+      - "research/verify_experiment_package_v2.py"
+      - "research/test_verify_experiment_package_v2.py"
 
 permissions:
   contents: read
@@ -24,7 +26,10 @@ jobs:
           mkdir -p bundle/research
           cp research/r323_fx_currency_strength.py bundle/research/
           cp research/R323_FX_CURRENCY_STRENGTH_PREREGISTRATION.md bundle/research/
-          python -m py_compile bundle/research/r323_fx_currency_strength.py
+          cp research/verify_experiment_package_v2.py bundle/research/
+          cp research/test_verify_experiment_package_v2.py bundle/research/
+          python -m py_compile bundle/research/r323_fx_currency_strength.py bundle/research/verify_experiment_package_v2.py
+          (cd bundle/research && python -m unittest -v test_verify_experiment_package_v2.py)
           cd bundle
           zip -qr ../R323-local-compute-code.zip research
       - uses: actions/upload-artifact@v4
