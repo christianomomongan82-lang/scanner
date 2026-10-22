@@ -1,3 +1,13 @@
+# RESEARCH RESET — 2026-10-22 (supersedes search approach, NOT the hard stop)
+
+The active research plan is [EDGE_SEARCH_RESET_PLAN_20261022.md](research/EDGE_SEARCH_RESET_PLAN_20261022.md). Core decision: stop repeated single-market candle/session variants and redirect toward economically grounded, portfolio-level return sources. **This is a plan, not an edge result; no new signal PnL is authorized by this note.**
+
+Before any new PnL, reconcile master ledger/family map through R328; classify irrecoverable R317/R318/R326 archive gaps as permanently non-promotable if exact artifacts cannot be recovered; mark R319/R320 as exploratory (registration followed outcomes); preserve sample/process distinctions for R323–R328; then read back and verify the consolidated records and pass V2 preflight on a new candidate package. No failed candidate may be rescued by changing its inspected parameters.
+
+The first literature-backed research lead is a genuinely distinct **portfolio-level** currency winner/loser relative-strength design, only if the novelty audit shows it is not a renamed R323 variant and cost/swap modeling is defensible. Otherwise choose a separate mechanism. The final objective remains realistic P(both phases by day 179 without breach), not a monotonic sequence of backtest PnL values. XAUUSD 2026 stays protected until pre-2026 gates pass.
+
+---
+
 # ACTIVE HARD STOP — 2026-10-22: V2 ARCHIVE/GOVERNANCE BLOCK
 
 **Search status: BLOCKED. No R329 or other new strategy PnL run is permitted.** The R323–R328 batch has been dispositioned below. This state supersedes earlier text suggesting that a next candidate may start.
