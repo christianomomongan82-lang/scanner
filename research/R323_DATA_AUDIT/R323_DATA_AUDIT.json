@@ -144,10 +144,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "audusd_h1_ask.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -161,10 +161,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "audusd_h1_bid.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -178,10 +178,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "eurusd_h1_ask.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -195,10 +195,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "eurusd_h1_bid.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -212,10 +212,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "gbpusd_h1_ask.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -229,10 +229,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "gbpusd_h1_bid.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -246,10 +246,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "nzdusd_h1_ask.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -263,10 +263,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "nzdusd_h1_bid.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -280,10 +280,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "usdcad_h1_ask.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -297,10 +297,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "usdcad_h1_bid.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -314,10 +314,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "usdchf_h1_ask.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -331,10 +331,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "usdchf_h1_bid.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -348,10 +348,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "usdjpy_h1_ask.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -365,10 +365,10 @@
       "duplicate_timestamp_values": 0,
       "end_utc": "2025-12-31T21:00:00+00:00",
       "file": "usdjpy_h1_bid.csv",
-      "gaps_gt_1h": 0,
+      "gaps_gt_1h": 36,
       "invalid_ohlc_rows_excluded": 0,
       "invalid_timestamps": 0,
-      "max_gap_hours": 0.0,
+      "max_gap_hours": 51.0,
       "misaligned_h1_rows": 0,
       "out_of_range_rows": 0,
       "raw_rows": 78361,
@@ -377,5 +377,4542 @@
       "valid_unique_rows": 78361
     }
   },
-  "timestamp_gaps_gt_1h": []
+  "timestamp_gaps_gt_1h": [
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "eurusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "eurusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "gbpusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "audusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "audusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "nzdusd_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "usdchf_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "usdchf_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "usdcad_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "usdcad_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_bid.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "usdjpy_h1_ask.csv"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "eurusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "gbpusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "audusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "nzdusd:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "usdchf:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "usdcad:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-03-31T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2017-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-06-30T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2017-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-09-29T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2018-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2017-12-29T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-03-30T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2018-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-06-29T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2018-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-08-31T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2018-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-11-30T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2019-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2018-12-31T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2019-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-05-31T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2019-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-08-30T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2019-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-11-29T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2019-12-31T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2020-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-01-31T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2020-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-02-28T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2020-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-07-31T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2020-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-10-30T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2021-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2020-12-31T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2021-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-04-30T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2021-08-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-07-30T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2022-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2021-12-31T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2022-05-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-04-29T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2022-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-09-30T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2023-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2022-12-30T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-04-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-03-31T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2023-07-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-06-30T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2023-10-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-09-29T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 51.0,
+      "next_bar_utc": "2024-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2023-12-29T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2024-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-05-31T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2024-09-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-08-30T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 27.0,
+      "next_bar_utc": "2024-12-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-11-29T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-01-01T00:00:00+00:00",
+      "previous_bar_utc": "2024-12-31T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-02-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-01-31T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 3.0,
+      "next_bar_utc": "2025-03-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-02-28T21:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 28.0,
+      "next_bar_utc": "2025-06-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-05-30T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    },
+    {
+      "gap_hours": 4.0,
+      "next_bar_utc": "2025-11-01T00:00:00+00:00",
+      "previous_bar_utc": "2025-10-31T20:00:00+00:00",
+      "stream": "usdjpy:BID_ASK_EXACT_COMMON"
+    }
+  ]
 }

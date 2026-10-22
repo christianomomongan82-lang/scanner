@@ -1,4 +1,36 @@
 {
+  "audit_correction": {
+    "per_pair_common_gap_counts": {
+      "audusd": 0,
+      "eurusd": 0,
+      "gbpusd": 0,
+      "nzdusd": 0,
+      "usdcad": 0,
+      "usdchf": 0,
+      "usdjpy": 0
+    },
+    "per_stream_gap_counts": {
+      "audusd_h1_ask.csv": 36,
+      "audusd_h1_bid.csv": 36,
+      "eurusd_h1_ask.csv": 36,
+      "eurusd_h1_bid.csv": 36,
+      "gbpusd_h1_ask.csv": 36,
+      "gbpusd_h1_bid.csv": 36,
+      "nzdusd_h1_ask.csv": 36,
+      "nzdusd_h1_bid.csv": 36,
+      "usdcad_h1_ask.csv": 36,
+      "usdcad_h1_bid.csv": 36,
+      "usdchf_h1_ask.csv": 36,
+      "usdchf_h1_bid.csv": 36,
+      "usdjpy_h1_ask.csv": 36,
+      "usdjpy_h1_bid.csv": 36
+    },
+    "raw_input_hashes_changed": false,
+    "reason": "Pandas datetime internal resolution is not guaranteed nanoseconds; differences are now normalized to ns before gap measurement.",
+    "timestamp_gap_rows": 756,
+    "weekend_session_filter": "applies to signal eligibility only; raw rows preserved"
+  },
+  "audit_json_sha256": "7be789523a08cf5b5a56ed846e5e130874c0b952cc1a1bbf3f1d6fe3d4484d22",
   "cleaning_policy": {
     "duplicate_timestamp": "fatal",
     "exact_timestamp_intersection": true,
