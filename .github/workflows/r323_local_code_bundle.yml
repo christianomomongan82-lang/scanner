@@ -1,0 +1,34 @@
+name: R323 local compute code bundle
+
+on:
+  push:
+    branches: ["local-backtest/r189-dukascopy-history"]
+    paths:
+      - ".github/workflows/r323_local_code_bundle.yml"
+      - "research/r323_fx_currency_strength.py"
+      - "research/R323_FX_CURRENCY_STRENGTH_PREREGISTRATION.md"
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: local-backtest/r189-dukascopy-history
+      - name: Package local-only runner and registered rules
+        run: |
+          mkdir -p bundle/research
+          cp research/r323_fx_currency_strength.py bundle/research/
+          cp research/R323_FX_CURRENCY_STRENGTH_PREREGISTRATION.md bundle/research/
+          python -m py_compile bundle/research/r323_fx_currency_strength.py
+          cd bundle
+          zip -qr ../R323-local-compute-code.zip research
+      - uses: actions/upload-artifact@v4
+        with:
+          name: R323-local-compute-code
+          path: R323-local-compute-code.zip
+          retention-days: 30
