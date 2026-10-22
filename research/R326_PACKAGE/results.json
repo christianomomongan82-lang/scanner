@@ -1,6 +1,6 @@
 {
   "study": "R326 EURUSD M5 raw-price impulse continuation",
-  "verdict": "FAIL — EDGE",
+  "verdict": "GAGAL — DATA/PROCESS",
   "preregistration_commit": "4c2dddf2ff17e8a5273c875ee84bdfd6b9af15ea",
   "source_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
   "data": {
@@ -168,5 +168,14 @@
     "report_sha256": "9d788fec219ec56318babc27116a2a718da398fb067d15eff0beda565c0bce8c",
     "annual_scorecard_sha256": "986a726521c210841fcbdeeb79d3539287ec29ac0946e5efcda57870ceeda11c"
   },
-  "reproducibility": "Two clean processes produced byte-identical normalized ledger, JSON, report and annual scorecard."
+  "reproducibility": "Two clean processes produced byte-identical normalized ledger, JSON, report and annual scorecard.",
+  "official_process_state": "NOT_CLOSED",
+  "economic_outcome_status": "EXPLORATORY_DIAGNOSTIC_NEGATIVE_NOT_FORMAL_EDGE_CLOSEOUT",
+  "v2_preflight_passed_before_outcome": false,
+  "v2_novelty_and_family_review_passed_before_outcome": false,
+  "full_runner_committed_and_readback_verified": false,
+  "full_trade_ledger_committed_and_readback_verified": false,
+  "weekly_net_r_series_committed_and_readback_verified": false,
+  "reproducibility_note": "Two local executions matched the original diagnostic hashes byte-for-byte. That does not satisfy the V2 repository package/closeout invariant.",
+  "exploratory_interpretation": "Observed outcomes were negative in discovery, confirmation and holdout, including before incremental friction; these are kept as exploratory diagnostics only because V2 registration/preflight/complete archive gates were not passed."
 }
