@@ -1,0 +1,128 @@
+name: R323 durable data archive (no strategy PnL)
+
+on:
+  push:
+    branches: ["local-backtest/r189-dukascopy-history"]
+    paths:
+      - ".github/workflows/r323_archive_acquired_data.yml"
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: r323-durable-data-archive
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout locked research branch
+        uses: actions/checkout@v4
+        with:
+          ref: local-backtest/r189-dukascopy-history
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Download successful acquisition artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: R323-FX-H1-BID-ASK-data
+          run-id: 39719343805
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: .
+
+      - name: Re-audit raw data only and prepare durable archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip numpy pandas
+          python -m py_compile research/r323_fx_currency_strength.py
+          python -u research/r323_fx_currency_strength.py \
+            --audit-only --data-dir dl/r323 --out-dir research/R323_DATA_AUDIT
+
+          python - <<'PY'
+          import csv, hashlib, json, shutil
+          from pathlib import Path
+          import pandas as pd
+
+          src=Path("dl/r323")
+          dest=Path("data/r323")
+          out=Path("research/R323_DATA_AUDIT")
+          audit=json.loads((out/"R323_DATA_AUDIT.json").read_text(encoding="utf-8"))
+          raw_manifest=json.loads((src/"R323_RAW_FILE_MANIFEST.json").read_text(encoding="utf-8"))
+          expected={f"{p}_h1_{s}.csv" for p in
+                    ("eurusd","gbpusd","audusd","nzdusd","usdchf","usdcad","usdjpy")
+                    for s in ("bid","ask")}
+          files=sorted(p for p in src.glob("*.csv") if p.name in expected)
+          if audit.get("data_gate") != "PASS":
+              raise SystemExit("Data gate failed; refusing durable source promotion")
+          if len(files)!=14 or {p.name for p in files}!=expected:
+              raise SystemExit(f"Expected exact 14 raw quote files, found {[p.name for p in files]}")
+          if raw_manifest.get("raw_csv_count") != 14:
+              raise SystemExit("Upstream acquisition manifest does not list exactly 14 raw streams")
+
+          dest.mkdir(parents=True,exist_ok=True)
+          entries=[]
+          for p in files:
+              q=dest/p.name
+              shutil.copyfile(p,q)
+              entries.append({"name":q.name,"bytes":q.stat().st_size,
+                "sha256":hashlib.sha256(q.read_bytes()).hexdigest()})
+          canonical=json.dumps(entries,sort_keys=True,separators=(",",":")).encode()
+          source_sha=hashlib.sha256(canonical).hexdigest()
+          manifest={
+            "experiment":"R323",
+            "source_workflow_run_id":39719343805,
+            "source_run_url":"https://github.com/christianomomongan82-lang/scanner/actions/runs/39719343805",
+            "provider":"Dukascopy native H1 OHLC",
+            "period_utc":{"start_inclusive":"2017-01-01T00:00:00Z","end_exclusive":"2026-01-01T00:00:00Z"},
+            "mode":"DATA_ARCHIVE_AND_AUDIT_ONLY_NO_STRATEGY_PNL",
+            "raw_stream_count":len(entries),
+            "combined_ordered_stream_manifest_sha256":source_sha,
+            "streams":entries,
+            "data_gate":audit["data_gate"],
+            "fatal_errors":audit.get("fatal_errors",[]),
+            "cleaning_policy":{
+              "no_fill_forward":True,"exact_timestamp_intersection":True,
+              "duplicate_timestamp":"fatal","invalid_ohlc":"exclude and count",
+              "repeated_flat_bars":"preserve","negative_open_or_close_spread":"fatal",
+              "missing_hours":"preserve and audit"
+            }
+          }
+          out.mkdir(parents=True,exist_ok=True)
+          (out/"R323_SOURCE_DATA_MANIFEST.json").write_text(json.dumps(manifest,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+          with (out/"R323_PAIR_COVERAGE.csv").open("w",newline="",encoding="utf-8") as f:
+              w=csv.writer(f,lineterminator="\n")
+              w.writerow(["pair","bid_rows","ask_rows","common_exact_timestamps","bid_unmatched_rows","ask_unmatched_rows","negative_open_spreads","negative_close_spreads","spread_price_min","spread_price_median","spread_price_p95","spread_price_max","gaps_gt_1h"])
+              for pair in sorted(audit["pairs"]):
+                  z=audit["pairs"][pair]
+                  w.writerow([pair]+[z.get(k,"") for k in ("bid_rows","ask_rows","common_exact_timestamps","bid_unmatched_rows","ask_unmatched_rows","negative_open_spreads","negative_close_spreads","spread_price_min","spread_price_median","spread_price_p95","spread_price_max","gaps_gt_1h")])
+          pd.DataFrame(audit.get("timestamp_gaps_gt_1h",[]),
+              columns=["stream","previous_bar_utc","next_bar_utc","gap_hours"]).to_csv(
+              out/"R323_GAPS_GT_1H.csv",index=False,lineterminator="\n")
+          if audit.get("data_gate")!="PASS" or len(audit.get("streams",{}))!=14:
+              raise SystemExit("Local data audit did not pass exact 14-stream gate")
+          print(json.dumps({"data_gate":audit["data_gate"],"raw_streams":len(entries),
+            "source_manifest_sha256":source_sha,"durable_bytes":sum(x["bytes"] for x in entries)},indent=2))
+          PY
+
+      - name: Archive raw price files and audit reports permanently in Git
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/r323/*.csv research/R323_DATA_AUDIT/*
+          git add -f research/r323_fx_currency_strength.py research/R323_FX_CURRENCY_STRENGTH_PREREGISTRATION.md
+          if git diff --cached --quiet; then
+            echo "No raw data or audit changes to commit."
+          else
+            git commit -m "Archive R323 Dukascopy H1 quote source and audit"
+            git push origin HEAD:local-backtest/r189-dukascopy-history
+          fi
