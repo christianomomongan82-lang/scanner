@@ -1,0 +1,42 @@
+{
+  "study": "R325 EURUSD Asian-range breakout continuation",
+  "registration_commit": "111f34274bcb1abdc9a762865a27e164b03aae31",
+  "source_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+  "phase": "pre-outcome sample gate only; no exit prices, PnL, R, PF, drawdown or bootstrap calculated",
+  "bid_rows": 4415493,
+  "ask_rows": 4415493,
+  "exact_timestamp_join": true,
+  "candidates_with_complete_contiguous_exit_horizon": 1469,
+  "discovery_2017_2020": 593,
+  "confirmation_A_2021_2023": 441,
+  "final_holdout_B_2024_2025": 306,
+  "discovery_year_counts": {
+    "2017": 159,
+    "2018": 139,
+    "2019": 137,
+    "2020": 158
+  },
+  "confirmation_A_year_counts": {
+    "2021": 149,
+    "2022": 152,
+    "2023": 140
+  },
+  "holdout_B_year_counts": {
+    "2024": 150,
+    "2025": 156
+  },
+  "sample_gates": {
+    "discovery_min_600": false,
+    "confirmation_min_400": true,
+    "final_holdout_min_250": true,
+    "each_year_min_100": true
+  },
+  "verdict": "FAIL — DATA/SAMPLE",
+  "skip_reasons": {
+    "breakout_invalidated_during_delay": 917,
+    "incomplete_asia_360_bars": 2,
+    "invalid_entry_to_midpoint_risk": 4,
+    "invalid_zero_asia_range": 8,
+    "no_breakout_close": 207
+  }
+}
