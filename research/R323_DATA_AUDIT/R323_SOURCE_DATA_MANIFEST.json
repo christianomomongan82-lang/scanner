@@ -1,13 +1,13 @@
 {
   "audit_correction": {
     "per_pair_common_gap_counts": {
-      "audusd": 0,
-      "eurusd": 0,
-      "gbpusd": 0,
-      "nzdusd": 0,
-      "usdcad": 0,
-      "usdchf": 0,
-      "usdjpy": 0
+      "audusd": 36,
+      "eurusd": 36,
+      "gbpusd": 36,
+      "nzdusd": 36,
+      "usdcad": 36,
+      "usdchf": 36,
+      "usdjpy": 36
     },
     "per_stream_gap_counts": {
       "audusd_h1_ask.csv": 36,
@@ -30,7 +30,7 @@
     "timestamp_gap_rows": 756,
     "weekend_session_filter": "applies to signal eligibility only; raw rows preserved"
   },
-  "audit_json_sha256": "7be789523a08cf5b5a56ed846e5e130874c0b952cc1a1bbf3f1d6fe3d4484d22",
+  "audit_json_sha256": "cc64104cffdb563f9854cd49092a955d1dc9176bdec9be5935cb0a3d715194cc",
   "cleaning_policy": {
     "duplicate_timestamp": "fatal",
     "exact_timestamp_intersection": true,
