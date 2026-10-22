@@ -133,3 +133,36 @@ Artinya laporan ringkas cukup untuk mencatat verdict saat ini, tetapi belum semu
 R312 dated 2026-10-20 explicitly orders a pause on all new strategy backtests until the reproducible real-data adapter, full event path, and challenge replay are complete. The MRM V1/V2 signal experiments were nevertheless run on 2026-10-23, before the report documents those gates as complete. The MRM reports themselves confirm that the candidate still was not fully repository-reproducible and no FundedNext challenge path was run.
 
 This is a direct process-control failure: the project identified the correct stop condition, but did not enforce it. The MRM findings remain valid evidence against those tested models, but running more signal research before closing the R312 prerequisites added more negative results without solving the stated blocker. The next step must follow the pause criteria rather than open another signal family.
+
+
+## 7. Local recheck of the remaining legacy R189 candidate — 2026-10-23
+
+The raw GitHub Actions artifact `EURUSD-M1-Dukascopy-BID-ASK-2016-2025` (artifact ID `11959096102`) was retrieved into the current local session and checked against the hashes in the committed R189 report.
+
+| Input | Rechecked value | Result |
+|---|---|---|
+| BID rows | 4,415,493 | Match saved audit |
+| ASK rows | 4,415,493 | Match saved audit |
+| BID SHA-256 | `b588b7e07d9fea3748a84a1e3ecf29ccb2ea1d8ea52503f8579928a3cd4990cc` | Match |
+| ASK SHA-256 | `52e53dbb22ef11aee2d2c3d5e5b4ded6659d58c086189a327559253727e52f8b` | Match |
+| Intrabar replay trades | 1,673 | Match saved report |
+| Full-period PF / net pips at +1 pip | 1.082 / +462.5 | Match saved report |
+| 2021–2025 PF / net pips at +0.5 pip | 1.284 / +674.8 | Match saved report |
+| 2021–2025 PF / net pips at +1 pip | 1.114 / +291.3 | Match saved report |
+
+The independent local replay used the committed strategy and execution function logic. It reproduced the headline metrics to rounding precision. It was assembled as a local verification script from the fetched source logic rather than invoking the checked-in Python file byte-for-byte; treat this as a successful logic-level replay, not a cryptographically identical build invocation.
+
+### Manual latency decision
+
+The local latency replay also matched the saved R189 sensitivity results:
+
+| Additional delay after ideal next-bar fill | Extra cost beyond observed BID/ASK | Forward PF | Forward net pips | 95% weekly-bootstrap CI |
+|---:|---:|---:|---:|---:|
+| 1 minute | +0.5 pip | 1.225 | +544.1 | [+0.404, +3.794] |
+| 3 minutes | +0.5 pip | 1.212 | +509.6 | [+0.287, +3.646] |
+| 5 minutes | +0.5 pip | 1.071 | +181.5 | [-0.444, +1.849] |
+| 5 minutes | +1.0 pip | 0.926 | -203.0 | [-1.997, +0.348] |
+
+**Updated decision: R189 is reproducible at the headline-metric level but remains NOT PASSED for the user's several-minute manual-phone execution.** At a five-minute extra delay, the +0.5-pip case falls below the project's PF 1.10 floor and its weekly interval includes zero; at +1 pip the point estimate is loss-making. This confirms an execution-horizon mismatch, not a data-checksum problem.
+
+This does not change the project-wide verdict: no current candidate has demonstrated all historical, execution, account-path, challenge-rule, and pass-probability gates. Do not retune R189 on these reused dates.
