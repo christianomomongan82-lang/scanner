@@ -64,3 +64,14 @@ Prices through 2025 have been inspected across many earlier FX experiments; the 
 ## 7. Preregistered archive contract
 
 Archive and read back: this preregistration; data-only acquisition code/workflow; raw bid/ask archive and its SHA-256; data audit; exact runner; calendar/session and eligibility audit; full chronological trade and skip ledger; annual/quarterly and cost scorecards; weekly/daily series; bootstrap; two clean run hashes; environment; machine JSON; final report; master ledger; family map; and PROJECT_STATE update. The local runner must complete two deterministic runs before claiming reproducibility.
+
+
+## 8. Frozen data cleaning and pre-outcome integrity rules (locked before price outcomes)
+
+- Required files are the fourteen native Dukascopy H1 streams for the seven named pairs, one BID and one ASK stream per pair. Range is 2017-01-01 inclusive through 2026-01-01 exclusive; no other pair or period may be substituted.
+- Parse a numeric timestamp as milliseconds when its absolute median is at least 1e11, otherwise seconds when at least 1e8; otherwise use a parseable timezone-aware/ISO timestamp. Convert every timestamp to UTC and reject invalid timestamps or any timestamp not aligned to an exact H1 open (minute/second/microsecond must be zero).
+- OHLC must be finite and satisfy high >= max(open, close), low <= min(open, close), and high >= low. Any invalid OHLC row is excluded and counted before eligibility. Any duplicate timestamp in a raw stream causes a DATA GATE failure; do not choose a preferred duplicate row. Preserve all valid repeated-flat candles; no placeholder/static-bar deletion is permitted in R323.
+- BID/ASK pairing is exact-timestamp intersection only. Record missing/nonmatched timestamps and all gaps; never forward-fill or nearest-join. At common timestamps, negative ASK-minus-BID at either open or close causes a DATA GATE failure. Observed spread remains in quote-side execution.
+- The data audit must record raw file byte size, SHA-256, raw/valid/invalid/duplicate row counts, coverage bounds, expected H1 alignment, unmatched quote-row counts, common-row counts, spread extrema/quantiles, and all timestamp gaps greater than one hour. Only after this audit passes may signals/eligibility be constructed.
+- The runner emits outcome-free eligibility counts before computing any trade outcomes. If either discovery or confirmation fails a minimum completed-leg or active-day sample gate, it stops and reports GAGAL — DATA/SAMPLE with no PnL, PF, drawdown, or bootstrap computed.
+- Reproducibility means two fresh local runs from the same fourteen files produce identical SHA-256 hashes for each outcome-derived CSV/JSON/Markdown output, excluding only an external execution log; the hash manifest itself is not recursively hashed.
