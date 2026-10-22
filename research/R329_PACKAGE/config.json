@@ -1,0 +1,46 @@
+{
+  "candidate_count": 3,
+  "commission_round_trip_usd": 10,
+  "entry": "exact active Tuesday 12:00 UTC H1 open; conservative hourly proxy, not exact T+5 quote",
+  "experiment_id": "R329",
+  "extra_slippage_pips_round_trip": [0, 0.5, 1, 2],
+  "fundednext_forex_commission_usd_per_side_per_standard_lot": 5,
+  "horizon_weeks": [13, 26, 39],
+  "outcome_calculation_authorized": false,
+  "pairs": ["audusd", "eurusd", "gbpusd", "nzdusd", "usdcad", "usdchf", "usdjpy"],
+  "periods": {
+    "confirmation": "2021-01-01/2024-01-01",
+    "diagnostic": "2024-01-01/2026-01-01",
+    "discovery": "2017-01-01/2021-01-01",
+    "excluded": "2026-01-01 onward"
+  },
+  "preoutcome_sample_gates": {
+    "confirmation_active_rebalance_dates_min": 70,
+    "discovery_active_rebalance_dates_min": 100,
+    "per_candidate_confirmation_eligible_legs_min": 100,
+    "per_candidate_discovery_eligible_legs_min": 200
+  },
+  "primary_extra_slippage_pips": 1,
+  "primary_swap_proxy_pips": 2,
+  "protected_xau_2026_read": false,
+  "rebalance_exit": "same exact 12:00 UTC open one calendar week later; held period 168h when eligible",
+  "redistribute_capped_weight": false,
+  "risk_weighting": "inverse standard deviation of last 13 eligible weekly log returns, normalize gross pre-cap to 1",
+  "scheduled_signal": "Tuesday 10:00 UTC H1 bar open; close known at 11:00 UTC",
+  "single_pair_abs_weight_cap": 0.25,
+  "standard_lot_account_contract_size_verified": false,
+  "standard_lot_units_assumption": 100000,
+  "swap_proxy_is_actual_provider_swap": false,
+  "swap_proxy_pips_per_7day_holding_period": [2, 4],
+  "usd_factor_cap_fraction_gross": 0.3,
+  "usd_loading": {
+    "audusd": -1,
+    "eurusd": -1,
+    "gbpusd": -1,
+    "nzdusd": -1,
+    "usdcad": 1,
+    "usdchf": 1,
+    "usdjpy": 1
+  },
+  "volatility_lookback_weekly_returns": 13
+}
