@@ -29,15 +29,17 @@ This is a one-time closeout task. If an artifact is demonstrably unavailable, cl
 
 ## Step 2 — Change the search unit from a chart pattern to an economic return source
 
-### First research lead: a diversified currency relative-strength portfolio
+### First research lead: a portfolio of time-series momentum across currency pairs
 
-A published FX literature line reports cross-sectional momentum: currencies that were recent winners outperformed recent losers in broad samples. The authors also stress that transaction costs and limits to arbitrage matter. This is **a research lead, not evidence that this CFD implementation will work**. See Menkhoff et al., *Currency Momentum Strategies* (Journal of Financial Economics, 2012), also listed by the BIS:
-- https://doi.org/10.1016/j.jfineco.2012.06.009
-- https://www.bis.org/publ/work366.htm
+**Preferred research hypothesis:** use completed, multi-week price returns to determine a separate long/short direction for each of the seven available major USD FX pairs, then combine the positions into a risk-balanced portfolio that rebalances on a fixed schedule. This changes the unit of research from one candle trigger on EURUSD to a multi-instrument portfolio with explicit correlation/aggregate-risk constraints and a challenge-level objective.
 
-This must not be a renamed R323 rerun. R323 tested a five-session USD-relative strength trigger with delayed individual entries and failed the preregistered pre-outcome sample gate (410 discovery / 270 confirmation legs versus its own higher gates); it produced no PnL evidence. A new portfolio-level design is only eligible after a written novelty audit explains the substantive difference: cross-sectional winner/loser portfolio construction, multi-week horizon, scheduled rebalancing, balanced USD exposure, portfolio overlap and risk caps, and a separate cost/swap treatment. If the audit concludes it is only a horizon/threshold mutation, reject it before PnL and choose a genuinely different family.
+A credible literature basis exists: Moskowitz, Ooi and Pedersen, *Time Series Momentum* (Journal of Financial Economics, 2012), documented return persistence over 1–12 months across 58 liquid equity-index, currency, commodity and bond futures. This gives a reason to test a slow return-persistence hypothesis, **not** a claim that it works on these retail FX CFDs. It also creates a key risk: a 1–12 month horizon may be too slow for the project's 179-day funded-target objective, so the final decision must be based on the actual day-179 path result, not on the paper's findings. Source: https://doi.org/10.1016/j.jfineco.2011.11.003.
 
-### Requirements for any candidate
+This is not approved to run yet. R258 tested short 24h/120h momentum on a single EURUSD pair and failed; R323 tested a five-session cross-sectional USD-relative ranking and failed its pre-outcome sample gate. The portfolio candidate must be preregistered as a distinct **portfolio/multi-instrument crossover**: fixed multi-week horizons, seven-pair directional time-series signals, volatility-normalized sizing, capped correlated exposure, scheduled rebalancing, and portfolio-level challenge replay. Merely changing a momentum lookback or candle interval would fail novelty review.
+
+Existing repository data includes paired H1 quotes for seven FX pairs, which is enough to begin a data-only feasibility audit. Before any outcome PnL, the audit must verify exact quote alignment, missing gaps, NY-roll trading-day construction, executable-side prices, and whether account-specific swap costs can be defensibly bounded. If data/fees or novelty fail, reject this lead **before PnL**; do not quietly substitute symbols, periods or cost assumptions. Cross-sectional currency winner/loser momentum remains a secondary lead but is currently less attractive because it is economically too close to R323.
+
+## Requirements for any candidate
 
 - Start with one locked economic mechanism and a small, explicitly registered candidate set (normally <=100; prefer far fewer), not an open-ended threshold hunt.
 - Use only available signal-time information; exact paired BID/ASK data; no fabricated bars; five-minute delayed executable entry where relevant; adverse gap and SL/TP collision treatment.
