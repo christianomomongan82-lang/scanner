@@ -1,0 +1,95 @@
+name: R323 refresh source integrity audit only
+
+on:
+  push:
+    branches: ["local-backtest/r189-dukascopy-history"]
+    paths:
+      - ".github/workflows/r323_refresh_source_audit.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r323-refresh-source-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout durable R323 raw inputs
+        uses: actions/checkout@v4
+        with:
+          ref: local-backtest/r189-dukascopy-history
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Re-audit timestamps/quotes using version-independent nanosecond calculations
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip numpy pandas
+          python -m py_compile research/r323_fx_currency_strength.py
+          python -u research/r323_fx_currency_strength.py \
+            --audit-only --data-dir data/r323 --out-dir research/R323_DATA_AUDIT
+      - name: Reconcile audit with locked source manifest (no outcomes)
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          out=Path("research/R323_DATA_AUDIT")
+          manifest_path=out/"R323_SOURCE_DATA_MANIFEST.json"
+          manifest=json.loads(manifest_path.read_text())
+          audit=json.loads((out/"R323_DATA_AUDIT.json").read_text())
+          if audit.get("data_gate")!="PASS" or len(audit.get("streams",{}))!=14:
+              raise SystemExit("R323 DATA GATE FAILED; no source audit promotion")
+          entries=manifest.get("streams",[])
+          for entry in entries:
+              p=Path("data/r323")/entry["name"]
+              if not p.is_file() or p.stat().st_size!=entry["bytes"]:
+                  raise SystemExit(f"Raw input bytes/size mismatch: {entry['name']}")
+              if hashlib.sha256(p.read_bytes()).hexdigest()!=entry["sha256"]:
+                  raise SystemExit(f"Raw input SHA-256 mismatch: {entry['name']}")
+          manifest["data_gate"]=audit["data_gate"]
+          manifest["audit_correction"]={
+            "reason":"Pandas datetime internal resolution is not guaranteed nanoseconds; differences are now normalized to ns before gap measurement.",
+            "raw_input_hashes_changed":False,
+            "timestamp_gap_rows":len(audit.get("timestamp_gaps_gt_1h",[])),
+            "per_stream_gap_counts":{name:info["gaps_gt_1h"] for name,info in audit["streams"].items()},
+            "per_pair_common_gap_counts":{name:info["gaps_gt_1h"] for name,info in audit["pairs"].items()},
+            "weekend_session_filter":"applies to signal eligibility only; raw rows preserved"
+          }
+          manifest["audit_json_sha256"]=hashlib.sha256((out/"R323_DATA_AUDIT.json").read_bytes()).hexdigest()
+          manifest_path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+"\n")
+          note="""# R323 source audit correction — 2026-10-22
+
+The first acquisition-run audit incorrectly reported zero gaps because the implementation treated the pandas datetime index's integer representation as always nanoseconds. This is not a valid cross-version assumption. The source runner now explicitly normalizes DatetimeIndex values to nanoseconds before calculating differences and preserves each gap in the audit.
+
+Corrected input audit was rerun against the same 14 raw streams whose SHA-256 values are unchanged. The corrected audit reports each raw stream's gap count and records every gap over one hour in R323_GAPS_GT_1H.csv. The gaps are not forward-filled. Weekend bars remain in raw source files but are excluded from the active-session ranks/lookbacks by the pre-outcome registration amendment.
+
+No R323 strategy PnL, PF, drawdown or bootstrap was calculated before this correction.
+"""
+          (out/"R323_DATA_AUDIT_CORRECTION.md").write_text(note,encoding="utf-8")
+          print(json.dumps({
+            "data_gate":audit["data_gate"],
+            "streams":len(audit["streams"]),
+            "raw_gap_rows":sum(v["gaps_gt_1h"] for v in audit["streams"].values()),
+            "common_pair_gap_rows":sum(v["gaps_gt_1h"] for v in audit["pairs"].values()),
+            "gap_ledger_rows":len(audit.get("timestamp_gaps_gt_1h",[])),
+            "source_sha256":manifest["combined_ordered_stream_manifest_sha256"],
+            "raw_sha256_unchanged":True
+          },indent=2))
+          PY
+      - name: Commit corrected source-quality reports
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/R323_DATA_AUDIT/*
+          if git diff --cached --quiet; then
+            echo "Audit outputs are already current."
+          else
+            git commit -m "Correct R323 timestamp gap audit before outcomes"
+            git push origin HEAD:local-backtest/r189-dukascopy-history
+          fi
