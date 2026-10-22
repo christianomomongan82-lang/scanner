@@ -1,0 +1,8 @@
+V2 validator unit tests: 7/7 PASS
+py_compile runner.py: PASS
+data_gate: PASS (14/14 raw streams, no duplicates/misalignment/invalid OHLC/negative spreads)
+timestamp gap correction: PASS (36 gaps >1h per stream; 36 per pair; no fill-forward)
+weekend active-session correction: PASS
+clean pre-outcome run 1: STOPPED_BEFORE_PNL, GAGAL — DATA/SAMPLE, exit code 1
+clean pre-outcome run 2: STOPPED_BEFORE_PNL, GAGAL — DATA/SAMPLE, exit code 1
+Sample counts match in both runs. PnL, PF, DD and bootstrap were NOT calculated.
