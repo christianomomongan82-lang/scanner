@@ -38,5 +38,10 @@
     "invalid_entry_to_midpoint_risk": 4,
     "invalid_zero_asia_range": 8,
     "no_breakout_close": 207
-  }
+  },
+  "official_v2_disposition": "GAGAL — DATA/PROCESS",
+  "v2_package_state": "NOT_CLOSED",
+  "pnl_calculated": false,
+  "reason": "The V2 package/preflight and family novelty review were not completed before the sample screen. Counts below are diagnostics only, not an accepted closed experiment.",
+  "observed_sample_gate_finding": "FAIL — DATA/SAMPLE: discovery 593 < 600; confirmation 441 and holdout 306."
 }
