@@ -147,8 +147,13 @@ def run(package,data_dir,out_dir):
             if legs==0: r["reason"]="flat_after_usd_exposure_cap_or_zero_signal"; rows.append(r); continue
             r["eligible"]=True;r["reason"]="eligible_preoutcome_only";rows.append(r)
     df=pd.DataFrame(rows)
+    # Compact, deterministic archive encoding; reason/period maps are documented in ELIGIBILITY_AUDIT_SCHEMA.md.
+    reason_codes={"outside_registered_period":"X","signal_timestamp_not_common_to_all_pairs":"S_TS","signal_bar_inactive_in_at_least_one_pair":"S_INACTIVE","insufficient_eligible_weekly_history":"HIST","entry_timestamp_not_common_to_all_pairs":"E_TS","scheduled_exit_timestamp_not_common_to_all_pairs":"X_TS","entry_bar_inactive_in_at_least_one_pair":"E_INACTIVE","exit_bar_inactive_in_at_least_one_pair":"X_INACTIVE","invalid_signal_or_trailing_volatility":"FEATURE","flat_after_usd_exposure_cap_or_zero_signal":"FLAT","eligible_preoutcome_only":"OK"}
+    period_codes={"discovery":"D","confirmation":"C","diagnostic":"G","excluded":"X"}
+    compact_df=pd.DataFrame({"h":df.horizon_weeks.astype("int8"),"t":pd.to_datetime(df.signal_timestamp_utc,utc=True).astype("int64")//10**9,"en":pd.to_datetime(df.entry_timestamp_utc,utc=True).astype("int64")//10**9,"ex":pd.to_datetime(df.exit_timestamp_utc,utc=True).astype("int64")//10**9,"p":df.period.map(period_codes),"ok":df.eligible.astype("int8"),"why":df.reason.map(reason_codes),"n":df.eligible_leg_count.astype("int8"),"days":pd.to_numeric(df.calendar_days_in_lookback,errors="coerce").fillna(-1).astype("int16"),"usd":pd.to_numeric(df.usd_net_ratio_final,errors="coerce").fillna(-1).round(4),"gross":df.gross_weight_final.round(4)})
+    if compact_df.why.isna().any() or compact_df.p.isna().any(): raise ValueError("unmapped eligibility archive code")
     with (out_dir/"eligibility_skip_audit.csv.gz").open("wb") as raw:
-        with gzip.GzipFile(filename="",mode="wb",fileobj=raw,mtime=0) as gz: gz.write(df.to_csv(index=False,lineterminator="\n").encode())
+        with gzip.GzipFile(filename="",mode="wb",fileobj=raw,mtime=0,compresslevel=9) as gz: gz.write(compact_df.to_csv(index=False,lineterminator="\\n").encode())
     results=[]; all_pass=True
     for h in HORIZONS:
         z=df[(df.horizon_weeks==h)&df.period.isin(["discovery","confirmation","diagnostic"])]
