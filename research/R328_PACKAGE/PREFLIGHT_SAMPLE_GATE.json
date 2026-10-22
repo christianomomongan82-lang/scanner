@@ -1,0 +1,65 @@
+{
+  "study": "R328 EURUSD M5 volatility-compression breakout",
+  "preregistration_commit": "e7d63fa3b1a4b8448cadfe325f3e22cc87c76f29",
+  "source_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+  "phase": "pre-outcome sample screen only; no outcome or PnL/R/PF/drawdown/bootstrap calculation",
+  "official_v2_disposition": "GAGAL — DATA/PROCESS",
+  "v2_package_state": "NOT_CLOSED",
+  "reason": "V2 preflight/novelty review was not completed before the sample screen, and the hypothesis overlaps the previously tested session/range/compression-breakout family. Counts are diagnostic only.",
+  "bid_rows": 4415493,
+  "ask_rows": 4415493,
+  "exact_pairing": true,
+  "invalid_ohlc_rows": 0,
+  "duplicate_timestamps": 0,
+  "gaps_over_one_minute": 538,
+  "gaps_over_one_hour": 528,
+  "max_gap_minutes": 3001,
+  "complete_m5_bars": 883086,
+  "window_candidates_before_one_per_day": 1099,
+  "first_signal_days_by_period": {
+    "discovery": 305,
+    "confirmation_A": 238,
+    "holdout_B": 183
+  },
+  "eligible_trade_counts": {
+    "discovery": 298,
+    "confirmation_A": 233,
+    "holdout_B": 183
+  },
+  "annual_eligible_counts": {
+    "discovery": {
+      "2017": 72,
+      "2018": 59,
+      "2019": 82,
+      "2020": 85
+    },
+    "confirmation_A": {
+      "2021": 74,
+      "2022": 89,
+      "2023": 70
+    },
+    "holdout_B": {
+      "2024": 88,
+      "2025": 95
+    }
+  },
+  "sample_gate_checks": {
+    "discovery_total_ge_350": false,
+    "discovery_each_year_ge_50": true,
+    "confirmation_A_total_ge_250": false,
+    "confirmation_A_each_year_ge_50": true,
+    "holdout_B_total_ge_150": true,
+    "holdout_B_each_year_ge_35": true
+  },
+  "sample_gate_pass": false,
+  "observed_sample_finding": "FAIL — DATA/SAMPLE (discovery 298 < 350, confirmation 233 < 250).",
+  "signal_rejection_counts": {
+    "insufficient_history_or_discontinuous_84_m5": 187,
+    "invalid_compression": 365,
+    "compression_not_low_quartile": 116593,
+    "no_breakout_close": 4168
+  },
+  "trade_rejection_counts": {
+    "stop_touched_delay": 12
+  }
+}
