@@ -68,6 +68,26 @@ class GateTests(unittest.TestCase):
             result=run_gate(root,"closeout")
             self.assertEqual(result["status"],"BLOCKED")
             self.assertTrue(any("SHA-256 mismatch" in x for x in result["issues"]))
+
+    def test_closeout_allows_registered_sample_gate_failure_before_pnl(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);build_package(root,"closeout")
+            reg=json.loads((root/"registration.json").read_text())
+            reg["first_outcome_compute_at_utc"]=None
+            (root/"registration.json").write_text(json.dumps(reg),encoding="utf-8")
+            (root/"results.json").write_text(json.dumps({
+                "verdict":"GAGAL","first_failed_gate":"minimum_sample_gate",
+                "outcomes_computed":False,
+                "reason":"sample gate failed before any PnL was calculated"
+            }),encoding="utf-8")
+            manifest=[]
+            for name in sorted(CLOSEOUT_REQUIRED_FILES-{"output_sha256_manifest.json"}):
+                p=root/name
+                manifest.append({"path":name,"sha256":hashlib.sha256(p.read_bytes()).hexdigest(),"size_bytes":p.stat().st_size})
+            (root/"output_sha256_manifest.json").write_text(json.dumps({"files":manifest}),encoding="utf-8")
+            result=run_gate(root,"closeout")
+            self.assertEqual(result["status"],"PASS",result["issues"])
+
     def test_closeout_requires_two_identical_runs(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);build_package(root,"closeout")
