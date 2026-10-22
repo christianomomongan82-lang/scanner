@@ -62,14 +62,15 @@ jobs:
           }
           manifest["audit_json_sha256"]=hashlib.sha256((out/"R323_DATA_AUDIT.json").read_bytes()).hexdigest()
           manifest_path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+"\n")
-          note="""# R323 source audit correction — 2026-10-22
-
-The first acquisition-run audit incorrectly reported zero gaps because the implementation treated the pandas datetime index's integer representation as always nanoseconds. This is not a valid cross-version assumption. The source runner now explicitly normalizes DatetimeIndex values to nanoseconds before calculating differences and preserves each gap in the audit.
-
-Corrected input audit was rerun against the same 14 raw streams whose SHA-256 values are unchanged. The corrected audit reports each raw stream's gap count and records every gap over one hour in R323_GAPS_GT_1H.csv. The gaps are not forward-filled. Weekend bars remain in raw source files but are excluded from the active-session ranks/lookbacks by the pre-outcome registration amendment.
-
-No R323 strategy PnL, PF, drawdown or bootstrap was calculated before this correction.
-"""
+          note="\\n".join([
+            "# R323 source audit correction — 2026-10-22",
+            "",
+            "The first acquisition-run audit incorrectly reported zero gaps because the implementation treated the pandas datetime index's integer representation as always nanoseconds. The source runner now explicitly normalizes DatetimeIndex values to nanoseconds before calculating differences.",
+            "",
+            "Corrected audit was rerun against the same 14 raw streams whose SHA-256 values are unchanged. It records every gap over one hour in R323_GAPS_GT_1H.csv. Gaps are not forward-filled. Weekend bars remain in the source files but are excluded from active-session ranks/lookbacks by the pre-outcome amendment.",
+            "",
+            "No R323 strategy PnL, PF, drawdown or bootstrap was calculated before this correction."
+          ])+"\\n"
           (out/"R323_DATA_AUDIT_CORRECTION.md").write_text(note,encoding="utf-8")
           print(json.dumps({
             "data_gate":audit["data_gate"],
