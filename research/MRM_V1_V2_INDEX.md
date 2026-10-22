@@ -3,24 +3,26 @@
 Branch: `local-backtest/market-response-model-v1-20261023`  
 Date: 2026-10-23
 
-## Final decisions
+## Current authoritative result
 
-- **MRM V1: GAGAL.** A net-PnL model learned in-sample but its score ranking collapsed out of sample; 1,907 forward-diagnostic selected trades lost 2,065.888 pips at +0.5 pip incremental friction, PF 0.8138.
-- **MRM V2: GAGAL.** Separating gross midpoint response from spread cost did not uncover direction alpha; 4,415 forward-diagnostic selected trades lost 4,039.285 pips at +0.5 pip incremental friction, PF 0.8410.
-- Neither candidate is funded-ready. 2020–2025 results are not pristine program-level OOS. The protected XAUUSD 2026 window remains unscored.
+- **Closure-clean MRM V1: GAGAL.** This is the current authority after finding and correcting a data-preparation defect.
+- Raw EURUSD M1 contained 696,795 flat BID/ASK rows repeating previous quotes; the corrected filter excluded 22,793 decision points whose lookback or future trade path touched >=30-minute flat-candle runs.
+- After correction, forward 2022–2025 selected policy = 1,751 trades, -1,795.690 pip with +0.5 pip incremental friction, PF 0.821. Removing that extra 0.5 pip still leaves -920.190 pip after observed BID/ASK friction, PF 0.903. All four forward years are negative.
+- The original V1 result is superseded. V2 shares the closure-data defect and uses an approximated midpoint-barrier label; its gross-alpha diagnostics are not definitive.
+- Neither model is funded-ready. The 2020–2025 dates are not pristine program-level holdouts. The protected XAUUSD 2026 window remains unopened.
 
 ## Files
 
-- [V1 final report](MRM_V1_FINAL_REPORT.md)
-- [V1 machine-readable summary](MRM_V1_summary.json)
-- [V1 local runner](market_response_v1.py)
-- [V1 top feature importance](MRM_V1_feature_importance_top20.csv)
+- [Closure-clean corrected replay report](MRM_V1_CLOSED_MARKET_CLEAN_REPLAY.md)
+- [Closure-clean machine summary](MRM_V1_CLOSED_MARKET_CLEAN_SUMMARY.json)
+- [Closure-clean runner](market_response_v1_closed_market_clean.py)
+- [Original V1 report — superseded](MRM_V1_FINAL_REPORT.md)
+- [V2 report — contaminated input / midpoint-label caution](MRM_V2_FINAL_REPORT.md)
 - [V2 preregistration](MRM_V2_COST_ALPHA_DECOMPOSITION_PREREGISTRATION.md)
-- [V2 final report](MRM_V2_FINAL_REPORT.md)
-- [V2 machine-readable summary](MRM_V2_summary.json)
-- [V2 local runner](market_response_v2.py)
-- [V2 top feature importance](MRM_V2_feature_importance_top20.csv)
+- [V2 runner](market_response_v2.py)
 
-## Interpretation
+## Root-cause conclusion
 
-V1's feature importance indicated spread states dominated the model, so V2 removed spread from the predictor and applied a spread gate based on training data only. V2 still had slightly negative out-of-sample gross-response rank correlation and negative executable expectancy. This is direct evidence that this model class, feature representation and tested EURUSD setup did not find a usable edge. It is not evidence that all trading edges are impossible. Do not tune the two registered candidates on the same windows. A next step should change the information source or conditional mechanism, rather than repeatedly altering these models.
+The recent experiment had a concrete engineering error: sequential timestamps were treated as sufficient evidence of active market data. The closure-clean rerun still failed, so that defect is not the complete explanation. After correction, the model's ranking ability remains positive in-sample but slightly negative out of sample, the score-selected policy loses money, and even removing the extra 0.5 pip cost assumption does not make it profitable.
+
+The next project-wide audit should determine which earlier tests consumed the same static-placeholder archive without an equivalent activity filter. Do not assume all earlier failures had this cause; audit each family's actual source and preprocessing. Keep the corrected V1 locked as GAGAL and do not retune its threshold on these dates.
