@@ -11,7 +11,7 @@ V1's top four gain-importance features all measured spread. V2 therefore predict
 ## Locked design
 
 - Input: retained GitHub Actions artifact 11959096102, EURUSD Dukascopy BID/ASK M1 from 2016–2025; 4,415,493 matched timestamps.
-- 140,188 valid decision timestamps; 74 price/context columns plus direction and 39 signed interactions.
+- 140,188 valid decision timestamps; 74 price/context columns plus the side variable and nine signed-return/body interaction columns (84 model columns total).
 - Decision every 30 minutes; wait 5 minutes after signal candle closes before entry. One position at a time.
 - Model target: gross midpoint outcome with TP 15 pip, SL 10 pip, time stop 120 minutes; stop-first when both barrier prices touch in the same M1 candle.
 - One fixed LightGBM regressor; train 2016–2019; no parameter search.
