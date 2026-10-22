@@ -1,3 +1,26 @@
+# ACTIVE HARD STOP — 2026-10-22: V2 ARCHIVE/GOVERNANCE BLOCK
+
+**Search status: BLOCKED. No R329 or other new strategy PnL run is permitted.** The R323–R328 batch has been dispositioned below. This state supersedes earlier text suggesting that a next candidate may start.
+
+## Current official dispositions
+- **R323: GAGAL — DATA/PROCESS / NOT CLOSED.** Underlying pre-outcome finding: DATA/SAMPLE (410 discovery legs vs 1,000; 270 confirmation vs 600); no PnL. Its prior archive manifest claiming "closed" has been superseded.
+- **R324: GAGAL — DATA/PROCESS.** Diagnostic sample counts 341 discovery / 222 confirmation; no PnL. Overlaps prior sweep/reclaim families; V2 package/novelty review incomplete.
+- **R325: GAGAL — DATA/PROCESS.** Diagnostic counts 593 discovery / 441 confirmation / 306 holdout; no PnL. Overlaps earlier Asia/session breakout family.
+- **R326: GAGAL — DATA/PROCESS / NOT CLOSED.** Two local result generations matched hashes and exploratory results were negative in all three cohorts and all nine years. These are not a formally closed EDGE verdict because the complete V2 pre-outcome/preflight review and static archive were not satisfied; complete runner, full trade ledger and zero-inclusive weekly-R rows still need commit/readback verification.
+- **R327: GAGAL — DATA/PROCESS.** Diagnostic sample counts 342 / 272 / 187; no PnL.
+- **R328: GAGAL — DATA/PROCESS.** Diagnostic counts 298 / 233 / 183; no PnL. Overlaps prior range/compression family.
+
+## Blockers before any further signal search
+1. R326 full V2 archive: exact source runner, normalized row-level ledger, full zero-inclusive weekly series, output/hash manifest and package-closeout evidence must be committed as normal repository files/chunks and readback/hash verified. Local output hashes alone are not a static archive.
+2. Legacy archive disposition: R317/R318 source and row-level package gaps are not fully recoverable from the repo state seen during audit; formally mark them non-promotable historical archive failures or recover the exact artifacts. R319/R320 were not preregistered before PnL and cannot be retroactively presented as preregistered; record their full-ledger static archive gap/resolution.
+3. Five open scanner smoke-test issues (#1, #2, #3, #5, #6) are legacy notifications, not active incidents. Add an explicit disposition comment and close them as completed test notices, then verify the open-issue search no longer returns them.
+4. Reconcile master ledger and family map to R322 plus R323–R328; read back and verify IDs, row counts and hashes.
+5. Run the V2 package preflight/closeout validator only against a compliant package. A clean unit-test suite is not a candidate package pass.
+
+**No further PnL search until these blockers are fixed or individually classified as irrecoverable and excluded from promotion.** Do not solve this block by opening another strategy or tuning an old family. EURUSD 2017–2025 and US indices 2017–2026 are project-contaminated. XAUUSD 2026 remains protected.
+
+---
+
 # V2 VALIDATOR ADDED — 2026-10-21
 
 Fail-closed gate tool and tests are now committed: [validator](research/verify_experiment_package_v2.py), [6 regression tests](research/test_verify_experiment_package_v2.py). The local suite passed 6/6 tests, covering valid preflight/closeout, grid-over-100 plan requirement, post-result registration rejection, checksum mismatch detection and non-identical rerun blocking. Commands and limitations are in [Search Process Improvement Protocol v2](research/SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md).
