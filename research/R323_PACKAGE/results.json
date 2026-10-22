@@ -1,0 +1,55 @@
+{
+  "PF_R": "NOT_CALCULATED_SAMPLE_GATE_FAILED",
+  "bootstrap": "NOT_CALCULATED_SAMPLE_GATE_FAILED",
+  "data_gate": "PASS",
+  "eligibility": {
+    "by_period": {
+      "confirmation": {
+        "active_days": 135,
+        "legs": 270
+      },
+      "diagnostic": {
+        "active_days": 83,
+        "legs": 166
+      },
+      "discovery": {
+        "active_days": 205,
+        "legs": 410
+      }
+    },
+    "common_10utc_weekday_sessions": 2348,
+    "eligible_baskets": 423,
+    "eligible_legs": 846,
+    "skipped_dates": 1925
+  },
+  "experiment_id": "R323",
+  "failure_class": "DATA/PROCESS",
+  "first_failed_gate": "minimum_sample_gate",
+  "interpretation": "This is a data/sample/evidence gate failure, not evidence against market alpha. No outcome calculations were performed.",
+  "max_drawdown_R": "NOT_CALCULATED_SAMPLE_GATE_FAILED",
+  "net_R": "NOT_CALCULATED_SAMPLE_GATE_FAILED",
+  "outcomes_computed": false,
+  "pnl_computed": false,
+  "process_tests_passed": "7/7",
+  "raw_stream_manifest_sha256": "2db7c7d88b2f31965ff956dd5e017ce7f0b76a4ac1792dca4896833b884e85e0",
+  "sample_gate_details": {
+    "confirmation": {
+      "observed_active_days": 135,
+      "observed_legs": 270,
+      "required_active_days": 300,
+      "required_legs": 600
+    },
+    "discovery": {
+      "observed_active_days": 205,
+      "observed_legs": 410,
+      "required_active_days": 500,
+      "required_legs": 1000
+    }
+  },
+  "sample_gates": {
+    "confirmation_600_legs_300_days": false,
+    "discovery_1000_legs_500_days": false
+  },
+  "two_clean_runs_identical": true,
+  "verdict": "GAGAL"
+}
