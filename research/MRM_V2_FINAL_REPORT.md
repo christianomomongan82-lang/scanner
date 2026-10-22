@@ -1,3 +1,5 @@
+> **DATA-QUALITY WARNING:** V2 used the same EURUSD archive before static market-closure rows were excluded, so its model training/diagnostics share the closure-contamination defect. Its midpoint high/low label is also an approximation made by averaging BID and ASK M1 extrema that need not occur at the same instant. See [the closure-clean corrected V1 replay](MRM_V1_CLOSED_MARKET_CLEAN_REPLAY.md); do not treat V2's gross-alpha diagnostic as independent, definitive evidence.
+
 # Market Response Model v2 — Gross Alpha / Execution Cost Decomposition
 
 **Verdict: GAGAL. No positive executable edge found. Not funded-ready.**  
