@@ -1,6 +1,10 @@
 # R326 — EURUSD M5 raw-price impulse continuation
 
-**Final verdict: FAIL — EDGE**
+**Official V2 disposition: GAGAL — DATA/PROCESS (NOT CLOSED).**  
+**Outcome metrics below are exploratory diagnostics only, not a formally accepted EDGE closeout.**
+
+The signal outcomes were computed before the repository's V2 preflight and novelty review were completed. The exact runner, full trade ledger and weekly net-R rows are not yet committed/read-back-verified as a complete V2 package. Therefore the overall experiment cannot be called CLOSED, even though the observed price outcome is strongly negative. The data below is retained transparently as diagnostic evidence; it must not be used to claim the V2 process gates passed or to justify a new parameter variation.
+
 
 This test passed every frozen sample-size gate, so outcome metrics were calculated. It fails the edge gates in discovery, confirmation and final holdout. Do not use for a funded challenge; do not tune against these same confirmation/holdout dates.
 
