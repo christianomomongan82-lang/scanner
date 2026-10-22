@@ -155,7 +155,7 @@ def load_all(data_dir: Path):
           "spread_price_max":float(spreads.max()) if len(spreads) else None,
           "common_start_utc":common[0].isoformat() if len(common) else None,
           "common_end_utc":common[-1].isoformat() if len(common) else None,
-          "gaps_gt_1h":int((np.diff(common.asi8)/1e9>3600).sum()) if len(common)>1 else 0
+          "gaps_gt_1h":int((np.diff(common.as_unit("ns").asi8)/1e9>3600).sum()) if len(common)>1 else 0
         }
         if len(common)<10000: audit["fatal_errors"].append(f"{pair}: fewer than 10,000 exact BID/ASK rows")
         z=pd.DataFrame(index=common)
