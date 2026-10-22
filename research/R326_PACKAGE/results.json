@@ -1,0 +1,172 @@
+{
+  "study": "R326 EURUSD M5 raw-price impulse continuation",
+  "verdict": "FAIL — EDGE",
+  "preregistration_commit": "4c2dddf2ff17e8a5273c875ee84bdfd6b9af15ea",
+  "source_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+  "data": {
+    "bid_rows": 4415493,
+    "ask_rows": 4415493,
+    "exact_timestamp_pairing": true,
+    "duplicate_timestamps": 0,
+    "invalid_ohlc_rows": 0,
+    "complete_m5_bars": 883086,
+    "gaps_over_one_minute": 538,
+    "gaps_over_one_hour": 528,
+    "maximum_gap_minutes": 3001
+  },
+  "sample_gate": {
+    "discovery_2017_2020": {
+      "trades": 928,
+      "threshold": 600,
+      "annual_trades": {
+        "2017": 224,
+        "2018": 235,
+        "2019": 238,
+        "2020": 231
+      },
+      "passed": true
+    },
+    "confirmation_A_2021_2023": {
+      "trades": 710,
+      "threshold": 400,
+      "annual_trades": {
+        "2021": 234,
+        "2022": 237,
+        "2023": 239
+      },
+      "passed": true
+    },
+    "holdout_B_2024_2025": {
+      "trades": 479,
+      "threshold": 250,
+      "annual_trades": {
+        "2024": 237,
+        "2025": 242
+      },
+      "passed": true
+    }
+  },
+  "metrics_by_cohort_cost_pips": {
+    "discovery": {
+      "0.5": {
+        "trades": 928,
+        "net_expectancy_R": -0.2500487312214937,
+        "net_total_R": -232.04522257354614,
+        "profit_factor": 0.6594595762371985,
+        "max_drawdown_R": 235.53902070590647,
+        "win_rate": 0.3609913793103448,
+        "gross_expectancy_R": -0.09924062491455786
+      },
+      "1.0": {
+        "trades": 928,
+        "net_expectancy_R": -0.4008568375284295,
+        "net_total_R": -371.9951452263826,
+        "profit_factor": 0.5173903583865175,
+        "max_drawdown_R": 373.73234358549587,
+        "win_rate": 0.3609913793103448,
+        "gross_expectancy_R": -0.09924062491455786
+      },
+      "2.0": {
+        "trades": 928,
+        "net_expectancy_R": -0.7024730501423011,
+        "net_total_R": -651.8949905320554,
+        "profit_factor": 0.321684131058361,
+        "max_drawdown_R": 653.0313541684176,
+        "win_rate": 0.33405172413793105,
+        "gross_expectancy_R": -0.09924062491455786
+      }
+    },
+    "confirmation_A": {
+      "0.5": {
+        "trades": 710,
+        "net_expectancy_R": -0.20902314998855095,
+        "net_total_R": -148.40643649187118,
+        "profit_factor": 0.7084805512525182,
+        "max_drawdown_R": 154.85178935868208,
+        "win_rate": 0.3732394366197183,
+        "gross_expectancy_R": -0.06991061483474112
+      },
+      "1.0": {
+        "trades": 710,
+        "net_expectancy_R": -0.3481356851423608,
+        "net_total_R": -247.17633645107617,
+        "profit_factor": 0.5693540883404958,
+        "max_drawdown_R": 250.58291520057026,
+        "win_rate": 0.3704225352112676,
+        "gross_expectancy_R": -0.06991061483474112
+      },
+      "2.0": {
+        "trades": 710,
+        "net_expectancy_R": -0.6263607554499805,
+        "net_total_R": -444.71613636948615,
+        "profit_factor": 0.3717459766265517,
+        "max_drawdown_R": 445.6605808139311,
+        "win_rate": 0.36619718309859156,
+        "gross_expectancy_R": -0.06991061483474112
+      }
+    },
+    "holdout_B": {
+      "0.5": {
+        "trades": 479,
+        "net_expectancy_R": -0.26382431403260914,
+        "net_total_R": -126.37184642161978,
+        "profit_factor": 0.6441715744816155,
+        "max_drawdown_R": 128.3132322836542,
+        "win_rate": 0.35490605427974947,
+        "gross_expectancy_R": -0.11305884114583854
+      },
+      "1.0": {
+        "trades": 479,
+        "net_expectancy_R": -0.41458978691937975,
+        "net_total_R": -198.5885079343829,
+        "profit_factor": 0.5061723579781088,
+        "max_drawdown_R": 199.97127965845206,
+        "gross_expectancy_R": -0.11305884114583854
+      },
+      "2.0": {
+        "trades": 479,
+        "net_expectancy_R": -0.716120732692921,
+        "net_total_R": -343.02183095990915,
+        "profit_factor": 0.3153397240965076,
+        "max_drawdown_R": 343.2873744080476,
+        "win_rate": 0.33194154488517746,
+        "gross_expectancy_R": -0.11305884114583854
+      }
+    }
+  },
+  "annual_primary_cost_scorecard": "year,period,trades,net_expectancy_R,net_total_R,profit_factor,max_drawdown_R,win_rate,gross_expectancy_R\n2017,discovery,224,-0.228972203107,-51.2897734959,0.681363718549,52.8522985325,0.361607142857,-0.0924411285545\n2018,discovery,235,-0.173146191077,-40.689354903,0.750054932893,49.3829959529,0.378723404255,-0.0633222261674\n2019,discovery,238,-0.288686709442,-68.7074368472,0.622360320322,72.065021174,0.373949579832,-0.0661764705882\n2020,discovery,231,-0.308911936483,-71.3586573275,0.593870104609,73.3269674603,0.329004329004,-0.176440536689\n2021,confirmation_A,234,-0.296117982332,-69.2916078657,0.614693717463,74.4569666427,0.346153846154,-0.134683218017\n2022,confirmation_A,237,-0.25839030658,-61.2385026594,0.648947799461,66.9812428059,0.341772151899,-0.142898351836\n2023,confirmation_A,239,-0.0747963429573,-17.8763259668,0.88452072514,22.0997882684,0.430962343096,0.065883873926\n2024,holdout_B,237,-0.346144073494,-82.0361454181,0.557684837601,83.9775312802,0.333333333333,-0.167120420601\n2025,holdout_B,242,-0.183205376047,-44.3357010035,0.738707406487,45.9927532434,0.376033057851,-0.0601142364724\n",
+  "bootstrap": {
+    "confirmation_A": {
+      "weeks": 156,
+      "mean_weekly_net_R": -0.9513233108453283,
+      "ci95_lower": -1.3666211688734338,
+      "ci95_upper": -0.5663260482038175,
+      "resamples": 10000,
+      "block_weeks": 4,
+      "seed": 326
+    },
+    "holdout_B": {
+      "weeks": 105,
+      "mean_weekly_net_R": -1.203541394491617,
+      "ci95_lower": -1.598330482649984,
+      "ci95_upper": -0.8028197903920649,
+      "resamples": 10000,
+      "block_weeks": 4,
+      "seed": 326
+    }
+  },
+  "positive_annual_year_count": {
+    "discovery": 0,
+    "confirmation_A": 0,
+    "holdout_B": 0
+  },
+  "hashes": {
+    "source_zip_sha256": "b5a06ed7df292a6add87d3ce519ee66189d940244651ab005f57519ee48a0d2e",
+    "runner_sha256": "4a761fede599e39cd9316fcad9e8c2dbe848c9bbd6bbb236eb949b3c99246398",
+    "ledger_sha256": "ee34a03a720cb980cd363f312a1690deb472b8a58e9d5b69673c89437ddc5d92",
+    "results_json_sha256": "c67befa7755b0aca395ba1beafbaf1848ec269337b9eb12e105cff5e7646f50d",
+    "report_sha256": "9d788fec219ec56318babc27116a2a718da398fb067d15eff0beda565c0bce8c",
+    "annual_scorecard_sha256": "986a726521c210841fcbdeeb79d3539287ec29ac0946e5efcda57870ceeda11c"
+  },
+  "reproducibility": "Two clean processes produced byte-identical normalized ledger, JSON, report and annual scorecard."
+}
