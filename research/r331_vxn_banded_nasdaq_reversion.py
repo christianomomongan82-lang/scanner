@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 
 NY = "America/New_York"
+DATA_START = date(2023, 10, 23)
 START = pd.Timestamp("2023-10-25")
 DISCOVERY_END = pd.Timestamp("2025-03-31")
 CONFIRM_START = pd.Timestamp("2025-04-01")
@@ -154,6 +155,81 @@ def week_monday(d: date) -> date:
     return d - timedelta(days=d.weekday())
 
 
+def nth_weekday(year: int, month: int, weekday: int, n: int) -> date:
+    first = date(year, month, 1)
+    delta = (weekday - first.weekday()) % 7
+    return first + timedelta(days=delta + 7 * (n - 1))
+
+
+def last_weekday(year: int, month: int, weekday: int) -> date:
+    last_day = date(year + (month == 12), 1 if month == 12 else month + 1, 1) - timedelta(days=1)
+    delta = (last_day.weekday() - weekday) % 7
+    return last_day - timedelta(days=delta)
+
+
+def easter_sunday(year: int) -> date:
+    # Gregorian computus (Meeus/Jones/Butcher).
+    a = year % 19
+    b = year // 100
+    c = year % 100
+    d = b // 4
+    e = b % 4
+    f = (b + 8) // 25
+    g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i = c // 4
+    k = c % 4
+    l = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 22 * l) // 451
+    month = (h + l - 7 * m + 114) // 31
+    day = ((h + l - 7 * m + 114) % 31) + 1
+    return date(year, month, day)
+
+
+def observed_fixed(year: int, month: int, day: int) -> date:
+    d = date(year, month, day)
+    if d.weekday() == 5:
+        return d - timedelta(days=1)
+    if d.weekday() == 6:
+        return d + timedelta(days=1)
+    return d
+
+
+def nyse_calendar(start: date, end: date):
+    """Small explicit NYSE regular/early-close calendar for R331's 2023–2026 window."""
+    holidays = set()
+    early_closes = set()
+    for y in range(start.year - 1, end.year + 2):
+        for month, day in ((1, 1), (6, 19), (7, 4), (12, 25)):
+            holidays.add(observed_fixed(y, month, day))
+        holidays.add(nth_weekday(y, 1, 0, 3))       # MLK Day
+        holidays.add(nth_weekday(y, 2, 0, 3))       # Presidents' Day
+        holidays.add(easter_sunday(y) - timedelta(days=2))  # Good Friday
+        holidays.add(last_weekday(y, 5, 0))         # Memorial Day
+        holidays.add(nth_weekday(y, 9, 0, 1))       # Labor Day
+        thanksgiving = nth_weekday(y, 11, 3, 4)
+        holidays.add(thanksgiving)
+        early_closes.add(thanksgiving + timedelta(days=1))
+        christmas_eve = date(y, 12, 24)
+        if christmas_eve.weekday() < 5:
+            early_closes.add(christmas_eve)
+        july4_obs = observed_fixed(y, 7, 4)
+        candidate = july4_obs - timedelta(days=1)
+        while candidate.weekday() >= 5 or candidate in holidays:
+            candidate -= timedelta(days=1)
+        early_closes.add(candidate)
+    holidays.add(date(2025, 1, 9))  # US equity-market closure for President Carter's state funeral
+    holidays = {d for d in holidays if start - timedelta(days=7) <= d <= end + timedelta(days=7)}
+    early_closes = {d for d in early_closes if start <= d <= end and d not in holidays}
+    trading_dates = []
+    d = start
+    while d <= end:
+        if d.weekday() < 5 and d not in holidays:
+            trading_dates.append(d)
+        d += timedelta(days=1)
+    return trading_dates, holidays, early_closes
+
+
 def bootstrap_mean_ci(weekly: list[float], reps=BOOTSTRAP_REPS, block=BOOTSTRAP_BLOCK_WEEKS, seed=BOOTSTRAP_SEED):
     arr = np.asarray(weekly, dtype=float)
     if len(arr) < block:
@@ -234,20 +310,34 @@ def main():
     vxn_dates = sorted(vxn_map)
     sessions = {}
     invalid_sessions = {}
-    local_times = m5["local"]
-    rth_labels = [t.strftime("%H:%M") for t in pd.date_range("2000-01-03 09:30", "2000-01-03 15:55", freq="5min")]
-    for day, group in m5.groupby("session_date", sort=True):
-        g = group.copy()
+    trading_dates, market_holidays, early_closes = nyse_calendar(DATA_START, END.date())
+    rth_labels_by_day = {}
+    for td in trading_dates:
+        close_time = "13:00" if td in early_closes else "16:00"
+        rth_labels_by_day[td.isoformat()] = [
+            t.strftime("%H:%M")
+            for t in pd.date_range("2000-01-03 09:30", f"2000-01-03 {close_time}", freq="5min", inclusive="left")
+        ]
+    observed_by_day = {k: g.sort_values("local").copy() for k, g in m5.groupby("session_date", sort=True)}
+    no_session_data = [d.isoformat() for d in trading_dates if d.isoformat() not in observed_by_day]
+    if no_session_data:
+        raise ValueError("GAGAL — DATA/PROCESS: no RTH quote bars for expected NYSE sessions, first="
+                         + ",".join(no_session_data[:20]) + f"; count={len(no_session_data)}")
+    for td in trading_dates:
+        day = td.isoformat()
+        if day not in observed_by_day:
+            continue
+        g = observed_by_day[day]
+        expected_labels = rth_labels_by_day[day]
         have = set(g.local_hhmm)
-        missing = [x for x in rth_labels if x not in have]
-        if len(g) != EXPECTED_RTH_BARS or missing:
-            invalid_sessions[day] = {"reason": "INCOMPLETE_RTH_M5_SESSION", "m5_bars": int(len(g)), "missing_labels": missing}
+        missing = [x for x in expected_labels if x not in have]
+        if len(g) != len(expected_labels) or missing:
+            invalid_sessions[day] = {"reason": "INCOMPLETE_RTH_M5_SESSION", "m5_bars": int(len(g)),
+                                     "expected_m5_bars": len(expected_labels), "missing_labels": missing}
         else:
             sessions[day] = g.sort_values("local")
 
-    # A date with any RTH data counts as the previous session date. If it was incomplete,
-    # the next session is not allowed to fall back over it to an older close.
-    active_dates = sorted(set(m5.session_date.astype(str)))
+    trading_date_strs = [x.isoformat() for x in trading_dates]
     ledger_rows = []
     skip_counts = {}
     def emit(row):
@@ -256,11 +346,9 @@ def main():
             reason = str(row.get("reason", row.get("status", "UNKNOWN")))
             skip_counts[reason] = skip_counts.get(reason, 0) + 1
 
-    dates_to_evaluate = sorted(set(active_dates))
+    dates_to_evaluate = [x.isoformat() for x in trading_dates if START.date() <= x <= END.date()]
     for dstr in dates_to_evaluate:
         d = date.fromisoformat(dstr)
-        if d < START.date() or d > END.date():
-            continue
         partition = "discovery" if d <= DISCOVERY_END.date() else "confirmation" if d >= CONFIRM_START.date() else "embargo"
         if partition == "embargo":
             emit({"session_date": dstr, "partition": partition, "status": "NOT_SCORED", "reason": "PARTITION_BOUNDARY"})
@@ -269,11 +357,11 @@ def main():
             emit({"session_date": dstr, "partition": partition, "status": "SKIP", "reason": invalid_sessions.get(dstr, {}).get("reason", "INCOMPLETE_RTH_M5_SESSION"),
                   "rth_m5_bars": invalid_sessions.get(dstr, {}).get("m5_bars", 0)})
             continue
-        previous_active = [x for x in active_dates if x < dstr]
-        if not previous_active:
+        earlier = [x for x in trading_date_strs if x < dstr]
+        if not earlier:
             emit({"session_date": dstr, "partition": partition, "status": "SKIP", "reason": "NO_PREVIOUS_SESSION"})
             continue
-        prev_date = previous_active[-1]
+        prev_date = earlier[-1]
         if prev_date not in sessions:
             emit({"session_date": dstr, "partition": partition, "status": "SKIP", "reason": "PREVIOUS_SESSION_INCOMPLETE", "previous_session_date": prev_date})
             continue
@@ -289,7 +377,10 @@ def main():
                   "previous_session_date": prev_date, "vxn_source_date": vxn_date, "regime": "middle"})
             continue
         regime = "low" if vx < 20 else "high"
-        prior_close = float(sessions[prev_date].loc[sessions[prev_date].local_hhmm.eq("15:55"), "mid_close"].iloc[0])
+        previous_close_label = rth_labels_by_day[prev_date][-1]
+        prior_close = float(sessions[prev_date].loc[
+            sessions[prev_date].local_hhmm.eq(previous_close_label), "mid_close"
+        ].iloc[0])
         upper = prior_close * (1.0 + vx / 1600.0)
         lower = prior_close * (1.0 - vx / 1600.0)
         g = sessions[dstr]
@@ -326,7 +417,10 @@ def main():
                 return None
             entry_bar = bars_by_utc[entry_ts]
             exit_bar = bars_by_utc[exit_ts]
-            if entry_bar.local.strftime("%H:%M") > "15:25" or exit_bar.local.strftime("%H:%M") > "15:55":
+            session_close = "13:00" if d in early_closes else "16:00"
+            latest_entry = (pd.Timestamp(f"{dstr} {session_close}", tz=NY) - pd.Timedelta(minutes=30)).strftime("%H:%M")
+            last_exit_open = (pd.Timestamp(f"{dstr} {session_close}", tz=NY) - pd.Timedelta(minutes=5)).strftime("%H:%M")
+            if entry_bar.local.strftime("%H:%M") > latest_entry or exit_bar.local.strftime("%H:%M") > last_exit_open:
                 return None
             entry_px = float(entry_bar.open_ask if direction == 1 else entry_bar.open_bid)
             exit_px = float(exit_bar.open_bid if direction == 1 else exit_bar.open_ask)
@@ -359,6 +453,9 @@ def main():
         })
 
     ledger = pd.DataFrame(ledger_rows)
+    for required_col in ("primary_gross_bps", "ideal_gross_bps"):
+        if required_col not in ledger.columns:
+            ledger[required_col] = np.nan
     ledger_path = args.out_dir / "r331_session_event_ledger_local.csv"
     ledger.to_csv(ledger_path, index=False)
     # The public artifact later commits a redacted event ledger; raw quote and VXN values remain local.
@@ -412,7 +509,8 @@ def main():
         },
         "mechanics": {
             "session_timezone": NY, "regular_hours": "09:30-16:00 ET",
-            "expected_regular_session_m5_bars": EXPECTED_RTH_BARS,
+            "expected_regular_session_m5_bars": "78 for full days 09:30-16:00; 42 for scheduled half-days 09:30-13:00",
+            "market_calendar": "explicit NYSE holidays, Good Friday, MLK/Presidents/Memorial/Labor/Thanksgiving/Christmas/Independence; half-days after Thanksgiving, eligible Christmas Eve/July 4; 2025-01-09 Carter funeral closure",
             "signal_reference": "prior valid regular-session midpoint close",
             "vxn_join": "latest VXN date strictly earlier than session date",
             "upper_lower_band": "prior midpoint close * (1 +/- VXN/1600)",
