@@ -31,6 +31,7 @@ class ChallengeRules:
     max_calendar_days: int = 179               # project speed gate: complete before day 180
     quick_strike_cycle_days: int = 14            # FundedNext evaluation cycle anchored at first trade
     max_inactivity_days: int = 30                  # conservative cap while official sources conflict (calendar days)
+    max_inactivity_days: int = 30                  # conservative cap while official sources conflict (calendar days)
 
     def validate(self) -> None:
         if self.initial_balance <= 0:
@@ -51,6 +52,8 @@ class ChallengeRules:
             raise ValueError("max_calendar_days must be zero or greater")
         if self.quick_strike_cycle_days < 1:
             raise ValueError("quick_strike_cycle_days must be positive")
+        if self.max_inactivity_days < 1:
+            raise ValueError("max_inactivity_days must be positive")
         if self.max_inactivity_days < 1:
             raise ValueError("max_inactivity_days must be positive")
         ZoneInfo(self.server_timezone)
@@ -329,6 +332,15 @@ def simulate_challenge(
                     breach_time = dt.isoformat()
                     status = "INACTIVITY_LIMIT_REACHED"
                     break
+            if last_accepted_entry_time is not None and not active:
+                previous_day = last_accepted_entry_time.astimezone(tz).date()
+                current_day = dt.astimezone(tz).date()
+                inactivity_gap = (current_day - previous_day).days
+                if inactivity_gap >= rules.max_inactivity_days:
+                    failure_reason = "inactivity_limit_reached"
+                    breach_time = dt.isoformat()
+                    status = "INACTIVITY_LIMIT_REACHED"
+                    break
             active[tid] = {
                 "risk_cash": risk_cash, "floating_r": 0.0,
                 "entry_time": dt, "entry_day": daily_key(dt),
@@ -452,6 +464,7 @@ def simulate_challenge(
             "A closed-trade ledger alone is not valid input; MARK events must include floating and conservative intrabar checkpoints.",
             "MARK/EXIT values must already include observed spread, commission, swap, fees and the tested slippage scenario.",
             "Europe/Helsinki is a seasonal server-time proxy, not platform-time verification.",
+            "Inactivity is conservatively enforced as fewer than 30 calendar days between accepted entries because official FundedNext sources conflict; confirm exact account terms.",
             "Inactivity is conservatively enforced as fewer than 30 calendar days between accepted entries because official FundedNext sources conflict; confirm exact account terms.",
             "This is one chronological path, not a 10,000-path pass-probability estimate.",
         ],
