@@ -1,0 +1,58 @@
+name: R331 USATECH M1 BID ASK acquisition only
+
+on:
+  push:
+    branches:
+      - local-backtest/r189-dukascopy-history
+    paths:
+      - ".github/workflows/r331-usatech-m1-data-only.yml"
+      - "research/download_r331_usatech_m1.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r331-usatech-m1-data-only
+  cancel-in-progress: false
+
+jobs:
+  collect-raw-market-data:
+    name: Download raw USATECH M1 BID ASK only
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout acquisition code only
+        uses: actions/checkout@v4
+        with:
+          ref: local-backtest/r189-dukascopy-history
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate acquisition collector syntax
+        run: python -m py_compile research/download_r331_usatech_m1.py
+
+      - name: Download raw USATECH M1 BID ASK
+        env:
+          DUKASCOPY_NODE_VERSION: "1.50.0"
+        run: python -u research/download_r331_usatech_m1.py
+
+      - name: Upload raw prices and collection manifest only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R331-USATECHIDXUSD-M1-BID-ASK-20231023-20261022
+          path: |
+            data_exports/r331_usatech_m1/
+          if-no-files-found: warn
+          retention-days: 90
+
