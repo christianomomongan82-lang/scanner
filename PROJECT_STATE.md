@@ -1,3 +1,13 @@
+# NEXT DECISION — 2026-10-23
+
+The next move is a bounded research reset, not R330 or another FX candle/session parameter variant. See [NEXT_DECISION_AFTER_ROOT_CAUSE_AUDIT_20261023.md](research/NEXT_DECISION_AFTER_ROOT_CAUSE_AUDIT_20261023.md).
+
+Chosen path: inventory a broader FundedNext-tradable, multi-asset universe; verify independent BID/ASK histories and symbol-specific costs; assess a materially distinct return-persistence hypothesis across genuinely different asset classes; preregister its sample/frequency and selection rules before any PnL. Reject it before PnL if reliable costs/data or plausible day-179 opportunity capacity are absent. If no candidate clears the gates, do not buy/start a challenge on hope.
+
+Do not confuse DATA/PROCESS failure with negative economics. No current strategy is funded-ready, and no defensible two-phase pass probability exists yet.
+
+---
+
 # ROOT-CAUSE AUDIT — 2026-10-23
 
 Latest diagnosis of repeated backtest failures: [ROOT_CAUSE_FAILURE_AUDIT_20261023.md](research/ROOT_CAUSE_FAILURE_AUDIT_20261023.md).
