@@ -6,6 +6,10 @@ on:
       - local-backtest/r189-dukascopy-history
     paths:
       - ".github/workflows/r331-runner-code-only.yml"
+      - "research/r331_vxn_banded_nasdaq_reversion.py"
+      - "research/R331_VXN_BANDED_NASDAQ_REVERSION_PREREGISTRATION_20261023.md"
+      - "research/R331_AMENDMENT_A_EXACT_USATECH_DATA_20261023.md"
+      - "research/R331_AMENDMENT_B_OPERATIONAL_SEMANTICS_20261023.md"
   workflow_dispatch:
 
 permissions:
