@@ -1,0 +1,54 @@
+{
+  "experiment_id": "R330",
+  "horizons_weeks": [
+    13,
+    26,
+    39
+  ],
+  "pairs": [
+    "audusd",
+    "eurusd",
+    "gbpusd",
+    "nzdusd",
+    "usdcad",
+    "usdchf",
+    "usdjpy"
+  ],
+  "currency_code_by_pair": {
+    "audusd": "AUD",
+    "eurusd": "EUR",
+    "gbpusd": "GBP",
+    "nzdusd": "NZD",
+    "usdcad": "CAD",
+    "usdchf": "CHF",
+    "usdjpy": "JPY"
+  },
+  "pair_to_foreign_strength_sign": {
+    "audusd": 1,
+    "eurusd": 1,
+    "gbpusd": 1,
+    "nzdusd": 1,
+    "usdcad": -1,
+    "usdchf": -1,
+    "usdjpy": -1
+  },
+  "top_rank_count": 2,
+  "bottom_rank_count": 2,
+  "risk_weight_each_leg": 0.25,
+  "decision_weekday_utc": "Tuesday",
+  "signal_bar_open_hour_utc": 10,
+  "entry_bar_open_hour_utc": 12,
+  "holding_weeks": 1,
+  "primary_slippage_pips": 1,
+  "stress_slippage_pips": 2,
+  "primary_swap_pip_equivalent_per_week": 2,
+  "stress_swap_pip_equivalent_per_week": 4,
+  "commission_usd_per_round_trip_standard_lot": 10,
+  "standard_lot_units_assumption": 100000,
+  "discovery": "2017-01-01/2021-01-01",
+  "confirmation": "2021-01-01/2024-01-01",
+  "diagnostic": "2024-01-01/2026-01-01",
+  "excluded": "2026-01-01 onward",
+  "compute_location": "local Python/container only",
+  "data_source_manifest_sha256": "2db7c7d88b2f31965ff956dd5e017ce7f0b76a4ac1792dca4896833b884e85e0"
+}
