@@ -369,7 +369,7 @@ def main():
         if partition == "embargo":
             emit({"session_date": dstr, "partition": partition, "status": "NOT_SCORED", "reason": "PARTITION_BOUNDARY"})
             continue
-        if d not in sessions:
+        if dstr not in sessions:
             emit({"session_date": dstr, "partition": partition, "status": "SKIP", "reason": invalid_sessions.get(dstr, {}).get("reason", "INCOMPLETE_RTH_M5_SESSION"),
                   "rth_m5_bars": invalid_sessions.get(dstr, {}).get("m5_bars", 0)})
             continue
