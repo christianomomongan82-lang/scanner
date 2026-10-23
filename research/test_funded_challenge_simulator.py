@@ -114,6 +114,28 @@ class ChallengeSimulatorTests(unittest.TestCase):
         self.assertEqual(result["status"], "INACTIVITY_LIMIT_REACHED")
         self.assertEqual(result["failure_reason"], "inactivity_limit_reached")
 
+    def test_30_calendar_day_inactivity_gap_fails_conservatively(self):
+        events = win_trade(0, "first")
+        events += win_trade(30, "too_late")
+        result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
+        self.assertEqual(result["status"], "INACTIVITY_LIMIT_REACHED")
+        self.assertEqual(result["binary_verdict"], "GAGAL")
+        self.assertEqual(result["failure_reason"], "inactivity_limit_reached")
+
+    def test_29_calendar_day_gap_does_not_fail_inactivity_gate(self):
+        events = win_trade(0, "first")
+        events += win_trade(29, "within_limit")
+        result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
+        self.assertNotEqual(result["status"], "INACTIVITY_LIMIT_REACHED")
+
+    def test_skipped_signal_does_not_reset_inactivity_clock(self):
+        events = win_trade(0, "first")
+        events += [event(29, "OPEN", "skipped", risk_pct=0.04)]
+        events += win_trade(30, "too_late_after_skipped")
+        result = simulate_challenge(events, ChallengeRules(server_timezone="UTC"))
+        self.assertEqual(result["status"], "INACTIVITY_LIMIT_REACHED")
+        self.assertEqual(result["failure_reason"], "inactivity_limit_reached")
+
     def test_rejects_timezone_naive_input(self):
         events = [{"timestamp_utc": "2025-01-01T00:00:00", "event": "OPEN", "trade_id": "x"}]
         with self.assertRaises(ValueError):
