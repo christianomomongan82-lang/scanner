@@ -1,3 +1,9 @@
+# R331 RESULT — REJECTED AT INITIAL SCREEN (2026-10-24)
+
+R331's final local rerun is **GAGAL — SAMPLE/TARGET FEASIBILITY**: 93 discovery trades and only 33 confirmation trades (<50 required). It is also economically negative before added costs in both periods: discovery gross -267.35 bps (PF 0.752), confirmation gross -397.32 bps (PF 0.665). At +5 bps round-trip cost the totals are -732.35 and -562.32 bps. Two runner defects were fixed and committed before this rerun: pandas `Index.has_duplicates` property called as a function (`ab00b0f`), and date-vs-string session-key mismatch (`d2c1b35`). Do not tune/promote this hypothesis; change family. Full result and provenance: [R331 initial screen result](research/R331_INITIAL_SCREEN_RESULT_20261024.md). This is a rejected strategy screen, not proof that the overall funded or income goal is impossible.
+
+---
+
 # R331 AMENDMENT D — MIDPOINT EXTREMA FIXED PRE-OUTCOME
 
 R331 computes each paired M1 midpoint first, then aggregates midpoint highs/lows across the five minute bars. It does not average separately aggregated BID/ASK extrema, which could create a false band breach. The additional 0/2/5/10 bps costs are beyond observed source-feed BID/ASK spread; do not double-count them as spread. See [Amendment D](research/R331_AMENDMENT_D_MIDPOINT_CONSTRUCTION_AND_COST_INTERPRETATION_20261023.md). No outcomes calculated.
