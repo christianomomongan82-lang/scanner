@@ -1,3 +1,11 @@
+# R330 AMENDMENT A — PRE-OUTCOME DATA LIMIT — 2026-10-23
+
+The original R330 registration was amended before any PnL because Massive raw-data requests began returning rate-limit errors while attempting to archive the full 15-symbol universe. The frozen universe is now 8 US stocks (AAPL, AMZN, GOOG, MSFT, NVDA, TSLA, AMD, META) plus BTCUSD and ETHUSD. BABA/NFLX/INTC/NKE/KO are excluded before outcomes and may not be substituted later. See [R330 Amendment A](research/R330_AMENDMENT_A_PREOUTCOME_UNIVERSE_DATA_LIMIT_20261023.md).
+
+The signal/cost/split rules remain unchanged. No R330 outcome has been calculated. Do not run PnL until all 10 raw sources, hashes, and the exact reproducible runner are archived.
+
+---
+
 # R330 STATUS — REGISTERED BEFORE OUTCOME CALCULATION — 2026-10-23
 
 R330's frozen registration is committed at [R330_MULTI_ASSET_TIMESERIES_MOMENTUM_PREREGISTRATION_20261023.md](research/R330_MULTI_ASSET_TIMESERIES_MOMENTUM_PREREGISTRATION_20261023.md). It tests one fixed 20-observation, volatility-normalized time-series momentum rule on 13 FundedNext-listed US stock CFDs and BTCUSD/ETHUSD, using Massive daily bars from 2024-10-23 to 2026-10-22. No R330 PnL was calculated at registration. The source is underlying-market aggregates, not FundedNext BID/ASK execution history, so a positive result is only a screen and cannot establish funded-readiness.
