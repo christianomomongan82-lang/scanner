@@ -1,3 +1,8 @@
+# R331 AMENDMENT D — MIDPOINT EXTREMA FIXED PRE-OUTCOME
+
+R331 computes each paired M1 midpoint first, then aggregates midpoint highs/lows across the five minute bars. It does not average separately aggregated BID/ASK extrema, which could create a false band breach. The additional 0/2/5/10 bps costs are beyond observed source-feed BID/ASK spread; do not double-count them as spread. See [Amendment D](research/R331_AMENDMENT_D_MIDPOINT_CONSTRUCTION_AND_COST_INTERPRETATION_20261023.md). No outcomes calculated.
+
+---
 # R331 AMENDMENT D — BID/ASK VS ADDITIONAL COSTS
 
 Because R331 now executes at side-correct USATECH BID/ASK, the quoted feed spread is already reflected in raw trade returns. The fixed 0/2/5/10 bps ladder is explicitly interpreted as additional round-trip feed mismatch/slippage beyond those side prices; 5 bps remains the primary hurdle, 10 bps stress. These are sensitivities, not claimed FundedNext quote costs. See [R331 Amendment D](research/R331_AMENDMENT_D_COST_SEMANTICS_20261023.md). No price/event/PnL results yet.
