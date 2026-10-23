@@ -1,3 +1,15 @@
+# ROOT-CAUSE AUDIT — 2026-10-23
+
+Latest diagnosis of repeated backtest failures: [ROOT_CAUSE_FAILURE_AUDIT_20261023.md](research/ROOT_CAUSE_FAILURE_AUDIT_20261023.md).
+
+**Main finding:** no single cause. The dominant economic failure is that tested price-pattern/short-horizon FX hypotheses have not shown persistent executable edge; multiple-testing and repeated data use explain why several discovery winners collapsed in validation; costs/latency amplify but do not explain all losses. Separately, six of R322–R328 were stopped before valid PnL by sample/novelty/package gates, so they were not all proven unprofitable. Known data and archive defects affect particular runs but do not explain all well-audited negative results.
+
+Evidence anchors: R317 +39.398R discovery vs -37.264R validation (still -3.862R at zero additional cost); R318 all five selected top candidates failed validation; R319 0/11 discovery winners survived confirmation; R321 all 28 causal price-state/horizon relations were negative even before extra friction; R329 confirmation was -2.093R before incremental commission/slippage/swap. No current candidate is proven funded-ready and no supported day-179 pass probability exists.
+
+**Decision:** do not automatically start R330 or tune closed families. Distinguish economic failure, process/sample stop, target-feasibility failure and challenge failure. Future gates must be preregistered and justified by statistical power/target feasibility; execution delay and executable-side costs must be modelled from the start. Progress is required to be monotonic in research integrity, not candidate PnL.
+
+---
+
 # INACTIVITY RULE ADDED TO FUNDED REPLAY — 2026-10-23
 
 The inactivity constraint is now part of the active research configuration and shared challenge simulator. Official FundedNext sources conflict (one says 60 days; the Help Center article updated 2026-07-27 says 30 days), so the project conservatively treats **30 consecutive calendar days without an accepted new trade as a failure** until the exact Stellar 2-Step CFD account terms are confirmed in writing. This is a modelling safety choice, not a claim that the source conflict is resolved.
