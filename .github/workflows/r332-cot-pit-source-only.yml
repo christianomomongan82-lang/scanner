@@ -1,0 +1,63 @@
+name: R332 pinned CFTC point-in-time source acquisition ONLY
+
+on:
+  push:
+    branches:
+      - local-backtest/r189-dukascopy-history
+    paths:
+      - ".github/workflows/r332-cot-pit-source-only.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire-source-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download pinned public source files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source
+          REV="917febb"
+          BASE="https://huggingface.co/datasets/ZipLime/commitments-of-traders/resolve/${REV}/data"
+          curl --fail --location --retry 3 --retry-all-errors --max-time 180 "${BASE}/pit/part-00000.parquet" -o source/cot_pit.parquet
+          curl --fail --location --retry 3 --retry-all-errors --max-time 180 "${BASE}/markets/part-00000.parquet" -o source/cot_markets.parquet
+          curl --fail --location --retry 3 --retry-all-errors --max-time 180 "${BASE}/releases/part-00000.parquet" -o source/cot_releases.parquet
+          python - <<'PY'
+          from pathlib import Path
+          files = [Path("source") / name for name in (
+              "cot_pit.parquet", "cot_markets.parquet", "cot_releases.parquet"
+          )]
+          for path in files:
+              size = path.stat().st_size
+              with path.open("rb") as f:
+                  start = f.read(4)
+                  f.seek(-4, 2)
+                  end = f.read(4)
+              if size < 100 or start != b"PAR1" or end != b"PAR1":
+                  raise SystemExit(f"Invalid parquet container: {path}, bytes={size}, start={start}, end={end}")
+              print(f"SOURCE_BYTES_OK {path} {size}")
+          PY
+          {
+            echo "experiment=R332"
+            echo "purpose=data acquisition and byte validation only; no feature, signal, return, PnL, or strategy verdict calculations"
+            echo "source=https://huggingface.co/datasets/ZipLime/commitments-of-traders"
+            echo "revision=${REV}"
+            echo "acquisition_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "files:"
+            sha256sum source/*.parquet
+            echo "sizes:"
+            wc -c source/*.parquet
+          } > source/SOURCE_MANIFEST.txt
+          cat source/SOURCE_MANIFEST.txt
+
+      - name: Archive raw source inputs and hashes (no backtest calculation)
+        uses: actions/upload-artifact@v4
+        with:
+          name: R332-COT-PIT-source-only-917febb
+          path: source/
+          if-no-files-found: error
+          retention-days: 90
