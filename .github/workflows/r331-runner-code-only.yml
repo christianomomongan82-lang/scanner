@@ -1,0 +1,34 @@
+name: R331 runner source bundle (no data or calculation)
+
+on:
+  push:
+    branches:
+      - local-backtest/r189-dukascopy-history
+    paths:
+      - ".github/workflows/r331-runner-code-only.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  archive-runner-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout committed R331 source
+        uses: actions/checkout@v4
+        with:
+          ref: local-backtest/r189-dukascopy-history
+          persist-credentials: false
+
+      - name: Bundle source and registration only
+        uses: actions/upload-artifact@v4
+        with:
+          name: R331-committed-runner-source-only
+          path: |
+            research/r331_vxn_banded_nasdaq_reversion.py
+            research/R331_VXN_BANDED_NASDAQ_REVERSION_PREREGISTRATION_20261023.md
+            research/R331_AMENDMENT_A_EXACT_USATECH_DATA_20261023.md
+            research/R331_AMENDMENT_B_OPERATIONAL_SEMANTICS_20261023.md
+          if-no-files-found: error
+          retention-days: 90
