@@ -1,3 +1,8 @@
+# R331 AMENDMENT C — EXCHANGE CALENDAR AND DATA GATES FROZEN PRE-OUTCOME
+
+R331 now uses explicit NYSE trading days and half-days, with 78 complete M5 bars for full sessions and 42 for early-close sessions. An absent expected price session or expected prior-day VXN close is GAGAL — DATA/PROCESS; incomplete prior-session price data may not be replaced by an older close. See [R331 Amendment C](research/R331_AMENDMENT_C_NYSE_CALENDAR_20261023.md). No price/event/PnL has been calculated yet.
+
+---
 # R331 AMENDMENT B — EVENT AND DATA SEMANTICS FROZEN PRE-OUTCOME
 
 R331 Amendment B freezes the paired BID/ASK → complete M5 bar construction, midpoint band signal, strictly prior-day VXN join, same-bar two-sided breach skip, delayed entry at signal label +10 minutes, exact +30-minute exit, side-correct bid/ask PnL, cost ladder, and zero-inclusive 4-week bootstrap. Raw VXN values remain local only; only source/hash/date-coverage metadata may be stored in the public repo. No price/event/PnL results yet. See [R331 operational semantics](research/R331_AMENDMENT_B_OPERATIONAL_SEMANTICS_20261023.md).
