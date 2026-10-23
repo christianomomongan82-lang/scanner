@@ -6,7 +6,7 @@
 - Public mirror used to acquire the daily series: https://github.com/fuxui/vix-vxn/blob/main/data/history.json
 - Mirror retrieval time recorded in JSON: 2026-10-23T00:27:11Z
 - Mirror JSON SHA-256: 4c0603b692e69fd9b1aad3ae82ce2bdb0b875104e38d53c27991bf2202d1a11a
-- VXN observations used locally: 750 daily rows, 2023-10-25 through 2026-10-21 inclusive, no duplicate dates or missing close values in the extracted window.
+- VXN observations used locally: 750 daily rows, 2023-10-25 through 2026-10-21 inclusive, no duplicate dates or missing close values in the extracted window. Pre-outcome calendar audit matched all 750 source dates to expected NYSE trading dates in the registered interval (0 expected trading-day VXN observations missing).
 - Local derived CSV SHA-256 (file retained locally only): 23c48798bb9691d8f9d168ea8c1356e4f3acd0df739372f3f679d76ca200e448
 - Local CSV columns: date,close. The raw daily values are not embedded in this manifest, the public R331 runner, or public result artifacts.
 
