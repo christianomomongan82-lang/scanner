@@ -308,6 +308,15 @@ def main():
     vxn, vdiag = read_vxn(args.vxn)
     vxn_map = {r.date.date(): float(r.close) for r in vxn.itertuples(index=False)}
     vxn_dates = sorted(vxn_map)
+    # A trading-day VXN observation missing inside the registered signal window is
+    # a source-data failure; the strategy may never carry a stale volatility close forward.
+    vxn_missing_expected = [
+        x.isoformat() for x in trading_dates
+        if START.date() <= x <= END.date() and x >= vxn_dates[0] and x not in vxn_map
+    ]
+    if vxn_missing_expected:
+        raise ValueError("GAGAL — DATA/PROCESS: VXN is missing expected NYSE daily closes, first="
+                         + ",".join(vxn_missing_expected[:20]) + f"; count={len(vxn_missing_expected)}")
     sessions = {}
     invalid_sessions = {}
     trading_dates, market_holidays, early_closes = nyse_calendar(DATA_START, END.date())
@@ -331,11 +340,12 @@ def main():
         expected_labels = rth_labels_by_day[day]
         have = set(g.local_hhmm)
         missing = [x for x in expected_labels if x not in have]
-        if len(g) != len(expected_labels) or missing:
-            invalid_sessions[day] = {"reason": "INCOMPLETE_RTH_M5_SESSION", "m5_bars": int(len(g)),
+        session_rows = g.loc[g.local_hhmm.isin(expected_labels)].copy()
+        if len(session_rows) != len(expected_labels) or missing:
+            invalid_sessions[day] = {"reason": "INCOMPLETE_RTH_M5_SESSION", "m5_bars": int(len(session_rows)),
                                      "expected_m5_bars": len(expected_labels), "missing_labels": missing}
         else:
-            sessions[day] = g.sort_values("local")
+            sessions[day] = session_rows.sort_values("local")
 
     trading_date_strs = [x.isoformat() for x in trading_dates]
     ledger_rows = []
