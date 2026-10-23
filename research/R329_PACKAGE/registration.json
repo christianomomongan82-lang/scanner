@@ -23,7 +23,7 @@
   "holdout_status": "UNOPENED",
   "data_source_sha256": "2db7c7d88b2f31965ff956dd5e017ce7f0b76a4ac1792dca4896833b884e85e0",
   "output_contract_version": "v2",
-  "first_outcome_compute_at_utc": null,
+  "first_outcome_compute_at_utc": "2026-10-23T03:23:30Z",
   "note": "Registered economic mechanism only. Current H1 source supports an exact T+60-minute bar-open proxy, not actual T+5-minute execution; actual contract size/swaps require verification before promotion.",
   "preoutcome_amendments": [
     "R329_PREOUTCOME_AMENDMENT_A_SOURCE_HASH.md: corrected copied NZDUSD ASK source hash before V2 preflight; no candidate rules changed.",
@@ -31,5 +31,9 @@
     "R329_PREOUTCOME_AMENDMENT_D_OUTCOME_IMPLEMENTATION.md: froze exact economic outcome runner and output interpretation before any PnL."
   ],
   "outcome_runner_path": "research/R329_PACKAGE/outcome_runner.py",
-  "outcome_runner_git_blob_sha": "6abf73f4d59351424c306f3dde2b1f7b5c37cdc5"
+  "outcome_runner_git_blob_sha": "6abf73f4d59351424c306f3dde2b1f7b5c37cdc5",
+  "outcome_status": "GAGAL — ECONOMIC SCREEN",
+  "outcome_result_path": "research/R329_PACKAGE/results.json",
+  "outcome_report_path": "research/R329_PACKAGE/report.md",
+  "outcome_source_identity_caveat": "The execution source SHA-256 did not byte-match the registered GitHub runner blob; this is recorded in R329_SOURCE_IDENTITY_AUDIT_20261023.md. Two same-source local runs were byte-identical, and a second reconstruction matched the economics outputs. No promotion or challenge replay allowed."
 }
