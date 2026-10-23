@@ -1,0 +1,415 @@
+{
+  "experiment": "R330",
+  "claimType": "initial screen only; not funded-ready",
+  "verdict": "GAGAL — ECONOMIC SCREEN",
+  "dates": {
+    "start": "2024-10-23",
+    "end": "2026-10-22",
+    "discoveryForwardCutoff": "2025-10-22",
+    "confirmationStart": "2025-10-23",
+    "confirmationForwardCutoff": "2026-10-22"
+  },
+  "universe": [
+    {
+      "symbol": "AAPL",
+      "assetClass": "stock"
+    },
+    {
+      "symbol": "AMZN",
+      "assetClass": "stock"
+    },
+    {
+      "symbol": "GOOG",
+      "assetClass": "stock"
+    },
+    {
+      "symbol": "MSFT",
+      "assetClass": "stock"
+    },
+    {
+      "symbol": "NVDA",
+      "assetClass": "stock"
+    },
+    {
+      "symbol": "TSLA",
+      "assetClass": "stock"
+    },
+    {
+      "symbol": "AMD",
+      "assetClass": "stock"
+    },
+    {
+      "symbol": "META",
+      "assetClass": "stock"
+    },
+    {
+      "symbol": "BTCUSD",
+      "assetClass": "crypto"
+    },
+    {
+      "symbol": "ETHUSD",
+      "assetClass": "crypto"
+    }
+  ],
+  "frozenSignal": {
+    "lookbackBars": 20,
+    "scoreThreshold": 1,
+    "rebalance": "weekly Friday snapshot",
+    "grossExposureCap": 1
+  },
+  "costAssumptions": {
+    "stockCommissionPerSide": 0.00004,
+    "cryptoCommissionPerSide": 0.0004,
+    "stockExtraPerSideBps": {
+      "floor": 0,
+      "primary": 5,
+      "stress": 10
+    },
+    "cryptoExtraPerSideBps": {
+      "floor": 0,
+      "primary": 15,
+      "stress": 30
+    }
+  },
+  "promotionNote": "Underlying-market daily aggregates are not exact FundedNext CFD BID/ASK quotes; no swap deduction or five-minute fill is modeled. This verdict cannot establish funded readiness or day-179 pass probability.",
+  "dataAudit": {
+    "instruments": [
+      {
+        "symbol": "AAPL",
+        "assetClass": "stock",
+        "rowCount": 501,
+        "firstDate": "2024-10-23",
+        "lastDate": "2026-10-22"
+      },
+      {
+        "symbol": "AMZN",
+        "assetClass": "stock",
+        "rowCount": 501,
+        "firstDate": "2024-10-23",
+        "lastDate": "2026-10-22"
+      },
+      {
+        "symbol": "GOOG",
+        "assetClass": "stock",
+        "rowCount": 501,
+        "firstDate": "2024-10-23",
+        "lastDate": "2026-10-22"
+      },
+      {
+        "symbol": "MSFT",
+        "assetClass": "stock",
+        "rowCount": 501,
+        "firstDate": "2024-10-23",
+        "lastDate": "2026-10-22"
+      },
+      {
+        "symbol": "NVDA",
+        "assetClass": "stock",
+        "rowCount": 501,
+        "firstDate": "2024-10-23",
+        "lastDate": "2026-10-22"
+      },
+      {
+        "symbol": "TSLA",
+        "assetClass": "stock",
+        "rowCount": 501,
+        "firstDate": "2024-10-23",
+        "lastDate": "2026-10-22"
+      },
+      {
+        "symbol": "AMD",
+        "assetClass": "stock",
+        "rowCount": 501,
+        "firstDate": "2024-10-23",
+        "lastDate": "2026-10-22"
+      },
+      {
+        "symbol": "META",
+        "assetClass": "stock",
+        "rowCount": 501,
+        "firstDate": "2024-10-23",
+        "lastDate": "2026-10-22"
+      },
+      {
+        "symbol": "BTCUSD",
+        "assetClass": "crypto",
+        "rowCount": 730,
+        "firstDate": "2024-10-23",
+        "lastDate": "2026-10-22"
+      },
+      {
+        "symbol": "ETHUSD",
+        "assetClass": "crypto",
+        "rowCount": 730,
+        "firstDate": "2024-10-23",
+        "lastDate": "2026-10-22"
+      }
+    ],
+    "rawHeadersChecked": true,
+    "duplicateDates": 0,
+    "invalidOHLC": 0,
+    "weeklySnapshotCount": 104,
+    "snapshotStart": "2024-10-25",
+    "snapshotEnd": "2026-10-16"
+  },
+  "discovery": {
+    "partition": "discovery",
+    "eligibleWeeks": 51,
+    "signalStart": "2024-10-25",
+    "signalEnd": "2025-10-10",
+    "cumulativePrimaryNetReturn": 0.8282792833834447,
+    "cumulativeStressNetReturn": 0.7751837399711092,
+    "arithmeticSumGrossReturn": 0.6768938620579148,
+    "arithmeticSumCommissionOnlyReturn": 0.6726088506215809,
+    "commissionCost": 0.004285011436333659,
+    "primaryExtraCost": 0.030063813360346227,
+    "stressExtraCost": 0.060127626720692454,
+    "meanPrimaryNetWeeklyReturn": 0.012598922299239899,
+    "medianPrimaryNetWeeklyReturn": 0.00726787528469465,
+    "winWeekRate": 0.5882352941176471,
+    "profitFactorWeekly": 2.6056403749874,
+    "maxDrawdownPrimary": -0.11820877091555637,
+    "annualizedWeeklySharpe": 2.402855026569192,
+    "totalTurnover": 46.699724095649884,
+    "bootstrapMeanPrimary95": {
+      "reps": 10000,
+      "blockLength": 4,
+      "seedInput": 33020261023,
+      "seedUint32": 2955489951,
+      "low": 0.003777033280294337,
+      "high": 0.020816450934901243
+    },
+    "perAsset": [
+      {
+        "symbol": "AAPL",
+        "assetClass": "stock",
+        "grossContribution": 0.009034972609791398,
+        "turnover": 9.24363847181834,
+        "commissionCost": 0.00036974553887273364,
+        "primaryExtraCost": 0.004621819235909171,
+        "stressExtraCost": 0.009243638471818342,
+        "activeWeeks": 24
+      },
+      {
+        "symbol": "AMZN",
+        "assetClass": "stock",
+        "grossContribution": 0.006471005068391593,
+        "turnover": 3.8776958462910276,
+        "commissionCost": 0.0001551078338516412,
+        "primaryExtraCost": 0.0019388479231455145,
+        "stressExtraCost": 0.003877695846291029,
+        "activeWeeks": 16
+      },
+      {
+        "symbol": "GOOG",
+        "assetClass": "stock",
+        "grossContribution": 0.08620453331987457,
+        "turnover": 5.166857164092943,
+        "commissionCost": 0.00020667428656371767,
+        "primaryExtraCost": 0.002583428582046471,
+        "stressExtraCost": 0.005166857164092942,
+        "activeWeeks": 19
+      },
+      {
+        "symbol": "MSFT",
+        "assetClass": "stock",
+        "grossContribution": 0.004962356276727937,
+        "turnover": 6.9420032255773725,
+        "commissionCost": 0.00027768012902309476,
+        "primaryExtraCost": 0.0034710016127886844,
+        "stressExtraCost": 0.006942003225577369,
+        "activeWeeks": 21
+      },
+      {
+        "symbol": "NVDA",
+        "assetClass": "stock",
+        "grossContribution": 0.034258179866786954,
+        "turnover": 1.90291678147399,
+        "commissionCost": 0.00007611667125895962,
+        "primaryExtraCost": 0.0009514583907369951,
+        "stressExtraCost": 0.0019029167814739903,
+        "activeWeeks": 14
+      },
+      {
+        "symbol": "TSLA",
+        "assetClass": "stock",
+        "grossContribution": 0.07940970394438178,
+        "turnover": 2.9704911169983053,
+        "commissionCost": 0.00011881964467993222,
+        "primaryExtraCost": 0.0014852455584991528,
+        "stressExtraCost": 0.0029704911169983056,
+        "activeWeeks": 21
+      },
+      {
+        "symbol": "AMD",
+        "assetClass": "stock",
+        "grossContribution": 0.2608546931814869,
+        "turnover": 6.144776888397897,
+        "commissionCost": 0.00024579107553591593,
+        "primaryExtraCost": 0.003072388444198948,
+        "stressExtraCost": 0.006144776888397896,
+        "activeWeeks": 21
+      },
+      {
+        "symbol": "META",
+        "assetClass": "stock",
+        "grossContribution": 0.0469717152551023,
+        "turnover": 3.737393288478726,
+        "commissionCost": 0.00014949573153914903,
+        "primaryExtraCost": 0.001868696644239363,
+        "stressExtraCost": 0.003737393288478726,
+        "activeWeeks": 16
+      },
+      {
+        "symbol": "BTCUSD",
+        "assetClass": "crypto",
+        "grossContribution": 0.06605180725288334,
+        "turnover": 3.7208771433397105,
+        "commissionCost": 0.001488350857335884,
+        "primaryExtraCost": 0.005581315715009566,
+        "stressExtraCost": 0.011162631430019132,
+        "activeWeeks": 13
+      },
+      {
+        "symbol": "ETHUSD",
+        "assetClass": "crypto",
+        "grossContribution": 0.08267489528248793,
+        "turnover": 2.9930741691815754,
+        "commissionCost": 0.00119722966767263,
+        "primaryExtraCost": 0.004489611253772363,
+        "stressExtraCost": 0.008979222507544725,
+        "activeWeeks": 17
+      }
+    ]
+  },
+  "confirmation": {
+    "partition": "confirmation",
+    "eligibleWeeks": 52,
+    "signalStart": "2025-10-24",
+    "signalEnd": "2026-10-16",
+    "cumulativePrimaryNetReturn": -0.37412811667777157,
+    "cumulativeStressNetReturn": -0.3985599037541877,
+    "arithmeticSumGrossReturn": -0.3918607144190802,
+    "arithmeticSumCommissionOnlyReturn": -0.39742837206003934,
+    "commissionCost": 0.005567657640959046,
+    "primaryExtraCost": 0.03945381574911535,
+    "stressExtraCost": 0.0789076314982307,
+    "meanPrimaryNetWeeklyReturn": -0.008401580534791436,
+    "medianPrimaryNetWeeklyReturn": -0.003202066565413602,
+    "winWeekRate": 0.36538461538461536,
+    "profitFactorWeekly": 0.515543093151376,
+    "maxDrawdownPrimary": -0.39233840702719136,
+    "annualizedWeeklySharpe": -1.800621192318296,
+    "totalTurnover": 61.683685919446276,
+    "bootstrapMeanPrimary95": {
+      "reps": 10000,
+      "blockLength": 4,
+      "seedInput": 33020261023,
+      "seedUint32": 2955489951,
+      "low": -0.016631931983735415,
+      "high": -0.00019529621613659053
+    },
+    "perAsset": [
+      {
+        "symbol": "AAPL",
+        "assetClass": "stock",
+        "grossContribution": -0.06551263640907945,
+        "turnover": 11.0681296401609,
+        "commissionCost": 0.000442725185606436,
+        "primaryExtraCost": 0.005534064820080451,
+        "stressExtraCost": 0.011068129640160901,
+        "activeWeeks": 21
+      },
+      {
+        "symbol": "AMZN",
+        "assetClass": "stock",
+        "grossContribution": -0.016332801889864183,
+        "turnover": 4.689912368472393,
+        "commissionCost": 0.00018759649473889568,
+        "primaryExtraCost": 0.0023449561842361958,
+        "stressExtraCost": 0.0046899123684723916,
+        "activeWeeks": 15
+      },
+      {
+        "symbol": "GOOG",
+        "assetClass": "stock",
+        "grossContribution": -0.0735474975495612,
+        "turnover": 9.34287675391153,
+        "commissionCost": 0.00037371507015646115,
+        "primaryExtraCost": 0.004671438376955764,
+        "stressExtraCost": 0.009342876753911529,
+        "activeWeeks": 20
+      },
+      {
+        "symbol": "MSFT",
+        "assetClass": "stock",
+        "grossContribution": -0.0853761373937891,
+        "turnover": 6.778907408247453,
+        "commissionCost": 0.00027115629632989816,
+        "primaryExtraCost": 0.003389453704123727,
+        "stressExtraCost": 0.006778907408247454,
+        "activeWeeks": 20
+      },
+      {
+        "symbol": "NVDA",
+        "assetClass": "stock",
+        "grossContribution": -0.021712337935162054,
+        "turnover": 2.519067212748517,
+        "commissionCost": 0.00010076268850994069,
+        "primaryExtraCost": 0.0012595336063742585,
+        "stressExtraCost": 0.002519067212748517,
+        "activeWeeks": 8
+      },
+      {
+        "symbol": "TSLA",
+        "assetClass": "stock",
+        "grossContribution": -0.1647213851817892,
+        "turnover": 5.492017849044454,
+        "commissionCost": 0.00021968071396177816,
+        "primaryExtraCost": 0.0027460089245222264,
+        "stressExtraCost": 0.005492017849044453,
+        "activeWeeks": 14
+      },
+      {
+        "symbol": "AMD",
+        "assetClass": "stock",
+        "grossContribution": -0.030152628436276682,
+        "turnover": 5.51576561762112,
+        "commissionCost": 0.0002206306247048448,
+        "primaryExtraCost": 0.0027578828088105603,
+        "stressExtraCost": 0.005515765617621121,
+        "activeWeeks": 19
+      },
+      {
+        "symbol": "META",
+        "assetClass": "stock",
+        "grossContribution": -0.05371501311318493,
+        "turnover": 7.6650362798476985,
+        "commissionCost": 0.00030660145119390796,
+        "primaryExtraCost": 0.0038325181399238486,
+        "stressExtraCost": 0.007665036279847697,
+        "activeWeeks": 16
+      },
+      {
+        "symbol": "BTCUSD",
+        "assetClass": "crypto",
+        "grossContribution": 0.07463190526017006,
+        "turnover": 4.6875755420381005,
+        "commissionCost": 0.0018750302168152404,
+        "primaryExtraCost": 0.007031363313057152,
+        "stressExtraCost": 0.014062726626114304,
+        "activeWeeks": 15
+      },
+      {
+        "symbol": "ETHUSD",
+        "assetClass": "crypto",
+        "grossContribution": 0.04457781822945645,
+        "turnover": 3.9243972473541073,
+        "commissionCost": 0.001569758898941643,
+        "primaryExtraCost": 0.005886595871031163,
+        "stressExtraCost": 0.011773191742062325,
+        "activeWeeks": 15
+      }
+    ]
+  }
+}
