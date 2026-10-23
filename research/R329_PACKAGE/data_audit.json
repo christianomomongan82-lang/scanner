@@ -1,0 +1,35 @@
+{
+  "experiment_id": "R329",
+  "mode": "candidate-specific-preoutcome-audit",
+  "data_gate": "PASS",
+  "provider": "Dukascopy native H1 BID/ASK",
+  "source_artifact_id": 12400822266,
+  "source_workflow_run_id": 39719343805,
+  "source_manifest_sha256": "2db7c7d88b2f31965ff956dd5e017ce7f0b76a4ac1792dca4896833b884e85e0",
+  "streams": 14,
+  "pairs": 7,
+  "rows_per_stream": 78361,
+  "all_pair_exact_timestamp_intersection": 78361,
+  "active_common_tuesday_10utc_snapshots": 468,
+  "integrity": {
+    "duplicate_timestamps": 0,
+    "misaligned_h1_timestamps": 0,
+    "invalid_ohlc_rows": 0,
+    "nonfinite_ohlc_rows": 0,
+    "negative_open_spreads": 0,
+    "negative_close_spreads": 0
+  },
+  "spread_price_median_by_pair": {
+    "AUDUSD": 0.00011,
+    "EURUSD": 0.00004,
+    "GBPUSD": 0.00011,
+    "NZDUSD": 0.00012,
+    "USDCAD": 0.00013,
+    "USDCHF": 0.00012,
+    "USDJPY": 0.006
+  },
+  "flat_rows": "preserved in raw source; ineligible for active signal/entry/exit only",
+  "missing_rows": "preserved; no fill-forward, no synthetic rows",
+  "timestamp_join": "exact intersection only",
+  "candidate_outcomes_inspected": false
+}
