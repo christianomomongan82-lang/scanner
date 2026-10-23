@@ -87,8 +87,7 @@ jobs:
               w=csv.writer(f, lineterminator="\n")
               w.writerow(["date","close"])
               w.writerows(rows)
-          # The pre-registered local CSV has no trailing newline; match it byte-for-byte.
-          out.write_bytes(out.read_bytes().rstrip(b"\n"))
+          # csv.writer's final newline matches the pre-registered source CSV.
           derived=hashlib.sha256(out.read_bytes()).hexdigest()
           expected_derived="23c48798bb9691d8f9d168ea8c1356e4f3acd0df739372f3f679d76ca200e448"
           if derived!=expected_derived:
