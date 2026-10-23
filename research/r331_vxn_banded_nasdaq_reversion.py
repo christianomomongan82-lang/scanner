@@ -60,7 +60,7 @@ def read_side(path: Path, side: str):
     out = df[["open", "high", "low", "close"]].apply(pd.to_numeric, errors="coerce")
     out.columns = [f"{x}_{side}" for x in ("open", "high", "low", "close")]
     out.index = idx
-    if out.index.has_duplicates():
+    if out.index.has_duplicates:
         raise ValueError(f"Duplicate timestamps in {path}: {int(out.index.duplicated().sum())}")
     out = out.sort_index()
     valid = np.isfinite(out.to_numpy(dtype=float)).all(axis=1)
