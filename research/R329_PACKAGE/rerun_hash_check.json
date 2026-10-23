@@ -1,0 +1,10 @@
+{
+  "runs_compared": 2,
+  "mismatches": [],
+  "byte_identical_within_same_runner": true,
+  "source_hash": "abc24c2b706e58ebc059b93b5c18f48807ebfb02df12166c4230aa428f2c842b",
+  "source_hash_matches_registered_github_runner": false,
+  "cross_reconstruction_results_match": true,
+  "cross_reconstruction_only_difference": "weekly_all_configs.csv.gz has an extra unused entry_date column in first local variant; economic scorecard, ledgers, annual metrics and result JSON match.",
+  "interpretation": "Deterministic local rerun PASS; repository runner byte-identity gap disclosed. Candidate remains non-promotable and economically GAGAL."
+}
