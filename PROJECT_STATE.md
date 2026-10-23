@@ -1,3 +1,11 @@
+# R330 STATUS — REGISTERED BEFORE OUTCOME CALCULATION — 2026-10-23
+
+R330's frozen registration is committed at [R330_MULTI_ASSET_TIMESERIES_MOMENTUM_PREREGISTRATION_20261023.md](research/R330_MULTI_ASSET_TIMESERIES_MOMENTUM_PREREGISTRATION_20261023.md). It tests one fixed 20-observation, volatility-normalized time-series momentum rule on 13 FundedNext-listed US stock CFDs and BTCUSD/ETHUSD, using Massive daily bars from 2024-10-23 to 2026-10-22. No R330 PnL was calculated at registration. The source is underlying-market aggregates, not FundedNext BID/ASK execution history, so a positive result is only a screen and cannot establish funded-readiness.
+
+Next: archive exact raw input CSVs and hashes, verify completeness, run the frozen screen twice from reproducible local Python inputs, and report discovery (2024-10-23 to 2025-10-22) separately from confirmation (2025-10-23 to 2026-10-22). No R330 thresholds or universe may be changed after outcomes. Exact FundedNext financing/swap and quote-side execution must be verified before any candidate could reach challenge replay.
+
+---
+
 # NEXT DECISION — 2026-10-23
 
 The next move is a bounded research reset, not R330 or another FX candle/session parameter variant. See [NEXT_DECISION_AFTER_ROOT_CAUSE_AUDIT_20261023.md](research/NEXT_DECISION_AFTER_ROOT_CAUSE_AUDIT_20261023.md).
