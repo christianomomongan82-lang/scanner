@@ -41,21 +41,79 @@ jobs:
                   raise SystemExit(f"Invalid parquet container: {path}, bytes={size}, start={start}, end={end}")
               print(f"SOURCE_BYTES_OK {path} {size}")
           PY
+
+      - name: Inspect source schemas and market map only (no signals or outcomes)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --no-input pyarrow==19.0.1
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import pandas as pd
+          import pyarrow.parquet as pq
+
+          root = Path("source")
+          out = {"purpose": "source schema and market mapping audit only; no signals, price joins, returns or PnL", "tables": {}}
+          terms = ["euro", "europe", "british pound", "pound sterling", "japanese yen",
+                   "swiss franc", "australian dollar", "canadian dollar", "new zealand dollar",
+                   "nz dollar", "australian", "canadian", "chf", "aud", "cad", "nzd",
+                   "jpy", "eur", "gbp"]
+          for name in ("cot_pit", "cot_markets", "cot_releases"):
+              path = root / f"{name}.parquet"
+              pf = pq.ParquetFile(path)
+              table = pf.read()
+              out["tables"][name] = {
+                  "rows": pf.metadata.num_rows,
+                  "bytes": path.stat().st_size,
+                  "schema": [{"name": field.name, "type": str(field.type)} for field in table.schema],
+                  "sample_rows": table.slice(0, 3).to_pylist()
+              }
+              if name == "cot_markets":
+                  df = table.to_pandas()
+                  mask = pd.Series(False, index=df.index)
+                  for col in df.columns:
+                      if pd.api.types.is_string_dtype(df[col].dtype):
+                          colv = df[col].fillna("").astype(str).str.lower()
+                          for term in terms:
+                              mask |= colv.str.contains(term, regex=False)
+                  out["tables"][name]["currency_candidate_rows"] = df.loc[mask].head(80).to_dict(orient="records")
+              if name == "cot_pit":
+                  df = table.to_pandas()
+                  out["tables"][name]["likely_currency_rows"] = []
+                  text_cols = [c for c in df.columns if pd.api.types.is_string_dtype(df[c].dtype)]
+                  mask = pd.Series(False, index=df.index)
+                  for col in text_cols:
+                      colv = df[col].fillna("").astype(str).str.lower()
+                      for term in terms:
+                          mask |= colv.str.contains(term, regex=False)
+                  candidate = df.loc[mask]
+                  if "market_name" in candidate.columns:
+                      candidate = candidate[candidate["market_name"].astype(str).str.lower().str.contains(
+                          "euro|pound|yen|franc|australian|canadian|new zealand|nz dollar", regex=True
+                      )]
+                  out["tables"][name]["likely_currency_rows"] = candidate.head(30).to_dict(orient="records")
+          (root / "SOURCE_SCHEMA_AUDIT.json").write_text(json.dumps(out, indent=2, default=str) + "\n")
+          print(json.dumps({name: {"rows": v["rows"], "columns": [f["name"] for f in v["schema"]]}
+                            for name, v in out["tables"].items()}, indent=2))
+          print("SOURCE SCHEMA AUDIT COMPLETE; no signal, price join, or outcome calculations executed.")
+          PY
           {
             echo "experiment=R332"
-            echo "contract_version=2"
-            echo "purpose=data acquisition and byte validation only; no feature, signal, return, PnL, or strategy verdict calculations"
+            echo "contract_version=3"
+            echo "purpose=data acquisition, byte validation and source schema/mapping audit only; no feature, signal, price join, return, PnL, or strategy verdict calculations"
             echo "source=https://huggingface.co/datasets/ZipLime/commitments-of-traders"
-            echo "revision=${REV}"
+            echo "revision=917febb"
             echo "acquisition_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
             echo "files:"
             sha256sum source/*.parquet
             echo "sizes:"
             wc -c source/*.parquet
+            sha256sum source/SOURCE_SCHEMA_AUDIT.json
           } > source/SOURCE_MANIFEST.txt
           cat source/SOURCE_MANIFEST.txt
 
-      - name: Archive raw source inputs and hashes (no backtest calculation)
+      - name: Archive raw source inputs and source audit (no backtest calculation)
         uses: actions/upload-artifact@v4
         with:
           name: R332-COT-PIT-source-only-917febb
