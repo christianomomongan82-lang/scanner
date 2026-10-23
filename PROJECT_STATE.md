@@ -1,3 +1,17 @@
+# INACTIVITY RULE ADDED TO FUNDED REPLAY — 2026-10-23
+
+The inactivity constraint is now part of the active research configuration and shared challenge simulator. Official FundedNext sources conflict (one says 60 days; the Help Center article updated 2026-07-27 says 30 days), so the project conservatively treats **30 consecutive calendar days without an accepted new trade as a failure** until the exact Stellar 2-Step CFD account terms are confirmed in writing. This is a modelling safety choice, not a claim that the source conflict is resolved.
+
+- Rule record: [FUNDEDNEXT_INACTIVITY_RULE_20261023.md](research/FUNDEDNEXT_INACTIVITY_RULE_20261023.md)
+- Simulator field: `ChallengeRules.max_inactivity_days = 30`
+- Simulator behavior: an accepted entry after a gap of 30 or more server-local calendar dates fails with `INACTIVITY_LIMIT_REACHED`; a rejected/skipped signal does not reset the clock.
+- Added boundary tests for 29 vs 30 days and skipped signals. The replay input must still cover the complete attempted period; a truncated event path cannot prove inactivity safety.
+- Do not manufacture trades just to reset inactivity. A candidate with a natural gap beyond the conservative limit is not promotable under this configuration.
+
+Before challenge purchase/start, seek written confirmation from FundedNext for the exact account type and archive it. If confirmed rules differ, update the model only with that evidence and rerun the tests.
+
+---
+
 # TRUE TOP-LEVEL OBJECTIVE — 2026-10-23
 
 The project's highest-level goal is **sustainable income equivalent to UMK Manado without depending on a conventional job**, not merely passing a funded challenge. See [the authoritative true-objective note](research/TRUE_OBJECTIVE_UMK_MANADO_NONEMPLOYMENT_INCOME_20261023.md).
