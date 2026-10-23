@@ -1,0 +1,70 @@
+{
+  "experiment_id": "R329",
+  "verdict": "PREFLIGHT_PASS",
+  "data_gate": "PASS",
+  "candidate_sample_gates_pass": true,
+  "outcomes_computed": false,
+  "pnl_computed": false,
+  "source_manifest_sha256": "2db7c7d88b2f31965ff956dd5e017ce7f0b76a4ac1792dca4896833b884e85e0",
+  "preflight_runner_blob_sha": "a1010dc1c2896ea366ffaf9ffd38bf10c837b5af",
+  "data_counts": {
+    "native_streams": 14,
+    "pairs": 7,
+    "rows_per_stream": 78361,
+    "exact_bidask_timestamps_per_pair": 78361,
+    "all_seven_pair_common_timestamps": 78361,
+    "active_common_tuesday_10utc_snapshots": 468,
+    "duplicates": 0,
+    "misaligned_timestamps": 0,
+    "invalid_ohlc_rows": 0,
+    "nonfinite_ohlc_rows": 0,
+    "negative_open_or_close_spreads": 0
+  },
+  "horizons": [
+    {
+      "horizon_weeks": 13,
+      "discovery_eligible_legs": 1001,
+      "discovery_eligible_dates": 143,
+      "confirmation_eligible_legs": 658,
+      "confirmation_eligible_dates": 94,
+      "diagnostic_eligible_legs": 371,
+      "diagnostic_eligible_dates": 53,
+      "sample_gate_pass": true,
+      "required_discovery_legs": 200,
+      "required_discovery_dates": 100,
+      "required_confirmation_legs": 100,
+      "required_confirmation_dates": 70
+    },
+    {
+      "horizon_weeks": 26,
+      "discovery_eligible_legs": 896,
+      "discovery_eligible_dates": 128,
+      "confirmation_eligible_legs": 644,
+      "confirmation_eligible_dates": 92,
+      "diagnostic_eligible_legs": 476,
+      "diagnostic_eligible_dates": 68,
+      "sample_gate_pass": true,
+      "required_discovery_legs": 200,
+      "required_discovery_dates": 100,
+      "required_confirmation_legs": 100,
+      "required_confirmation_dates": 70
+    },
+    {
+      "horizon_weeks": 39,
+      "discovery_eligible_legs": 840,
+      "discovery_eligible_dates": 120,
+      "confirmation_eligible_legs": 644,
+      "confirmation_eligible_dates": 92,
+      "diagnostic_eligible_legs": 553,
+      "diagnostic_eligible_dates": 79,
+      "sample_gate_pass": true,
+      "required_discovery_legs": 200,
+      "required_discovery_dates": 100,
+      "required_confirmation_legs": 100,
+      "required_confirmation_dates": 70
+    }
+  ],
+  "interpretation": "Pre-outcome eligibility only; no realized returns, PnL, PF, drawdown, annual performance, bootstrap or challenge replay has been computed.",
+  "holdout_status": "UNOPENED",
+  "xauusd_2026_opened": false
+}
