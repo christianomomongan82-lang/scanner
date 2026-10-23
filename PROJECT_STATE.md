@@ -1,3 +1,10 @@
+# R330 EXECUTION EXCEPTION — SCREEN ONLY — 2026-10-23
+
+The local Python/container environment cannot resolve external hostnames, so it cannot retrieve archived CSVs from GitHub directly. A bounded, pre-outcome exception permits the initial R330 screen only to use a pure deterministic ECMAScript calculation core in the current tool runtime. Commit the exact runner before outcomes; verify raw input SHA-256; run twice and compare deterministic outputs. No GitHub Actions computation is authorized. See [R330 runtime amendment](research/R330_AMENDMENT_B_SCREEN_EXECUTION_RUNTIME_20261023.md).
+
+A positive result remains screen-only and requires independent Python reproduction plus exact FundedNext quote, financing, and challenge replay before promotion. This exception does not replace the normal local-Python workflow for future full backtests.
+
+---
 # R330 AMENDMENT A — PRE-OUTCOME DATA LIMIT — 2026-10-23
 
 The original R330 registration was amended before any PnL because Massive raw-data requests began returning rate-limit errors while attempting to archive the full 15-symbol universe. The frozen universe is now 8 US stocks (AAPL, AMZN, GOOG, MSFT, NVDA, TSLA, AMD, META) plus BTCUSD and ETHUSD. BABA/NFLX/INTC/NKE/KO are excluded before outcomes and may not be substituted later. See [R330 Amendment A](research/R330_AMENDMENT_A_PREOUTCOME_UNIVERSE_DATA_LIMIT_20261023.md).
