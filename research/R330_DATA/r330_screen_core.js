@@ -250,7 +250,7 @@ function runR330Screen(rawCsvBySymbol) {
       weeklyRows.push({
         partition: name, signalDate: s.signalDate, exitHorizonEndDate: s.maxForwardDate,
         grossReturn: gross, commissionOnlyReturn: gross - commission,
-        primaryExtraCost, stressExtraCost, commissionCost: commission,
+        primaryExtraCost: primaryExtra, stressExtraCost: stressExtra, commissionCost: commission,
         primaryNetReturn: primaryNet, stressNetReturn: stressNet,
         turnover, targetGrossExposure: Object.values(currentWeights).reduce((a, x) => a + Math.abs(x), 0),
         weights: currentWeights
@@ -281,6 +281,7 @@ function runR330Screen(rawCsvBySymbol) {
       last.commissionCost += exitComm;
       last.primaryExtraCost += exitPrimary;
       last.stressExtraCost += exitStress;
+      last.commissionOnlyReturn -= exitComm;
       last.primaryNetReturn -= exitComm + exitPrimary;
       last.stressNetReturn -= exitComm + exitStress;
       last.exitTurnover = exitTurnover;
