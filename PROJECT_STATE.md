@@ -1,16 +1,31 @@
-# PROJECT-LEVEL SOLUTION — 2026-10-23 (supersedes the 2026-10-22 reset note below)
+# PROJECT-LEVEL SOLUTION — 2026-10-23 (updated after R329 outcome)
 
-The user's instruction is to solve why the project is looping—not to propose another strategy. The authoritative solution is now documented in [PROJECT_LEVEL_SOLUTION_20261023.md](research/PROJECT_LEVEL_SOLUTION_20261023.md). It defines the bounded research-to-decision pipeline: permanently disposition historic archive exceptions, separate process/sample/edge failures, verify the candidate-independent challenge engine once, freeze a candidate-specific V2 preflight before PnL, and promote only against the real target metric P(both funded phases by day 179 without a loss-rule breach).
+This checkpoint supersedes the stale opening status below. The R329 frozen seven-pair, multi-week FX time-series-momentum screen has now been executed and closed **GAGAL — ECONOMIC SCREEN**. It did not reach funded-readiness, and no challenge-path probability was calculated.
 
-**Important correction to the prior reset note:** the relative-strength portfolio described below is only an example lead, not the answer or next mandatory candidate. No particular strategy is selected by the project-level solution. Do not conflate this process fix with evidence of a market edge.
+## Latest completed economic result
 
-What is resolved: the canonical ledger/family-map reconciliation through R328 and explicit non-promotable dispositions for unavailable historic archives. What is not yet proved: any profitable edge or funded-ready system. No new signal PnL has been run by this update.
+- Frozen horizon grid: 13 / 26 / 39 weekly observations.
+- Selection was based on discovery only; the 13-week stream was selected, then tested unchanged in confirmation.
+- At primary costs (observed BID/ASK + $10/standard-lot round-trip commission + 1-pip slippage + 2-pip-equivalent adverse swap proxy per seven-day hold): discovery **-2.606R / PF 0.862**; confirmation **-5.283R / PF 0.651**.
+- Higher-cost stress (+2 pips slippage + 4-pip-equivalent swap proxy): discovery **-5.871R**; confirmation **-7.643R**.
+- All three horizons failed the registered gates. Quote-side returns before incremental commission/slippage/swap were +1.811R in discovery but **-2.093R in confirmation**, which shows the directional relation did not persist; cost is not the only cause.
+- 2017–2025 is already program-contaminated. The H1 feed gives a one-hour bar-open execution proxy, not a true five-minute fill, and the swap stress is a proxy, not verified symbol-specific funding terms.
+- Source identity caveat: the local executed runner's byte hash does not equal the pinned GitHub runner blob. Two runs of the same local source were deterministic, and a second reconstruction matched the economic results except for an unused weekly-output column. The mismatch is explicitly documented; this result must not be represented as a byte-identical V2 reproduction.
+- R329 is closed and must not be rescued by changing lookback, cost assumptions, or risk. No challenge replay was run.
 
-Canonical files:
-- [Project-level solution](research/PROJECT_LEVEL_SOLUTION_20261023.md)
-- [Master experiment ledger R251–R328](research/MASTER_SEARCH_LEDGER_R251_R328.csv)
-- [Family map R251–R328](research/SEARCH_FAMILY_MAP_R251_R328.md)
-- [Full V2 research protocol](research/SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md)
+## Canonical research status
+
+- [R329 final report](research/R329_PACKAGE/report.md)
+- [R329 machine result](research/R329_PACKAGE/results.json)
+- [R329 source-identity audit](research/R329_PACKAGE/R329_SOURCE_IDENTITY_AUDIT_20261023.md)
+- [Master experiment ledger through R329](research/MASTER_SEARCH_LEDGER_R251_R329.csv)
+- [Search-family map through R329](research/SEARCH_FAMILY_MAP_R251_R329.md)
+- [V2 search-process protocol](research/SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md)
+
+No candidate is currently established as funded-ready. The next research decision cannot be “try another nearby parameter”: it must be a structurally distinct mechanism with a fully archived, frozen V2 package and a candidate-specific preflight before any PnL. Keep the protected XAUUSD 2026 segment closed. GitHub stores/version-controls the research; strategy calculations remain local Python, not GitHub Actions.
+
+Historical reconciliation is closed with documented exceptions; no missing trade rows or source hashes may be invented. Research can continue, but only with honest distinctions between process/sample failure and economic failure, and no invented guarantee of a funded pass.
+
 
 ---
 
