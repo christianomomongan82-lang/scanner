@@ -1,0 +1,124 @@
+name: R331 emergency compute fallback (locked local runner)
+
+on:
+  push:
+    branches:
+      - local-backtest/r189-dukascopy-history
+    paths:
+      - ".github/workflows/r331-emergency-compute-fallback.yml"
+      - "research/r331_vxn_banded_nasdaq_reversion.py"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: r331-emergency-compute-fallback
+  cancel-in-progress: false
+
+jobs:
+  reproduce-locked-screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout committed source and preregistration
+        uses: actions/checkout@v4
+        with:
+          ref: local-backtest/r189-dukascopy-history
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install numerical runtime
+        run: python -m pip install --disable-pip-version-check numpy pandas
+
+      - name: Download completed raw-only price artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: R331-USATECHIDXUSD-M1-BID-ASK-20231023-20261022
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: 39938766828
+          path: inputs/prices
+
+      - name: Validate pinned VXN input and raw quote artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p inputs outputs
+          python - <<'PY'
+          import csv, hashlib, json, urllib.request
+          from pathlib import Path
+          root=Path(".")
+          files=[p for p in (root/"inputs/prices").rglob("*") if p.is_file()]
+          for p in files:
+              print("ARTIFACT_FILE", p, p.stat().st_size)
+          bids=list((root/"inputs/prices").rglob("usatechidxusd_bid_M1_20231023_20261022.csv.gz"))
+          asks=list((root/"inputs/prices").rglob("usatechidxusd_ask_M1_20231023_20261022.csv.gz"))
+          manifests=list((root/"inputs/prices").rglob("manifest.json"))
+          if len(bids)!=1 or len(asks)!=1 or len(manifests)!=1:
+              raise SystemExit(f"GAGAL_DATA_ARTIFACT_LAYOUT bid={len(bids)} ask={len(asks)} manifest={len(manifests)}")
+          manifest=json.loads(manifests[0].read_text())
+          if manifest.get("status")!="RAW_DATA_COLLECTION_ONLY":
+              raise SystemExit("GAGAL_DATA_MANIFEST_STATUS")
+          for side,path in (("bid",bids[0]),("ask",asks[0])):
+              actual=hashlib.sha256(path.read_bytes()).hexdigest()
+              expected=manifest["outputs"][side]["sha256_gzip_file"]
+              if actual!=expected:
+                  raise SystemExit(f"GAGAL_DATA_HASH {side}: {actual} != {expected}")
+              print("VERIFIED_PRICE_ARCHIVE", side, "sha256="+actual, "rows="+str(manifest["outputs"][side]["rows"]))
+          source_url="https://raw.githubusercontent.com/fuxui/vix-vxn/main/data/history.json"
+          req=urllib.request.Request(source_url, headers={"User-Agent":"R331-research-data-audit/1.0"})
+          raw=urllib.request.urlopen(req, timeout=30).read()
+          source_hash=hashlib.sha256(raw).hexdigest()
+          expected_source_hash="4c0603b692e69fd9b1aad3ae82ce2bdb0b875104e38d53c27991bf2202d1a11a"
+          if source_hash!=expected_source_hash:
+              raise SystemExit("GAGAL_VXN_SOURCE_HASH: "+source_hash)
+          j=json.loads(raw)
+          rows=sorted((x["date"], float(x["close"])) for x in j["VXN"] if "2023-10-23" <= x["date"] <= "2026-10-21")
+          if len(rows)!=750 or rows[0][0]!="2023-10-25" or rows[-1][0]!="2026-10-21":
+              raise SystemExit(f"GAGAL_VXN_COVERAGE rows={len(rows)}")
+          out=root/"inputs/vxn.csv"
+          with out.open("w", newline="", encoding="utf-8") as f:
+              w=csv.writer(f, lineterminator="\n")
+              w.writerow(["date","close"])
+              w.writerows(rows)
+          derived=hashlib.sha256(out.read_bytes()).hexdigest()
+          expected_derived="23c48798bb9691d8f9d168ea8c1356e4f3acd0df739372f3f679d76ca200e448"
+          if derived!=expected_derived:
+              raise SystemExit("GAGAL_VXN_DERIVED_HASH: "+derived)
+          print("VERIFIED_VXN_SOURCE sha256="+source_hash, "rows="+str(len(rows)), "first="+rows[0][0], "last="+rows[-1][0], "local_csv_sha256="+derived)
+          PY
+
+      - name: Compile locked runner
+        run: python -m py_compile research/r331_vxn_banded_nasdaq_reversion.py
+
+      - name: Execute one registered R331 screen, no tuning
+        shell: bash
+        run: |
+          set +e
+          BID="$(find inputs/prices -type f -name 'usatechidxusd_bid_M1_20231023_20261022.csv.gz' -print -quit)"
+          ASK="$(find inputs/prices -type f -name 'usatechidxusd_ask_M1_20231023_20261022.csv.gz' -print -quit)"
+          python research/r331_vxn_banded_nasdaq_reversion.py --bid "$BID" --ask "$ASK" --vxn inputs/vxn.csv --out-dir outputs > outputs/runner.log 2>&1
+          RC=$?
+          echo "$RC" > outputs/runner_exit_code.txt
+          echo "RUNNER_EXIT_CODE=$RC"
+          tail -c 30000 outputs/runner.log || true
+          exit 0
+
+      - name: Upload reproducibility evidence, not source prices
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R331-screen-results-and-redacted-ledger
+          path: |
+            outputs/runner.log
+            outputs/runner_exit_code.txt
+            outputs/r331_results_local.json
+            outputs/r331_session_event_ledger_redacted.csv
+          if-no-files-found: warn
+          retention-days: 90
