@@ -1,3 +1,30 @@
+# AUTONOMOUS RESEARCH MANDATE — 2026-10-23
+
+This is an authoritative operating rule for future work on this project and supersedes any older wording that implies the assistant should wait for the user to specify every next step.
+
+## User's instruction
+
+The assistant must act independently and use judgment. Do not merely follow the user's immediate commands one by one. Identify the next bottleneck, choose the highest-value action from the evidence, use suitable tools and current internet research where material, execute the action in the current session, verify the result, and persist important findings in GitHub. Do not ask the user to do work that can be carried out directly with the available tools. Do not claim an action/result unless it was actually completed and checked.
+
+## Required decision hierarchy
+
+1. Primary target: pass FundedNext Stellar 2-Step Phase 1 (+8%) and Phase 2 (+5%) by calendar day 179, without breaching 5% daily loss or 10% static max-loss rules. This is the project's target, not a firm-imposed deadline. Use the $6,000 account only if it is the most economical suitable option and reconfirm terms before purchase.
+2. The actual scorecard is the binary challenge outcome and the estimated probability of passing both phases by day 179 under realistic costs, execution delay, and rule handling—not discovery profit factor or an attractive backtest alone.
+3. Choose research directions autonomously based on evidence: use internet sources for current firm rules, independent price data, published empirical evidence, data-provider specifications, and relevant market/execution facts. Cite/store useful findings. Treat online strategies as hypotheses, not proof.
+4. Prioritize high-value blockers. Do not keep repeating completed audits or closed failed candidate families. Do not run nearby parameter variants on inspected/failed holdouts. Distinguish economic failure from data/sample/process failure.
+5. Before signal PnL, satisfy the existing V2 preregistration, novelty, source-identity, reproducibility and candidate-specific preflight requirements. Then run realistic rule-aware two-phase replay; include event-path execution, quotes/spread, commission/swap, slippage, manual alert-to-entry delay, server-time/DST/daily reset, static and daily loss, cycle handling and sequential dependence where applicable.
+6. Use GitHub as versioned storage and source of truth for code/data/reports; calculate backtests in the local Python/session environment, not by default in GitHub Actions. Persist the chosen next action, rationale, result, limitations and exact artifacts after meaningful work.
+7. Be honest: autonomy means selecting and executing the best supported next step, not guaranteeing a funded pass or presenting unverified conclusions as facts.
+
+## Current controlling references
+
+- User objective: [PROJECT_OBJECTIVE_UNDER_6_MONTHS_20261023.md](research/PROJECT_OBJECTIVE_UNDER_6_MONTHS_20261023.md)
+- Internet evidence/data plan: [EXTERNAL_INTERNET_EVIDENCE_AND_DATA_PLAN_20261023.md](research/EXTERNAL_INTERNET_EVIDENCE_AND_DATA_PLAN_20261023.md)
+- Search-process protocol: [SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md](research/SEARCH_PROCESS_IMPROVEMENT_PROTOCOL_V2.md)
+- Master experiment ledger: [MASTER_SEARCH_LEDGER_R251_R329.csv](research/MASTER_SEARCH_LEDGER_R251_R329.csv)
+
+---
+
 # PROJECT-LEVEL SOLUTION — 2026-10-23 (updated after R329 outcome)
 
 This checkpoint supersedes the stale opening status below. The R329 frozen seven-pair, multi-week FX time-series-momentum screen has now been executed and closed **GAGAL — ECONOMIC SCREEN**. It did not reach funded-readiness, and no challenge-path probability was calculated.
