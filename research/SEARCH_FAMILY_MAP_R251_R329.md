@@ -1,3 +1,12 @@
+# R330 — Multi-asset weekly time-series momentum screen (2026-10-23)
+
+**Binary verdict: GAGAL — ECONOMIC SCREEN.** The fixed 20-observation volatility-normalized rule on eight US stock CFDs and BTCUSD/ETHUSD performed +82.83% compounded at primary cost in discovery, then -37.41% compounded in confirmation. Confirmation weekly PF was 0.516, max drawdown -39.23%, and the 4-week block-bootstrap 95% interval for mean primary-net weekly return was entirely negative (−1.663% to −0.0195%). Stress-net confirmation was -39.86%. All eight stock gross contributions were negative in confirmation; positive BTC/ETH contributions did not offset them.
+
+R330 used 2024-10-23 to 2026-10-22 underlying-market daily OHLC aggregates, not exact FundedNext CFD quotes. It was a fixed screen, not a funded replay. No Python reproduction, symbol swap model, five-minute execution fill, or two-phase pass probability is claimed. Full report, input/output hashes, full JSON, weekly ledger and per-asset ledger are stored under [R330 artifacts](R330_FINAL_REPORT_20261023.md).
+
+**Stop rule:** close this exact rule. Do not drop the stock losers, isolate crypto after seeing attribution, change direction/threshold/lookback, or recycle the same confirmation period. A later candidate must have a genuinely distinct mechanism and independent registered evidence.
+
+---
 # Search Family Map — R251–R329 (Canonical)
 
 Date audited: 2026-10-21  
