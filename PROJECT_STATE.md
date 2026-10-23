@@ -1,3 +1,10 @@
+# R331 DATA GATE — QQQ MINUTE DATA NOT ENTITLED; SWITCHED BEFORE OUTCOMES
+
+Massive rejected QQQ intraday OHLC under the connected plan (NOT_ENTITLED), so QQQ daily bars will not be used to estimate a 30-minute trade. R331 Amendment A freezes USATECHIDXUSD M1 BID/ASK from Dukascopy plus prior-session CBOE VXN, with all signal, delay, cost, regime, split and decision rules unchanged. A data-only acquisition workflow may be used; all signal/PnL calculations remain local. See [R331 Amendment A](research/R331_AMENDMENT_A_EXACT_USATECH_DATA_20261023.md).
+
+R331 has not calculated any price/event return or PnL yet.
+
+---
 # LATEST RESULT — R330 GAGAL — 2026-10-23
 
 R330's fixed multi-asset weekly momentum screen is **GAGAL — ECONOMIC SCREEN**. Primary-proxy compounded result reversed from +82.83% in discovery to -37.41% in confirmation; confirmation weekly PF 0.516, max drawdown -39.23%, 4-week bootstrap 95% CI for mean weekly primary-net return [-1.663%, -0.0195%], and stress cumulative confirmation -39.86%. All eight US stock gross contributions were negative in confirmation; BTCUSD/ETHUSD were positive but insufficient.
