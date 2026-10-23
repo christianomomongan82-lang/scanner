@@ -1,0 +1,92 @@
+{
+  "experiment_id": "R329",
+  "verdict": "GAGAL",
+  "first_failed_gate": "primary_discovery_net_R_positive",
+  "outcomes_computed": true,
+  "pnl_computed": true,
+  "first_outcome_compute_at_utc": "2026-10-23T03:23:30Z",
+  "selected_horizon_weeks": 13,
+  "data_gate": "PASS",
+  "source_manifest_sha256": "2db7c7d88b2f31965ff956dd5e017ce7f0b76a4ac1792dca4896833b884e85e0",
+  "candidate_specific_preflight_sha256": "059361ee6b038edfabdba991989c34eeaea65280ab14b3301ecb3683692f48ef",
+  "primary_cost": {
+    "slippage_pips": 1,
+    "adverse_swap_pips_week": 2,
+    "commission_usd_round_trip_per_standard_lot": 10
+  },
+  "stress_cost": {
+    "slippage_pips": 2,
+    "adverse_swap_pips_week": 4
+  },
+  "discovery": {
+    "net_R": -2.6055611764562143,
+    "PF_R": 0.8623507120003423,
+    "mean_weekly_R": -0.0124667998874,
+    "active_legs": 1001,
+    "active_weeks": 143,
+    "bootstrap_lower_95_mean_weekly_R": -0.051328743758681156,
+    "holm_adjusted_discovery_p": 1
+  },
+  "confirmation": {
+    "net_R": -5.282874030835081,
+    "PF_R": 0.651319838968288,
+    "mean_weekly_R": -0.0338645771207,
+    "active_legs": 658,
+    "active_weeks": 94,
+    "bootstrap_lower_95_mean_weekly_R": -0.07200825875514165
+  },
+  "stress_discovery": {
+    "net_R": -5.8710537093203845,
+    "PF_R": 0.7204551623288172
+  },
+  "stress_confirmation": {
+    "net_R": -7.642719701811205,
+    "PF_R": 0.5379930337692553
+  },
+  "diagnostic_2024_2025": {
+    "net_R": -3.135034062920099,
+    "PF_R": 0.5933,
+    "active_legs": 371,
+    "active_weeks": 53
+  },
+  "quote_side_gross_before_incremental_commission_slippage_swap": {
+    "discovery_net_R": 1.8109259459762492,
+    "confirmation_net_R": -2.0927198926660227,
+    "diagnostic_net_R": -1.1554580160455916
+  },
+  "discovery_years_2018_2020": {
+    "positive_years": 1,
+    "net_R": {
+      "2018": -2.34471826568,
+      "2019": -3.67563336871,
+      "2020": 2.74244398268
+    },
+    "max_share_positive_net_R": 1
+  },
+  "bootstrap_replicates": 10000,
+  "bootstrap_method": "four-week circular block bootstrap; zero-trade weeks included; RNG seed 329; Holm step-down across three discovery horizons",
+  "gate_values": {
+    "primary_discovery_net_R_positive": false,
+    "primary_discovery_PF_ge_1_05": false,
+    "primary_confirmation_net_R_positive": false,
+    "primary_confirmation_PF_ge_1_05": false,
+    "stress_discovery_net_R_positive": false,
+    "stress_discovery_PF_ge_1_00": false,
+    "stress_confirmation_net_R_positive": false,
+    "stress_confirmation_PF_ge_1_00": false,
+    "at_least_2_of_3_discovery_years_positive": false,
+    "no_discovery_year_over_70pct_positive_net_R": false,
+    "discovery_bootstrap_lower_gt_zero": false,
+    "confirmation_bootstrap_lower_gt_zero": false,
+    "holm_adjusted_discovery_p_lt_0_05": false
+  },
+  "execution_audit": {
+    "registered_runner_git_blob_sha": "6abf73f4d59351424c306f3dde2b1f7b5c37cdc5",
+    "locally_executed_runner_sha256": "abc24c2b706e58ebc059b93b5c18f48807ebfb02df12166c4230aa428f2c842b",
+    "second_reconstructed_runner_sha256": "97c08cedaf01cef1da7e7a544fad2ca6a09bbd3dfadd5d004f718fd75e160129c",
+    "deterministic_same_runner_rerun": true,
+    "note": "Two runs using the same local runner produced identical outputs. A second source reconstruction produced identical result JSON, scorecard, annual cohorts, full grid, and trade ledgers; only weekly_all_configs.csv.gz differed because the first local copy included a redundant unused entry_date column. Neither local source hash is byte-identical to the pinned GitHub runner blob, so this result is an economic-screen failure with an explicit source-identity archive caveat, not funded-ready evidence."
+  },
+  "contamination": "2017-2025 repeatedly inspected; not independent program-level OOS",
+  "challenge_replay": "NOT_RUN: registered economic gates fail. No funded pass probability can be claimed."
+}
