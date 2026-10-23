@@ -1,3 +1,8 @@
+# R331 VXN PROVENANCE — VALUES KEPT LOCAL
+
+Local VXN source file was extracted from the public mirror identified as using CBOE's official daily VXN history. The local 750-row CSV spans 2023-10-25 through 2026-10-21 with no duplicate/missing observations; its SHA-256 is 23c48798bb9691d8f9d168ea8c1356e4f3acd0df739372f3f679d76ca200e448. Mirror JSON SHA-256: 4c0603b692e69fd9b1aad3ae82ce2bdb0b875104e38d53c27991bf2202d1a11a. Raw values remain local, not in the public repository. See [R331 VXN source manifest](research/R331_VXN_SOURCE_MANIFEST_20261023.md). No PnL calculated.
+
+---
 # R331 AMENDMENT C — EXCHANGE CALENDAR AND DATA GATES FROZEN PRE-OUTCOME
 
 R331 now uses explicit NYSE trading days and half-days, with 78 complete M5 bars for full sessions and 42 for early-close sessions. An absent expected price session or expected prior-day VXN close is GAGAL — DATA/PROCESS; incomplete prior-session price data may not be replaced by an older close. See [R331 Amendment C](research/R331_AMENDMENT_C_NYSE_CALENDAR_20261023.md). No price/event/PnL has been calculated yet.
