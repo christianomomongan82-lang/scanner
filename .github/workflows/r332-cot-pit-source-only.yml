@@ -46,7 +46,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python -m pip install --disable-pip-version-check --no-input pyarrow==19.0.1
+          python -m pip install --disable-pip-version-check --no-input pyarrow==19.0.1 pandas==2.2.3
           python - <<'PY'
           import json
           from pathlib import Path
