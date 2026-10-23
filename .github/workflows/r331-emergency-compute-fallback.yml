@@ -79,7 +79,7 @@ jobs:
           if source_hash!=expected_source_hash:
               raise SystemExit("GAGAL_VXN_SOURCE_HASH: "+source_hash)
           j=json.loads(raw)
-          rows=sorted((x["date"], float(x["close"])) for x in j["VXN"] if "2023-10-23" <= x["date"] <= "2026-10-21")
+          rows=sorted((x["date"], format(float(x["close"]), ".15g")) for x in j["VXN"] if "2023-10-23" <= x["date"] <= "2026-10-21")
           if len(rows)!=750 or rows[0][0]!="2023-10-25" or rows[-1][0]!="2026-10-21":
               raise SystemExit(f"GAGAL_VXN_COVERAGE rows={len(rows)}")
           out=root/"inputs/vxn.csv"
