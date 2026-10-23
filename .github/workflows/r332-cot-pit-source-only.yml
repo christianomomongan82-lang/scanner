@@ -43,6 +43,7 @@ jobs:
           PY
           {
             echo "experiment=R332"
+            echo "contract_version=2"
             echo "purpose=data acquisition and byte validation only; no feature, signal, return, PnL, or strategy verdict calculations"
             echo "source=https://huggingface.co/datasets/ZipLime/commitments-of-traders"
             echo "revision=${REV}"
