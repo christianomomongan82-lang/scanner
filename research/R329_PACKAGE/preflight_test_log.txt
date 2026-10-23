@@ -1,0 +1,15 @@
+R329 candidate-specific pre-outcome V2 gate
+Data source: Dukascopy H1 BID/ASK, seven pairs, fourteen raw streams.
+Composite source manifest SHA-256: 2db7c7d88b2f31965ff956dd5e017ce7f0b76a4ac1792dca4896833b884e85e0
+Source file hashes and byte counts pinned in data_manifest.json.
+Data integrity: PASS; 14/14 streams, 7/7 BID/ASK pairs, 78,361 common timestamps.
+Duplicates/misaligned timestamps/invalid OHLC/nonfinite OHLC/negative spread: all zero.
+Common active Tuesday 10:00 UTC signal snapshots: 468.
+Exact timestamps only; no forward fill; no synthetic bars; raw flat placeholders preserved but excluded from active signals/entries/exits.
+V2 validator: preflight phase PASS (10/10 required files).
+V2 validator regression tests: 7/7 PASS.
+13-week: discovery 1,001 eligible legs / 143 dates; confirmation 658 legs / 94 dates — sample gate PASS.
+26-week: discovery 896 eligible legs / 128 dates; confirmation 644 legs / 92 dates — sample gate PASS.
+39-week: discovery 840 eligible legs / 120 dates; confirmation 644 legs / 92 dates — sample gate PASS.
+PnL/outcome computations: NOT RUN when this preflight was closed.
+All 2026 data excluded; protected XAUUSD 2026 unopened.
