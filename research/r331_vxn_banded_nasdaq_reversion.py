@@ -93,20 +93,26 @@ def paired_m5(bid_path: Path, ask_path: Path):
     neg_close = int(((pair.close_ask + 1e-10) < pair.close_bid).sum())
     if neg_open or neg_close:
         raise ValueError(f"Negative open/close spread rows: open={neg_open}, close={neg_close}")
+    # Build each minute's midpoint OHLC before aggregation. Averaging the
+    # separately aggregated BID/ASK highs or lows can create a synthetic extreme
+    # that never occurred on any paired minute.
+    pair["mid_open"] = (pair.open_bid + pair.open_ask) / 2
+    pair["mid_high"] = (pair.high_bid + pair.high_ask) / 2
+    pair["mid_low"] = (pair.low_bid + pair.low_ask) / 2
+    pair["mid_close"] = (pair.close_bid + pair.close_ask) / 2
     pair["bar5_utc"] = pair.index.floor("5min")
     grp = pair.groupby("bar5_utc", sort=True)
     counts = grp.size()
     complete_labels = counts.index[counts == 5]
     # Five unique minute timestamps in each 5-minute bin means the bar is complete.
+    # Executable-side bars retain their own BID/ASK highs/lows for fills/diagnostics;
+    # the signal uses max/min of actual per-minute midpoint highs/lows.
     m5 = grp.agg({
         "open_bid":"first", "high_bid":"max", "low_bid":"min", "close_bid":"last",
-        "open_ask":"first", "high_ask":"max", "low_ask":"min", "close_ask":"last"
+        "open_ask":"first", "high_ask":"max", "low_ask":"min", "close_ask":"last",
+        "mid_open":"first", "mid_high":"max", "mid_low":"min", "mid_close":"last"
     }).loc[complete_labels].copy()
     m5.index = pd.DatetimeIndex(m5.index, name="bar_open_utc")
-    m5["mid_open"] = (m5.open_bid + m5.open_ask) / 2
-    m5["mid_high"] = (m5.high_bid + m5.high_ask) / 2
-    m5["mid_low"] = (m5.low_bid + m5.low_ask) / 2
-    m5["mid_close"] = (m5.close_bid + m5.close_ask) / 2
     m5["local"] = m5.index.tz_convert(NY)
     m5["session_date"] = [x.date().isoformat() for x in m5["local"]]
     m5["local_hhmm"] = [x.strftime("%H:%M") for x in m5["local"]]
