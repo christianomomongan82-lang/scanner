@@ -1,3 +1,19 @@
+# LATEST RESULT — R330 GAGAL — 2026-10-23
+
+R330's fixed multi-asset weekly momentum screen is **GAGAL — ECONOMIC SCREEN**. Primary-proxy compounded result reversed from +82.83% in discovery to -37.41% in confirmation; confirmation weekly PF 0.516, max drawdown -39.23%, 4-week bootstrap 95% CI for mean weekly primary-net return [-1.663%, -0.0195%], and stress cumulative confirmation -39.86%. All eight US stock gross contributions were negative in confirmation; BTCUSD/ETHUSD were positive but insufficient.
+
+The exact R330 source core was read back from GitHub, run twice against the ten archived raw CSVs whose SHA-256 values all matched the manifest, and produced identical JSON output. Core SHA-256: 35e753efa87e0267652cf83eab8f053b19003c92bad997b44ce7ed2697040d90. Full output SHA-256: 646dc2d3ae4766ad149955bdb5c4b87511c45566167a9a8f32f77f80f5c1be39. This was deterministic ECMAScript screen execution under the bounded Amendment B, not local-Python reproduction. Inputs are underlying-market daily aggregates, not exact FundedNext CFD BID/ASK quotes. No swap, five-minute execution fill, daily/max-loss equity path, or two-phase pass probability was modeled.
+
+- Final report: [R330_FINAL_REPORT_20261023.md](research/R330_FINAL_REPORT_20261023.md)
+- Full output: [R330_SCREEN_OUTPUT_20261023.json](research/R330_SCREEN_OUTPUT_20261023.json)
+- Ledgers: [weekly](research/R330_WEEKLY_LEDGER_20261023.csv), [per-asset](research/R330_ASSET_LEDGER_20261023.csv)
+- Input/output hash manifest: [R330_OUTPUT_MANIFEST_20261023.md](research/R330_OUTPUT_MANIFEST_20261023.md)
+- Exact screen core: [r330_screen_core.js](research/R330_DATA/r330_screen_core.js)
+- Canonical experiment ledger now includes R330; the search-family map marks this exact rule closed.
+
+**Decision:** do not tune the losing basket or retest nearby parameters on these dates. This rejects the frozen specification, not all trend strategies. The next research direction must use a materially different mechanism, independent evidence, a preregistered sample/target-feasibility argument, and reliable execution data. No current candidate is funded-ready; no supported probability of passing both phases by day 179 exists.
+
+---
 # R330 EXECUTION EXCEPTION — SCREEN ONLY — 2026-10-23
 
 The local Python/container environment cannot resolve external hostnames, so it cannot retrieve archived CSVs from GitHub directly. A bounded, pre-outcome exception permits the initial R330 screen only to use a pure deterministic ECMAScript calculation core in the current tool runtime. Commit the exact runner before outcomes; verify raw input SHA-256; run twice and compare deterministic outputs. No GitHub Actions computation is authorized. See [R330 runtime amendment](research/R330_AMENDMENT_B_SCREEN_EXECUTION_RUNTIME_20261023.md).
