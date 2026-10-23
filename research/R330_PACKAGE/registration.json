@@ -1,0 +1,28 @@
+{
+  "experiment_id": "R330",
+  "family_id": "FX_CROSS_SECTIONAL_MULTIWEEK_MOMENTUM",
+  "hypothesis": "Among seven non-USD currencies, a medium-term cross-sectional momentum portfolio that is long the two strongest currencies versus USD and short the two weakest, rebalanced weekly after a fixed quote-resolution delay, may retain net momentum after executable BID/ASK and holding costs.",
+  "registered_at_utc": "2026-10-23T03:40:00Z",
+  "registration_commit_sha": "0000000000000000000000000000000000000000",
+  "registration_commit_utc": "2026-10-23T03:40:00Z",
+  "runner_commit_sha": "0000000000000000000000000000000000000000",
+  "candidate_count": 3,
+  "selection_rule": "Select horizon only by discovery mean weekly net R under primary costs; tie-break by larger Holm-adjusted four-week block-bootstrap lower bound, then lower drawdown. Freeze selected horizon and score unchanged confirmation; do not switch horizons after seeing confirmation.",
+  "discovery_period_utc": "2017-01-01T00:00:00Z/2021-01-01T00:00:00Z",
+  "confirmation_period_utc": "2021-01-01T00:00:00Z/2024-01-01T00:00:00Z",
+  "diagnostic_period_utc": "2024-01-01T00:00:00Z/2026-01-01T00:00:00Z (project-contaminated, diagnostics only)",
+  "cost_model": "Side-correct observed BID/ASK entry/exit; $10 round-trip commission per standard 100,000-unit lot; +1 pip per round-trip adverse slippage primary; +2 pip-equivalent adverse swap proxy per 7-day hold primary. Stress: +2 pips slippage and +4 pip-equivalent swap per week. Swap is a proxy, not verified account terms.",
+  "manual_delay_minutes": 5,
+  "falsification_gates": [
+    "Candidate-specific V2 source, timestamp, coverage, exact-join and active-quote preflight passes before any outcome compute.",
+    "For each horizon: at least 200 eligible discovery position legs / 100 dates and 100 confirmation legs / 70 dates.",
+    "At primary cost, discovery and confirmation each require net R > 0 and PF_R >= 1.05; under stress each requires net R > 0 and PF_R >= 1.00.",
+    "At least 2 of complete discovery years 2018-2020 positive, and no one year contributes more than 70% of positive discovery net R.",
+    "10,000 replicate, four-week circular block bootstrap with zero-trade weeks included and seed 330; lower 95% bounds >0 in discovery and confirmation; Holm correction across three discovery horizons."
+  ],
+  "holdout_status": "UNOPENED",
+  "data_source_sha256": "2db7c7d88b2f31965ff956dd5e017ce7f0b76a4ac1792dca4896833b884e85e0",
+  "output_contract_version": "v2",
+  "first_outcome_compute_at_utc": null,
+  "note": "New causal construction relative to R323: 5-session strength was tested as same-day continuation and stopped at a sample gate; R330 uses 13/26/39-week cross-sectional ranking and weekly portfolio holding, not time-series sign-per-pair as in R329. Historical years remain contaminated and cannot establish promotion-level OOS. H1 provides a one-hour bar-open fill proxy, not exact five-minute fill."
+}
