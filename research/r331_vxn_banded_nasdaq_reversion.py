@@ -308,6 +308,9 @@ def main():
     vxn, vdiag = read_vxn(args.vxn)
     vxn_map = {r.date.date(): float(r.close) for r in vxn.itertuples(index=False)}
     vxn_dates = sorted(vxn_map)
+    sessions = {}
+    invalid_sessions = {}
+    trading_dates, market_holidays, early_closes = nyse_calendar(DATA_START, END.date())
     # A trading-day VXN observation missing inside the registered signal window is
     # a source-data failure; the strategy may never carry a stale volatility close forward.
     vxn_missing_expected = [
@@ -317,9 +320,6 @@ def main():
     if vxn_missing_expected:
         raise ValueError("GAGAL — DATA/PROCESS: VXN is missing expected NYSE daily closes, first="
                          + ",".join(vxn_missing_expected[:20]) + f"; count={len(vxn_missing_expected)}")
-    sessions = {}
-    invalid_sessions = {}
-    trading_dates, market_holidays, early_closes = nyse_calendar(DATA_START, END.date())
     rth_labels_by_day = {}
     for td in trading_dates:
         close_time = "13:00" if td in early_closes else "16:00"
