@@ -1,3 +1,13 @@
+# TRUE TOP-LEVEL OBJECTIVE — 2026-10-23
+
+The project's highest-level goal is **sustainable income equivalent to UMK Manado without depending on a conventional job**, not merely passing a funded challenge. See [the authoritative true-objective note](research/TRUE_OBJECTIVE_UMK_MANADO_NONEMPLOYMENT_INCOME_20261023.md).
+
+For 2026, the working benchmark is Rp4,022,017/month. Evaluate cash actually received and available to use, net of profit splits and costs, with repeatability and ongoing labor measured. Manual trading is not truly passive income, and prop-firm rewards are conditional—not salary. The $6,000 FundedNext challenge and day-179 pass target remain intermediate milestones only; no funded-ready strategy is currently established.
+
+Decision rule: independently choose the route most likely to achieve the actual income objective under the user's budget, device, time, and eligibility constraints. Do not assume trading must be the answer; compare alternatives on startup cost, time to first payout, probability of recurring target income, downside risk, and required labor. The narrower challenge objective and workflow below are subordinate to this top-level objective.
+
+---
+
 # FOUNDATIONAL THINKING CHARTER — 2026-10-23
 
 This charter is more fundamental than the project task list or autonomous workflow below. It defines the quality of reasoning required, not merely which actions to take next.
