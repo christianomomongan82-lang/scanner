@@ -4,7 +4,7 @@ from __future__ import annotations
 import csv, gzip, hashlib, json, os, subprocess, time
 from datetime import date, datetime, timezone
 from pathlib import Path
-import pandas as pd
+import math
 
 START = date(2023, 10, 23)
 END_EXCLUSIVE = date(2026, 10, 23)
@@ -135,7 +135,7 @@ def combine_and_compress(side: str, files: list[Path]):
                     except Exception:
                         invalid_ohlc += 1
                         continue
-                    if not all(pd.notna(x) and abs(x) < float("inf") for x in (op, high, low, close)) or high < max(op, low, close) or low > min(op, high, close):
+                    if not all(math.isfinite(x) for x in (op, high, low, close)) or high < max(op, low, close) or low > min(op, high, close):
                         invalid_ohlc += 1
                         continue
                     seen.add(key)
