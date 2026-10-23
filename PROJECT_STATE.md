@@ -1,3 +1,8 @@
+# R331 AMENDMENT B — EVENT AND DATA SEMANTICS FROZEN PRE-OUTCOME
+
+R331 Amendment B freezes the paired BID/ASK → complete M5 bar construction, midpoint band signal, strictly prior-day VXN join, same-bar two-sided breach skip, delayed entry at signal label +10 minutes, exact +30-minute exit, side-correct bid/ask PnL, cost ladder, and zero-inclusive 4-week bootstrap. Raw VXN values remain local only; only source/hash/date-coverage metadata may be stored in the public repo. No price/event/PnL results yet. See [R331 operational semantics](research/R331_AMENDMENT_B_OPERATIONAL_SEMANTICS_20261023.md).
+
+---
 # R331 DATA GATE — QQQ MINUTE DATA NOT ENTITLED; SWITCHED BEFORE OUTCOMES
 
 Massive rejected QQQ intraday OHLC under the connected plan (NOT_ENTITLED), so QQQ daily bars will not be used to estimate a 30-minute trade. R331 Amendment A freezes USATECHIDXUSD M1 BID/ASK from Dukascopy plus prior-session CBOE VXN, with all signal, delay, cost, regime, split and decision rules unchanged. A data-only acquisition workflow may be used; all signal/PnL calculations remain local. See [R331 Amendment A](research/R331_AMENDMENT_A_EXACT_USATECH_DATA_20261023.md).
