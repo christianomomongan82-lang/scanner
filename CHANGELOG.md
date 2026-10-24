@@ -37,3 +37,10 @@
 - Made annual M5 coverage 2017–2025 required whenever source history exists; 2026 remains optional if the current quarter is not yet available. Dukascopy explicitly returned zero rows before 2018-08-08 for USSC2000, so that index begins in 2018 Q3 and remains included from its first available bar, without synthetic history.
 - Increased retries for 2017–2018 quarterly M5 retrieval. Data-acquisition changes only; the R191 signal, stop, target, sim, six PASS thresholds and causality-audit rule remain unchanged.
 - Isolated the M5-only rerun from the earlier hung H1+M5 acquisition run so the canonical basket can proceed with the existing cache keys and completed quarterly chunks.
+
+
+## 2026-10-24 — Bound R330 M5 download stalls
+
+- Added a 90-second timeout per Dukascopy quarterly M5 request and reduced retries to two attempts. This prevents a hung vendor request from occupying a preparation job indefinitely.
+- Failed requests still fail the required instrument/year job; no missing data is silently treated as a pass or instrument exclusion. The only intentionally absent period remains USSC2000 before the documented 2018-08-08 source-history start.
+- This is data-acquisition reliability only; canonical engine, locked periods, six PASS criteria, challenge rules and causal audit thresholds are unchanged.
