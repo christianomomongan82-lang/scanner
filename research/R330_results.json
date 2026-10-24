@@ -1,0 +1,72 @@
+{
+  "experiment": "R330",
+  "verdict": "REJECT",
+  "stopped_at": "G1_R191_REPLICATION",
+  "result_basis": "Hard-stop preflight against the existing persisted R194 ten-index baseline artifact. This uses the same manual5m trade stream and the R192 metric/trade_r cost convention; it is not represented as the still-running new Actions job's freshly replayed signal-path output.",
+  "reference_source": {
+    "workflow_run_id": 38133085545,
+    "workflow_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/38133085545",
+    "artifact_id": 11700178416,
+    "artifact_name": "R194-ten-index-audit",
+    "archived_common_data_cutoff_utc": "2026-10-09T20:00:00Z",
+    "file_used": "trades.csv",
+    "mode": "manual5m",
+    "instruments": [
+      "usa500idxusd",
+      "usatechidxusd"
+    ]
+  },
+  "gate1": {
+    "pass": false,
+    "expected": {
+      "forward_closed_n": 70,
+      "pf_1bp_rounded_3dp": 1.247
+    },
+    "observed": {
+      "forward_entries": 72,
+      "forward_closed_n": 70,
+      "censored": 2,
+      "wins_R": 59.891385367487075,
+      "losses_R": 40.175841380059396,
+      "pf_1bp": 1.4907313278375587,
+      "pf_1bp_rounded_3dp": 1.491
+    },
+    "difference_from_expected_pf": 0.24373132783755863,
+    "pf_formula": "sum(positive net R) / abs(sum(negative net R)); net R=(exit-entry-entry*1bp/10000)/risk_points, per research/r192_ger40.py trade_r/metric convention.",
+    "failure_reason": "Closed trade count matches, but PF@1bp does not reproduce the required 1.247 to three decimals."
+  },
+  "gate2": {
+    "status": "NOT_RUN",
+    "reason": "Hard stop after Gate 1 failure; all-ten truncation was not evaluated in this R330 round."
+  },
+  "remaining_criteria": {
+    "pooled_forward_n_and_pf": "NOT_RUN",
+    "pooled_discovery_pf": "NOT_RUN",
+    "worst_forward_year_pf": "NOT_RUN",
+    "neighborhood_N40_N55_N80": "NOT_RUN",
+    "leave_one_out": "NOT_RUN",
+    "stellar_2step_10000_path_simulation": "NOT_RUN",
+    "correlation_overlap_and_exposure": "NOT_RUN",
+    "causal_trade_path_audit": "NOT_RUN",
+    "reason": "Sequential hard stop at Gate 1. No pooled performance, robustness, LOO or challenge results are being reported as if this round ran them."
+  },
+  "locked_rule": {
+    "timezone": "America/New_York",
+    "timeframe": "H4",
+    "direction": "long-only",
+    "breakout_N": 55,
+    "stop_lookback_M": 27,
+    "RR": 2,
+    "entry_mode": "first non-flat M5 BID bar at or after signal-close +5 minutes and before next actual NY H4 close",
+    "costs_round_trip_price_bps": [
+      1,
+      2,
+      3
+    ]
+  },
+  "guardrails": [
+    "No instrument removed or selected.",
+    "No parameter tuning or replacement variant.",
+    "G1 mismatch is REJECT under preregistered decision rule."
+  ]
+}
