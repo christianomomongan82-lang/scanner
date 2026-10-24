@@ -43,7 +43,6 @@ jobs:
             r201-asset-${{ matrix.instrument }}-
             r200-asset-${{ matrix.instrument }}-
             r199-asset-${{ matrix.instrument }}-
-            r198-asset-${{ matrix.instrument }}-
             r194-asset-${{ matrix.instrument }}-
             r195-asset-${{ matrix.instrument }}-
       - name: Setup Node.js
@@ -295,7 +294,6 @@ jobs:
             r201-asset-${{ matrix.instrument }}-
             r200-asset-${{ matrix.instrument }}-
             r199-asset-${{ matrix.instrument }}-
-            r198-asset-${{ matrix.instrument }}-
             r194-asset-${{ matrix.instrument }}-
             r195-asset-${{ matrix.instrument }}-
       - name: Setup Node.js
