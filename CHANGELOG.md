@@ -66,3 +66,10 @@
 
 - Added the source-history boundary check inside monthly fallback and skip logic when merging months with no source history. This prevents a failed 2018 Q3 quarter from treating USSC2000 July 2018 as a required month; Aug/Sep remain eligible from the documented 2018-08-08 inception date.
 - All other instrument/year completeness checks remain strict. Missing required data after the known source start still stops the run. No strategy logic or performance gate changed.
+
+
+## 2026-10-24 — Reduce Dukascopy request pressure after HTTP 503 persisted into monthly fallback
+
+- On run 40100064131, USSC2000 quarterly 2021 Q3 returned HTTP 503 on four quarter requests; monthly fallback then successfully saved July but got HTTP 503 on all three August attempts. The separate USA30 and Germany jobs were also still fetching at this point.
+- Reduce ten-index acquisition concurrency from three jobs to one, increase Dukascopy client's own retry delay from 1s to 3s and retry count from 5 to 10, and extend bounded outer timeouts (quarter=240s, month=180s). Existing saved quarters/months remain cached and resumable. The small Gate 1 source stage remains parallel and unchanged.
+- This is still data-source reliability only: all ten indices, canonical strategy math, source-completeness requirements after each instrument's inception, Gate 1 baseline, Gate 2, six PASS criteria and the PF>1.4 audit remain unchanged. No missing bars are synthesized.

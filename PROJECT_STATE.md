@@ -431,3 +431,10 @@ Official baseline dari canonical `research/R191_CANONICAL_index_trend_long.py` p
 ### R330 — guard monthly fallback at the known source-history boundary (2026-10-24)
 
 - Monthly fallback now honors the preregistered USSC2000 inception date (2018-08-08), skipping only pre-inception months instead of attempting to download or synthesize them. Existing coverage requirements after inception remain unchanged.
+
+
+### R330 — lower source pressure and longer Dukascopy retry backoff (2026-10-24)
+
+- The monthly fallback proved it can retrieve USSC2000 July 2021 data, but the provider returned HTTP 503 for August 2021 three times after the original quarterly request had also returned 503 four times. This confirms the remaining blocker is upstream data retrieval, not a Gate 1 mismatch or strategy result.
+- New acquisition policy uses one instrument job at a time for the ten-index stage, 10 client retries with 3s retry period, 240s quarterly and 180s monthly request bounds. Completed quarterly/monthly files survive via the existing per-instrument Actions cache, so the next run resumes from the last successful point.
+- Gate 1 passed again. Gate 2 and the six pooled criteria remain unrun until all required M5 snapshots are complete; do not label the strategy PASS/REJECT based on a source download failure.
