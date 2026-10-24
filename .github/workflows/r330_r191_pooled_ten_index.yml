@@ -208,7 +208,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: r330-asset-${{ matrix.instrument }}
+          name: r330-gate1-asset-${{ matrix.instrument }}
           path: |
             dl/${{ matrix.instrument }}_h1.csv.gz
             dl/${{ matrix.instrument }}_m5.csv.gz
