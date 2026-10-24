@@ -24,7 +24,6 @@ for Q in 1 2 3 4; do
 
   FROM="$YEAR-$QM-01"
   MAX_ATTEMPTS=3
-  if [ "$YEAR" -le 2018 ]; then MAX_ATTEMPTS=1; fi
   OK=false
   for ATTEMPT in $(seq 1 "$MAX_ATTEMPTS"); do
     rm -f "$QR"
