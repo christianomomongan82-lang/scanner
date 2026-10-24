@@ -83,7 +83,33 @@ The comparison below filters the trade streams to entry year >=2017 in New York.
     "canonical_sl_27bar_low": 2256.061,
     "canonical_next_h4_open_time_utc": "2017-01-24T22:00:00+00:00",
     "canonical_next_h4_open": 2281.531,
-    "canonical_risk": 25.4699999999998
+    "canonical_risk": 25.4699999999998,
+    "r192_candidate_match_method": "matching H4 signal label fallback",
+    "r192_signal_label_ny": "2017-01-24T13:00:00-05:00",
+    "r192_signal_label_utc": "2017-01-24T18:00:00+00:00",
+    "r192_signal": true,
+    "r192_signal_close_utc": "2017-01-24T22:00:00+00:00",
+    "r192_signal_close": 2279.8,
+    "r192_prior_55bar_high": 2277.295,
+    "r192_sl_27bar_low": 2256.061,
+    "r192_next_h4_open_time_utc": "2017-01-24T22:00:00+00:00",
+    "r192_next_h4_open": 2279.8,
+    "r192_risk": 23.739000000000033,
+    "same_signal_close_bar_ohlc_equal": true,
+    "same_signal_close_bar_ohlc": {
+      "canonical_M5_resample": {
+        "open": 2275.91,
+        "high": 2284.632,
+        "low": 2275.91,
+        "close": 2279.8
+      },
+      "r192_H1_wall_clock": {
+        "open": 2275.91,
+        "high": 2284.632,
+        "low": 2275.91,
+        "close": 2279.8
+      }
+    }
   },
   "r192_position_blocker_at_candidate_signal_close": {
     "entry_time_utc": "2016-11-09T18:00:00+00:00",
@@ -97,7 +123,7 @@ The comparison below filters the trade streams to entry year >=2017 in New York.
     "opened_before_2017_NY": true,
     "still_active_at_signal_close": true
   },
-  "cause_assessment": "One-position state: an R192 position opened before the canonical 2017 start was still active at this signal close; R192 therefore skipped the candidate. Canonical load() truncates source bars to NY year >= 2017 and resets active=-1, so it can take this trade."
+  "cause_assessment": "One-position state: an R192 position opened before the canonical 2017 start was still active at this signal close; R192 therefore skipped the candidate. Canonical load() truncates source bars to NY year >= 2017 and resets active=-1, so it can take this trade. Data/source aggregation difference at the same next-H4 label: canonical builds OHLC from M5, while R192 builds H4 from H1. The observed next-bar opens differ; this changes entry price and risk. The rolling prior-55-bar high differs between M5-derived and H1-derived H4 histories; this is data/aggregation, not the entry timestamp convention."
 }
 
 Full ledgers: research/R330_G1_canonical_trades.csv and research/R330_G1_r192_ideal_trades.csv. Details: research/R330_G1_first_trade_mismatch.json.
