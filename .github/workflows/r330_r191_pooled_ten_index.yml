@@ -5,6 +5,7 @@ on:
     branches: [research/r330-r191-pooled-ten-index]
     paths:
       - "research/r330_r191_pooled_ten_index.py"
+      - "research/R191_CANONICAL_index_trend_long.py"
       - ".github/workflows/r330_r191_pooled_ten_index.yml"
   workflow_dispatch:
 
@@ -59,7 +60,7 @@ jobs:
       - name: Install Python and prepare folders
         run: |
           python -m pip install --upgrade pip pandas numpy requests tabulate
-          python -m py_compile research/r192_ger40.py research/r195_ten_index.py research/r330_r191_pooled_ten_index.py
+          python -m py_compile research/r192_ger40.py research/r195_ten_index.py research/R191_CANONICAL_index_trend_long.py research/r330_r191_pooled_ten_index.py
           mkdir -p dl/chunks results
       - name: Download only missing annual chunks for this instrument
         env:
@@ -237,7 +238,7 @@ jobs:
       - name: Install Python and compile
         run: |
           python -m pip install --upgrade pip pandas numpy requests
-          python -m py_compile research/r192_ger40.py research/r194_ten_index.py
+          python -m py_compile research/r192_ger40.py research/r194_ten_index.py research/R191_CANONICAL_index_trend_long.py research/r330_r191_pooled_ten_index.py
       - name: Validate snapshots and run locked R330 pooled baseline
         run: |
           python - <<'PY'
