@@ -46,9 +46,18 @@
       "instrument_name": "USA 500 / S&P 500"
     },
     "bar_grid_checks": {
-      "canonical_signal_label_exists_in_r192_grid": false,
-      "canonical_entry_label_exists_in_r192_grid": false,
-      "canonical_signal_label_exists_in_canonical_grid": false
+      "canonical_signal_label_exists_in_r192_grid": true,
+      "canonical_entry_label_exists_in_r192_grid": true,
+      "canonical_signal_label_exists_in_canonical_grid": true,
+      "r192_bar_closing_at_canonical_entry_boundary_exists": false,
+      "canonical_signal_close_boundary_utc": "2017-01-24T22:00:00+00:00",
+      "r192_nearest_labels_utc": [
+        "2017-01-24T10:00:00+00:00",
+        "2017-01-24T14:00:00+00:00",
+        "2017-01-24T18:00:00+00:00",
+        "2017-01-24T22:00:00+00:00",
+        "2017-01-25T02:00:00+00:00"
+      ]
     },
     "same_signal_candidate_in_r192_h4": {
       "signal_label_ny": "2017-01-24T13:00:00-05:00",
@@ -61,8 +70,19 @@
       "canonical_next_h4_open": 2281.531,
       "canonical_risk": 25.4699999999998
     },
-    "r192_position_blocker_at_candidate_signal_close": null,
-    "cause_assessment": "The canonical signal label is absent from R192's H4 grid; this is a true boundary/grid mismatch at this label."
+    "r192_position_blocker_at_candidate_signal_close": {
+      "entry_time_utc": "2016-11-09T18:00:00+00:00",
+      "entry_time_ny": "2016-11-09T13:00:00-05:00",
+      "entry": 2158.969,
+      "sl": 2054.219,
+      "risk_points": 104.75,
+      "exit_time_utc": "2017-02-23T14:25:00+00:00",
+      "exit_time_ny": "2017-02-23T09:25:00-05:00",
+      "reason": "TP",
+      "opened_before_2017_NY": true,
+      "still_active_at_signal_close": true
+    },
+    "cause_assessment": "One-position state: an R192 position opened before the canonical 2017 start was still active at this signal close; R192 therefore skipped the candidate. Canonical load() truncates source bars to NY year >= 2017 and resets active=-1, so it can take this trade."
   },
   "first_difference_per_instrument": [
     {
@@ -112,9 +132,18 @@
         "instrument_name": "USA 500 / S&P 500"
       },
       "bar_grid_checks": {
-        "canonical_signal_label_exists_in_r192_grid": false,
-        "canonical_entry_label_exists_in_r192_grid": false,
-        "canonical_signal_label_exists_in_canonical_grid": false
+        "canonical_signal_label_exists_in_r192_grid": true,
+        "canonical_entry_label_exists_in_r192_grid": true,
+        "canonical_signal_label_exists_in_canonical_grid": true,
+        "r192_bar_closing_at_canonical_entry_boundary_exists": false,
+        "canonical_signal_close_boundary_utc": "2017-01-24T22:00:00+00:00",
+        "r192_nearest_labels_utc": [
+          "2017-01-24T10:00:00+00:00",
+          "2017-01-24T14:00:00+00:00",
+          "2017-01-24T18:00:00+00:00",
+          "2017-01-24T22:00:00+00:00",
+          "2017-01-25T02:00:00+00:00"
+        ]
       },
       "same_signal_candidate_in_r192_h4": {
         "signal_label_ny": "2017-01-24T13:00:00-05:00",
@@ -127,8 +156,19 @@
         "canonical_next_h4_open": 2281.531,
         "canonical_risk": 25.4699999999998
       },
-      "r192_position_blocker_at_candidate_signal_close": null,
-      "cause_assessment": "The canonical signal label is absent from R192's H4 grid; this is a true boundary/grid mismatch at this label."
+      "r192_position_blocker_at_candidate_signal_close": {
+        "entry_time_utc": "2016-11-09T18:00:00+00:00",
+        "entry_time_ny": "2016-11-09T13:00:00-05:00",
+        "entry": 2158.969,
+        "sl": 2054.219,
+        "risk_points": 104.75,
+        "exit_time_utc": "2017-02-23T14:25:00+00:00",
+        "exit_time_ny": "2017-02-23T09:25:00-05:00",
+        "reason": "TP",
+        "opened_before_2017_NY": true,
+        "still_active_at_signal_close": true
+      },
+      "cause_assessment": "One-position state: an R192 position opened before the canonical 2017 start was still active at this signal close; R192 therefore skipped the candidate. Canonical load() truncates source bars to NY year >= 2017 and resets active=-1, so it can take this trade."
     },
     {
       "instrument": "usatechidxusd",
@@ -177,9 +217,18 @@
         "instrument_name": "USA 100 Tech / Nasdaq 100"
       },
       "bar_grid_checks": {
-        "canonical_signal_label_exists_in_r192_grid": false,
-        "canonical_entry_label_exists_in_r192_grid": false,
-        "canonical_signal_label_exists_in_canonical_grid": false
+        "canonical_signal_label_exists_in_r192_grid": true,
+        "canonical_entry_label_exists_in_r192_grid": true,
+        "canonical_signal_label_exists_in_canonical_grid": true,
+        "r192_bar_closing_at_canonical_entry_boundary_exists": false,
+        "canonical_signal_close_boundary_utc": "2017-01-24T22:00:00+00:00",
+        "r192_nearest_labels_utc": [
+          "2017-01-24T10:00:00+00:00",
+          "2017-01-24T14:00:00+00:00",
+          "2017-01-24T18:00:00+00:00",
+          "2017-01-24T22:00:00+00:00",
+          "2017-01-25T02:00:00+00:00"
+        ]
       },
       "same_signal_candidate_in_r192_h4": {
         "signal_label_ny": "2017-01-24T13:00:00-05:00",
@@ -192,8 +241,19 @@
         "canonical_next_h4_open": 5111.343,
         "canonical_risk": 77.33899999999994
       },
-      "r192_position_blocker_at_candidate_signal_close": null,
-      "cause_assessment": "The canonical signal label is absent from R192's H4 grid; this is a true boundary/grid mismatch at this label."
+      "r192_position_blocker_at_candidate_signal_close": {
+        "entry_time_utc": "2016-11-10T10:00:00+00:00",
+        "entry_time_ny": "2016-11-10T05:00:00-05:00",
+        "entry": 4870.269,
+        "sl": 4588.669,
+        "risk_points": 281.60000000000036,
+        "exit_time_utc": "2017-03-16T07:10:00+00:00",
+        "exit_time_ny": "2017-03-16T03:10:00-04:00",
+        "reason": "TP",
+        "opened_before_2017_NY": true,
+        "still_active_at_signal_close": true
+      },
+      "cause_assessment": "One-position state: an R192 position opened before the canonical 2017 start was still active at this signal close; R192 therefore skipped the candidate. Canonical load() truncates source bars to NY year >= 2017 and resets active=-1, so it can take this trade."
     }
   ],
   "comparison_rule": "First ordinal mismatch after filtering both streams to entry year >=2017 in America/New_York; full R192 CSV also retains pre-2017 trades to diagnose active-position carryover.",
