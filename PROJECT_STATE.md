@@ -408,8 +408,8 @@ Official baseline dari canonical `research/R191_CANONICAL_index_trend_long.py` p
 - Gate 1 deterministic baseline: PASS.
 - Gate 2 canonical truncation untuk 10 indeks: belum dijalankan/selesai.
 - Enam kriteria PASS terkunci dan causal audit PF>1.4: belum dinilai. Tidak ada tuning, variasi, atau penghapusan indeks.
-- Latest M5-only workflow run: https://github.com/christianomomongan82-lang/scanner/actions/runs/40080602591
-- Isolated canonical M5 run: https://github.com/christianomomongan82-lang/scanner/actions/runs/40080690669
+- Latest canonical M5-only run, including the documented USSC2000 source-start exception: https://github.com/christianomomongan82-lang/scanner/actions/runs/40081030101
+- Earlier runs 40080602591 and 40080690669 are superseded because they treated the source's pre-2018-08 USSC2000 empty history as a download failure.
 - Canonical source: research/R191_CANONICAL_index_trend_long.py
 - Runner: research/r330_r191_pooled_ten_index.py
 - Preregistration and baseline amendment: research/R330_LOCKED_PREREGISTRATION.md, CHANGELOG.md
