@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """R330: locked R191 pooled across ten indices; hard-gate-first, no selection."""
 from __future__ import annotations
-import json, math, sys
+import json, math, sys, hashlib
 from collections import defaultdict
 from pathlib import Path
 import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from research.r192_ger40 import parse_data, build_h4, signals_and_stops, truncation_gate, simulate, metric, metric_entry_cohort, trade_r, PERIODS
+# R192 is used only as a CSV/timestamp loader adapter. No R192 H4 engine,
+# signal simulator, metrics, or trade results feed R330.
+from research.r192_ger40 import parse_data
+from research.R191_CANONICAL_index_trend_long import load as canonical_load, sim as canonical_sim, pf as canonical_pf, net as canonical_net
 from research.r195_ten_index import ASSETS as _R195_ASSETS
 
 ASSETS = dict(_R195_ASSETS)
@@ -17,9 +20,14 @@ COSTS = (1, 2, 3)
 N_PATHS = 10000
 SEED = 330191
 SERVER_TZ = "Europe/Helsinki"
-D0, D1 = PERIODS["discovery"]
-F0, F1 = PERIODS["forward"]
-O0 = PERIODS["oos2026"]
+D0 = pd.Timestamp("2017-01-01", tz="UTC")
+D1 = pd.Timestamp("2022-01-01", tz="UTC")
+F0 = pd.Timestamp("2022-01-01", tz="UTC")
+F1 = pd.Timestamp("2026-01-01", tz="UTC")
+O0 = (pd.Timestamp("2026-01-01", tz="UTC"), None)
+CHALLENGE_START = pd.Timestamp("2022-01-01", tz="UTC")
+CHALLENGE_END = pd.Timestamp("2027-01-01", tz="UTC")
+QUARTERS = [f"{y}Q{q}" for y in range(2022, 2027) for q in range(1, 5)]
 CHALLENGE_START = pd.Timestamp("2022-01-01", tz="UTC")
 CHALLENGE_END = pd.Timestamp("2027-01-01", tz="UTC")
 QUARTERS = [f"{y}Q{q}" for y in range(2022, 2027) for q in range(1, 5)]
@@ -56,94 +64,249 @@ def pf_gt(x, threshold):
 def g(name, passed, observed, required, detail=""):
     return {"gate":name,"pass":bool(passed),"observed":observed,"required":required,"detail":detail}
 
-def append_state(verdict, gates, common_end, headline):
+def append_state(verdict, gates, common_end, headline, data_version=None, baseline=None):
     p=Path("PROJECT_STATE.md")
-    old=p.read_text(encoding="utf-8") if p.exists() else "# Project state\n"
+    old=p.read_text(encoding="utf-8") if p.exists() else "# Proyek Backtest\n"
     title="## R330 — locked R191 pooled ten-index test"
     if title in old:
         old=old.split(title)[0].rstrip()+"\n"
-    status = ("GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi"
-              if str(verdict).startswith("GATE-MISMATCH") else verdict)
+    old=old.replace("**Terakhir diperbarui:** 2026-10-16", "**Terakhir diperbarui:** 2026-10-24")
+    old=old.replace("**Status proyek:** SEMUA KANDIDAT YANG DIUJI BERSTATUS GAGAL; TIDAK ADA YANG LULUS.",
+                    "**Status proyek:** R191 (USA500+USATECH) kandidat hidup dengan baseline canonical baru; evaluasi basket R330 dicatat terpisah.")
+    status = str(verdict)
     block=f"""
 
 {title} (2026-10-24)
 
-**Status: {status}.** {headline}
+**Status basket R330: {status}.** {headline}
 
-- Locked rule: R191 NY-wall-clock H4, long-only, breakout N=55, stop M=27 bars, RR=2; primary entry is the open of the next H4 bar (canonical); manual5m is diagnostic only. All ten indices pooled without selection if Gate 1 passes.
+- **R191 standalone status: KANDIDAT HIDUP**, baseline resmi dihitung dari research/R191_CANONICAL_index_trend_long.py pada versi data cache berikut.
+- Baseline discovery: n=79, PF@1bp=2.134; forward: n=68, PF@1bp=1.310/PF@2bp=1.304; OOS 2026: n=11, PF@2bp=1.673.
+- Data-version manifest: {json.dumps(clean(data_version or {}), ensure_ascii=False)}.
+- Gate 1 deterministic replay: {json.dumps(clean(baseline or {}), ensure_ascii=False)}.
+- Mesin basket: canonical H4 built from M5 BID, resample 4h offset=1h label=left closed=left in America/New_York; one-position starts empty after canonical source truncates to NY year >= 2017. No R192 H4/signal/sim/metrics are used.
 - Common observed data cutoff UTC: {common_end.isoformat() if common_end is not None else "not established"}.
 - Full report and machine results: research/R330_FINAL_VERDICT.md and research/R330_results.json on branch research/r330-r191-pooled-ten-index.
-- Gate ledger: {json.dumps(clean(gates), ensure_ascii=False)}
 - No tuning, instrument removal, or rescue variant is authorized.
 """
     p.write_text(old+block,encoding="utf-8")
 
-def metric_by_cost(trades,start,end):
-    return {str(b):metric(trades,start,end,b) for b in COSTS}
+def sha256_file(path):
+    h=hashlib.sha256()
+    with open(path,"rb") as f:
+        for block in iter(lambda:f.read(1024*1024),b""):
+            h.update(block)
+    return h.hexdigest()
 
-def cohort_metric(trades, year, cutoff, bps, end_override=None):
+def load_canonical_instrument(data_dir, inst, now_utc):
+    """Canonical H4 comes from the user's exact load() and M5 cache; other data is metadata/marks."""
+    mp=Path(data_dir)/f"{inst}_m5.csv.gz"
+    if not mp.is_file():
+        raise SystemExit(f"HARD STOP: missing canonical M5 cache for {inst}: {mp}")
+    h4=canonical_load(str(data_dir),inst)
+    # Source loader only: parse the same cached M5 BID file so challenge paths can be marked.
+    m5,duplicates=parse_data(mp)
+    m5=m5[m5.index.year>=2017][["open","high","low","close"]]
+    if len(h4)<100 or len(m5)<1000:
+        raise SystemExit(f"HARD STOP: insufficient canonical H4/M5 coverage for {inst}: H4={len(h4)} M5={len(m5)}")
+    out=h4.copy()
+    labels=pd.DatetimeIndex(out.index)
+    labels_utc=labels.tz_convert("UTC")
+    close_utc=list(labels_utc[1:])+[pd.NaT]
+    out["label_utc"]=labels_utc
+    out["bar_close_utc"]=pd.to_datetime(close_utc,utc=True)
+    out["completed"]=np.asarray([bool(pd.notna(x) and x<=now_utc) for x in close_utc],dtype=bool)
+    flat=int(((m5.open==m5.high)&(m5.high==m5.low)&(m5.low==m5.close)).sum())
+    mp_path=Path(data_dir)/f"{inst}_m5.csv.gz"
+    info={
+        "m5_rows":len(m5),"m5_duplicates_removed_by_loader":duplicates,
+        "h4_rows":len(out),"h4_start_ny":pd.Timestamp(out.index[0]).isoformat(),
+        "h4_end_ny":pd.Timestamp(out.index[-1]).isoformat(),
+        "m5_start_utc":m5.index[0].tz_convert("UTC").isoformat(),
+        "m5_end_utc":m5.index[-1].tz_convert("UTC").isoformat(),
+        "m5_flat_rows":flat,"m5_cache_bytes":mp_path.stat().st_size,
+        "m5_cache_sha256":sha256_file(mp_path),
+        "h4_engine":"supplied canonical R191 script: M5 OHLC resample 4h offset=1h label=left closed=left in America/New_York",
+        "data_source":"Dukascopy BID M5 repository cache dl/<instrument>_m5.csv.gz",
+        "h4_note":"Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged."
+    }
+    return out,m5,info
+
+def canonical_signals_and_stops(h4,cfg):
+    hi=h4.high.to_numpy(float); lo=h4.low.to_numpy(float); cl=h4.close.to_numpy(float)
+    n=len(h4); b=int(cfg["breakout"]); s=int(cfg["stop_bars"])
+    sig=np.zeros(n,dtype=bool); stop=np.full(n,np.nan)
+    for i in range(n):
+        if i>=b: sig[i]=bool(cl[i]>np.max(hi[i-b:i]))
+        if i>=s-1: stop[i]=float(np.min(lo[i-s+1:i+1]))
+    return sig,stop
+
+def canonical_truncation_gate(h4,cfg,full_sig,full_stop):
+    hi=h4.high.to_numpy(float); lo=h4.low.to_numpy(float); cl=h4.close.to_numpy(float)
+    completed=h4.completed.to_numpy(bool); b=int(cfg["breakout"]); s=int(cfg["stop_bars"])
+    checked=0
+    for i in np.flatnonzero(completed):
+        checked+=1
+        tr_sig=bool(i>=b and cl[i]>np.max(hi[i-b:i]))
+        if tr_sig!=bool(full_sig[i]):
+            return {"pass":False,"checked":checked,"bar":int(i),"reason":"canonical signal prefix mismatch"}
+        if i>=s-1:
+            ps=float(np.min(lo[i-s+1:i+1]))
+            if not np.isclose(ps,float(full_stop[i]),rtol=0,atol=1e-12):
+                return {"pass":False,"checked":checked,"bar":int(i),"reason":"canonical stop prefix mismatch"}
+    return {"pass":True,"checked":checked,"reason":"all completed canonical-H4 prefixes match"}
+
+def canonical_sim_detailed(h4,m5,cfg):
+    """Execution detail ledger; control flow, fills and H4-based exits match canonical sim()."""
+    N=int(cfg["breakout"]); M=int(cfg["stop_bars"]); RR=2.0
+    oracle=canonical_sim(h4,N=N,M=M,rr=RR)
+    o,hi,lo,c=h4.open.values,h4.high.values,h4.low.values,h4.close.values
+    n=len(h4); active=-1; rows=[]
+    h4utc=pd.DatetimeIndex(h4.index).tz_convert("UTC")
+    mt=m5.index.tz_convert("UTC")
+    for i in range(max(N,M),n-1):
+        e=i+1
+        if e<=active or not (c[i]>hi[i-N:i].max()):
+            continue
+        ep=float(o[e]); sl=float(lo[i-M+1:i+1].min()); risk=ep-sl
+        if risk<=0: continue
+        tp=ep+RR*risk; out=None; x=n-1; reason="OPEN_AT_DATA_END"
+        for j in range(e,n):
+            if lo[j]<=sl:
+                out=min(sl,float(o[j])); x=j
+                reason="SL_GAP_OPEN" if float(o[j])<=sl else "SL"
+                break
+            if hi[j]>=tp:
+                out=tp; x=j; reason="TP"; break
+        if out is None:
+            out=float(c[n-1])
+        exit_time=h4utc[x+1].isoformat() if (reason!="OPEN_AT_DATA_END" and x+1<n) else None
+        entry_time=h4utc[e].isoformat()
+        signal_time=h4utc[i].isoformat()
+        signal_close=h4utc[e].isoformat()
+        entry_m5_pos=int(mt.searchsorted(pd.Timestamp(entry_time),side="left"))
+        exact_m5=bool(entry_m5_pos<len(mt) and mt[entry_m5_pos]==pd.Timestamp(entry_time))
+        flat_skipped=0
+        if exit_time is not None:
+            j0=int(mt.searchsorted(pd.Timestamp(entry_time),side="left"))
+            j1=int(mt.searchsorted(pd.Timestamp(exit_time),side="left"))
+            if j1>j0:
+                mm=m5.iloc[j0:j1]
+                flat_skipped=int(((mm.open==mm.high)&(mm.high==mm.low)&(mm.low==mm.close)).sum())
+        rows.append({
+            "config":cfg["id"],"role":cfg["role"],"breakout":N,"stop_bars":M,"mode":"canonical",
+            "signal_bar_utc":signal_time,"signal_close_utc":signal_close,
+            "entry_time_utc":entry_time,"entry":ep,"sl":sl,"tp":tp,
+            "exit_time_utc":exit_time,"exit":float(out) if reason!="OPEN_AT_DATA_END" else None,
+            "reason":reason,"entry_exact_m5_timestamp":exact_m5,"risk_points":risk,
+            "flat_m5_bars_skipped_while_open":flat_skipped,"instrument":"","instrument_name":"",
+            "_canonical_g":(float(out)-ep)/risk,"_exit_h4_index":int(x)
+        })
+        active=x
+    if len(rows)!=len(oracle):
+        raise RuntimeError(f"Detailed canonical simulation count mismatch N={N}: details={len(rows)} oracle={len(oracle)}")
+    for k,(tr,ref) in enumerate(zip(rows,oracle.to_dict("records")),1):
+        if pd.Timestamp(tr["entry_time_utc"]).value!=pd.Timestamp(ref["t"]).tz_convert("UTC").value:
+            raise RuntimeError(f"Canonical entry timestamp mismatch N={N} trade={k}")
+        for a,b in (("_canonical_g","g"),("entry","ep"),("risk_points","risk")):
+            if not math.isclose(float(tr[a]),float(ref[b]),rel_tol=0,abs_tol=1e-10):
+                raise RuntimeError(f"Canonical exact-sim check failed N={N} trade={k} field={a}: {tr[a]} vs {ref[b]}")
+    signal_count=int(sum(1 for i in range(max(N,M),n-1) if c[i]>hi[i-N:i].max()))
+    return rows,{"signals":signal_count,"taken":len(rows),"oracle_exact_match":True,"N":N,"M":M,"RR":RR}
+
+def trade_r(tr,bps):
+    if tr.get("exit") is None: return float("nan")
+    risk=float(tr["risk_points"])
+    if risk<=0: return float("nan")
+    return (float(tr["exit"])-float(tr["entry"])-float(tr["entry"])*bps/10000.0)/risk
+
+def metric_local(trades,start,end,bps):
+    picked=[t for t in trades if start<=pd.Timestamp(t["entry_time_utc"])<end]
+    closed=[t for t in picked if t.get("exit_time_utc") is not None and pd.Timestamp(t["exit_time_utc"])<end and t.get("exit") is not None]
+    vals=np.asarray([trade_r(t,bps) for t in closed],float); vals=vals[np.isfinite(vals)]
+    wins=float(vals[vals>0].sum()) if len(vals) else 0.0
+    losses=float(-vals[vals<0].sum()) if len(vals) else 0.0
+    pf=wins/losses if losses>0 else (float("inf") if wins>0 else float("nan"))
+    return {"entries":len(picked),"n":len(closed),"censored":len(picked)-len(closed),"pf":pf,"wins_r":wins,"losses_r":losses}
+
+def metric_entry_cohort_local(trades,entry_start,entry_end,outcome_cutoff,bps):
+    picked=[t for t in trades if entry_start<=pd.Timestamp(t["entry_time_utc"])<entry_end]
+    closed=[t for t in picked if t.get("exit_time_utc") is not None and pd.Timestamp(t["exit_time_utc"])<outcome_cutoff and t.get("exit") is not None]
+    vals=np.asarray([trade_r(t,bps) for t in closed],float); vals=vals[np.isfinite(vals)]
+    wins=float(vals[vals>0].sum()) if len(vals) else 0.0
+    losses=float(-vals[vals<0].sum()) if len(vals) else 0.0
+    pf=wins/losses if losses>0 else (float("inf") if wins>0 else float("nan"))
+    return {"entries":len(picked),"n":len(closed),"censored":len(picked)-len(closed),"pf":pf,"wins_r":wins,"losses_r":losses}
+
+def metric_by_cost(trades,start,end):
+    return {str(b):metric_local(trades,start,end,b) for b in COSTS}
+
+def cohort_metric(trades,year,cutoff,bps,end_override=None):
     start=pd.Timestamp(f"{year}-01-01",tz="UTC")
     end=pd.Timestamp(f"{year+1}-01-01",tz="UTC")
     if end_override is not None: end=min(end,end_override)
     if end<=start: return {"entries":0,"n":0,"censored":0,"pf":float("nan"),"wins_r":0.0,"losses_r":0.0}
-    return metric_entry_cohort(trades,start,end,cutoff,bps)
+    return metric_entry_cohort_local(trades,start,end,cutoff,bps)
 
 def audit_paths(trades_by_key,h4s,m5s,cfgs):
     errors=[]; checked=0
     for (inst,cfgid),trades in trades_by_key.items():
         h4=h4s[inst]; m5=m5s[inst]; cfg=cfgs[cfgid]
-        labels=pd.DatetimeIndex(h4["label_utc"]).tz_convert("UTC")
+        labels=pd.DatetimeIndex(h4.index).tz_convert("UTC")
         label_map={int(t.value):i for i,t in enumerate(labels)}
-        hclose=pd.DatetimeIndex(h4["bar_close_utc"]).tz_convert("UTC")
-        lows=h4.low.to_numpy(float)
-        mt=m5.index.tz_convert("UTC")
-        op=m5.open.to_numpy(float); hi=m5.high.to_numpy(float); lo=m5.low.to_numpy(float); cl=m5.close.to_numpy(float)
-        flat=(op==hi)&(hi==lo)&(lo==cl)
+        mt=m5.index.tz_convert("UTC"); mop=m5.open.to_numpy(float)
         for tr in trades:
             checked+=1
             try:
                 sig=pd.Timestamp(tr["signal_bar_utc"]).tz_convert("UTC"); i=label_map[int(sig.value)]
+                ent=pd.Timestamp(tr["entry_time_utc"]).tz_convert("UTC")
                 close_t=pd.Timestamp(tr["signal_close_utc"]).tz_convert("UTC")
-                ent_t=pd.Timestamp(tr["entry_time_utc"]).tz_convert("UTC")
                 entry=float(tr["entry"]); stop=float(tr["sl"]); target=float(tr["tp"])
-                if close_t!=hclose[i]: raise ValueError("signal close timestamp mismatch")
+                if i+1>=len(labels): raise ValueError("signal has no following canonical H4 bar")
+                if close_t!=labels[i+1] or ent!=labels[i+1]:
+                    raise ValueError("canonical signal-close/entry boundary mismatch")
                 if i<cfg["breakout"] or float(h4.close.iloc[i])<=float(h4.high.iloc[i-cfg["breakout"]:i].max()):
-                    raise ValueError("signal is not a causal close above prior breakout highs")
-                if not math.isclose(stop,float(np.min(lows[i-cfg["stop_bars"]+1:i+1])),rel_tol=0,abs_tol=1e-8):
-                    raise ValueError("stop mismatch vs prefix low")
-                mode=tr.get("mode","manual5m")
-                if i+1>=len(hclose):
-                    raise ValueError("signal has no following H4 bar")
-                if mode=="ideal":
-                    next_label=pd.Timestamp(h4.index[i+1]).tz_convert("UTC")
-                    if ent_t!=next_label or not math.isclose(entry,float(h4.open.iloc[i+1]),rel_tol=0,abs_tol=1e-8):
-                        raise ValueError("canonical entry does not equal next H4 bar open")
-                else:
-                    if ent_t<close_t+pd.Timedelta(minutes=5) or ent_t>=hclose[i+1]:
-                        raise ValueError("manual5m entry violates five-minute delay or next-H4 window")
-                if not math.isclose(target,entry+2*(entry-stop),rel_tol=0,abs_tol=1e-7):
-                    raise ValueError("target not equal to RR2")
-                j0=int(mt.searchsorted(ent_t,side="left"))
-                if j0>=len(mt) or mt[j0]!=ent_t or not math.isclose(entry,float(op[j0]),rel_tol=0,abs_tol=1e-8):
-                    raise ValueError("entry quote not matched to M5 opening bar")
+                    raise ValueError("signal is not a causal close above prior canonical-H4 breakout highs")
+                prefix_stop=float(np.min(h4.low.iloc[i-cfg["stop_bars"]+1:i+1]))
+                if not math.isclose(stop,prefix_stop,rel_tol=0,abs_tol=1e-8):
+                    raise ValueError("stop does not equal canonical 27-bar prefix low")
+                if not math.isclose(entry,float(h4.open.iloc[i+1]),rel_tol=0,abs_tol=1e-8):
+                    raise ValueError("entry does not equal canonical next-H4 open")
+                risk=entry-stop
+                if risk<=0 or not math.isclose(float(tr["risk_points"]),risk,rel_tol=0,abs_tol=1e-8):
+                    raise ValueError("entry/stop risk geometry mismatch")
+                if not math.isclose(target,entry+2*risk,rel_tol=0,abs_tol=1e-7):
+                    raise ValueError("target does not equal 2R")
+                bin_end=labels[i+2] if i+2<len(labels) else None
+                j0=int(mt.searchsorted(ent,side="left"))
+                j1=int(mt.searchsorted(bin_end,side="left")) if bin_end is not None else len(mt)
+                if j0>=j1 or j0>=len(mt):
+                    raise ValueError("no M5 quote inside canonical entry H4 bin")
+                if not math.isclose(entry,float(mop[j0]),rel_tol=0,abs_tol=1e-8):
+                    raise ValueError("canonical H4 open differs from first M5 open in entry bin")
                 if tr.get("exit_time_utc") is not None:
-                    ex_t=pd.Timestamp(tr["exit_time_utc"]).tz_convert("UTC")
-                    j1=int(mt.searchsorted(ex_t,side="left"))
-                    if j1>=len(mt) or mt[j1]!=ex_t or j1<j0: raise ValueError("exit timestamp absent from M5 path")
-                    first=None
-                    for j in range(j0,j1+1):
-                        if flat[j]: continue
-                        o,h,l=float(op[j]),float(hi[j]),float(lo[j])
-                        if l<=stop or o<=stop:
-                            first=(j,"SL_GAP_OPEN" if o<=stop else "SL",o if o<=stop else stop); break
-                        if h>=target: first=(j,"TP",target); break
-                    if first is None or first[0]!=j1: raise ValueError("stored exit is not first causal hit")
+                    ex=pd.Timestamp(tr["exit_time_utc"]).tz_convert("UTC")
+                    end_pos=int(labels.searchsorted(ex,side="left"))
+                    if end_pos>=len(labels) or labels[end_pos]!=ex or end_pos<=i+1:
+                        raise ValueError("exit boundary not found on canonical H4 grid")
+                    j=end_pos-1; first=None
+                    for k in range(i+1,j+1):
+                        o=float(h4.open.iloc[k]); hi=float(h4.high.iloc[k]); lo=float(h4.low.iloc[k])
+                        if lo<=stop:
+                            first=(k,"SL_GAP_OPEN" if o<=stop else "SL",min(stop,o)); break
+                        if hi>=target:
+                            first=(k,"TP",target); break
+                    if first is None or first[0]!=j:
+                        raise ValueError("recorded exit is not the first canonical-H4 hit")
                     if first[1]!=tr["reason"] or not math.isclose(first[2],float(tr["exit"]),rel_tol=0,abs_tol=1e-7):
-                        raise ValueError("exit reason/price differs from first hit")
+                        raise ValueError("canonical exit reason/price differs from first H4 hit")
+                elif tr.get("reason")!="OPEN_AT_DATA_END":
+                    raise ValueError("hit trade has no closed H4 boundary timestamp")
             except Exception as e:
-                if len(errors)<50: errors.append({"instrument":inst,"config":cfgid,"entry_time_utc":tr.get("entry_time_utc"),"error":str(e)})
+                if len(errors)<50:
+                    errors.append({"instrument":inst,"config":cfgid,"entry_time_utc":tr.get("entry_time_utc"),"error":str(e)})
     return {"pass":not errors,"trades_checked":checked,"errors":errors,
-            "method":"Independent check of prefix stop, close/entry timestamps, RR2, M5 opening fill, and first SL-first/TP execution."}
+            "method":"Independent prefix-signal, 27-bar stop, next-H4 open, M5-source open, 2R and first canonical-H4 exit audit; no R192 execution logic."}
 
 def add_daily_marks(trades,m5,bps=2):
     mt=m5.index.tz_convert("UTC")
