@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+set -euo pipefail
+INST="$1"
+YEAR="$2"
+OUT="$3"
+mkdir -p dl/chunks
+NEXT=$((YEAR + 1))
+
+for Q in 1 2 3 4; do
+  case "$Q" in
+    1) QM=01; QTO="$YEAR-04-01" ;;
+    2) QM=04; QTO="$YEAR-07-01" ;;
+    3) QM=07; QTO="$YEAR-10-01" ;;
+    4) QM=10; if [ "$YEAR" -eq 2026 ]; then QTO="now"; else QTO="$NEXT-01-01"; fi ;;
+  esac
+
+  QB="$INST"_m5q_"$YEAR"_Q"$Q"
+  QC="dl/chunks/$QB.csv.gz"
+  QR="dl/chunks/$QB.csv"
+  if [ -s "$QC" ] && gzip -t "$QC" >/dev/null 2>&1; then
+    echo "QUARTER CACHE HIT: $QB"
+    continue
+  fi
+
+  FROM="$YEAR-$QM-01"
+  MAX_ATTEMPTS=3
+  if [ "$YEAR" -le 2018 ]; then MAX_ATTEMPTS=1; fi
+  OK=false
+  for ATTEMPT in $(seq 1 "$MAX_ATTEMPTS"); do
+    rm -f "$QR"
+    echo "DOWNLOAD $QB: $FROM to $QTO (attempt $ATTEMPT/$MAX_ATTEMPTS)"
+    if npx --yes dukascopy-node@1.50.0 \
+      -i "$INST" -from "$FROM" -to "$QTO" \
+      -t m5 -p bid -utc 0 -f csv -fl \
+      -dir dl/chunks -fn "$QB" \
+      -bs 10 -bp 1000 -r 5 -rp 1000; then
+      LINES=$(wc -l < "$QR" 2>/dev/null || echo 0)
+      if [ -s "$QR" ] && [ "$LINES" -gt 1000 ] && gzip -1 "$QR" && gzip -t "$QC"; then
+        echo "SAVED $QC ($(du -h "$QC" | cut -f1), rows=$((LINES - 1)))"
+        OK=true
+        break
+      fi
+    fi
+    rm -f "$QR"
+    if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then sleep $((ATTEMPT * 15)); fi
+  done
+  if [ "$OK" != "true" ]; then
+    echo "ERROR: quarterly M5 download failed: $QB" >&2
+    exit 1
+  fi
+done
+
+RAW="dl/chunks/$INST"_"m5"_"$YEAR".csv
+rm -f "$RAW" "$OUT"
+FIRST=true
+for Q in 1 2 3 4; do
+  QB="$INST"_m5q_"$YEAR"_Q"$Q"
+  QC="dl/chunks/$QB.csv.gz"
+  if [ "$FIRST" = "true" ]; then
+    gzip -cd "$QC" > "$RAW"
+    FIRST=false
+  else
+    gzip -cd "$QC" | tail -n +2 >> "$RAW"
+  fi
+done
+LINES=$(wc -l < "$RAW" 2>/dev/null || echo 0)
+if [ ! -s "$RAW" ] || [ "$LINES" -le 1000 ] || ! gzip -1 "$RAW" || ! gzip -t "$OUT"; then
+  rm -f "$RAW" "$OUT"
+  echo "ERROR: failed to join M5 quarterly chunks into $OUT" >&2
+  exit 1
+fi
+echo "SAVED ANNUAL M5 CHUNK: $OUT ($(du -h "$OUT" | cut -f1), rows=$((LINES - 1)))"
