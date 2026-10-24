@@ -26,6 +26,10 @@ Official baseline for the canonical code on the current repository M5 cache:
 
 This shift is attributed to data-cache version/provenance, not a change to signal, stop, target, entry or simulation rules. Gate 1 passes only if a fresh canonical load/resample/sim is run twice on the identical cache, both H4 grids/OHLC and trade outputs are identical, and all official figures match to three decimals. SHA-256 hashes of all ten instrument M5 snapshots must be stored in the result manifest.
 
+## Per-instrument source-history boundaries
+
+Dukascopy M5 retrieval for `ussc2000idxusd` explicitly returned zero-byte data for pre-inception requests and reported historical data starting on 2018-08-08. The index remains in the ten-instrument basket from its first available M5 bar onward; there is no invented 2017 history, no synthesized bars, and no index exclusion. For this one source only, required annual chunks begin in 2018 and required quarter checks begin in 2018 Q3. This is source availability, not a strategy variant or a threshold change.
+
 ## Data windows and cost model
 
 Discovery entry cohorts: 2017-01-01 through 2021-12-31; outcomes count only if canonical exit boundary is before 2022-01-01. Forward entry cohorts: 2022-01-01 through 2025-12-31; outcomes count only if canonical exit boundary is before 2026-01-01. OOS: 2026 through the common available source cutoff. PF sensitivity remains modeled round-trip price costs of 1, 2 and 3 basis points applied as `gross R - entry_price * bps / 10000 / risk_points`. These are not measured broker commissions, spread or slippage.
