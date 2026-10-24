@@ -14,7 +14,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: r330-r191-pooled-ten-index
+  group: r330-r191-canonical-m5-only
   cancel-in-progress: true
 
 jobs:
