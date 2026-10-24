@@ -53,8 +53,81 @@ for Q in 1 2 3 4; do
     if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then sleep $((ATTEMPT * 20)); fi
   done
   if [ "$OK" != "true" ]; then
-    echo "ERROR: quarterly M5 download failed: $QB" >&2
-    exit 1
+    echo "QUARTER REQUEST FAILED: $QB; falling back to separate month downloads from the same Dukascopy BID source."
+    case "$Q" in
+      1) MONTH_LIST=(01 02 03) ;;
+      2) MONTH_LIST=(04 05 06) ;;
+      3) MONTH_LIST=(07 08 09) ;;
+      4) MONTH_LIST=(10 11 12) ;;
+    esac
+    FALLBACK_OK=true
+    for MO in "${MONTH_LIST[@]}"; do
+      MONTH_BASE="fallback_${INST}_m5_${YEAR}_M${MO}"
+      MR="dl/chunks/${MONTH_BASE}.csv"
+      MC="dl/chunks/${MONTH_BASE}.csv.gz"
+      if [ -s "$MC" ] && gzip -t "$MC" >/dev/null 2>&1; then
+        echo "MONTH CACHE HIT: ${MONTH_BASE}"
+        continue
+      fi
+      MFROM="$YEAR-$MO-01"
+      if [ "$MO" -eq 12 ]; then
+        if [ "$YEAR" -eq 2026 ]; then MTO="now"; else MTO="$NEXT-01-01"; fi
+      else
+        MNEXT=$((10#$MO + 1))
+        printf -v MONEXT "%02d" "$MNEXT"
+        MTO="$YEAR-$MONEXT-01"
+      fi
+      MONTH_OK=false
+      for MATTEMPT in 1 2 3; do
+        rm -f "$MR" "$MC"
+        echo "MONTH FALLBACK DOWNLOAD $MONTH_BASE: $MFROM to $MTO (attempt $MATTEMPT/3)"
+        if timeout 120s npx --yes dukascopy-node@1.50.0 \
+          -i "$INST" -from "$MFROM" -to "$MTO" \
+          -t m5 -p bid -utc 0 -f csv -fl \
+          -dir dl/chunks -fn "$MONTH_BASE" \
+          -bs 10 -bp 1000 -r 5 -rp 1000; then
+          MLINES=$(wc -l < "$MR" 2>/dev/null || echo 0)
+          if [ -s "$MR" ] && [ "$MLINES" -gt 200 ] && gzip -1 "$MR" && gzip -t "$MC"; then
+            echo "SAVED MONTH $MC ($(du -h "$MC" | cut -f1), rows=$((MLINES - 1)))"
+            MONTH_OK=true
+            break
+          fi
+        fi
+        rm -f "$MR"
+        if [ "$MATTEMPT" -lt 3 ]; then sleep $((MATTEMPT * 15)); fi
+      done
+      if [ "$MONTH_OK" != "true" ]; then
+        echo "ERROR: monthly fallback failed: $MONTH_BASE" >&2
+        FALLBACK_OK=false
+        break
+      fi
+    done
+    if [ "$FALLBACK_OK" = "true" ]; then
+      rm -f "$QR" "$QC"
+      FIRST_MONTH=true
+      for MO in "${MONTH_LIST[@]}"; do
+        MONTH_BASE="fallback_${INST}_m5_${YEAR}_M${MO}"
+        MC="dl/chunks/${MONTH_BASE}.csv.gz"
+        if [ "$FIRST_MONTH" = "true" ]; then
+          gzip -cd "$MC" > "$QR"
+          FIRST_MONTH=false
+        else
+          gzip -cd "$MC" | tail -n +2 >> "$QR"
+        fi
+      done
+      LINES=$(wc -l < "$QR" 2>/dev/null || echo 0)
+      if [ -s "$QR" ] && [ "$LINES" -gt 1000 ] && gzip -1 "$QR" && gzip -t "$QC"; then
+        echo "SAVED QUARTER VIA MONTHLY FALLBACK: $QC ($(du -h "$QC" | cut -f1), rows=$((LINES - 1)))"
+        OK=true
+        for MO in "${MONTH_LIST[@]}"; do
+          rm -f "dl/chunks/fallback_${INST}_m5_${YEAR}_M${MO}.csv.gz"
+        done
+      fi
+    fi
+    if [ "$OK" != "true" ]; then
+      echo "ERROR: quarterly and monthly M5 downloads failed: $QB" >&2
+      exit 1
+    fi
   fi
 done
 

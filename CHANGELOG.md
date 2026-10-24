@@ -53,3 +53,10 @@
 - Changed M5 quarterly retrieval to a 180-second per-attempt timeout, four attempts, and longer backoff. Reduced only the ten-index data-preparation matrix concurrency from 10 to 3 to reduce simultaneous source pressure. Gate 1’s two-index preparation is unchanged.
 - The existing Actions cache is resumable; successful quarterly chunks from failed attempts are retained and reused. Required 2017–2025 coverage rules (with the preregistered USSC2000 inception exception) remain unchanged.
 - This is an acquisition reliability fix only. It does not change canonical R191 math, instrument universe, costs, periods, any of the six PASS gates, challenge simulator, or PF>1.4 causality audit. No pooled metric is claimed until Gate 2 and all locked calculations actually finish.
+
+
+## 2026-10-24 — R330 monthly fallback for persistent quarterly HTTP 503
+
+- The first retry-policy run reached USA30 year 2020 but Dukascopy returned HTTP 503 for the 2020 Q4 M5 request across all four quarterly attempts. This is a source endpoint error, distinct from a strategy-test failure.
+- Added a fallback that requests the same BID M5 source as three separate months for a failed quarter, each with bounded retries, then concatenates those monthly files into the same quarterly archive format. If any month cannot be retrieved, the instrument still fails preflight; no prices or bars are synthesized. Temporary fallback files are excluded from annual chunk globbing and removed only after the quarter is successfully reconstructed.
+- No strategy calculation, dataset universe, required years/quarters, baseline, cost model, locked gate, or challenge criterion changed.

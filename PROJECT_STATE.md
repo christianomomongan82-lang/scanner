@@ -420,3 +420,9 @@ Official baseline dari canonical `research/R191_CANONICAL_index_trend_long.py` p
 - Root cause of run [40082027593](https://github.com/christianomomongan82-lang/scanner/actions/runs/40082027593): request-level 90-second timeout and two attempts; several indices progressed through many quarters, but one timed-out quarter caused that instrument job to stop. Preparation concurrency was 10.
 - Corrective patch: per-quarter timeout 180s, four attempts, 20 seconds multiplied by attempt number for backoff, and preparation concurrency reduced to 3. Successful quarterly cache files remain eligible for reuse on the next run.
 - This does not constitute an R330 strategy REJECT. Gate 1 remains PASS on the official current-cache baseline; Gate 2 and locked pooled criteria are still not calculated. Do not report PASS or REJECT for R330 until the canonical ten-index run completes its locked gates.
+
+
+### R330 — monthly data-fetch fallback (2026-10-24)
+
+- The revised retry job revealed a persistent HTTP 503 from Dukascopy for usa30idxusd M5 2020 Q4 across four quarter-level requests. Quarterly retrieval now falls back to month-sized requests from the same BID source, concatenated without synthesized bars. Failed months remain a hard data-preparation stop.
+- Run 40099342928 is the first retry-policy attempt and is not a strategy verdict; Gate 1 passed, but at least one instrument download stopped at the source layer. The monthly fallback is being added before the next retry.
