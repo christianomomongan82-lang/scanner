@@ -153,20 +153,24 @@ def add_daily_marks(trades,m5,bps=2):
         for j in range(j0,j1+1):
             if flat[j]: continue
             ts=mt[j]; day=str(ts.tz_convert(SERVER_TZ).date())
-            # If this is the exit bar, mark no worse than the executable exit fill.
-            low_px=float(lo[j])
-            if j==j1 and str(tr.get("reason","")).startswith("SL"): low_px=float(tr["exit"])
-            rlow=(low_px-entry)/risk
-            d=days.setdefault(day,{"min_r":rlow,"min_t":ts,"close_r":None,"close_t":None})
+            # Do not use prices occurring after the recorded exit within the same M5 bar.
+            low_px=float(lo[j]); high_px=float(hi[j])
+            if j==j1:
+                low_px=float(tr["exit"]); high_px=float(tr["exit"])
+            rlow=(low_px-entry)/risk; rhigh=(high_px-entry)/risk
+            d=days.setdefault(day,{"min_r":rlow,"min_t":ts,"max_r":rhigh,"max_t":ts,"close_r":None,"close_t":None})
             if rlow<d["min_r"]: d["min_r"]=rlow; d["min_t"]=ts
+            if rhigh>d["max_r"]: d["max_r"]=rhigh; d["max_t"]=ts
             if j<j1:
                 d["close_r"]=(float(cl[j])-entry)/risk
                 d["close_t"]=ts+pd.Timedelta(minutes=5)
         marks=[]
         for d in days.values():
             marks.append((d["min_t"],float(d["min_r"]),"low"))
+            marks.append((d["max_t"],float(d["max_r"]),"high"))
             if d["close_t"] is not None: marks.append((d["close_t"],float(d["close_r"]),"close"))
-        marks.sort(key=lambda x:(x[0],0 if x[2]=="close" else 1))
+        # If high and low occur in the same M5 bar, process adverse low first.
+        marks.sort(key=lambda x:(x[0],0 if x[2]=="close" else (1 if x[2]=="low" else 2)))
         tr["_marks"]=marks
     return trades
 
@@ -197,10 +201,15 @@ def run_path(pools, sampled, risk_fraction):
             for mt,mr,kind in tr["_marks"]:
                 mt=pd.Timestamp(mt).tz_convert("UTC")+delta
                 if mt>=CHALLENGE_END: continue
-                pri=0 if kind=="close" else (4 if mt==ent else 1)
+                if kind=="close": pri=0
+                elif mt==ent: pri=5 if kind=="low" else 6
+                else: pri=1 if kind=="low" else 2
                 events.append((mt,pri,tid,"mark",float(mr)))
-            events.append((ent,3,tid,"entry",{"r":r,"exit":ex}))
-            if ex<CHALLENGE_END: events.append((ex,2,tid,"exit",r))
+            events.append((ent,4,tid,"entry",{"r":r,"exit":ex}))
+            if ex<CHALLENGE_END:
+                # Same-M5 entry and exit must be processed after that trade is opened and marked.
+                exit_pri=7 if ex==ent else 3
+                events.append((ex,exit_pri,tid,"exit",r))
     events.sort(key=lambda x:(x[0],x[1]))
     balance=100.0; phase=1; phase_days=set(); phase1_time=None
     active={}; current_day=None; day_start=100.0
@@ -285,7 +294,7 @@ def challenge_sim(candidate,baseline):
         "candidate_quarter_counts":{q:len(pool_c[q]) for q in QUARTERS},
         "baseline_quarter_counts":{q:len(pool_b[q]) for q in QUARTERS},
         "risk_cap":"Skip an entry if total active stop-risk would exceed 2% of current phase balance.",
-        "marking":"M5 intraday low and last pre-exit close mark open positions. DLL includes marked floating PnL; MLL is a static 10% floor. Five distinct server-day trade closures required in each phase.",
+        "marking":"M5 intraday low/high extrema and last pre-exit close mark open positions; same-bar exit is after entry/marks and stop-first ordering is conservative. DLL includes marked floating PnL; MLL is a static 10% floor. Five distinct server-day trade closures required in each phase.",
         "server_day":"Europe/Helsinki seasonal GMT+2/GMT+3 proxy; verify against funded account server.",
         "limitations":["Quarter cohorts are synchronized across instruments to preserve observed cross-index co-occurrence, but a trade's marked path is shifted as a unit with its entry quarter.",
           "This is a bootstrap simulation of observed trade cohorts, not a future-price guarantee or a full broker/platform execution emulator."]}
@@ -425,7 +434,7 @@ def main():
     pd.DataFrame(ann).to_csv(out/"R330_pooled_annual.csv",index=False)
     fw_year=[r for r in ann if 2022<=r["year"]<=2025]
     worstpf=min([float(r["pf_2bp"]) for r in fw_year if valid_pf(r["pf_2bp"])],default=None)
-    four_have_trades=len(fw_year)==4 and all(r["n_2bp"]>0 for r in fw_year)
+    four_have_trades=len(fw_year)==4 and all(r["n_2bp"]>0 and valid_pf(r["pf_2bp"]) for r in fw_year)
 
     instrows=[]
     for inst in ASSETS:
@@ -528,7 +537,7 @@ def main():
         f"- Uncapped maximum exposure based on overlap: {ov['uncapped_max_open_risk_pct_at_0_5_each']:.2f}% at 0.5% each and {ov['uncapped_max_open_risk_pct_at_1_0_each']:.2f}% at 1% each. Simulator caps aggregate stop-risk at 2%.","",
         "## Stellar 2-Step challenge simulator","",
         pd.DataFrame([{k:v for k,v in r.items() if k!="quarter_trade_counts"} for r in simrows]).to_markdown(index=False),"",
-        "10,000 paired quarterly-bootstrap paths per stream and risk setting. Quarterly draws are synchronized across instruments. Floating-equity marks use daily M5 lows and pre-exit closes; server-day boundaries use Europe/Helsinki seasonal GMT+2/GMT+3 as a proxy. This resamples observed trade cohorts, not raw future price bars.","",
+        "10,000 paired quarterly-bootstrap paths per stream and risk setting. Quarterly draws are synchronized across instruments. Floating-equity marks use daily M5 lows, highs and pre-exit closes; same-entry/exit M5 bars are processed after entry, with adverse low before high; server-day boundaries use Europe/Helsinki seasonal GMT+2/GMT+3 as a proxy. This resamples observed trade cohorts, not raw future price bars.","",
         "## Neighborhood","",
         pd.DataFrame(nbr).to_markdown(index=False),"",
         "## Leave one out","",

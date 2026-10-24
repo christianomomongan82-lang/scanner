@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: r330-r191-pooled-ten-index
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   prepare-instrument:
@@ -44,6 +44,15 @@ jobs:
           key: r330-asset-${{ matrix.instrument }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             r330-asset-${{ matrix.instrument }}-
+            r205-asset-${{ matrix.instrument }}-
+            r204-asset-${{ matrix.instrument }}-
+            r202-asset-${{ matrix.instrument }}-
+            r201-asset-${{ matrix.instrument }}-
+            r200-asset-${{ matrix.instrument }}-
+            r199-asset-${{ matrix.instrument }}-
+            r198-asset-${{ matrix.instrument }}-
+            r197-asset-${{ matrix.instrument }}-
+            r196-asset-${{ matrix.instrument }}-
             r195-asset-${{ matrix.instrument }}-
             r194-asset-${{ matrix.instrument }}-
             r194-ten-index-data-
