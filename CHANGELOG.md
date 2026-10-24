@@ -29,3 +29,11 @@
 - Gate 1 now requires two independent canonical load/resample/sim runs against the same cache to produce identical H4 grids/OHLC and trade outputs, and to reproduce every official baseline figure to three decimals.
 - Changed the R330 basket engine to use the exact canonical M5-to-H4 resample and canonical sim for Gate 2, N=40/55/80 robustness, all ten-index metrics and the R191-only challenge comparator. R192 is only a timestamp/CSV loader adapter, not a calculation engine.
 - Recorded M5 per-index SHA-256 data hashes so the baseline is tied to a verifiable cache version. All six downstream PASS criteria and the PF>1.4 causality audit remain unchanged; no tuning or instrument removal was introduced.
+
+
+## 2026-10-24 — R330 canonical M5-only data preparation
+
+- Removed unnecessary H1 download, upload and validation from the R330 research workflow because the locked canonical engine builds all H4 bars directly from M5 BID.
+- Made annual M5 coverage 2017–2025 required for every index; 2026 remains optional if the current quarter is not yet available. This avoids silently treating incomplete discovery history as a full-period basket test.
+- Increased retries for 2017–2018 quarterly M5 retrieval. Data-acquisition changes only; the R191 signal, stop, target, sim, six PASS thresholds and causality-audit rule remain unchanged.
+- Isolated the M5-only rerun from the earlier hung H1+M5 acquisition run so the canonical basket can proceed with the existing cache keys and completed quarterly chunks.
