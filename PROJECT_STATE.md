@@ -445,3 +445,10 @@ Official baseline dari canonical `research/R191_CANONICAL_index_trend_long.py` p
 - Run [40100804035](https://github.com/christianomomongan82-lang/scanner/actions/runs/40100804035) passed Gate 1 but still encountered upstream HTTP 503 responses for some quarter and month ranges after retries. The pooled backtest has not run on that attempt.
 - Added recursive splitting of a failed month into smaller intervals using the same Dukascopy BID M5 source. No gap is silently accepted: if the source still fails at one-day resolution or the recovered month remains below 200 rows, the instrument preparation stops. Successful subranges are combined without synthetic prices.
 - This is a data-preparation fix only. R191 remains the live candidate at its official current-cache baseline; R330 basket Gate 2 and six PASS criteria remain pending until all required sources pass validation.
+
+
+### R330 — hard bound on hung source requests (2026-10-25)
+
+- The previous source-preparation workflow retained a job as in-progress after its last visible log line, even though a newer recovery run had been created. Request timeouts now include a 10-second hard-kill grace period, and both shell scripts are syntax-checked before download.
+- The new recovery run uses a separate concurrency group to avoid waiting behind that stale run. The index-preparation matrix remains limited to one index at a time.
+- Current status remains: Gate 1 PASS on the official R191 baseline; full basket Gate 2 and six PASS criteria are not yet calculated. A source-acquisition failure is not a strategy verdict.

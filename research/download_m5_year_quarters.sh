@@ -37,7 +37,7 @@ for Q in 1 2 3 4; do
     rm -f "$QR" "$QC"
     echo "DOWNLOAD $QB: $FROM to $QTO (attempt $ATTEMPT/$MAX_ATTEMPTS)"
     echo "BOUNDED REQUEST: timeout=180s; attempt=$ATTEMPT/$MAX_ATTEMPTS"
-    if timeout 240s npx --yes dukascopy-node@1.50.0 \
+    if timeout --kill-after=10s 240s npx --yes dukascopy-node@1.50.0 \
       -i "$INST" -from "$FROM" -to "$QTO" \
       -t m5 -p bid -utc 0 -f csv -fl \
       -dir dl/chunks -fn "$QB" \
@@ -85,7 +85,7 @@ for Q in 1 2 3 4; do
       for MATTEMPT in 1 2 3; do
         rm -f "$MR" "$MC"
         echo "MONTH FALLBACK DOWNLOAD $MONTH_BASE: $MFROM to $MTO (attempt $MATTEMPT/3)"
-        if timeout 180s npx --yes dukascopy-node@1.50.0 \
+        if timeout --kill-after=10s 180s npx --yes dukascopy-node@1.50.0 \
           -i "$INST" -from "$MFROM" -to "$MTO" \
           -t m5 -p bid -utc 0 -f csv -fl \
           -dir dl/chunks -fn "$MONTH_BASE" \

@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-25 — Bound hung Dukascopy subprocesses
+
+- The prior run remained in-progress while its current matrix job stopped producing accessible logs; the shell used a timeout without a hard-kill grace period. A spawned Node process can outlive the initial TERM and hold the job open.
+- Added `timeout --kill-after=10s` to quarterly, monthly and recursively split M5 requests so each request is forcibly bounded. Added `bash -n` checks for both acquisition scripts before any download.
+- Moved the new recovery run to its own concurrency group so it can start while the stale prior run is being terminated. The ten-index stage remains one instrument at a time to limit provider load.
+- The recursive fallback still fails closed when a one-day source range cannot be retrieved. This changes only data acquisition and runner liveness, not any strategy calculation or locked criterion.
+
 ## 2026-10-25 — R330 recursively split stubborn Dukascopy ranges
 
 - The current one-index-at-a-time retry run continued to hit reproducible HTTP 503 responses for individual month ranges even after quarterly retries and month-level fallback. Example: DEU40 M5 February 2023 repeatedly returned 503.

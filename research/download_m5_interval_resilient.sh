@@ -38,7 +38,7 @@ fetch_range() {
   for attempt in 1 2; do
     rm -f "$raw" "$gz"
     echo "RANGE REQUEST $name: $start to $end (attempt $attempt/2; timeout 120s)"
-    if timeout 120s npx --yes dukascopy-node@1.50.0 \
+    if timeout --kill-after=10s 120s npx --yes dukascopy-node@1.50.0 \
       -i "$INST" -from "$start" -to "$end" \
       -t m5 -p bid -utc 0 -f csv -fl \
       -dir dl/chunks -fn "$name" \
