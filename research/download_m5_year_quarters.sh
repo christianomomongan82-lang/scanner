@@ -34,7 +34,7 @@ for Q in 1 2 3 4; do
   MAX_ATTEMPTS=2
   OK=false
   for ATTEMPT in $(seq 1 "$MAX_ATTEMPTS"); do
-    rm -f "$QR"
+    rm -f "$QR" "$QC"
     echo "DOWNLOAD $QB: $FROM to $QTO (attempt $ATTEMPT/$MAX_ATTEMPTS)"
     echo "BOUNDED REQUEST: timeout=90s; attempt=$ATTEMPT/$MAX_ATTEMPTS"
     if timeout 90s npx --yes dukascopy-node@1.50.0 \
