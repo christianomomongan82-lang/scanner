@@ -6,6 +6,7 @@ on:
     paths:
       - "research/r330_r191_pooled_ten_index.py"
       - "research/R191_CANONICAL_index_trend_long.py"
+      - "research/download_m5_year_quarters.sh"
       - ".github/workflows/r330_r191_pooled_ten_index.yml"
   workflow_dispatch:
 
@@ -62,14 +63,14 @@ jobs:
         run: |
           set -uo pipefail
           echo "INSTRUMENT JOB: $INST; a separate runner handles each index."
-          for TF in h1 m5; do
+          for TF in m5; do
             DATASET="dl/${INST}_${TF}.csv.gz"
             if [ -s "$DATASET" ] && gzip -t "$DATASET" >/dev/null 2>&1; then
               echo "DATASET CACHE HIT: $INST $TF; reusing the completed snapshot."
               continue
             fi
 
-            for YEAR in $(seq 2016 2026); do
+            for YEAR in $(seq 2017 2026); do
               BASE="${INST}_${TF}_${YEAR}"
               CHUNK="dl/chunks/${BASE}.csv.gz"
               RAW="dl/chunks/${BASE}.csv"
@@ -81,7 +82,7 @@ jobs:
               if [ "$TF" = "m5" ]; then
                 if bash research/download_m5_year_quarters.sh "$INST" "$YEAR" "$CHUNK"; then
                   continue
-                elif [ "$YEAR" -le 2018 ] || [ "$YEAR" -eq 2026 ]; then
+                elif [ "$YEAR" -eq 2026 ]; then
                   echo "OPTIONAL M5 HISTORY INCOMPLETE: $INST $YEAR; continue without this chunk."
                   continue
                 else
@@ -163,8 +164,8 @@ jobs:
           from pathlib import Path
           from research.r192_ger40 import parse_data
           inst = os.environ["INST"]
-          required = set(range(2019, 2026))
-          for tf in ("h1", "m5"):
+          required = set(range(2017, 2026))
+          for tf in ("m5",):
               final = Path("dl") / f"{inst}_{tf}.csv.gz"
               if final.is_file() and final.stat().st_size and os.system(f"gzip -t '{final}' >/dev/null 2>&1") == 0:
                   bars, duplicates = parse_data(final)
@@ -221,7 +222,6 @@ jobs:
         with:
           name: r330-gate1-asset-${{ matrix.instrument }}
           path: |
-            dl/${{ matrix.instrument }}_h1.csv.gz
             dl/${{ matrix.instrument }}_m5.csv.gz
           if-no-files-found: error
           retention-days: 7
@@ -249,7 +249,7 @@ jobs:
           from pathlib import Path
           from research.r192_ger40 import parse_data
           for inst in ("usa500idxusd", "usatechidxusd"):
-              for tf in ("h1", "m5"):
+              for tf in ("m5",):
                   p = Path("dl") / f"{inst}_{tf}.csv.gz"
                   bars, duplicates = parse_data(p)
                   print(f"COVERAGE {inst} {tf.upper()}: rows={len(bars):,}; duplicates_removed={duplicates}; UTC={bars.index[0].tz_convert('UTC').isoformat()}..{bars.index[-1].tz_convert('UTC').isoformat()}")
@@ -325,14 +325,14 @@ jobs:
         run: |
           set -uo pipefail
           echo "INSTRUMENT JOB: $INST; a separate runner handles each index."
-          for TF in h1 m5; do
+          for TF in m5; do
             DATASET="dl/${INST}_${TF}.csv.gz"
             if [ -s "$DATASET" ] && gzip -t "$DATASET" >/dev/null 2>&1; then
               echo "DATASET CACHE HIT: $INST $TF; reusing the completed snapshot."
               continue
             fi
 
-            for YEAR in $(seq 2016 2026); do
+            for YEAR in $(seq 2017 2026); do
               BASE="${INST}_${TF}_${YEAR}"
               CHUNK="dl/chunks/${BASE}.csv.gz"
               RAW="dl/chunks/${BASE}.csv"
@@ -344,7 +344,7 @@ jobs:
               if [ "$TF" = "m5" ]; then
                 if bash research/download_m5_year_quarters.sh "$INST" "$YEAR" "$CHUNK"; then
                   continue
-                elif [ "$YEAR" -le 2018 ] || [ "$YEAR" -eq 2026 ]; then
+                elif [ "$YEAR" -eq 2026 ]; then
                   echo "OPTIONAL M5 HISTORY INCOMPLETE: $INST $YEAR; continue without this chunk."
                   continue
                 else
@@ -426,8 +426,8 @@ jobs:
           from pathlib import Path
           from research.r192_ger40 import parse_data
           inst = os.environ["INST"]
-          required = set(range(2019, 2026))
-          for tf in ("h1", "m5"):
+          required = set(range(2017, 2026))
+          for tf in ("m5",):
               final = Path("dl") / f"{inst}_{tf}.csv.gz"
               if final.is_file() and final.stat().st_size and os.system(f"gzip -t '{final}' >/dev/null 2>&1") == 0:
                   bars, duplicates = parse_data(final)
@@ -484,7 +484,6 @@ jobs:
         with:
           name: r330-asset-${{ matrix.instrument }}
           path: |
-            dl/${{ matrix.instrument }}_h1.csv.gz
             dl/${{ matrix.instrument }}_m5.csv.gz
           if-no-files-found: error
           retention-days: 7
@@ -514,7 +513,7 @@ jobs:
           assets = ("usa500idxusd","usatechidxusd","usa30idxusd","ussc2000idxusd","deuidxeur","gbridxgbp","fraidxeur","eusidxeur","ausidxaud","jpnidxjpy")
           missing = []
           for inst in assets:
-              for tf in ("h1", "m5"):
+              for tf in ("m5",):
                   p = Path("dl") / f"{inst}_{tf}.csv.gz"
                   try:
                       bars, duplicates = parse_data(p)
