@@ -77,6 +77,10 @@ for Q in 1 2 3 4; do
         printf -v MONEXT "%02d" "$MNEXT"
         MTO="$YEAR-$MONEXT-01"
       fi
+      if [ "$MTO" != "now" ] && { [[ "$MTO" < "$HISTORY_START" ]] || [[ "$MTO" == "$HISTORY_START" ]]; }; then
+        echo "NO SOURCE HISTORY IN FALLBACK MONTH: $MONTH_BASE ends before $HISTORY_START; leave it absent."
+        continue
+      fi
       MONTH_OK=false
       for MATTEMPT in 1 2 3; do
         rm -f "$MR" "$MC"
@@ -108,6 +112,10 @@ for Q in 1 2 3 4; do
       for MO in "${MONTH_LIST[@]}"; do
         MONTH_BASE="fallback_${INST}_m5_${YEAR}_M${MO}"
         MC="dl/chunks/${MONTH_BASE}.csv.gz"
+        if [ ! -s "$MC" ] || ! gzip -t "$MC" >/dev/null 2>&1; then
+          echo "SKIP ABSENT PRE-INCEPTION FALLBACK MONTH: $MONTH_BASE"
+          continue
+        fi
         if [ "$FIRST_MONTH" = "true" ]; then
           gzip -cd "$MC" > "$QR"
           FIRST_MONTH=false

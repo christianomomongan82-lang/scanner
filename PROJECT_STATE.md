@@ -426,3 +426,8 @@ Official baseline dari canonical `research/R191_CANONICAL_index_trend_long.py` p
 
 - The revised retry job revealed a persistent HTTP 503 from Dukascopy for usa30idxusd M5 2020 Q4 across four quarter-level requests. Quarterly retrieval now falls back to month-sized requests from the same BID source, concatenated without synthesized bars. Failed months remain a hard data-preparation stop.
 - Run 40099342928 is the first retry-policy attempt and is not a strategy verdict; Gate 1 passed, but at least one instrument download stopped at the source layer. The monthly fallback is being added before the next retry.
+
+
+### R330 — guard monthly fallback at the known source-history boundary (2026-10-24)
+
+- Monthly fallback now honors the preregistered USSC2000 inception date (2018-08-08), skipping only pre-inception months instead of attempting to download or synthesize them. Existing coverage requirements after inception remain unchanged.

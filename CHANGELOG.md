@@ -60,3 +60,9 @@
 - The first retry-policy run reached USA30 year 2020 but Dukascopy returned HTTP 503 for the 2020 Q4 M5 request across all four quarterly attempts. This is a source endpoint error, distinct from a strategy-test failure.
 - Added a fallback that requests the same BID M5 source as three separate months for a failed quarter, each with bounded retries, then concatenates those monthly files into the same quarterly archive format. If any month cannot be retrieved, the instrument still fails preflight; no prices or bars are synthesized. Temporary fallback files are excluded from annual chunk globbing and removed only after the quarter is successfully reconstructed.
 - No strategy calculation, dataset universe, required years/quarters, baseline, cost model, locked gate, or challenge criterion changed.
+
+
+## 2026-10-24 — Preserve the USSC2000 pre-inception exception during monthly fallback
+
+- Added the source-history boundary check inside monthly fallback and skip logic when merging months with no source history. This prevents a failed 2018 Q3 quarter from treating USSC2000 July 2018 as a required month; Aug/Sep remain eligible from the documented 2018-08-08 inception date.
+- All other instrument/year completeness checks remain strict. Missing required data after the known source start still stops the run. No strategy logic or performance gate changed.
