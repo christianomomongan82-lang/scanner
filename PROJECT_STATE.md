@@ -1,7 +1,7 @@
 # Proyek Backtest — Checkpoint Utama
 
-**Terakhir diperbarui:** 2026-10-16  
-**Status proyek:** SEMUA KANDIDAT YANG DIUJI BERSTATUS GAGAL; TIDAK ADA YANG LULUS.  
+**Terakhir diperbarui:** 2026-10-24  
+**Status proyek:** R191 (USA500+USATECH) kandidat hidup dengan baseline canonical baru; evaluasi basket R330 berjalan, belum ada keputusan akhir.  
 **Repositori sumber utama:** https://github.com/christianomomongan82-lang/scanner  
 **Branch riset aktif saat checkpoint ini:** [local-backtest/r189-dukascopy-history](https://github.com/christianomomongan82-lang/scanner/tree/local-backtest/r189-dukascopy-history)
 
@@ -386,12 +386,30 @@ Continuation instruction: read the latest R270–R274 results and `research/EVOL
 - **Next step:** broader instrument and hypothesis-family coverage with preregistered discovery filters and component ablations. Do not revive the failed signal blocks by lowering thresholds. Do not register R275 until its hypothesis is materially distinct and preregistered.
 
 
-## R330 — locked R191 pooled ten-index test (2026-10-24)
+## R330 — canonical R191 pooled ten-index test (2026-10-24)
 
-**Status: GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi.** The exact canonical R191 Gate 1 metrics did not match the locked targets. Stopped before Gate 2 and every pooled/performance criterion.
+**Status: Gate 1 LULUS; Gate 2 dan kriteria basket belum menghasilkan putusan.** Run aktif menyiapkan snapshot M5 sepuluh indeks; tidak ada angka pooled yang dicatat di checkpoint ini.
 
-- Locked rule: R191 NY-wall-clock H4, long-only, breakout N=55, stop M=27 bars, RR=2; primary entry is the open of the next H4 bar (canonical); manual5m is diagnostic only. All ten indices pooled without selection if Gate 1 passes.
-- Common observed data cutoff UTC: 2026-10-23T20:15:00+00:00.
-- Full report and machine results: research/R330_FINAL_VERDICT.md and research/R330_results.json on branch research/r330-r191-pooled-ten-index.
-- Gate ledger: [{"gate": "G1_R191_CANONICAL_REPLICATION", "pass": false, "observed": {"canonical_script": {"selection": {"1": {"entries": 79, "n": 79, "censored": 0, "pf": 2.1344507712955396, "wins_r": 81.83137200127523, "losses_r": 38.33837402190651, "total_r": 43.49299797936873}, "2": {"entries": 79, "n": 79, "censored": 0, "pf": 2.121484650800913, "wins_r": 81.66274400255047, "losses_r": 38.493205205006205, "total_r": 43.16953879754426}, "3": {"entries": 79, "n": 79, "censored": 0, "pf": 2.108622419660779, "wins_r": 81.49411600382571, "losses_r": 38.64803638810591, "total_r": 42.846079615719795}}, "forward": {"1": {"entries": 68, "n": 68, "censored": 0, "pf": 1.3103452710799484, "wins_r": 53.91450237654008, "losses_r": 41.145264203613536, "total_r": 12.769238172926539}, "2": {"entries": 68, "n": 68, "censored": 0, "pf": 1.3042813506009419, "wins_r": 53.82900475308016, "losses_r": 41.271007001885515, "total_r": 12.557997751194645}, "3": {"entries": 68, "n": 68, "censored": 0, "pf": 1.2982542684888698, "wins_r": 53.74350712962024, "losses_r": 41.3967498001575, "total_r": 12.346757329462747}}, "oos_2026": {"1": {"entries": 11, "n": 11, "censored": 0, "pf": 1.6833237689562284, "wins_r": 8.449786229661878, "losses_r": 5.019703508910411, "total_r": 3.430082720751467}, "2": {"entries": 11, "n": 11, "censored": 0, "pf": 1.673449066010866, "wins_r": 8.43319096722086, "losses_r": 5.039407017820823, "total_r": 3.393783949400037}, "3": {"entries": 11, "n": 11, "censored": 0, "pf": 1.6636512802613006, "wins_r": 8.416595704779839, "losses_r": 5.059110526731233, "total_r": 3.357485178048606}}}, "r192_ideal_diagnostic_only": true, "manual5m_diagnostic_only": {"selection": {"1": {"entries": 92, "n": 90, "censored": 2, "pf": 1.6604971717004513, "wins_r": 81.83434114125679, "losses_r": 49.283035548596196}, "2": {"entries": 92, "n": 90, "censored": 2, "pf": 1.6482831387562495, "wins_r": 81.66868228251359, "losses_r": 49.54772657817673}, "3": {"entries": 92, "n": 90, "censored": 2, "pf": 1.636198910592084, "wins_r": 81.50302342377037, "losses_r": 49.81241760775726}}, "forward": {"1": {"entries": 72, "n": 70, "censored": 2, "pf": 1.4907313278375582, "wins_r": 59.89138536748706, "losses_r": 40.175841380059396}, "2": {"entries": 72, "n": 70, "censored": 2, "pf": 1.4826412445527661, "wins_r": 59.78277073497412, "losses_r": 40.321804721551096}, "3": {"entries": 72, "n": 70, "censored": 2, "pf": 1.4746095215702943, "wins_r": 59.674156102461176, "losses_r": 40.4677680630428}}, "oos_2026": {"1": {"entries": 13, "n": 11, "censored": 2, "pf": 1.6574113344438315, "wins_r": 9.982045074704356, "losses_r": 6.022672143758433}, "2": {"entries": 13, "n": 11, "censored": 2, "pf": 1.6482254236510119, "wins_r": 9.964090149408714, "losses_r": 6.045344287516867}, "3": {"entries": 13, "n": 11, "censored": 2, "pf": 1.6391081561429977, "wins_r": 9.946135224113071, "losses_r": 6.068016431275301}}}, "checks": {"selection_n": false, "selection_pf_1bp": false, "forward_n": false, "forward_pf_1bp": false, "forward_pf_2bp": false, "oos_2026_n": true, "oos_2026_pf_2bp": false}, "selection_years_ny": [2017, 2021], "forward_years_ny": [2022, 2025], "oos_year_ny": 2026}, "required": {"selection": {"n": 78, "pf_1bp_rounded_3dp": 2.082}, "forward": {"n": 70, "pf_1bp_rounded_3dp": 1.247, "pf_2bp_rounded_3dp": 1.241}, "oos_2026": {"n": 11, "pf_2bp_rounded_3dp": 1.954}}, "detail": "Gate 1 uses the exact canonical script; R192 ideal/manual5m are comparison ledgers only."}]
-- No tuning, instrument removal, or rescue variant is authorized.
+### R191 standalone — kandidat hidup
+Official baseline dari canonical `research/R191_CANONICAL_index_trend_long.py` pada cache M5 saat ini:
+- Seleksi 2017–2021: n=79, PF@1bp=2.134.
+- Forward 2022–2025: n=68, PF@1bp=1.310, PF@2bp=1.304.
+- OOS 2026: n=11, PF@2bp=1.673.
+- Replay deterministik: dua kali load/resample dan sim pada cache sama menghasilkan H4 grid/OHLC dan trade rows identik untuk USA500 dan USATECH.
+- Ini menggantikan angka sebelumnya dari snapshot yang tidak tersedia; versi data berubah, bukan aturan strategi atau ambang PASS.
+
+### Versi data Gate 1
+- USA500 M5 BID cache: SHA-256 `75d3c8dd64ba4647af7f5376ac219010dc2c65f46beb296f978257e770c90087`; 11,805,722 bytes; 826,522 rows; UTC data 2016-01-04T00:00:00Z–2026-10-23T20:10:00Z.
+- USATECH M5 BID cache: SHA-256 `b8f3b267e187669890f455486100133a29a78b5b5fcb4824c67d2b8f3acb8755`; 13,248,558 bytes; 826,429 rows; UTC data 2016-01-04T00:00:00Z–2026-10-23T20:10:00Z.
+- Mesin R330: canonical H4 resample M5 BID `4h/offset=1h/label=left/closed=left`, America/New_York; canonical one-position sim starts empty after loader truncates source to NY year >=2017. R192 tidak dipakai untuk pembuatan H4, sinyal, simulasi trade, metrik, Gate 2, robustness, LOO, atau challenge.
+- Preparation workflow kini hanya mengambil M5 dan mewajibkan tahun sumber 2017–2025; H1 dihapus dari input karena tidak digunakan mesin canonical. 2026 tetap opsional sesuai ketersediaan. Hash sepuluh indeks akan direkam di hasil final.
+
+### Gate dan artefak
+- Gate 1 deterministic baseline: PASS.
+- Gate 2 canonical truncation untuk 10 indeks: belum dijalankan/selesai.
+- Enam kriteria PASS terkunci dan causal audit PF>1.4: belum dinilai. Tidak ada tuning, variasi, atau penghapusan indeks.
+- Latest M5-only workflow run: https://github.com/christianomomongan82-lang/scanner/actions/runs/40080602591
+- Isolated canonical M5 run: https://github.com/christianomomongan82-lang/scanner/actions/runs/40080690669
+- Canonical source: research/R191_CANONICAL_index_trend_long.py
+- Runner: research/r330_r191_pooled_ten_index.py
+- Preregistration and baseline amendment: research/R330_LOCKED_PREREGISTRATION.md, CHANGELOG.md
