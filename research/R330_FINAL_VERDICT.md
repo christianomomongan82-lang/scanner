@@ -20,7 +20,11 @@ Observed raw PF: 1.490731327838. The archived trade ledger contains 72 forward e
 - Pooled forward n/PF, discovery PF, worst-year PF, N=40/55/80 neighborhood, leave-one-out, challenge simulator, correlation/overlap exposure, and causal path audit: **NOT RUN** in this R330 round.
 - No 2026 OOS performance or challenge bootstrap results are reported. No index was excluded, and no parameter was changed.
 
-The archived PF above is greater than 1.4; however, it belongs to the failed replication preflight, not a validated pooled candidate. A full OHLC path audit was not executed before the hard stop and must not be inferred to have passed. The required reproduction did not match.
+The archived PF above is greater than 1.4; however, it belongs to the failed replication preflight, not a validated pooled candidate.
+
+A **ledger-only consistency audit** of all 70 forward USA500/USATECH trades passed these checks: exact M5 entry timestamp; entry at least five minutes after signal close; risk points equal entry minus SL; TP equals entry + 2R; exit not before entry; TP/SL exit price matches the stored level; and gap-stop fills are at or below the stop. The recorded exits were 38 SL, 30 TP, and 2 SL-gap fills.
+
+This is **not a full causality pass**: the archived artifact does not contain raw OHLC, so it cannot independently establish that the SL equals the trailing 27-H4-bar low or that the recorded exit was the first causal M5 stop/target hit. The corrected Actions runner includes this full path audit when PF > 1.4 and still hard-stops at Gate 1 if the replication mismatch remains. The required reproduction does not match.
 
 ## Decision
 

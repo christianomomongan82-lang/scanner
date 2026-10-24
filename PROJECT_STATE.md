@@ -385,10 +385,13 @@ Continuation instruction: read the latest R270–R274 results and `research/EVOL
 - Data/entry/exit integrity controls are reusable implementation blocks, not alpha. No R270–R274 signal block is established as a positive edge. Row-level ledgers were generated locally but not uploaded; reports/compact JSON and the R273/R274 runners are stored in the research branch.
 - **Next step:** broader instrument and hypothesis-family coverage with preregistered discovery filters and component ablations. Do not revive the failed signal blocks by lowering thresholds. Do not register R275 until its hypothesis is materially distinct and preregistered.
 
+
 ## R330 — locked R191 pooled ten-index test (2026-10-24)
 
-**Verdict: REJECT at Gate 1.** The existing persisted R194 manual5m trade ledger gives USA500+USATECH forward n=70 but PF@1bp=1.491, not the required 1.247. The count matches; the PF reproduction fails. The round was stopped without running truncation, pooled performance, robustness, leave-one-out, correlations/overlap, or challenge simulation.
+**Verdict: REJECT at Gate 1.** The persisted R194 manual5m trade ledger gives USA500+USATECH forward n=70 but PF@1bp=1.491, not the required 1.247. The closed-trade count matches; the PF reproduction does not. No pooled strategy metrics, Gate 2, neighborhood, LOO, or challenge simulator were run after the hard stop.
 
-- Evidence: [R194 Actions run 38133085545](https://github.com/christianomomongan82-lang/scanner/actions/runs/38133085545), artifact `R194-ten-index-audit` (ID 11700178416), common cutoff 2026-10-09T20:00:00Z.
+- Reference evidence: [R194 Actions run 38133085545](https://github.com/christianomomongan82-lang/scanner/actions/runs/38133085545), artifact `R194-ten-index-audit` (ID 11700178416), common cutoff 2026-10-09T20:00:00Z.
+- Ledger consistency checks passed for 70/70 records (M5 entry timestamp/delay, risk=entry-SL, RR2, exit ordering and recorded exit-price relations). Full causal path audit against raw OHLC is not established by the archived trade ledger.
+- Actions attempts: initial run cancelled during preparation; subsequent run failed on a cache restore-key count limit; the corrected workflow now allows nine restore prefixes and the latest run is preparing source snapshots for the PF>1.4 full OHLC audit.
 - Full record: `research/R330_results.json` and `research/R330_FINAL_VERDICT.md` on branch `research/r330-r191-pooled-ten-index`.
-- No instrument removal, parameter tuning or rescue variant is authorized after this rejection.
+- No parameter tuning, instrument removal or rescue variant is authorized after this rejection.

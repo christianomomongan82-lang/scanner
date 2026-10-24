@@ -68,5 +68,31 @@
     "No instrument removed or selected.",
     "No parameter tuning or replacement variant.",
     "G1 mismatch is REJECT under preregistered decision rule."
-  ]
+  ],
+  "ledger_consistency_audit": {
+    "status": "PARTIAL_PASS; full causal path audit not yet verified",
+    "source": "Persisted R194 trades.csv only; no raw OHLC bars exist in that artifact.",
+    "trades_checked": 70,
+    "checks": {
+      "entry_timestamp_exact_m5_all": true,
+      "entry_at_least_five_minutes_after_signal_close_all": true,
+      "risk_points_equal_entry_minus_sl_all": true,
+      "tp_equals_entry_plus_2R_all": true,
+      "exit_time_not_before_entry_all": true,
+      "TP_exit_price_equals_target_all": true,
+      "SL_exit_price_equals_stop_all": true,
+      "gap_stop_fills_at_or_below_stop_all": true
+    },
+    "delay_minutes": {
+      "min": 5,
+      "max": 65
+    },
+    "exit_reasons": {
+      "SL": 38,
+      "TP": 30,
+      "SL_GAP_OPEN": 2
+    },
+    "limitation": "Ledger consistency does not independently verify that the recorded SL equals the trailing 27-H4-bar low or that each exit is the first causal M5 stop/target hit. The PF>1.4 full OHLC path audit remains unverified; the corrected Actions runner performs that diagnostic before stopping at a Gate 1 mismatch.",
+    "pass": false
+  }
 }
