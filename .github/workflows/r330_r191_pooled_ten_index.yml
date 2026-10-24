@@ -78,6 +78,18 @@ jobs:
                 continue
               fi
 
+              if [ "$TF" = "m5" ]; then
+                if bash research/download_m5_year_quarters.sh "$INST" "$YEAR" "$CHUNK"; then
+                  continue
+                elif [ "$YEAR" -le 2018 ] || [ "$YEAR" -eq 2026 ]; then
+                  echo "OPTIONAL M5 HISTORY INCOMPLETE: $INST $YEAR; continue without this chunk."
+                  continue
+                else
+                  echo "ERROR: required M5 annual chunk unavailable after quarterly attempts: $BASE"
+                  exit 1
+                fi
+              fi
+
               NEXT=$((YEAR + 1))
               FROM="${YEAR}-01-01"
               if [ "$YEAR" -eq 2026 ]; then TO="now"; else TO="${NEXT}-01-01"; fi
@@ -327,6 +339,18 @@ jobs:
               if [ -s "$CHUNK" ] && gzip -t "$CHUNK" >/dev/null 2>&1; then
                 echo "CHUNK CACHE HIT: $BASE"
                 continue
+              fi
+
+              if [ "$TF" = "m5" ]; then
+                if bash research/download_m5_year_quarters.sh "$INST" "$YEAR" "$CHUNK"; then
+                  continue
+                elif [ "$YEAR" -le 2018 ] || [ "$YEAR" -eq 2026 ]; then
+                  echo "OPTIONAL M5 HISTORY INCOMPLETE: $INST $YEAR; continue without this chunk."
+                  continue
+                else
+                  echo "ERROR: required M5 annual chunk unavailable after quarterly attempts: $BASE"
+                  exit 1
+                fi
               fi
 
               NEXT=$((YEAR + 1))
