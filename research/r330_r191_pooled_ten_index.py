@@ -477,15 +477,24 @@ def main():
                 if c is not None and c.get("signal_bar_utc"):
                     cs=pd.Timestamp(c["signal_bar_utc"]).tz_convert("UTC")
                     ci=int(cidx.get_indexer([cs])[0])
+                    entry_boundary=pd.Timestamp(c["entry_time_utc"]).tz_convert("UTC")
+                    close_values=pd.DatetimeIndex(rh["bar_close_utc"]).tz_convert("UTC")
+                    close_matches=np.flatnonzero(close_values.asi8==entry_boundary.value)
+                    close_ri=int(close_matches[0]) if len(close_matches) else -1
+                    r_start_ri=int(ridx.get_indexer([cs])[0])
+                    r_entry_ri=int(ridx.get_indexer([entry_boundary])[0])
                     diag["bar_grid_checks"]={
-                        "canonical_signal_label_exists_in_r192_grid":bool(cs.value in rlabels),
-                        "canonical_entry_label_exists_in_r192_grid":bool(pd.Timestamp(c["entry_time_utc"]).tz_convert("UTC").value in rlabels),
-                        "canonical_signal_label_exists_in_canonical_grid":bool(cs.value in clabels)}
+                        "canonical_signal_label_exists_in_r192_grid":r_start_ri>=0,
+                        "canonical_entry_label_exists_in_r192_grid":r_entry_ri>=0,
+                        "canonical_signal_label_exists_in_canonical_grid":ci>=0,
+                        "r192_bar_closing_at_canonical_entry_boundary_exists":close_ri>=0,
+                        "canonical_signal_close_boundary_utc":entry_boundary.isoformat(),
+                        "r192_nearest_labels_utc":[pd.Timestamp(x).isoformat() for x in ridx[max(0,ridx.searchsorted(cs)-2):min(len(ridx),ridx.searchsorted(cs)+3)]]}
                     if ci>=0:
                         cb=ch.iloc[ci]
                         c_prev_hi=float(ch.high.iloc[ci-CFG["breakout"]:ci].max()) if ci>=CFG["breakout"] else None
                         c_sl=float(stop_c[ci]) if math.isfinite(float(stop_c[ci])) else None
-                        cclose=pd.Timestamp(ch.index[ci+1]).tz_convert("UTC") if ci+1<len(ch) else None
+                        cclose=entry_boundary
                         ce_idx=ci+1
                         c_ep=float(ch.open.iloc[ce_idx]) if ce_idx<len(ch) else None
                         c_risk=(c_ep-c_sl) if c_ep is not None and c_sl is not None else None
@@ -493,43 +502,47 @@ def main():
                             "signal_label_utc":cs.isoformat(),"canonical_signal":bool(sig_c[ci]),
                             "canonical_signal_close":float(ch.close.iloc[ci]),
                             "canonical_prior_55bar_high":c_prev_hi,"canonical_sl_27bar_low":c_sl,
-                            "canonical_next_h4_open_time_utc":cclose.isoformat() if cclose is not None else None,
+                            "canonical_next_h4_open_time_utc":cclose.isoformat(),
                             "canonical_next_h4_open":c_ep,"canonical_risk":c_risk}
-                        if cs.value in rlabels:
-                            ri=int(ridx.get_indexer([cs])[0])
+                        # Compare R192 bars using the same signal-close boundary, not ordinal trade timestamps.
+                        # Its H4 labels and canonical H4 labels can differ, so close-boundary matching is primary.
+                        if close_ri>=0:
+                            ri=close_ri
                             rb=rh.iloc[ri]
                             r_prev_hi=float(rh.high.iloc[ri-CFG["breakout"]:ri].max()) if ri>=CFG["breakout"] else None
                             r_sl=float(stop_r[ri]) if math.isfinite(float(stop_r[ri])) else None
                             rclose=pd.Timestamp(rh["bar_close_utc"].iloc[ri]).tz_convert("UTC")
                             r_ep=float(rh.open.iloc[ri+1]) if ri+1<len(rh) else None
                             r_risk=(r_ep-r_sl) if r_ep is not None and r_sl is not None else None
-                            candidate.update({"r192_signal":bool(sig_r[ri]),
+                            candidate.update({"r192_signal_label_ny":pd.Timestamp(rh.index[ri]).isoformat(),
+                                "r192_signal_label_utc":pd.Timestamp(rh.index[ri]).tz_convert("UTC").isoformat(),
+                                "r192_signal":bool(sig_r[ri]),
                                 "r192_signal_close_utc":rclose.isoformat(),
                                 "r192_signal_close":float(rh.close.iloc[ri]),
                                 "r192_prior_55bar_high":r_prev_hi,"r192_sl_27bar_low":r_sl,
                                 "r192_next_h4_open_time_utc":pd.Timestamp(rh.index[ri+1]).tz_convert("UTC").isoformat() if ri+1<len(rh) else None,
                                 "r192_next_h4_open":r_ep,"r192_risk":r_risk,
-                                "same_signal_bar_ohlc_equal":bool(all(math.isclose(float(cb[q]),float(rb[q]),rel_tol=0,abs_tol=1e-8)
+                                "same_signal_close_bar_ohlc_equal":bool(all(math.isclose(float(cb[q]),float(rb[q]),rel_tol=0,abs_tol=1e-8)
                                     for q in ("open","high","low","close"))),
-                                "same_signal_bar_ohlc":{"canonical_M5_resample":{q:float(cb[q]) for q in ("open","high","low","close")},
+                                "same_signal_close_bar_ohlc":{"canonical_M5_resample":{q:float(cb[q]) for q in ("open","high","low","close")},
                                     "r192_H1_wall_clock":{q:float(rb[q]) for q in ("open","high","low","close")}}})
-                            if rclose is not None:
-                                occupied=[]
-                                for tr in [t for t in rep if t["instrument"]==inst]:
-                                    ent=pd.Timestamp(tr["entry_time_utc"]).tz_convert("UTC")
-                                    ex=pd.Timestamp(tr["exit_time_utc"]).tz_convert("UTC") if tr.get("exit_time_utc") else None
-                                    if ent<rclose and (ex is None or ex>=rclose):
-                                        occupied.append(tr)
-                                if occupied:
-                                    tr=max(occupied,key=lambda z:pd.Timestamp(z["entry_time_utc"]).value)
-                                    blocker={"entry_time_utc":pd.Timestamp(tr["entry_time_utc"]).tz_convert("UTC").isoformat(),
-                                        "entry_time_ny":pd.Timestamp(tr["entry_time_utc"]).tz_convert("America/New_York").isoformat(),
-                                        "entry":float(tr["entry"]),"sl":float(tr["sl"]),"risk_points":float(tr["risk_points"]),
-                                        "exit_time_utc":pd.Timestamp(tr["exit_time_utc"]).tz_convert("UTC").isoformat() if tr.get("exit_time_utc") else None,
-                                        "exit_time_ny":pd.Timestamp(tr["exit_time_utc"]).tz_convert("America/New_York").isoformat() if tr.get("exit_time_utc") else None,
-                                        "reason":tr.get("reason"),
-                                        "opened_before_2017_NY":bool(pd.Timestamp(tr["entry_time_utc"]).tz_convert("America/New_York").year<2017),
-                                        "still_active_at_signal_close":True}
+                    # A R192 position can block the candidate even if the label grid does not match exactly.
+                    occupied=[]
+                    for tr in [t for t in rep if t["instrument"]==inst]:
+                        ent=pd.Timestamp(tr["entry_time_utc"]).tz_convert("UTC")
+                        ex=pd.Timestamp(tr["exit_time_utc"]).tz_convert("UTC") if tr.get("exit_time_utc") else None
+                        if ent<entry_boundary and (ex is None or ex>=entry_boundary):
+                            occupied.append(tr)
+                    if occupied:
+                        tr=max(occupied,key=lambda z:pd.Timestamp(z["entry_time_utc"]).value)
+                        blocker={"entry_time_utc":pd.Timestamp(tr["entry_time_utc"]).tz_convert("UTC").isoformat(),
+                            "entry_time_ny":pd.Timestamp(tr["entry_time_utc"]).tz_convert("America/New_York").isoformat(),
+                            "entry":float(tr["entry"]),"sl":float(tr["sl"]),"risk_points":float(tr["risk_points"]),
+                            "exit_time_utc":pd.Timestamp(tr["exit_time_utc"]).tz_convert("UTC").isoformat() if tr.get("exit_time_utc") else None,
+                            "exit_time_ny":pd.Timestamp(tr["exit_time_utc"]).tz_convert("America/New_York").isoformat() if tr.get("exit_time_utc") else None,
+                            "reason":tr.get("reason"),
+                            "opened_before_2017_NY":bool(pd.Timestamp(tr["entry_time_utc"]).tz_convert("America/New_York").year<2017),
+                            "still_active_at_signal_close":True}
                 diag["same_signal_candidate_in_r192_h4"]=candidate
                 diag["r192_position_blocker_at_candidate_signal_close"]=blocker
                 causes=[]
