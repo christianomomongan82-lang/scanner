@@ -42,5 +42,6 @@
 ## 2026-10-24 — Bound R330 M5 download stalls
 
 - Added a 90-second timeout per Dukascopy quarterly M5 request and reduced retries to two attempts. This prevents a hung vendor request from occupying a preparation job indefinitely.
+- Before retrying a quarterly request, removes both the partial CSV and stale compressed output so a corrupt archive cannot prevent future successful retries.
 - Failed requests still fail the required instrument/year job; no missing data is silently treated as a pass or instrument exclusion. The only intentionally absent period remains USSC2000 before the documented 2018-08-08 source-history start.
 - This is data-acquisition reliability only; canonical engine, locked periods, six PASS criteria, challenge rules and causal audit thresholds are unchanged.
