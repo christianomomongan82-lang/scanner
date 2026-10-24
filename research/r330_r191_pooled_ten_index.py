@@ -352,10 +352,11 @@ def correlations(trades,start,end):
 def main():
     import argparse
     ap=argparse.ArgumentParser()
-    ap.add_argument("--data-dir",default="dl"); ap.add_argument("--out",default="research")
+    ap.add_argument("--data-dir",default="dl"); ap.add_argument("--out",default="research"); ap.add_argument("--gate1-only",action="store_true")
     a=ap.parse_args(); data_dir=Path(a.data_dir); out=Path(a.out); out.mkdir(parents=True,exist_ok=True)
     h1s={}; m5s={}; h4s={}; meta={}
-    for inst,name in ASSETS.items():
+    load_assets=ASSETS if not a.gate1_only else {k:ASSETS[k] for k in ("usa500idxusd","usatechidxusd")}
+    for inst,name in load_assets.items():
         hp=data_dir/f"{inst}_h1.csv.gz"; mp=data_dir/f"{inst}_m5.csv.gz"
         if not hp.is_file() or not mp.is_file(): raise SystemExit(f"HARD STOP: missing cache for {inst}: {hp} / {mp}")
         h1,d1=parse_data(hp); m5,d2=parse_data(mp); h4,diag=build_h4(h1,pd.Timestamp.now(tz="UTC"))
@@ -529,6 +530,24 @@ def main():
         print("FIRST TRADE DIFFERENCE:",json.dumps(clean(first_diff),ensure_ascii=False),flush=True)
         raise SystemExit(2)
     print("G1 PASS: exact canonical reference metrics match to three decimals.",flush=True)
+    if a.gate1_only:
+        headline="Canonical Gate 1 matched every locked target to three decimals. This preflight intentionally stops here; the full ten-index suite may now run."
+        result={"experiment":"R330","verdict":"GATE1_PASS","stopped_at":"G1 preflight only",
+            "gate1":gr1,"gate1_canonical_observed":gate1_observed,"gate1_manual5m_diagnostic":gate1_manual,
+            "gate1_expected":expected_gate1,"gate1_checks":gate1_checks,
+            "remaining_criteria_status":"NOT_RUN_IN_GATE1_PREFLIGHT",
+            "canonical_source":"research/R191_CANONICAL_index_trend_long.py","data":meta,"headline":headline}
+        dump(out/"R330_results.json",result)
+        rows=[]
+        for phase,(ya,yb) in canonical_years.items():
+            c=gate1_observed[phase]
+            rows.append({"phase":phase,"years_ny":f"{ya}-{yb}","canonical_n":c["1"]["n"],
+                "canonical_pf_1bp":c["1"]["pf"],"canonical_pf_2bp":c["2"]["pf"],"canonical_pf_3bp":c["3"]["pf"],
+                "expected_n":expected_gate1[phase]["n"],"expected_pf_1bp":expected_gate1[phase].get("pf_1bp_rounded_3dp"),
+                "expected_pf_2bp":expected_gate1[phase].get("pf_2bp_rounded_3dp")})
+        (out/"R330_FINAL_VERDICT.md").write_text("# R330 — CANONICAL GATE 1 PASSED; full suite pending\n\n"+headline+"\n\n"+pd.DataFrame(rows).to_markdown(index=False)+"\n",encoding="utf-8")
+        print("R330 GATE1-ONLY PASS: stopped before Gate 2 by preflight mode.",flush=True)
+        return
 
     # Hard gate 2: all ten instruments pass N=55 truncation before any ten-index metrics.
     trunc={}
