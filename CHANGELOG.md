@@ -20,3 +20,12 @@
 - The first fresh Gate 1 attempt (run 40064140080) stopped before the backtest because annual M5 data download for USA500 2023 failed with Dukascopy HTTP 504/400 errors; no Gate 1 metric from that run was produced.
 - Added resumable quarterly M5 downloads and annual snapshot reconstruction in `research/download_m5_year_quarters.sh`, used by both R330 data-preparation stages. The analysis input format and strategy logic are unchanged.
 - Current retry run: [40073656843](https://github.com/christianomomongan82-lang/scanner/actions/runs/40073656843). At the time of this entry, USA500 cache preparation was still in progress; no fresh canonical Gate 1 verdict is claimed yet.
+
+
+## 2026-10-24 — R330 official canonical baseline/data-version amendment
+
+- Superseded the unavailable prior-snapshot Gate 1 targets (n=78/70/11 and PF 2.082/1.247/1.954) with the canonical results reproduced on the current M5 cache: selection n=79/PF@1bp=2.134; forward n=68/PF@1bp=1.310/PF@2bp=1.304; OOS 2026 n=11/PF@2bp=1.673.
+- This is a data-cache version/provenance shift, not a change to the R191 entry/signal/SL/TP/sim rules or any locked downstream threshold.
+- Gate 1 now requires two independent canonical load/resample/sim runs against the same cache to produce identical H4 grids/OHLC and trade outputs, and to reproduce every official baseline figure to three decimals.
+- Changed the R330 basket engine to use the exact canonical M5-to-H4 resample and canonical sim for Gate 2, N=40/55/80 robustness, all ten-index metrics and the R191-only challenge comparator. R192 is only a timestamp/CSV loader adapter, not a calculation engine.
+- Recorded M5 per-index SHA-256 data hashes so the baseline is tied to a verifiable cache version. All six downstream PASS criteria and the PF>1.4 causality audit remain unchanged; no tuning or instrument removal was introduced.
