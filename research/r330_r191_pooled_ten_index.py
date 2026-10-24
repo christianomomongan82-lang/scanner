@@ -444,56 +444,121 @@ def main():
     if not repok:
         first_diff=None; per_instrument_diff=[]
         for inst in ("usa500idxusd","usatechidxusd"):
-            cr=sorted([x for x in canonical_trace_rows if x["instrument"]==inst],key=lambda x:x["trade_ordinal"])
-            rr=sorted([x for x in rep if x["instrument"]==inst],key=lambda x:pd.Timestamp(x["entry_time_utc"]).value)
+            # Compare like-for-like post-2017 trade cohorts, matching the canonical loader's
+            # local-year cut. Keep the full R192 ledger separately so pre-period positions remain auditable.
+            cr=sorted([x for x in canonical_trace_rows if x["instrument"]==inst and int(x["entry_year_ny"])>=2017],
+                      key=lambda x:pd.Timestamp(x["entry_time_utc"]).value)
+            rr=sorted([x for x in rep if x["instrument"]==inst and
+                       pd.Timestamp(x["entry_time_utc"]).tz_convert("America/New_York").year>=2017],
+                      key=lambda x:pd.Timestamp(x["entry_time_utc"]).value)
             ch=canonical_h4s[inst]; rh=h4s[inst]
-            clabels=set(pd.DatetimeIndex(ch.index).tz_convert("UTC").asi8.tolist())
-            rlabels=set(pd.DatetimeIndex(rh.index).tz_convert("UTC").asi8.tolist())
+            cidx=pd.DatetimeIndex(ch.index).tz_convert("UTC")
+            ridx=pd.DatetimeIndex(rh.index).tz_convert("UTC")
+            clabels=set(cidx.asi8.tolist()); rlabels=set(ridx.asi8.tolist())
+            sig_r, stop_r=signals_and_stops(rh,CFG)
+            sig_c, stop_c=signals_and_stops(ch,CFG)
             for k in range(max(len(cr),len(rr))):
                 c=cr[k] if k<len(cr) else None; r=rr[k] if k<len(rr) else None
                 fields=[]
-                if c is None or r is None: fields=["trade_presence"]
+                if c is None or r is None:
+                    fields=["trade_presence"]
                 else:
-                    ce=pd.Timestamp(c["entry_time_utc"]); re=pd.Timestamp(r["entry_time_utc"]).tz_convert("UTC")
+                    ce=pd.Timestamp(c["entry_time_utc"]).tz_convert("UTC")
+                    re=pd.Timestamp(r["entry_time_utc"]).tz_convert("UTC")
                     if ce.value!=re.value: fields.append("entry_timestamp")
+                    if not math.isclose(float(c["entry"]),float(r["entry"]),rel_tol=0,abs_tol=1e-8): fields.append("entry_price")
                     if not math.isclose(float(c["sl"]),float(r["sl"]),rel_tol=0,abs_tol=1e-8): fields.append("sl")
                     if not math.isclose(float(c["risk_points"]),float(r["risk_points"]),rel_tol=0,abs_tol=1e-8): fields.append("risk")
-                    if not math.isclose(float(c["entry"]),float(r["entry"]),rel_tol=0,abs_tol=1e-8): fields.append("entry_price")
                 if not fields: continue
-                diag={"instrument":inst,"trade_ordinal_within_instrument":k+1,"different_fields":fields,
-                      "canonical_trade":c,"r192_ideal_trade":r}
-                if c is not None and r is not None:
-                    ce=pd.Timestamp(c["entry_time_utc"]).tz_convert("UTC"); re=pd.Timestamp(r["entry_time_utc"]).tz_convert("UTC")
-                    cs=pd.Timestamp(c["signal_bar_utc"]).tz_convert("UTC") if c["signal_bar_utc"] else pd.NaT
-                    rs=pd.Timestamp(r["signal_bar_utc"]).tz_convert("UTC")
-                    diag["bar_grid_checks"]={"canonical_entry_label_exists_in_r192_grid":bool(ce.value in rlabels),
-                        "r192_entry_label_exists_in_canonical_grid":bool(re.value in clabels),
-                        "canonical_signal_bar_utc":cs.isoformat() if not pd.isna(cs) else None,
-                        "r192_signal_bar_utc":rs.isoformat(),"signal_timestamps_equal":bool(not pd.isna(cs) and cs.value==rs.value)}
-                    if not pd.isna(cs) and cs.value in rlabels and cs.value in clabels:
-                        cb=ch.loc[ch.index.tz_convert("UTC")==cs].iloc[0]; rb=rh.loc[rh.index.tz_convert("UTC")==cs].iloc[0]
-                        diag["same_signal_label_ohlc"]={
-                            "canonical_M5_resample":{"open":float(cb.open),"high":float(cb.high),"low":float(cb.low),"close":float(cb.close)},
-                            "r192_H1_wall_clock":{"open":float(rb.open),"high":float(rb.high),"low":float(rb.low),"close":float(rb.close)},
-                            "ohlc_equal":bool(all(math.isclose(float(cb[q]),float(rb[q]),rel_tol=0,abs_tol=1e-8) for q in ("open","high","low","close")))}
-                    if "entry_timestamp" in fields and (ce.value not in rlabels or re.value not in clabels):
-                        diag["cause_assessment"]="H4 boundary/resampling mismatch confirmed: an entry label is absent from the other H4 label grid."
-                    elif "sl" in fields or "risk" in fields or "entry_price" in fields:
-                        diag["cause_assessment"]="The first differing trade has different entry/SL/risk geometry; the attached same-label OHLC comparison and values identify data/aggregation versus the 27-bar stop window."
-                    elif "entry_timestamp" in fields and not diag["bar_grid_checks"]["signal_timestamps_equal"]:
-                        diag["cause_assessment"]="The signal timestamps diverged at this ordinal; compare H4 signal/bar boundaries and prior-bar highs."
-                    else:
-                        diag["cause_assessment"]="Entry labels exist in both grids; compare the prior trade exit/active state and close-breakout decision. The observed difference is not explained by a missing boundary alone."
-                else:
-                    diag["cause_assessment"]="One stream has no trade at this ordinal; this is a signal/one-position/exit-sequencing divergence, not a PF calculation difference."
+                diag={"instrument":inst,"trade_ordinal_within_instrument_post2017":k+1,
+                      "comparison_window":"entry year >= 2017 in America/New_York",
+                      "different_fields":fields,"canonical_trade":c,"r192_ideal_trade":r}
+                candidate=None; blocker=None
+                if c is not None and c.get("signal_bar_utc"):
+                    cs=pd.Timestamp(c["signal_bar_utc"]).tz_convert("UTC")
+                    ci=int(cidx.get_indexer([cs])[0])
+                    diag["bar_grid_checks"]={
+                        "canonical_signal_label_exists_in_r192_grid":bool(cs.value in rlabels),
+                        "canonical_entry_label_exists_in_r192_grid":bool(pd.Timestamp(c["entry_time_utc"]).tz_convert("UTC").value in rlabels),
+                        "canonical_signal_label_exists_in_canonical_grid":bool(cs.value in clabels)}
+                    if ci>=0:
+                        cb=ch.iloc[ci]
+                        c_prev_hi=float(ch.high.iloc[ci-CFG["breakout"]:ci].max()) if ci>=CFG["breakout"] else None
+                        c_sl=float(stop_c[ci]) if math.isfinite(float(stop_c[ci])) else None
+                        cclose=pd.Timestamp(ch.index[ci+1]).tz_convert("UTC") if ci+1<len(ch) else None
+                        ce_idx=ci+1
+                        c_ep=float(ch.open.iloc[ce_idx]) if ce_idx<len(ch) else None
+                        c_risk=(c_ep-c_sl) if c_ep is not None and c_sl is not None else None
+                        candidate={"signal_label_ny":pd.Timestamp(ch.index[ci]).isoformat(),
+                            "signal_label_utc":cs.isoformat(),"canonical_signal":bool(sig_c[ci]),
+                            "canonical_signal_close":float(ch.close.iloc[ci]),
+                            "canonical_prior_55bar_high":c_prev_hi,"canonical_sl_27bar_low":c_sl,
+                            "canonical_next_h4_open_time_utc":cclose.isoformat() if cclose is not None else None,
+                            "canonical_next_h4_open":c_ep,"canonical_risk":c_risk}
+                        if cs.value in rlabels:
+                            ri=int(ridx.get_indexer([cs])[0])
+                            rb=rh.iloc[ri]
+                            r_prev_hi=float(rh.high.iloc[ri-CFG["breakout"]:ri].max()) if ri>=CFG["breakout"] else None
+                            r_sl=float(stop_r[ri]) if math.isfinite(float(stop_r[ri])) else None
+                            rclose=pd.Timestamp(rh["bar_close_utc"].iloc[ri]).tz_convert("UTC")
+                            r_ep=float(rh.open.iloc[ri+1]) if ri+1<len(rh) else None
+                            r_risk=(r_ep-r_sl) if r_ep is not None and r_sl is not None else None
+                            candidate.update({"r192_signal":bool(sig_r[ri]),
+                                "r192_signal_close_utc":rclose.isoformat(),
+                                "r192_signal_close":float(rh.close.iloc[ri]),
+                                "r192_prior_55bar_high":r_prev_hi,"r192_sl_27bar_low":r_sl,
+                                "r192_next_h4_open_time_utc":pd.Timestamp(rh.index[ri+1]).tz_convert("UTC").isoformat() if ri+1<len(rh) else None,
+                                "r192_next_h4_open":r_ep,"r192_risk":r_risk,
+                                "same_signal_bar_ohlc_equal":bool(all(math.isclose(float(cb[q]),float(rb[q]),rel_tol=0,abs_tol=1e-8)
+                                    for q in ("open","high","low","close"))),
+                                "same_signal_bar_ohlc":{"canonical_M5_resample":{q:float(cb[q]) for q in ("open","high","low","close")},
+                                    "r192_H1_wall_clock":{q:float(rb[q]) for q in ("open","high","low","close")}}})
+                            if rclose is not None:
+                                occupied=[]
+                                for tr in [t for t in rep if t["instrument"]==inst]:
+                                    ent=pd.Timestamp(tr["entry_time_utc"]).tz_convert("UTC")
+                                    ex=pd.Timestamp(tr["exit_time_utc"]).tz_convert("UTC") if tr.get("exit_time_utc") else None
+                                    if ent<rclose and (ex is None or ex>=rclose):
+                                        occupied.append(tr)
+                                if occupied:
+                                    tr=max(occupied,key=lambda z:pd.Timestamp(z["entry_time_utc"]).value)
+                                    blocker={"entry_time_utc":pd.Timestamp(tr["entry_time_utc"]).tz_convert("UTC").isoformat(),
+                                        "entry_time_ny":pd.Timestamp(tr["entry_time_utc"]).tz_convert("America/New_York").isoformat(),
+                                        "entry":float(tr["entry"]),"sl":float(tr["sl"]),"risk_points":float(tr["risk_points"]),
+                                        "exit_time_utc":pd.Timestamp(tr["exit_time_utc"]).tz_convert("UTC").isoformat() if tr.get("exit_time_utc") else None,
+                                        "exit_time_ny":pd.Timestamp(tr["exit_time_utc"]).tz_convert("America/New_York").isoformat() if tr.get("exit_time_utc") else None,
+                                        "reason":tr.get("reason"),
+                                        "opened_before_2017_NY":bool(pd.Timestamp(tr["entry_time_utc"]).tz_convert("America/New_York").year<2017),
+                                        "still_active_at_signal_close":True}
+                diag["same_signal_candidate_in_r192_h4"]=candidate
+                diag["r192_position_blocker_at_candidate_signal_close"]=blocker
+                causes=[]
+                if blocker:
+                    causes.append("One-position state: an R192 position opened before the canonical 2017 start was still active at this signal close; R192 therefore skipped the candidate. Canonical load() truncates source bars to NY year >= 2017 and resets active=-1, so it can take this trade.")
+                if candidate and candidate.get("r192_signal"):
+                    if candidate.get("canonical_next_h4_open") is not None and candidate.get("r192_next_h4_open") is not None and not math.isclose(
+                        float(candidate["canonical_next_h4_open"]),float(candidate["r192_next_h4_open"]),rel_tol=0,abs_tol=1e-8):
+                        causes.append("Data/source aggregation difference at the same next-H4 label: canonical builds OHLC from M5, while R192 builds H4 from H1. The observed next-bar opens differ; this changes entry price and risk.")
+                    if candidate.get("canonical_prior_55bar_high") is not None and candidate.get("r192_prior_55bar_high") is not None and not math.isclose(
+                        float(candidate["canonical_prior_55bar_high"]),float(candidate["r192_prior_55bar_high"]),rel_tol=0,abs_tol=1e-8):
+                        causes.append("The rolling prior-55-bar high differs between M5-derived and H1-derived H4 histories; this is data/aggregation, not the entry timestamp convention.")
+                    if candidate.get("canonical_sl_27bar_low") is not None and candidate.get("r192_sl_27bar_low") is not None and not math.isclose(
+                        float(candidate["canonical_sl_27bar_low"]),float(candidate["r192_sl_27bar_low"]),rel_tol=0,abs_tol=1e-8):
+                        causes.append("The 27-bar stop low differs between the M5-derived and H1-derived H4 histories.")
+                if not diag["bar_grid_checks"].get("canonical_signal_label_exists_in_r192_grid",False):
+                    causes.append("The canonical signal label is absent from R192's H4 grid; this is a true boundary/grid mismatch at this label.")
+                if not causes:
+                    causes.append("The trade streams diverge at this post-2017 ordinal; review the attached signal, rolling-high, stop, next-open and active-position diagnostics. No timezone/boundary cause is inferred without direct evidence.")
+                diag["cause_assessment"]=" ".join(causes)
                 per_instrument_diff.append(diag)
                 if first_diff is None: first_diff=diag
                 break
         dump(out/"R330_G1_first_trade_mismatch.json",{"first_difference":first_diff,
             "first_difference_per_instrument":per_instrument_diff,
-            "comparison_rule":"First ordinal mismatch per instrument on entry timestamp, entry price, SL, risk, or trade presence.",
-            "H4_methods":{"canonical":"M5 OHLC resample 4h offset=1h in America/New_York",
-                "r192_ideal":"R192 H1 explicit NY wall-clock boundaries 01/05/09/13/17/21"}})
+            "comparison_rule":"First ordinal mismatch after filtering both streams to entry year >=2017 in America/New_York; full R192 CSV also retains pre-2017 trades to diagnose active-position carryover.",
+            "H4_methods":{"canonical":"the supplied script: M5 OHLC resample 4h offset=1h, label=left, closed=left, in America/New_York",
+                "r192_ideal":"R192 H1 explicit NY wall-clock boundaries 01/05/09/13/17/21"},
+            "scope":"Gate 1 mismatch only; Gate 2 and all pooled criteria were not run."})
         mismatch_label="GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi"
         headline=("The exact canonical R191 Gate 1 metrics did not match the locked targets. "
                   "Stopped before Gate 2 and every pooled/performance criterion.")
@@ -504,22 +569,24 @@ def main():
                 "canonical_pf_1bp":c["1"]["pf"],"canonical_pf_2bp":c["2"]["pf"],"canonical_pf_3bp":c["3"]["pf"],
                 "expected_n":expected_gate1[phase]["n"],"expected_pf_1bp":expected_gate1[phase].get("pf_1bp_rounded_3dp"),
                 "expected_pf_2bp":expected_gate1[phase].get("pf_2bp_rounded_3dp")})
-        report=("# R330 STATUS — GATE-MISMATCH (entry convention), strategy not evaluated\n\n"
+        report=("# R330 STATUS — GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi\n\n"
             "## Canonical Gate 1 run\n\n"
-            "The supplied canonical source is saved as research/R191_CANONICAL_index_trend_long.py. The H4 resampling, signal, stop, target and sim code are unchanged; only the loader supports the repository M5 CSV.GZ cache. Gate 1 is decided by canonical output, not R192 ideal or manual5m.\n\n"
+            "The canonical source is stored as research/R191_CANONICAL_index_trend_long.py. Strategy code is unchanged; only the loader accepts repository M5 CSV.GZ cache. Gate 1 is decided by canonical output, not R192 ideal or manual5m.\n\n"
             +pd.DataFrame(rows).to_markdown(index=False)+"\n\n"
-            +"## First trade-level divergence\n\n"
-            +("No ordinal trade difference was found even though a reference metric failed; inspect period/cost calculations in both ledgers.\n\n" if first_diff is None else
-              "First mismatch JSON:\n\n"+json.dumps(clean(first_diff),indent=2,ensure_ascii=False)+"\n\n")
+            +"## First post-2017 trade-level divergence\n\n"
+            +("No ordinal trade difference was found; inspect period/cost calculations.\n\n" if first_diff is None else
+              "The comparison below filters the trade streams to entry year >=2017 in New York. The full R192 ledger is still preserved, including pre-2017 trades, because a pre-period position can block a post-period signal.\n\n"
+              +json.dumps(clean(first_diff),indent=2,ensure_ascii=False)+"\n\n")
             +"Full ledgers: research/R330_G1_canonical_trades.csv and research/R330_G1_r192_ideal_trades.csv. Details: research/R330_G1_first_trade_mismatch.json.\n\n"
             +"## Manual5m diagnostic (not used for pass/fail)\n\n"+pd.DataFrame(manual_rows).to_markdown(index=False)+"\n\n"
             +"## Decision\n\n**GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi.** Gate 2 and all pooled criteria are NOT RUN. No pooled PF, neighborhood, leave-one-out, correlation/overlap, or funded challenge simulation was calculated.\n")
         (out/"R330_FINAL_VERDICT.md").write_text(report,encoding="utf-8")
-        result={"experiment":"R330","verdict":"GATE-MISMATCH","stopped_at":"G1_R191_CANONICAL_REPLICATION",
-            "gate1":gr1,"gate1_canonical_observed":gate1_observed,"gate1_manual5m_diagnostic":gate1_manual,
-            "gate1_expected":expected_gate1,"gate1_checks":gate1_checks,"first_trade_mismatch":first_diff,
+        result={"experiment":"R330","verdict":"GATE-MISMATCH","status_label":mismatch_label,
+            "stopped_at":"G1_R191_CANONICAL_REPLICATION","gate1":gr1,"gate1_canonical_observed":gate1_observed,
+            "gate1_manual5m_diagnostic":gate1_manual,"gate1_expected":expected_gate1,
+            "gate1_checks":gate1_checks,"first_trade_mismatch":first_diff,
             "remaining_criteria_status":"NOT_RUN_AFTER_GATE_MISMATCH",
-            "entry_convention_amendment":{"primary":"exact canonical resample/sim and next-H4-open entry","manual5m":"diagnostic only"},
+            "entry_convention_amendment":{"primary":"exact canonical M5-resample/sim; next-H4-open entry","manual5m":"diagnostic only"},
             "canonical_source":"research/R191_CANONICAL_index_trend_long.py",
             "canonical_trade_ledger":"research/R330_G1_canonical_trades.csv","r192_ideal_trade_ledger":"research/R330_G1_r192_ideal_trades.csv",
             "first_trade_difference_file":"research/R330_G1_first_trade_mismatch.json","data":meta}
