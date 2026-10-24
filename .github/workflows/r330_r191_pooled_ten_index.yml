@@ -51,11 +51,8 @@ jobs:
             r200-asset-${{ matrix.instrument }}-
             r199-asset-${{ matrix.instrument }}-
             r198-asset-${{ matrix.instrument }}-
-            r197-asset-${{ matrix.instrument }}-
-            r196-asset-${{ matrix.instrument }}-
             r195-asset-${{ matrix.instrument }}-
             r194-asset-${{ matrix.instrument }}-
-            r194-ten-index-data-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:

@@ -379,10 +379,39 @@ def main():
         {"n":70,"pf_1bp_rounded_3dp":1.247},"USA500 + USATECH, R191, manual5m, cached BID data.")
     print(f"G1 REPLICATION {gr1}",flush=True)
     if not repok:
-        result={"experiment":"R330","verdict":"REJECT","stopped_at":"G1_R191_REPLICATION","gate1":gr1,"replication_metrics":repm,"data":meta}
+        # Explicit user guardrail: any observed PF > 1.4 requires a causality audit,
+        # even when the hard reproduction gate itself fails. This audit is diagnostic
+        # only; it cannot turn a failed Gate 1 into a pass or unlock further metrics.
+        causal=None
+        if finite(repm["pf"]) and float(repm["pf"])>1.4:
+            rep_by_key={(inst,CFG["id"]):[t for t in rep if t.get("instrument")==inst]
+                        for inst in ("usa500idxusd","usatechidxusd")}
+            causal=audit_paths(rep_by_key,h4s,m5s,{CFG["id"]:CFG})
+            causal["required"]=True
+            print(f"G1 PF>1.4 CAUSALITY AUDIT: {causal}",flush=True)
+        else:
+            causal={"required":False,"pass":True,"trades_checked":0,"errors":[],
+                    "detail":"Observed Gate 1 PF did not exceed 1.4."}
+        result={"experiment":"R330","verdict":"REJECT","stopped_at":"G1_R191_REPLICATION",
+                "gate1":gr1,"replication_metrics":repm,"causality_audit":causal,"data":meta,
+                "remaining_criteria_status":"NOT_RUN_AFTER_HARD_STOP"}
         dump(out/"R330_results.json",result)
-        (out/"R330_FINAL_VERDICT.md").write_text("# R330 FINAL VERDICT — REJECT\n\nStopped at Gate 1: R191 reference does not reproduce. No pooled metrics, robustness, leave-one-out or challenge simulation was calculated.\n\nObserved: "+json.dumps(clean(repm),indent=2,ensure_ascii=False)+"\nRequired: n=70 and PF@1bp=1.247 rounded to three decimals.\n",encoding="utf-8")
-        append_state("REJECT at Gate 1",[gr1],common_end,f"Two-index reference mismatch: n={repm['n']}, PF@1bp={repm['pf']}; required n=70 and PF=1.247.")
+        report=("# R330 FINAL VERDICT — REJECT\\n\\n"
+                "Stopped at Gate 1: R191 reference does not reproduce. No pooled metrics,\\n"
+                "truncation gate, neighborhood, leave-one-out, correlation/overlap, or challenge\\n"
+                "simulation was calculated.\\n\\nObserved: "
+                +json.dumps(clean(repm),indent=2,ensure_ascii=False)
+                +"\\nRequired: n=70 and PF@1bp=1.247 rounded to three decimals.\\n\\n"
+                +"## Causality audit triggered by PF > 1.4\\n\\n"
+                +("Result: "+("PASS" if causal.get("pass") else "FAIL")+
+                  "; checked trades="+str(causal.get("trades_checked",0))+".\\n\\n"
+                  +json.dumps(clean(causal.get("errors",[])),indent=2,ensure_ascii=False)
+                  if causal.get("required") else "Not required.\\n"))
+        (out/"R330_FINAL_VERDICT.md").write_text(report,encoding="utf-8")
+        append_state("REJECT at Gate 1",[gr1],common_end,
+            f"Two-index reference mismatch: n={repm['n']}, PF@1bp={repm['pf']}; required n=70 and PF=1.247. "
+            f"PF>1.4 causality audit: {causal.get('pass') if causal.get('required') else 'not required'}; "
+            f"checked trades={causal.get('trades_checked',0)}.")
         raise SystemExit(2)
     print("G1 PASS: reference result matches.",flush=True)
 
