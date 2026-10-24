@@ -1,98 +1,204 @@
 {
   "experiment": "R330",
-  "verdict": "REJECT",
-  "stopped_at": "G1_R191_REPLICATION",
-  "result_basis": "Hard-stop preflight against the existing persisted R194 ten-index baseline artifact. This uses the same manual5m trade stream and the R192 metric/trade_r cost convention; it is not represented as the still-running new Actions job's freshly replayed signal-path output.",
-  "reference_source": {
+  "verdict": "GATE-MISMATCH",
+  "status_label": "GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi",
+  "stopped_at": "G1_R191_CANONICAL_REPLICATION",
+  "gate1_pass": false,
+  "gate1_expected": {
+    "selection": {
+      "n": 78,
+      "pf_1bp_rounded_3dp": 2.082
+    },
+    "forward": {
+      "n": 70,
+      "pf_1bp_rounded_3dp": 1.247,
+      "pf_2bp_rounded_3dp": 1.241
+    },
+    "oos_2026": {
+      "n": 11,
+      "pf_2bp_rounded_3dp": 1.954
+    }
+  },
+  "gate1_observed_from_archived_R194_ledger": {
+    "selection": {
+      "start": "2017-01-01",
+      "end": "2022-01-01",
+      "canonical": {
+        "entries": 89,
+        "n": 87,
+        "censored": 2,
+        "pf1": 1.8514671336158095,
+        "pf2": 1.8378299614928053,
+        "pf3": 1.8243374446151042
+      },
+      "manual5m": {
+        "entries": 92,
+        "n": 90,
+        "censored": 2,
+        "pf1": 1.6604971717004513,
+        "pf2": 1.6482831387562495,
+        "pf3": 1.636198910592084
+      }
+    },
+    "forward": {
+      "start": "2022-01-01",
+      "end": "2026-01-01",
+      "canonical": {
+        "entries": 77,
+        "n": 75,
+        "censored": 2,
+        "pf1": 1.325246611689949,
+        "pf2": 1.318091917926055,
+        "pf3": 1.31098897914714
+      },
+      "manual5m": {
+        "entries": 72,
+        "n": 70,
+        "censored": 2,
+        "pf1": 1.4907313278375587,
+        "pf2": 1.4826412445527661,
+        "pf3": 1.4746095215702943
+      }
+    },
+    "oos_2026": {
+      "start": "2026-01-01",
+      "end": "2026-10-09T20:00:00Z",
+      "canonical": {
+        "entries": 12,
+        "n": 10,
+        "censored": 2,
+        "pf1": 1.9887202686124015,
+        "pf2": 1.9775269974597847,
+        "pf3": 1.9664191962483704
+      },
+      "manual5m": {
+        "entries": 13,
+        "n": 11,
+        "censored": 2,
+        "pf1": 1.657411334443833,
+        "pf2": 1.6482254236510132,
+        "pf3": 1.6391081561429985
+      }
+    }
+  },
+  "gate1_checks": {
+    "selection_n": false,
+    "selection_pf_1bp": false,
+    "forward_n": false,
+    "forward_pf_1bp": false,
+    "forward_pf_2bp": false,
+    "oos_n": false,
+    "oos_pf_2bp": false
+  },
+  "source": {
     "workflow_run_id": 38133085545,
     "workflow_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/38133085545",
     "artifact_id": 11700178416,
     "artifact_name": "R194-ten-index-audit",
-    "archived_common_data_cutoff_utc": "2026-10-09T20:00:00Z",
-    "file_used": "trades.csv",
-    "mode": "manual5m",
-    "instruments": [
-      "usa500idxusd",
-      "usatechidxusd"
-    ]
+    "file": "trades.csv",
+    "common_cutoff_utc": "2026-10-09T20:00:00Z",
+    "method": "Filter existing R194 trades.csv to USA500+USATECH and mode=ideal (the R192 helper's next-H4-open entry), then recompute R192 cost/PF formula. This is the canonical-equivalent check available in the tracked source."
   },
-  "gate1": {
-    "pass": false,
-    "expected": {
-      "forward_closed_n": 70,
-      "pf_1bp_rounded_3dp": 1.247
-    },
-    "observed": {
-      "forward_entries": 72,
-      "forward_closed_n": 70,
-      "censored": 2,
-      "wins_R": 59.891385367487075,
-      "losses_R": 40.175841380059396,
-      "pf_1bp": 1.4907313278375587,
-      "pf_1bp_rounded_3dp": 1.491
-    },
-    "difference_from_expected_pf": 0.24373132783755863,
-    "pf_formula": "sum(positive net R) / abs(sum(negative net R)); net R=(exit-entry-entry*1bp/10000)/risk_points, per research/r192_ger40.py trade_r/metric convention.",
-    "failure_reason": "Closed trade count matches, but PF@1bp does not reproduce the required 1.247 to three decimals."
+  "canonical_script_availability": {
+    "requested": "R191_CANONICAL_index_trend_long.py",
+    "found_in_tracked_repository": false,
+    "found_in_project_files": false,
+    "limitation": "The exact named script was absent from the accessible repo and project files, so this interim result is not claimed to be a run of that exact file. The R192 mode ideal explicitly enters at the next H4 bar open."
   },
-  "gate2": {
-    "status": "NOT_RUN",
-    "reason": "Hard stop after Gate 1 failure; all-ten truncation was not evaluated in this R330 round."
+  "manual5m_diagnostic_only": {
+    "selection": {
+      "start": "2017-01-01",
+      "end": "2022-01-01",
+      "canonical": {
+        "entries": 89,
+        "n": 87,
+        "censored": 2,
+        "pf1": 1.8514671336158095,
+        "pf2": 1.8378299614928053,
+        "pf3": 1.8243374446151042
+      },
+      "manual5m": {
+        "entries": 92,
+        "n": 90,
+        "censored": 2,
+        "pf1": 1.6604971717004513,
+        "pf2": 1.6482831387562495,
+        "pf3": 1.636198910592084
+      }
+    },
+    "forward": {
+      "start": "2022-01-01",
+      "end": "2026-01-01",
+      "canonical": {
+        "entries": 77,
+        "n": 75,
+        "censored": 2,
+        "pf1": 1.325246611689949,
+        "pf2": 1.318091917926055,
+        "pf3": 1.31098897914714
+      },
+      "manual5m": {
+        "entries": 72,
+        "n": 70,
+        "censored": 2,
+        "pf1": 1.4907313278375587,
+        "pf2": 1.4826412445527661,
+        "pf3": 1.4746095215702943
+      }
+    },
+    "oos_2026": {
+      "start": "2026-01-01",
+      "end": "2026-10-09T20:00:00Z",
+      "canonical": {
+        "entries": 12,
+        "n": 10,
+        "censored": 2,
+        "pf1": 1.9887202686124015,
+        "pf2": 1.9775269974597847,
+        "pf3": 1.9664191962483704
+      },
+      "manual5m": {
+        "entries": 13,
+        "n": 11,
+        "censored": 2,
+        "pf1": 1.657411334443833,
+        "pf2": 1.6482254236510132,
+        "pf3": 1.6391081561429985
+      }
+    }
+  },
+  "causality": {
+    "required": true,
+    "status": "NOT_VERIFIED_FROM_ARCHIVED_TRADE_LEDGER",
+    "detail": "PF values exceed 1.4; the old artifact contains a trade ledger but not the source OHLC path needed for a full first-hit audit. The revised R330 runner will run the raw OHLC causal audit before stopping if the canonical preflight is reproduced on loaded data."
   },
   "remaining_criteria": {
-    "pooled_forward_n_and_pf": "NOT_RUN",
-    "pooled_discovery_pf": "NOT_RUN",
-    "worst_forward_year_pf": "NOT_RUN",
+    "gate2_truncation_all_10": "NOT_RUN",
+    "pooled_forward": "NOT_RUN",
+    "pooled_discovery": "NOT_RUN",
+    "worst_forward_year": "NOT_RUN",
     "neighborhood_N40_N55_N80": "NOT_RUN",
     "leave_one_out": "NOT_RUN",
-    "stellar_2step_10000_path_simulation": "NOT_RUN",
-    "correlation_overlap_and_exposure": "NOT_RUN",
-    "causal_trade_path_audit": "NOT_RUN",
-    "reason": "Sequential hard stop at Gate 1. No pooled performance, robustness, LOO or challenge results are being reported as if this round ran them."
+    "stellar_2step_simulation": "NOT_RUN",
+    "correlation_and_overlap": "NOT_RUN"
   },
-  "locked_rule": {
+  "locked_parameters": {
     "timezone": "America/New_York",
     "timeframe": "H4",
-    "direction": "long-only",
-    "breakout_N": 55,
-    "stop_lookback_M": 27,
+    "N": 55,
+    "M": 27,
     "RR": 2,
-    "entry_mode": "first non-flat M5 BID bar at or after signal-close +5 minutes and before next actual NY H4 close",
-    "costs_round_trip_price_bps": [
+    "direction": "long-only",
+    "costs_bps": [
       1,
       2,
       3
     ]
   },
   "guardrails": [
-    "No instrument removed or selected.",
-    "No parameter tuning or replacement variant.",
-    "G1 mismatch is REJECT under preregistered decision rule."
-  ],
-  "ledger_consistency_audit": {
-    "status": "PARTIAL_PASS; full causal path audit not yet verified",
-    "source": "Persisted R194 trades.csv only; no raw OHLC bars exist in that artifact.",
-    "trades_checked": 70,
-    "checks": {
-      "entry_timestamp_exact_m5_all": true,
-      "entry_at_least_five_minutes_after_signal_close_all": true,
-      "risk_points_equal_entry_minus_sl_all": true,
-      "tp_equals_entry_plus_2R_all": true,
-      "exit_time_not_before_entry_all": true,
-      "TP_exit_price_equals_target_all": true,
-      "SL_exit_price_equals_stop_all": true,
-      "gap_stop_fills_at_or_below_stop_all": true
-    },
-    "delay_minutes": {
-      "min": 5,
-      "max": 65
-    },
-    "exit_reasons": {
-      "SL": 38,
-      "TP": 30,
-      "SL_GAP_OPEN": 2
-    },
-    "limitation": "Ledger consistency does not independently verify that the recorded SL equals the trailing 27-H4-bar low or that each exit is the first causal M5 stop/target hit. The PF>1.4 full OHLC path audit remains unverified; the corrected Actions runner performs that diagnostic before stopping at a Gate 1 mismatch.",
-    "pass": false
-  }
+    "No tuning.",
+    "No instrument removal or selection.",
+    "No replacement variant.",
+    "No strategy PASS/FAIL issued from a gate-definition mismatch."
+  ]
 }

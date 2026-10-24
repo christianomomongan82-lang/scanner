@@ -28,3 +28,14 @@ Discovery entries: 2017-01-01 through 2021-12-31, with outcomes closed before 20
 9. If any reported PF exceeds 1.4, perform an independent entry/stop/first-exit causal audit. Audit failure rejects the run.
 
 Any failed criterion means REJECT. After REJECT, do not tune, remove instruments, test rescue variants, or rerun to salvage the result. Store all results and the verdict in research/, and append the outcome to PROJECT_STATE.md. Do not edit scan.py or the scanner workflow.
+
+
+## Amendment — Gate 1 entry convention (2026-10-24)
+
+This amends the definition of Gate 1 only; it does not change any PASS threshold or downstream criterion.
+
+- Canonical mode is entry at the open of the next New York wall-clock H4 bar. The Gate 1 reference targets are: selection n=78/PF@1bp=2.082; forward n=70/PF@1bp=1.247/PF@2bp=1.241; 2026 OOS n=11/PF@2bp=1.954. All comparisons are to three decimals.
+- manual5m is retained as a separate diagnostic table and must never be used for Gate 1 or other PASS/FAIL decisions when canonical is the primary convention.
+- If any canonical reference value fails, stop and report exact observed values. Status must be GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi—not a strategy performance REJECT.
+- The specifically named R191_CANONICAL_index_trend_long.py was not present in the available tracked repository. The R192 ideal mode is the available implementation that opens at the next H4 bar and is explicitly labelled canonical-equivalent if used.
+- All pooled PASS criteria remain exactly as originally locked. No tuning, variant, or instrument removal is allowed after a gate mismatch.

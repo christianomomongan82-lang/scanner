@@ -388,10 +388,9 @@ Continuation instruction: read the latest R270–R274 results and `research/EVOL
 
 ## R330 — locked R191 pooled ten-index test (2026-10-24)
 
-**Verdict: REJECT at Gate 1.** The persisted R194 manual5m trade ledger gives USA500+USATECH forward n=70 but PF@1bp=1.491, not the required 1.247. The closed-trade count matches; the PF reproduction does not. No pooled strategy metrics, Gate 2, neighborhood, LOO, or challenge simulator were run after the hard stop.
+**Status: GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi.** Gate 1 was amended to use canonical next-H4-open entry. The prior manual5m PF of 1.491 is not used to judge canonical replication. The available R192 ideal-mode stream from the persisted R194 ledger does not match the supplied canonical targets (forward observed n=75/PF@1bp=1.325/PF@2bp=1.318; OOS observed n=10/PF@2bp=1.978). The named R191_CANONICAL_index_trend_long.py was not present in the tracked repository or Project files, so this is a canonical-equivalent check and not a run of that exact file.
 
-- Reference evidence: [R194 Actions run 38133085545](https://github.com/christianomomongan82-lang/scanner/actions/runs/38133085545), artifact `R194-ten-index-audit` (ID 11700178416), common cutoff 2026-10-09T20:00:00Z.
-- Ledger consistency checks passed for 70/70 records (M5 entry timestamp/delay, risk=entry-SL, RR2, exit ordering and recorded exit-price relations). Full causal path audit against raw OHLC is not established by the archived trade ledger.
-- Actions attempts: initial run cancelled during preparation; subsequent run failed on a cache restore-key count limit; the corrected workflow now allows nine restore prefixes and the latest run is preparing source snapshots for the PF>1.4 full OHLC audit.
-- Full record: `research/R330_results.json` and `research/R330_FINAL_VERDICT.md` on branch `research/r330-r191-pooled-ten-index`.
-- No parameter tuning, instrument removal or rescue variant is authorized after this rejection.
+- Source: [R194 Actions run 38133085545](https://github.com/christianomomongan82-lang/scanner/actions/runs/38133085545), artifact R194-ten-index-audit ID 11700178416; common cutoff 2026-10-09T20:00:00Z.
+- Manual5m metrics are diagnostic only, never a pass/fail input.
+- No Gate 2 or strategy performance criteria were run after the Gate 1 mismatch. No tuning or instrument exclusion was used.
+- See research/R330_FINAL_VERDICT.md and research/R330_results.json on branch research/r330-r191-pooled-ten-index.

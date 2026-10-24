@@ -1,31 +1,31 @@
-# R330 FINAL VERDICT — REJECT at Gate 1
+# R330 STATUS — GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi
 
-**Verdict: REJECT.** The persisted R191 manual5m two-index baseline has the expected 70 closed forward trades, but it does not reproduce the required PF@1bp=1.247. Observed PF is **1.491** after the same R192 trade-cost calculation. Under the locked instruction, this mismatch stops the round here.
+## Amandemen Gate 1
 
-## Gate 1 — R191 reference replication: FAIL
+Gate 1 harus memakai entry canonical: open bar H4 berikutnya. PF manual5m sebesar 1.491 sebelumnya **bukan** bukti replikasi canonical gagal dan tidak dipakai untuk pass/fail. Manual5m hanya diagnostik.
 
-| Item | Required | Observed |
-|---|---:|---:|
-| Forward closed trades, USA500 + USATECH | 70 | 70 |
-| PF @ 1bp, rounded to three decimals | 1.247 | 1.491 |
-| Verdict | exact match | **FAIL** |
+File bernama R191_CANONICAL_index_trend_long.py tidak ditemukan dalam tree repository atau file Project yang tersedia. Karena itu angka interim di bawah berasal dari ledger tersimpan R194, difilter ke USA500+USATECH mode ideal pada helper R192 (entry open bar H4 berikutnya). Ini adalah pemeriksaan canonical-equivalent, bukan klaim bahwa file bernama tersebut sudah dijalankan. Window selection juga belum bisa dibandingkan dengan definisi asli script; yang tersedia adalah discovery R192: entry 2017-01-01 sampai sebelum 2022-01-01.
 
-Observed raw PF: 1.490731327838. The archived trade ledger contains 72 forward entries, of which 70 closed before 2026-01-01 and 2 were censored. Using the helper's net-return convention, winning R sum = 59.891385367 and absolute losing R sum = 40.175841380.
+## Gate 1 — canonical-equivalent observed vs target
 
-**Reference evidence:** [R194 Actions run 38133085545](https://github.com/christianomomongan82-lang/scanner/actions/runs/38133085545), artifact `R194-ten-index-audit` (artifact ID 11700178416), cached common data cutoff 2026-10-09T20:00:00Z. The check used its persisted `trades.csv`, filtered to `mode=manual5m` and USA500 + USATECH, forward entries 2022-01-01 through 2025-12-31, closed outcomes before 2026-01-01. Cost calculation is identical to the R192 helper convention: net R = (exit − entry − entry × 1/10,000) / risk_points; PF = total positive net R / absolute total negative net R.
+| Phase | Entries | Closed n | Censored | PF@1bp | PF@2bp | PF@3bp | Target n | Target PF@1bp | Target PF@2bp |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Selection / available discovery 2017–2021 | 89 | 87 | 2 | 1.851 | 1.838 | 1.824 | 78 | 2.082 | — |
+| Forward 2022–2025 | 77 | 75 | 2 | 1.325 | 1.318 | 1.311 | 70 | 1.247 | 1.241 |
+| OOS 2026 through archived common cutoff | 12 | 10 | 2 | 1.989 | 1.978 | 1.966 | 11 | — | 1.954 |
 
-## Hard stop and remaining criteria
+PF uses the R192 helper's risk-normalized net-R convention: round-trip cost = entry × bps / 10,000; PF = summed positive net R / absolute summed negative net R. Source is the existing R194 audit artifact, run 38133085545 / artifact 11700178416, common cutoff 2026-10-09 20:00 UTC.
 
-- **Gate 2 (truncation across all ten indices): NOT RUN in this R330 round.** Gate 1 failed first, so the sequential hard-stop rule prevents proceeding.
-- Pooled forward n/PF, discovery PF, worst-year PF, N=40/55/80 neighborhood, leave-one-out, challenge simulator, correlation/overlap exposure, and causal path audit: **NOT RUN** in this R330 round.
-- No 2026 OOS performance or challenge bootstrap results are reported. No index was excluded, and no parameter was changed.
+## Manual5m comparison — diagnostic only, never used for pass/fail
 
-The archived PF above is greater than 1.4; however, it belongs to the failed replication preflight, not a validated pooled candidate.
+| Phase | Entries | Closed n | Censored | PF@1bp | PF@2bp | PF@3bp |
+|---|---:|---:|---:|---:|---:|---:|
+| Selection / available discovery 2017–2021 | 92 | 90 | 2 | 1.660 | 1.648 | 1.636 |
+| Forward 2022–2025 | 72 | 70 | 2 | 1.491 | 1.483 | 1.475 |
+| OOS 2026 through archived common cutoff | 13 | 11 | 2 | 1.657 | 1.648 | 1.639 |
 
-A **ledger-only consistency audit** of all 70 forward USA500/USATECH trades passed these checks: exact M5 entry timestamp; entry at least five minutes after signal close; risk points equal entry minus SL; TP equals entry + 2R; exit not before entry; TP/SL exit price matches the stored level; and gap-stop fills are at or below the stop. The recorded exits were 38 SL, 30 TP, and 2 SL-gap fills.
+## Decision and stop point
 
-This is **not a full causality pass**: the archived artifact does not contain raw OHLC, so it cannot independently establish that the SL equals the trailing 27-H4-bar low or that the recorded exit was the first causal M5 stop/target hit. The corrected Actions runner includes this full path audit when PF > 1.4 and still hard-stops at Gate 1 if the replication mismatch remains. The required reproduction does not match.
+**GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi.** The available canonical-equivalent stream does not reproduce the supplied targets (especially forward n/PF and 2026 OOS n/PF). Under the hard-stop rule, Gate 2, pooled performance, worst year, neighborhoods, leave-one-out, correlation/overlap and challenge simulation were not run. No tuning, instrument removal, or replacement variant was attempted.
 
-## Decision
-
-**REJECT. Stop at Gate 1.** Do not run tuning, neighborhoods, leave-one-out, or a challenge simulator to rescue this round. The root issue to resolve separately is why the persisted two-index baseline yields PF 1.491 while the required reference is 1.247; this report does not speculate about the cause.
+Causality remains unverified from the archived ledger because the artifact lacks raw OHLC paths. The revised R330 runner now uses next-H4-open entry for the primary candidate, keeps manual5m diagnostic-only, and triggers an OHLC path audit whenever any Gate 1 PF exceeds 1.4 if the fresh canonical preflight can be reproduced.
