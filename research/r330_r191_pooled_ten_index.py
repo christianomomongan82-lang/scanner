@@ -506,8 +506,10 @@ def main():
                             "canonical_next_h4_open":c_ep,"canonical_risk":c_risk}
                         # Compare R192 bars using the same signal-close boundary, not ordinal trade timestamps.
                         # Its H4 labels and canonical H4 labels can differ, so close-boundary matching is primary.
-                        if close_ri>=0:
-                            ri=close_ri
+                        if close_ri>=0 or r_start_ri>=0:
+                            # Prefer an exact close-boundary match; otherwise compare the exact matching signal label.
+                            ri=close_ri if close_ri>=0 else r_start_ri
+                            candidate["r192_candidate_match_method"]="signal-close boundary" if close_ri>=0 else "matching H4 signal label fallback"
                             rb=rh.iloc[ri]
                             r_prev_hi=float(rh.high.iloc[ri-CFG["breakout"]:ri].max()) if ri>=CFG["breakout"] else None
                             r_sl=float(stop_r[ri]) if math.isfinite(float(stop_r[ri])) else None
