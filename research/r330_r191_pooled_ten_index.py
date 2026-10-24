@@ -44,6 +44,15 @@ def dump(path, obj):
 def finite(x):
     return isinstance(x,(int,float,np.integer,np.floating)) and math.isfinite(float(x))
 
+def valid_pf(x):
+    return isinstance(x,(int,float,np.integer,np.floating)) and not math.isnan(float(x))
+
+def pf_ge(x, threshold):
+    return valid_pf(x) and float(x) >= threshold
+
+def pf_gt(x, threshold):
+    return valid_pf(x) and float(x) > threshold
+
 def g(name, passed, observed, required, detail=""):
     return {"gate":name,"pass":bool(passed),"observed":observed,"required":required,"detail":detail}
 
@@ -96,6 +105,8 @@ def audit_paths(trades_by_key,h4s,m5s,cfgs):
                 ent_t=pd.Timestamp(tr["entry_time_utc"]).tz_convert("UTC")
                 entry=float(tr["entry"]); stop=float(tr["sl"]); target=float(tr["tp"])
                 if close_t!=hclose[i]: raise ValueError("signal close timestamp mismatch")
+                if i<cfg["breakout"] or float(h4.close.iloc[i])<=float(h4.high.iloc[i-cfg["breakout"]:i].max()):
+                    raise ValueError("signal is not a causal close above prior breakout highs")
                 if not math.isclose(stop,float(np.min(lows[i-cfg["stop_bars"]+1:i+1])),rel_tol=0,abs_tol=1e-8):
                     raise ValueError("stop mismatch vs prefix low")
                 if ent_t<close_t+pd.Timedelta(minutes=5) or i+1>=len(hclose) or ent_t>=hclose[i+1]:
@@ -413,7 +424,7 @@ def main():
         ann.append(row)
     pd.DataFrame(ann).to_csv(out/"R330_pooled_annual.csv",index=False)
     fw_year=[r for r in ann if 2022<=r["year"]<=2025]
-    worstpf=min([float(r["pf_2bp"]) for r in fw_year if finite(r["pf_2bp"])],default=None)
+    worstpf=min([float(r["pf_2bp"]) for r in fw_year if valid_pf(r["pf_2bp"])],default=None)
     four_have_trades=len(fw_year)==4 and all(r["n_2bp"]>0 for r in fw_year)
 
     instrows=[]
@@ -435,7 +446,7 @@ def main():
     loo=[]
     for removed in ASSETS:
         ts=[t for t in base if t["instrument"]!=removed]; m=metric(ts,F0,F1,2)
-        loo.append({"removed_instrument":removed,"remaining_instruments":9,"forward_n":m["n"],"forward_pf_2bp":m["pf"],"pass":finite(m["pf"]) and m["pf"]>=1.05})
+        loo.append({"removed_instrument":removed,"remaining_instruments":9,"forward_n":m["n"],"forward_pf_2bp":m["pf"],"pass":pf_ge(m["pf"],1.05)})
     pd.DataFrame(loo).to_csv(out/"R330_leave_one_out.csv",index=False)
 
     corr,corr_summary=correlations(base,F0,common_end)
@@ -446,11 +457,11 @@ def main():
     reported_pf=[]
     for mm in agg.values():
         for m in mm.values():
-            if finite(m["pf"]): reported_pf.append(float(m["pf"]))
-    for row in ann+nbr:
+            if valid_pf(m["pf"]): reported_pf.append(float(m["pf"]))
+    for row in ann+nbr+instrows+loo:
         for k,v in row.items():
-            if "pf" in k and finite(v): reported_pf.append(float(v))
-    need_causality=any(v>1.4 for v in reported_pf)
+            if "pf" in k and valid_pf(v): reported_pf.append(float(v))
+    need_causality=any(pf_gt(v,1.4) for v in reported_pf)
     if need_causality:
         caus=audit_paths(all_audit,h4s,m5s,cfgs); caus["required"]=True
     else:
@@ -460,13 +471,13 @@ def main():
     pd.DataFrame([{k:v for k,v in r.items() if k!="quarter_trade_counts"} for r in simrows]).to_csv(out/"R330_challenge_simulation.csv",index=False)
 
     gates=[gr1,gr2]
-    gates.append(g("G3_POOLED_FORWARD",fwd["n"]>=150 and finite(fwd["pf"]) and fwd["pf"]>=1.15,
+    gates.append(g("G3_POOLED_FORWARD",fwd["n"]>=150 and pf_ge(fwd["pf"],1.15),
         {"n":fwd["n"],"pf_2bp":fwd["pf"]},{"n_min":150,"pf_2bp_min":1.15}))
-    gates.append(g("G4_POOLED_DISCOVERY",finite(dis_pf) and dis_pf>=1.00,{"pf_2bp":dis_pf},{"pf_2bp_min":1.00}))
-    gates.append(g("G5_WORST_FORWARD_YEAR",four_have_trades and worstpf is not None and worstpf>=.80,
+    gates.append(g("G4_POOLED_DISCOVERY",pf_ge(dis_pf,1.00),{"pf_2bp":dis_pf},{"pf_2bp_min":1.00}))
+    gates.append(g("G5_WORST_FORWARD_YEAR",four_have_trades and worstpf is not None and pf_ge(worstpf,.80),
         {"worst_year_pf_2bp":worstpf,"four_years_have_closed_trades":four_have_trades,"years":fw_year},
         {"pf_2bp_min":0.80,"all_four_years_have_closed_trades":True}))
-    gates.append(g("G6_NEIGHBORHOOD_N40_55_80",all(finite(r["forward_pf_2bp"]) and r["forward_pf_2bp"]>=1.00 for r in nbr),
+    gates.append(g("G6_NEIGHBORHOOD_N40_55_80",all(pf_ge(r["forward_pf_2bp"],1.00) for r in nbr),
         nbr,"All three pooled forward PF@2bp>=1.00; candidate remains N=55."))
     gates.append(g("G7_LEAVE_ONE_OUT",all(r["pass"] for r in loo),loo,"Every leave-one-out portfolio forward PF@2bp>=1.05."))
     gates.append(g("G8_STELLAR_2STEP_SIMULATION",all(x["pass"] for x in sim_gates),{"risk_level_gates":sim_gates,"rows":simrows,"simulator":sim_meta},
