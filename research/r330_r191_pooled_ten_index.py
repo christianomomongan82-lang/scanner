@@ -367,61 +367,70 @@ def main():
         print(f"DATA {inst}: H1={len(h1):,}, M5={len(m5):,}",flush=True)
     common_end=min(m5.index[-1].tz_convert("UTC")+pd.Timedelta(minutes=5) for m5 in m5s.values())
 
-    # Hard gate 1: canonical R191 execution (open of the next H4 bar).
-    # manual5m is computed only as a comparison table and never affects Gate 1.
-    rep=[]; rep_manual=[]
+    # Hard gate 1: use the exact canonical R191 script pasted by the user.
+    from research.R191_CANONICAL_index_trend_long import load as canonical_load, sim as canonical_sim, pf as canonical_pf, net as canonical_net
+    canonical_h4s={}; canonical_parts=[]; canonical_trace_rows=[]
     for inst in ("usa500idxusd","usatechidxusd"):
-        canonical_trades,_=simulate(h4s[inst],m5s[inst],CFG,"ideal")
-        manual_trades,_=simulate(h4s[inst],m5s[inst],CFG,"manual5m")
-        for t in canonical_trades:
-            t["instrument"]=inst; t["instrument_name"]=ASSETS[inst]
-        for t in manual_trades:
-            t["instrument"]=inst; t["instrument_name"]=ASSETS[inst]
-        rep.extend(canonical_trades); rep_manual.extend(manual_trades)
-
-    gate1_windows={
-        "selection":(D0,D1),
-        "forward":(F0,F1),
-        "oos_2026":(O0[0],common_end),
-    }
-    gate1_observed={}
-    gate1_manual={}
-    for phase,(start,end) in gate1_windows.items():
-        gate1_observed[phase]={}
-        gate1_manual[phase]={}
-        for bp in (1,2,3):
-            cm=metric(rep,start,end,bp)
-            mm=metric(rep_manual,start,end,bp)
-            for dest,m in ((gate1_observed,cm),(gate1_manual,mm)):
-                dest[phase][str(bp)]={
-                    "entries":m["entries"],"n":m["n"],"censored":m["censored"],
-                    "pf":m["pf"],"wins_r":m["wins_r"],"losses_r":m["losses_r"]}
+        ch=canonical_load(str(data_dir),inst); canonical_h4s[inst]=ch
+        ct=canonical_sim(ch).assign(inst=inst); canonical_parts.append(ct)
+        for ordinal,tr in enumerate(ct.to_dict("records"),1):
+            ent=pd.Timestamp(tr["t"]); pos=int(ch.index.get_indexer([ent])[0])
+            signal_t=ch.index[pos-1] if pos>0 else pd.NaT
+            ep=float(tr["ep"]); risk=float(tr["risk"])
+            canonical_trace_rows.append({
+                "instrument":inst,"trade_ordinal":ordinal,
+                "signal_bar_ny":None if pd.isna(signal_t) else pd.Timestamp(signal_t).isoformat(),
+                "signal_bar_utc":None if pd.isna(signal_t) else pd.Timestamp(signal_t).tz_convert("UTC").isoformat(),
+                "entry_time_ny":ent.isoformat(),"entry_time_utc":ent.tz_convert("UTC").isoformat(),
+                "entry":ep,"sl":ep-risk,"tp":ep+2.0*risk,"risk_points":risk,
+                "gross_r":float(tr["g"]),"gross_exit_derived":ep+float(tr["g"])*risk,
+                "entry_year_ny":int(ent.year)})
+    canonical_T=pd.concat(canonical_parts,ignore_index=True); canonical_T["y"]=canonical_T.t.dt.year
+    canonical_years={"selection":(2017,2021),"forward":(2022,2025),"oos_2026":(2026,2026)}
     expected_gate1={
         "selection":{"n":78,"pf_1bp_rounded_3dp":2.082},
         "forward":{"n":70,"pf_1bp_rounded_3dp":1.247,"pf_2bp_rounded_3dp":1.241},
-        "oos_2026":{"n":11,"pf_2bp_rounded_3dp":1.954},
-    }
-    def rounded_pf(phase,bp):
-        v=gate1_observed[phase][str(bp)]["pf"]
-        return round(float(v),3) if finite(v) else None
+        "oos_2026":{"n":11,"pf_2bp_rounded_3dp":1.954}}
+    gate1_observed={}
+    for phase,(ya,yb) in canonical_years.items():
+        S=canonical_T[(canonical_T.y>=ya)&(canonical_T.y<=yb)]; gate1_observed[phase]={}
+        for bp in (1,2,3):
+            vals=np.asarray(canonical_net(S,bp),float); v=canonical_pf(vals)
+            gate1_observed[phase][str(bp)]={"entries":int(len(S)),"n":int(len(S)),"censored":0,
+                "pf":float(v),"wins_r":float(vals[vals>0].sum()),
+                "losses_r":float(-vals[vals<0].sum()),"total_r":float(vals.sum())}
+
+    # R192 ideal and manual5m are diagnostic ledgers only, never Gate 1 pass/fail inputs.
+    rep=[]; rep_manual=[]
+    for inst in ("usa500idxusd","usatechidxusd"):
+        r192_ideal,_=simulate(h4s[inst],m5s[inst],CFG,"ideal")
+        manual_trades,_=simulate(h4s[inst],m5s[inst],CFG,"manual5m")
+        for t in r192_ideal: t["instrument"]=inst; t["instrument_name"]=ASSETS[inst]
+        for t in manual_trades: t["instrument"]=inst; t["instrument_name"]=ASSETS[inst]
+        rep.extend(r192_ideal); rep_manual.extend(manual_trades)
+    gate1_windows={"selection":(D0,D1),"forward":(F0,F1),"oos_2026":(O0[0],common_end)}
+    gate1_manual={}
+    for phase,(start,end) in gate1_windows.items():
+        gate1_manual[phase]={}
+        for bp in (1,2,3):
+            mm=metric(rep_manual,start,end,bp)
+            gate1_manual[phase][str(bp)]={"entries":mm["entries"],"n":mm["n"],"censored":mm["censored"],
+                "pf":mm["pf"],"wins_r":mm["wins_r"],"losses_r":mm["losses_r"]}
     gate1_checks={
         "selection_n":gate1_observed["selection"]["1"]["n"]==expected_gate1["selection"]["n"],
-        "selection_pf_1bp":rounded_pf("selection",1)==expected_gate1["selection"]["pf_1bp_rounded_3dp"],
+        "selection_pf_1bp":round(gate1_observed["selection"]["1"]["pf"],3)==expected_gate1["selection"]["pf_1bp_rounded_3dp"],
         "forward_n":gate1_observed["forward"]["1"]["n"]==expected_gate1["forward"]["n"],
-        "forward_pf_1bp":rounded_pf("forward",1)==expected_gate1["forward"]["pf_1bp_rounded_3dp"],
-        "forward_pf_2bp":rounded_pf("forward",2)==expected_gate1["forward"]["pf_2bp_rounded_3dp"],
+        "forward_pf_1bp":round(gate1_observed["forward"]["1"]["pf"],3)==expected_gate1["forward"]["pf_1bp_rounded_3dp"],
+        "forward_pf_2bp":round(gate1_observed["forward"]["2"]["pf"],3)==expected_gate1["forward"]["pf_2bp_rounded_3dp"],
         "oos_2026_n":gate1_observed["oos_2026"]["2"]["n"]==expected_gate1["oos_2026"]["n"],
-        "oos_2026_pf_2bp":rounded_pf("oos_2026",2)==expected_gate1["oos_2026"]["pf_2bp_rounded_3dp"],
-    }
+        "oos_2026_pf_2bp":round(gate1_observed["oos_2026"]["2"]["pf"],3)==expected_gate1["oos_2026"]["pf_2bp_rounded_3dp"]}
     repok=all(gate1_checks.values())
     gr1=g("G1_R191_CANONICAL_REPLICATION",repok,
-        {"canonical_open_next_H4":gate1_observed,"manual5m_diagnostic_only":gate1_manual,
-         "checks":gate1_checks,"selection_window_utc":[D0.isoformat(),D1.isoformat()],
-         "forward_window_utc":[F0.isoformat(),F1.isoformat()],
-         "oos_2026_window_utc":[O0[0].isoformat(),common_end.isoformat()]},
-        expected_gate1,
-        "Canonical mode means entry at open of next H4 bar; manual5m is excluded from pass/fail.")
-    print("G1 CANONICAL REPLICATION:",gr1,flush=True)
+        {"canonical_script":gate1_observed,"r192_ideal_diagnostic_only":True,"manual5m_diagnostic_only":gate1_manual,
+         "checks":gate1_checks,"selection_years_ny":[2017,2021],"forward_years_ny":[2022,2025],"oos_year_ny":2026},
+        expected_gate1,"Gate 1 uses the exact canonical script; R192 ideal/manual5m are comparison ledgers only.")
+    pd.DataFrame(canonical_trace_rows).to_csv(out/"R330_G1_canonical_trades.csv",index=False)
+    pd.DataFrame(rep).to_csv(out/"R330_G1_r192_ideal_trades.csv",index=False)
     manual_rows=[]
     for phase in gate1_windows:
         row={"phase":phase,"entry_convention":"manual5m","pass_fail_use":False}
@@ -430,62 +439,96 @@ def main():
             row[f"n_{bp}bp"]=m["n"]; row[f"pf_{bp}bp"]=m["pf"]
             row[f"entries_{bp}bp"]=m["entries"]; row[f"censored_{bp}bp"]=m["censored"]
         manual_rows.append(row)
-    pd.DataFrame(manual_rows).to_csv(out/"R330_manual5m_gate1_diagnostic.csv",index=False)
-
-    all_gate1_pfs=[
-        gate1_observed[p][str(bp)]["pf"] for p in gate1_windows for bp in (1,2,3)
-    ] + [
-        gate1_manual[p][str(bp)]["pf"] for p in gate1_windows for bp in (1,2,3)
-    ]
-    causality_needed=any(finite(v) and float(v)>1.4 for v in all_gate1_pfs)
-    if causality_needed:
-        audit_map={}
-        for inst in ("usa500idxusd","usatechidxusd"):
-            audit_map[(inst,CFG["id"])]=[
-                t for t in rep+rep_manual if t.get("instrument")==inst
-            ]
-        causal=audit_paths(audit_map,h4s,m5s,{CFG["id"]:CFG})
-        causal["required"]=True
-        print(f"G1 PF>1.4 CAUSALITY AUDIT: {causal}",flush=True)
-    else:
-        causal={"required":False,"pass":True,"trades_checked":0,"errors":[],
-                "detail":"No Gate 1 canonical/manual diagnostic PF exceeded 1.4."}
 
     if not repok:
+        first_diff=None; per_instrument_diff=[]
+        for inst in ("usa500idxusd","usatechidxusd"):
+            cr=sorted([x for x in canonical_trace_rows if x["instrument"]==inst],key=lambda x:x["trade_ordinal"])
+            rr=sorted([x for x in rep if x["instrument"]==inst],key=lambda x:pd.Timestamp(x["entry_time_utc"]).value)
+            ch=canonical_h4s[inst]; rh=h4s[inst]
+            clabels=set(pd.DatetimeIndex(ch.index).tz_convert("UTC").asi8.tolist())
+            rlabels=set(pd.DatetimeIndex(rh.index).tz_convert("UTC").asi8.tolist())
+            for k in range(max(len(cr),len(rr))):
+                c=cr[k] if k<len(cr) else None; r=rr[k] if k<len(rr) else None
+                fields=[]
+                if c is None or r is None: fields=["trade_presence"]
+                else:
+                    ce=pd.Timestamp(c["entry_time_utc"]); re=pd.Timestamp(r["entry_time_utc"]).tz_convert("UTC")
+                    if ce.value!=re.value: fields.append("entry_timestamp")
+                    if not math.isclose(float(c["sl"]),float(r["sl"]),rel_tol=0,abs_tol=1e-8): fields.append("sl")
+                    if not math.isclose(float(c["risk_points"]),float(r["risk_points"]),rel_tol=0,abs_tol=1e-8): fields.append("risk")
+                    if not math.isclose(float(c["entry"]),float(r["entry"]),rel_tol=0,abs_tol=1e-8): fields.append("entry_price")
+                if not fields: continue
+                diag={"instrument":inst,"trade_ordinal_within_instrument":k+1,"different_fields":fields,
+                      "canonical_trade":c,"r192_ideal_trade":r}
+                if c is not None and r is not None:
+                    ce=pd.Timestamp(c["entry_time_utc"]).tz_convert("UTC"); re=pd.Timestamp(r["entry_time_utc"]).tz_convert("UTC")
+                    cs=pd.Timestamp(c["signal_bar_utc"]).tz_convert("UTC") if c["signal_bar_utc"] else pd.NaT
+                    rs=pd.Timestamp(r["signal_bar_utc"]).tz_convert("UTC")
+                    diag["bar_grid_checks"]={"canonical_entry_label_exists_in_r192_grid":bool(ce.value in rlabels),
+                        "r192_entry_label_exists_in_canonical_grid":bool(re.value in clabels),
+                        "canonical_signal_bar_utc":cs.isoformat() if not pd.isna(cs) else None,
+                        "r192_signal_bar_utc":rs.isoformat(),"signal_timestamps_equal":bool(not pd.isna(cs) and cs.value==rs.value)}
+                    if not pd.isna(cs) and cs.value in rlabels and cs.value in clabels:
+                        cb=ch.loc[ch.index.tz_convert("UTC")==cs].iloc[0]; rb=rh.loc[rh.index.tz_convert("UTC")==cs].iloc[0]
+                        diag["same_signal_label_ohlc"]={
+                            "canonical_M5_resample":{"open":float(cb.open),"high":float(cb.high),"low":float(cb.low),"close":float(cb.close)},
+                            "r192_H1_wall_clock":{"open":float(rb.open),"high":float(rb.high),"low":float(rb.low),"close":float(rb.close)},
+                            "ohlc_equal":bool(all(math.isclose(float(cb[q]),float(rb[q]),rel_tol=0,abs_tol=1e-8) for q in ("open","high","low","close")))}
+                    if "entry_timestamp" in fields and (ce.value not in rlabels or re.value not in clabels):
+                        diag["cause_assessment"]="H4 boundary/resampling mismatch confirmed: an entry label is absent from the other H4 label grid."
+                    elif "sl" in fields or "risk" in fields or "entry_price" in fields:
+                        diag["cause_assessment"]="The first differing trade has different entry/SL/risk geometry; the attached same-label OHLC comparison and values identify data/aggregation versus the 27-bar stop window."
+                    elif "entry_timestamp" in fields and not diag["bar_grid_checks"]["signal_timestamps_equal"]:
+                        diag["cause_assessment"]="The signal timestamps diverged at this ordinal; compare H4 signal/bar boundaries and prior-bar highs."
+                    else:
+                        diag["cause_assessment"]="Entry labels exist in both grids; compare the prior trade exit/active state and close-breakout decision. The observed difference is not explained by a missing boundary alone."
+                else:
+                    diag["cause_assessment"]="One stream has no trade at this ordinal; this is a signal/one-position/exit-sequencing divergence, not a PF calculation difference."
+                per_instrument_diff.append(diag)
+                if first_diff is None: first_diff=diag
+                break
+        dump(out/"R330_G1_first_trade_mismatch.json",{"first_difference":first_diff,
+            "first_difference_per_instrument":per_instrument_diff,
+            "comparison_rule":"First ordinal mismatch per instrument on entry timestamp, entry price, SL, risk, or trade presence.",
+            "H4_methods":{"canonical":"M5 OHLC resample 4h offset=1h in America/New_York",
+                "r192_ideal":"R192 H1 explicit NY wall-clock boundaries 01/05/09/13/17/21"}})
         mismatch_label="GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi"
-        headline=("Canonical Gate 1 did not match the locked reference; no ten-index truncation, pooled "
-                  "performance, neighborhood, leave-one-out, correlation/overlap or challenge simulation was run.")
-        result={"experiment":"R330","verdict":"GATE-MISMATCH","stopped_at":"G1_R191_CANONICAL_REPLICATION",
-                "gate1":gr1,"gate1_canonical_observed":gate1_observed,"gate1_manual5m_diagnostic":gate1_manual,
-                "gate1_expected":expected_gate1,"gate1_checks":gate1_checks,"causality_audit":causal,
-                "data":meta,"remaining_criteria_status":"NOT_RUN_AFTER_GATE_MISMATCH",
-                "entry_convention_amendment":{"primary":"canonical next-H4 open","manual5m":"diagnostic only"},
-                "note":"The specifically named R191_CANONICAL_index_trend_long.py was not present in the repository snapshot. The available R192 mode 'ideal' enters at the open of the next H4 bar. This is a canonical-equivalent check, not proof the missing named file was executed."}
-        dump(out/"R330_results.json",result)
+        headline=("The exact canonical R191 Gate 1 metrics did not match the locked targets. "
+                  "Stopped before Gate 2 and every pooled/performance criterion.")
         rows=[]
-        for phase in gate1_windows:
+        for phase,(ya,yb) in canonical_years.items():
             c=gate1_observed[phase]
-            rows.append({"phase":phase,"canonical_n":c["1"]["n"],"canonical_pf_1bp":c["1"]["pf"],
-                         "canonical_pf_2bp":c["2"]["pf"],"canonical_pf_3bp":c["3"]["pf"],
-                         "expected_n":expected_gate1[phase]["n"],
-                         "expected_pf_1bp":expected_gate1[phase].get("pf_1bp_rounded_3dp"),
-                         "expected_pf_2bp":expected_gate1[phase].get("pf_2bp_rounded_3dp")})
+            rows.append({"phase":phase,"years_ny":f"{ya}-{yb}","canonical_n":c["1"]["n"],
+                "canonical_pf_1bp":c["1"]["pf"],"canonical_pf_2bp":c["2"]["pf"],"canonical_pf_3bp":c["3"]["pf"],
+                "expected_n":expected_gate1[phase]["n"],"expected_pf_1bp":expected_gate1[phase].get("pf_1bp_rounded_3dp"),
+                "expected_pf_2bp":expected_gate1[phase].get("pf_2bp_rounded_3dp")})
         report=("# R330 STATUS — GATE-MISMATCH (entry convention), strategy not evaluated\n\n"
-                "## Definition amendment\n\n"
-                "Gate 1 uses canonical entry: the open of the next H4 bar. The previous manual5m PF of 1.491 is not a canonical replication failure and is not used for pass/fail. manual5m is a diagnostic table only.\n\n"
-                "The named file R191_CANONICAL_index_trend_long.py is absent from the tracked repository snapshot. The figures below come from the available R192 mode ideal, which enters at the next H4 open; they are not represented as execution of that missing file.\n\n"
-                "## Gate 1 comparison\n\n"+pd.DataFrame(rows).to_markdown(index=False)+"\n\n"
-                "Window caveat: the available R192 helper labels discovery/selection as entries 2017-01-01 to 2022-01-01. Since the named canonical file is missing, the requested selection-window definition could not be independently verified.\n\n"
-                "## Manual5m diagnostic (not used for pass/fail)\n\n"+pd.DataFrame(manual_rows).to_markdown(index=False)+"\n\n"
-                "## Causality diagnostic when PF > 1.4\n\n"
-                +f"- Required: {causality_needed}; audit result: {'PASS' if causal.get('pass') else 'FAIL'}; trades checked: {causal.get('trades_checked',0)}.\n\n"
-                +(json.dumps(clean(causal.get("errors",[])),indent=2,ensure_ascii=False) if causal.get("errors") else "No path errors were reported by this audit.\n")
-                +"\n## Decision\n\n"
-                "**GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi.** No Gate 2, pooled metrics, neighborhood, LOO, or challenge simulation was run. No tuning, instrument removal, or replacement variant was attempted.\n")
+            "## Canonical Gate 1 run\n\n"
+            "The supplied canonical source is saved as research/R191_CANONICAL_index_trend_long.py. The H4 resampling, signal, stop, target and sim code are unchanged; only the loader supports the repository M5 CSV.GZ cache. Gate 1 is decided by canonical output, not R192 ideal or manual5m.\n\n"
+            +pd.DataFrame(rows).to_markdown(index=False)+"\n\n"
+            +"## First trade-level divergence\n\n"
+            +("No ordinal trade difference was found even though a reference metric failed; inspect period/cost calculations in both ledgers.\n\n" if first_diff is None else
+              "First mismatch JSON:\n\n"+json.dumps(clean(first_diff),indent=2,ensure_ascii=False)+"\n\n")
+            +"Full ledgers: research/R330_G1_canonical_trades.csv and research/R330_G1_r192_ideal_trades.csv. Details: research/R330_G1_first_trade_mismatch.json.\n\n"
+            +"## Manual5m diagnostic (not used for pass/fail)\n\n"+pd.DataFrame(manual_rows).to_markdown(index=False)+"\n\n"
+            +"## Decision\n\n**GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi.** Gate 2 and all pooled criteria are NOT RUN. No pooled PF, neighborhood, leave-one-out, correlation/overlap, or funded challenge simulation was calculated.\n")
         (out/"R330_FINAL_VERDICT.md").write_text(report,encoding="utf-8")
+        result={"experiment":"R330","verdict":"GATE-MISMATCH","stopped_at":"G1_R191_CANONICAL_REPLICATION",
+            "gate1":gr1,"gate1_canonical_observed":gate1_observed,"gate1_manual5m_diagnostic":gate1_manual,
+            "gate1_expected":expected_gate1,"gate1_checks":gate1_checks,"first_trade_mismatch":first_diff,
+            "remaining_criteria_status":"NOT_RUN_AFTER_GATE_MISMATCH",
+            "entry_convention_amendment":{"primary":"exact canonical resample/sim and next-H4-open entry","manual5m":"diagnostic only"},
+            "canonical_source":"research/R191_CANONICAL_index_trend_long.py",
+            "canonical_trade_ledger":"research/R330_G1_canonical_trades.csv","r192_ideal_trade_ledger":"research/R330_G1_r192_ideal_trades.csv",
+            "first_trade_difference_file":"research/R330_G1_first_trade_mismatch.json","data":meta}
+        dump(out/"R330_results.json",result)
         append_state(mismatch_label,[gr1],common_end,headline)
+        print("R330 GATE-MISMATCH: canonical Gate 1 target mismatch; pooled criteria NOT RUN.",flush=True)
+        print(pd.DataFrame(rows).to_string(index=False),flush=True)
+        print("FIRST TRADE DIFFERENCE:",json.dumps(clean(first_diff),ensure_ascii=False),flush=True)
         raise SystemExit(2)
-    print("G1 PASS: all canonical reference metrics match to three decimals.",flush=True)
+    print("G1 PASS: exact canonical reference metrics match to three decimals.",flush=True)
 
     # Hard gate 2: all ten instruments pass N=55 truncation before any ten-index metrics.
     trunc={}
