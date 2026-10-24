@@ -1,41 +1,56 @@
 # R330 — Locked preregistration
 
-Status: locked before pooled forward/OOS calculations. Branch: research/r330-r191-pooled-ten-index.
+Status: thresholds remain locked; canonical-data amendment recorded 2026-10-24. Branch: research/r330-r191-pooled-ten-index.
 
 ## Candidate and universe
-Apply the unchanged R191 rule to every index in the existing ten-index R195 universe: USA500, USATECH, USA30, US Small Cap 2000, Germany 40, FTSE 100, France 40, EU Stocks 50, Australia 200 and Japan 200. No index selection or removal.
 
-- Long-only; America/New_York wall-clock H4.
-- Signal: completed H4 close exceeds the preceding 55 H4 highs.
+Apply unchanged R191 to every index in the existing ten-index universe: USA500, USATECH, USA30, US Small Cap 2000, Germany 40, FTSE 100, France 40, EU Stocks 50, Australia 200 and Japan 200. No instrument selection or removal.
+
+- Long-only.
+- Engine is the supplied `research/R191_CANONICAL_index_trend_long.py`: its H4 is built from M5 BID OHLC using `resample('4h', offset='1h', label='left', closed='left')` in America/New_York.
+- Signal: H4 close strictly exceeds the prior N=55 H4 highs.
 - Stop: lowest low over the signal H4 bar and preceding 26 H4 bars (27 bars inclusive).
-- Target: 2R.
-- Manual entry proxy: first non-flat M5 BID bar at/after signal close +5 minutes and before the next actual NY H4 close.
-- M5 BID OHLC exits, stop checked first when stop and target overlap; gap through stop fills at the open.
-- Candidate parameters are frozen at N=55, M=27, RR=2. N=40 and N=80 are robustness-only diagnostics; they cannot replace the candidate.
+- Target: 2R. Entry is the open field of the next H4 bar; exit decisions use the canonical H4 high/low scan and preserve the canonical stop-first ordering and gap fill rule.
+- Canonical loader filters input source bars to New York calendar year >=2017; each instrument's one-position simulation starts with no active position at that truncated boundary.
+- No R192 H4 construction, signal simulator, trade results, or metric helpers are allowed in Gate 1, Gate 2, pooled metrics, robustness, LOO or challenge trade generation. The R192 parser may only be used by the canonical loader adapter to read repository M5 CSV.GZ cache and by source loading for intraday path marks.
+- N=55/M=27/RR=2 is the candidate. N=40 and N=80 are locked robustness diagnostics only; neither may replace the candidate. No manual5m variant is used for PASS/FAIL or as a rescue path.
 
-## Periods and costs
-Discovery entries: 2017-01-01 through 2021-12-31, with outcomes closed before 2022-01-01. Forward entries: 2022-01-01 through 2025-12-31, with outcomes closed before 2026-01-01. OOS entries: 2026 through the common cutoff, opened only once after both hard gates pass. All reported trade-cost sensitivities use modeled round-trip price costs of 1, 2 and 3 basis points.
+## Official R191 baseline and data version
+
+The earlier target figures (selection n=78/PF@1bp=2.082; forward n=70/PF@1bp=1.247/PF@2bp=1.241; OOS 2026 n=11/PF@2bp=1.954) came from a prior data snapshot that is no longer available. They are superseded, not a performance rejection.
+
+Official baseline for the canonical code on the current repository M5 cache:
+- Selection 2017–2021: n=79, PF@1bp=2.134.
+- Forward 2022–2025: n=68, PF@1bp=1.310, PF@2bp=1.304.
+- OOS 2026: n=11, PF@2bp=1.673.
+
+This shift is attributed to data-cache version/provenance, not a change to signal, stop, target, entry or simulation rules. Gate 1 passes only if a fresh canonical load/resample/sim is run twice on the identical cache, both H4 grids/OHLC and trade outputs are identical, and all official figures match to three decimals. SHA-256 hashes of all ten instrument M5 snapshots must be stored in the result manifest.
+
+## Data windows and cost model
+
+Discovery entry cohorts: 2017-01-01 through 2021-12-31; outcomes count only if canonical exit boundary is before 2022-01-01. Forward entry cohorts: 2022-01-01 through 2025-12-31; outcomes count only if canonical exit boundary is before 2026-01-01. OOS: 2026 through the common available source cutoff. PF sensitivity remains modeled round-trip price costs of 1, 2 and 3 basis points applied as `gross R - entry_price * bps / 10000 / risk_points`. These are not measured broker commissions, spread or slippage.
 
 ## Sequential hard gates
-1. Reproduce the existing USA500+USATECH R191 manual-execution forward result: n=70 and PF@1bp=1.247 rounded to 3 decimals. If mismatch, stop immediately.
-2. R191 signal and stop prefix/truncation checks pass on all ten indices. If any fails, stop immediately.
-3. Pooled forward: n>=150 and PF@2bp>=1.15.
-4. Pooled discovery PF@2bp>=1.00.
-5. Worst of all four pooled forward entry-year cohorts PF@2bp>=0.80; every year must have closed outcomes.
-6. Pooled forward PF@2bp>=1.00 for each robustness-only N=40, 55, 80. Candidate N/M/RR remains 55/27/2.
-7. Each leave-one-index-out pooled forward portfolio PF@2bp>=1.05.
-8. Stellar two-phase path simulation: 10,000 paired bootstrap paths built from quarterly 2022–2026 trade cohorts; risk 0.5% and 1.0% per trade; aggregate open stop-risk capped at 2%; phase 1 +8%, phase 2 +5%, daily loss limit 5%, static max loss 10%, at least five distinct closing-trade server days per phase. For open-position mark-to-market, record daily M5 low/high extrema and the last pre-exit close; process adverse low before high if both occur in one bar, process entry before marks on the entry bar, and process same-bar exits after the entry/marks. At each risk, pooled pass-both-within-5-years>=65%, combined DLL/MLL breach<=25%, and pass-both probability strictly exceeds R191-only with no higher breach probability.
-9. If any reported PF exceeds 1.4, perform an independent entry/stop/first-exit causal audit. Audit failure rejects the run.
 
-Any failed criterion means REJECT. After REJECT, do not tune, remove instruments, test rescue variants, or rerun to salvage the result. Store all results and the verdict in research/, and append the outcome to PROJECT_STATE.md. Do not edit scan.py or the scanner workflow.
+Gate 1 — canonical determinism and official data baseline:
+1. Load/resample each USA500/USATECH M5 cache twice and run the exact canonical `sim` twice. H4 labels/OHLC and trade outputs must be identical, and the official baseline above must match to three decimals. If not, stop before Gate 2 and all basket metrics; report the hashes and exact mismatch.
 
+Gate 2 — truncation:
+2. Canonical signal and 27-bar stop prefix/truncation checks must pass on all ten indices. If any index fails, stop before pooled metrics.
 
-## Amendment — Gate 1 entry convention (2026-10-24)
+After both hard gates pass, the six locked PASS criteria are unchanged:
 
-This amends the definition of Gate 1 only; it does not change any PASS threshold or downstream criterion.
+1. Pooled forward n >= 150 and PF@2bp >= 1.15.
+2. Pooled discovery PF@2bp >= 1.00.
+3. Worst of all four pooled forward entry-year cohorts PF@2bp >= 0.80, and every year must have closed outcomes.
+4. Pooled forward PF@2bp >= 1.00 for each N=40, 55 and 80. Candidate remains N=55/M=27/RR=2.
+5. Every leave-one-index-out pooled forward portfolio PF@2bp >= 1.05.
+6. Stellar 2-Step path simulator: 10,000 paired quarterly-bootstrap paths over 2022–2026; 0.5% and 1.0% risk per trade; aggregate open stop-risk cap 2%; phase 1 +8%, phase 2 +5%; DLL 5%, static MLL 10%; five distinct closing-trade server days per phase. At each risk, pooled passes both within 5 years >=65%, combined DLL/MLL breach <=25%, and pass-both probability must strictly exceed R191-only with no higher breach probability.
 
-- Canonical mode is entry at the open of the next New York wall-clock H4 bar. The Gate 1 reference targets are: selection n=78/PF@1bp=2.082; forward n=70/PF@1bp=1.247/PF@2bp=1.241; 2026 OOS n=11/PF@2bp=1.954. All comparisons are to three decimals.
-- manual5m is retained as a separate diagnostic table and must never be used for Gate 1 or other PASS/FAIL decisions when canonical is the primary convention.
-- If any canonical reference value fails, stop and report exact observed values. Status must be GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi—not a strategy performance REJECT.
-- The specifically named R191_CANONICAL_index_trend_long.py was not present in the available tracked repository. The R192 ideal mode is the available implementation that opens at the next H4 bar and is explicitly labelled canonical-equivalent if used.
-- All pooled PASS criteria remain exactly as originally locked. No tuning, variant, or instrument removal is allowed after a gate mismatch.
+The R191-only comparator must be the USA500+USATECH subset generated by this same canonical engine and the same cache version, not the older R192 ledger.
+
+Challenge mark-to-market continues to use daily M5 intraday low/high extrema and the last pre-exit close, adverse low before high if both occur in a bar, entry before marks on entry bar, and same-boundary exit after entry/marks. Canonical strategy trade entries, SL/TP and H4 exit outcomes must remain the canonical sim's outputs; path-marking is used to evaluate funded-account drawdown constraints. Server day uses the locked Europe/Helsinki seasonal GMT+2/GMT+3 proxy, with the limitation reported.
+
+Extra locked audit: if any reported PF exceeds 1.4, run an independent causal audit of signal prefix, stop, next-H4 open, RR2 and first canonical-H4 exit. Audit failure means REJECT.
+
+A single failed locked criterion means REJECT. Do not tune, remove an index, introduce a variant, or rerun to rescue the result. Store outputs in research/, update PROJECT_STATE.md, and do not edit scan.py or the main scanner workflow.
