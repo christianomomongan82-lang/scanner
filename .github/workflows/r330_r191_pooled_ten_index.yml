@@ -12,12 +12,11 @@ permissions:
   contents: write
 
 concurrency:
-  group: r194-ten-index-universe
+  group: r330-r191-pooled-ten-index
   cancel-in-progress: false
 
 jobs:
   prepare-instrument:
-    needs: boundary-test
     runs-on: ubuntu-latest
     timeout-minutes: 75
     strategy:
