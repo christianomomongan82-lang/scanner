@@ -300,7 +300,9 @@ def audit_paths(trades_by_key,h4s,m5s,cfgs):
                         raise ValueError("recorded exit is not the first canonical-H4 hit")
                     if first[1]!=tr["reason"] or not math.isclose(first[2],float(tr["exit"]),rel_tol=0,abs_tol=1e-7):
                         raise ValueError("canonical exit reason/price differs from first H4 hit")
-                elif tr.get("reason")!="OPEN_AT_DATA_END":
+                elif tr.get("reason")!="OPEN_AT_DATA_END" and not (
+                    int(tr.get("_exit_h4_index",-1))==len(h4)-1 and not bool(h4.completed.iloc[-1])
+                ):
                     raise ValueError("hit trade has no closed H4 boundary timestamp")
             except Exception as e:
                 if len(errors)<50:
@@ -527,15 +529,20 @@ def main():
         meta[inst]={"name":ASSETS[inst],**info}
         print(f"CANONICAL DATA {inst}: H4={len(h4):,} M5={len(m5):,}; SHA256={info['m5_cache_sha256']}",flush=True)
 
-    run1={}; run2={}; first_parts=[]
+    run1={}; run2={}; first_parts=[]; resample_identical={}
     for inst in gate1_instruments:
-        h=h4s[inst][["open","high","low","close"]]
-        run1[inst]=canonical_sim(h,N=55,M=27,rr=2.0)
-        run2[inst]=canonical_sim(h,N=55,M=27,rr=2.0)
+        h_first=canonical_load(str(data_dir),inst)
+        h_second=canonical_load(str(data_dir),inst)
+        ohlc=("open","high","low","close")
+        same_grid=h_first.index.equals(h_second.index)
+        same_ohlc=same_grid and h_first[list(ohlc)].equals(h_second[list(ohlc)])
+        resample_identical[inst]=bool(same_ohlc)
+        run1[inst]=canonical_sim(h_first[list(ohlc)],N=55,M=27,rr=2.0)
+        run2[inst]=canonical_sim(h_second[list(ohlc)],N=55,M=27,rr=2.0)
         for key,df in (("first",run1[inst]),("second",run2[inst])):
             d=df.copy(); d["inst"]=inst; d["run"]=key; first_parts.append(d)
     replay_identical={inst:run1[inst].equals(run2[inst]) for inst in gate1_instruments}
-    deterministic=all(replay_identical.values())
+    deterministic=all(replay_identical.values()) and all(resample_identical.values())
     T=pd.concat([run1[k].assign(inst=k) for k in gate1_instruments],ignore_index=True)
     T["y"]=T.t.dt.year
     gate1_years={"selection":(2017,2021),"forward":(2022,2025),"oos_2026":(2026,2026)}
@@ -552,8 +559,8 @@ def main():
             observed[phase][str(bp)]={"n":int(len(S)),"pf":float(v),
                 "total_r":float(canonical_net(S,bp).sum())}
     checks={
-        "deterministic_usa500":bool(replay_identical["usa500idxusd"]),
-        "deterministic_usatech":bool(replay_identical["usatechidxusd"]),
+        "deterministic_usa500":bool(replay_identical["usa500idxusd"] and resample_identical["usa500idxusd"]),
+        "deterministic_usatech":bool(replay_identical["usatechidxusd"] and resample_identical["usatechidxusd"]),
         "selection_n":observed["selection"]["1"]["n"]==expected["selection"]["n"],
         "selection_pf_1bp":round(observed["selection"]["1"]["pf"],3)==expected["selection"]["pf_1bp_rounded_3dp"],
         "forward_n":observed["forward"]["1"]["n"]==expected["forward"]["n"],
@@ -564,7 +571,7 @@ def main():
     gate1_pass=deterministic and all(checks.values())
     baseline_manifest={
         "status":"PASS" if gate1_pass else "FAIL",
-        "deterministic_replay":replay_identical,
+        "deterministic_replay":replay_identical,"identical_resample_grid_and_ohlc":resample_identical,
         "baseline_expected":expected,"baseline_observed":observed,
         "checks":checks,
         "source_hashes":{i:meta[i]["m5_cache_sha256"] for i in gate1_instruments},
@@ -594,7 +601,7 @@ def main():
         headline="Canonical replay is non-deterministic or does not match the locked official baseline for this cache version; stopped before Gate 2 and all basket performance metrics."
         result={"experiment":"R330","verdict":"GATE-MISMATCH","status_label":"GATE-MISMATCH (canonical determinism/data baseline), strategi belum dievaluasi",
             "stopped_at":"G1_CANONICAL_DETERMINISM_AND_BASELINE","gate1":gr1,"gate1_canonical_observed":observed,
-            "gate1_expected":expected,"gate1_checks":checks,"data_version":data_version,
+            "gate1_expected":expected,"checks":checks,"data_version":data_version,
             "remaining_criteria_status":"NOT_RUN_AFTER_GATE1_MISMATCH","note":"No R192 engine/metrics were used."}
         dump(out/"R330_results.json",result)
         rows=[{"phase":p,"years_ny":f"{a}-{b}","n":observed[p]["1"]["n"],
@@ -658,6 +665,15 @@ def main():
             print(f"SIM N={n} {inst}: signals={sd['signals']}; trades={len(ts)}",flush=True)
         pools[n]=joined; diagpool[n]={"by_instrument":{i:len(t) for i,t in per.items()}}
     base=pools[55]; base2=[t for t in base if t["instrument"] in ("usa500idxusd","usatechidxusd")]
+    r191_only_size={
+        "total_canonical_trade_rows":len(base2),
+        "trades_by_instrument":{inst:sum(t["instrument"]==inst for t in base2) for inst in ("usa500idxusd","usatechidxusd")},
+        "trades_by_entry_year_ny":{str(y):sum(pd.Timestamp(t["entry_time_utc"]).tz_convert("America/New_York").year==y for t in base2)
+                                   for y in range(2017,2027)},
+        "closed_trade_metrics":{}
+    }
+    for phase,start,end in (("discovery",D0,D1),("forward",F0,F1),("oos_2026",O0[0],common_end)):
+        r191_only_size["closed_trade_metrics"][phase]={str(bp):metric_local(base2,start,end,bp) for bp in COSTS}
 
     agg={}
     for phase,start,end in (("discovery",D0,D1),("forward",F0,F1),("oos_2026",O0[0],common_end)):
@@ -710,6 +726,10 @@ def main():
     for mm in agg.values():
         for m in mm.values():
             if valid_pf(m["pf"]): reported_pf.append(float(m["pf"]))
+    for phase in observed:
+        for bp in ("1","2","3"):
+            v=observed[phase][bp]["pf"]
+            if valid_pf(v): reported_pf.append(float(v))
     for row in ann+nbr+instrows+loo:
         for k,v in row.items():
             if "pf" in k and valid_pf(v): reported_pf.append(float(v))
@@ -745,8 +765,8 @@ def main():
         "periods":{"discovery":"2017-01-01 <= entry < 2022-01-01; outcomes closed before 2022-01-01",
         "forward":"2022-01-01 <= entry < 2026-01-01; outcomes closed before 2026-01-01",
         "oos_2026":"2026 entry cohort through common cached data cutoff"},
-        "common_data_cutoff_utc":common_end.isoformat(),"data":meta,
-        "gate1_replication":{"gate":gr1,"canonical_metrics":gate1_observed,"checks":gate1_checks},
+        "common_data_cutoff_utc":common_end.isoformat(),"data_version":data_version,"data":meta,"r191_only_baseline_size":r191_only_size,
+        "gate1_replication":{"gate":gr1,"canonical_metrics":observed,"checks":checks,"official_baseline":expected},
         "gate2_truncation":{"gate":gr2,"by_instrument":trunc},
         "pooled_metrics":agg,"pooled_annual":ann,"instrument_metrics":instrows,"neighborhood":nbr,"leave_one_out":loo,
         "correlation_overlap":{"daily_correlations":corr_summary,"overlap":ov},
@@ -759,19 +779,24 @@ def main():
         "required":json.dumps(clean(x["required"]),ensure_ascii=False),"detail":x["detail"]} for x in gates]).to_csv(out/"R330_gate_ledger.csv",index=False)
     report=[
         "# R330 FINAL VERDICT — R191 pooled over all ten indices","",f"**VERDICT: {verdict}.** {headline}","",
+        "## Data-version baseline","",
+        "The official R191 baseline is n=79/PF@1bp=2.134 in selection, n=68/PF@1bp=1.310/PF@2bp=1.304 in forward, and n=11/PF@2bp=1.673 in OOS 2026. This replaces the earlier unavailable-snapshot figures; the rule and PASS thresholds did not change. The M5 cache SHA-256 manifest is in R330_results.json.","",
+        "Combined source SHA-256: "+data_version["combined_sha256"],"",
         "## Locked rule","",
         "- NY-wall-clock H4, long-only, breakout 55, stop lookback 27 bars inclusive, target 2R.",
-        "- Primary canonical entry: open of the next NY-wall-clock H4 bar. manual5m is diagnostic only and excluded from all pass/fail gates.",
+        "- Primary canonical entry: open of the next NY-wall-clock H4 bar. all candidate and robustness runs use the supplied canonical H4-from-M5 engine; no R192 execution engine is used.",
         "- Costs are modeled round-trip price costs of 1/2/3bp; they are not measured broker fees/spread/slippage.",
         "- All ten indices pooled; no selection or exclusions. Discovery 2017–2021, forward 2022–2025, OOS 2026 once after hard gates.",
         "",
         "## Sequential hard gates","",
-        f"1. R191 canonical USA500+USATECH replication: {'PASS' if gr1['pass'] else 'FAIL'}; forward n={gate1_observed['forward']['1']['n']}, PF@1bp={gate1_observed['forward']['1']['pf']!r}, PF@2bp={gate1_observed['forward']['2']['pf']!r}; selection n={gate1_observed['selection']['1']['n']}, PF@1bp={gate1_observed['selection']['1']['pf']!r}; OOS n={gate1_observed['oos_2026']['2']['n']}, PF@2bp={gate1_observed['oos_2026']['2']['pf']!r}.",
+        f"1. R191 canonical deterministic replay and official-baseline check: {'PASS' if gr1['pass'] else 'FAIL'}; forward n={observed['forward']['1']['n']}, PF@1bp={observed['forward']['1']['pf']!r}, PF@2bp={observed['forward']['2']['pf']!r}; selection n={observed['selection']['1']['n']}, PF@1bp={observed['selection']['1']['pf']!r}; OOS n={observed['oos_2026']['2']['n']}, PF@2bp={observed['oos_2026']['2']['pf']!r}.",
         f"2. N=55 truncation on all ten: {'PASS' if gr2['pass'] else 'FAIL'}; {sum(bool(x['pass']) for x in trunc.values())}/10 passed.",
         "",
         "## Pooled annual entry-cohort table","",
         "PF uses risk-normalized R. Outcomes cut off at each phase boundary; 2026 is limited to common source cutoff.","",
         pd.DataFrame(ann).to_markdown(index=False),"",
+        "## R191-only benchmark size","",
+        json.dumps(clean(r191_only_size),indent=2,ensure_ascii=False),"",
         "## Aggregate metrics","",
         pd.DataFrame([{"phase":p,"cost_bps":int(bp),"n":m["n"],"PF":m["pf"],"entries":m["entries"],"censored":m["censored"]} for p,mm in agg.items() for bp,m in mm.items()]).to_markdown(index=False),"",
         "## Correlation and simultaneous exposure","",
