@@ -3,7 +3,385 @@
   "verdict": "GATE-MISMATCH",
   "status_label": "GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi",
   "stopped_at": "G1_R191_CANONICAL_REPLICATION",
-  "gate1_pass": false,
+  "gate1": {
+    "gate": "G1_R191_CANONICAL_REPLICATION",
+    "pass": false,
+    "observed": {
+      "canonical_script": {
+        "selection": {
+          "1": {
+            "entries": 79,
+            "n": 79,
+            "censored": 0,
+            "pf": 2.1344507712955396,
+            "wins_r": 81.83137200127523,
+            "losses_r": 38.33837402190651,
+            "total_r": 43.49299797936873
+          },
+          "2": {
+            "entries": 79,
+            "n": 79,
+            "censored": 0,
+            "pf": 2.121484650800913,
+            "wins_r": 81.66274400255047,
+            "losses_r": 38.493205205006205,
+            "total_r": 43.16953879754426
+          },
+          "3": {
+            "entries": 79,
+            "n": 79,
+            "censored": 0,
+            "pf": 2.108622419660779,
+            "wins_r": 81.49411600382571,
+            "losses_r": 38.64803638810591,
+            "total_r": 42.846079615719795
+          }
+        },
+        "forward": {
+          "1": {
+            "entries": 68,
+            "n": 68,
+            "censored": 0,
+            "pf": 1.3103452710799484,
+            "wins_r": 53.91450237654008,
+            "losses_r": 41.145264203613536,
+            "total_r": 12.769238172926539
+          },
+          "2": {
+            "entries": 68,
+            "n": 68,
+            "censored": 0,
+            "pf": 1.3042813506009419,
+            "wins_r": 53.82900475308016,
+            "losses_r": 41.271007001885515,
+            "total_r": 12.557997751194645
+          },
+          "3": {
+            "entries": 68,
+            "n": 68,
+            "censored": 0,
+            "pf": 1.2982542684888698,
+            "wins_r": 53.74350712962024,
+            "losses_r": 41.3967498001575,
+            "total_r": 12.346757329462747
+          }
+        },
+        "oos_2026": {
+          "1": {
+            "entries": 11,
+            "n": 11,
+            "censored": 0,
+            "pf": 1.6833237689562284,
+            "wins_r": 8.449786229661878,
+            "losses_r": 5.019703508910411,
+            "total_r": 3.430082720751467
+          },
+          "2": {
+            "entries": 11,
+            "n": 11,
+            "censored": 0,
+            "pf": 1.673449066010866,
+            "wins_r": 8.43319096722086,
+            "losses_r": 5.039407017820823,
+            "total_r": 3.393783949400037
+          },
+          "3": {
+            "entries": 11,
+            "n": 11,
+            "censored": 0,
+            "pf": 1.6636512802613006,
+            "wins_r": 8.416595704779839,
+            "losses_r": 5.059110526731233,
+            "total_r": 3.357485178048606
+          }
+        }
+      },
+      "r192_ideal_diagnostic_only": true,
+      "manual5m_diagnostic_only": {
+        "selection": {
+          "1": {
+            "entries": 92,
+            "n": 90,
+            "censored": 2,
+            "pf": 1.6604971717004513,
+            "wins_r": 81.83434114125679,
+            "losses_r": 49.283035548596196
+          },
+          "2": {
+            "entries": 92,
+            "n": 90,
+            "censored": 2,
+            "pf": 1.6482831387562495,
+            "wins_r": 81.66868228251359,
+            "losses_r": 49.54772657817673
+          },
+          "3": {
+            "entries": 92,
+            "n": 90,
+            "censored": 2,
+            "pf": 1.636198910592084,
+            "wins_r": 81.50302342377037,
+            "losses_r": 49.81241760775726
+          }
+        },
+        "forward": {
+          "1": {
+            "entries": 72,
+            "n": 70,
+            "censored": 2,
+            "pf": 1.4907313278375582,
+            "wins_r": 59.89138536748706,
+            "losses_r": 40.175841380059396
+          },
+          "2": {
+            "entries": 72,
+            "n": 70,
+            "censored": 2,
+            "pf": 1.4826412445527661,
+            "wins_r": 59.78277073497412,
+            "losses_r": 40.321804721551096
+          },
+          "3": {
+            "entries": 72,
+            "n": 70,
+            "censored": 2,
+            "pf": 1.4746095215702943,
+            "wins_r": 59.674156102461176,
+            "losses_r": 40.4677680630428
+          }
+        },
+        "oos_2026": {
+          "1": {
+            "entries": 13,
+            "n": 11,
+            "censored": 2,
+            "pf": 1.6574113344438315,
+            "wins_r": 9.982045074704356,
+            "losses_r": 6.022672143758433
+          },
+          "2": {
+            "entries": 13,
+            "n": 11,
+            "censored": 2,
+            "pf": 1.6482254236510119,
+            "wins_r": 9.964090149408714,
+            "losses_r": 6.045344287516867
+          },
+          "3": {
+            "entries": 13,
+            "n": 11,
+            "censored": 2,
+            "pf": 1.6391081561429977,
+            "wins_r": 9.946135224113071,
+            "losses_r": 6.068016431275301
+          }
+        }
+      },
+      "checks": {
+        "selection_n": false,
+        "selection_pf_1bp": false,
+        "forward_n": false,
+        "forward_pf_1bp": false,
+        "forward_pf_2bp": false,
+        "oos_2026_n": true,
+        "oos_2026_pf_2bp": false
+      },
+      "selection_years_ny": [
+        2017,
+        2021
+      ],
+      "forward_years_ny": [
+        2022,
+        2025
+      ],
+      "oos_year_ny": 2026
+    },
+    "required": {
+      "selection": {
+        "n": 78,
+        "pf_1bp_rounded_3dp": 2.082
+      },
+      "forward": {
+        "n": 70,
+        "pf_1bp_rounded_3dp": 1.247,
+        "pf_2bp_rounded_3dp": 1.241
+      },
+      "oos_2026": {
+        "n": 11,
+        "pf_2bp_rounded_3dp": 1.954
+      }
+    },
+    "detail": "Gate 1 uses the exact canonical script; R192 ideal/manual5m are comparison ledgers only."
+  },
+  "gate1_canonical_observed": {
+    "selection": {
+      "1": {
+        "entries": 79,
+        "n": 79,
+        "censored": 0,
+        "pf": 2.1344507712955396,
+        "wins_r": 81.83137200127523,
+        "losses_r": 38.33837402190651,
+        "total_r": 43.49299797936873
+      },
+      "2": {
+        "entries": 79,
+        "n": 79,
+        "censored": 0,
+        "pf": 2.121484650800913,
+        "wins_r": 81.66274400255047,
+        "losses_r": 38.493205205006205,
+        "total_r": 43.16953879754426
+      },
+      "3": {
+        "entries": 79,
+        "n": 79,
+        "censored": 0,
+        "pf": 2.108622419660779,
+        "wins_r": 81.49411600382571,
+        "losses_r": 38.64803638810591,
+        "total_r": 42.846079615719795
+      }
+    },
+    "forward": {
+      "1": {
+        "entries": 68,
+        "n": 68,
+        "censored": 0,
+        "pf": 1.3103452710799484,
+        "wins_r": 53.91450237654008,
+        "losses_r": 41.145264203613536,
+        "total_r": 12.769238172926539
+      },
+      "2": {
+        "entries": 68,
+        "n": 68,
+        "censored": 0,
+        "pf": 1.3042813506009419,
+        "wins_r": 53.82900475308016,
+        "losses_r": 41.271007001885515,
+        "total_r": 12.557997751194645
+      },
+      "3": {
+        "entries": 68,
+        "n": 68,
+        "censored": 0,
+        "pf": 1.2982542684888698,
+        "wins_r": 53.74350712962024,
+        "losses_r": 41.3967498001575,
+        "total_r": 12.346757329462747
+      }
+    },
+    "oos_2026": {
+      "1": {
+        "entries": 11,
+        "n": 11,
+        "censored": 0,
+        "pf": 1.6833237689562284,
+        "wins_r": 8.449786229661878,
+        "losses_r": 5.019703508910411,
+        "total_r": 3.430082720751467
+      },
+      "2": {
+        "entries": 11,
+        "n": 11,
+        "censored": 0,
+        "pf": 1.673449066010866,
+        "wins_r": 8.43319096722086,
+        "losses_r": 5.039407017820823,
+        "total_r": 3.393783949400037
+      },
+      "3": {
+        "entries": 11,
+        "n": 11,
+        "censored": 0,
+        "pf": 1.6636512802613006,
+        "wins_r": 8.416595704779839,
+        "losses_r": 5.059110526731233,
+        "total_r": 3.357485178048606
+      }
+    }
+  },
+  "gate1_manual5m_diagnostic": {
+    "selection": {
+      "1": {
+        "entries": 92,
+        "n": 90,
+        "censored": 2,
+        "pf": 1.6604971717004513,
+        "wins_r": 81.83434114125679,
+        "losses_r": 49.283035548596196
+      },
+      "2": {
+        "entries": 92,
+        "n": 90,
+        "censored": 2,
+        "pf": 1.6482831387562495,
+        "wins_r": 81.66868228251359,
+        "losses_r": 49.54772657817673
+      },
+      "3": {
+        "entries": 92,
+        "n": 90,
+        "censored": 2,
+        "pf": 1.636198910592084,
+        "wins_r": 81.50302342377037,
+        "losses_r": 49.81241760775726
+      }
+    },
+    "forward": {
+      "1": {
+        "entries": 72,
+        "n": 70,
+        "censored": 2,
+        "pf": 1.4907313278375582,
+        "wins_r": 59.89138536748706,
+        "losses_r": 40.175841380059396
+      },
+      "2": {
+        "entries": 72,
+        "n": 70,
+        "censored": 2,
+        "pf": 1.4826412445527661,
+        "wins_r": 59.78277073497412,
+        "losses_r": 40.321804721551096
+      },
+      "3": {
+        "entries": 72,
+        "n": 70,
+        "censored": 2,
+        "pf": 1.4746095215702943,
+        "wins_r": 59.674156102461176,
+        "losses_r": 40.4677680630428
+      }
+    },
+    "oos_2026": {
+      "1": {
+        "entries": 13,
+        "n": 11,
+        "censored": 2,
+        "pf": 1.6574113344438315,
+        "wins_r": 9.982045074704356,
+        "losses_r": 6.022672143758433
+      },
+      "2": {
+        "entries": 13,
+        "n": 11,
+        "censored": 2,
+        "pf": 1.6482254236510119,
+        "wins_r": 9.964090149408714,
+        "losses_r": 6.045344287516867
+      },
+      "3": {
+        "entries": 13,
+        "n": 11,
+        "censored": 2,
+        "pf": 1.6391081561429977,
+        "wins_r": 9.946135224113071,
+        "losses_r": 6.068016431275301
+      }
+    }
+  },
   "gate1_expected": {
     "selection": {
       "n": 78,
@@ -19,186 +397,139 @@
       "pf_2bp_rounded_3dp": 1.954
     }
   },
-  "gate1_observed_from_archived_R194_ledger": {
-    "selection": {
-      "start": "2017-01-01",
-      "end": "2022-01-01",
-      "canonical": {
-        "entries": 89,
-        "n": 87,
-        "censored": 2,
-        "pf1": 1.8514671336158095,
-        "pf2": 1.8378299614928053,
-        "pf3": 1.8243374446151042
-      },
-      "manual5m": {
-        "entries": 92,
-        "n": 90,
-        "censored": 2,
-        "pf1": 1.6604971717004513,
-        "pf2": 1.6482831387562495,
-        "pf3": 1.636198910592084
-      }
-    },
-    "forward": {
-      "start": "2022-01-01",
-      "end": "2026-01-01",
-      "canonical": {
-        "entries": 77,
-        "n": 75,
-        "censored": 2,
-        "pf1": 1.325246611689949,
-        "pf2": 1.318091917926055,
-        "pf3": 1.31098897914714
-      },
-      "manual5m": {
-        "entries": 72,
-        "n": 70,
-        "censored": 2,
-        "pf1": 1.4907313278375587,
-        "pf2": 1.4826412445527661,
-        "pf3": 1.4746095215702943
-      }
-    },
-    "oos_2026": {
-      "start": "2026-01-01",
-      "end": "2026-10-09T20:00:00Z",
-      "canonical": {
-        "entries": 12,
-        "n": 10,
-        "censored": 2,
-        "pf1": 1.9887202686124015,
-        "pf2": 1.9775269974597847,
-        "pf3": 1.9664191962483704
-      },
-      "manual5m": {
-        "entries": 13,
-        "n": 11,
-        "censored": 2,
-        "pf1": 1.657411334443833,
-        "pf2": 1.6482254236510132,
-        "pf3": 1.6391081561429985
-      }
-    }
-  },
   "gate1_checks": {
     "selection_n": false,
     "selection_pf_1bp": false,
     "forward_n": false,
     "forward_pf_1bp": false,
     "forward_pf_2bp": false,
-    "oos_n": false,
-    "oos_pf_2bp": false
+    "oos_2026_n": true,
+    "oos_2026_pf_2bp": false
   },
-  "source": {
-    "workflow_run_id": 38133085545,
-    "workflow_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/38133085545",
-    "artifact_id": 11700178416,
-    "artifact_name": "R194-ten-index-audit",
-    "file": "trades.csv",
-    "common_cutoff_utc": "2026-10-09T20:00:00Z",
-    "method": "Filter existing R194 trades.csv to USA500+USATECH and mode=ideal (the R192 helper's next-H4-open entry), then recompute R192 cost/PF formula. This is the canonical-equivalent check available in the tracked source."
-  },
-  "canonical_script_availability": {
-    "requested": "R191_CANONICAL_index_trend_long.py",
-    "found_in_tracked_repository": false,
-    "found_in_project_files": false,
-    "limitation": "The exact named script was absent from the accessible repo and project files, so this interim result is not claimed to be a run of that exact file. The R192 mode ideal explicitly enters at the next H4 bar open."
-  },
-  "manual5m_diagnostic_only": {
-    "selection": {
-      "start": "2017-01-01",
-      "end": "2022-01-01",
-      "canonical": {
-        "entries": 89,
-        "n": 87,
-        "censored": 2,
-        "pf1": 1.8514671336158095,
-        "pf2": 1.8378299614928053,
-        "pf3": 1.8243374446151042
-      },
-      "manual5m": {
-        "entries": 92,
-        "n": 90,
-        "censored": 2,
-        "pf1": 1.6604971717004513,
-        "pf2": 1.6482831387562495,
-        "pf3": 1.636198910592084
-      }
+  "first_trade_mismatch": {
+    "instrument": "usa500idxusd",
+    "trade_ordinal_within_instrument_post2017": 1,
+    "comparison_window": "entry year >= 2017 in America/New_York",
+    "different_fields": [
+      "entry_timestamp",
+      "entry_price",
+      "sl",
+      "risk"
+    ],
+    "canonical_trade": {
+      "instrument": "usa500idxusd",
+      "trade_ordinal": 1,
+      "signal_bar_ny": "2017-01-24T13:00:00-05:00",
+      "signal_bar_utc": "2017-01-24T18:00:00+00:00",
+      "entry_time_ny": "2017-01-24T17:00:00-05:00",
+      "entry_time_utc": "2017-01-24T22:00:00+00:00",
+      "entry": 2281.531,
+      "sl": 2256.061,
+      "tp": 2332.4709999999995,
+      "risk_points": 25.4699999999998,
+      "gross_r": 2.0,
+      "gross_exit_derived": 2332.4709999999995,
+      "entry_year_ny": 2017
     },
-    "forward": {
-      "start": "2022-01-01",
-      "end": "2026-01-01",
-      "canonical": {
-        "entries": 77,
-        "n": 75,
-        "censored": 2,
-        "pf1": 1.325246611689949,
-        "pf2": 1.318091917926055,
-        "pf3": 1.31098897914714
-      },
-      "manual5m": {
-        "entries": 72,
-        "n": 70,
-        "censored": 2,
-        "pf1": 1.4907313278375587,
-        "pf2": 1.4826412445527661,
-        "pf3": 1.4746095215702943
-      }
+    "r192_ideal_trade": {
+      "config": "R191_BASE_55_27_RR2",
+      "role": "locked_baseline",
+      "breakout": 55,
+      "stop_bars": 27,
+      "mode": "ideal",
+      "signal_bar_utc": "2017-03-01T06:00:00+00:00",
+      "signal_close_utc": "2017-03-01T10:00:00+00:00",
+      "entry_time_utc": "2017-03-01T10:00:00+00:00",
+      "entry": 2374.12,
+      "sl": 2358.349,
+      "tp": 2405.6619999999994,
+      "exit_time_utc": "2017-03-09T19:00:00+00:00",
+      "exit": 2358.349,
+      "reason": "SL",
+      "entry_exact_m5_timestamp": true,
+      "risk_points": 15.77099999999973,
+      "flat_m5_bars_skipped_while_open": 504,
+      "instrument": "usa500idxusd",
+      "instrument_name": "USA 500 / S&P 500"
     },
-    "oos_2026": {
-      "start": "2026-01-01",
-      "end": "2026-10-09T20:00:00Z",
-      "canonical": {
-        "entries": 12,
-        "n": 10,
-        "censored": 2,
-        "pf1": 1.9887202686124015,
-        "pf2": 1.9775269974597847,
-        "pf3": 1.9664191962483704
+    "bar_grid_checks": {
+      "canonical_signal_label_exists_in_r192_grid": false,
+      "canonical_entry_label_exists_in_r192_grid": false,
+      "canonical_signal_label_exists_in_canonical_grid": false
+    },
+    "same_signal_candidate_in_r192_h4": {
+      "signal_label_ny": "2017-01-24T13:00:00-05:00",
+      "signal_label_utc": "2017-01-24T18:00:00+00:00",
+      "canonical_signal": true,
+      "canonical_signal_close": 2279.8,
+      "canonical_prior_55bar_high": 2278.058,
+      "canonical_sl_27bar_low": 2256.061,
+      "canonical_next_h4_open_time_utc": "2017-01-24T22:00:00+00:00",
+      "canonical_next_h4_open": 2281.531,
+      "canonical_risk": 25.4699999999998
+    },
+    "r192_position_blocker_at_candidate_signal_close": null,
+    "cause_assessment": "The canonical signal label is absent from R192's H4 grid; this is a true boundary/grid mismatch at this label."
+  },
+  "remaining_criteria_status": "NOT_RUN_AFTER_GATE_MISMATCH",
+  "entry_convention_amendment": {
+    "primary": "exact canonical M5-resample/sim; next-H4-open entry",
+    "manual5m": "diagnostic only"
+  },
+  "canonical_source": "research/R191_CANONICAL_index_trend_long.py",
+  "canonical_trade_ledger": "research/R330_G1_canonical_trades.csv",
+  "r192_ideal_trade_ledger": "research/R330_G1_r192_ideal_trades.csv",
+  "first_trade_difference_file": "research/R330_G1_first_trade_mismatch.json",
+  "data": {
+    "usa500idxusd": {
+      "name": "USA 500 / S&P 500",
+      "h1_rows": 93905,
+      "m5_rows": 889572,
+      "h1_duplicates_removed": 0,
+      "m5_duplicates_removed": 0,
+      "h1_start_utc": "2016-01-01T00:00:00+00:00",
+      "h1_end_utc": "2026-10-23T20:00:00+00:00",
+      "m5_start_utc": "2016-01-04T00:00:00+00:00",
+      "m5_end_utc": "2026-10-23T20:10:00+00:00",
+      "flat_m5_rows": 207884,
+      "source_h1_rows": 93905,
+      "h4_rows": 23520,
+      "flat_h1_rows": 34972,
+      "flat_h4_rows": 8010,
+      "h4_bins_with_unexpected_h1_count": 72,
+      "h4_elapsed_duration_hours_counts": {
+        "4.0": 23499,
+        "3.0": 11,
+        "5.0": 10
       },
-      "manual5m": {
-        "entries": 13,
-        "n": 11,
-        "censored": 2,
-        "pf1": 1.657411334443833,
-        "pf2": 1.6482254236510132,
-        "pf3": 1.6391081561429985
-      }
+      "flat_policy": "existing flat H1/H4 bars retained and counted; never forward-filled",
+      "resample": "explicit America/New_York wall-clock boundaries 01/05/09/13/17/21; left-closed/right-open",
+      "dst_policy": "01:00 autumn ambiguity chooses first occurrence; spring 01->05 bin is 3 elapsed hours and autumn bin is 5"
+    },
+    "usatechidxusd": {
+      "name": "USA 100 Tech / Nasdaq 100",
+      "h1_rows": 93904,
+      "m5_rows": 889405,
+      "h1_duplicates_removed": 0,
+      "m5_duplicates_removed": 0,
+      "h1_start_utc": "2016-01-01T00:00:00+00:00",
+      "h1_end_utc": "2026-10-23T20:00:00+00:00",
+      "m5_start_utc": "2016-01-04T00:00:00+00:00",
+      "m5_end_utc": "2026-10-23T20:10:00+00:00",
+      "flat_m5_rows": 207187,
+      "source_h1_rows": 93904,
+      "h4_rows": 23520,
+      "flat_h1_rows": 35002,
+      "flat_h4_rows": 8028,
+      "h4_bins_with_unexpected_h1_count": 73,
+      "h4_elapsed_duration_hours_counts": {
+        "4.0": 23499,
+        "3.0": 11,
+        "5.0": 10
+      },
+      "flat_policy": "existing flat H1/H4 bars retained and counted; never forward-filled",
+      "resample": "explicit America/New_York wall-clock boundaries 01/05/09/13/17/21; left-closed/right-open",
+      "dst_policy": "01:00 autumn ambiguity chooses first occurrence; spring 01->05 bin is 3 elapsed hours and autumn bin is 5"
     }
-  },
-  "causality": {
-    "required": true,
-    "status": "NOT_VERIFIED_FROM_ARCHIVED_TRADE_LEDGER",
-    "detail": "PF values exceed 1.4; the old artifact contains a trade ledger but not the source OHLC path needed for a full first-hit audit. The revised R330 runner will run the raw OHLC causal audit before stopping if the canonical preflight is reproduced on loaded data."
-  },
-  "remaining_criteria": {
-    "gate2_truncation_all_10": "NOT_RUN",
-    "pooled_forward": "NOT_RUN",
-    "pooled_discovery": "NOT_RUN",
-    "worst_forward_year": "NOT_RUN",
-    "neighborhood_N40_N55_N80": "NOT_RUN",
-    "leave_one_out": "NOT_RUN",
-    "stellar_2step_simulation": "NOT_RUN",
-    "correlation_and_overlap": "NOT_RUN"
-  },
-  "locked_parameters": {
-    "timezone": "America/New_York",
-    "timeframe": "H4",
-    "N": 55,
-    "M": 27,
-    "RR": 2,
-    "direction": "long-only",
-    "costs_bps": [
-      1,
-      2,
-      3
-    ]
-  },
-  "guardrails": [
-    "No tuning.",
-    "No instrument removal or selection.",
-    "No replacement variant.",
-    "No strategy PASS/FAIL issued from a gate-definition mismatch."
-  ]
+  }
 }

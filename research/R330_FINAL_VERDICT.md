@@ -1,31 +1,95 @@
 # R330 STATUS — GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi
 
-## Amandemen Gate 1
+## Canonical Gate 1 run
 
-Gate 1 harus memakai entry canonical: open bar H4 berikutnya. PF manual5m sebesar 1.491 sebelumnya **bukan** bukti replikasi canonical gagal dan tidak dipakai untuk pass/fail. Manual5m hanya diagnostik.
+The canonical source is stored as research/R191_CANONICAL_index_trend_long.py. Strategy code is unchanged; only the loader accepts repository M5 CSV.GZ cache. Gate 1 is decided by canonical output, not R192 ideal or manual5m.
 
-File bernama R191_CANONICAL_index_trend_long.py tidak ditemukan dalam tree repository atau file Project yang tersedia. Karena itu angka interim di bawah berasal dari ledger tersimpan R194, difilter ke USA500+USATECH mode ideal pada helper R192 (entry open bar H4 berikutnya). Ini adalah pemeriksaan canonical-equivalent, bukan klaim bahwa file bernama tersebut sudah dijalankan. Window selection juga belum bisa dibandingkan dengan definisi asli script; yang tersedia adalah discovery R192: entry 2017-01-01 sampai sebelum 2022-01-01.
+| phase     | years_ny   |   canonical_n |   canonical_pf_1bp |   canonical_pf_2bp |   canonical_pf_3bp |   expected_n |   expected_pf_1bp |   expected_pf_2bp |
+|:----------|:-----------|--------------:|-------------------:|-------------------:|-------------------:|-------------:|------------------:|------------------:|
+| selection | 2017-2021  |            79 |            2.13445 |            2.12148 |            2.10862 |           78 |             2.082 |           nan     |
+| forward   | 2022-2025  |            68 |            1.31035 |            1.30428 |            1.29825 |           70 |             1.247 |             1.241 |
+| oos_2026  | 2026-2026  |            11 |            1.68332 |            1.67345 |            1.66365 |           11 |           nan     |             1.954 |
 
-## Gate 1 — canonical-equivalent observed vs target
+## First post-2017 trade-level divergence
 
-| Phase | Entries | Closed n | Censored | PF@1bp | PF@2bp | PF@3bp | Target n | Target PF@1bp | Target PF@2bp |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Selection / available discovery 2017–2021 | 89 | 87 | 2 | 1.851 | 1.838 | 1.824 | 78 | 2.082 | — |
-| Forward 2022–2025 | 77 | 75 | 2 | 1.325 | 1.318 | 1.311 | 70 | 1.247 | 1.241 |
-| OOS 2026 through archived common cutoff | 12 | 10 | 2 | 1.989 | 1.978 | 1.966 | 11 | — | 1.954 |
+The comparison below filters the trade streams to entry year >=2017 in New York. The full R192 ledger is still preserved, including pre-2017 trades, because a pre-period position can block a post-period signal.
 
-PF uses the R192 helper's risk-normalized net-R convention: round-trip cost = entry × bps / 10,000; PF = summed positive net R / absolute summed negative net R. Source is the existing R194 audit artifact, run 38133085545 / artifact 11700178416, common cutoff 2026-10-09 20:00 UTC.
+{
+  "instrument": "usa500idxusd",
+  "trade_ordinal_within_instrument_post2017": 1,
+  "comparison_window": "entry year >= 2017 in America/New_York",
+  "different_fields": [
+    "entry_timestamp",
+    "entry_price",
+    "sl",
+    "risk"
+  ],
+  "canonical_trade": {
+    "instrument": "usa500idxusd",
+    "trade_ordinal": 1,
+    "signal_bar_ny": "2017-01-24T13:00:00-05:00",
+    "signal_bar_utc": "2017-01-24T18:00:00+00:00",
+    "entry_time_ny": "2017-01-24T17:00:00-05:00",
+    "entry_time_utc": "2017-01-24T22:00:00+00:00",
+    "entry": 2281.531,
+    "sl": 2256.061,
+    "tp": 2332.4709999999995,
+    "risk_points": 25.4699999999998,
+    "gross_r": 2.0,
+    "gross_exit_derived": 2332.4709999999995,
+    "entry_year_ny": 2017
+  },
+  "r192_ideal_trade": {
+    "config": "R191_BASE_55_27_RR2",
+    "role": "locked_baseline",
+    "breakout": 55,
+    "stop_bars": 27,
+    "mode": "ideal",
+    "signal_bar_utc": "2017-03-01T06:00:00+00:00",
+    "signal_close_utc": "2017-03-01T10:00:00+00:00",
+    "entry_time_utc": "2017-03-01T10:00:00+00:00",
+    "entry": 2374.12,
+    "sl": 2358.349,
+    "tp": 2405.6619999999994,
+    "exit_time_utc": "2017-03-09T19:00:00+00:00",
+    "exit": 2358.349,
+    "reason": "SL",
+    "entry_exact_m5_timestamp": true,
+    "risk_points": 15.77099999999973,
+    "flat_m5_bars_skipped_while_open": 504,
+    "instrument": "usa500idxusd",
+    "instrument_name": "USA 500 / S&P 500"
+  },
+  "bar_grid_checks": {
+    "canonical_signal_label_exists_in_r192_grid": false,
+    "canonical_entry_label_exists_in_r192_grid": false,
+    "canonical_signal_label_exists_in_canonical_grid": false
+  },
+  "same_signal_candidate_in_r192_h4": {
+    "signal_label_ny": "2017-01-24T13:00:00-05:00",
+    "signal_label_utc": "2017-01-24T18:00:00+00:00",
+    "canonical_signal": true,
+    "canonical_signal_close": 2279.8,
+    "canonical_prior_55bar_high": 2278.058,
+    "canonical_sl_27bar_low": 2256.061,
+    "canonical_next_h4_open_time_utc": "2017-01-24T22:00:00+00:00",
+    "canonical_next_h4_open": 2281.531,
+    "canonical_risk": 25.4699999999998
+  },
+  "r192_position_blocker_at_candidate_signal_close": null,
+  "cause_assessment": "The canonical signal label is absent from R192's H4 grid; this is a true boundary/grid mismatch at this label."
+}
 
-## Manual5m comparison — diagnostic only, never used for pass/fail
+Full ledgers: research/R330_G1_canonical_trades.csv and research/R330_G1_r192_ideal_trades.csv. Details: research/R330_G1_first_trade_mismatch.json.
 
-| Phase | Entries | Closed n | Censored | PF@1bp | PF@2bp | PF@3bp |
-|---|---:|---:|---:|---:|---:|---:|
-| Selection / available discovery 2017–2021 | 92 | 90 | 2 | 1.660 | 1.648 | 1.636 |
-| Forward 2022–2025 | 72 | 70 | 2 | 1.491 | 1.483 | 1.475 |
-| OOS 2026 through archived common cutoff | 13 | 11 | 2 | 1.657 | 1.648 | 1.639 |
+## Manual5m diagnostic (not used for pass/fail)
 
-## Decision and stop point
+| phase     | entry_convention   | pass_fail_use   |   n_1bp |   pf_1bp |   entries_1bp |   censored_1bp |   n_2bp |   pf_2bp |   entries_2bp |   censored_2bp |   n_3bp |   pf_3bp |   entries_3bp |   censored_3bp |
+|:----------|:-------------------|:----------------|--------:|---------:|--------------:|---------------:|--------:|---------:|--------------:|---------------:|--------:|---------:|--------------:|---------------:|
+| selection | manual5m           | False           |      90 |  1.6605  |            92 |              2 |      90 |  1.64828 |            92 |              2 |      90 |  1.6362  |            92 |              2 |
+| forward   | manual5m           | False           |      70 |  1.49073 |            72 |              2 |      70 |  1.48264 |            72 |              2 |      70 |  1.47461 |            72 |              2 |
+| oos_2026  | manual5m           | False           |      11 |  1.65741 |            13 |              2 |      11 |  1.64823 |            13 |              2 |      11 |  1.63911 |            13 |              2 |
 
-**GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi.** The available canonical-equivalent stream does not reproduce the supplied targets (especially forward n/PF and 2026 OOS n/PF). Under the hard-stop rule, Gate 2, pooled performance, worst year, neighborhoods, leave-one-out, correlation/overlap and challenge simulation were not run. No tuning, instrument removal, or replacement variant was attempted.
+## Decision
 
-Causality remains unverified from the archived ledger because the artifact lacks raw OHLC paths. The revised R330 runner now uses next-H4-open entry for the primary candidate, keeps manual5m diagnostic-only, and triggers an OHLC path audit whenever any Gate 1 PF exceeds 1.4 if the fresh canonical preflight can be reproduced.
+**GATE-MISMATCH (definisi konvensi entry), strategi belum dievaluasi.** Gate 2 and all pooled criteria are NOT RUN. No pooled PF, neighborhood, leave-one-out, correlation/overlap, or funded challenge simulation was calculated.

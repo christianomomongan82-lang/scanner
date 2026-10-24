@@ -1,0 +1,205 @@
+{
+  "first_difference": {
+    "instrument": "usa500idxusd",
+    "trade_ordinal_within_instrument_post2017": 1,
+    "comparison_window": "entry year >= 2017 in America/New_York",
+    "different_fields": [
+      "entry_timestamp",
+      "entry_price",
+      "sl",
+      "risk"
+    ],
+    "canonical_trade": {
+      "instrument": "usa500idxusd",
+      "trade_ordinal": 1,
+      "signal_bar_ny": "2017-01-24T13:00:00-05:00",
+      "signal_bar_utc": "2017-01-24T18:00:00+00:00",
+      "entry_time_ny": "2017-01-24T17:00:00-05:00",
+      "entry_time_utc": "2017-01-24T22:00:00+00:00",
+      "entry": 2281.531,
+      "sl": 2256.061,
+      "tp": 2332.4709999999995,
+      "risk_points": 25.4699999999998,
+      "gross_r": 2.0,
+      "gross_exit_derived": 2332.4709999999995,
+      "entry_year_ny": 2017
+    },
+    "r192_ideal_trade": {
+      "config": "R191_BASE_55_27_RR2",
+      "role": "locked_baseline",
+      "breakout": 55,
+      "stop_bars": 27,
+      "mode": "ideal",
+      "signal_bar_utc": "2017-03-01T06:00:00+00:00",
+      "signal_close_utc": "2017-03-01T10:00:00+00:00",
+      "entry_time_utc": "2017-03-01T10:00:00+00:00",
+      "entry": 2374.12,
+      "sl": 2358.349,
+      "tp": 2405.6619999999994,
+      "exit_time_utc": "2017-03-09T19:00:00+00:00",
+      "exit": 2358.349,
+      "reason": "SL",
+      "entry_exact_m5_timestamp": true,
+      "risk_points": 15.77099999999973,
+      "flat_m5_bars_skipped_while_open": 504,
+      "instrument": "usa500idxusd",
+      "instrument_name": "USA 500 / S&P 500"
+    },
+    "bar_grid_checks": {
+      "canonical_signal_label_exists_in_r192_grid": false,
+      "canonical_entry_label_exists_in_r192_grid": false,
+      "canonical_signal_label_exists_in_canonical_grid": false
+    },
+    "same_signal_candidate_in_r192_h4": {
+      "signal_label_ny": "2017-01-24T13:00:00-05:00",
+      "signal_label_utc": "2017-01-24T18:00:00+00:00",
+      "canonical_signal": true,
+      "canonical_signal_close": 2279.8,
+      "canonical_prior_55bar_high": 2278.058,
+      "canonical_sl_27bar_low": 2256.061,
+      "canonical_next_h4_open_time_utc": "2017-01-24T22:00:00+00:00",
+      "canonical_next_h4_open": 2281.531,
+      "canonical_risk": 25.4699999999998
+    },
+    "r192_position_blocker_at_candidate_signal_close": null,
+    "cause_assessment": "The canonical signal label is absent from R192's H4 grid; this is a true boundary/grid mismatch at this label."
+  },
+  "first_difference_per_instrument": [
+    {
+      "instrument": "usa500idxusd",
+      "trade_ordinal_within_instrument_post2017": 1,
+      "comparison_window": "entry year >= 2017 in America/New_York",
+      "different_fields": [
+        "entry_timestamp",
+        "entry_price",
+        "sl",
+        "risk"
+      ],
+      "canonical_trade": {
+        "instrument": "usa500idxusd",
+        "trade_ordinal": 1,
+        "signal_bar_ny": "2017-01-24T13:00:00-05:00",
+        "signal_bar_utc": "2017-01-24T18:00:00+00:00",
+        "entry_time_ny": "2017-01-24T17:00:00-05:00",
+        "entry_time_utc": "2017-01-24T22:00:00+00:00",
+        "entry": 2281.531,
+        "sl": 2256.061,
+        "tp": 2332.4709999999995,
+        "risk_points": 25.4699999999998,
+        "gross_r": 2.0,
+        "gross_exit_derived": 2332.4709999999995,
+        "entry_year_ny": 2017
+      },
+      "r192_ideal_trade": {
+        "config": "R191_BASE_55_27_RR2",
+        "role": "locked_baseline",
+        "breakout": 55,
+        "stop_bars": 27,
+        "mode": "ideal",
+        "signal_bar_utc": "2017-03-01T06:00:00+00:00",
+        "signal_close_utc": "2017-03-01T10:00:00+00:00",
+        "entry_time_utc": "2017-03-01T10:00:00+00:00",
+        "entry": 2374.12,
+        "sl": 2358.349,
+        "tp": 2405.6619999999994,
+        "exit_time_utc": "2017-03-09T19:00:00+00:00",
+        "exit": 2358.349,
+        "reason": "SL",
+        "entry_exact_m5_timestamp": true,
+        "risk_points": 15.77099999999973,
+        "flat_m5_bars_skipped_while_open": 504,
+        "instrument": "usa500idxusd",
+        "instrument_name": "USA 500 / S&P 500"
+      },
+      "bar_grid_checks": {
+        "canonical_signal_label_exists_in_r192_grid": false,
+        "canonical_entry_label_exists_in_r192_grid": false,
+        "canonical_signal_label_exists_in_canonical_grid": false
+      },
+      "same_signal_candidate_in_r192_h4": {
+        "signal_label_ny": "2017-01-24T13:00:00-05:00",
+        "signal_label_utc": "2017-01-24T18:00:00+00:00",
+        "canonical_signal": true,
+        "canonical_signal_close": 2279.8,
+        "canonical_prior_55bar_high": 2278.058,
+        "canonical_sl_27bar_low": 2256.061,
+        "canonical_next_h4_open_time_utc": "2017-01-24T22:00:00+00:00",
+        "canonical_next_h4_open": 2281.531,
+        "canonical_risk": 25.4699999999998
+      },
+      "r192_position_blocker_at_candidate_signal_close": null,
+      "cause_assessment": "The canonical signal label is absent from R192's H4 grid; this is a true boundary/grid mismatch at this label."
+    },
+    {
+      "instrument": "usatechidxusd",
+      "trade_ordinal_within_instrument_post2017": 1,
+      "comparison_window": "entry year >= 2017 in America/New_York",
+      "different_fields": [
+        "entry_timestamp",
+        "entry_price",
+        "sl",
+        "risk"
+      ],
+      "canonical_trade": {
+        "instrument": "usatechidxusd",
+        "trade_ordinal": 1,
+        "signal_bar_ny": "2017-01-24T13:00:00-05:00",
+        "signal_bar_utc": "2017-01-24T18:00:00+00:00",
+        "entry_time_ny": "2017-01-24T17:00:00-05:00",
+        "entry_time_utc": "2017-01-24T22:00:00+00:00",
+        "entry": 5111.343,
+        "sl": 5034.004,
+        "tp": 5266.021,
+        "risk_points": 77.33899999999994,
+        "gross_r": 2.0,
+        "gross_exit_derived": 5266.021,
+        "entry_year_ny": 2017
+      },
+      "r192_ideal_trade": {
+        "config": "R191_BASE_55_27_RR2",
+        "role": "locked_baseline",
+        "breakout": 55,
+        "stop_bars": 27,
+        "mode": "ideal",
+        "signal_bar_utc": "2017-03-16T05:00:00+00:00",
+        "signal_close_utc": "2017-03-16T09:00:00+00:00",
+        "entry_time_utc": "2017-03-16T09:00:00+00:00",
+        "entry": 5430.753,
+        "sl": 5359.293,
+        "tp": 5573.673,
+        "exit_time_utc": "2017-03-21T15:30:00+00:00",
+        "exit": 5359.293,
+        "reason": "SL",
+        "entry_exact_m5_timestamp": true,
+        "risk_points": 71.46000000000004,
+        "flat_m5_bars_skipped_while_open": 216,
+        "instrument": "usatechidxusd",
+        "instrument_name": "USA 100 Tech / Nasdaq 100"
+      },
+      "bar_grid_checks": {
+        "canonical_signal_label_exists_in_r192_grid": false,
+        "canonical_entry_label_exists_in_r192_grid": false,
+        "canonical_signal_label_exists_in_canonical_grid": false
+      },
+      "same_signal_candidate_in_r192_h4": {
+        "signal_label_ny": "2017-01-24T13:00:00-05:00",
+        "signal_label_utc": "2017-01-24T18:00:00+00:00",
+        "canonical_signal": true,
+        "canonical_signal_close": 5099.47,
+        "canonical_prior_55bar_high": 5085.339,
+        "canonical_sl_27bar_low": 5034.004,
+        "canonical_next_h4_open_time_utc": "2017-01-24T22:00:00+00:00",
+        "canonical_next_h4_open": 5111.343,
+        "canonical_risk": 77.33899999999994
+      },
+      "r192_position_blocker_at_candidate_signal_close": null,
+      "cause_assessment": "The canonical signal label is absent from R192's H4 grid; this is a true boundary/grid mismatch at this label."
+    }
+  ],
+  "comparison_rule": "First ordinal mismatch after filtering both streams to entry year >=2017 in America/New_York; full R192 CSV also retains pre-2017 trades to diagnose active-position carryover.",
+  "H4_methods": {
+    "canonical": "the supplied script: M5 OHLC resample 4h offset=1h, label=left, closed=left, in America/New_York",
+    "r192_ideal": "R192 H1 explicit NY wall-clock boundaries 01/05/09/13/17/21"
+  },
+  "scope": "Gate 1 mismatch only; Gate 2 and all pooled criteria were not run."
+}
