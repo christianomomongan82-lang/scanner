@@ -5,6 +5,10 @@ YEAR="$2"
 OUT="$3"
 mkdir -p dl/chunks
 NEXT=$((YEAR + 1))
+# Dukascopy returned empty files before this instrument's source-history start.
+# Keep US Small Cap 2000 in every pooled test from its first available M5 bar onward.
+HISTORY_START="2017-01-01"
+if [ "$INST" = "ussc2000idxusd" ]; then HISTORY_START="2018-08-08"; fi
 
 for Q in 1 2 3 4; do
   case "$Q" in
@@ -23,6 +27,10 @@ for Q in 1 2 3 4; do
   fi
 
   FROM="$YEAR-$QM-01"
+  if [ "$QTO" != "now" ] && { [[ "$QTO" < "$HISTORY_START" ]] || [[ "$QTO" == "$HISTORY_START" ]]; }; then
+    echo "NO SOURCE HISTORY: $QB ends before $HISTORY_START; quarter is absent by source availability, not removed from the basket."
+    continue
+  fi
   MAX_ATTEMPTS=3
   OK=false
   for ATTEMPT in $(seq 1 "$MAX_ATTEMPTS"); do
@@ -55,6 +63,10 @@ FIRST=true
 for Q in 1 2 3 4; do
   QB="$INST"_m5q_"$YEAR"_Q"$Q"
   QC="dl/chunks/$QB.csv.gz"
+  if [ ! -s "$QC" ] || ! gzip -t "$QC" >/dev/null 2>&1; then
+    echo "SKIP ABSENT PRE-INCEPTION QUARTER: $QB"
+    continue
+  fi
   if [ "$FIRST" = "true" ]; then
     gzip -cd "$QC" > "$RAW"
     FIRST=false
@@ -62,6 +74,11 @@ for Q in 1 2 3 4; do
     gzip -cd "$QC" | tail -n +2 >> "$RAW"
   fi
 done
+if [ "$FIRST" = "true" ]; then
+  rm -f "$RAW" "$OUT"
+  echo "NO SOURCE DATA for $INST in $YEAR before its documented history start $HISTORY_START."
+  exit 0
+fi
 LINES=$(wc -l < "$RAW" 2>/dev/null || echo 0)
 if [ ! -s "$RAW" ] || [ "$LINES" -le 1000 ] || ! gzip -1 "$RAW" || ! gzip -t "$OUT"; then
   rm -f "$RAW" "$OUT"

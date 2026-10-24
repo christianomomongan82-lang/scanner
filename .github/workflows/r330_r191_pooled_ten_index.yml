@@ -165,11 +165,17 @@ jobs:
           from research.r192_ger40 import parse_data
           inst = os.environ["INST"]
           required = set(range(2017, 2026))
+          if inst == "ussc2000idxusd":
+              required = set(range(2018, 2026))  # No Dukascopy M5 history before 2018-08-08
           for tf in ("m5",):
               final = Path("dl") / f"{inst}_{tf}.csv.gz"
               if final.is_file() and final.stat().st_size and os.system(f"gzip -t '{final}' >/dev/null 2>&1") == 0:
                   bars, duplicates = parse_data(final)
-                  print(f"SNAPSHOT READY {final}: rows={len(bars):,}; duplicates_removed={duplicates}")
+                  years_present = set(int(y) for y in bars.index.year.unique())
+                  missing_years = sorted(required - years_present)
+                  if missing_years:
+                      raise SystemExit(f"Existing cache {final} lacks required source years {missing_years}; refusing an incomplete basket.")
+                  print(f"SNAPSHOT READY {final}: rows={len(bars):,}; duplicates_removed={duplicates}; years={sorted(years_present)}")
                   continue
               chunks = sorted(Path("dl/chunks").glob(f"{inst}_{tf}_*.csv.gz"))
               years = set()
@@ -206,7 +212,18 @@ jobs:
                   raise SystemExit(f"Insufficient joined rows for {inst} {tf}: {rows}")
               tmp.replace(final)
               bars, duplicates = parse_data(final)
-              print(f"JOINED {final}: rows={len(bars):,}; duplicates_removed={duplicates}; years={sorted(years)}")
+              years_present = set(int(y) for y in bars.index.year.unique())
+              missing_years = sorted(required - years_present)
+              if missing_years:
+                  raise SystemExit(f"Joined cache {final} lacks required source years {missing_years}.")
+              required_quarters = {(y, q) for y in required for q in range(1, 5)}
+              if inst == "ussc2000idxusd":
+                  required_quarters = {(y, q) for y in required for q in range(1, 5) if (y, q) >= (2018, 3)}
+              present_quarters = {(int(t.year), int(t.quarter)) for t in bars.index}
+              missing_quarters = sorted(required_quarters - present_quarters)
+              if missing_quarters:
+                  raise SystemExit(f"Joined cache {final} lacks required source quarters {missing_quarters[:12]}.")
+              print(f"JOINED {final}: rows={len(bars):,}; duplicates_removed={duplicates}; years={sorted(years_present)}; required_quarters={len(required_quarters)}")
               for p in chunks:
                   p.unlink(missing_ok=True)
           PY
@@ -427,11 +444,17 @@ jobs:
           from research.r192_ger40 import parse_data
           inst = os.environ["INST"]
           required = set(range(2017, 2026))
+          if inst == "ussc2000idxusd":
+              required = set(range(2018, 2026))  # No Dukascopy M5 history before 2018-08-08
           for tf in ("m5",):
               final = Path("dl") / f"{inst}_{tf}.csv.gz"
               if final.is_file() and final.stat().st_size and os.system(f"gzip -t '{final}' >/dev/null 2>&1") == 0:
                   bars, duplicates = parse_data(final)
-                  print(f"SNAPSHOT READY {final}: rows={len(bars):,}; duplicates_removed={duplicates}")
+                  years_present = set(int(y) for y in bars.index.year.unique())
+                  missing_years = sorted(required - years_present)
+                  if missing_years:
+                      raise SystemExit(f"Existing cache {final} lacks required source years {missing_years}; refusing an incomplete basket.")
+                  print(f"SNAPSHOT READY {final}: rows={len(bars):,}; duplicates_removed={duplicates}; years={sorted(years_present)}")
                   continue
               chunks = sorted(Path("dl/chunks").glob(f"{inst}_{tf}_*.csv.gz"))
               years = set()
@@ -468,7 +491,18 @@ jobs:
                   raise SystemExit(f"Insufficient joined rows for {inst} {tf}: {rows}")
               tmp.replace(final)
               bars, duplicates = parse_data(final)
-              print(f"JOINED {final}: rows={len(bars):,}; duplicates_removed={duplicates}; years={sorted(years)}")
+              years_present = set(int(y) for y in bars.index.year.unique())
+              missing_years = sorted(required - years_present)
+              if missing_years:
+                  raise SystemExit(f"Joined cache {final} lacks required source years {missing_years}.")
+              required_quarters = {(y, q) for y in required for q in range(1, 5)}
+              if inst == "ussc2000idxusd":
+                  required_quarters = {(y, q) for y in required for q in range(1, 5) if (y, q) >= (2018, 3)}
+              present_quarters = {(int(t.year), int(t.quarter)) for t in bars.index}
+              missing_quarters = sorted(required_quarters - present_quarters)
+              if missing_quarters:
+                  raise SystemExit(f"Joined cache {final} lacks required source quarters {missing_quarters[:12]}.")
+              print(f"JOINED {final}: rows={len(bars):,}; duplicates_removed={duplicates}; years={sorted(years_present)}; required_quarters={len(required_quarters)}")
               for p in chunks:
                   p.unlink(missing_ok=True)
           PY

@@ -130,6 +130,8 @@ def load_canonical_instrument(data_dir, inst, now_utc):
         "data_source":"Dukascopy BID M5 repository cache dl/<instrument>_m5.csv.gz",
         "h4_note":"Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged."
     }
+    if inst == "ussc2000idxusd":
+        info["source_availability_note"]="Dukascopy M5 returned zero rows before 2018-08-08; the index is retained in the basket from its first available source bar onward, without synthesized history."
     return out,m5,info
 
 def canonical_signals_and_stops(h4,cfg):
