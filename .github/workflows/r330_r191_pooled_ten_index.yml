@@ -7,6 +7,7 @@ on:
       - "research/r330_r191_pooled_ten_index.py"
       - "research/R191_CANONICAL_index_trend_long.py"
       - "research/download_m5_year_quarters.sh"
+      - "research/download_m5_interval_resilient.sh"
       - ".github/workflows/r330_r191_pooled_ten_index.yml"
   workflow_dispatch:
 

@@ -101,7 +101,17 @@ for Q in 1 2 3 4; do
         if [ "$MATTEMPT" -lt 3 ]; then sleep $((MATTEMPT * 15)); fi
       done
       if [ "$MONTH_OK" != "true" ]; then
-        echo "ERROR: monthly fallback failed: $MONTH_BASE" >&2
+        echo "MONTH-LEVEL FETCH STILL FAILING: $MONTH_BASE; recursively split the range to smaller intervals from the same BID source."
+        if bash research/download_m5_interval_resilient.sh "$INST" "$MFROM" "$MTO" "$MONTH_BASE"; then
+          MLINES=$(gzip -cd "$MC" 2>/dev/null | wc -l || echo 0)
+          if [ -s "$MC" ] && gzip -t "$MC" >/dev/null 2>&1 && [ "$MLINES" -gt 200 ]; then
+            echo "MONTH RECOVERED BY RANGE SPLITTING: $MC ($(du -h "$MC" | cut -f1), rows=$((MLINES - 1)))"
+            MONTH_OK=true
+          fi
+        fi
+      fi
+      if [ "$MONTH_OK" != "true" ]; then
+        echo "ERROR: monthly fallback and recursive sub-month download failed: $MONTH_BASE" >&2
         FALLBACK_OK=false
         break
       fi

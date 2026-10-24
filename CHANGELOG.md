@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-25 — R330 recursively split stubborn Dukascopy ranges
+
+- The current one-index-at-a-time retry run continued to hit reproducible HTTP 503 responses for individual month ranges even after quarterly retries and month-level fallback. Example: DEU40 M5 February 2023 repeatedly returned 503.
+- Added a source-preserving range-split fallback: after quarter and month retrieval fail, recursively split the same M5 BID time range into smaller intervals until each piece downloads. Successful pieces are concatenated in timestamp order without inventing prices. A one-day request that still fails remains a hard failure; the workflow does not waive the missing-data gate.
+- The change affects only acquisition recovery. The canonical R191 engine, data eligibility windows, ten-index universe, Gate 2, six PASS criteria and challenge simulation thresholds are untouched.
+
 ## 2026-10-24 — R330 Gate 1 entry-convention amendment
 
 - Corrected Gate 1 to use canonical R191 entry: open of the next completed New York wall-clock H4 bar.
