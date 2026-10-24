@@ -402,7 +402,7 @@ Official baseline dari canonical `research/R191_CANONICAL_index_trend_long.py` p
 - USA500 M5 BID cache: SHA-256 `75d3c8dd64ba4647af7f5376ac219010dc2c65f46beb296f978257e770c90087`; 11,805,722 bytes; 826,522 rows; UTC data 2016-01-04T00:00:00Z–2026-10-23T20:10:00Z.
 - USATECH M5 BID cache: SHA-256 `b8f3b267e187669890f455486100133a29a78b5b5fcb4824c67d2b8f3acb8755`; 13,248,558 bytes; 826,429 rows; UTC data 2016-01-04T00:00:00Z–2026-10-23T20:10:00Z.
 - Mesin R330: canonical H4 resample M5 BID `4h/offset=1h/label=left/closed=left`, America/New_York; canonical one-position sim starts empty after loader truncates source to NY year >=2017. R192 tidak dipakai untuk pembuatan H4, sinyal, simulasi trade, metrik, Gate 2, robustness, LOO, atau challenge.
-- Preparation workflow kini hanya mengambil M5 dan mewajibkan tahun sumber 2017–2025; H1 dihapus dari input karena tidak digunakan mesin canonical. 2026 tetap opsional sesuai ketersediaan. Hash sepuluh indeks akan direkam di hasil final.
+- Preparation workflow kini hanya mengambil M5; H1 dihapus dari input karena tidak digunakan mesin canonical. Tahun 2017–2025 diwajibkan saat data sumber memang tersedia; Dukascopy memberi zero-byte untuk USSC2000 sebelum 2018-08-08, sehingga indeks itu disertakan mulai Q3 2018 tanpa mengarang riwayat atau mengeluarkannya dari basket. 2026 tetap opsional sesuai ketersediaan. Hash sepuluh indeks akan direkam di hasil final.
 
 ### Gate dan artefak
 - Gate 1 deterministic baseline: PASS.
