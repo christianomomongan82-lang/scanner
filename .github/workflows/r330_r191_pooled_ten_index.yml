@@ -294,7 +294,7 @@ jobs:
     timeout-minutes: 75
     strategy:
       fail-fast: false
-      max-parallel: 10
+      max-parallel: 3
       matrix:
         instrument:
           - usa500idxusd

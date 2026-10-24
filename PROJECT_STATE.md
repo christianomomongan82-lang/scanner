@@ -408,8 +408,15 @@ Official baseline dari canonical `research/R191_CANONICAL_index_trend_long.py` p
 - Gate 1 deterministic baseline: PASS.
 - Gate 2 canonical truncation untuk 10 indeks: belum dijalankan/selesai.
 - Enam kriteria PASS terkunci dan causal audit PF>1.4: belum dinilai. Tidak ada tuning, variasi, atau penghapusan indeks.
-- Latest canonical M5-only run, including the documented USSC2000 source-start exception: https://github.com/christianomomongan82-lang/scanner/actions/runs/40081030101
+- Latest pre-retry-patch run 40082027593 failed during data preparation, before Gate 2 or any pooled metric. Job logs indicate repeated 90-second request timeouts after only two attempts while ten instrument jobs downloaded concurrently. A retry-policy correction is now recorded below; partial quarterly chunks are cached to resume rather than restart.
 - Earlier runs 40080602591 and 40080690669 are superseded because they treated the source's pre-2018-08 USSC2000 empty history as a download failure.
 - Canonical source: research/R191_CANONICAL_index_trend_long.py
 - Runner: research/r330_r191_pooled_ten_index.py
 - Preregistration and baseline amendment: research/R330_LOCKED_PREREGISTRATION.md, CHANGELOG.md
+
+
+### R330 — data acquisition correction (2026-10-24)
+
+- Root cause of run [40082027593](https://github.com/christianomomongan82-lang/scanner/actions/runs/40082027593): request-level 90-second timeout and two attempts; several indices progressed through many quarters, but one timed-out quarter caused that instrument job to stop. Preparation concurrency was 10.
+- Corrective patch: per-quarter timeout 180s, four attempts, 20 seconds multiplied by attempt number for backoff, and preparation concurrency reduced to 3. Successful quarterly cache files remain eligible for reuse on the next run.
+- This does not constitute an R330 strategy REJECT. Gate 1 remains PASS on the official current-cache baseline; Gate 2 and locked pooled criteria are still not calculated. Do not report PASS or REJECT for R330 until the canonical ten-index run completes its locked gates.

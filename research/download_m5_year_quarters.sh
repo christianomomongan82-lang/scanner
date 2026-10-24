@@ -31,13 +31,13 @@ for Q in 1 2 3 4; do
     echo "NO SOURCE HISTORY: $QB ends before $HISTORY_START; quarter is absent by source availability, not removed from the basket."
     continue
   fi
-  MAX_ATTEMPTS=2
+  MAX_ATTEMPTS=4
   OK=false
   for ATTEMPT in $(seq 1 "$MAX_ATTEMPTS"); do
     rm -f "$QR" "$QC"
     echo "DOWNLOAD $QB: $FROM to $QTO (attempt $ATTEMPT/$MAX_ATTEMPTS)"
-    echo "BOUNDED REQUEST: timeout=90s; attempt=$ATTEMPT/$MAX_ATTEMPTS"
-    if timeout 90s npx --yes dukascopy-node@1.50.0 \
+    echo "BOUNDED REQUEST: timeout=180s; attempt=$ATTEMPT/$MAX_ATTEMPTS"
+    if timeout 180s npx --yes dukascopy-node@1.50.0 \
       -i "$INST" -from "$FROM" -to "$QTO" \
       -t m5 -p bid -utc 0 -f csv -fl \
       -dir dl/chunks -fn "$QB" \
@@ -50,7 +50,7 @@ for Q in 1 2 3 4; do
       fi
     fi
     rm -f "$QR"
-    if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then sleep $((ATTEMPT * 15)); fi
+    if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then sleep $((ATTEMPT * 20)); fi
   done
   if [ "$OK" != "true" ]; then
     echo "ERROR: quarterly M5 download failed: $QB" >&2

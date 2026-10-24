@@ -45,3 +45,11 @@
 - Before retrying a quarterly request, removes both the partial CSV and stale compressed output so a corrupt archive cannot prevent future successful retries.
 - Failed requests still fail the required instrument/year job; no missing data is silently treated as a pass or instrument exclusion. The only intentionally absent period remains USSC2000 before the documented 2018-08-08 source-history start.
 - This is data-acquisition reliability only; canonical engine, locked periods, six PASS criteria, challenge rules and causal audit thresholds are unchanged.
+
+
+## 2026-10-24 — R330 M5 acquisition timeout/retry correction
+
+- The most recent basket attempt (run 40082027593) failed in data preparation, not in a strategy gate. The downloader timed out at 90 seconds after only two attempts; eight separate non-Gate1 index jobs were running at once. Logs show multiple quarters made progress before a single stalled quarterly request terminated that instrument.
+- Changed M5 quarterly retrieval to a 180-second per-attempt timeout, four attempts, and longer backoff. Reduced only the ten-index data-preparation matrix concurrency from 10 to 3 to reduce simultaneous source pressure. Gate 1’s two-index preparation is unchanged.
+- The existing Actions cache is resumable; successful quarterly chunks from failed attempts are retained and reused. Required 2017–2025 coverage rules (with the preregistered USSC2000 inception exception) remain unchanged.
+- This is an acquisition reliability fix only. It does not change canonical R191 math, instrument universe, costs, periods, any of the six PASS gates, challenge simulator, or PF>1.4 causality audit. No pooled metric is claimed until Gate 2 and all locked calculations actually finish.
