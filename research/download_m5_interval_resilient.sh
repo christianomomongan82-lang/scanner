@@ -42,7 +42,7 @@ fetch_range() {
       -i "$INST" -from "$start" -to "$end" \
       -t m5 -p bid -utc 0 -f csv -fl \
       -dir dl/chunks -fn "$name" \
-      -bs 10 -bp 1000 -r 3 -rp 1500; then
+      -bs 10 -bp 1000 -r 5 -rp 5000; then
       lines=$(wc -l < "$raw" 2>/dev/null || echo 0)
       if [ -s "$raw" ] && [ "$lines" -ge "$min_lines" ] && gzip -1 "$raw" && gzip -t "$gz"; then
         echo "RANGE SAVED $gz ($((lines - 1)) rows)"
@@ -50,19 +50,43 @@ fetch_range() {
       fi
     fi
     rm -f "$raw" "$gz"
-    if [ "$attempt" -lt 2 ]; then sleep 10; fi
+    if [ "$attempt" -lt 2 ]; then sleep 15; fi
   done
 
   start_s=$(date -u -d "$start" +%s)
   end_s=$(date -u -d "$end" +%s)
-  days=$(( (end_s - start_s) / 86400 ))
-  if [ "$days" -le 1 ]; then
-    echo "ERROR: irreducible one-day source range failed: $name ($start to $end)" >&2
+  seconds=$(( end_s - start_s ))
+  if [ "$seconds" -le 86400 ]; then
+    # The provider sometimes returns HTTP 503 for a wider request even though
+    # smaller batches succeed. Try the one-day (or shorter) leaf with batch-size
+    # one and longer retries before declaring this source interval unavailable.
+    for attempt in 1 2 3 4 5; do
+      rm -f "$raw" "$gz"
+      echo "NARROW-RANGE RECOVERY $name: $start to $end (attempt $attempt/5; batch-size=1)"
+      if timeout --kill-after=10s 120s npx --yes dukascopy-node@1.50.0 \
+        -i "$INST" -from "$start" -to "$end" \
+        -t m5 -p bid -utc 0 -f csv -fl \
+        -dir dl/chunks -fn "$name" \
+        -bs 1 -bp 1000 -r 15 -rp 5000; then
+        lines=$(wc -l < "$raw" 2>/dev/null || echo 0)
+        if [ -s "$raw" ] && [ "$lines" -ge "$min_lines" ] && gzip -1 "$raw" && gzip -t "$gz"; then
+          echo "NARROW-RANGE SAVED $gz ($((lines - 1)) rows)"
+          return 0
+        fi
+      fi
+      rm -f "$raw" "$gz"
+      if [ "$attempt" -lt 5 ]; then sleep $((attempt * 15)); fi
+    done
+    echo "ERROR: irreducible source interval failed after narrow-range retries: $name ($start to $end)" >&2
     return 1
   fi
 
-  half=$((days / 2))
-  mid=$(date -u -d "$start + $half days" +%F)
+  if [ "$seconds" -lt 0 ]; then
+    echo "ERROR: invalid reversed date interval: $name ($start to $end)" >&2
+    return 1
+  fi
+  half=$((seconds / 2))
+  mid=$(date -u -d "@$((start_s + half))" +%F)
   if [ "$mid" = "$start" ] || [ "$mid" = "$end" ]; then
     echo "ERROR: could not split date interval safely: $name ($start to $end)" >&2
     return 1
@@ -72,8 +96,17 @@ fetch_range() {
   left_gz="dl/chunks/${left_name}.csv.gz"
   right_gz="dl/chunks/${right_name}.csv.gz"
 
-  if ! fetch_range "$start" "$mid" "$left_name" 1; then return 1; fi
-  if ! fetch_range "$mid" "$end" "$right_name" 1; then return 1; fi
+  # Try both child intervals even if one fails. This retains successful source
+  # ranges in the cache, making the next retry resume instead of redownloading
+  # the already recovered half. A failed leaf still makes the overall range fail.
+  LEFT_OK=true
+  RIGHT_OK=true
+  if ! fetch_range "$start" "$mid" "$left_name" 1; then LEFT_OK=false; fi
+  if ! fetch_range "$mid" "$end" "$right_name" 1; then RIGHT_OK=false; fi
+  if [ "$LEFT_OK" != "true" ] || [ "$RIGHT_OK" != "true" ]; then
+    echo "ERROR: split range incomplete; successful child segments retained: $name" >&2
+    return 1
+  fi
 
   rm -f "$raw" "$gz"
   gzip -cd "$left_gz" > "$raw"
