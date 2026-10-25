@@ -452,3 +452,7 @@ Official baseline dari canonical `research/R191_CANONICAL_index_trend_long.py` p
 - The previous source-preparation workflow retained a job as in-progress after its last visible log line, even though a newer recovery run had been created. Request timeouts now include a 10-second hard-kill grace period, and both shell scripts are syntax-checked before download.
 - The new recovery run uses a separate concurrency group to avoid waiting behind that stale run. The index-preparation matrix remains limited to one index at a time.
 - Current status remains: Gate 1 PASS on the official R191 baseline; full basket Gate 2 and six PASS criteria are not yet calculated. A source-acquisition failure is not a strategy verdict.
+
+
+## R330 — REJECT (2026-10-25)
+Aturan R191 persis dipasang di 10 indeks, pooled, tanpa seleksi. Gate 1 (baseline canonical di cache sekarang: n=79/68/11, PF@1bp 2.134/1.310; target lama tidak bisa direproduksi karena snapshot data), Gate 2, G3, G4, G6, G7, G9 lolos. GAGAL: G5 (2022 PF@2bp 0.561 < 0.80) dan G8 (simulasi Stellar). Detail: research/R330_FINAL_VERDICT.md. R191 (usa500+usatech, baseline cache baru) tetap kandidat hidup. Tidak ada varian lanjutan dari R330.
