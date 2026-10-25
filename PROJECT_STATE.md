@@ -1,6 +1,6 @@
 # Proyek Backtest — Checkpoint Utama
 
-**Terakhir diperbarui:** 2026-10-16  
+**Terakhir diperbarui:** 2026-10-25  
 **Status proyek:** SEMUA KANDIDAT YANG DIUJI BERSTATUS GAGAL; TIDAK ADA YANG LULUS.  
 **Repositori sumber utama:** https://github.com/christianomomongan82-lang/scanner  
 **Branch riset aktif saat checkpoint ini:** [local-backtest/r189-dukascopy-history](https://github.com/christianomomongan82-lang/scanner/tree/local-backtest/r189-dukascopy-history)
@@ -384,3 +384,11 @@ Continuation instruction: read the latest R270–R274 results and `research/EVOL
 - Corrected raw-only artifact `12031270051` (data acquisition run `38859918137`) has 947,326 paired XAUUSD M5 BID/ASK rows; synthetic flats disabled; 572 >5m gaps kept. Local calculations used 877,930 quote rows through 2025 only. 2026 remains unopened.
 - Data/entry/exit integrity controls are reusable implementation blocks, not alpha. No R270–R274 signal block is established as a positive edge. Row-level ledgers were generated locally but not uploaded; reports/compact JSON and the R273/R274 runners are stored in the research branch.
 - **Next step:** broader instrument and hypothesis-family coverage with preregistered discovery filters and component ablations. Do not revive the failed signal blocks by lowering thresholds. Do not register R275 until its hypothesis is materially distinct and preregistered.
+
+## R332 — trend-following H4 lintas kelas aset
+
+**Status:** PREREGISTRASI TERKUNCI; hasil belum dibaca. Branch: research/r332-multi-asset-trend (dibuat dari main).
+
+**Hipotesis tunggal:** breakout trend H4 N=55, SL 27 bar, TP 2R; indeks long-only, kelas lain dua arah. Universe kandidat, urutan deduplikasi korelasi discovery, source guardrails, Gate 1–8, dan kebijakan stop dicatat di research/R332_LOCKED_PREREGISTRATION.md.
+
+**Batas perubahan:** scan.py, state.json, dan .github/workflows/scan.yml tidak diubah. Hasil ke research/R332_results.md/.json. Jika Gate 1/2 atau satu kriteria gagal, REJECT dan tidak ada varian/tuning sesudahnya. Komisi/spread live dan risiko floating akun funded belum diverifikasi.
