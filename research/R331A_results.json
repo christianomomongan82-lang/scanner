@@ -1,0 +1,9 @@
+{
+  "experiment": "R331-A",
+  "status": "INCOMPLETE",
+  "cache_artifact_run_id": 40166799441,
+  "cache_cutoff_utc": "2026-10-23T20:00:00+00:00",
+  "evaluation_start_label_ny": "2024-01-01T00:00:00-05:00",
+  "error": "AttributeError: 'numpy.ndarray' object has no attribute 'to_numpy'",
+  "note": "No PASS/FAIL verdict is assigned without completing both instrument audits."
+}
