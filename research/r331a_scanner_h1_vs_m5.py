@@ -133,7 +133,7 @@ def evaluate_instrument(inst: str) -> dict:
     a_complete = (a_close_utc <= CUTOFF).to_numpy(dtype=bool)
     # The canonical pandas 4h resample has fixed 4-elapsed-hour bins.
     b_close_utc = pd.DatetimeIndex(h4_b.index).tz_convert("UTC") + pd.Timedelta(hours=4)
-    b_complete = (b_close_utc <= CUTOFF).to_numpy(dtype=bool)
+    b_complete = (b_close_utc <= CUTOFF)
 
     a_idx_ny = pd.DatetimeIndex(h4_a.index).tz_convert(NY)
     b_idx_ny = pd.DatetimeIndex(h4_b.index).tz_convert(NY)
