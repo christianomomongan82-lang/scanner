@@ -56,6 +56,24 @@ fetch_range() {
   start_s=$(date -u -d "$start" +%s)
   end_s=$(date -u -d "$end" +%s)
   seconds=$(( end_s - start_s ))
+
+  # When a monthly M5 interval fails, recover that interval from official Jetta
+  # M1 directly instead of wasting repeated M5 attempts on dozens of day leaves.
+  # The Python helper still requires same-instrument native-M5 equivalence first.
+  if [ "$seconds" -gt 86400 ] && [ "$seconds" -le 2764800 ]; then
+    rm -f "$raw" "$gz"
+    echo "MONTH-SCALE JETTA FALLBACK: $name ($start to $end)"
+    if python research/recover_m5_by_jettam1.py --instrument "$INST" --start "$start" --end "$end" --output "$raw"; then
+      lines=$(wc -l < "$raw" 2>/dev/null || echo 0)
+      if [ -s "$raw" ] && [ "$lines" -ge "$min_lines" ] && gzip -1 "$raw" && gzip -t "$gz"; then
+        echo "Jetta M1->M5 monthly source-recovery saved $gz ($((lines - 1)) rows)"
+        return 0
+      fi
+    fi
+    rm -f "$raw" "$gz"
+    echo "Jetta month recovery failed; fall back to recursive source-range splitting: $name" >&2
+  fi
+
   if [ "$seconds" -le 86400 ]; then
     # The provider sometimes returns HTTP 503 for a wider request even though
     # smaller batches succeed. Try the one-day (or shorter) leaf with batch-size

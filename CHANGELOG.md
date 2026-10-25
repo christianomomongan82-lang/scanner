@@ -2,6 +2,7 @@
 
 ## 2026-10-25 — Same-source Jetta fallback for failed native M5 intervals
 
+- Monthly M5 range failures now try the Jetta M1 recovery once for the whole month (after native M5 retries), before recursively splitting a failed month. This avoids tens of repeated legacy 503 requests when the older endpoint is unavailable across an entire month; failed validation remains fatal.
 - Writes recovered rows using the exact native CSV schema (`timestamp` in epoch milliseconds, OHLC only), keeping joins byte-header compatible with `dukascopy-node` files.
 - Isolates the recovery run in a dedicated concurrency group; the prior stalled native-endpoint run cannot cancel or block it.
 - The legacy `dukascopy-node@1.50.0` endpoint repeatedly returned HTTP 503 for a required US Small Cap 2000 interval (2022-09-01 to 2022-09-02), even after monthly and recursive split retries. The underlying Dukascopy candle endpoint problem has been publicly reported: https://github.com/Leo4815162342/dukascopy-node/issues/254.
