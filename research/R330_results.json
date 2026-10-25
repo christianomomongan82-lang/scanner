@@ -1,123 +1,2350 @@
 {
   "experiment": "R330",
-  "verdict": "GATE1_PASS",
-  "status_label": "Gate 1 PASS; full ten-index basket verdict pending",
-  "stopped_at": "G1_CANONICAL_DETERMINISM_AND_BASELINE_PREFLIGHT",
-  "gate1": {
-    "gate": "G1_CANONICAL_DETERMINISM_AND_BASELINE",
-    "pass": true,
-    "observed": {
-      "engine": "research/R191_CANONICAL_index_trend_long.py unchanged sim() and H4 resample; loader reads repository M5 CSV.GZ",
-      "baseline_version_note": "Official R191 baseline shifted from earlier targets because the earlier source snapshot was unavailable; strategy rules and thresholds are unchanged.",
-      "deterministic_replay": {
-        "usa500idxusd": true,
-        "usatechidxusd": true
+  "verdict": "REJECT",
+  "run_utc": "2026-10-25T08:15:37.680736+00:00",
+  "branch": "research/r330-r191-pooled-ten-index",
+  "locked_rule": {
+    "direction": "long-only",
+    "timezone": "America/New_York",
+    "H4_breakout_N": 55,
+    "stop_lookback_M": 27,
+    "RR": 2.0,
+    "entry": "open of the next NY-wall-clock H4 bar (canonical)",
+    "round_trip_price_cost_bps": [
+      1,
+      2,
+      3
+    ]
+  },
+  "periods": {
+    "discovery": "2017-01-01 <= entry < 2022-01-01; outcomes closed before 2022-01-01",
+    "forward": "2022-01-01 <= entry < 2026-01-01; outcomes closed before 2026-01-01",
+    "oos_2026": "2026 entry cohort through common cached data cutoff"
+  },
+  "common_data_cutoff_utc": "2026-10-23T20:00:00+00:00",
+  "data_version": {
+    "engine": "canonical R191 H4-from-M5; one-position starts empty at NY year >=2017",
+    "instruments": {
+      "usa500idxusd": {
+        "sha256": "75d3c8dd64ba4647af7f5376ac219010dc2c65f46beb296f978257e770c90087",
+        "bytes": 11805722,
+        "rows": 826522,
+        "start_utc": "2017-01-03T00:00:00+00:00",
+        "end_utc": "2026-10-23T20:10:00+00:00"
       },
-      "identical_resample_grid_and_ohlc": {
-        "usa500idxusd": true,
-        "usatechidxusd": true
+      "usatechidxusd": {
+        "sha256": "b8f3b267e187669890f455486100133a29a78b5b5fcb4824c67d2b8f3acb8755",
+        "bytes": 13248558,
+        "rows": 826429,
+        "start_utc": "2017-01-03T00:00:00+00:00",
+        "end_utc": "2026-10-23T20:10:00+00:00"
       },
-      "source_hashes": {
-        "usa500idxusd": "75d3c8dd64ba4647af7f5376ac219010dc2c65f46beb296f978257e770c90087",
-        "usatechidxusd": "b8f3b267e187669890f455486100133a29a78b5b5fcb4824c67d2b8f3acb8755"
+      "usa30idxusd": {
+        "sha256": "324d63da09b4e2ae02a691b878e81c568694acc79b7de2f4f10f27edab4abc1a",
+        "bytes": 12812066,
+        "rows": 826427,
+        "start_utc": "2017-01-03T00:00:00+00:00",
+        "end_utc": "2026-10-23T20:10:00+00:00"
       },
-      "source_bytes": {
-        "usa500idxusd": 11805722,
-        "usatechidxusd": 13248558
+      "ussc2000idxusd": {
+        "sha256": "4f33a1aad2d80fd4f064826b74a27704ce8b45825d3dbd10bf0d9bdf77ad179c",
+        "bytes": 9464835,
+        "rows": 702500,
+        "start_utc": "2018-08-08T13:30:00+00:00",
+        "end_utc": "2026-10-23T20:10:00+00:00"
       },
-      "source_rows": {
-        "usa500idxusd": 826522,
-        "usatechidxusd": 826429
+      "deuidxeur": {
+        "sha256": "107639ec91e06efb990ce3b71b044635a7173ff9663fe79729d65eebb65c3de5",
+        "bytes": 12253399,
+        "rows": 821968,
+        "start_utc": "2017-01-02T00:00:00+00:00",
+        "end_utc": "2026-10-23T19:55:00+00:00"
       },
-      "source_start_utc": {
-        "usa500idxusd": "2016-01-04T00:00:00Z",
-        "usatechidxusd": "2016-01-04T00:00:00Z"
+      "gbridxgbp": {
+        "sha256": "e13afc75fd8930e989b76968dc7f77f82aabc6b29800eb4418aa8c418ca6b43e",
+        "bytes": 12568106,
+        "rows": 817651,
+        "start_utc": "2017-01-03T00:00:00+00:00",
+        "end_utc": "2026-10-23T20:00:00+00:00"
       },
-      "source_end_utc": {
-        "usa500idxusd": "2026-10-23T20:10:00Z",
-        "usatechidxusd": "2026-10-23T20:10:00Z"
+      "fraidxeur": {
+        "sha256": "fa0c9940d37f993d6960b7da9f9133aaf5ac622b1d3d1feee9533ab78c90b702",
+        "bytes": 9158741,
+        "rows": 613763,
+        "start_utc": "2017-01-02T00:00:00+00:00",
+        "end_utc": "2026-10-23T19:55:00+00:00"
       },
-      "official_baseline": {
-        "selection_2017_2021": {
-          "n": 79,
-          "pf_1bp": 2.1344507712955396,
-          "pf_2bp": 2.121484650800913,
-          "pf_3bp": 2.108622419660779
+      "eusidxeur": {
+        "sha256": "836b39ab26feaf271673eb55b1cf1ea9186c1f6002d330e8a228449a5bf67da2",
+        "bytes": 7350577,
+        "rows": 613613,
+        "start_utc": "2017-01-02T00:00:00+00:00",
+        "end_utc": "2026-10-23T19:55:00+00:00"
+      },
+      "ausidxaud": {
+        "sha256": "d51548f6d02176062fe6884cd63081f9f388f6e6f4319ebf3df1c5df51846eb8",
+        "bytes": 10803401,
+        "rows": 819791,
+        "start_utc": "2017-01-03T00:00:00+00:00",
+        "end_utc": "2026-10-23T19:55:00+00:00"
+      },
+      "jpnidxjpy": {
+        "sha256": "5ae8abed97a7201f9d577682a9d49825d0b695437ff3949aa437b68d0e70616d",
+        "bytes": 11334086,
+        "rows": 824715,
+        "start_utc": "2017-01-03T00:00:00+00:00",
+        "end_utc": "2026-10-23T20:10:00+00:00"
+      }
+    },
+    "combined_sha256": "a4ad8c53ca9c0345b59ea4e506b0445f3e3ea53136e895bdf5d8258d13f42b54",
+    "common_cutoff_utc": "2026-10-23T20:00:00+00:00"
+  },
+  "data": {
+    "usa500idxusd": {
+      "name": "USA 500 / S&P 500",
+      "m5_rows": 826522,
+      "m5_duplicates_removed_by_loader": 0,
+      "h4_rows": 17904,
+      "h4_start_ny": "2017-01-02T17:00:00-05:00",
+      "h4_end_ny": "2026-10-23T14:00:00-04:00",
+      "m5_start_utc": "2017-01-03T00:00:00+00:00",
+      "m5_end_utc": "2026-10-23T20:10:00+00:00",
+      "m5_flat_rows": 188488,
+      "m5_cache_bytes": 11805722,
+      "m5_cache_sha256": "75d3c8dd64ba4647af7f5376ac219010dc2c65f46beb296f978257e770c90087",
+      "h4_engine": "supplied canonical R191 script: M5 OHLC resample 4h offset=1h label=left closed=left in America/New_York",
+      "data_source": "Dukascopy BID M5 cache; any Jetta M1-to-M5 recovery is listed in the validation/provenance sidecar",
+      "h4_note": "Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged."
+    },
+    "usatechidxusd": {
+      "name": "USA 100 Tech / Nasdaq 100",
+      "m5_rows": 826429,
+      "m5_duplicates_removed_by_loader": 0,
+      "h4_rows": 17903,
+      "h4_start_ny": "2017-01-02T17:00:00-05:00",
+      "h4_end_ny": "2026-10-23T14:00:00-04:00",
+      "m5_start_utc": "2017-01-03T00:00:00+00:00",
+      "m5_end_utc": "2026-10-23T20:10:00+00:00",
+      "m5_flat_rows": 187532,
+      "m5_cache_bytes": 13248558,
+      "m5_cache_sha256": "b8f3b267e187669890f455486100133a29a78b5b5fcb4824c67d2b8f3acb8755",
+      "h4_engine": "supplied canonical R191 script: M5 OHLC resample 4h offset=1h label=left closed=left in America/New_York",
+      "data_source": "Dukascopy BID M5 cache; any Jetta M1-to-M5 recovery is listed in the validation/provenance sidecar",
+      "h4_note": "Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged."
+    },
+    "usa30idxusd": {
+      "name": "USA 30 / Dow Jones",
+      "m5_rows": 826427,
+      "m5_duplicates_removed_by_loader": 0,
+      "h4_rows": 17903,
+      "h4_start_ny": "2017-01-02T17:00:00-05:00",
+      "h4_end_ny": "2026-10-23T14:00:00-04:00",
+      "m5_start_utc": "2017-01-03T00:00:00+00:00",
+      "m5_end_utc": "2026-10-23T20:10:00+00:00",
+      "m5_flat_rows": 187206,
+      "m5_cache_bytes": 12812066,
+      "m5_cache_sha256": "324d63da09b4e2ae02a691b878e81c568694acc79b7de2f4f10f27edab4abc1a",
+      "h4_engine": "supplied canonical R191 script: M5 OHLC resample 4h offset=1h label=left closed=left in America/New_York",
+      "data_source": "Dukascopy BID M5 cache; any Jetta M1-to-M5 recovery is listed in the validation/provenance sidecar",
+      "h4_note": "Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged."
+    },
+    "ussc2000idxusd": {
+      "name": "US Small Cap 2000",
+      "m5_rows": 702500,
+      "m5_duplicates_removed_by_loader": 0,
+      "h4_rows": 15218,
+      "h4_start_ny": "2018-08-08T09:00:00-04:00",
+      "h4_end_ny": "2026-10-23T13:00:00-04:00",
+      "m5_start_utc": "2018-08-08T13:30:00+00:00",
+      "m5_end_utc": "2026-10-23T20:10:00+00:00",
+      "m5_flat_rows": 170934,
+      "m5_cache_bytes": 9464835,
+      "m5_cache_sha256": "4f33a1aad2d80fd4f064826b74a27704ce8b45825d3dbd10bf0d9bdf77ad179c",
+      "h4_engine": "supplied canonical R191 script: M5 OHLC resample 4h offset=1h label=left closed=left in America/New_York",
+      "data_source": "Dukascopy BID M5 cache; any Jetta M1-to-M5 recovery is listed in the validation/provenance sidecar",
+      "h4_note": "Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged.",
+      "source_availability_note": "Dukascopy M5 returned zero rows before 2018-08-08; the index is retained in the basket from its first available source bar onward, without synthesized history."
+    },
+    "deuidxeur": {
+      "name": "Germany 40 / DAX",
+      "m5_rows": 821968,
+      "m5_duplicates_removed_by_loader": 0,
+      "h4_rows": 17820,
+      "h4_start_ny": "2017-01-01T17:00:00-05:00",
+      "h4_end_ny": "2026-10-23T14:00:00-04:00",
+      "m5_start_utc": "2017-01-02T00:00:00+00:00",
+      "m5_end_utc": "2026-10-23T19:55:00+00:00",
+      "m5_flat_rows": 184902,
+      "m5_cache_bytes": 12253399,
+      "m5_cache_sha256": "107639ec91e06efb990ce3b71b044635a7173ff9663fe79729d65eebb65c3de5",
+      "h4_engine": "supplied canonical R191 script: M5 OHLC resample 4h offset=1h label=left closed=left in America/New_York",
+      "data_source": "Dukascopy BID M5 cache; any Jetta M1-to-M5 recovery is listed in the validation/provenance sidecar",
+      "h4_note": "Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged."
+    },
+    "gbridxgbp": {
+      "name": "FTSE 100",
+      "m5_rows": 817651,
+      "m5_duplicates_removed_by_loader": 0,
+      "h4_rows": 17720,
+      "h4_start_ny": "2017-01-02T17:00:00-05:00",
+      "h4_end_ny": "2026-10-23T14:00:00-04:00",
+      "m5_start_utc": "2017-01-03T00:00:00+00:00",
+      "m5_end_utc": "2026-10-23T20:00:00+00:00",
+      "m5_flat_rows": 184712,
+      "m5_cache_bytes": 12568106,
+      "m5_cache_sha256": "e13afc75fd8930e989b76968dc7f77f82aabc6b29800eb4418aa8c418ca6b43e",
+      "h4_engine": "supplied canonical R191 script: M5 OHLC resample 4h offset=1h label=left closed=left in America/New_York",
+      "data_source": "Dukascopy BID M5 cache; any Jetta M1-to-M5 recovery is listed in the validation/provenance sidecar",
+      "h4_note": "Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged."
+    },
+    "fraidxeur": {
+      "name": "France 40 / CAC 40",
+      "m5_rows": 613763,
+      "m5_duplicates_removed_by_loader": 0,
+      "h4_rows": 15046,
+      "h4_start_ny": "2017-01-01T17:00:00-05:00",
+      "h4_end_ny": "2026-10-23T14:00:00-04:00",
+      "m5_start_utc": "2017-01-02T00:00:00+00:00",
+      "m5_end_utc": "2026-10-23T19:55:00+00:00",
+      "m5_flat_rows": 193901,
+      "m5_cache_bytes": 9158741,
+      "m5_cache_sha256": "fa0c9940d37f993d6960b7da9f9133aaf5ac622b1d3d1feee9533ab78c90b702",
+      "h4_engine": "supplied canonical R191 script: M5 OHLC resample 4h offset=1h label=left closed=left in America/New_York",
+      "data_source": "Dukascopy BID M5 cache; any Jetta M1-to-M5 recovery is listed in the validation/provenance sidecar",
+      "h4_note": "Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged."
+    },
+    "eusidxeur": {
+      "name": "EU Stocks 50",
+      "m5_rows": 613613,
+      "m5_duplicates_removed_by_loader": 0,
+      "h4_rows": 15042,
+      "h4_start_ny": "2017-01-01T17:00:00-05:00",
+      "h4_end_ny": "2026-10-23T14:00:00-04:00",
+      "m5_start_utc": "2017-01-02T00:00:00+00:00",
+      "m5_end_utc": "2026-10-23T19:55:00+00:00",
+      "m5_flat_rows": 202299,
+      "m5_cache_bytes": 7350577,
+      "m5_cache_sha256": "836b39ab26feaf271673eb55b1cf1ea9186c1f6002d330e8a228449a5bf67da2",
+      "h4_engine": "supplied canonical R191 script: M5 OHLC resample 4h offset=1h label=left closed=left in America/New_York",
+      "data_source": "Dukascopy BID M5 cache; any Jetta M1-to-M5 recovery is listed in the validation/provenance sidecar",
+      "h4_note": "Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged."
+    },
+    "ausidxaud": {
+      "name": "Australia 200",
+      "m5_rows": 819791,
+      "m5_duplicates_removed_by_loader": 0,
+      "h4_rows": 17719,
+      "h4_start_ny": "2017-01-02T17:00:00-05:00",
+      "h4_end_ny": "2026-10-23T14:00:00-04:00",
+      "m5_start_utc": "2017-01-03T00:00:00+00:00",
+      "m5_end_utc": "2026-10-23T19:55:00+00:00",
+      "m5_flat_rows": 222615,
+      "m5_cache_bytes": 10803401,
+      "m5_cache_sha256": "d51548f6d02176062fe6884cd63081f9f388f6e6f4319ebf3df1c5df51846eb8",
+      "h4_engine": "supplied canonical R191 script: M5 OHLC resample 4h offset=1h label=left closed=left in America/New_York",
+      "data_source": "Dukascopy BID M5 cache; any Jetta M1-to-M5 recovery is listed in the validation/provenance sidecar",
+      "h4_note": "Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged."
+    },
+    "jpnidxjpy": {
+      "name": "Japan 200+",
+      "m5_rows": 824715,
+      "m5_duplicates_removed_by_loader": 0,
+      "h4_rows": 17875,
+      "h4_start_ny": "2017-01-02T17:00:00-05:00",
+      "h4_end_ny": "2026-10-23T14:00:00-04:00",
+      "m5_start_utc": "2017-01-03T00:00:00+00:00",
+      "m5_end_utc": "2026-10-23T20:10:00+00:00",
+      "m5_flat_rows": 176905,
+      "m5_cache_bytes": 11334086,
+      "m5_cache_sha256": "5ae8abed97a7201f9d577682a9d49825d0b695437ff3949aa437b68d0e70616d",
+      "h4_engine": "supplied canonical R191 script: M5 OHLC resample 4h offset=1h label=left closed=left in America/New_York",
+      "data_source": "Dukascopy BID M5 cache; any Jetta M1-to-M5 recovery is listed in the validation/provenance sidecar",
+      "h4_note": "Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged."
+    }
+  },
+  "r191_only_baseline_size": {
+    "total_canonical_trade_rows": 158,
+    "trades_by_instrument": {
+      "usa500idxusd": 81,
+      "usatechidxusd": 77
+    },
+    "trades_by_entry_year_ny": {
+      "2017": 13,
+      "2018": 18,
+      "2019": 14,
+      "2020": 15,
+      "2021": 19,
+      "2022": 21,
+      "2023": 21,
+      "2024": 12,
+      "2025": 14,
+      "2026": 11
+    },
+    "closed_trade_metrics": {
+      "discovery": {
+        "1": {
+          "entries": 79,
+          "n": 77,
+          "censored": 2,
+          "pf": 2.252185608227275,
+          "wins_r": 81.83137200127523,
+          "losses_r": 36.33420429574886
         },
-        "forward_2022_2025": {
-          "n": 68,
-          "pf_1bp": 1.3103452710799484,
-          "pf_2bp": 1.3042813506009419,
-          "pf_3bp": 1.2982542684888698
+        "2": {
+          "entries": 79,
+          "n": 77,
+          "censored": 2,
+          "pf": 2.23826351879964,
+          "wins_r": 81.66274400255047,
+          "losses_r": 36.48486575269092
         },
-        "oos_2026": {
-          "n": 11,
-          "pf_1bp": 1.6833237689562284,
-          "pf_2bp": 1.673449066010866,
-          "pf_3bp": 1.6636512802613006
+        "3": {
+          "entries": 79,
+          "n": 77,
+          "censored": 2,
+          "pf": 2.224455936924461,
+          "wins_r": 81.49411600382571,
+          "losses_r": 36.635527209632976
         }
       },
-      "gate1_checks": {
-        "deterministic_usa500": true,
-        "deterministic_usatech": true,
-        "selection_n": true,
-        "selection_pf_1bp": true,
-        "forward_n": true,
-        "forward_pf_1bp": true,
-        "forward_pf_2bp": true,
-        "oos_2026_n": true,
-        "oos_2026_pf_2bp": true
+      "forward": {
+        "1": {
+          "entries": 68,
+          "n": 66,
+          "censored": 2,
+          "pf": 1.3774671775639407,
+          "wins_r": 53.91450237654008,
+          "losses_r": 39.14031728283226
+        },
+        "2": {
+          "entries": 68,
+          "n": 66,
+          "censored": 2,
+          "pf": 1.3710514150036737,
+          "wins_r": 53.829004753080156,
+          "losses_r": 39.261113160322964
+        },
+        "3": {
+          "entries": 68,
+          "n": 66,
+          "censored": 2,
+          "pf": 1.3646750104982694,
+          "wins_r": 53.74350712962024,
+          "losses_r": 39.38190903781366
+        }
       },
-      "current_run": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40081030101"
-    },
-    "required": {
-      "deterministic_replay": "Two fresh canonical loads/resamples/sims on the same cache must be identical",
-      "official_baseline": {
-        "selection_2017_2021": {
-          "n": 79,
-          "pf_1bp": 2.1344507712955396,
-          "pf_2bp": 2.121484650800913,
-          "pf_3bp": 2.108622419660779
+      "oos_2026": {
+        "1": {
+          "entries": 11,
+          "n": 9,
+          "censored": 2,
+          "pf": 1.591362273684138,
+          "wins_r": 7.9881667891599175,
+          "losses_r": 5.019703508910411
         },
-        "forward_2022_2025": {
-          "n": 68,
-          "pf_1bp": 1.3103452710799484,
-          "pf_2bp": 1.3042813506009419,
-          "pf_3bp": 1.2982542684888698
+        "2": {
+          "entries": 11,
+          "n": 9,
+          "censored": 2,
+          "pf": 1.582792092425394,
+          "wins_r": 7.976333578319835,
+          "losses_r": 5.039407017820823
         },
-        "oos_2026": {
-          "n": 11,
-          "pf_1bp": 1.6833237689562284,
-          "pf_2bp": 1.673449066010866,
-          "pf_3bp": 1.6636512802613006
+        "3": {
+          "entries": 11,
+          "n": 9,
+          "censored": 2,
+          "pf": 1.5742886670289322,
+          "wins_r": 7.9645003674797525,
+          "losses_r": 5.059110526731233
         }
       }
     }
   },
-  "data_version": {
-    "engine": "research/R191_CANONICAL_index_trend_long.py unchanged sim() and H4 resample; loader reads repository M5 CSV.GZ",
-    "cache_source_hashes": {
-      "usa500idxusd": "75d3c8dd64ba4647af7f5376ac219010dc2c65f46beb296f978257e770c90087",
-      "usatechidxusd": "b8f3b267e187669890f455486100133a29a78b5b5fcb4824c67d2b8f3acb8755"
+  "gate1_replication": {
+    "gate": {
+      "gate": "G1_CANONICAL_DETERMINISM_AND_BASELINE",
+      "pass": true,
+      "observed": {
+        "status": "PASS",
+        "deterministic_replay": {
+          "usa500idxusd": true,
+          "usatechidxusd": true
+        },
+        "identical_resample_grid_and_ohlc": {
+          "usa500idxusd": true,
+          "usatechidxusd": true
+        },
+        "baseline_expected": {
+          "selection": {
+            "n": 79,
+            "pf_1bp_rounded_3dp": 2.134
+          },
+          "forward": {
+            "n": 68,
+            "pf_1bp_rounded_3dp": 1.31,
+            "pf_2bp_rounded_3dp": 1.304
+          },
+          "oos_2026": {
+            "n": 11,
+            "pf_2bp_rounded_3dp": 1.673
+          }
+        },
+        "baseline_observed": {
+          "selection": {
+            "0": {
+              "n": 79,
+              "pf": 2.1475220449334924,
+              "total_r": 43.816457161193185
+            },
+            "1": {
+              "n": 79,
+              "pf": 2.1344507712955396,
+              "total_r": 43.49299797936873
+            },
+            "2": {
+              "n": 79,
+              "pf": 2.121484650800913,
+              "total_r": 43.16953879754426
+            },
+            "3": {
+              "n": 79,
+              "pf": 2.108622419660779,
+              "total_r": 42.846079615719795
+            }
+          },
+          "forward": {
+            "0": {
+              "n": 68,
+              "pf": 1.316446368703076,
+              "total_r": 12.980478594658436
+            },
+            "1": {
+              "n": 68,
+              "pf": 1.3103452710799484,
+              "total_r": 12.769238172926539
+            },
+            "2": {
+              "n": 68,
+              "pf": 1.3042813506009419,
+              "total_r": 12.557997751194645
+            },
+            "3": {
+              "n": 68,
+              "pf": 1.2982542684888698,
+              "total_r": 12.346757329462747
+            }
+          },
+          "oos_2026": {
+            "0": {
+              "n": 11,
+              "pf": 1.6932762984205798,
+              "total_r": 3.466381492102899
+            },
+            "1": {
+              "n": 11,
+              "pf": 1.6833237689562284,
+              "total_r": 3.430082720751467
+            },
+            "2": {
+              "n": 11,
+              "pf": 1.673449066010866,
+              "total_r": 3.393783949400037
+            },
+            "3": {
+              "n": 11,
+              "pf": 1.6636512802613006,
+              "total_r": 3.357485178048606
+            }
+          }
+        },
+        "checks": {
+          "deterministic_usa500": true,
+          "deterministic_usatech": true,
+          "selection_n": true,
+          "selection_pf_1bp": true,
+          "forward_n": true,
+          "forward_pf_1bp": true,
+          "forward_pf_2bp": true,
+          "oos_2026_n": true,
+          "oos_2026_pf_2bp": true
+        },
+        "source_hashes": {
+          "usa500idxusd": "75d3c8dd64ba4647af7f5376ac219010dc2c65f46beb296f978257e770c90087",
+          "usatechidxusd": "b8f3b267e187669890f455486100133a29a78b5b5fcb4824c67d2b8f3acb8755"
+        },
+        "source_bytes": {
+          "usa500idxusd": 11805722,
+          "usatechidxusd": 13248558
+        },
+        "engine": "research/R191_CANONICAL_index_trend_long.py unchanged sim() and H4 resample; loader reads repository M5 CSV.GZ",
+        "data_version_note": "Baseline change from the previous locked targets is attributed to the M5 cache/version; rule and thresholds are unchanged."
+      },
+      "required": {
+        "deterministic_replay": "identical outputs on each same-cache replay",
+        "official_baseline": {
+          "selection": {
+            "n": 79,
+            "pf_1bp_rounded_3dp": 2.134
+          },
+          "forward": {
+            "n": 68,
+            "pf_1bp_rounded_3dp": 1.31,
+            "pf_2bp_rounded_3dp": 1.304
+          },
+          "oos_2026": {
+            "n": 11,
+            "pf_2bp_rounded_3dp": 1.673
+          }
+        }
+      },
+      "detail": "Canonical source is run twice on identical M5 cache; both replays must be identical and match the new official baseline to 3 decimals."
     },
-    "source_bytes": {
-      "usa500idxusd": 11805722,
-      "usatechidxusd": 13248558
+    "canonical_metrics": {
+      "selection": {
+        "0": {
+          "n": 79,
+          "pf": 2.1475220449334924,
+          "total_r": 43.816457161193185
+        },
+        "1": {
+          "n": 79,
+          "pf": 2.1344507712955396,
+          "total_r": 43.49299797936873
+        },
+        "2": {
+          "n": 79,
+          "pf": 2.121484650800913,
+          "total_r": 43.16953879754426
+        },
+        "3": {
+          "n": 79,
+          "pf": 2.108622419660779,
+          "total_r": 42.846079615719795
+        }
+      },
+      "forward": {
+        "0": {
+          "n": 68,
+          "pf": 1.316446368703076,
+          "total_r": 12.980478594658436
+        },
+        "1": {
+          "n": 68,
+          "pf": 1.3103452710799484,
+          "total_r": 12.769238172926539
+        },
+        "2": {
+          "n": 68,
+          "pf": 1.3042813506009419,
+          "total_r": 12.557997751194645
+        },
+        "3": {
+          "n": 68,
+          "pf": 1.2982542684888698,
+          "total_r": 12.346757329462747
+        }
+      },
+      "oos_2026": {
+        "0": {
+          "n": 11,
+          "pf": 1.6932762984205798,
+          "total_r": 3.466381492102899
+        },
+        "1": {
+          "n": 11,
+          "pf": 1.6833237689562284,
+          "total_r": 3.430082720751467
+        },
+        "2": {
+          "n": 11,
+          "pf": 1.673449066010866,
+          "total_r": 3.393783949400037
+        },
+        "3": {
+          "n": 11,
+          "pf": 1.6636512802613006,
+          "total_r": 3.357485178048606
+        }
+      }
     },
-    "source_rows": {
-      "usa500idxusd": 826522,
-      "usatechidxusd": 826429
+    "checks": {
+      "deterministic_usa500": true,
+      "deterministic_usatech": true,
+      "selection_n": true,
+      "selection_pf_1bp": true,
+      "forward_n": true,
+      "forward_pf_1bp": true,
+      "forward_pf_2bp": true,
+      "oos_2026_n": true,
+      "oos_2026_pf_2bp": true
     },
-    "source_start_utc": {
-      "usa500idxusd": "2016-01-04T00:00:00Z",
-      "usatechidxusd": "2016-01-04T00:00:00Z"
-    },
-    "source_end_utc": {
-      "usa500idxusd": "2026-10-23T20:10:00Z",
-      "usatechidxusd": "2026-10-23T20:10:00Z"
+    "official_baseline": {
+      "selection": {
+        "n": 79,
+        "pf_1bp_rounded_3dp": 2.134
+      },
+      "forward": {
+        "n": 68,
+        "pf_1bp_rounded_3dp": 1.31,
+        "pf_2bp_rounded_3dp": 1.304
+      },
+      "oos_2026": {
+        "n": 11,
+        "pf_2bp_rounded_3dp": 1.673
+      }
     }
   },
-  "remaining_criteria_status": "NOT_RUN_PREFLIGHT_ONLY; full M5-only ten-index preparation is running",
-  "note": "This is a Gate 1 checkpoint, not the final R330 strategy verdict. No pooled metrics, Gate 2, neighborhood, leave-one-out, or funded challenge rates are reported here.",
-  "rules_and_thresholds_changed": false
+  "gate2_truncation": {
+    "gate": {
+      "gate": "G2_TRUNCATION_ALL_10",
+      "pass": true,
+      "observed": {
+        "passed": 10,
+        "total": 10,
+        "by_instrument": {
+          "usa500idxusd": {
+            "pass": true,
+            "checked": 17903,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "usatechidxusd": {
+            "pass": true,
+            "checked": 17902,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "usa30idxusd": {
+            "pass": true,
+            "checked": 17902,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "ussc2000idxusd": {
+            "pass": true,
+            "checked": 15217,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "deuidxeur": {
+            "pass": true,
+            "checked": 17819,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "gbridxgbp": {
+            "pass": true,
+            "checked": 17719,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "fraidxeur": {
+            "pass": true,
+            "checked": 15045,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "eusidxeur": {
+            "pass": true,
+            "checked": 15041,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "ausidxaud": {
+            "pass": true,
+            "checked": 17718,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "jpnidxjpy": {
+            "pass": true,
+            "checked": 17874,
+            "reason": "all completed canonical-H4 prefixes match"
+          }
+        }
+      },
+      "required": "10/10 instruments pass N=55 signal/stop prefix consistency.",
+      "detail": ""
+    },
+    "by_instrument": {
+      "usa500idxusd": {
+        "pass": true,
+        "checked": 17903,
+        "reason": "all completed canonical-H4 prefixes match"
+      },
+      "usatechidxusd": {
+        "pass": true,
+        "checked": 17902,
+        "reason": "all completed canonical-H4 prefixes match"
+      },
+      "usa30idxusd": {
+        "pass": true,
+        "checked": 17902,
+        "reason": "all completed canonical-H4 prefixes match"
+      },
+      "ussc2000idxusd": {
+        "pass": true,
+        "checked": 15217,
+        "reason": "all completed canonical-H4 prefixes match"
+      },
+      "deuidxeur": {
+        "pass": true,
+        "checked": 17819,
+        "reason": "all completed canonical-H4 prefixes match"
+      },
+      "gbridxgbp": {
+        "pass": true,
+        "checked": 17719,
+        "reason": "all completed canonical-H4 prefixes match"
+      },
+      "fraidxeur": {
+        "pass": true,
+        "checked": 15045,
+        "reason": "all completed canonical-H4 prefixes match"
+      },
+      "eusidxeur": {
+        "pass": true,
+        "checked": 15041,
+        "reason": "all completed canonical-H4 prefixes match"
+      },
+      "ausidxaud": {
+        "pass": true,
+        "checked": 17718,
+        "reason": "all completed canonical-H4 prefixes match"
+      },
+      "jpnidxjpy": {
+        "pass": true,
+        "checked": 17874,
+        "reason": "all completed canonical-H4 prefixes match"
+      }
+    }
+  },
+  "pooled_metrics": {
+    "discovery": {
+      "1": {
+        "entries": 287,
+        "n": 277,
+        "censored": 10,
+        "pf": 1.5172075554136233,
+        "wins_r": 239.54991160191315,
+        "losses_r": 157.8886888264979
+      },
+      "2": {
+        "entries": 287,
+        "n": 277,
+        "censored": 10,
+        "pf": 1.508088413109299,
+        "wins_r": 239.09982320382628,
+        "losses_r": 158.5449640255922
+      },
+      "3": {
+        "entries": 287,
+        "n": 277,
+        "censored": 10,
+        "pf": 1.4990444544776713,
+        "wins_r": 238.64973480573943,
+        "losses_r": 159.2012392246865
+      }
+    },
+    "forward": {
+      "1": {
+        "entries": 294,
+        "n": 284,
+        "censored": 10,
+        "pf": 1.3083668337596306,
+        "wins_r": 225.59373584473647,
+        "losses_r": 172.42391814265594
+      },
+      "2": {
+        "entries": 294,
+        "n": 284,
+        "censored": 10,
+        "pf": 1.3011958533451247,
+        "wins_r": 225.18747168947294,
+        "losses_r": 173.06193461234847
+      },
+      "3": {
+        "entries": 294,
+        "n": 284,
+        "censored": 10,
+        "pf": 1.294077552319183,
+        "wins_r": 224.7812075342094,
+        "losses_r": 173.69995108204097
+      }
+    },
+    "oos_2026": {
+      "1": {
+        "entries": 41,
+        "n": 31,
+        "censored": 10,
+        "pf": 1.0938663650951215,
+        "wins_r": 21.96564689129817,
+        "losses_r": 20.080740748791616
+      },
+      "2": {
+        "entries": 41,
+        "n": 31,
+        "censored": 10,
+        "pf": 1.0877818569644926,
+        "wins_r": 21.93129378259634,
+        "losses_r": 20.161481497583228
+      },
+      "3": {
+        "entries": 41,
+        "n": 31,
+        "censored": 10,
+        "pf": 1.0817458877478738,
+        "wins_r": 21.896940673894512,
+        "losses_r": 20.24222224637484
+      }
+    }
+  },
+  "pooled_annual": [
+    {
+      "year": 2017,
+      "phase": "discovery",
+      "entries_1bp": 56,
+      "n_1bp": 56,
+      "censored_1bp": 0,
+      "pf_1bp": 2.62792974052677,
+      "wins_r_1bp": 63.829818468578424,
+      "losses_r_1bp": 24.289012557764842,
+      "entries_2bp": 56,
+      "n_2bp": 56,
+      "censored_2bp": 0,
+      "pf_2bp": 2.6081946820164563,
+      "wins_r_2bp": 63.65963693715683,
+      "losses_r_2bp": 24.407548016293045,
+      "entries_3bp": 56,
+      "n_3bp": 56,
+      "censored_3bp": 0,
+      "pf_3bp": 2.5886503840254087,
+      "wins_r_3bp": 63.48945540573526,
+      "losses_r_3bp": 24.52608347482125
+    },
+    {
+      "year": 2018,
+      "phase": "discovery",
+      "entries_1bp": 58,
+      "n_1bp": 58,
+      "censored_1bp": 0,
+      "pf_1bp": 0.4653002628860581,
+      "wins_r_1bp": 21.954595040811146,
+      "losses_r_1bp": 47.18371510180588,
+      "entries_2bp": 58,
+      "n_2bp": 58,
+      "censored_2bp": 0,
+      "pf_2bp": 0.4626646419942766,
+      "wins_r_2bp": 21.90919008162229,
+      "losses_r_2bp": 47.35436446404158,
+      "entries_3bp": 58,
+      "n_3bp": 58,
+      "censored_3bp": 0,
+      "pf_3bp": 0.4600479486940123,
+      "wins_r_3bp": 21.86378512243344,
+      "losses_r_3bp": 47.525013826277295
+    },
+    {
+      "year": 2019,
+      "phase": "discovery",
+      "entries_1bp": 63,
+      "n_1bp": 63,
+      "censored_1bp": 0,
+      "pf_1bp": 2.3303997298644625,
+      "wins_r_1bp": 67.87486339431732,
+      "losses_r_1bp": 29.12584589008039,
+      "entries_2bp": 63,
+      "n_2bp": 63,
+      "censored_2bp": 0,
+      "pf_2bp": 2.31609601584084,
+      "wins_r_2bp": 67.74972678863463,
+      "losses_r_2bp": 29.25169178016078,
+      "entries_3bp": 63,
+      "n_3bp": 63,
+      "censored_3bp": 0,
+      "pf_3bp": 2.3019148487537886,
+      "wins_r_3bp": 67.62459018295193,
+      "losses_r_3bp": 29.37753767024117
+    },
+    {
+      "year": 2020,
+      "phase": "discovery",
+      "entries_1bp": 48,
+      "n_1bp": 48,
+      "censored_1bp": 0,
+      "pf_1bp": 2.159376090428365,
+      "wins_r_1bp": 49.95731264144116,
+      "losses_r_1bp": 23.13506797768188,
+      "entries_2bp": 48,
+      "n_2bp": 48,
+      "censored_2bp": 0,
+      "pf_2bp": 2.1495222126965556,
+      "wins_r_2bp": 49.914625282882334,
+      "losses_r_2bp": 23.221265166766944,
+      "entries_3bp": 48,
+      "n_3bp": 48,
+      "censored_3bp": 0,
+      "pf_3bp": 2.1397412194812246,
+      "wins_r_3bp": 49.8719379243235,
+      "losses_r_3bp": 23.307462355852
+    },
+    {
+      "year": 2021,
+      "phase": "discovery",
+      "entries_1bp": 62,
+      "n_1bp": 52,
+      "censored_1bp": 10,
+      "pf_1bp": 1.0520647722143146,
+      "wins_r_1bp": 35.933322056765086,
+      "losses_r_1bp": 34.15504729916492,
+      "entries_2bp": 62,
+      "n_2bp": 52,
+      "censored_2bp": 10,
+      "pf_2bp": 1.0453671006571956,
+      "wins_r_2bp": 35.866644113530185,
+      "losses_r_2bp": 34.310094598329854,
+      "entries_3bp": 62,
+      "n_3bp": 52,
+      "censored_3bp": 10,
+      "pf_3bp": 1.0387296903279983,
+      "wins_r_3bp": 35.79996617029528,
+      "losses_r_3bp": 34.46514189749478
+    },
+    {
+      "year": 2022,
+      "phase": "forward",
+      "entries_1bp": 77,
+      "n_1bp": 77,
+      "censored_1bp": 0,
+      "pf_1bp": 0.5633511079316811,
+      "wins_r_1bp": 33.958705027346106,
+      "losses_r_1bp": 60.2798229190034,
+      "entries_2bp": 77,
+      "n_2bp": 77,
+      "censored_2bp": 0,
+      "pf_2bp": 0.5612456453529069,
+      "wins_r_2bp": 33.91741005469222,
+      "losses_r_2bp": 60.432379895553964,
+      "entries_3bp": 77,
+      "n_3bp": 77,
+      "censored_3bp": 0,
+      "pf_3bp": 0.5591507861690306,
+      "wins_r_3bp": 33.876115082038325,
+      "losses_r_3bp": 60.584936872104514
+    },
+    {
+      "year": 2023,
+      "phase": "forward",
+      "entries_1bp": 88,
+      "n_1bp": 88,
+      "censored_1bp": 0,
+      "pf_1bp": 1.3751778073422634,
+      "wins_r_1bp": 71.86362855132523,
+      "losses_r_1bp": 52.25769945358007,
+      "entries_2bp": 88,
+      "n_2bp": 88,
+      "censored_2bp": 0,
+      "pf_2bp": 1.3665762743839638,
+      "wins_r_2bp": 71.7272571026505,
+      "losses_r_2bp": 52.4868303710192,
+      "entries_3bp": 88,
+      "n_3bp": 88,
+      "censored_3bp": 0,
+      "pf_3bp": 1.358049514875296,
+      "wins_r_3bp": 71.59088565397575,
+      "losses_r_3bp": 52.71596128845835
+    },
+    {
+      "year": 2024,
+      "phase": "forward",
+      "entries_1bp": 66,
+      "n_1bp": 66,
+      "censored_1bp": 0,
+      "pf_1bp": 1.9744780179214767,
+      "wins_r_1bp": 65.87376913979362,
+      "losses_r_1bp": 33.36262472505955,
+      "entries_2bp": 66,
+      "n_2bp": 66,
+      "censored_2bp": 0,
+      "pf_2bp": 1.9626031274997324,
+      "wins_r_2bp": 65.74753827958723,
+      "losses_r_2bp": 33.500169931628825,
+      "entries_3bp": 66,
+      "n_3bp": 66,
+      "censored_3bp": 0,
+      "pf_3bp": 1.9508253503479784,
+      "wins_r_3bp": 65.62130741938086,
+      "losses_r_3bp": 33.637715138198125
+    },
+    {
+      "year": 2025,
+      "phase": "forward",
+      "entries_1bp": 63,
+      "n_1bp": 53,
+      "censored_1bp": 10,
+      "pf_1bp": 2.032050157377809,
+      "wins_r_1bp": 53.897633126271494,
+      "losses_r_1bp": 26.52377104501293,
+      "entries_2bp": 63,
+      "n_2bp": 53,
+      "censored_2bp": 10,
+      "pf_2bp": 2.019148217408882,
+      "wins_r_2bp": 53.79526625254298,
+      "losses_r_2bp": 26.64255441414647,
+      "entries_3bp": 63,
+      "n_3bp": 53,
+      "censored_3bp": 10,
+      "pf_3bp": 2.0063608110189772,
+      "wins_r_3bp": 53.692899378814474,
+      "losses_r_3bp": 26.761337783280005
+    },
+    {
+      "year": 2026,
+      "phase": "oos_2026",
+      "entries_1bp": 41,
+      "n_1bp": 31,
+      "censored_1bp": 10,
+      "pf_1bp": 1.0938663650951215,
+      "wins_r_1bp": 21.96564689129817,
+      "losses_r_1bp": 20.080740748791616,
+      "entries_2bp": 41,
+      "n_2bp": 31,
+      "censored_2bp": 10,
+      "pf_2bp": 1.0877818569644926,
+      "wins_r_2bp": 21.93129378259634,
+      "losses_r_2bp": 20.161481497583228,
+      "entries_3bp": 41,
+      "n_3bp": 31,
+      "censored_3bp": 10,
+      "pf_3bp": 1.0817458877478738,
+      "wins_r_3bp": 21.896940673894512,
+      "losses_r_3bp": 20.24222224637484
+    }
+  ],
+  "instrument_metrics": [
+    {
+      "instrument": "usa500idxusd",
+      "instrument_name": "USA 500 / S&P 500",
+      "discovery_n_1bp": 39,
+      "discovery_pf_1bp": 2.0891454786258397,
+      "discovery_n_2bp": 39,
+      "discovery_pf_2bp": 2.0731969451461314,
+      "discovery_n_3bp": 39,
+      "discovery_pf_3bp": 2.057414908722178,
+      "forward_n_1bp": 35,
+      "forward_pf_1bp": 1.4898702982229828,
+      "forward_n_2bp": 35,
+      "forward_pf_2bp": 1.4812692934277598,
+      "forward_n_3bp": 35,
+      "forward_pf_3bp": 1.4727335564200403,
+      "oos_2026_n_1bp": 4,
+      "oos_2026_pf_1bp": 1.987628368919975,
+      "oos_2026_n_2bp": 4,
+      "oos_2026_pf_2bp": 1.9753656278838767,
+      "oos_2026_n_3bp": 4,
+      "oos_2026_pf_3bp": 1.9632103455820655
+    },
+    {
+      "instrument": "usatechidxusd",
+      "instrument_name": "USA 100 Tech / Nasdaq 100",
+      "discovery_n_1bp": 38,
+      "discovery_pf_1bp": 2.432891705574627,
+      "discovery_n_2bp": 38,
+      "discovery_pf_2bp": 2.4216496097410927,
+      "discovery_n_3bp": 38,
+      "discovery_pf_3bp": 2.4104722518430957,
+      "forward_n_1bp": 31,
+      "forward_pf_1bp": 1.25885253547294,
+      "forward_n_2bp": 31,
+      "forward_pf_2bp": 1.2545670084311202,
+      "forward_n_3bp": 31,
+      "forward_pf_3bp": 1.2503011768934442,
+      "oos_2026_n_1bp": 5,
+      "oos_2026_pf_1bp": 1.3269658837206897,
+      "oos_2026_n_2bp": 5,
+      "oos_2026_pf_2bp": 1.3206440514442492,
+      "oos_2026_n_3bp": 5,
+      "oos_2026_pf_3bp": 1.3143673480398672
+    },
+    {
+      "instrument": "usa30idxusd",
+      "instrument_name": "USA 30 / Dow Jones",
+      "discovery_n_1bp": 26,
+      "discovery_pf_1bp": 3.159453556930997,
+      "discovery_n_2bp": 26,
+      "discovery_pf_2bp": 3.13473747831276,
+      "discovery_n_3bp": 26,
+      "discovery_pf_3bp": 3.1102848856219785,
+      "forward_n_1bp": 24,
+      "forward_pf_1bp": 1.6762990227276904,
+      "forward_n_2bp": 24,
+      "forward_pf_2bp": 1.66733712172702,
+      "forward_n_3bp": 24,
+      "forward_pf_3bp": 1.658435261322505,
+      "oos_2026_n_1bp": 4,
+      "oos_2026_pf_1bp": 1.9920802658576071,
+      "oos_2026_n_2bp": 4,
+      "oos_2026_pf_2bp": 1.9842010257747522,
+      "oos_2026_n_3bp": 4,
+      "oos_2026_pf_3bp": 1.9763619699706914
+    },
+    {
+      "instrument": "ussc2000idxusd",
+      "instrument_name": "US Small Cap 2000",
+      "discovery_n_1bp": 21,
+      "discovery_pf_1bp": 1.8106735003978593,
+      "discovery_n_2bp": 21,
+      "discovery_pf_2bp": 1.8032076370522652,
+      "discovery_n_3bp": 21,
+      "discovery_pf_3bp": 1.795783869083631,
+      "forward_n_1bp": 25,
+      "forward_pf_1bp": 1.295191516224916,
+      "forward_n_2bp": 25,
+      "forward_pf_2bp": 1.290781079906242,
+      "forward_n_3bp": 25,
+      "forward_pf_3bp": 1.2863885395324925,
+      "oos_2026_n_1bp": 3,
+      "oos_2026_pf_1bp": 0.9959225555680177,
+      "oos_2026_n_2bp": 3,
+      "oos_2026_pf_2bp": 0.99186763506118,
+      "oos_2026_n_3bp": 3,
+      "oos_2026_pf_3bp": 0.9878350523592987
+    },
+    {
+      "instrument": "deuidxeur",
+      "instrument_name": "Germany 40 / DAX",
+      "discovery_n_1bp": 28,
+      "discovery_pf_1bp": 1.105069665138492,
+      "discovery_n_2bp": 28,
+      "discovery_pf_2bp": 1.0990752683708183,
+      "discovery_n_3bp": 28,
+      "discovery_pf_3bp": 1.0931273733295022,
+      "forward_n_1bp": 32,
+      "forward_pf_1bp": 1.35927448335229,
+      "forward_n_2bp": 32,
+      "forward_pf_2bp": 1.3502132309622823,
+      "forward_n_3bp": 32,
+      "forward_pf_3bp": 1.3412361072814674,
+      "oos_2026_n_1bp": 3,
+      "oos_2026_pf_1bp": 0.0,
+      "oos_2026_n_2bp": 3,
+      "oos_2026_pf_2bp": 0.0,
+      "oos_2026_n_3bp": 3,
+      "oos_2026_pf_3bp": 0.0
+    },
+    {
+      "instrument": "gbridxgbp",
+      "instrument_name": "FTSE 100",
+      "discovery_n_1bp": 29,
+      "discovery_pf_1bp": 1.045166655783639,
+      "discovery_n_2bp": 29,
+      "discovery_pf_2bp": 1.0377697733249551,
+      "discovery_n_3bp": 29,
+      "discovery_pf_3bp": 1.0304400055333636,
+      "forward_n_1bp": 27,
+      "forward_pf_1bp": 1.5828789639195227,
+      "forward_n_2bp": 27,
+      "forward_pf_2bp": 1.5710869713568139,
+      "forward_n_3bp": 27,
+      "forward_pf_3bp": 1.55940495846307,
+      "oos_2026_n_1bp": 5,
+      "oos_2026_pf_1bp": 1.3220847163966878,
+      "oos_2026_n_2bp": 5,
+      "oos_2026_pf_2bp": 1.3109732379940897,
+      "oos_2026_n_3bp": 5,
+      "oos_2026_pf_3bp": 1.2999964054152686
+    },
+    {
+      "instrument": "fraidxeur",
+      "instrument_name": "France 40 / CAC 40",
+      "discovery_n_1bp": 15,
+      "discovery_pf_1bp": 1.326406229253932,
+      "discovery_n_2bp": 15,
+      "discovery_pf_2bp": 1.3195331731847368,
+      "discovery_n_3bp": 15,
+      "discovery_pf_3bp": 1.3127135350279049,
+      "forward_n_1bp": 28,
+      "forward_pf_1bp": 0.7946199638885962,
+      "forward_n_2bp": 28,
+      "forward_pf_2bp": 0.7904547131170477,
+      "forward_n_3bp": 28,
+      "forward_pf_3bp": 0.7863208519583653,
+      "oos_2026_n_1bp": 0,
+      "oos_2026_pf_1bp": null,
+      "oos_2026_n_2bp": 0,
+      "oos_2026_pf_2bp": null,
+      "oos_2026_n_3bp": 0,
+      "oos_2026_pf_3bp": null
+    },
+    {
+      "instrument": "eusidxeur",
+      "instrument_name": "EU Stocks 50",
+      "discovery_n_1bp": 25,
+      "discovery_pf_1bp": 0.7739618491775595,
+      "discovery_n_2bp": 25,
+      "discovery_pf_2bp": 0.7701736544846236,
+      "discovery_n_3bp": 25,
+      "discovery_pf_3bp": 0.7664128924415265,
+      "forward_n_1bp": 23,
+      "forward_pf_1bp": 1.2578641195533597,
+      "forward_n_2bp": 23,
+      "forward_pf_2bp": 1.2503244912414686,
+      "forward_n_3bp": 23,
+      "forward_pf_3bp": 1.2428446904108854,
+      "oos_2026_n_1bp": 2,
+      "oos_2026_pf_1bp": 0.0,
+      "oos_2026_n_2bp": 2,
+      "oos_2026_pf_2bp": 0.0,
+      "oos_2026_n_3bp": 2,
+      "oos_2026_pf_3bp": 0.0
+    },
+    {
+      "instrument": "ausidxaud",
+      "instrument_name": "Australia 200",
+      "discovery_n_1bp": 27,
+      "discovery_pf_1bp": 0.9930056320666526,
+      "discovery_n_2bp": 27,
+      "discovery_pf_2bp": 0.9860871202673414,
+      "discovery_n_3bp": 27,
+      "discovery_pf_3bp": 0.9792432372319997,
+      "forward_n_1bp": 28,
+      "forward_pf_1bp": 0.9409319510057863,
+      "forward_n_2bp": 28,
+      "forward_pf_2bp": 0.9345594950441962,
+      "forward_n_3bp": 28,
+      "forward_pf_3bp": 0.9282501029125577,
+      "oos_2026_n_1bp": 3,
+      "oos_2026_pf_1bp": 0.993919136226639,
+      "oos_2026_n_2bp": 3,
+      "oos_2026_pf_2bp": 0.9878898989873969,
+      "oos_2026_n_3bp": 3,
+      "oos_2026_pf_3bp": 0.9819116335974907
+    },
+    {
+      "instrument": "jpnidxjpy",
+      "instrument_name": "Japan 200+",
+      "discovery_n_1bp": 29,
+      "discovery_pf_1bp": 1.2161369577864602,
+      "discovery_n_2bp": 29,
+      "discovery_pf_2bp": 1.2100932761183376,
+      "discovery_n_3bp": 29,
+      "discovery_pf_3bp": 1.2040907524444937,
+      "forward_n_1bp": 31,
+      "forward_pf_1bp": 1.6377686850938502,
+      "forward_n_2bp": 31,
+      "forward_pf_2bp": 1.6305217175732898,
+      "forward_n_3bp": 31,
+      "forward_pf_3bp": 1.6233187396936029,
+      "oos_2026_n_1bp": 2,
+      "oos_2026_pf_1bp": 1.995079390907291,
+      "oos_2026_n_2bp": 2,
+      "oos_2026_pf_2bp": 1.9901762119097448,
+      "oos_2026_n_3bp": 2,
+      "oos_2026_pf_3bp": 1.9852903705581113
+    }
+  ],
+  "neighborhood": [
+    {
+      "N": 40,
+      "M": 27,
+      "RR": 2,
+      "forward_n": 281,
+      "forward_pf_2bp": 1.402816099014576,
+      "truncation_10_of_10": true,
+      "note": "N=40/80 are robustness only; candidate remains N=55."
+    },
+    {
+      "N": 55,
+      "M": 27,
+      "RR": 2,
+      "forward_n": 284,
+      "forward_pf_2bp": 1.3011958533451247,
+      "truncation_10_of_10": true,
+      "note": "N=40/80 are robustness only; candidate remains N=55."
+    },
+    {
+      "N": 80,
+      "M": 27,
+      "RR": 2,
+      "forward_n": 237,
+      "forward_pf_2bp": 1.138554644445126,
+      "truncation_10_of_10": true,
+      "note": "N=40/80 are robustness only; candidate remains N=55."
+    }
+  ],
+  "leave_one_out": [
+    {
+      "removed_instrument": "usa500idxusd",
+      "remaining_instruments": 9,
+      "forward_n": 249,
+      "forward_pf_2bp": 1.2774357328083215,
+      "pass": true
+    },
+    {
+      "removed_instrument": "usatechidxusd",
+      "remaining_instruments": 9,
+      "forward_n": 253,
+      "forward_pf_2bp": 1.306976361273137,
+      "pass": true
+    },
+    {
+      "removed_instrument": "usa30idxusd",
+      "remaining_instruments": 9,
+      "forward_n": 260,
+      "forward_pf_2bp": 1.2711062948905065,
+      "pass": true
+    },
+    {
+      "removed_instrument": "ussc2000idxusd",
+      "remaining_instruments": 9,
+      "forward_n": 259,
+      "forward_pf_2bp": 1.3022169082295052,
+      "pass": true
+    },
+    {
+      "removed_instrument": "deuidxeur",
+      "remaining_instruments": 9,
+      "forward_n": 252,
+      "forward_pf_2bp": 1.2950866733442237,
+      "pass": true
+    },
+    {
+      "removed_instrument": "gbridxgbp",
+      "remaining_instruments": 9,
+      "forward_n": 257,
+      "forward_pf_2bp": 1.2752250114332686,
+      "pass": true
+    },
+    {
+      "removed_instrument": "fraidxeur",
+      "remaining_instruments": 9,
+      "forward_n": 256,
+      "forward_pf_2bp": 1.3686209568675198,
+      "pass": true
+    },
+    {
+      "removed_instrument": "eusidxeur",
+      "remaining_instruments": 9,
+      "forward_n": 261,
+      "forward_pf_2bp": 1.3057913028284411,
+      "pass": true
+    },
+    {
+      "removed_instrument": "ausidxaud",
+      "remaining_instruments": 9,
+      "forward_n": 256,
+      "forward_pf_2bp": 1.346922890598074,
+      "pass": true
+    },
+    {
+      "removed_instrument": "jpnidxjpy",
+      "remaining_instruments": 9,
+      "forward_n": 253,
+      "forward_pf_2bp": 1.2650294590151556,
+      "pass": true
+    }
+  ],
+  "correlation_overlap": {
+    "daily_correlations": {
+      "period": "Daily realized risk-normalized R at 2bp, forward through common cutoff",
+      "daily_sample_count": 1757,
+      "pairs_with_defined_correlation": 45,
+      "mean_pairwise_daily_correlation": 0.038656144511414234,
+      "median_pairwise_daily_correlation": 0.025514263902617934,
+      "min_pairwise_daily_correlation": -0.01362183741343527,
+      "max_pairwise_daily_correlation": 0.16256570669793097
+    },
+    "overlap": {
+      "window_start_utc": "2022-01-01T00:00:00+00:00",
+      "window_end_utc": "2026-10-23T20:00:00+00:00",
+      "pct_elapsed_time_with_3_or_more_open": 92.33469310312114,
+      "max_simultaneous_positions": 10,
+      "uncapped_max_open_risk_pct_at_0_5_each": 5.0,
+      "uncapped_max_open_risk_pct_at_1_0_each": 10.0,
+      "note": "Raw historical overlap before the simulator's 2% open-stop-risk cap."
+    }
+  },
+  "causality_audit": {
+    "pass": true,
+    "trades_checked": 1834,
+    "errors": [],
+    "method": "Independent prefix-signal, 27-bar stop, next-H4 open, M5-source open, 2R and first canonical-H4 exit audit; no R192 execution logic.",
+    "required": true
+  },
+  "challenge_simulation": [
+    {
+      "stream": "R191_only_USA500_USATECH",
+      "risk_per_trade_pct": 0.5,
+      "paths": 10000,
+      "pass_both_within_5y_pct": 28.0,
+      "breach_DLL_pct": 0.0,
+      "breach_MLL_pct": 5.75,
+      "failed_by_breach_pct": 5.75,
+      "unfinished_5y_pct": 66.25,
+      "median_years_if_passed": 3.484152787284204,
+      "p90_years_if_passed": 4.703047760285953,
+      "mean_trades_taken": 58.4228,
+      "mean_blocked_by_2pct_cap": 0.4838,
+      "max_open_positions_observed": 4,
+      "max_open_risk_pct_observed": 2.0000000000000004,
+      "quarter_trade_counts": {
+        "2022Q1": 5,
+        "2022Q2": 2,
+        "2022Q3": 3,
+        "2022Q4": 7,
+        "2023Q1": 6,
+        "2023Q2": 3,
+        "2023Q3": 2,
+        "2023Q4": 7,
+        "2024Q1": 1,
+        "2024Q2": 4,
+        "2024Q3": 2,
+        "2024Q4": 2,
+        "2025Q1": 2,
+        "2025Q2": 3,
+        "2025Q3": 4,
+        "2025Q4": 4,
+        "2026Q1": 1,
+        "2026Q2": 7,
+        "2026Q3": 1,
+        "2026Q4": 0
+      }
+    },
+    {
+      "stream": "pooled_all_10_indices",
+      "risk_per_trade_pct": 0.5,
+      "paths": 10000,
+      "pass_both_within_5y_pct": 50.7,
+      "breach_DLL_pct": 0.0,
+      "breach_MLL_pct": 21.48,
+      "failed_by_breach_pct": 21.48,
+      "unfinished_5y_pct": 27.82,
+      "median_years_if_passed": 2.4328418510913377,
+      "p90_years_if_passed": 4.3382652673207085,
+      "mean_trades_taken": 88.0697,
+      "mean_blocked_by_2pct_cap": 107.766,
+      "max_open_positions_observed": 4,
+      "max_open_risk_pct_observed": 2.0000000000000004,
+      "quarter_trade_counts": {
+        "2022Q1": 18,
+        "2022Q2": 13,
+        "2022Q3": 14,
+        "2022Q4": 22,
+        "2023Q1": 17,
+        "2023Q2": 17,
+        "2023Q3": 15,
+        "2023Q4": 29,
+        "2024Q1": 19,
+        "2024Q2": 11,
+        "2024Q3": 21,
+        "2024Q4": 10,
+        "2025Q1": 15,
+        "2025Q2": 18,
+        "2025Q3": 12,
+        "2025Q4": 16,
+        "2026Q1": 14,
+        "2026Q2": 12,
+        "2026Q3": 5,
+        "2026Q4": 0
+      }
+    },
+    {
+      "stream": "R191_only_USA500_USATECH",
+      "risk_per_trade_pct": 1.0,
+      "paths": 10000,
+      "pass_both_within_5y_pct": 54.52,
+      "breach_DLL_pct": 0.0,
+      "breach_MLL_pct": 28.57,
+      "failed_by_breach_pct": 28.57,
+      "unfinished_5y_pct": 16.91,
+      "median_years_if_passed": 2.3687875503840594,
+      "p90_years_if_passed": 4.207496767815043,
+      "mean_trades_taken": 31.6758,
+      "mean_blocked_by_2pct_cap": 6.5693,
+      "max_open_positions_observed": 2,
+      "max_open_risk_pct_observed": 2.0000000000000004,
+      "quarter_trade_counts": {
+        "2022Q1": 5,
+        "2022Q2": 2,
+        "2022Q3": 3,
+        "2022Q4": 7,
+        "2023Q1": 6,
+        "2023Q2": 3,
+        "2023Q3": 2,
+        "2023Q4": 7,
+        "2024Q1": 1,
+        "2024Q2": 4,
+        "2024Q3": 2,
+        "2024Q4": 2,
+        "2025Q1": 2,
+        "2025Q2": 3,
+        "2025Q3": 4,
+        "2025Q4": 4,
+        "2026Q1": 1,
+        "2026Q2": 7,
+        "2026Q3": 1,
+        "2026Q4": 0
+      }
+    },
+    {
+      "stream": "pooled_all_10_indices",
+      "risk_per_trade_pct": 1.0,
+      "paths": 10000,
+      "pass_both_within_5y_pct": 46.17,
+      "breach_DLL_pct": 0.0,
+      "breach_MLL_pct": 29.33,
+      "failed_by_breach_pct": 29.33,
+      "unfinished_5y_pct": 24.5,
+      "median_years_if_passed": 2.4294052779679065,
+      "p90_years_if_passed": 4.242849266103891,
+      "mean_trades_taken": 42.5501,
+      "mean_blocked_by_2pct_cap": 144.3463,
+      "max_open_positions_observed": 2,
+      "max_open_risk_pct_observed": 2.0000000000000004,
+      "quarter_trade_counts": {
+        "2022Q1": 18,
+        "2022Q2": 13,
+        "2022Q3": 14,
+        "2022Q4": 22,
+        "2023Q1": 17,
+        "2023Q2": 17,
+        "2023Q3": 15,
+        "2023Q4": 29,
+        "2024Q1": 19,
+        "2024Q2": 11,
+        "2024Q3": 21,
+        "2024Q4": 10,
+        "2025Q1": 15,
+        "2025Q2": 18,
+        "2025Q3": 12,
+        "2025Q4": 16,
+        "2026Q1": 14,
+        "2026Q2": 12,
+        "2026Q3": 5,
+        "2026Q4": 0
+      }
+    }
+  ],
+  "challenge_gates": [
+    {
+      "risk_per_trade_pct": 0.5,
+      "pass_rate_gate": false,
+      "breach_rate_gate": true,
+      "better_than_R191_only": false,
+      "candidate_pass_pct": 50.7,
+      "baseline_pass_pct": 28.0,
+      "candidate_breach_pct": 21.48,
+      "baseline_breach_pct": 5.75,
+      "pass": false,
+      "comparison": "Candidate pass-both rate must be strictly higher, with no higher DLL/MLL breach rate."
+    },
+    {
+      "risk_per_trade_pct": 1.0,
+      "pass_rate_gate": false,
+      "breach_rate_gate": false,
+      "better_than_R191_only": false,
+      "candidate_pass_pct": 46.17,
+      "baseline_pass_pct": 54.52,
+      "candidate_breach_pct": 29.33,
+      "baseline_breach_pct": 28.57,
+      "pass": false,
+      "comparison": "Candidate pass-both rate must be strictly higher, with no higher DLL/MLL breach rate."
+    }
+  ],
+  "challenge_simulator": {
+    "paths_per_stream_risk": 10000,
+    "seed": 330191,
+    "quarter_blocks": [
+      "2022Q1",
+      "2022Q2",
+      "2022Q3",
+      "2022Q4",
+      "2023Q1",
+      "2023Q2",
+      "2023Q3",
+      "2023Q4",
+      "2024Q1",
+      "2024Q2",
+      "2024Q3",
+      "2024Q4",
+      "2025Q1",
+      "2025Q2",
+      "2025Q3",
+      "2025Q4",
+      "2026Q1",
+      "2026Q2",
+      "2026Q3",
+      "2026Q4"
+    ],
+    "candidate_quarter_counts": {
+      "2022Q1": 18,
+      "2022Q2": 13,
+      "2022Q3": 14,
+      "2022Q4": 22,
+      "2023Q1": 17,
+      "2023Q2": 17,
+      "2023Q3": 15,
+      "2023Q4": 29,
+      "2024Q1": 19,
+      "2024Q2": 11,
+      "2024Q3": 21,
+      "2024Q4": 10,
+      "2025Q1": 15,
+      "2025Q2": 18,
+      "2025Q3": 12,
+      "2025Q4": 16,
+      "2026Q1": 14,
+      "2026Q2": 12,
+      "2026Q3": 5,
+      "2026Q4": 0
+    },
+    "baseline_quarter_counts": {
+      "2022Q1": 5,
+      "2022Q2": 2,
+      "2022Q3": 3,
+      "2022Q4": 7,
+      "2023Q1": 6,
+      "2023Q2": 3,
+      "2023Q3": 2,
+      "2023Q4": 7,
+      "2024Q1": 1,
+      "2024Q2": 4,
+      "2024Q3": 2,
+      "2024Q4": 2,
+      "2025Q1": 2,
+      "2025Q2": 3,
+      "2025Q3": 4,
+      "2025Q4": 4,
+      "2026Q1": 1,
+      "2026Q2": 7,
+      "2026Q3": 1,
+      "2026Q4": 0
+    },
+    "risk_cap": "Skip an entry if total active stop-risk would exceed 2% of current phase balance.",
+    "marking": "M5 intraday low/high extrema and last pre-exit close mark open positions; same-bar exit is after entry/marks and stop-first ordering is conservative. DLL includes marked floating PnL; MLL is a static 10% floor. Five distinct server-day trade closures required in each phase.",
+    "server_day": "Europe/Helsinki seasonal GMT+2/GMT+3 proxy; verify against funded account server.",
+    "limitations": [
+      "Quarter cohorts are synchronized across instruments to preserve observed cross-index co-occurrence, but a trade's marked path is shifted as a unit with its entry quarter.",
+      "This is a bootstrap simulation of observed trade cohorts, not a future-price guarantee or a full broker/platform execution emulator."
+    ]
+  },
+  "gates": [
+    {
+      "gate": "G1_CANONICAL_DETERMINISM_AND_BASELINE",
+      "pass": true,
+      "observed": {
+        "status": "PASS",
+        "deterministic_replay": {
+          "usa500idxusd": true,
+          "usatechidxusd": true
+        },
+        "identical_resample_grid_and_ohlc": {
+          "usa500idxusd": true,
+          "usatechidxusd": true
+        },
+        "baseline_expected": {
+          "selection": {
+            "n": 79,
+            "pf_1bp_rounded_3dp": 2.134
+          },
+          "forward": {
+            "n": 68,
+            "pf_1bp_rounded_3dp": 1.31,
+            "pf_2bp_rounded_3dp": 1.304
+          },
+          "oos_2026": {
+            "n": 11,
+            "pf_2bp_rounded_3dp": 1.673
+          }
+        },
+        "baseline_observed": {
+          "selection": {
+            "0": {
+              "n": 79,
+              "pf": 2.1475220449334924,
+              "total_r": 43.816457161193185
+            },
+            "1": {
+              "n": 79,
+              "pf": 2.1344507712955396,
+              "total_r": 43.49299797936873
+            },
+            "2": {
+              "n": 79,
+              "pf": 2.121484650800913,
+              "total_r": 43.16953879754426
+            },
+            "3": {
+              "n": 79,
+              "pf": 2.108622419660779,
+              "total_r": 42.846079615719795
+            }
+          },
+          "forward": {
+            "0": {
+              "n": 68,
+              "pf": 1.316446368703076,
+              "total_r": 12.980478594658436
+            },
+            "1": {
+              "n": 68,
+              "pf": 1.3103452710799484,
+              "total_r": 12.769238172926539
+            },
+            "2": {
+              "n": 68,
+              "pf": 1.3042813506009419,
+              "total_r": 12.557997751194645
+            },
+            "3": {
+              "n": 68,
+              "pf": 1.2982542684888698,
+              "total_r": 12.346757329462747
+            }
+          },
+          "oos_2026": {
+            "0": {
+              "n": 11,
+              "pf": 1.6932762984205798,
+              "total_r": 3.466381492102899
+            },
+            "1": {
+              "n": 11,
+              "pf": 1.6833237689562284,
+              "total_r": 3.430082720751467
+            },
+            "2": {
+              "n": 11,
+              "pf": 1.673449066010866,
+              "total_r": 3.393783949400037
+            },
+            "3": {
+              "n": 11,
+              "pf": 1.6636512802613006,
+              "total_r": 3.357485178048606
+            }
+          }
+        },
+        "checks": {
+          "deterministic_usa500": true,
+          "deterministic_usatech": true,
+          "selection_n": true,
+          "selection_pf_1bp": true,
+          "forward_n": true,
+          "forward_pf_1bp": true,
+          "forward_pf_2bp": true,
+          "oos_2026_n": true,
+          "oos_2026_pf_2bp": true
+        },
+        "source_hashes": {
+          "usa500idxusd": "75d3c8dd64ba4647af7f5376ac219010dc2c65f46beb296f978257e770c90087",
+          "usatechidxusd": "b8f3b267e187669890f455486100133a29a78b5b5fcb4824c67d2b8f3acb8755"
+        },
+        "source_bytes": {
+          "usa500idxusd": 11805722,
+          "usatechidxusd": 13248558
+        },
+        "engine": "research/R191_CANONICAL_index_trend_long.py unchanged sim() and H4 resample; loader reads repository M5 CSV.GZ",
+        "data_version_note": "Baseline change from the previous locked targets is attributed to the M5 cache/version; rule and thresholds are unchanged."
+      },
+      "required": {
+        "deterministic_replay": "identical outputs on each same-cache replay",
+        "official_baseline": {
+          "selection": {
+            "n": 79,
+            "pf_1bp_rounded_3dp": 2.134
+          },
+          "forward": {
+            "n": 68,
+            "pf_1bp_rounded_3dp": 1.31,
+            "pf_2bp_rounded_3dp": 1.304
+          },
+          "oos_2026": {
+            "n": 11,
+            "pf_2bp_rounded_3dp": 1.673
+          }
+        }
+      },
+      "detail": "Canonical source is run twice on identical M5 cache; both replays must be identical and match the new official baseline to 3 decimals."
+    },
+    {
+      "gate": "G2_TRUNCATION_ALL_10",
+      "pass": true,
+      "observed": {
+        "passed": 10,
+        "total": 10,
+        "by_instrument": {
+          "usa500idxusd": {
+            "pass": true,
+            "checked": 17903,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "usatechidxusd": {
+            "pass": true,
+            "checked": 17902,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "usa30idxusd": {
+            "pass": true,
+            "checked": 17902,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "ussc2000idxusd": {
+            "pass": true,
+            "checked": 15217,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "deuidxeur": {
+            "pass": true,
+            "checked": 17819,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "gbridxgbp": {
+            "pass": true,
+            "checked": 17719,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "fraidxeur": {
+            "pass": true,
+            "checked": 15045,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "eusidxeur": {
+            "pass": true,
+            "checked": 15041,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "ausidxaud": {
+            "pass": true,
+            "checked": 17718,
+            "reason": "all completed canonical-H4 prefixes match"
+          },
+          "jpnidxjpy": {
+            "pass": true,
+            "checked": 17874,
+            "reason": "all completed canonical-H4 prefixes match"
+          }
+        }
+      },
+      "required": "10/10 instruments pass N=55 signal/stop prefix consistency.",
+      "detail": ""
+    },
+    {
+      "gate": "G3_POOLED_FORWARD",
+      "pass": true,
+      "observed": {
+        "n": 284,
+        "pf_2bp": 1.3011958533451247
+      },
+      "required": {
+        "n_min": 150,
+        "pf_2bp_min": 1.15
+      },
+      "detail": ""
+    },
+    {
+      "gate": "G4_POOLED_DISCOVERY",
+      "pass": true,
+      "observed": {
+        "pf_2bp": 1.508088413109299
+      },
+      "required": {
+        "pf_2bp_min": 1.0
+      },
+      "detail": ""
+    },
+    {
+      "gate": "G5_WORST_FORWARD_YEAR",
+      "pass": false,
+      "observed": {
+        "worst_year_pf_2bp": 0.5612456453529069,
+        "four_years_have_closed_trades": true,
+        "years": [
+          {
+            "year": 2022,
+            "phase": "forward",
+            "entries_1bp": 77,
+            "n_1bp": 77,
+            "censored_1bp": 0,
+            "pf_1bp": 0.5633511079316811,
+            "wins_r_1bp": 33.958705027346106,
+            "losses_r_1bp": 60.2798229190034,
+            "entries_2bp": 77,
+            "n_2bp": 77,
+            "censored_2bp": 0,
+            "pf_2bp": 0.5612456453529069,
+            "wins_r_2bp": 33.91741005469222,
+            "losses_r_2bp": 60.432379895553964,
+            "entries_3bp": 77,
+            "n_3bp": 77,
+            "censored_3bp": 0,
+            "pf_3bp": 0.5591507861690306,
+            "wins_r_3bp": 33.876115082038325,
+            "losses_r_3bp": 60.584936872104514
+          },
+          {
+            "year": 2023,
+            "phase": "forward",
+            "entries_1bp": 88,
+            "n_1bp": 88,
+            "censored_1bp": 0,
+            "pf_1bp": 1.3751778073422634,
+            "wins_r_1bp": 71.86362855132523,
+            "losses_r_1bp": 52.25769945358007,
+            "entries_2bp": 88,
+            "n_2bp": 88,
+            "censored_2bp": 0,
+            "pf_2bp": 1.3665762743839638,
+            "wins_r_2bp": 71.7272571026505,
+            "losses_r_2bp": 52.4868303710192,
+            "entries_3bp": 88,
+            "n_3bp": 88,
+            "censored_3bp": 0,
+            "pf_3bp": 1.358049514875296,
+            "wins_r_3bp": 71.59088565397575,
+            "losses_r_3bp": 52.71596128845835
+          },
+          {
+            "year": 2024,
+            "phase": "forward",
+            "entries_1bp": 66,
+            "n_1bp": 66,
+            "censored_1bp": 0,
+            "pf_1bp": 1.9744780179214767,
+            "wins_r_1bp": 65.87376913979362,
+            "losses_r_1bp": 33.36262472505955,
+            "entries_2bp": 66,
+            "n_2bp": 66,
+            "censored_2bp": 0,
+            "pf_2bp": 1.9626031274997324,
+            "wins_r_2bp": 65.74753827958723,
+            "losses_r_2bp": 33.500169931628825,
+            "entries_3bp": 66,
+            "n_3bp": 66,
+            "censored_3bp": 0,
+            "pf_3bp": 1.9508253503479784,
+            "wins_r_3bp": 65.62130741938086,
+            "losses_r_3bp": 33.637715138198125
+          },
+          {
+            "year": 2025,
+            "phase": "forward",
+            "entries_1bp": 63,
+            "n_1bp": 53,
+            "censored_1bp": 10,
+            "pf_1bp": 2.032050157377809,
+            "wins_r_1bp": 53.897633126271494,
+            "losses_r_1bp": 26.52377104501293,
+            "entries_2bp": 63,
+            "n_2bp": 53,
+            "censored_2bp": 10,
+            "pf_2bp": 2.019148217408882,
+            "wins_r_2bp": 53.79526625254298,
+            "losses_r_2bp": 26.64255441414647,
+            "entries_3bp": 63,
+            "n_3bp": 53,
+            "censored_3bp": 10,
+            "pf_3bp": 2.0063608110189772,
+            "wins_r_3bp": 53.692899378814474,
+            "losses_r_3bp": 26.761337783280005
+          }
+        ]
+      },
+      "required": {
+        "pf_2bp_min": 0.8,
+        "all_four_years_have_closed_trades": true
+      },
+      "detail": ""
+    },
+    {
+      "gate": "G6_NEIGHBORHOOD_N40_55_80",
+      "pass": true,
+      "observed": [
+        {
+          "N": 40,
+          "M": 27,
+          "RR": 2,
+          "forward_n": 281,
+          "forward_pf_2bp": 1.402816099014576,
+          "truncation_10_of_10": true,
+          "note": "N=40/80 are robustness only; candidate remains N=55."
+        },
+        {
+          "N": 55,
+          "M": 27,
+          "RR": 2,
+          "forward_n": 284,
+          "forward_pf_2bp": 1.3011958533451247,
+          "truncation_10_of_10": true,
+          "note": "N=40/80 are robustness only; candidate remains N=55."
+        },
+        {
+          "N": 80,
+          "M": 27,
+          "RR": 2,
+          "forward_n": 237,
+          "forward_pf_2bp": 1.138554644445126,
+          "truncation_10_of_10": true,
+          "note": "N=40/80 are robustness only; candidate remains N=55."
+        }
+      ],
+      "required": "All three pooled forward PF@2bp>=1.00; candidate remains N=55.",
+      "detail": ""
+    },
+    {
+      "gate": "G7_LEAVE_ONE_OUT",
+      "pass": true,
+      "observed": [
+        {
+          "removed_instrument": "usa500idxusd",
+          "remaining_instruments": 9,
+          "forward_n": 249,
+          "forward_pf_2bp": 1.2774357328083215,
+          "pass": true
+        },
+        {
+          "removed_instrument": "usatechidxusd",
+          "remaining_instruments": 9,
+          "forward_n": 253,
+          "forward_pf_2bp": 1.306976361273137,
+          "pass": true
+        },
+        {
+          "removed_instrument": "usa30idxusd",
+          "remaining_instruments": 9,
+          "forward_n": 260,
+          "forward_pf_2bp": 1.2711062948905065,
+          "pass": true
+        },
+        {
+          "removed_instrument": "ussc2000idxusd",
+          "remaining_instruments": 9,
+          "forward_n": 259,
+          "forward_pf_2bp": 1.3022169082295052,
+          "pass": true
+        },
+        {
+          "removed_instrument": "deuidxeur",
+          "remaining_instruments": 9,
+          "forward_n": 252,
+          "forward_pf_2bp": 1.2950866733442237,
+          "pass": true
+        },
+        {
+          "removed_instrument": "gbridxgbp",
+          "remaining_instruments": 9,
+          "forward_n": 257,
+          "forward_pf_2bp": 1.2752250114332686,
+          "pass": true
+        },
+        {
+          "removed_instrument": "fraidxeur",
+          "remaining_instruments": 9,
+          "forward_n": 256,
+          "forward_pf_2bp": 1.3686209568675198,
+          "pass": true
+        },
+        {
+          "removed_instrument": "eusidxeur",
+          "remaining_instruments": 9,
+          "forward_n": 261,
+          "forward_pf_2bp": 1.3057913028284411,
+          "pass": true
+        },
+        {
+          "removed_instrument": "ausidxaud",
+          "remaining_instruments": 9,
+          "forward_n": 256,
+          "forward_pf_2bp": 1.346922890598074,
+          "pass": true
+        },
+        {
+          "removed_instrument": "jpnidxjpy",
+          "remaining_instruments": 9,
+          "forward_n": 253,
+          "forward_pf_2bp": 1.2650294590151556,
+          "pass": true
+        }
+      ],
+      "required": "Every leave-one-out portfolio forward PF@2bp>=1.05.",
+      "detail": ""
+    },
+    {
+      "gate": "G8_STELLAR_2STEP_SIMULATION",
+      "pass": false,
+      "observed": {
+        "risk_level_gates": [
+          {
+            "risk_per_trade_pct": 0.5,
+            "pass_rate_gate": false,
+            "breach_rate_gate": true,
+            "better_than_R191_only": false,
+            "candidate_pass_pct": 50.7,
+            "baseline_pass_pct": 28.0,
+            "candidate_breach_pct": 21.48,
+            "baseline_breach_pct": 5.75,
+            "pass": false,
+            "comparison": "Candidate pass-both rate must be strictly higher, with no higher DLL/MLL breach rate."
+          },
+          {
+            "risk_per_trade_pct": 1.0,
+            "pass_rate_gate": false,
+            "breach_rate_gate": false,
+            "better_than_R191_only": false,
+            "candidate_pass_pct": 46.17,
+            "baseline_pass_pct": 54.52,
+            "candidate_breach_pct": 29.33,
+            "baseline_breach_pct": 28.57,
+            "pass": false,
+            "comparison": "Candidate pass-both rate must be strictly higher, with no higher DLL/MLL breach rate."
+          }
+        ],
+        "rows": [
+          {
+            "stream": "R191_only_USA500_USATECH",
+            "risk_per_trade_pct": 0.5,
+            "paths": 10000,
+            "pass_both_within_5y_pct": 28.0,
+            "breach_DLL_pct": 0.0,
+            "breach_MLL_pct": 5.75,
+            "failed_by_breach_pct": 5.75,
+            "unfinished_5y_pct": 66.25,
+            "median_years_if_passed": 3.484152787284204,
+            "p90_years_if_passed": 4.703047760285953,
+            "mean_trades_taken": 58.4228,
+            "mean_blocked_by_2pct_cap": 0.4838,
+            "max_open_positions_observed": 4,
+            "max_open_risk_pct_observed": 2.0000000000000004,
+            "quarter_trade_counts": {
+              "2022Q1": 5,
+              "2022Q2": 2,
+              "2022Q3": 3,
+              "2022Q4": 7,
+              "2023Q1": 6,
+              "2023Q2": 3,
+              "2023Q3": 2,
+              "2023Q4": 7,
+              "2024Q1": 1,
+              "2024Q2": 4,
+              "2024Q3": 2,
+              "2024Q4": 2,
+              "2025Q1": 2,
+              "2025Q2": 3,
+              "2025Q3": 4,
+              "2025Q4": 4,
+              "2026Q1": 1,
+              "2026Q2": 7,
+              "2026Q3": 1,
+              "2026Q4": 0
+            }
+          },
+          {
+            "stream": "pooled_all_10_indices",
+            "risk_per_trade_pct": 0.5,
+            "paths": 10000,
+            "pass_both_within_5y_pct": 50.7,
+            "breach_DLL_pct": 0.0,
+            "breach_MLL_pct": 21.48,
+            "failed_by_breach_pct": 21.48,
+            "unfinished_5y_pct": 27.82,
+            "median_years_if_passed": 2.4328418510913377,
+            "p90_years_if_passed": 4.3382652673207085,
+            "mean_trades_taken": 88.0697,
+            "mean_blocked_by_2pct_cap": 107.766,
+            "max_open_positions_observed": 4,
+            "max_open_risk_pct_observed": 2.0000000000000004,
+            "quarter_trade_counts": {
+              "2022Q1": 18,
+              "2022Q2": 13,
+              "2022Q3": 14,
+              "2022Q4": 22,
+              "2023Q1": 17,
+              "2023Q2": 17,
+              "2023Q3": 15,
+              "2023Q4": 29,
+              "2024Q1": 19,
+              "2024Q2": 11,
+              "2024Q3": 21,
+              "2024Q4": 10,
+              "2025Q1": 15,
+              "2025Q2": 18,
+              "2025Q3": 12,
+              "2025Q4": 16,
+              "2026Q1": 14,
+              "2026Q2": 12,
+              "2026Q3": 5,
+              "2026Q4": 0
+            }
+          },
+          {
+            "stream": "R191_only_USA500_USATECH",
+            "risk_per_trade_pct": 1.0,
+            "paths": 10000,
+            "pass_both_within_5y_pct": 54.52,
+            "breach_DLL_pct": 0.0,
+            "breach_MLL_pct": 28.57,
+            "failed_by_breach_pct": 28.57,
+            "unfinished_5y_pct": 16.91,
+            "median_years_if_passed": 2.3687875503840594,
+            "p90_years_if_passed": 4.207496767815043,
+            "mean_trades_taken": 31.6758,
+            "mean_blocked_by_2pct_cap": 6.5693,
+            "max_open_positions_observed": 2,
+            "max_open_risk_pct_observed": 2.0000000000000004,
+            "quarter_trade_counts": {
+              "2022Q1": 5,
+              "2022Q2": 2,
+              "2022Q3": 3,
+              "2022Q4": 7,
+              "2023Q1": 6,
+              "2023Q2": 3,
+              "2023Q3": 2,
+              "2023Q4": 7,
+              "2024Q1": 1,
+              "2024Q2": 4,
+              "2024Q3": 2,
+              "2024Q4": 2,
+              "2025Q1": 2,
+              "2025Q2": 3,
+              "2025Q3": 4,
+              "2025Q4": 4,
+              "2026Q1": 1,
+              "2026Q2": 7,
+              "2026Q3": 1,
+              "2026Q4": 0
+            }
+          },
+          {
+            "stream": "pooled_all_10_indices",
+            "risk_per_trade_pct": 1.0,
+            "paths": 10000,
+            "pass_both_within_5y_pct": 46.17,
+            "breach_DLL_pct": 0.0,
+            "breach_MLL_pct": 29.33,
+            "failed_by_breach_pct": 29.33,
+            "unfinished_5y_pct": 24.5,
+            "median_years_if_passed": 2.4294052779679065,
+            "p90_years_if_passed": 4.242849266103891,
+            "mean_trades_taken": 42.5501,
+            "mean_blocked_by_2pct_cap": 144.3463,
+            "max_open_positions_observed": 2,
+            "max_open_risk_pct_observed": 2.0000000000000004,
+            "quarter_trade_counts": {
+              "2022Q1": 18,
+              "2022Q2": 13,
+              "2022Q3": 14,
+              "2022Q4": 22,
+              "2023Q1": 17,
+              "2023Q2": 17,
+              "2023Q3": 15,
+              "2023Q4": 29,
+              "2024Q1": 19,
+              "2024Q2": 11,
+              "2024Q3": 21,
+              "2024Q4": 10,
+              "2025Q1": 15,
+              "2025Q2": 18,
+              "2025Q3": 12,
+              "2025Q4": 16,
+              "2026Q1": 14,
+              "2026Q2": 12,
+              "2026Q3": 5,
+              "2026Q4": 0
+            }
+          }
+        ],
+        "simulator": {
+          "paths_per_stream_risk": 10000,
+          "seed": 330191,
+          "quarter_blocks": [
+            "2022Q1",
+            "2022Q2",
+            "2022Q3",
+            "2022Q4",
+            "2023Q1",
+            "2023Q2",
+            "2023Q3",
+            "2023Q4",
+            "2024Q1",
+            "2024Q2",
+            "2024Q3",
+            "2024Q4",
+            "2025Q1",
+            "2025Q2",
+            "2025Q3",
+            "2025Q4",
+            "2026Q1",
+            "2026Q2",
+            "2026Q3",
+            "2026Q4"
+          ],
+          "candidate_quarter_counts": {
+            "2022Q1": 18,
+            "2022Q2": 13,
+            "2022Q3": 14,
+            "2022Q4": 22,
+            "2023Q1": 17,
+            "2023Q2": 17,
+            "2023Q3": 15,
+            "2023Q4": 29,
+            "2024Q1": 19,
+            "2024Q2": 11,
+            "2024Q3": 21,
+            "2024Q4": 10,
+            "2025Q1": 15,
+            "2025Q2": 18,
+            "2025Q3": 12,
+            "2025Q4": 16,
+            "2026Q1": 14,
+            "2026Q2": 12,
+            "2026Q3": 5,
+            "2026Q4": 0
+          },
+          "baseline_quarter_counts": {
+            "2022Q1": 5,
+            "2022Q2": 2,
+            "2022Q3": 3,
+            "2022Q4": 7,
+            "2023Q1": 6,
+            "2023Q2": 3,
+            "2023Q3": 2,
+            "2023Q4": 7,
+            "2024Q1": 1,
+            "2024Q2": 4,
+            "2024Q3": 2,
+            "2024Q4": 2,
+            "2025Q1": 2,
+            "2025Q2": 3,
+            "2025Q3": 4,
+            "2025Q4": 4,
+            "2026Q1": 1,
+            "2026Q2": 7,
+            "2026Q3": 1,
+            "2026Q4": 0
+          },
+          "risk_cap": "Skip an entry if total active stop-risk would exceed 2% of current phase balance.",
+          "marking": "M5 intraday low/high extrema and last pre-exit close mark open positions; same-bar exit is after entry/marks and stop-first ordering is conservative. DLL includes marked floating PnL; MLL is a static 10% floor. Five distinct server-day trade closures required in each phase.",
+          "server_day": "Europe/Helsinki seasonal GMT+2/GMT+3 proxy; verify against funded account server.",
+          "limitations": [
+            "Quarter cohorts are synchronized across instruments to preserve observed cross-index co-occurrence, but a trade's marked path is shifted as a unit with its entry quarter.",
+            "This is a bootstrap simulation of observed trade cohorts, not a future-price guarantee or a full broker/platform execution emulator."
+          ]
+        }
+      },
+      "required": "At each risk, pass-both >=65%, DLL+MLL breach<=25%, and better than R191-only without higher breach rate.",
+      "detail": ""
+    },
+    {
+      "gate": "G9_CAUSALITY_IF_PF_GT_1_4",
+      "pass": true,
+      "observed": {
+        "pass": true,
+        "trades_checked": 1834,
+        "errors": [],
+        "method": "Independent prefix-signal, 27-bar stop, next-H4 open, M5-source open, 2R and first canonical-H4 exit audit; no R192 execution logic.",
+        "required": true
+      },
+      "required": "If any reported PF>1.4, independent trade-path audit must pass.",
+      "detail": ""
+    }
+  ],
+  "final_verdict": "REJECT",
+  "headline": "Failed gates: G5_WORST_FORWARD_YEAR, G8_STELLAR_2STEP_SIMULATION. No tuning, instrument removal or rescue variant was run.",
+  "guardrails": [
+    "No instrument is selected or dropped.",
+    "N=40/80 are robustness checks only; they cannot replace N=55.",
+    "After REJECT no tuning, variant, or instrument removal is permitted."
+  ]
 }

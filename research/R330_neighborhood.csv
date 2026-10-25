@@ -1,0 +1,4 @@
+N,M,RR,forward_n,forward_pf_2bp,truncation_10_of_10,note
+40,27,2,281,1.402816099014576,True,N=40/80 are robustness only; candidate remains N=55.
+55,27,2,284,1.3011958533451247,True,N=40/80 are robustness only; candidate remains N=55.
+80,27,2,237,1.138554644445126,True,N=40/80 are robustness only; candidate remains N=55.

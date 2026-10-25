@@ -1,6 +1,5 @@
 {
-  "engine": "research/R191_CANONICAL_index_trend_long.py unchanged sim() and H4 resample; loader reads repository M5 CSV.GZ",
-  "baseline_version_note": "Official R191 baseline shifted from earlier targets because the earlier source snapshot was unavailable; strategy rules and thresholds are unchanged.",
+  "status": "PASS",
   "deterministic_replay": {
     "usa500idxusd": true,
     "usatechidxusd": true
@@ -9,47 +8,90 @@
     "usa500idxusd": true,
     "usatechidxusd": true
   },
-  "source_hashes": {
-    "usa500idxusd": "75d3c8dd64ba4647af7f5376ac219010dc2c65f46beb296f978257e770c90087",
-    "usatechidxusd": "b8f3b267e187669890f455486100133a29a78b5b5fcb4824c67d2b8f3acb8755"
-  },
-  "source_bytes": {
-    "usa500idxusd": 11805722,
-    "usatechidxusd": 13248558
-  },
-  "source_rows": {
-    "usa500idxusd": 826522,
-    "usatechidxusd": 826429
-  },
-  "source_start_utc": {
-    "usa500idxusd": "2016-01-04T00:00:00Z",
-    "usatechidxusd": "2016-01-04T00:00:00Z"
-  },
-  "source_end_utc": {
-    "usa500idxusd": "2026-10-23T20:10:00Z",
-    "usatechidxusd": "2026-10-23T20:10:00Z"
-  },
-  "official_baseline": {
-    "selection_2017_2021": {
+  "baseline_expected": {
+    "selection": {
       "n": 79,
-      "pf_1bp": 2.1344507712955396,
-      "pf_2bp": 2.121484650800913,
-      "pf_3bp": 2.108622419660779
+      "pf_1bp_rounded_3dp": 2.134
     },
-    "forward_2022_2025": {
+    "forward": {
       "n": 68,
-      "pf_1bp": 1.3103452710799484,
-      "pf_2bp": 1.3042813506009419,
-      "pf_3bp": 1.2982542684888698
+      "pf_1bp_rounded_3dp": 1.31,
+      "pf_2bp_rounded_3dp": 1.304
     },
     "oos_2026": {
       "n": 11,
-      "pf_1bp": 1.6833237689562284,
-      "pf_2bp": 1.673449066010866,
-      "pf_3bp": 1.6636512802613006
+      "pf_2bp_rounded_3dp": 1.673
     }
   },
-  "gate1_checks": {
+  "baseline_observed": {
+    "selection": {
+      "0": {
+        "n": 79,
+        "pf": 2.1475220449334924,
+        "total_r": 43.816457161193185
+      },
+      "1": {
+        "n": 79,
+        "pf": 2.1344507712955396,
+        "total_r": 43.49299797936873
+      },
+      "2": {
+        "n": 79,
+        "pf": 2.121484650800913,
+        "total_r": 43.16953879754426
+      },
+      "3": {
+        "n": 79,
+        "pf": 2.108622419660779,
+        "total_r": 42.846079615719795
+      }
+    },
+    "forward": {
+      "0": {
+        "n": 68,
+        "pf": 1.316446368703076,
+        "total_r": 12.980478594658436
+      },
+      "1": {
+        "n": 68,
+        "pf": 1.3103452710799484,
+        "total_r": 12.769238172926539
+      },
+      "2": {
+        "n": 68,
+        "pf": 1.3042813506009419,
+        "total_r": 12.557997751194645
+      },
+      "3": {
+        "n": 68,
+        "pf": 1.2982542684888698,
+        "total_r": 12.346757329462747
+      }
+    },
+    "oos_2026": {
+      "0": {
+        "n": 11,
+        "pf": 1.6932762984205798,
+        "total_r": 3.466381492102899
+      },
+      "1": {
+        "n": 11,
+        "pf": 1.6833237689562284,
+        "total_r": 3.430082720751467
+      },
+      "2": {
+        "n": 11,
+        "pf": 1.673449066010866,
+        "total_r": 3.393783949400037
+      },
+      "3": {
+        "n": 11,
+        "pf": 1.6636512802613006,
+        "total_r": 3.357485178048606
+      }
+    }
+  },
+  "checks": {
     "deterministic_usa500": true,
     "deterministic_usatech": true,
     "selection_n": true,
@@ -60,5 +102,14 @@
     "oos_2026_n": true,
     "oos_2026_pf_2bp": true
   },
-  "current_run": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40081030101"
+  "source_hashes": {
+    "usa500idxusd": "75d3c8dd64ba4647af7f5376ac219010dc2c65f46beb296f978257e770c90087",
+    "usatechidxusd": "b8f3b267e187669890f455486100133a29a78b5b5fcb4824c67d2b8f3acb8755"
+  },
+  "source_bytes": {
+    "usa500idxusd": 11805722,
+    "usatechidxusd": 13248558
+  },
+  "engine": "research/R191_CANONICAL_index_trend_long.py unchanged sim() and H4 resample; loader reads repository M5 CSV.GZ",
+  "data_version_note": "Baseline change from the previous locked targets is attributed to the M5 cache/version; rule and thresholds are unchanged."
 }

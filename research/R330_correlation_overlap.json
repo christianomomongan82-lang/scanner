@@ -1,0 +1,20 @@
+{
+  "correlation": {
+    "period": "Daily realized risk-normalized R at 2bp, forward through common cutoff",
+    "daily_sample_count": 1757,
+    "pairs_with_defined_correlation": 45,
+    "mean_pairwise_daily_correlation": 0.038656144511414234,
+    "median_pairwise_daily_correlation": 0.025514263902617934,
+    "min_pairwise_daily_correlation": -0.01362183741343527,
+    "max_pairwise_daily_correlation": 0.16256570669793097
+  },
+  "overlap": {
+    "window_start_utc": "2022-01-01T00:00:00+00:00",
+    "window_end_utc": "2026-10-23T20:00:00+00:00",
+    "pct_elapsed_time_with_3_or_more_open": 92.33469310312114,
+    "max_simultaneous_positions": 10,
+    "uncapped_max_open_risk_pct_at_0_5_each": 5.0,
+    "uncapped_max_open_risk_pct_at_1_0_each": 10.0,
+    "note": "Raw historical overlap before the simulator's 2% open-stop-risk cap."
+  }
+}
