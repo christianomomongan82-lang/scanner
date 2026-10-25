@@ -15,8 +15,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: r330-r191-canonical-m5-interval-recovery
-  cancel-in-progress: true
+  group: r330-r191-canonical-m5-final
+  cancel-in-progress: false
 
 jobs:
   prepare-gate1-instrument:
