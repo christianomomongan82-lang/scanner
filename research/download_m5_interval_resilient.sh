@@ -77,7 +77,20 @@ fetch_range() {
       rm -f "$raw" "$gz"
       if [ "$attempt" -lt 5 ]; then sleep $((attempt * 15)); fi
     done
-    echo "ERROR: irreducible source interval failed after narrow-range retries: $name ($start to $end)" >&2
+    # Last resort: use the official Dukascopy Jetta BID M1 API and aggregate only
+    # complete M1 groups to M5. The Python helper checks same-instrument native-M5
+    # equivalence first; if it cannot prove equivalence, this source gap stays fatal.
+    rm -f "$raw" "$gz"
+    echo "NATIVE M5 FAILED: attempting same-source Jetta M1->M5 recovery for $name ($start to $end)"
+    if python research/recover_m5_by_jettam1.py --instrument "$INST" --start "$start" --end "$end" --output "$raw"; then
+      lines=$(wc -l < "$raw" 2>/dev/null || echo 0)
+      if [ -s "$raw" ] && [ "$lines" -ge "$min_lines" ] && gzip -1 "$raw" && gzip -t "$gz"; then
+        echo "Jetta M1->M5 source-recovery saved $gz ($((lines - 1)) rows)"
+        return 0
+      fi
+    fi
+    rm -f "$raw" "$gz"
+    echo "ERROR: irreducible source interval failed after native and same-source recovery attempts: $name ($start to $end)" >&2
     return 1
   fi
 

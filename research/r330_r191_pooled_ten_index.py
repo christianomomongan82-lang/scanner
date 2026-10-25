@@ -127,11 +127,16 @@ def load_canonical_instrument(data_dir, inst, now_utc):
         "m5_flat_rows":flat,"m5_cache_bytes":mp_path.stat().st_size,
         "m5_cache_sha256":sha256_file(mp_path),
         "h4_engine":"supplied canonical R191 script: M5 OHLC resample 4h offset=1h label=left closed=left in America/New_York",
-        "data_source":"Dukascopy BID M5 repository cache dl/<instrument>_m5.csv.gz",
+        "data_source":"Dukascopy BID M5 cache; any Jetta M1-to-M5 recovery is listed in the validation/provenance sidecar",
         "h4_note":"Only metadata columns label_utc/bar_close_utc/completed were added; canonical OHLC and index are unchanged."
     }
     if inst == "ussc2000idxusd":
         info["source_availability_note"]="Dukascopy M5 returned zero rows before 2018-08-08; the index is retained in the basket from its first available source bar onward, without synthesized history."
+    recovery_path=Path(data_dir)/f"{inst}_m5_recovery.json"
+    if recovery_path.is_file():
+        recovery=json.loads(recovery_path.read_text(encoding="utf-8"))
+        info["m5_recovery_manifest"]=recovery
+        info["m5_recovery_manifest_sha256"]=sha256_file(recovery_path)
     return out,m5,info
 
 def canonical_signals_and_stops(h4,cfg):
