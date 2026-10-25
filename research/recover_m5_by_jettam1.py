@@ -270,12 +270,12 @@ def main() -> int:
 
         out_path = Path(args.output)
         out_path.parent.mkdir(parents=True, exist_ok=True)
-        out = derived.reset_index()
+        out = derived.reset_index().rename(columns={TIME: "timestamp"})
         if out.empty:
-            out = pd.DataFrame(columns=[TIME, *OHLC])
+            out = pd.DataFrame(columns=["timestamp", *OHLC])
         else:
-            out[TIME] = pd.to_datetime(out[TIME], utc=True).dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
-            out = out[[TIME, *OHLC]]
+            out["timestamp"] = (pd.to_datetime(out["timestamp"], utc=True).astype("int64") // 1_000_000).astype("int64")
+            out = out[["timestamp", *OHLC]]
         out.to_csv(out_path, index=False, lineterminator="\n")
 
         entry = {

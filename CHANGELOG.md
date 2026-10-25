@@ -2,6 +2,8 @@
 
 ## 2026-10-25 — Same-source Jetta fallback for failed native M5 intervals
 
+- Writes recovered rows using the exact native CSV schema (`timestamp` in epoch milliseconds, OHLC only), keeping joins byte-header compatible with `dukascopy-node` files.
+- Isolates the recovery run in a dedicated concurrency group; the prior stalled native-endpoint run cannot cancel or block it.
 - The legacy `dukascopy-node@1.50.0` endpoint repeatedly returned HTTP 503 for a required US Small Cap 2000 interval (2022-09-01 to 2022-09-02), even after monthly and recursive split retries. The underlying Dukascopy candle endpoint problem has been publicly reported: https://github.com/Leo4815162342/dukascopy-node/issues/254.
 - Added fail-closed recovery using Dukascopy's newer official Jetta BID M1 API (https://pypi.org/project/dukascopy-downloader/), aggregated to M5 only when all five constituent M1 candles exist. Before recovery is accepted, the helper requires native-M5 overlap validation for the same instrument: at least 50 common bars, at least 95% coverage and zero OHLC mismatches at 1e-8 absolute tolerance. If validation or the requested source interval fails, the data job still fails; it does not skip required weekday data or synthesize partial bars.
 - Added a recovery sidecar containing validation cache hash, reference day, M1 payload/output hashes and exact UTC ranges. The sidecar travels with the instrument snapshot and is recorded in the R330 data-version manifest.

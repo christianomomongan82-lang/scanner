@@ -16,7 +16,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: r330-r191-canonical-m5-final
+  group: r330-r191-canonical-m5-jetta-fallback
   cancel-in-progress: false
 
 jobs:
