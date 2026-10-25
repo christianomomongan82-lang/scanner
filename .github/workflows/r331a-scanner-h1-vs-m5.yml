@@ -1,0 +1,87 @@
+name: R331-A scanner H1 vs canonical M5 audit
+
+on:
+  push:
+    branches: [research/r331a-scanner-h1-vs-m5]
+    paths:
+      - "research/R191_CANONICAL_index_trend_long.py"
+      - "research/r331a_scanner_h1_vs_m5.py"
+      - ".github/workflows/r331a-scanner-h1-vs-m5.yml"
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: r331a-scanner-h1-vs-m5-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install --upgrade pandas numpy requests
+      - name: Download exact R330 USA500 M5 cache artifact
+        id: cache_usa500
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: r330-gate1-asset-usa500idxusd
+          path: dl/r330_m5
+          repository: ${{ github.repository }}
+          run-id: 40166799441
+          github-token: ${{ github.token }}
+      - name: Download exact R330 USATECH M5 cache artifact
+        id: cache_usatech
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: r330-gate1-asset-usatechidxusd
+          path: dl/r330_m5
+          repository: ${{ github.repository }}
+          run-id: 40166799441
+          github-token: ${{ github.token }}
+      - name: Run fixed R331-A comparison
+        id: audit_run
+        if: always()
+        run: python -u research/r331a_scanner_h1_vs_m5.py
+      - name: Commit report files to the audit branch
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/R331A_results.md research/R331A_results.json
+          if git diff --cached --quiet; then
+            echo "No R331-A report files were generated."
+            exit 0
+          fi
+          git commit -m "Record R331-A H1-vs-M5 audit results [skip ci]"
+          git push origin "HEAD:$GITHUB_REF_NAME"
+      - name: Upload R331-A reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R331A-results
+          path: |
+            research/R331A_results.md
+            research/R331A_results.json
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Keep the workflow red when the audit did not complete or failed
+        if: always() && steps.audit_run.outcome == 'failure'
+        run: exit 1
