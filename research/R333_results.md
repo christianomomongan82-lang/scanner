@@ -63,6 +63,21 @@ Run [40309624911](https://github.com/christianomomongan82-lang/scanner/actions/r
 - Keep the original small-cap definition: monthly cross-sectional bottom 30% market cap using point-in-time shares, plus the locked 60-session liquidity filter. Do not use the latest shares-outstanding field retroactively, do not choose names using PnL, and do not calculate strategy PnL until a defensible universe gate passes.
 - The deterministic source-acquisition queue is committed at [yahoo_daily_acquisition_roster.csv](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/universe/yahoo_daily_acquisition_roster.csv), with its contract in [YAHOO_ACQUISITION_QUEUE_README.md](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/universe/YAHOO_ACQUISITION_QUEUE_README.md). It freezes all 962 current ticker codes in source order, with no PnL-dependent filtering. This is **only** a survivorship-biased acquisition queue, not a small-cap universe. The Actions-only batch collector is [r333_yahoo_batch_source_only.py](r333_yahoo_batch_source_only.py); the 97-batch matrix workflow is [.github/workflows/r333-yahoo-full-roster-source-only.yml](../.github/workflows/r333-yahoo-full-roster-source-only.yml). The workflow will be launched by committing its batch request. Each batch has at most 10 tickers and keeps its own immutable manifest; failures after 5 attempts retain exact ticker/stage/error diagnostics. Even if all current-symbol histories download, original R333 remains DATA_INADEQUATE until historical delisting membership and point-in-time shares/sectors are defensible.
 
+## 3. Akuisisi seluruh roster aktif via Actions — run sedang berjalan
+
+Workflow matrix run [40321267682](https://github.com/christianomomongan82-lang/scanner/actions/runs/40321267682) dipicu dari request commit dan job persiapan sukses. Run ini hanya mengunduh data, menghitung metadata kualitas, dan menyimpan CSV/manifest; tidak menghitung sinyal, PnL, PF, expectancy atau alpha.
+
+**Snapshot progres saat checkpoint ini:**
+- 962 ticker dalam queue, dibagi menjadi 97 batch (10 ticker per batch kecuali batch terakhir), maksimum 3 batch paralel.
+- **16/97 batch selesai sukses; 160/962 ticker berhasil diunduh** dari Yahoo melalui Actions.
+- Baris OHLCV berhasil tersimpan pada 160 ticker: **158.206 baris** (masing-masing saham memiliki histori sejak tanggal data provider mulai tersedia; bukan semuanya sejak 2010).
+- Ada **11 baris OHLC invalid** di batch selesai yang belum dibersihkan. Baris mentah dipertahankan.
+- 0 batch gagal, 3 batch sedang berjalan, 78 batch masih queued pada snapshot ini.
+- Seluruh 160 ticker yang berhasil pada batch selesai hanya butuh attempt pertama; tidak ada HTTP 429/limit error yang tercatat pada batch selesai saat snapshot ini. Ini tidak menjamin batch berikutnya tidak terkena 429.
+- Manifest batch menyimpan ticker, rentang tanggal, row count, byte size, SHA-256 tiap CSV, cek duplikasi, invalid OHLC, corporate action, percobaan dan error persis. Contoh: [batch 000](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_000_run_40321267682_attempt_1.json) sampai [batch 015](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_015_run_40321267682_attempt_1.json).
+
+Ini snapshot, bukan hasil final. Status terbaru harus dicek pada run 40321267682 dan semua manifest batch. **Queue tetap survivorship-biased dan bukan universe small-cap final.** Walaupun 962 cache berhasil diunduh, data hanya current-listing survivors; PnL tetap dilarang sampai kelayakan data dan universe point-in-time lolos.
+
 ## 3. Gate status dan metrik
 
 | Item | Status | Alasan |
