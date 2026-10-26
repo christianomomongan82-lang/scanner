@@ -1,11 +1,11 @@
 # R333 — Hasil dan Verdict
 
-**VERDICT: `DATA_INADEQUATE` — alpha `NOT_TESTED`.**  
-Smoke-test unduhan harga berhasil. Namun smoke test empat ticker bukan universe small-cap historis dan input belum lolos seluruh audit kelayakan. Tidak ada perhitungan sinyal, trade, PF, expectancy, R, t-stat atau PnL yang dijalankan.
+**KEPUTUSAN DATA GATE: `DATA_INADEQUATE` — alpha `NOT_TESTED`.**  
+Audit baru membuktikan laporan bulanan resmi delisting bisa diambil untuk seluruh 202 bulan dari 2010-01 sampai 2026-10. Namun data gate R333 secara keseluruhan belum lolos: 41 dari 962 ticker OHLCV tidak terambil dari Yahoo, 1.124 baris OHLC invalid/blank, dan shares outstanding serta sektor point-in-time belum terverifikasi. Tahap 1 (universe small-cap historis dibekukan) dan Tahap 2/backtest tetap **NOT_RUN**; tidak ada perhitungan sinyal, trade, PF, expectancy, R, t-stat atau PnL.
 
 - Branch riset: `research/r333-idx-smallcap-daily`
 - Branch data: `data/r333-idx-daily-yahoo`
-- Preregistrasi terkunci: [R333_LOCKED_PREREGISTRATION.md](R333_LOCKED_PREREGISTRATION.md) · [amendment akuisisi](R333_DATA_AMENDMENT_20261026.md) · [audit roster/delisting](R333_IDX_METADATA_AUDIT_20261026.md)
+- Preregistrasi terkunci: [R333_LOCKED_PREREGISTRATION.md](R333_LOCKED_PREREGISTRATION.md) · [amendment akuisisi](R333_DATA_AMENDMENT_20261026.md) · [audit roster](R333_IDX_METADATA_AUDIT_20261026.md) · [audit sweep delisting](R333_DELISTED_MONTHLY_SWEEP_AUDIT_20261026.md)
 - Collector Yahoo data-only: [r333_yahoo_source_only.py](r333_yahoo_source_only.py)
 - Workflow Yahoo data-only: [.github/workflows/r333-yahoo-daily-source-only.yml](../.github/workflows/r333-yahoo-daily-source-only.yml)
 - Governance: [SEARCH_GOVERNANCE_AND_SCORING_V1.md](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/market-response-model-v1-20261023/research/SEARCH_GOVERNANCE_AND_SCORING_V1.md)
@@ -40,9 +40,9 @@ Official IDX source-only run [40309248358](https://github.com/christianomomongan
 
 This roster gives current code, name, listing date, currently listed shares and board. It does **not** prove historical monthly constituents, historic shares outstanding or historical sector membership. It is not the frozen small-cap universe.
 
-### Delisting records not acquired — exact errors
+### Earlier ListingActivity/GetDelisting route failures — exact historical errors
 
-The metadata workflow's overall conclusion was ROSTER_JSON_FOUND, not full delisting success. The manifest's selected_delistings field is null. The following source attempts failed:
+Pada percobaan awal, workflow metadata hanya memperoleh roster aktif; endpoint `ListingActivity/GetDelisting` yang dicoba saat itu gagal. Itu tetap hasil historis yang benar untuk endpoint tersebut, tetapi bukan kesimpulan final bahwa semua sumber resmi delisting tidak tersedia: [full sweep kemudian berhasil menggunakan API laporan bulanan resmi `LINK_DELISTING`](R333_DELISTED_MONTHLY_SWEEP_AUDIT_20261026.md). Manifest probe lama memiliki `selected_delistings=null` karena endpoint yang dipilih saat itu tidak mengembalikan baris delisting. Endpoint alternatif dilacak dari halaman resmi IDX dan frontend chunk-nya, tanpa bypass Cloudflare.
 
 1. Primary IDX endpoint, [manifest](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/idx-metadata-latest.json): `https://www.idx.co.id/primary/ListingActivity/GetDelisting?start=0&length=2000` — 3 attempts, HTTP 403 Cloudflare. Last error begins: `HTTP 403: <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" ...`; last body 5,979 bytes, content type text/html.
 2. Block host endpoint: `https://block.idx.id/primary/ListingActivity/GetDelisting?start=0&length=2000` — 3 attempts, HTTP 404, 147 bytes. Exact body:
@@ -54,12 +54,24 @@ The metadata workflow's overall conclusion was ROSTER_JSON_FOUND, not full delis
 
 Run [40309624911](https://github.com/christianomomongan82-lang/scanner/actions/runs/40309624911) successfully downloaded 15/15 official IDX JavaScript assets. It found the page code's data route string `/primary/ListingActivity/GetDelisting` and public monthly/quarterly delisted-company report routes. The strings are only endpoint-discovery evidence: no response of delisted records was fetched, so they do not remove the survivorship gap.
 
+### Exhaustive monthly official report sweep — source coverage PASS
+
+GitHub Actions run [40342501539](https://github.com/christianomomongan82-lang/scanner/actions/runs/40342501539) queried the official IDX report route for **every month from 2010-01 through 2026-10** through `block.idx.id`; no other source was used. Result: **202/202 months HTTP 200**, 0 failed/inconsistent months, 65 raw rows/65 deduplicated event rows/65 unique ticker codes. Each month's `data` row count equalled `meta.totalItems`, and all 65 events contain the required code, issuer, listing date and delisting date fields. All monthly report responses needed only one page (requested page size 2,000).
+
+Saved on the data branch:
+- [Consolidated delisted events CSV](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/idx_metadata/delisted_monthly_sweep/delisted_events_2010-01_to_2026-10.csv), SHA-256 `0ccfb9ae8a5eacfbbe3e4936244a9c85df8cb737a227730baa47dda75b1fa6b3`, Git blob SHA `d07db7050349971832166f12623fe847b9f68c8b`.
+- [Month coverage audit CSV](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/idx_metadata/delisted_monthly_sweep/monthly_coverage_audit.csv), SHA-256 `dcad3c5f9887238c249462ebe2f9d358b5aea65051123b207d38d1e524abc6c2`, 202 period rows and header.
+- [Latest sweep manifest](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/idx-delisted-monthly-sweep-latest.json), Git blob SHA `89c04ea3263805d33dd3e25391f8235b49d0f043`.
+- Full reasoning: [R333_DELISTED_MONTHLY_SWEEP_AUDIT_20261026.md](R333_DELISTED_MONTHLY_SWEEP_AUDIT_20261026.md).
+
+The three requested spot probes were confirmed again by the sweep: January 2010 has BATI (1 row), January 2020 has ITTG and BORN (2 rows), October 2026 has 0 rows and `meta.totalItems=0`. Thus the decision on the **official published delisting-report route** is **PASS for 2010-01 to 2026-10**. This does not establish data before 2010, does not make Yahoo return daily bars for delisted firms, and does not independently validate the truth of the exchange's published figures beyond internal row-count/pagination consistency.
+
 ### Current universe and survivor bias
 
 - Current active listing snapshot: 962 unique codes.
-- Delisted history records successfully acquired: **0** (this does not mean IDX has no delisted companies).
+- Official delisted-event reports successfully acquired: **65 records / 65 unique codes**, from all **202/202 monthly reports** covering 2010-01 through 2026-10; per-month counts match the official API's `meta.totalItems`. This does not mean Yahoo has the OHLCV for those delisted tickers.
 - Point-in-time historical shares outstanding and sectors: **not verified**.
-- Therefore, a queue of these tickers for daily price acquisition is **survivorship-biased** and is only an acquisition/coverage roster, not a selected small-cap universe.
+- The frozen queue itself is still **survivorship-biased** as a price-data set: it comes from a current listing roster, and 41 ticker price histories were not returned by Yahoo. The new delisted-event file helps identify exit dates but does not supply the missing pre-delisting OHLCV for those tickers. The queue is only an acquisition/coverage roster, not a selected small-cap universe.
 - Keep the original small-cap definition: monthly cross-sectional bottom 30% market cap using point-in-time shares, plus the locked 60-session liquidity filter. Do not use the latest shares-outstanding field retroactively, do not choose names using PnL, and do not calculate strategy PnL until a defensible universe gate passes.
 - The deterministic source-acquisition queue is committed at [yahoo_daily_acquisition_roster.csv](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/universe/yahoo_daily_acquisition_roster.csv), with its contract in [YAHOO_ACQUISITION_QUEUE_README.md](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/universe/YAHOO_ACQUISITION_QUEUE_README.md). It freezes all 962 current ticker codes in source order, with no PnL-dependent filtering. This is **only** a survivorship-biased acquisition queue, not a small-cap universe. The Actions-only batch collector is [r333_yahoo_batch_source_only.py](r333_yahoo_batch_source_only.py); the 97-batch matrix workflow is [.github/workflows/r333-yahoo-full-roster-source-only.yml](../.github/workflows/r333-yahoo-full-roster-source-only.yml). The workflow will be launched by committing its batch request. Each batch has at most 10 tickers and keeps its own immutable manifest; failures after 5 attempts retain exact ticker/stage/error diagnostics. Even if all current-symbol histories download, original R333 remains DATA_INADEQUATE until historical delisting membership and point-in-time shares/sectors are defensible.
 
@@ -123,7 +135,9 @@ The registered small-cap universe remains **NOT FROZEN**: monthly bottom 30th pe
 | Yahoo acquisition path via Actions | **PASS with 41 ticker failures** | 921 ticker CSVs retrieved; 41 404 failures recorded; no fallback. |
 | Cache integrity | **PASS for 921 acquired CSVs** | SHA, bytes, rows, date range and order match manifest; zero duplicate dates. |
 | Raw OHLC quality | **FAIL for clean-input eligibility** | 1,124 invalid/blank OHLC rows preserved in 459 files. |
-| Historical delisted membership | **NOT VERIFIED** | No official delisted records acquired; Yahoo 404 does not verify delisting. |
+| Official delisted-event report coverage, 2010-01–2026-10 | **PASS** | 202/202 monthly reports acquired, 65 events/65 unique codes, and per-month `data` rows match `meta.totalItems`. Coverage is bounded to the published report window and does not provide Yahoo OHLCV. |
+| Historical price coverage for delisted names | **FAIL / INCOMPLETE** | 41 of 962 Yahoo ticker requests returned HTTP 404; no missing prices are reconstructed or silently filled. |
+| OHLC input quality | **FAIL for unqualified strategy testing** | 1,124 invalid/blank OHLC rows across the acquired 921 stock CSVs are preserved and not repaired. |
 | Point-in-time shares outstanding / sectors | **NOT VERIFIED** | Current listing metadata is not a historical monthly snapshot. |
 | Corporate-action adjustment semantics | **NOT FULLY VERIFIED** | Raw OHLC and corporate-action fields exist; completeness/adjustment semantics remain unaudited. |
 | Observable spread and executable fills | **NOT AVAILABLE / UNVERIFIED** | Yahoo daily OHLCV has no observed bid/ask or queue. |
@@ -139,4 +153,4 @@ Jangkar biaya publik broker yang sebelumnya dicatat adalah 0,1513% beli dan 0,25
 
 ## 5. Putusan terkini
 
-**R333 = `DATA_INADEQUATE`; alpha = `NOT_TESTED`.** Unduhan smoke berhasil, tetapi empat ticker tidak membangun universe small-cap historis. Invalid bars belum diselesaikan, delisted and point-in-time shares/sector coverage belum terbukti, sehingga Stage 1–2/backtest tidak dijalankan. Tidak ada klaim “tidak ada edge” atau “ada edge”.
+**R333 = `DATA_INADEQUATE`; alpha = `NOT_TESTED`.** Akses laporan resmi delisting bulanan **lulus** untuk 2010-01–2026-10 (202/202 bulan, 65 kejadian), tetapi **data gate R333 keseluruhan tetap tidak lolos**. Penyebabnya: 41 ticker belum memiliki OHLCV dari Yahoo, ada 1.124 baris OHLC invalid/blank, shares outstanding dan sektor point-in-time belum tersedia, serta semantik penyesuaian split/dividen belum diverifikasi secara independen. Universe small-cap historis karena itu belum bisa dibekukan secara defensible. Tahap 1 dan Tahap 2 tidak dijalankan; tidak ada klaim “tidak ada edge” atau “ada edge”.
