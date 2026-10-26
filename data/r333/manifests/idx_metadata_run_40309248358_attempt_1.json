@@ -1,0 +1,302 @@
+{
+  "experiment": "R333",
+  "purpose": "official IDX listing/delisting metadata acquisition only; no signals/PnL",
+  "run_id": "40309248358",
+  "run_attempt": "1",
+  "started_utc": "2026-10-26T10:40:41Z",
+  "finished_utc": "2026-10-26T10:44:06Z",
+  "official_domains_only": true,
+  "overall_status": "ROSTER_JSON_FOUND",
+  "sources": [
+    {
+      "name": "listed_securities_primary",
+      "url": "https://www.idx.co.id/primary/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+      "kind": "json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T10:40:41Z",
+          "finished_utc": "2026-10-26T10:40:41Z",
+          "http_status": 403,
+          "final_url": "https://www.idx.co.id/primary/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 6108,
+          "error": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-2XH07zF1lvqtUqgVOT62TH&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-s"
+        },
+        {
+          "attempt": 2,
+          "started_utc": "2026-10-26T10:40:51Z",
+          "finished_utc": "2026-10-26T10:40:51Z",
+          "http_status": 403,
+          "final_url": "https://www.idx.co.id/primary/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 6129,
+          "error": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-gvQw5BjjlmuRMpZRpTDOSf&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-s"
+        },
+        {
+          "attempt": 3,
+          "started_utc": "2026-10-26T10:41:21Z",
+          "finished_utc": "2026-10-26T10:41:21Z",
+          "http_status": 403,
+          "final_url": "https://www.idx.co.id/primary/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 6129,
+          "error": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-tWQkzL3ucNor2gHob2VtOK&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-s"
+        }
+      ],
+      "status": "FAILED",
+      "started_utc": "2026-10-26T10:40:41Z",
+      "finished_utc": "2026-10-26T10:41:21Z"
+    },
+    {
+      "name": "listed_securities_umbraco",
+      "url": "https://www.idx.co.id/umbraco/Surface/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+      "kind": "json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T10:41:21Z",
+          "finished_utc": "2026-10-26T10:41:21Z",
+          "http_status": 403,
+          "final_url": "https://www.idx.co.id/umbraco/Surface/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 6153,
+          "error": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-Z9oAiomjHbGvtyb19O4ghc&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-s"
+        },
+        {
+          "attempt": 2,
+          "started_utc": "2026-10-26T10:41:31Z",
+          "finished_utc": "2026-10-26T10:41:31Z",
+          "http_status": 403,
+          "final_url": "https://www.idx.co.id/umbraco/Surface/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 6153,
+          "error": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-LNQWASI4E9NOjumStvLYMS&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-s"
+        },
+        {
+          "attempt": 3,
+          "started_utc": "2026-10-26T10:42:01Z",
+          "finished_utc": "2026-10-26T10:42:02Z",
+          "http_status": 403,
+          "final_url": "https://www.idx.co.id/umbraco/Surface/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 6153,
+          "error": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-O7IXCVrjVe1MmP2Vz8OQrD&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-s"
+        }
+      ],
+      "status": "FAILED",
+      "started_utc": "2026-10-26T10:41:21Z",
+      "finished_utc": "2026-10-26T10:42:02Z"
+    },
+    {
+      "name": "listed_securities_block",
+      "url": "https://block.idx.id/primary/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+      "kind": "json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T10:42:02Z",
+          "finished_utc": "2026-10-26T10:42:02Z",
+          "http_status": 200,
+          "final_url": "https://block.idx.id/primary/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+          "content_type": "application/json; charset=utf-8",
+          "bytes": 131862,
+          "error": null
+        }
+      ],
+      "status": "FETCHED",
+      "started_utc": "2026-10-26T10:42:02Z",
+      "saved_path": "data/r333/idx_metadata/listed_securities_block.json",
+      "bytes": 131862,
+      "sha256": "92114ed2700e7b723b9d538de77009ac09561cff423fdda2c105088df066f6e9",
+      "content_type": "application/json; charset=utf-8",
+      "final_url": "https://block.idx.id/primary/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+      "parsed_path": "data/r333/idx_metadata/listed_securities_block_parsed.json",
+      "parsed_sha256": "db85c01ded27208bad3610d5dc1f3931dd3033bad1b03c84d4f6b53726896e82",
+      "candidate_record_objects": 962,
+      "finished_utc": "2026-10-26T10:42:02Z"
+    },
+    {
+      "name": "delisting_activity_primary",
+      "url": "https://www.idx.co.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
+      "kind": "json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T10:42:02Z",
+          "finished_utc": "2026-10-26T10:42:02Z",
+          "http_status": 403,
+          "final_url": "https://www.idx.co.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 5979,
+          "error": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-XVbAxuXzdIT14oVIWQPMbU&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-s"
+        },
+        {
+          "attempt": 2,
+          "started_utc": "2026-10-26T10:42:12Z",
+          "finished_utc": "2026-10-26T10:42:13Z",
+          "http_status": 403,
+          "final_url": "https://www.idx.co.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 5979,
+          "error": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-Y0ZPFu2yGKqM8maLcHm67e&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-s"
+        },
+        {
+          "attempt": 3,
+          "started_utc": "2026-10-26T10:42:43Z",
+          "finished_utc": "2026-10-26T10:42:43Z",
+          "http_status": 403,
+          "final_url": "https://www.idx.co.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 5979,
+          "error": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-DvTi3yrJlCohinHY4nqaHi&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-s"
+        }
+      ],
+      "status": "FAILED",
+      "started_utc": "2026-10-26T10:42:02Z",
+      "finished_utc": "2026-10-26T10:42:43Z"
+    },
+    {
+      "name": "delisting_activity_block",
+      "url": "https://block.idx.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
+      "kind": "json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T10:42:43Z",
+          "finished_utc": "2026-10-26T10:42:43Z",
+          "http_status": 404,
+          "final_url": "https://block.idx.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
+          "content_type": "application/json; charset=utf-8",
+          "bytes": 147,
+          "error": "HTTP 404: {\"Message\":\"No HTTP resource was found that matches the request URI 'http://localhost:8000/api/ListingActivity/GetDelisting?length=2000&start=0'.\"}"
+        },
+        {
+          "attempt": 2,
+          "started_utc": "2026-10-26T10:42:53Z",
+          "finished_utc": "2026-10-26T10:42:54Z",
+          "http_status": 404,
+          "final_url": "https://block.idx.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
+          "content_type": "application/json; charset=utf-8",
+          "bytes": 147,
+          "error": "HTTP 404: {\"Message\":\"No HTTP resource was found that matches the request URI 'http://localhost:8000/api/ListingActivity/GetDelisting?length=2000&start=0'.\"}"
+        },
+        {
+          "attempt": 3,
+          "started_utc": "2026-10-26T10:43:24Z",
+          "finished_utc": "2026-10-26T10:43:24Z",
+          "http_status": 404,
+          "final_url": "https://block.idx.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
+          "content_type": "application/json; charset=utf-8",
+          "bytes": 147,
+          "error": "HTTP 404: {\"Message\":\"No HTTP resource was found that matches the request URI 'http://localhost:8000/api/ListingActivity/GetDelisting?length=2000&start=0'.\"}"
+        }
+      ],
+      "status": "FAILED",
+      "started_utc": "2026-10-26T10:42:43Z",
+      "finished_utc": "2026-10-26T10:43:24Z"
+    },
+    {
+      "name": "listing_activity_page",
+      "url": "https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan",
+      "kind": "html",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T10:43:24Z",
+          "finished_utc": "2026-10-26T10:43:24Z",
+          "http_status": 403,
+          "final_url": "https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 5888,
+          "error": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-AI9IBUiYZRyKZmriNcpqFl&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-s"
+        },
+        {
+          "attempt": 2,
+          "started_utc": "2026-10-26T10:43:34Z",
+          "finished_utc": "2026-10-26T10:43:34Z",
+          "http_status": 403,
+          "final_url": "https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 5888,
+          "error": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-OsvngNLY0utj81oTwqAdrh&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-s"
+        },
+        {
+          "attempt": 3,
+          "started_utc": "2026-10-26T10:44:04Z",
+          "finished_utc": "2026-10-26T10:44:04Z",
+          "http_status": 403,
+          "final_url": "https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan",
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 5888,
+          "error": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-E8U9aZzmOAM6cDTGvnBjHa&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-s"
+        }
+      ],
+      "status": "FAILED",
+      "started_utc": "2026-10-26T10:43:24Z",
+      "finished_utc": "2026-10-26T10:44:04Z"
+    },
+    {
+      "name": "listing_activity_block_page",
+      "url": "https://block.idx.id/id/perusahaan-tercatat/aktivitas-pencatatan",
+      "kind": "html",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T10:44:04Z",
+          "finished_utc": "2026-10-26T10:44:06Z",
+          "http_status": 200,
+          "final_url": "https://block.idx.id/id/perusahaan-tercatat/aktivitas-pencatatan",
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 146471,
+          "error": null
+        }
+      ],
+      "status": "FETCHED",
+      "started_utc": "2026-10-26T10:44:04Z",
+      "saved_path": "data/r333/idx_metadata/listing_activity_block_page.html",
+      "bytes": 146471,
+      "sha256": "bef90e211f4ac562334267ba0054740010b786bda55dd48980073c0cd703223d",
+      "content_type": "text/html; charset=utf-8",
+      "final_url": "https://block.idx.id/id/perusahaan-tercatat/aktivitas-pencatatan",
+      "finished_utc": "2026-10-26T10:44:06Z"
+    },
+    {
+      "name": "stock_list_page",
+      "url": "https://block.idx.id/id/data-pasar/data-saham/daftar-saham/",
+      "kind": "html",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T10:44:06Z",
+          "finished_utc": "2026-10-26T10:44:06Z",
+          "http_status": 200,
+          "final_url": "https://block.idx.id/id/data-pasar/data-saham/daftar-saham/",
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 259392,
+          "error": null
+        }
+      ],
+      "status": "FETCHED",
+      "started_utc": "2026-10-26T10:44:06Z",
+      "saved_path": "data/r333/idx_metadata/stock_list_page.html",
+      "bytes": 259392,
+      "sha256": "dd625a89c43584976a9fc217426342d09a9b584798008ab12a54b5d9efb287b9",
+      "content_type": "text/html; charset=utf-8",
+      "final_url": "https://block.idx.id/id/data-pasar/data-saham/daftar-saham/",
+      "finished_utc": "2026-10-26T10:44:06Z"
+    }
+  ],
+  "selected_roster": {
+    "source": "listed_securities_block",
+    "path": "data/r333/idx_metadata/listed_securities_block_parsed.json",
+    "url": "https://block.idx.id/primary/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+    "candidate_records": 962
+  },
+  "selected_delistings": null,
+  "limitations": [
+    "Current listing metadata alone is not a historical point-in-time universe.",
+    "A current roster does not prove complete delisted coverage or historical shares outstanding.",
+    "If delisted names or point-in-time shares/sectors cannot be established, mark any result survivorship-biased/data-inadequate and make no edge claim without an explicit defensible correction."
+  ]
+}
