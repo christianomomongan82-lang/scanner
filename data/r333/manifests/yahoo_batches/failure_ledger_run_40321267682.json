@@ -15,9 +15,12 @@
     "queued_batches": 40,
     "successful_csvs": 537,
     "failed_tickers": 13,
-    "unprocessed_tickers": 425,
+    "unprocessed_tickers": 412,
     "rows_in_successful_csvs": 1341841,
-    "invalid_ohlc_rows_in_downloaded_csvs": 625
+    "invalid_ohlc_rows_in_downloaded_csvs": 625,
+    "unprocessed_tickers_excluding_running": 392,
+    "running_tickers": 20,
+    "queued_tickers": 392
   },
   "retry_policy": {
     "attempts_max": 5,
