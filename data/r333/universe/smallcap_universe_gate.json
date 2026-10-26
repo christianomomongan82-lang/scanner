@@ -40,11 +40,15 @@
     "selection_must_be_frozen_before_pnl": true
   },
   "failed_data_requirements": {
-    "delisted_history": "NOT_VERIFIED; zero delisting records successfully retrieved",
-    "point_in_time_shares": "NOT_VERIFIED; current shares cannot be applied retroactively",
+    "delisted_history": "PASS for official published monthly reports from 2010-01 through 2026-10: 202/202 months validated, 65 events/65 unique codes. Not an independent validation of periods before 2010.",
+    "point_in_time_shares": "NOT_VERIFIED; current shares outstanding cannot be applied retroactively.",
     "point_in_time_sectors": "NOT_VERIFIED",
     "split_adjustment_semantics": "not independently verified",
-    "executable_spread": "not present in Yahoo daily OHLCV; spread model not yet supported by observed bid/ask"
+    "executable_spread": "NOT_AVAILABLE from Yahoo daily OHLCV; no observed bid-ask/queue data.",
+    "yahoo_delisted_ohlcv": "INCOMPLETE; 41 of 962 queue ticker histories failed with HTTP 404; official delisted event list does not create missing price bars.",
+    "sector_point_in_time": "NOT_VERIFIED.",
+    "raw_ohlc_quality": "INADEQUATE for unqualified strategy testing: 1,124 invalid/blank OHLC rows across 921 downloaded stock CSVs; raw rows preserved without silent repair.",
+    "corporate_action_semantics": "NOT_FULLY_VERIFIED; raw OHLC and action columns are preserved but adjustment semantics/completeness not independently proven."
   },
   "exact_delisting_errors": [
     {
@@ -108,5 +112,48 @@
     "data_classification": "survivorship-biased",
     "strategy_pnl_allowed": false,
     "alpha_verdict": "NOT_TESTED"
+  },
+  "delisted_monthly_report_sweep": {
+    "status": "COMPLETE_FOR_PUBLISHED_OFFICIAL_MONTHLY_REPORTS",
+    "run_id": 40342501539,
+    "run_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40342501539",
+    "data_branch_commit": "3cd913264572242b7d71e4104e7f32e540ba3972",
+    "source_host": "block.idx.id",
+    "endpoint_template": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear={year}&periodMonth={month}&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber={page}&orderBy=",
+    "start_month": "2010-01",
+    "end_month": "2026-10",
+    "expected_months": 202,
+    "successful_months": 202,
+    "failed_or_inconsistent_months": 0,
+    "rows_before_dedup": 65,
+    "deduplicated_events": 65,
+    "unique_ticker_codes": 65,
+    "row_count_vs_meta_total_items": "202/202 month responses matched",
+    "schema_errors": 0,
+    "csv_path": "data/r333/idx_metadata/delisted_monthly_sweep/delisted_events_2010-01_to_2026-10.csv",
+    "csv_sha256": "0ccfb9ae8a5eacfbbe3e4936244a9c85df8cb737a227730baa47dda75b1fa6b3",
+    "csv_git_blob_sha": "d07db7050349971832166f12623fe847b9f68c8b",
+    "coverage_csv_path": "data/r333/idx_metadata/delisted_monthly_sweep/monthly_coverage_audit.csv",
+    "coverage_csv_sha256": "dcad3c5f9887238c249462ebe2f9d358b5aea65051123b207d38d1e524abc6c2",
+    "coverage_csv_git_blob_sha": "27208f9736ee2ef8071e9c233eec69b986629e9c",
+    "manifest_path": "data/r333/manifests/idx-delisted-monthly-sweep-latest.json",
+    "manifest_git_blob_sha": "89c04ea3263805d33dd3e25391f8235b49d0f043",
+    "coverage_boundary": "This establishes access to the official published monthly report for 2010-01 through 2026-10; it does not establish periods before 2010 or Yahoo daily price coverage.",
+    "verdict": "PASS for official monthly delisting-event report coverage in stated window"
+  },
+  "current_delisted_record_count_acquired": 65,
+  "data_gate_decision": {
+    "verdict": "DATA_INADEQUATE",
+    "alpha": "NOT_TESTED",
+    "rationale": [
+      "Official delisting event reports are now complete across 202 published months from 2010-01 to 2026-10; this part passes.",
+      "Historical daily OHLCV for 41 of 962 queued tickers is unavailable via Yahoo and HTTP 404 is not assumed to be proof of delisting.",
+      "1,124 invalid/blank OHLC rows remain in acquired data; they are not silently repaired.",
+      "Point-in-time shares outstanding and sector membership needed for historical small-cap selection and leave-one-sector-out remain unverified.",
+      "Split/dividend adjustment completeness and executable spread/fills remain unverified."
+    ],
+    "stage_1_allowed": false,
+    "stage_2_allowed": false,
+    "do_not_infer_alpha_failure": true
   }
 }
