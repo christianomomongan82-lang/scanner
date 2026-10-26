@@ -7,36 +7,43 @@
 
 ## R333 — IDX small-cap harian — DATA_INADEQUATE (alpha NOT_TESTED), 2026-10-26
 
-**Verdict biner terkoreksi:** `DATA_INADEQUATE`; alpha `NOT_TESTED`. Ini bukan kesimpulan edge positif atau negatif.
+**Verdict biner:** DATA_INADEQUATE; alpha NOT_TESTED. Ini bukan bukti alpha negatif maupun positif. Tidak ada perhitungan PnL, PF, expectancy, R atau statistik performa.
 
 - Branch riset: [research/r333-idx-smallcap-daily](https://github.com/christianomomongan82-lang/scanner/tree/research/r333-idx-smallcap-daily).
-- Preregistrasi/amandemen: [R333_LOCKED_PREREGISTRATION.md](https://github.com/christianomomongan82-lang/scanner/blob/research/r333-idx-smallcap-daily/research/R333_LOCKED_PREREGISTRATION.md).
-- Laporan: [R333_results.md](https://github.com/christianomomongan82-lang/scanner/blob/research/r333-idx-smallcap-daily/research/R333_results.md) · [JSON](https://github.com/christianomomongan82-lang/scanner/blob/research/r333-idx-smallcap-daily/research/R333_results.json).
-- Data branch: [data/r333-idx-daily-yahoo](https://github.com/christianomomongan82-lang/scanner/tree/data/r333-idx-daily-yahoo).
-- Governance: [SEARCH_GOVERNANCE_AND_SCORING_V1.md](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/market-response-model-v1-20261023/research/SEARCH_GOVERNANCE_AND_SCORING_V1.md) dibaca.
+- [Preregistrasi terkunci](research/R333_LOCKED_PREREGISTRATION.md) · [amendment akuisisi](research/R333_DATA_AMENDMENT_20261026.md) · [audit metadata IDX](research/R333_IDX_METADATA_AUDIT_20261026.md) · [laporan hasil](research/R333_results.md) · [JSON](research/R333_results.json).
+- Governance v1 dibaca dari branch [local-backtest/market-response-model-v1-20261023](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/market-response-model-v1-20261023/research/SEARCH_GOVERNANCE_AND_SCORING_V1.md).
 
-### Status akuisisi harga
-GitHub Actions run [40307108809](https://github.com/christianomomongan82-lang/scanner/actions/runs/40307108809) berhasil mengunduh dan commit empat cache melalui Python + `yfinance==1.7.0`, interval `1d`, start 2010-01-01, end 2026-10-26, `auto_adjust=False`, `actions=True`. Semua 4 ticker menghasilkan 4.131 rows (2010-01-04–2026-10-26). CSV SHA-256:
-- `^JKSE`: `08c46c6a8d59d831f03c4a9cecb2431fda831323db2e9cc3e5256139ccf45fd3` (52 blank/invalid OHLC rows, no duplicates).
-- `BBCA.JK`: `16f85b162f544a12bfab96d149aaa7509c23a1fc241c5be2c978a6b8ad881890` (0 invalid rows, 35 dividend rows, 1 split event).
-- `BBRI.JK`: `f7e1aa2165a42f3c23e702cf19512e8d39b9084d9094b003cb8280533ae83b39` (1 bad OHLC geometry row, 22 dividend rows, 2 split events).
-- `TLKM.JK`: `bb1dcc8c3608a3b9b1b19c208f6a65ba4aeb222b41b0547afc83e6303cac1689` (4 invalid/blank rows, 19 dividend rows, 1 split event).
-  
-All 4 files have 0 duplicate dates and columns `Date, Open, High, Low, Close, Adj Close, Volume, Dividends, Stock Splits`. Invalid rows are preserved; do not repair/fill silently. Raw-price request was explicit, but exact historical split-adjustment semantics have not been independently proven. First run [40306521287](https://github.com/christianomomongan82-lang/scanner/actions/runs/40306521287) failed before Yahoo access because setup-python pip cache expected a nonexistent root requirements file; implementation was fixed and subsequent Yahoo runs succeeded.
+### Latest Yahoo smoke cache — Actions only
 
-### Universe and remaining data gate
-Official public sources identified:
-- [IDX Daftar Saham](https://block.idx.id/id/data-pasar/data-saham/) — current code, company, listing date, listed shares and board.
-- [IDX Ringkasan Saham](https://idx.co.id/id/data-pasar/ringkasan-perdagangan/ringkasan-saham/) — current prices/volume/value/listed shares.
-- [IDX Aktivitas Pencatatan](https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan) — New Listing, Delisting and Relisting tabs.
+Run [40309094513](https://github.com/christianomomongan82-lang/scanner/actions/runs/40309094513) succeeded using Python 3.12.15 / yfinance 1.7.0 with daily bars from 2010-01-01, end omitted, auto_adjust=False, actions=True. All four tickers succeeded on attempt 1. Cache CSVs are committed on data branch, and the Actions artifact ZIP SHA-256 is 6c33aaeecffe60442dc5d37ec25dcec578e1ee8b1cddc8f48021a14b8534c49f.
 
-Acquisition-only workflow [r333-idx-metadata-source-only.yml](https://github.com/christianomomongan82-lang/scanner/blob/research/r333-idx-smallcap-daily/.github/workflows/r333-idx-metadata-source-only.yml) and collector [r333_idx_metadata_source_only.py](https://github.com/christianomomongan82-lang/scanner/blob/research/r333-idx-smallcap-daily/research/r333_idx_metadata_source_only.py) were added to collect official-source snapshots in Actions. First run [40308051186](https://github.com/christianomomongan82-lang/scanner/actions/runs/40308051186) failed due to a collector syntax error before making any IDX request; that is an implementation error, not a source rejection. The corrected run [40308193067](https://github.com/christianomomongan82-lang/scanner/actions/runs/40308193067) has been submitted; inspect its committed manifest and exact HTTP errors before claiming the roster source works.
+| Ticker | Rows | First–last | CSV SHA-256 | Invalid/blank OHLC |
+|---|---:|---|---|---:|
+| ^JKSE | 4,131 | 2010-01-04–2026-10-26 | 9d404c0248b346dfe5ea75545d4c054597ab73061777527e9f208a487ba3b203 | 52 |
+| BBCA.JK | 4,131 | 2010-01-04–2026-10-26 | 68e873bb42470e68324a175a4298a8b93a2d0dc74c17963fcdf3a7256a2992cd | 0 |
+| BBRI.JK | 4,131 | 2010-01-04–2026-10-26 | 28f50503e1495241421e8e8cf9bd7a4b0ef09277f514c884d1167a12cde03902 | 1 |
+| TLKM.JK | 4,131 | 2010-01-04–2026-10-26 | 83cccf3388f14dc71a562c586a8bffda184effbdc8298301d3ac66b533d549f9 | 4 |
 
-The currently acquired four tickers are only a smoke set, not a small-cap universe. Delisted coverage, historical point-in-time shares outstanding and sector classification remain unverified. A current active roster alone does not pass the data gate. If delisted history cannot be established, any descriptive result must be labeled **`survivorship-biased`**; under original R333 rules, severe survivorship / missing point-in-time inputs means `DATA_INADEQUATE` and no edge claim without an explicit defensible correction. Final universe list and provenance must be stored before PnL.
+All files have zero duplicate dates. Total invalid/blank OHLC rows = 57; records are preserved, not silently repaired. Raw OHLC and Adj Close plus dividend/split fields are present, but historical split adjustment semantics have not been independently established.
 
-**Stage 1–2/performance backtest is NOT_RUN.** G1–G11 remain `NOT_RUN`; no signal/PnL/PF was calculated. No claim of “tidak ada edge” or “ada edge”.
+### IDX current roster / delisted audit
 
-**Fee broker live, slippage, spread/antrean aktual, dan risiko eksekusi ARA/ARB belum diverifikasi di akun nyata.** Riset ini simulasi sampai kelayakan umur, akun, data, dan eksekusi nyata terpenuhi.
+- Run [40309248358](https://github.com/christianomomongan82-lang/scanner/actions/runs/40309248358) acquired 962 current listing codes. Raw official payload bytes 131,862, SHA-256 92114ed2700e7b723b9d538de77009ac09561cff423fdda2c105088df066f6e9; parsed JSON SHA-256 db85c01ded27208bad3610d5dc1f3931dd3033bad1b03c84d4f6b53726896e82.
+- Run [40309624911](https://github.com/christianomomongan82-lang/scanner/actions/runs/40309624911) fetched 15/15 public IDX frontend assets. This found documented route strings but no delisted records.
+- Primary delisting endpoint returned HTTP 403 Cloudflare 3/3 attempts; exact last error prefix: HTTP 403: <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title>. Block-host endpoint returned HTTP 404 3/3 attempts with exact body: {"Message":"No HTTP resource was found that matches the request URI 'http://localhost:8000/api/ListingActivity/GetDelisting?length=2000&start=0'."}. The official listing activity page returned 403 3/3. No records were acquired; this does not mean there are no delisted companies.
+- Point-in-time historical shares outstanding and sector assignments remain unverified. The active roster is not a historical point-in-time universe.
+
+### Acquisition-only universe queue and batch pipeline
+
+- Frozen acquisition queue: [data/r333/universe/yahoo_daily_acquisition_roster.csv](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/universe/yahoo_daily_acquisition_roster.csv), 962 current listing codes in deterministic source order. Commit 90506ff77d807505b405d3a46fcd145570387e4d. Readme: [YAHOO_ACQUISITION_QUEUE_README.md](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/universe/YAHOO_ACQUISITION_QUEUE_README.md).
+- This queue is labelled **survivorship-biased** and is **not** the final small-cap universe. Current shares cannot be retroactively used to compute historical market capitalization. The 962 rows are included solely for source coverage; no PnL-dependent filtering occurs.
+- Data-only collector: [r333_yahoo_batch_source_only.py](research/r333_yahoo_batch_source_only.py). Matrix Actions workflow: [.github/workflows/r333-yahoo-full-roster-source-only.yml](.github/workflows/r333-yahoo-full-roster-source-only.yml). It divides 962 tickers into 97 batches of at most 10, uses yfinance 1d from 2010-01-01 with auto_adjust=False/actions=True, and retries 5 attempts/ticker with waits 30, 120, 600, 600 seconds. Each batch saves immutable CSV hashes and detailed errors; all calculations of signals/PnL/PF are prohibited in acquisition jobs.
+- Pipeline setup is committed. The run request is the final trigger step; report the run ID/conclusion and exact failed ticker/stage/error after verifying its manifest.
+- Original small-cap universe remains **NOT_FROZEN** until historical delisting coverage and point-in-time shares/sectors are defensible, and locked market-cap/liquidity rules can be applied without look-ahead.
+
+**G1–G11 strategy gates: NOT_RUN.** No performance values, trade ledger or alpha verdict exist. All current-roster-only summaries must say **survivorship-biased** and cannot establish edge.
+
+**Fee broker live, slippage, spread/queue aktual, dan risiko eksekusi ARA/ARB belum diverifikasi di akun nyata.** Riset ini simulasi sampai syarat umur, akun, data dan eksekusi nyata terpenuhi.
 
 ## 1. Protokol penyimpanan dan kelanjutan
 
