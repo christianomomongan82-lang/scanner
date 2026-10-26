@@ -1,0 +1,78 @@
+name: R333 official IDX frontend asset source-only
+
+on:
+  push:
+    branches:
+      - research/r333-idx-smallcap-daily
+    paths:
+      - ".github/workflows/r333-idx-frontend-assets-source-only.yml"
+      - "research/r333_idx_frontend_asset_scan.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r333-yahoo-source-only
+  cancel-in-progress: false
+
+jobs:
+  acquire-official-assets:
+    name: Acquire official IDX frontend assets only
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout research code
+        uses: actions/checkout@v4
+        with:
+          ref: research/r333-idx-smallcap-daily
+          path: research-code
+          persist-credentials: false
+      - name: Checkout data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data/r333-idx-daily-yahoo
+          path: data-repo
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install source collector dependency
+        run: python -m pip install --disable-pip-version-check "requests>=2.32,<3"
+      - name: Fetch official IDX JavaScript assets and scan endpoint strings
+        id: acquire
+        env:
+          R333_DATA_ROOT: ${{ github.workspace }}/data-repo
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: python research-code/research/r333_idx_frontend_asset_scan.py
+      - name: Commit official assets and scan manifest
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd data-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p data/r333/idx_metadata/frontend_assets data/r333/manifests
+          git add data/r333/idx_metadata/frontend_assets data/r333/manifests/idx-frontend-assets-latest.json
+          if git diff --cached --quiet; then
+            echo "No new official frontend assets to commit."
+          else
+            git commit -m "R333 official IDX frontend asset scan $GITHUB_RUN_ID"
+            git push origin HEAD:data/r333-idx-daily-yahoo
+          fi
+      - name: Archive official frontend assets
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R333-official-IDX-frontend-assets-${{ github.run_id }}
+          path: |
+            data-repo/data/r333/idx_metadata/frontend_assets/
+            data-repo/data/r333/manifests/idx-frontend-assets-latest.json
+          if-no-files-found: error
+          retention-days: 30
+      - name: Fail if no assets downloaded
+        if: steps.acquire.outputs.asset_status != 'COMPLETE'
+        run: echo "No official IDX frontend JavaScript assets were acquired." && exit 1
