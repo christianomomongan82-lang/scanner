@@ -5,21 +5,22 @@
 **Repositori sumber utama:** https://github.com/christianomomongan82-lang/scanner  
 **Branch riset aktif saat checkpoint ini:** [research/r333-idx-smallcap-daily](https://github.com/christianomomongan82-lang/scanner/tree/research/r333-idx-smallcap-daily)
 
-## R333 — IDX small-cap harian — GAGAL karena data inadequate (2026-10-26)
+## R333 — IDX small-cap harian — DATA_INADEQUATE (alpha NOT_TESTED), 2026-10-26
 
-**Verdict biner:** **GAGAL** untuk kelayakan/akuisisi data; **bukan** kesimpulan bahwa alpha gagal atau bahwa “tidak ada edge”. Tidak ada PF atau PnL dihitung.
+**Verdict:** `DATA_INADEQUATE`; alpha `NOT_TESTED`. Ini status data eligibility, bukan kesimpulan performa atau bukti tidak ada edge.
 
-- Branch eksperimen: [research/r333-idx-smallcap-daily](https://github.com/christianomomongan82-lang/scanner/tree/research/r333-idx-smallcap-daily)
-- [Preregistrasi terkunci](research/R333_LOCKED_PREREGISTRATION.md) · [Laporan hasil/verdict](research/R333_results.md) · [JSON mesin](research/R333_results.json)
-- Hipotesis kausal yang dikunci: saham kecil punya cakupan analis dan institusi lebih sedikit, jadi reaksi harga terhadap informasi lebih lambat dan bisa diukur dari raw price + volume. Ini bisa gagal, dan itu hasil valid.
-- Sumber tunggal yang dipilih: Yahoo Finance `.JK` melalui `yfinance`. Dua percobaan akuisisi gagal: endpoint chart tak dapat diakses; halaman histori memberi HTTP 429. Sesuai aturan, STOP di Tahap 0 tanpa fallback, percobaan ketiga, bypass, atau backtest.
-- Tahun pertama/terakhir, jumlah baris, dan SHA-256 cache semuanya **tidak tersedia** karena tidak ada file data yang diunduh. Delisted coverage, shares outstanding point-in-time, sektor historis, corporate action completeness, dan spread bid-ask juga belum terverifikasi. Penilaian data: **`data inadequate`**.
-- Gate G1–G11 tidak lolos karena bukti/data tidak tersedia setelah hard stop; ini bukan pengukuran negatif performa strategi. Tidak ada runner, trade ledger, atau klaim reproducibility.
-- Biaya live broker, slippage, spread/antrean, dan risiko ARA/ARB **belum diverifikasi pada akun nyata**. Riset ini hanya simulasi sampai syarat umur, akun dan eksekusi nyata terpenuhi.
-- Template `R332_LOCKED_PREREGISTRATION.md` ditemukan pada branch `research/r332-multi-asset-trend`, bukan `main`; `SEARCH_GOVERNANCE_AND_SCORING_V1` tidak ditemukan di lokasi yang diperiksa. Rincian akses dan data diarsipkan di preregistrasi R333.
-
-
-Dokumen ini adalah titik lanjut permanen. Percakapan baru yang menerima instruksi “lanjut” harus membaca dokumen ini terlebih dahulu, lalu memeriksa artefak riset terbaru di branch aktif dan memperbarui checkpoint setelah ada hasil penting. Jangan meminta pengguna membuat prompt khusus atau mengunggah ulang data yang sudah ada di GitHub.
+- Branch riset: [research/r333-idx-smallcap-daily](https://github.com/christianomomongan82-lang/scanner/tree/research/r333-idx-smallcap-daily).
+- Preregistrasi terkoreksi: [R333_LOCKED_PREREGISTRATION.md](https://github.com/christianomomongan82-lang/scanner/blob/research/r333-idx-smallcap-daily/research/R333_LOCKED_PREREGISTRATION.md).
+- Hasil: [R333_results.md](https://github.com/christianomomongan82-lang/scanner/blob/research/r333-idx-smallcap-daily/research/R333_results.md) · [JSON](https://github.com/christianomomongan82-lang/scanner/blob/research/r333-idx-smallcap-daily/research/R333_results.json).
+- Data target branch: [data/r333-idx-daily-yahoo](https://github.com/christianomomongan82-lang/scanner/tree/data/r333-idx-daily-yahoo).
+- Governance sudah dibaca dari [SEARCH_GOVERNANCE_AND_SCORING_V1.md](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/market-response-model-v1-20261023/research/SEARCH_GOVERNANCE_AND_SCORING_V1.md); template R332 dibaca dari branch `research/r332-multi-asset-trend`.
+- Alur sah: GitHub Actions data-only menggunakan Python + yfinance, `interval=1d`, `auto_adjust=False`, `actions=True`, mulai 2010-01-01 sampai waktu pengambilan; commit CSV + manifest/checksum ke branch data.
+- Tes kecil awal: `^JKSE`, `BBCA.JK`, `BBRI.JK`, `TLKM.JK`. Maksimal 5 total attempt per ticker, jeda 30 s / 120 s / 600 s / 600 s, dan simpan error/tahap/timestamp. Browser probes sebelumnya tidak dihitung sebagai akuisisi sah.
+- Jika tes kecil gagal karena akses/429, ulangi di waktu berbeda; tidak ada fallback ke provider lain atau akses Yahoo lewat sandbox.
+- Jika tes kecil lolos, daftar universe small-cap dan provenance harus disimpan sebelum PnL; lalu akuisisi tickers universe lewat Actions. Tahap 1–2/backtest di sandbox hanya setelah data lulus audit.
+- Cakupan delisted, point-in-time shares outstanding/sektor, corporate actions dan spread wajib diaudit. Bila sejarah delisted tidak tersedia, semua hasil wajib ditandai **`survivorship-biased`** dan tidak boleh klaim edge historis tanpa koreksi eksplisit.
+- **Semua metrik strategi dan gate G1–G11 = `NOT_RUN` sampai data eligibility lolos.** Tidak ada PF/PnL yang dihitung.
+- **Fee broker live, slippage, spread/antrean aktual, serta risiko eksekusi ARA/ARB belum diverifikasi pada akun nyata.** Riset ini simulasi sampai syarat usia, akun, data, dan eksekusi terpenuhi.
 
 ## 1. Protokol penyimpanan dan kelanjutan
 
