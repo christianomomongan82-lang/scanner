@@ -36,5 +36,8 @@
     ]
   },
   "no_fallback": true,
-  "expected_result": "Raw HTML/JS, downloadable file links or exact failed HTTP status and response prefix; this is not assumed to return delisted records."
+  "expected_result": "Raw HTML/JS, downloadable file links or exact failed HTTP status and response prefix; this is not assumed to return delisted records.",
+  "request_revision": 2,
+  "previous_run_id": 40324653440,
+  "previous_run_error": "AttributeError: 'dict' object has no attribute 'decode' in load_request source loop; corrected in research/r333_idx_delisted_report_source_only.py"
 }
