@@ -227,8 +227,8 @@ def main() -> int:
                 if int(later_meta.get("totalItems", -1)) != total_items or int(later_meta.get("pageNumber", -1)) != page:
                     month_result["status"] = "PAGINATION_INCONSISTENT"
                     month_result["schema_errors"].append(f"Pagination metadata mismatch on page {page}.")
-                month_records = list(later_payload["data"])
-                month_records.extend(month_records)
+                page_records = list(later_payload["data"])
+                month_records.extend(page_records)
                 month_result["pages"].append({
                     "page": page, "url": later["url"], "bytes": later["bytes"],
                     "sha256": later["sha256"], "row_count": len(later_payload["data"]),
