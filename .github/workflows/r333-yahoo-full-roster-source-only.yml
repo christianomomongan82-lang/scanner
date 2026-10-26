@@ -141,7 +141,7 @@ jobs:
         env:
           R333_BATCH_INDEX: ${{ matrix.batch_index }}
         run: |
-          echo "R333 batch $R333_BATCH_INDEX incomplete after the full per-ticker retry budget. See the committed immutable batch manifest for exact ticker/stage/error."
+          echo "R333 batch $R333_BATCH_INDEX incomplete due to a non-transient ticker error or exhausted retry budget. See the committed immutable batch manifest for exact ticker/stage/error and attempt count."
           exit 1
 
   archive:
