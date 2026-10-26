@@ -56,9 +56,9 @@ jobs:
           batches = (len(tickers) + size - 1) // size
           indices = list(range(batches))
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
-              out.write(f"batch_indices={json.dumps(indices)}\\n")
-              out.write(f"ticker_count={len(tickers)}\\n")
-              out.write(f"batch_count={batches}\\n")
+              out.write(f"batch_indices={json.dumps(indices)}\n")
+              out.write(f"ticker_count={len(tickers)}\n")
+              out.write(f"batch_count={batches}\n")
           print(f"R333_MATRIX_PREPARED tickers={len(tickers)} batches={batches} batch_size={size}")
           PY
 
