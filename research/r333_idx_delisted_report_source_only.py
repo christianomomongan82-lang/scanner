@@ -69,7 +69,10 @@ def load_request() -> dict[str, Any]:
     req = json.loads(REQUEST_PATH.read_text(encoding="utf-8"))
     if req.get("data_only") is not True or req.get("pnl_calculation") is not False:
         raise SystemExit("REQUEST_POLICY_REJECTED: this job only fetches official IDX public sources.")
-    for url in req.get("sources", []):
+    for resource in req.get("sources", []):
+        if not isinstance(resource, dict) or not resource.get("url"):
+            raise SystemExit(f"INVALID_SOURCE_ENTRY: expected object with url, got {resource!r}")
+        url = str(resource["url"])
         host = (urlparse(url).hostname or "").lower()
         if host not in OFFICIAL_HOSTS:
             raise SystemExit(f"NON_OFFICIAL_SOURCE_REJECTED: host={host} url={url}")
