@@ -1,0 +1,95 @@
+name: R333 official IDX all-month delisted report sweep — source only
+
+on:
+  push:
+    branches:
+      - research/r333-idx-smallcap-daily
+    paths:
+      - "research/R333_DELISTED_MONTHLY_SWEEP_REQUEST.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r333-idx-delisted-monthly-sweep
+  cancel-in-progress: false
+
+jobs:
+  sweep-official-monthly-report:
+    name: Fetch official monthly delisting reports 2010-01 through 2026-10
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout research request and source-only collector
+        uses: actions/checkout@v4
+        with:
+          ref: research/r333-idx-smallcap-daily
+          path: research-code
+          persist-credentials: false
+      - name: Checkout R333 data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data/r333-idx-daily-yahoo
+          path: data-repo
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install source-only HTTP dependency
+        run: python -m pip install --disable-pip-version-check "requests>=2.32,<3"
+      - name: Validate source-only sweep collector
+        run: python -m py_compile research-code/research/r333_idx_delisted_monthly_sweep_source_only.py
+      - name: Fetch all requested official monthly JSON reports (no strategy calculations)
+        id: sweep
+        env:
+          R333_DATA_ROOT: ${{ github.workspace }}/data-repo
+          R333_REQUEST_PATH: ${{ github.workspace }}/research-code/research/R333_DELISTED_MONTHLY_SWEEP_REQUEST.json
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: python research-code/research/r333_idx_delisted_monthly_sweep_source_only.py
+      - name: Commit raw monthly reports and coverage ledger to data branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd data-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p data/r333/idx_metadata/delisted_monthly_sweep data/r333/manifests
+          git add -A data/r333/idx_metadata/delisted_monthly_sweep
+          git add -f data/r333/manifests/idx-delisted-monthly-sweep-latest.json 2>/dev/null || true
+          for file in data/r333/manifests/idx_delisted_monthly_sweep_run_*.json; do
+            if [ -f "$file" ]; then git add "$file"; fi
+          done
+          if git diff --cached --quiet; then
+            echo "No delisting sweep snapshots/manifests to commit."
+            exit 0
+          fi
+          git commit -m "R333 official IDX monthly delisting sweep run $GITHUB_RUN_ID"
+          pushed=0
+          for attempt in $(seq 1 10); do
+            git fetch origin data/r333-idx-daily-yahoo
+            git rebase FETCH_HEAD || { git rebase --abort || true; sleep 2; continue; }
+            if git push origin HEAD:data/r333-idx-daily-yahoo; then
+              pushed=1
+              break
+            fi
+            sleep 2
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "DATA_BRANCH_PUSH_FAILED after 10 attempts" >&2
+            exit 1
+          fi
+      - name: Archive all official monthly report snapshots and audit manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R333-IDX-delisted-monthly-sweep-${{ github.run_id }}
+          path: |
+            data-repo/data/r333/idx_metadata/delisted_monthly_sweep/
+            data-repo/data/r333/manifests/idx-delisted-monthly-sweep-latest.json
+            data-repo/data/r333/manifests/idx_delisted_monthly_sweep_run_*.json
+          if-no-files-found: warn
+          retention-days: 90
