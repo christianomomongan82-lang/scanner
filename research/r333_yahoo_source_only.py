@@ -17,6 +17,8 @@ from typing import Any
 import pandas as pd
 import yfinance as yf
 
+yf.config.debug.hide_exceptions = False
+
 SMOKE_TICKERS = ["^JKSE", "BBCA.JK", "BBRI.JK", "TLKM.JK"]
 WAIT_SECONDS = [30, 120, 600, 600]  # delays after failures on attempts 1..4
 MAX_ATTEMPTS = 5
@@ -218,7 +220,6 @@ def main() -> int:
                     repair=False,
                     keepna=True,
                     timeout=30,
-                    raise_errors=True,
                 )
                 stage = "response-validation"
                 if frame is None or frame.empty:
