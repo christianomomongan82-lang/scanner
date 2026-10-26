@@ -70,9 +70,9 @@ def main():
   "note":"A discovered endpoint is not treated as reliable until a separate request in an acquisition-only workflow succeeds and its raw response is committed."
  }
  p=MANIFEST/"idx-frontend-assets-latest.json"
- p.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+ p.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
  print(f"IDX_ASSET_SCAN_STATUS={'COMPLETE' if assets and any(x['status']=='FETCHED' for x in assets) else 'NO_ASSETS'}")
  with open(os.getenv("GITHUB_OUTPUT","/dev/null"),"a",encoding="utf-8") as f:
-  f.write(f"asset_status={'COMPLETE' if assets and any(x['status']=='FETCHED' for x in assets) else 'NO_ASSETS'}\\n")
+  f.write(f"asset_status={'COMPLETE' if assets and any(x['status']=='FETCHED' for x in assets) else 'NO_ASSETS'}\n")
  return 0 if assets and any(x["status"]=="FETCHED" for x in assets) else 1
 if __name__=="__main__": raise SystemExit(main())
