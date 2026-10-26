@@ -5,8 +5,8 @@
   "branch": "research/r333-idx-smallcap-daily",
   "verdict": "DATA_INADEQUATE",
   "alpha_verdict": "NOT_TESTED",
-  "verdict_scope": "data_eligibility_only",
-  "reason": "Yahoo smoke acquisition succeeded via GitHub Actions, but 57 invalid/blank OHLC rows and lack of a verifiable point-in-time small-cap universe including delisted IDX shares remain. No strategy PnL has been calculated.",
+  "verdict_scope": "overall_data_eligibility",
+  "reason": "Official IDX monthly delisted-event reports are now acquired and internally reconciled for all 202 months from 2010-01 to 2026-10 (65 events). Overall data gate still fails: 41/962 ticker histories failed at Yahoo HTTP 404, 1,124 invalid/blank OHLC rows remain, point-in-time historical shares/sectors are not verified, split/dividend adjustment semantics remain unproven, and Yahoo daily OHLCV lacks executable bid/ask/queue data. No strategy PnL has been calculated.",
   "source_acquisition": {
     "provider": "Yahoo Finance via yfinance",
     "acquisition_method": "GitHub Actions only; sandbox is not permitted to access Yahoo",
@@ -141,10 +141,32 @@
     "raw_response_sha256": "92114ed2700e7b723b9d538de77009ac09561cff423fdda2c105088df066f6e9",
     "parsed_response_sha256": "db85c01ded27208bad3610d5dc1f3931dd3033bad1b03c84d4f6b53726896e82",
     "roster_frozen_as_smallcap_universe": false,
-    "delisted_coverage": "NOT_VERIFIED; zero delisted records were acquired",
+    "delisted_coverage": "COMPLETE_FOR_OFFICIAL_PUBLISHED_MONTHLY_REPORTS_2010-01_TO_2026-10; 202/202 monthly reports fetched; does not prove data before 2010 or OHLCV availability",
     "point_in_time_shares": "NOT_VERIFIED",
     "sector_point_in_time": "NOT_VERIFIED",
-    "selected_delistings": null,
+    "selected_delistings": {
+      "status": "COMPLETE_FOR_WINDOW",
+      "source": "Official IDX monthly report API urlName=LINK_DELISTING via block.idx.id",
+      "start_month": "2010-01",
+      "end_month": "2026-10",
+      "months_total": 202,
+      "months_success": 202,
+      "failed_months": 0,
+      "raw_rows": 65,
+      "deduplicated_rows": 65,
+      "unique_codes": 65,
+      "row_count_validation": "All months' returned data rows match meta.totalItems",
+      "csv_path": "data/r333/idx_metadata/delisted_monthly_sweep/delisted_events_2010-01_to_2026-10.csv",
+      "csv_sha256": "0ccfb9ae8a5eacfbbe3e4936244a9c85df8cb737a227730baa47dda75b1fa6b3",
+      "csv_git_blob_sha": "d07db7050349971832166f12623fe847b9f68c8b",
+      "coverage_csv_path": "data/r333/idx_metadata/delisted_monthly_sweep/monthly_coverage_audit.csv",
+      "coverage_csv_sha256": "dcad3c5f9887238c249462ebe2f9d358b5aea65051123b207d38d1e524abc6c2",
+      "manifest_path": "data/r333/manifests/idx-delisted-monthly-sweep-latest.json",
+      "manifest_git_blob_sha": "89c04ea3263805d33dd3e25391f8235b49d0f043",
+      "workflow_run_id": 40342501539,
+      "workflow_run_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40342501539",
+      "boundary": "Covers official published monthly reports for 2010-01 through 2026-10 only; does not provide Yahoo OHLCV for historical delisted names."
+    },
     "delisting_attempts": [
       {
         "url": "https://www.idx.co.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
@@ -187,31 +209,31 @@
     ]
   },
   "survivorship": {
-    "label": "survivorship-biased",
-    "reason": "Current IDX listing roster only; no official delisted records or point-in-time shares/sectors verified.",
+    "label": "survivorship-biased acquisition queue; delisted report events now available but Yahoo daily price histories are incomplete",
+    "reason": "A complete event table is available for official monthly reports from 2010-01 to 2026-10, but the 962 ticker queue came from a current roster and 41 daily histories failed. The event table does not supply missing pre-delisting price bars.",
     "strategy_edge_claim_allowed": false,
-    "correction_required": "Verified historical listings/delistings and point-in-time shares/sectors, plus explicit measurable bias correction."
+    "correction_required": "Daily raw OHLCV coverage for delisted names and point-in-time listing membership/shares/sectors, plus corporate-action and execution cost validation."
   },
   "gates": {
     "data_smoke_acquisition": {
-      "verdict": "NOT_RUN",
-      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
-      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
+      "verdict": "PASS_WITH_41_YAHOO_TICKER_FAILURES",
+      "reason": "921 of 962 queue tickers were downloaded through GitHub Actions; 41 ticker requests returned HTTP 404 and no fallback was used.",
+      "interpretation": "Acquisition mechanism works, complete raw-history coverage is not established."
     },
     "csv_hash_integrity": {
-      "verdict": "NOT_RUN",
-      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
-      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
+      "verdict": "PASS_FOR_921_ACQUIRED_CSVS",
+      "reason": "All 921 acquired stock CSVs match manifest SHA-256, bytes, row counts and first/last dates; no duplicate dates, required-field-name errors or date-order failures.",
+      "interpretation": "Integrity pass does not imply clean OHLC values or a valid historical universe."
     },
     "ohlc_data_quality": {
-      "verdict": "NOT_RUN",
-      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
-      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
+      "verdict": "FAIL_FOR_CLEAN_INPUT_ELIGIBILITY",
+      "reason": "1,124 invalid/blank OHLC rows occur across the 921 acquired stock CSVs; they remain preserved and unrepaired.",
+      "interpretation": "Do not run an unqualified strategy test on this input."
     },
     "historical_universe_data_eligibility": {
-      "verdict": "NOT_RUN",
-      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
-      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
+      "verdict": "FAIL",
+      "reason": "Delisting-event reports pass for all 202 published monthly reports 2010-01 through 2026-10, but 41 Yahoo ticker histories are missing and point-in-time shares outstanding/sectors are unverified, so the locked small-cap universe cannot be reconstructed safely.",
+      "interpretation": "Overall data gate remains DATA_INADEQUATE; Stage 1 and Stage 2 are blocked."
     },
     "G1": {
       "verdict": "NOT_RUN",
@@ -425,7 +447,36 @@
     "snapshot_is_final": true,
     "no_strategy_calculations": true
   },
-  "strategy_gates": "NOT_RUN: historical universe prerequisites have not passed; do not calculate PnL.",
+  "strategy_gates": "NOT_RUN: official delisted-event report coverage is complete for 2010-01–2026-10, but 41 ticker OHLCV histories are unavailable, 1,124 invalid OHLC rows remain, and point-in-time shares/sectors are unverified.",
   "data_audit_verdict": "DATA_INADEQUATE",
-  "audit_summary_path": "research/R333_YAHOO_CACHE_AUDIT_40321267682.md"
+  "audit_summary_path": "research/R333_YAHOO_CACHE_AUDIT_40321267682.md",
+  "delisted_monthly_report_sweep": {
+    "verdict": "PASS_FOR_OFFICIAL_PUBLISHED_REPORT_COVERAGE",
+    "source_host": "block.idx.id",
+    "endpoint_template": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear={year}&periodMonth={month}&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber={page}&orderBy=",
+    "run_id": 40342501539,
+    "run_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40342501539",
+    "data_branch_commit": "3cd913264572242b7d71e4104e7f32e540ba3972",
+    "months_total": 202,
+    "months_success": 202,
+    "months_failed_or_inconsistent": 0,
+    "raw_rows": 65,
+    "deduplicated_rows": 65,
+    "unique_codes": 65,
+    "required_field_schema_errors": 0,
+    "per_month_data_matches_meta_totalItems": true,
+    "csv_path": "data/r333/idx_metadata/delisted_monthly_sweep/delisted_events_2010-01_to_2026-10.csv",
+    "csv_sha256": "0ccfb9ae8a5eacfbbe3e4936244a9c85df8cb737a227730baa47dda75b1fa6b3",
+    "coverage_csv_path": "data/r333/idx_metadata/delisted_monthly_sweep/monthly_coverage_audit.csv",
+    "coverage_csv_sha256": "dcad3c5f9887238c249462ebe2f9d358b5aea65051123b207d38d1e524abc6c2",
+    "manifest_path": "data/r333/manifests/idx-delisted-monthly-sweep-latest.json",
+    "manifest_git_blob_sha": "89c04ea3263805d33dd3e25391f8235b49d0f043",
+    "report_path": "research/R333_DELISTED_MONTHLY_SWEEP_AUDIT_20261026.md",
+    "limitations": [
+      "No report periods before 2010-01 were sampled by this sweep.",
+      "The official report route provides delisting events, not missing Yahoo daily OHLCV.",
+      "Historical shares outstanding and point-in-time sectors remain unverified."
+    ]
+  },
+  "delisted_monthly_report_audit_path": "research/R333_DELISTED_MONTHLY_SWEEP_AUDIT_20261026.md"
 }
