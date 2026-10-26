@@ -162,6 +162,30 @@ def fetch_one(session: requests.Session, name: str, url: str) -> dict[str, Any]:
                 or re.search(r"delist|unduh|download|report|laporan|listing.activity", x["url"] + " " + x["text"], re.I)
             ][:250]
             result["visible_text_sample"] = " ".join(parser.page_text)[:3000]
+        elif "json" in content_type or suffix == ".json":
+            try:
+                payload = response.json()
+                result["json_top_level_type"] = type(payload).__name__
+                if isinstance(payload, dict):
+                    result["json_top_level_keys"] = list(payload.keys())[:100]
+                    data_obj = payload.get("data")
+                    meta_obj = payload.get("meta")
+                    if isinstance(data_obj, list):
+                        result["json_data_row_count"] = len(data_obj)
+                        result["json_sample_rows"] = data_obj[:3]
+                    elif isinstance(data_obj, dict):
+                        result["json_data_keys"] = list(data_obj.keys())[:100]
+                        nested_rows = data_obj.get("data") or data_obj.get("items") or data_obj.get("rows")
+                        if isinstance(nested_rows, list):
+                            result["json_data_row_count"] = len(nested_rows)
+                            result["json_sample_rows"] = nested_rows[:3]
+                        meta_obj = meta_obj or data_obj.get("meta")
+                    if isinstance(meta_obj, dict):
+                        result["json_meta"] = meta_obj
+                else:
+                    result["json_payload_sample"] = payload if isinstance(payload, (list, str, int, float, bool)) else str(payload)[:1000]
+            except Exception as exc:
+                result["json_parse_error"] = f"{type(exc).__name__}: {exc}"
         elif "javascript" in content_type or suffix == ".js":
             decoded = response.text
             patterns = [
