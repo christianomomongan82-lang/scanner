@@ -1,0 +1,88 @@
+name: R333 official IDX listing metadata source-only
+
+on:
+  push:
+    branches:
+      - research/r333-idx-smallcap-daily
+    paths:
+      - ".github/workflows/r333-idx-metadata-source-only.yml"
+      - "research/r333_idx_metadata_source_only.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r333-yahoo-source-only
+  cancel-in-progress: false
+
+jobs:
+  acquire-official-listing-metadata:
+    name: Acquire official IDX listing/delisting metadata only
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - name: Checkout research code
+        uses: actions/checkout@v4
+        with:
+          ref: research/r333-idx-smallcap-daily
+          path: research-code
+          persist-credentials: false
+
+      - name: Checkout data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data/r333-idx-daily-yahoo
+          path: data-repo
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install collector dependency
+        run: python -m pip install --disable-pip-version-check "requests>=2.32,<3"
+
+      - name: Acquire official IDX public pages/endpoints (no trading calculations)
+        id: acquire
+        env:
+          R333_DATA_ROOT: ${{ github.workspace }}/data-repo
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: python research-code/research/r333_idx_metadata_source_only.py
+
+      - name: Commit raw official-source snapshots and manifest
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd data-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p data/r333/idx_metadata data/r333/manifests
+          git add data/r333/idx_metadata data/r333/manifests/idx-metadata-latest.json data/r333/manifests/idx_metadata_run_*.json
+          if git diff --cached --quiet; then
+            echo "No official IDX metadata snapshots to commit."
+          else
+            git commit -m "R333 official IDX metadata source-only run $GITHUB_RUN_ID"
+            git push origin HEAD:data/r333-idx-daily-yahoo
+          fi
+
+      - name: Archive public-source snapshots and metadata manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R333-official-IDX-metadata-${{ github.run_id }}
+          path: |
+            data-repo/data/r333/idx_metadata/
+            data-repo/data/r333/manifests/idx-metadata-latest.json
+            data-repo/data/r333/manifests/idx_metadata_run_*.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Fail if no official roster payload was validated
+        if: steps.acquire.outputs.roster_status != 'ROSTER_JSON_FOUND'
+        run: |
+          echo "No parseable current roster was obtained from the registered official IDX pages/endpoints. See committed logs for exact stage/errors."
+          exit 1
