@@ -9,19 +9,23 @@
   "batch_size": 10,
   "intended_batches": 97,
   "batch_status_snapshot": {
-    "fully_successful_batches": 52,
-    "incomplete_batches": 28,
-    "running_batches": 3,
-    "queued_batches": 14,
-    "successful_csvs": 767,
-    "failed_tickers": 33,
-    "unprocessed_tickers": 212,
-    "rows_in_successful_csvs": 2140303,
-    "invalid_ohlc_rows_in_downloaded_csvs": 1063,
+    "fully_successful_batches": 63,
+    "incomplete_batches": 34,
+    "running_batches": 0,
+    "queued_batches": 0,
+    "successful_csvs": 921,
+    "failed_tickers": 41,
+    "unprocessed_tickers": 0,
+    "rows_in_successful_csvs": 2399444,
+    "invalid_ohlc_rows_in_downloaded_csvs": 1124,
     "observed_http_429_count": 0,
-    "unprocessed_tickers_excluding_running": 182,
-    "running_tickers": 30,
-    "queued_tickers": 132
+    "observed_retry_count_for_failed_404": 0,
+    "all_ticker_requests_completed": true,
+    "workflow_run_conclusion": "failure",
+    "run_failure_reason": "34 batch jobs deliberately concluded failure because one or more ticker requests returned non-transient HTTP 404; successful ticker CSVs and manifests were committed, and final combined archive was uploaded.",
+    "additional_baseline_csvs": 1,
+    "total_csv_files_in_artifact": 922,
+    "total_manifest_ticker_records": 962
   },
   "retry_policy": {
     "attempts_max": 5,
@@ -35,7 +39,7 @@
     "observed_http_429_count_in_completed_manifests": 0,
     "observed_http_404_retry_count": 0,
     "why_404_not_retried": "Collector classifies HTTP 404 as non-transient; preserves it and stops rather than waiting through retry delays. The user specifically mandated stepped retries on 429. No 429 was observed in the processed batches at this snapshot.",
-    "note": "All current failures are HTTP 404 and classified as non-transient; the collector logs exact exception and stops early. Retry waits 30/120/600/600 are only triggered for rate-limit/transient errors; none has been recorded in the completed batch manifests so far."
+    "note": "All 41 unavailable tickers returned HTTP 404 and were classified non-transient; each ticker has one logged attempt. The 30/120/600/600-second retry sequence was not triggered because no rate-limit/transient error occurred. Do not infer official delisting from Yahoo 404 alone."
   },
   "failed_batches": [
     {
@@ -459,9 +463,105 @@
           "error_message": "HTTP Error 404: "
         }
       ]
+    },
+    {
+      "batch_index": 81,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_081_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "bb22df4fd962e368b7bde128dc8e8cf116fd03b0",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "NUSA.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 82,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_082_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "15421c879a9d88a136c04f7cc8aa39bd7880c5f2",
+      "committed_csvs": 8,
+      "failed": [
+        {
+          "ticker": "HKMU.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        },
+        {
+          "ticker": "DUCK.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 84,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_084_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "2d681508879fede72db01adf870070ccd0f33f32",
+      "committed_csvs": 8,
+      "failed": [
+        {
+          "ticker": "CPRI.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        },
+        {
+          "ticker": "POSA.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 86,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_086_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "13113ccaedbb3029ef471a3dc0ac4cbe2583ffc7",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "ENVY.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 87,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_087_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "bd19c42db201e8c836de346367abf5a564637654",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "PURE.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 91,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_091_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "502ef9f6e7911ff98e3c8541d32f3bb3571082f5",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "CBMF.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
     }
   ],
-  "interpretation": "HTTP 404 from Yahoo indicates symbol/data is unavailable on that endpoint. For TECH, BTEL and TRIO the yfinance logs specifically include 'No data found, symbol may be delisted' / 'possibly delisted'; this is not an authoritative IDX delisting record. Do not infer official delisting status from Yahoo 404 alone.",
+  "interpretation": "HTTP 404 from Yahoo means no history was available for that request. It does not establish IDX delisting; several logs explicitly say 'No data found, symbol may be delisted', which remains a hint only.",
   "source_only": "No signal, PnL, PF, expectancy, trade counts, alpha or universe ranking was performed by the Actions jobs.",
   "next_step": "Let remaining predeclared batches finish. Preserve every batch manifest. If any actual HTTP 429 occurs, retry it with the locked wait sequence; if 404 only, record exact ticker and continue the rest of the queue. This acquisition queue remains survivorship-biased."
 }
