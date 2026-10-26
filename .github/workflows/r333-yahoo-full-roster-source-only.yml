@@ -1,0 +1,167 @@
+name: R333 Yahoo daily full current-listing roster acquisition ONLY
+
+on:
+  push:
+    branches:
+      - research/r333-idx-smallcap-daily
+    paths:
+      - "research/R333_YAHOO_BATCH_REQUEST.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r333-yahoo-source-only
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Freeze deterministic daily acquisition batches
+    runs-on: ubuntu-latest
+    outputs:
+      batch_indices: ${{ steps.count.outputs.batch_indices }}
+      ticker_count: ${{ steps.count.outputs.ticker_count }}
+      batch_count: ${{ steps.count.outputs.batch_count }}
+    steps:
+      - name: Checkout research request
+        uses: actions/checkout@v4
+        with:
+          ref: research/r333-idx-smallcap-daily
+          persist-credentials: false
+      - name: Checkout data branch and verify acquisition queue
+        uses: actions/checkout@v4
+        with:
+          ref: data/r333-idx-daily-yahoo
+          path: data-repo
+          persist-credentials: false
+      - name: Validate queue and create matrix
+        id: count
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv, json, os
+          from pathlib import Path
+          req = json.loads(Path("research/R333_YAHOO_BATCH_REQUEST.json").read_text(encoding="utf-8"))
+          queue = Path("data-repo/data/r333/universe/yahoo_daily_acquisition_roster.csv")
+          with queue.open("r", newline="", encoding="utf-8-sig") as f:
+              rows = list(csv.DictReader(f))
+          tickers = [r["yahoo_ticker"].strip() for r in rows if r.get("yahoo_ticker", "").strip()]
+          expected = int(req["expected_ticker_count"])
+          size = int(req["batch_size"])
+          if len(tickers) != expected:
+              raise SystemExit(f"QUEUE_COUNT_MISMATCH expected={expected} actual={len(tickers)}")
+          if len(set(tickers)) != len(tickers):
+              raise SystemExit("QUEUE_DUPLICATES_FOUND")
+          batches = (len(tickers) + size - 1) // size
+          indices = list(range(batches))
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"batch_indices={json.dumps(indices)}\\n")
+              out.write(f"ticker_count={len(tickers)}\\n")
+              out.write(f"batch_count={batches}\\n")
+          print(f"R333_MATRIX_PREPARED tickers={len(tickers)} batches={batches} batch_size={size}")
+          PY
+
+  acquire:
+    name: Yahoo daily batch ${{ matrix.batch_index }}
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        batch_index: ${{ fromJSON(needs.prepare.outputs.batch_indices) }}
+    steps:
+      - name: Checkout research collector
+        uses: actions/checkout@v4
+        with:
+          ref: research/r333-idx-smallcap-daily
+          path: research-code
+          persist-credentials: false
+      - name: Checkout data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data/r333-idx-daily-yahoo
+          path: data-repo
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned acquisition dependencies
+        run: python -m pip install --disable-pip-version-check "yfinance==1.7.0" "pandas>=2.2,<4"
+      - name: Download raw daily batch only
+        id: acquire_data
+        env:
+          R333_DATA_ROOT: ${{ github.workspace }}/data-repo
+          R333_REQUEST_PATH: ${{ github.workspace }}/research-code/research/R333_YAHOO_BATCH_REQUEST.json
+          R333_BATCH_INDEX: ${{ matrix.batch_index }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: python research-code/research/r333_yahoo_batch_source_only.py
+      - name: Commit this batch CSVs and immutable manifest to data branch
+        if: always()
+        shell: bash
+        env:
+          R333_BATCH_INDEX: ${{ matrix.batch_index }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          set -euo pipefail
+          cd data-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          batch="$(printf '%03d' "$R333_BATCH_INDEX")"
+          git add data/r333/yahoo_daily data/r333/manifests/yahoo_batches/batch_"$batch"_run_"$GITHUB_RUN_ID"_attempt_"$GITHUB_RUN_ATTEMPT".json
+          if git diff --cached --quiet; then
+            echo "No changed CSVs or manifest; nothing to commit."
+            exit 0
+          fi
+          git commit -m "R333 Yahoo daily data-only batch $R333_BATCH_INDEX run $GITHUB_RUN_ID"
+          pushed=0
+          for attempt in $(seq 1 10); do
+            git fetch origin data/r333-idx-daily-yahoo
+            git rebase FETCH_HEAD || { git rebase --abort || true; sleep 2; continue; }
+            if git push origin HEAD:data/r333-idx-daily-yahoo; then
+              pushed=1
+              break
+            fi
+            sleep 2
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "DATA_BRANCH_PUSH_FAILED after 10 non-fast-forward/rebase attempts for batch $R333_BATCH_INDEX" >&2
+            exit 1
+          fi
+      - name: Preserve exact failed acquisition diagnostics in job conclusion
+        if: steps.acquire_data.outputs.overall_status == 'INCOMPLETE'
+        shell: bash
+        env:
+          R333_BATCH_INDEX: ${{ matrix.batch_index }}
+        run: |
+          echo "R333 batch $R333_BATCH_INDEX incomplete after the full per-ticker retry budget. See the committed immutable batch manifest for exact ticker/stage/error."
+          exit 1
+
+  archive:
+    name: Archive acquired source cache for sandbox handoff
+    if: always() && needs.prepare.result == 'success'
+    needs: [prepare, acquire]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout data branch after batches complete
+        uses: actions/checkout@v4
+        with:
+          ref: data/r333-idx-daily-yahoo
+          path: data-repo
+          persist-credentials: false
+      - name: Upload current available raw data and manifests
+        uses: actions/upload-artifact@v4
+        with:
+          name: R333-Yahoo-current-listings-batches-${{ github.run_id }}
+          path: |
+            data-repo/data/r333/yahoo_daily/
+            data-repo/data/r333/manifests/yahoo_batches/
+            data-repo/data/r333/universe/yahoo_daily_acquisition_roster.csv
+            data-repo/data/r333/universe/YAHOO_ACQUISITION_QUEUE_README.md
+          if-no-files-found: warn
+          retention-days: 30
