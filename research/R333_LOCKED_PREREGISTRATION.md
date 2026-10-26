@@ -143,3 +143,22 @@ Laporan harus memuat breakdown semua tahun dan periode: n trade, PF pada biaya d
 Dokumen `R332_LOCKED_PREREGISTRATION.md` tidak ditemukan di `main`, tetapi template aktual berhasil ditemukan pada branch `research/r332-multi-asset-trend`; susunan R333 mengikuti disiplin template itu (lock sebelum hasil, sumber/cache dan checksum, fixed order/dedup, hard gates, laporan lengkap, binary verdict). File `SEARCH_GOVERNANCE_AND_SCORING_V1` tidak ditemukan pada `main` maupun pada branch template yang diperiksa; tidak ada klaim bahwa isinya telah dibaca. Kebijakan `RESEARCH_POLICY_BINARY_COMPOUNDING.md` ditemukan pada branch `local-backtest/r189-dukascopy-history` dan diterapkan: putusan biner, sumber dan ketidakpastian eksplisit, serta larangan menyebut data tidak layak sebagai bukti alpha gagal. R333 secara eksplisit mencatat keterbatasan akses ini.
 
 **Preregistrasi ini dicatat tanpa menghitung PF.** Karena dua akses akuisisi Yahoo gagal dan histori point-in-time/delisted/shares-outstanding tidak dapat diverifikasi, tidak ada perhitungan strategi yang diizinkan pada R333 ini.
+
+
+---
+
+## Amendment A — koreksi verdict dan protokol akuisisi data (2026-10-26, sebelum PnL)
+
+Amendment ini supersede setiap kalimat di atas yang menyatakan dua akses browser = dua kegagalan akuisisi, harus STOP sesudah dua percobaan, atau tidak ada perhitungan yang dapat dilakukan karena dua probe tersebut.
+
+1. **Verdict saat ini `DATA_INADEQUATE`; alpha `NOT_TESTED`.** Bukan `GAGAL` sebagai kesimpulan performa.
+2. Dua percobaan melalui tool browser bukan akuisisi dataset yang sah dan **tidak dihitung** sebagai attempt pada alur ini.
+3. Sandbox tidak mencoba mengakses Yahoo. Semua data dikumpulkan oleh GitHub Actions menggunakan Python + yfinance, lalu CSV dan manifest di-commit ke branch `data/r333-idx-daily-yahoo`.
+4. Parameter request: interval `1d`, tanggal mulai `2010-01-01`, end berupa waktu pengambilan terbaru yang disediakan API, `auto_adjust=False`, `actions=True`. Versi yfinance dipatok dalam workflow dan dicatat di manifest.
+5. Tes awal hanya pada `^JKSE`, `BBCA.JK`, `BBRI.JK`, `TLKM.JK`. Untuk tiap ticker maksimal **5 total attempt**, dengan jeda antarattempt gagal 30 detik, 120 detik, 600 detik, dan 600 detik. Catat ticker, nomor attempt, tahap, exception/log error yang tersedia, waktu UTC, dan hasilnya.
+6. Bila tes kecil tidak lengkap karena 429/akses, jalankan ulang di waktu berbeda; workflow menyediakan penjadwalan retry dan manual dispatch. Jangan ganti ke sumber lain, dan jangan melewati aturan Yahoo lewat tool sandbox.
+7. Jika tes kecil lolos, tahap berikutnya adalah menemukan dan memverifikasi sumber roster saham IDX/small-cap yang dapat dipertanggungjawabkan; simpan daftar universe dan provenance di repo **sebelum** PnL. Ambil data konstituen lewat Actions, bukan dari sandbox.
+8. Yahoo bisa tidak menyediakan saham delisted. Cakupan delisted harus diperiksa dan dicatat berdasarkan manifest/universe. Jika data delisted tidak tersedia, semua output strategi harus diberi label **`survivorship-biased`** dan dilarang membuat klaim edge historis tanpa koreksi survivorship bias yang diterangkan eksplisit.
+9. Tahap 1–2 hanya boleh dijalankan di sandbox setelah semua input lulus audit kelayakan; Actions tidak menghitung sinyal, trade, PnL, PF, statistik strategi, atau verdict performa.
+
+Ini amandemen protokol akuisisi/data eligibility, bukan perubahan hipotesis kausal, universe rules, sinyal, exit, periode, biaya, baseline, atau gate strategi yang sudah dikunci.
