@@ -73,6 +73,8 @@ jobs:
             echo "No new data or manifest changes to commit."
           else
             git commit -m "R333 data-only Yahoo acquisition run $GITHUB_RUN_ID"
+            git fetch origin data/r333-idx-daily-yahoo
+            git rebase FETCH_HEAD
             git push origin HEAD:data/r333-idx-daily-yahoo
           fi
 
