@@ -1,81 +1,64 @@
 # R333 — Hasil dan Verdict
 
-**VERDICT BINER: GAGAL — kelayakan/akuisisi data.**  
-**Klasifikasi data: `data inadequate`.**  
-**Ini bukan bukti `alpha gagal`, dan bukan hasil strategi tanpa edge. Tidak ada metrik edge yang dihitung.**
+**VERDICT: `DATA_INADEQUATE` — `alpha NOT_TESTED`.**
 
-- Branch: `research/r333-idx-smallcap-daily`
-- Parent: none; family baru `IDX_SMALLCAP_DAILY`
-- Preregistrasi: [R333_LOCKED_PREREGISTRATION.md](R333_LOCKED_PREREGISTRATION.md)
-- Prereg commit: `5ef12c40c1cd68e889c9632f08e19e1edab98065`
-- Klarifikasi template R332: commit `e71f3845d1d0d5f47636f655d87dc7509b006b82`
-- Batas penghentian: Tahap 0, akuisisi sumber tunggal Yahoo Finance setelah dua percobaan gagal.
-- Perhitungan PF/PnL: **tidak dijalankan**.
-- Runner backtest/ledger: **tidak dibuat/dijalankan** karena hard stop Tahap 0; membuat runner atau mencoba sumber lain akan melampaui aturan STOP yang dikunci.
+Data belum dinyatakan layak dan belum ada hasil performa strategi. Status ini bukan verdict alpha negatif: **tidak ada edge belum dapat disimpulkan** karena PnL/PF belum dihitung.
 
-## 1. Akuisisi sumber (dua percobaan, lalu STOP)
+- Family: `IDX_SMALLCAP_DAILY`, keluarga baru; parent tidak ada.
+- Branch riset: `research/r333-idx-smallcap-daily`.
+- Preregistrasi terkunci: [R333_LOCKED_PREREGISTRATION.md](R333_LOCKED_PREREGISTRATION.md).
+- Workflow akuisisi yang dibuat: [R333 Yahoo daily source-only](../../tree/main/.github/workflows/r333-yahoo-daily-source-only.yml).
+- Branch data yang ditetapkan: [data/r333-idx-daily-yahoo](../../tree/data/r333-idx-daily-yahoo).
+- Perhitungan PnL/PF: **belum dijalankan**. Tahap 1–2 baru boleh jalan sesudah audit data lolos.
 
-| Percobaan | Endpoint Yahoo Finance | Hasil aktual | Byte data / cache |
-|---|---|---|---|
-| 1 | [Yahoo chart endpoint BBCA.JK](https://query1.finance.yahoo.com/v8/finance/chart/BBCA.JK?range=max&interval=1d) | Tool browser mengembalikan “URL is not accessible”; tidak menerima payload harga. | Tidak ada |
-| 2 | [Yahoo history BBCA.JK](https://finance.yahoo.com/quote/BBCA.JK/history) | HTTP **429 Too Many Requests** dari akses halaman. | Tidak ada |
+## 1. Aturan akuisisi yang berlaku sekarang
 
-Ini adalah dua kegagalan akses dari lingkungan eksekusi saat ini. Ini **tidak** membuktikan Yahoo selalu gagal di Google Colab. Tetapi R333 mensyaratkan cache data aktual yang dapat diperiksa—bukan asumsi bahwa unduhan akan berhasil di lingkungan berbeda. Sesuai preregistrasi, berhenti di sini: tidak ada percobaan ketiga, fallback, penggantian sumber, atau bypass.
+Akuisisi dilakukan **hanya melalui GitHub Actions**, dengan Python + versi yfinance yang dipatok, interval harian, `auto_adjust=False`, `actions=True`, start 2010-01-01 sampai tanggal pengambilan data, lalu file CSV dan manifest di-commit ke branch data. Percobaan via tool browser pada jawaban sebelumnya bukan akuisisi sah dan tidak dihitung sebagai percobaan workflow.
 
-## 2. Audit fakta data
+Workflow menerapkan maksimal lima total attempt per ticker, dengan jeda bertahap 30 detik, 120 detik, 600 detik, dan 600 detik antara attempt yang gagal. Error per ticker dan per attempt ditulis ke manifest. Jika empat ticker tes kecil tidak lengkap, percobaan terjadwal di jam berbeda akan mengulang tes yang gagal; tidak ada fallback ke penyedia lain.
 
-| Wajib dicatat | Temuan |
-|---|---|
-| Tahun pertama dan terakhir pada data aktual | **Tidak tersedia** — dataset tidak berhasil diunduh. |
-| Jumlah baris | **Tidak tersedia** — bukan nol; jumlahnya tidak diketahui karena tidak ada file. |
-| SHA-256 cache | **Tidak tersedia** — tak ada cache yang byte-nya dapat di-hash. |
-| Cache mentah/versioned di repo | Tidak ada, karena akuisisi gagal. |
-| Raw vs adjusted untuk split/dividen | Dokumentasi `yfinance.download` menyatakan `auto_adjust=True` sebagai default; konfigurasi preregistrasi memaksa `auto_adjust=False` dan meminta `actions=True`. Karena payload aktual tidak ada, kelengkapan/semantik seri aktual belum dapat diaudit. |
-| Kelengkapan saham delisted | Tidak dapat dibuktikan. Menggunakan roster ticker aktif saat ini akan menimbulkan survivorship bias. |
-| Shares outstanding historis point-in-time | Tidak diverifikasi dari input yang tersedia; definisi small-cap historis dengan kapitalisasi pasar tidak bisa dipastikan. |
-| Corporate actions & sektor point-in-time | Tidak dapat diverifikasi. |
-| Spread bid-ask | Yahoo daily OHLCV tidak memberi bid/ask aktual dalam data yang diambil; tidak ada spread teramati yang bisa disimpan. |
-| Keputusan | **`data inadequate`**. Tidak ada kesimpulan performa strategi. |
+## 2. Status cache saat laporan ini diperbarui
 
-**Mengapa data belum cukup untuk klaim edge:** bahkan bila OHLCV satu ticker tersedia, syarat R333 membutuhkan roster listing historis termasuk delisted, shares outstanding point-in-time untuk klasifikasi kapitalisasi, sektor point-in-time untuk Gate G7, serta penanganan corporate action dan spread/eksekusi. Unsur tersebut belum terbukti tersedia lengkap dari sumber tunggal yang dipilih. Karena hard stop akuisisi sudah terjadi, kekurangan tersebut tidak dicoba diatasi dengan provider lain.
+| Ticker smoke test | Baris | Tanggal pertama | Tanggal terakhir | SHA-256 | Status |
+|---|---:|---|---|---|---|
+| `^JKSE` | Belum terverifikasi | Belum terverifikasi | Belum terverifikasi | Belum terverifikasi | Menunggu hasil Actions |
+| `BBCA.JK` | Belum terverifikasi | Belum terverifikasi | Belum terverifikasi | Belum terverifikasi | Menunggu hasil Actions |
+| `BBRI.JK` | Belum terverifikasi | Belum terverifikasi | Belum terverifikasi | Belum terverifikasi | Menunggu hasil Actions |
+| `TLKM.JK` | Belum terverifikasi | Belum terverifikasi | Belum terverifikasi | Belum terverifikasi | Menunggu hasil Actions |
 
-## 3. Fakta pasar/broker yang berhasil diverifikasi
+Nilai di atas sengaja tidak diisi sebelum CSV benar-benar di-commit dan diaudit. Setiap nilai akhir harus berasal dari manifest data yang menyimpan baris, tanggal, versi pustaka, parameter unduhan, error aktual, dan SHA-256 file yang di-commit.
 
-1. **Biaya contoh broker, bukan biaya live akun pengguna:** Ajaib mempublikasikan biaya total saham **0,1513% beli** dan **0,2513% jual**; tabelnya menyebut komponen broker, levy, PPN biaya broker, dan PPh final jual. IDX menerbitkan levy pasar reguler 0,0433% beli dan 0,1433% jual, di luar komisi Anggota Bursa. Sumber: [Ajaib biaya](https://ajaib.co.id/biaya), [IDX mekanisme dan biaya](https://www.idx.id/id/produk-layanan/jam-dan-mekanisme-perdagangan/).
-2. **Settlement:** pasar reguler diselesaikan T+2. Sumber: [IDX](https://www.idx.id/id/produk-layanan/jam-dan-mekanisme-perdagangan/), [KSEI](https://www.ksei.co.id/en/service-support/service-type/settlement-of-securities-transactions-services).
-3. **Minimum lot:** pasar reguler/tunai diperdagangkan dalam round lot **100 saham (1 lot)**; nilai rupiah minimum bergantung harga dan lot yang dapat dibeli. Sumber: [IDX mekanisme perdagangan](https://www.idx.id/id/produk-layanan/jam-dan-mekanisme-perdagangan/).
-4. **Fraksi harga:** halaman IDX yang diakses untuk aturan berjalan menampilkan Rp1 untuk harga di bawah Rp200; Rp2 untuk Rp200–di bawah Rp500; Rp5 untuk Rp500–di bawah Rp2.000; Rp10 untuk Rp2.000–di bawah Rp5.000; Rp25 mulai Rp5.000. Ini adalah tabel aturan yang berjalan saat akses, bukan tabel yang boleh dipaksakan ke seluruh sejarah 2016–2026.
-5. **ARA/ARB:** ada amandemen yang berlaku 20 Oktober–31 Desember 2026 untuk saham di papan utama/pengembangan/ekonomi baru, termasuk ARB 7% pada sebagian besar rentang dan batas nominal Rp1 untuk rentang harga Rp11–Rp14; papan Akselerasi/Pemantauan Khusus berbeda. Sumber yang mengutip keputusan BEI: [Katadata](https://katadata.co.id/finansial/bursa/6ad6bb9113d26/bei-ubah-lagi-aturan-arb-saham-rp-14-bisa-turun-ke-rp-1). Data harian OHLCV saja tidak mengungkap urutan antrean maupun jaminan fill pada ARA/ARB.
-6. **Short selling:** R333 sejak awal dikunci long-only. Halaman IDX menyatakan short selling memerlukan rekening efek khusus, instrumen yang memenuhi daftar short-selling, dan Anggota Bursa berlisensi; halaman tersebut juga menyebut jaminan awal sesuai ketentuan 50% nilai transaksi atau Rp50 juta sesuai persyaratan Anggota Bursa. Karena ketersediaan saham pinjaman tidak universal—terutama untuk small cap—R333 tidak mengasumsikan short dapat dilakukan. Sumber: [IDX aturan dan mekanisme](https://www.idx.id/id/produk-layanan/jam-dan-mekanisme-perdagangan/).
-7. **Usia:** persyaratan tergantung broker. Contoh CGS International mempublikasikan minimum 17 tahun dan sudah memiliki KTP: [FAQ CGS International](https://www.cgsi.co.id/help/faq-opening-account?lang=ID). Ini tidak memverifikasi syarat semua broker atau persetujuan rekening tertentu.
-8. **Keterbatasan live wajib dicatat:** **fee broker live, slippage, spread/antrean, dan risiko ARA/ARB belum diverifikasi pada akun nyata.** Hasil riset, jika kelak data layak, tetap simulasi sampai kelayakan umur, akun, dan eksekusi nyata terkonfirmasi.
+## 3. Kelayakan data / survivorship
 
-## 4. Status gate dan metrik
+Data Yahoo harus diaudit untuk missing/duplicate rows, OHLC invalid, volume, tanggal perdagangan, split/dividen, dan rentang yang benar-benar tersedia. Pengaturan permintaan raw adalah `auto_adjust=False`; kolom `Adj Close`, `Dividends`, dan `Stock Splits` disimpan bila tersedia. Harga raw tidak boleh disamakan dengan adjusted price.
 
-Semua gate performa berstatus **GAGAL untuk klaim kelayakan eksperimen** karena Tahap 0 berhenti sebelum bisa menguji bukti wajib. Kata “GAGAL” di bagian ini tidak berarti strategi sudah terbukti memiliki expectancy negatif.
+Yahoo Finance biasanya menyediakan sejarah ticker yang masih tersedia, dan tidak menjamin arsip lengkap semua saham IDX yang telah delisting. Sampai roster delisted/point-in-time bisa diverifikasi, setiap hasil harus diberi label **`survivorship-biased`**. Jika saham delisted tidak dapat diperoleh, tidak ada klaim edge historis yang boleh dipromosikan tanpa koreksi eksplisit terhadap survivorship bias. Universe kecil yang hanya diambil dari ticker aktif tidak cukup untuk mengklaim representasi small-cap IDX historis.
 
-| Gate | Verdict | Alasan |
-|---|---|---|
-| Data Tahap 0 | **GAGAL** | Dua percobaan akuisisi gagal; tidak ada cache. |
-| G1 Determinisme | **GAGAL** | Tidak ada cache/runner yang dapat dijalankan dua kali. |
-| G2 Truncation | **GAGAL** | Tidak ada baris data untuk menguji prefix/truncation. |
-| G3 Forward n/PF pada 1,5× biaya | **GAGAL** | Tidak ada trade atau PF yang dihitung. |
-| G4 Discovery PF pada biaya realistis | **GAGAL** | Tidak ada trade atau PF yang dihitung. |
-| G5 Stabilitas tahunan | **GAGAL** | Tidak ada breakdown tahunan; data tidak ada. |
-| G6 Neighbor robustness | **GAGAL** | Tidak ada pengujian parameter. |
-| G7 Leave-one-sector-out | **GAGAL** | Sektor point-in-time dan hasil tidak tersedia. |
-| G8 Bootstrap blok | **GAGAL** | Tidak ada return per trade yang bisa di-bootstrap. |
-| G9 Beta check | **GAGAL** | Matched buy-and-hold basket dan strategi tidak dapat dihitung. |
-| G10 Audit jika PF > 1,4 | **GAGAL / tidak terpicu** | PF sama sekali tidak dihitung; tidak ada klaim PF tinggi. |
-| G11 Likuiditas, spread, ARA/ARB | **GAGAL** | Tidak ada cache dan tidak ada spread aktual/eksekusi yang bisa diverifikasi. |
+## 4. Universe dan hasil performa
 
-Metrik wajib—n trade, PF pada biaya 1×/1,5×/2×, expectancy R, total R, t-stat, bootstrap CI, maximum simultaneous positions, drawdown, baseline basket dan IHSG—semua **N/A karena tidak dihitung**, bukan nol dan bukan hasil buruk. Tidak ada trade ledger. Tidak ada klaim determinisme atau reproducibility.
+Universe small-cap harus didapat dari sumber yang bisa diverifikasi, diurutkan/dedup sesuai preregistrasi, lalu **daftar final dan provenance-nya di-commit sebelum perhitungan PnL apa pun**. Setelah daftar itu dikunci, data harian diunduh lewat Actions yang sama dan di-commit ke branch data.
 
-## 5. Putusan akhir
+Baseline wajib tetap: equal-weight buy-and-hold basket dari universe yang sama dan IHSG. Long-only sudah dikunci a priori; tidak ada short. Tidak boleh mengulang keluarga strategi yang ditutup atau memilih/membuang ticker berdasarkan PnL.
 
-**R333 = GAGAL karena kelayakan data/akuisisi. Kategori: `data inadequate`.**
+Semua metrik edge—jumlah trade, PF pada biaya realistis/1,5×/2×, expectancy R, total R, t-stat, bootstrap CI, annual breakdown, maximum simultaneous positions, baseline matched basket dan IHSG—berstatus **`NOT_RUN`**. Tidak ada angka nol yang dipakai sebagai pengganti data tidak tersedia.
 
-- Tidak boleh menyimpulkan “tidak ada edge” untuk hipotesisnya, sebab strategi tidak diuji.
-- Tidak boleh menyimpulkan ada edge, sebab tidak ada return, biaya aktual, baseline, atau cache.
-- Tidak dilakukan retuning, varian, pembersihan saham berdasarkan PnL, atau penggantian sumber.
-- Checkpoint proyek diperbarui untuk mempertahankan putusan biner dan menghindari pengulangan percobaan yang sama tanpa bukti baru.
+## 5. Verdict biner dan gate
+
+- **Status R333 saat ini: `DATA_INADEQUATE`.**
+- **Status alpha: `NOT_TESTED`.**
+- Status Gate A (data eligibility): **`DATA_INADEQUATE` sampai cache dan provenance lolos audit**.
+- G1–G11 performa/robustness: **`NOT_RUN`**, bukan gagal performa, karena belum ada backtest.
+- Tidak ada runner strategi atau trade ledger yang boleh dieksekusi sebelum data gate lolos.
+
+Kriteria dan alur kerja tetap di [preregistrasi](R333_LOCKED_PREREGISTRATION.md), termasuk batas likuiditas, definisi small cap, dedup korelasi, sinyal raw price + volume, exit RR 1:2, periode discovery/forward/OOS, matched baseline, biaya dan semua gate.
+
+## 6. Biaya dan eksekusi live
+
+Jangkar biaya publik yang sudah dicatat dari Ajaib adalah 0,1513% beli dan 0,2513% jual; itu bukan verifikasi biaya akun pengguna. **Fee broker live, slippage, spread/antrean aktual, dan risiko eksekusi ARA/ARB belum diverifikasi pada akun nyata.** Riset ini tetap simulasi sampai syarat usia, akun, data, serta eksekusi nyata terkonfirmasi.
+
+## 7. Audit provenance dan sejarah perubahan verdict
+
+- Verdict sebelumnya `GAGAL` dicabut pada 2026-10-26 karena browser probes bukan akuisisi data sah untuk alur R333.
+- Verdict terkoreksi: **`DATA_INADEQUATE` (alpha `NOT_TESTED`)**.
+- Governance dibaca dari [SEARCH_GOVERNANCE_AND_SCORING_V1.md](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/market-response-model-v1-20261023/research/SEARCH_GOVERNANCE_AND_SCORING_V1.md).
+- Template R332 dibaca dari branch `research/r332-multi-asset-trend`.
