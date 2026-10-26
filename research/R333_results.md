@@ -73,7 +73,7 @@ The three requested spot probes were confirmed again by the sweep: January 2010 
 - Point-in-time historical shares outstanding and sectors: **not verified**.
 - The frozen queue itself is still **survivorship-biased** as a price-data set: it comes from a current listing roster, and 41 ticker price histories were not returned by Yahoo. The new delisted-event file helps identify exit dates but does not supply the missing pre-delisting OHLCV for those tickers. The queue is only an acquisition/coverage roster, not a selected small-cap universe.
 - Keep the original small-cap definition: monthly cross-sectional bottom 30% market cap using point-in-time shares, plus the locked 60-session liquidity filter. Do not use the latest shares-outstanding field retroactively, do not choose names using PnL, and do not calculate strategy PnL until a defensible universe gate passes.
-- The deterministic source-acquisition queue is committed at [yahoo_daily_acquisition_roster.csv](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/universe/yahoo_daily_acquisition_roster.csv), with its contract in [YAHOO_ACQUISITION_QUEUE_README.md](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/universe/YAHOO_ACQUISITION_QUEUE_README.md). It freezes all 962 current ticker codes in source order, with no PnL-dependent filtering. This is **only** a survivorship-biased acquisition queue, not a small-cap universe. The Actions-only batch collector is [r333_yahoo_batch_source_only.py](r333_yahoo_batch_source_only.py); the 97-batch matrix workflow is [.github/workflows/r333-yahoo-full-roster-source-only.yml](../.github/workflows/r333-yahoo-full-roster-source-only.yml). The workflow will be launched by committing its batch request. Each batch has at most 10 tickers and keeps its own immutable manifest; failures after 5 attempts retain exact ticker/stage/error diagnostics. Even if all current-symbol histories download, original R333 remains DATA_INADEQUATE until historical delisting membership and point-in-time shares/sectors are defensible.
+- The deterministic source-acquisition queue is committed at [yahoo_daily_acquisition_roster.csv](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/universe/yahoo_daily_acquisition_roster.csv), with its contract in [YAHOO_ACQUISITION_QUEUE_README.md](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/universe/YAHOO_ACQUISITION_QUEUE_README.md). It freezes all 962 current roster codes in source order, with no PnL-dependent filtering. This is **only** a survivorship-biased acquisition queue, not a small-cap universe. The Actions-only collector is [r333_yahoo_batch_source_only.py](r333_yahoo_batch_source_only.py); the 97-batch matrix workflow is [.github/workflows/r333-yahoo-full-roster-source-only.yml](../.github/workflows/r333-yahoo-full-roster-source-only.yml). Its run is complete: every batch recorded an immutable manifest; 921 ticker CSVs were obtained and 41 non-transient Yahoo HTTP 404 failures retained exact diagnostics. The separate official delisting report sweep has now passed coverage for 2010-01–2026-10, but this event table cannot supply missing Yahoo OHLCV, historical shares outstanding or point-in-time sectors. R333 therefore remains DATA_INADEQUATE even if all current-roster Yahoo downloads were available.
 
 ## 3. Full-roster Yahoo acquisition — final run and sandbox audit
 
@@ -128,7 +128,7 @@ The queue was derived from the current IDX roster and is **`survivorship-biased`
 
 The registered small-cap universe remains **NOT FROZEN**: monthly bottom 30th percentile of market capitalization using point-in-time shares, with the pre-registered 60-session liquidity filter and discovery correlation de-duplication. Today's shares outstanding must not be used retroactively. The current-roster queue is for acquisition coverage only, not candidate selection, not a historical universe, and not an input to strategy PnL.
 
-## 3. Gate status dan metrik
+## 4. Gate status dan metrik
 
 | Gate / data prerequisite | Status | Alasan |
 |---|---|---|
@@ -147,10 +147,10 @@ The registered small-cap universe remains **NOT FROZEN**: monthly bottom 30th pe
 
 Mandatory performance metrics—trade count, PF at 1×/1.5×/2× costs, expectancy R, total R, t-stat, bootstrap CI, max concurrent positions, annual breakdown, equal-weight matched basket and IHSG baseline—remain `null/NOT_RUN`, not zero. Do not infer “no edge” or “edge exists” from an eligibility failure.
 
-## 4. Biaya dan eksekusi live
+## 5. Biaya dan eksekusi live
 
 Jangkar biaya publik broker yang sebelumnya dicatat adalah 0,1513% beli dan 0,2513% jual (Ajaib; bukan verifikasi akun pengguna). **Fee broker live, slippage, spread/antrean aktual, dan risiko eksekusi ARA/ARB belum diverifikasi pada akun nyata.** Seluruh riset ini simulasi sampai syarat usia, akun, data, dan eksekusi aktual terverifikasi.
 
-## 5. Putusan terkini
+## 6. Putusan terkini
 
 **R333 = `DATA_INADEQUATE`; alpha = `NOT_TESTED`.** Akses laporan resmi delisting bulanan **lulus** untuk 2010-01–2026-10 (202/202 bulan, 65 kejadian), tetapi **data gate R333 keseluruhan tetap tidak lolos**. Penyebabnya: 41 ticker belum memiliki OHLCV dari Yahoo, ada 1.124 baris OHLC invalid/blank, shares outstanding dan sektor point-in-time belum tersedia, serta semantik penyesuaian split/dividen belum diverifikasi secara independen. Universe small-cap historis karena itu belum bisa dibekukan secara defensible. Tahap 1 dan Tahap 2 tidak dijalankan; tidak ada klaim “tidak ada edge” atau “ada edge”.
