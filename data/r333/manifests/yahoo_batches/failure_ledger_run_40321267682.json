@@ -9,18 +9,19 @@
   "batch_size": 10,
   "intended_batches": 97,
   "batch_status_snapshot": {
-    "fully_successful_batches": 44,
-    "incomplete_batches": 11,
-    "running_batches": 2,
-    "queued_batches": 40,
-    "successful_csvs": 537,
-    "failed_tickers": 13,
-    "unprocessed_tickers": 412,
-    "rows_in_successful_csvs": 1341841,
-    "invalid_ohlc_rows_in_downloaded_csvs": 625,
-    "unprocessed_tickers_excluding_running": 392,
-    "running_tickers": 20,
-    "queued_tickers": 392
+    "fully_successful_batches": 52,
+    "incomplete_batches": 28,
+    "running_batches": 3,
+    "queued_batches": 14,
+    "successful_csvs": 767,
+    "failed_tickers": 33,
+    "unprocessed_tickers": 212,
+    "rows_in_successful_csvs": 2140303,
+    "invalid_ohlc_rows_in_downloaded_csvs": 1063,
+    "observed_http_429_count": 0,
+    "unprocessed_tickers_excluding_running": 182,
+    "running_tickers": 30,
+    "queued_tickers": 132
   },
   "retry_policy": {
     "attempts_max": 5,
@@ -33,7 +34,8 @@
     "retry_rate_limit_and_transient_errors": true,
     "observed_http_429_count_in_completed_manifests": 0,
     "observed_http_404_retry_count": 0,
-    "why_404_not_retried": "Collector classifies HTTP 404 as non-transient; preserves it and stops rather than waiting through retry delays. The user specifically mandated stepped retries on 429. No 429 was observed in the processed batches at this snapshot."
+    "why_404_not_retried": "Collector classifies HTTP 404 as non-transient; preserves it and stops rather than waiting through retry delays. The user specifically mandated stepped retries on 429. No 429 was observed in the processed batches at this snapshot.",
+    "note": "All current failures are HTTP 404 and classified as non-transient; the collector logs exact exception and stops early. Retry waits 30/120/600/600 are only triggered for rate-limit/transient errors; none has been recorded in the completed batch manifests so far."
   },
   "failed_batches": [
     {
@@ -201,9 +203,265 @@
           "error_message": "HTTP Error 404: "
         }
       ]
+    },
+    {
+      "batch_index": 58,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_058_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "884558d6bda6ffdacf648f387bb84e14dab2044d",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "OCAP.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 59,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_059_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "45b09040b2859a6f8a3e737a6c35d9a133ca0639",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "PLAS.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 60,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_060_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "9fe56df7f7feaf5fa83c0dfc430b572c67debfd5",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "POOL.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 62,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_062_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "e6fb0026162d3fb46184959b1501d2b402ac0a2d",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "RIMO.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 63,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_063_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "e1f8abf6c13d48d43b57f49bf6f76bf7cc6bff69",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "SCPI.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 64,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_064_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "b81f04e94b8bc12fdb7ac4e06fe45260ef06c6dc",
+      "committed_csvs": 8,
+      "failed": [
+        {
+          "ticker": "SIMA.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        },
+        {
+          "ticker": "SKYB.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 65,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_065_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "601174649a6b6b033bb86b04ef482b11db8eba76",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "SMRU.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 66,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_066_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "0b46e1ecae1de695829523445437f014085d7988",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "SRIL.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 67,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_067_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "4acc79392cb9e85fc4efbc3e60fd59ad88795e88",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "SUGI.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 70,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_070_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "a37988a769b600f79cf515af7ef8658e71cb4dcb",
+      "committed_csvs": 7,
+      "failed": [
+        {
+          "ticker": "TRAM.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        },
+        {
+          "ticker": "TRIL.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        },
+        {
+          "ticker": "TRIO.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: $TRIO.JK: possibly delisted; no timezone found"
+        }
+      ]
+    },
+    {
+      "batch_index": 71,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_071_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "68c05a9ae43b128b63736ae35d0fb77ee6deef80",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "UNIT.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 72,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_072_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "7027294565b7eb26687dabf8259c8c1b9d6dcb58",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "WSKT.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 74,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_074_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "fc10658f4ad205d162ef1bc741a9258454a3b986",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "MTRA.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 75,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_075_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "c5f213410726b6d87a52d49d92c10c6f4a77e66c",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "ARMY.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 76,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_076_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "abebc0bb5c0f37a49337609cf64cabcd6b7b7d6b",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "MABA.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 78,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_078_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "65af49b4a78dd1c13dd629caef760b0d1e6a9f16",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "JSKY.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 79,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_079_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "ab3f5277d5840117cd24e6ed907a2568346f4f65",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "TDPM.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
     }
   ],
-  "interpretation": "HTTP 404 from Yahoo is a Yahoo symbol/data-availability failure. Some logs explicitly state 'No data found, symbol may be delisted'; it is not authoritative proof of IDX delisting. Do not label these as delisted without an official delisting record or independently verified source.",
+  "interpretation": "HTTP 404 from Yahoo indicates symbol/data is unavailable on that endpoint. For TECH, BTEL and TRIO the yfinance logs specifically include 'No data found, symbol may be delisted' / 'possibly delisted'; this is not an authoritative IDX delisting record. Do not infer official delisting status from Yahoo 404 alone.",
   "source_only": "No signal, PnL, PF, expectancy, trade counts, alpha or universe ranking was performed by the Actions jobs.",
   "next_step": "Let remaining predeclared batches finish. Preserve every batch manifest. If any actual HTTP 429 occurs, retry it with the locked wait sequence; if 404 only, record exact ticker and continue the rest of the queue. This acquisition queue remains survivorship-biased."
 }
