@@ -1,0 +1,54 @@
+{
+  "experiment": "R333",
+  "request_id": "R333_DELISTED_MONTHLY_SWEEP_2010_01_TO_2026_10",
+  "purpose": "exhaustive month-by-month coverage audit of official IDX LINK_DELISTING monthly report; acquisition only, never strategy PnL",
+  "data_only": true,
+  "pnl_calculation": false,
+  "source_host": "block.idx.id",
+  "source_page": "https://block.idx.id/id/data-pasar/laporan-statistik/digital-statistic/monthly/corporate-action-of-listed-companies/delisted-company",
+  "endpoint": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated",
+  "parameters": {
+    "urlName": "LINK_DELISTING",
+    "periodType": "monthly",
+    "isPrint": false,
+    "cumulative": false,
+    "pageSize": 2000,
+    "pageNumber": 1
+  },
+  "start_month": "2010-01",
+  "end_month": "2026-10",
+  "expected_month_count": 202,
+  "page_size": 2000,
+  "retry_on": "429, HTTP 5xx, network/timeout exceptions",
+  "retry_waits_seconds": [
+    30,
+    120,
+    600,
+    600
+  ],
+  "non_transient_statuses": [
+    400,
+    401,
+    403,
+    404,
+    410
+  ],
+  "non_transient_policy": "record exact response, do not hammer and do not use fallback host/source",
+  "coverage_checks": [
+    "Each month 2010-01 through 2026-10 has a raw report response snapshot",
+    "Every report response is HTTP 200 and JSON schema has data list plus pagination metadata",
+    "Collected row count matches meta.totalItems and every page is fetched if totalItems exceeds pageSize",
+    "Required record fields code, issuerName, ListingDate and DeListingDate are present",
+    "All source response bytes are preserved or their SHA-256 and payload are committed",
+    "No strategy selection, signal, PnL, PF, alpha or universe freezing is performed"
+  ],
+  "output_paths": {
+    "monthly_snapshots": "data/r333/idx_metadata/delisted_monthly_sweep/YYYY-MM.json",
+    "event_csv": "data/r333/idx_metadata/delisted_monthly_sweep/delisted_events_2010-01_to_2026-10.csv",
+    "coverage_csv": "data/r333/idx_metadata/delisted_monthly_sweep/monthly_coverage_audit.csv",
+    "latest_manifest": "data/r333/manifests/idx-delisted-monthly-sweep-latest.json"
+  },
+  "no_fallback": true,
+  "no_cloudflare_bypass": true,
+  "verdict_note": "A complete monthly response sweep only proves coverage of the published official monthly report for 2010-01 through 2026-10; it does not prove Yahoo daily bars, point-in-time shares/sectors, OHLC quality, or execution costs are adequate."
+}
