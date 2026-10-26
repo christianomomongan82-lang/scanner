@@ -63,87 +63,75 @@ Run [40309624911](https://github.com/christianomomongan82-lang/scanner/actions/r
 - Keep the original small-cap definition: monthly cross-sectional bottom 30% market cap using point-in-time shares, plus the locked 60-session liquidity filter. Do not use the latest shares-outstanding field retroactively, do not choose names using PnL, and do not calculate strategy PnL until a defensible universe gate passes.
 - The deterministic source-acquisition queue is committed at [yahoo_daily_acquisition_roster.csv](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/universe/yahoo_daily_acquisition_roster.csv), with its contract in [YAHOO_ACQUISITION_QUEUE_README.md](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/universe/YAHOO_ACQUISITION_QUEUE_README.md). It freezes all 962 current ticker codes in source order, with no PnL-dependent filtering. This is **only** a survivorship-biased acquisition queue, not a small-cap universe. The Actions-only batch collector is [r333_yahoo_batch_source_only.py](r333_yahoo_batch_source_only.py); the 97-batch matrix workflow is [.github/workflows/r333-yahoo-full-roster-source-only.yml](../.github/workflows/r333-yahoo-full-roster-source-only.yml). The workflow will be launched by committing its batch request. Each batch has at most 10 tickers and keeps its own immutable manifest; failures after 5 attempts retain exact ticker/stage/error diagnostics. Even if all current-symbol histories download, original R333 remains DATA_INADEQUATE until historical delisting membership and point-in-time shares/sectors are defensible.
 
-## 3. Full-roster Yahoo acquisition — current Actions snapshot
+## 3. Full-roster Yahoo acquisition — final run and sandbox audit
 
-Run [40321267682](https://github.com/christianomomongan82-lang/scanner/actions/runs/40321267682) menjalankan workflow data-only dari GitHub Actions. Job persiapan, validasi queue 962 ticker unik, dan syntax check kolektor berhasil. Semua CSV yang berhasil diperoleh disimpan ke branch data bersama hash/manifest per ticker; tidak ada PnL di Actions.
+Final matrix run: [40321267682](https://github.com/christianomomongan82-lang/scanner/actions/runs/40321267682), with conclusion `failure` by design because 34 batches had one or more non-transient 404 ticker failures. The archive job still succeeded and uploaded artifact `12649374154`. No strategy computation ran on Actions.
 
-**Snapshot progres terakhir yang terverifikasi dari run dan batch manifest:**
+- Artifact: `R333-Yahoo-current-listings-batches-40321267682`, 29,062,170 bytes according to Actions.
+- Artifact ZIP SHA-256 computed in the sandbox: `96306cc81c0b7fc18fc4ff436fda422c14844371950945d3136a9bc14e83aa51`.
+- Sandbox audit report: [R333_YAHOO_CACHE_AUDIT_40321267682.md](R333_YAHOO_CACHE_AUDIT_40321267682.md) and [machine-readable JSON](R333_yahoo_cache_audit_40321267682.json).
+- The archive was extracted in the sandbox. The sandbox did not query Yahoo; it checked only the bytes obtained from the GitHub Actions artifact.
 
-| Metrik | Status |
+### Acquisition and file integrity
+
+| Metric | Final audit |
 |---|---:|
-| Queue sumber listing IDX yang sedang dipakai untuk coverage | 962 ticker |
-| Batch selesai penuh dengan semua ticker sukses | 52 / 97 |
-| Batch berstatus INCOMPLETE (CSV parsial dan manifest tetap di-commit) | 28 |
-| Batch masih berjalan | 3 |
-| Batch masih antre | 14 |
-| CSV ticker berhasil tersimpan | 767 |
-| Total baris harian dalam CSV sukses/parsial yang tersimpan | 2.140.303 |
-| Baris OHLC invalid menurut manifest awal per batch | 1.063 |
-| Ticker yang tidak mendapatkan CSV Yahoo | 33 |
-| Error HTTP 429 pada batch yang sudah selesai | 0 |
+| Frozen current-listing acquisition queue | 962 unique tickers |
+| Per-batch manifests / batches | 97 / 97 |
+| Fully successful batches | 63 |
+| Incomplete batches | 34 |
+| Successful queue ticker CSVs | 921 |
+| Failed queue ticker requests | 41 |
+| CSV files in artifact | 922 (includes extra smoke cache `^JKSE`) |
+| Rows over 921 stock CSVs | 2,399,444 |
+| Invalid OHLC rows (recomputed) | 1,124 |
+| Files with clean OHLC | 462 |
+| Files with at least one invalid OHLC row | 459 |
+| SHA-256 identical to manifest | 921/921 |
+| Byte length / row count / first-last date matches | 921/921 |
+| Duplicate date rows / required-field errors / date-order failures | 0 / 0 / 0 |
+| HTTP 429 observed | 0 |
+| Strategy PnL/PF | **NOT RUN** |
 
-Snapshot ini bukan hasil akhir. Tiga puluh tiga ticker gagal pada tahap `Ticker.history` dengan exception `HTTPError: HTTP Error 404: ` (lihat tabel di bawah dan failure ledger). Setiap 404 diklasifikasikan non-transient oleh collector, dicatat pada manifest, lalu tidak di-retry. Tidak ada 429 yang terlihat pada manifest yang telah selesai saat snapshot ini, jadi jadwal 30/120/600/600 detik belum terpicu. Jika 429 muncul pada batch tersisa, collector menerapkan jadwal tersebut sampai maksimal lima attempt.
+The 921 acquired stock CSVs pass byte/row/date/hash integrity checks, but **their raw OHLC quality is not clean**: 1,124 rows fail basic OHLC field/geometry checks. Nothing was repaired, removed or interpolated. Raw OHLC, Adj Close, Volume, Dividends and Stock Splits were preserved. Split/dividend adjustment completeness is not independently proven and Yahoo daily OHLCV does not provide observed executable bid/ask / queue fill data.
 
-### Gagalnya ticker Yahoo — exact status dan log
+### Exact failures
 
-| Batch | Ticker gagal | Tahap | Error yang disimpan |
-|---:|---|---|---|
-| 25 | TECH.JK, BTEL.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 38 | COWL.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 42 | GAMA.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 44 | GOLL.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 45 | HOME.JK, HOTL.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 46 | IIKP.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 50 | KBRI.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 51 | LCGP.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 52 | LMAS.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 53 | MAGP.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 54 | META.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 58 | OCAP.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 59 | PLAS.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 60 | POOL.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 62 | RIMO.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 63 | SCPI.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 64 | SIMA.JK, SKYB.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 65 | SMRU.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 66 | SRIL.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 67 | SUGI.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 70 | TRAM.JK, TRIL.JK, TRIO.JK | `Ticker.history` | `HTTPError: HTTP Error 404: `; TRIO also `possibly delisted; no timezone found` |
-| 71 | UNIT.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 72 | WSKT.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 74 | MTRA.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 75 | ARMY.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 76 | MABA.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 78 | JSKY.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
-| 79 | TDPM.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+All 41 unavailable ticker requests failed at stage `Ticker.history`, with the last recorded error `HTTPError: HTTP Error 404: `. The special TRIO message was `$TRIO.JK: possibly delisted; no timezone found`.
 
-Manifest per-batch tetap sumber detail otoritatif, termasuk response code 404 dan log yfinance; daftar lengkap dan SHA Git tiap manifest tersimpan di [failure ledger JSON](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/failure_ledger_run_40321267682.json).
+```text
+TECH.JK, BTEL.JK, COWL.JK, GAMA.JK, GOLL.JK, HOME.JK, HOTL.JK, IIKP.JK,
+KBRI.JK, LCGP.JK, LMAS.JK, MAGP.JK, META.JK, OCAP.JK, PLAS.JK, POOL.JK,
+RIMO.JK, SCPI.JK, SIMA.JK, SKYB.JK, SMRU.JK, SRIL.JK, SUGI.JK, TRAM.JK,
+TRIL.JK, TRIO.JK, UNIT.JK, WSKT.JK, MTRA.JK, ARMY.JK, MABA.JK, JSKY.JK,
+TDPM.JK, NUSA.JK, HKMU.JK, DUCK.JK, CPRI.JK, POSA.JK, ENVY.JK, PURE.JK,
+CBMF.JK
+```
 
-Penting: sebagian ticker berasal dari roster IDX yang saat ini mencantumkan nama, jumlah saham, dan board, namun Yahoo tidak mengembalikan histori. Log `No data found, symbol may be delisted` hanya muncul untuk sebagian ticker (misalnya TECH.JK, BTEL.JK, TRIO.JK); itu **bukan** bukti resmi delisting dan dapat juga menunjukkan ticker Yahoo tidak tersedia atau mapping berbeda. Status delisting tetap harus diverifikasi dari sumber resmi.
+Per-ticker exact logs and manifest hashes are in the [failure ledger](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/failure_ledger_run_40321267682.json). The 34 incomplete batch jobs still committed their other successful CSVs plus manifests; the workflow conclusion is a visible partial-collection failure, not a commit failure. The retry schedule 30/120/600/600 seconds was not used because no HTTP 429/rate-limit/transient error was recorded. The collector treated the HTTP 404 responses as non-transient and stopped after one request. **Yahoo 404 is not official proof of IDX delisting.**
 
-Job batch gagal bukan karena commit: setiap batch di tabel ini menyimpan CSV bagi ticker yang sukses beserta manifest error ke data branch. Workflow sengaja memberi job conclusion `failure` supaya hasil parsial tidak disalahartikan sebagai semua ticker berhasil.
+### Survivorship warning and universe
 
-### Implikasi data dan next step
+The queue was derived from the current IDX roster and is **`survivorship-biased`**. It has no successfully acquired official delisted records; shares outstanding and sector assignments point-in-time remain unverified. The Yahoo ticker history coverage does not fix those omissions and may be incomplete for names that are still present in the current roster.
 
-- Data roster tetap **survivorship-biased** sampai data delisting point-in-time tersedia.
-- **1.063 baris OHLC invalid** dari 767 CSV sukses/parsial yang sudah selesai tetap dipertahankan; tak ada interpolasi, forward-fill, atau auto-repair.
-- Tidak ada bukti bahwa 962 kode pada queue merupakan universe aktif lengkap; 33 Yahoo 404 menambah kebutuhan mencocokkan roster dengan catatan listing/delisting resmi.
-- Setelah seluruh 97 batch selesai, tarik artefak Actions ke sandbox dan jalankan hanya audit integritas cache (`research/r333_audit_yahoo_dataset.py`), bukan backtest. Roster point-in-time, shares outstanding dan sektor historis belum diverifikasi, sehingga G1–G11 strategi tetap NOT_RUN dan PnL tetap dilarang.
+The registered small-cap universe remains **NOT FROZEN**: monthly bottom 30th percentile of market capitalization using point-in-time shares, with the pre-registered 60-session liquidity filter and discovery correlation de-duplication. Today's shares outstanding must not be used retroactively. The current-roster queue is for acquisition coverage only, not candidate selection, not a historical universe, and not an input to strategy PnL.
 
 ## 3. Gate status dan metrik
 
-| Item | Status | Alasan |
+| Gate / data prerequisite | Status | Alasan |
 |---|---|---|
-| Smoke acquisition Yahoo | **PASS** | 4/4 ticker didownload dan committed melalui Actions. |
-| Cache determinism / SHA check | **PASS untuk smoke cache** | SHA manifest cocok dengan CSV di artefak yang ditarik dari Actions. Ini bukan pass untuk strategi. |
-| OHLC quality | **FAIL untuk clean-input eligibility tanpa penanganan** | Ada 57 baris OHLC invalid/blank di empat file; tak boleh diisi/diperbaiki diam-diam. |
-| Historical universe incl. delisted | **NOT VERIFIED** | Hanya smoke tickers, belum ada roster historis yang terkunci. |
-| Shares outstanding/sector point-in-time | **NOT VERIFIED** | Sumber data point-in-time belum ada. |
-| Split/dividend adjustment semantics | **NOT FULLY VERIFIED** | Raw request and actions stored, but underlying adjustment semantics and completeness need audit. |
-| Strategy gates G1–G11 | **NOT_RUN** | Belum ada universe yang eligible; dilarang hitung PnL. |
-| Edge verdict | **NOT_TESTED** | Tidak ada sinyal, trade, PnL atau PF yang dihitung. |
+| Yahoo acquisition path via Actions | **PASS with 41 ticker failures** | 921 ticker CSVs retrieved; 41 404 failures recorded; no fallback. |
+| Cache integrity | **PASS for 921 acquired CSVs** | SHA, bytes, rows, date range and order match manifest; zero duplicate dates. |
+| Raw OHLC quality | **FAIL for clean-input eligibility** | 1,124 invalid/blank OHLC rows preserved in 459 files. |
+| Historical delisted membership | **NOT VERIFIED** | No official delisted records acquired; Yahoo 404 does not verify delisting. |
+| Point-in-time shares outstanding / sectors | **NOT VERIFIED** | Current listing metadata is not a historical monthly snapshot. |
+| Corporate-action adjustment semantics | **NOT FULLY VERIFIED** | Raw OHLC and corporate-action fields exist; completeness/adjustment semantics remain unaudited. |
+| Observable spread and executable fills | **NOT AVAILABLE / UNVERIFIED** | Yahoo daily OHLCV has no observed bid/ask or queue. |
+| Final small-cap universe | **NOT FROZEN** | Preregistered point-in-time market-cap and liquidity filters cannot yet be safely applied. |
+| G1–G11 strategy gates | **NOT_RUN** | Prerequisite data/universe gate not passed; no signal or PnL run. |
+| Alpha verdict | **NOT_TESTED** | No strategy trade, PnL or PF calculated. |
 
-Angka performa yang diwajibkan—n trade, PF pada cost realistis/1,5×/2×, expectancy R, total R, t-stat, bootstrap CI, jumlah posisi simultan, annual breakdown, equal-weight baseline, IHSG baseline—semua `null/NOT_RUN`, bukan nol.
+Mandatory performance metrics—trade count, PF at 1×/1.5×/2× costs, expectancy R, total R, t-stat, bootstrap CI, max concurrent positions, annual breakdown, equal-weight matched basket and IHSG baseline—remain `null/NOT_RUN`, not zero. Do not infer “no edge” or “edge exists” from an eligibility failure.
 
 ## 4. Biaya dan eksekusi live
 
