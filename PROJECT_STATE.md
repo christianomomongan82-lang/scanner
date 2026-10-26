@@ -1,9 +1,23 @@
 # Proyek Backtest — Checkpoint Utama
 
-**Terakhir diperbarui:** 2026-10-16  
+**Terakhir diperbarui:** 2026-10-26  
 **Status proyek:** SEMUA KANDIDAT YANG DIUJI BERSTATUS GAGAL; TIDAK ADA YANG LULUS.  
 **Repositori sumber utama:** https://github.com/christianomomongan82-lang/scanner  
-**Branch riset aktif saat checkpoint ini:** [local-backtest/r189-dukascopy-history](https://github.com/christianomomongan82-lang/scanner/tree/local-backtest/r189-dukascopy-history)
+**Branch riset aktif saat checkpoint ini:** [research/r333-idx-smallcap-daily](https://github.com/christianomomongan82-lang/scanner/tree/research/r333-idx-smallcap-daily)
+
+## R333 — IDX small-cap harian — GAGAL karena data inadequate (2026-10-26)
+
+**Verdict biner:** **GAGAL** untuk kelayakan/akuisisi data; **bukan** kesimpulan bahwa alpha gagal atau bahwa “tidak ada edge”. Tidak ada PF atau PnL dihitung.
+
+- Branch eksperimen: [research/r333-idx-smallcap-daily](https://github.com/christianomomongan82-lang/scanner/tree/research/r333-idx-smallcap-daily)
+- [Preregistrasi terkunci](research/R333_LOCKED_PREREGISTRATION.md) · [Laporan hasil/verdict](research/R333_results.md) · [JSON mesin](research/R333_results.json)
+- Hipotesis kausal yang dikunci: saham kecil punya cakupan analis dan institusi lebih sedikit, jadi reaksi harga terhadap informasi lebih lambat dan bisa diukur dari raw price + volume. Ini bisa gagal, dan itu hasil valid.
+- Sumber tunggal yang dipilih: Yahoo Finance `.JK` melalui `yfinance`. Dua percobaan akuisisi gagal: endpoint chart tak dapat diakses; halaman histori memberi HTTP 429. Sesuai aturan, STOP di Tahap 0 tanpa fallback, percobaan ketiga, bypass, atau backtest.
+- Tahun pertama/terakhir, jumlah baris, dan SHA-256 cache semuanya **tidak tersedia** karena tidak ada file data yang diunduh. Delisted coverage, shares outstanding point-in-time, sektor historis, corporate action completeness, dan spread bid-ask juga belum terverifikasi. Penilaian data: **`data inadequate`**.
+- Gate G1–G11 tidak lolos karena bukti/data tidak tersedia setelah hard stop; ini bukan pengukuran negatif performa strategi. Tidak ada runner, trade ledger, atau klaim reproducibility.
+- Biaya live broker, slippage, spread/antrean, dan risiko ARA/ARB **belum diverifikasi pada akun nyata**. Riset ini hanya simulasi sampai syarat umur, akun dan eksekusi nyata terpenuhi.
+- Template `R332_LOCKED_PREREGISTRATION.md` ditemukan pada branch `research/r332-multi-asset-trend`, bukan `main`; `SEARCH_GOVERNANCE_AND_SCORING_V1` tidak ditemukan di lokasi yang diperiksa. Rincian akses dan data diarsipkan di preregistrasi R333.
+
 
 Dokumen ini adalah titik lanjut permanen. Percakapan baru yang menerima instruksi “lanjut” harus membaca dokumen ini terlebih dahulu, lalu memeriksa artefak riset terbaru di branch aktif dan memperbarui checkpoint setelah ada hasil penting. Jangan meminta pengguna membuat prompt khusus atau mengunggah ulang data yang sudah ada di GitHub.
 
