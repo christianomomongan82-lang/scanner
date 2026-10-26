@@ -1,0 +1,180 @@
+{
+  "experiment": "R333",
+  "family": "IDX_SMALLCAP_DAILY",
+  "parent": null,
+  "branch": "research/r333-idx-smallcap-daily",
+  "verdict": "GAGAL",
+  "verdict_scope": "data_eligibility_and_acquisition",
+  "classification": "data inadequate",
+  "alpha_verdict": "NOT_TESTED; tidak boleh dinyatakan alpha gagal atau tidak ada edge",
+  "stop_stage": "TAHAP 0 / akuisisi sumber tunggal",
+  "p_n_l_computed": false,
+  "pf_computed": false,
+  "trade_ledger_created": false,
+  "backtest_runner_executed": false,
+  "source": {
+    "name": "Yahoo Finance via yfinance",
+    "intended_instrument_suffix": ".JK",
+    "intended_interval": "1d",
+    "colab_compatibility": "not runtime-verified in this session",
+    "config_locked": {
+      "auto_adjust": false,
+      "actions": true
+    },
+    "docs": [
+      "https://ranaroussi.github.io/yfinance/reference/api/yfinance.download.html",
+      "https://ranaroussi.github.io/yfinance/reference/yfinance.price_history.html"
+    ]
+  },
+  "acquisition_attempts": [
+    {
+      "number": 1,
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/BBCA.JK?range=max&interval=1d",
+      "status": "FAILED",
+      "observed_failure": "Endpoint tidak dapat diakses melalui tool browser; tidak ada payload harga yang diterima.",
+      "cache_bytes_received": false
+    },
+    {
+      "number": 2,
+      "url": "https://finance.yahoo.com/quote/BBCA.JK/history",
+      "status": "FAILED",
+      "observed_failure": "HTTP 429 Too Many Requests.",
+      "cache_bytes_received": false
+    }
+  ],
+  "data_audit": {
+    "first_year": null,
+    "last_year": null,
+    "row_count": null,
+    "sha256": null,
+    "cache_path": null,
+    "delisted_coverage": "unverified; current-ticker-only universe would have survivorship bias",
+    "point_in_time_shares_outstanding": "unverified",
+    "point_in_time_sector_classification": "unverified",
+    "corporate_action_completeness": "unverified; no raw data acquired",
+    "bid_ask_spread": "not available from acquired data; no cache acquired",
+    "assessment": "data inadequate",
+    "reason": "no dataset received after two attempts; point-in-time/delisted/share-count/corporate-action requirements not demonstrated"
+  },
+  "market_facts": {
+    "example_broker": "Ajaib",
+    "example_fee_buy_pct": 0.1513,
+    "example_fee_sell_pct": 0.2513,
+    "regular_market_settlement": "T+2",
+    "round_lot_shares": 100,
+    "strategy_direction": "LONG_ONLY_LOCKED_A_PRIORI",
+    "short_selling": "IDX requirements include special securities account, eligible short-selling instruments and licensed exchange member; R333 assumes no short",
+    "live_fee_slippage_spread_ara_arb_verified_in_real_account": false,
+    "sources": [
+      "https://ajaib.co.id/biaya",
+      "https://www.idx.id/id/produk-layanan/jam-dan-mekanisme-perdagangan/",
+      "https://www.ksei.co.id/en/service-support/service-type/settlement-of-securities-transactions-services",
+      "https://www.cgsi.co.id/help/faq-opening-account?lang=ID",
+      "https://katadata.co.id/finansial/bursa/6ad6bb9113d26/bei-ubah-lagi-aturan-arb-saham-rp-14-bisa-turun-ke-rp-1"
+    ]
+  },
+  "planned_periods_not_tested": {
+    "discovery": [
+      "2016-01-01",
+      "2020-12-31"
+    ],
+    "forward": [
+      "2021-01-01",
+      "2025-12-31"
+    ],
+    "oos": [
+      "2026-01-01",
+      "2026-10-26"
+    ]
+  },
+  "planned_signal_not_tested": {
+    "previous_close_return_min_pct": 0.5,
+    "previous_close_return_max_pct": 3,
+    "close_location_min": 0.8,
+    "volume_multiple_of_previous_20_session_median": 2,
+    "close_not_above_prior_20_session_high": true,
+    "entry": "next session open",
+    "stop": "signal-day low",
+    "reward_risk": 2,
+    "time_stop_sessions": 10
+  },
+  "gates": {
+    "G1": {
+      "verdict": "GAGAL",
+      "reason": "Tidak ada cache/runner untuk uji determinisme.",
+      "interpretation": "stopped at Stage 0; not evidence that strategy alpha is negative"
+    },
+    "G2": {
+      "verdict": "GAGAL",
+      "reason": "Tidak ada bar data untuk menguji truncation/no-lookahead.",
+      "interpretation": "stopped at Stage 0; not evidence that strategy alpha is negative"
+    },
+    "G3": {
+      "verdict": "GAGAL",
+      "reason": "Tidak ada trade/PF forward yang dihitung.",
+      "interpretation": "stopped at Stage 0; not evidence that strategy alpha is negative"
+    },
+    "G4": {
+      "verdict": "GAGAL",
+      "reason": "Tidak ada trade/PF discovery yang dihitung.",
+      "interpretation": "stopped at Stage 0; not evidence that strategy alpha is negative"
+    },
+    "G5": {
+      "verdict": "GAGAL",
+      "reason": "Tidak ada breakdown tahunan.",
+      "interpretation": "stopped at Stage 0; not evidence that strategy alpha is negative"
+    },
+    "G6": {
+      "verdict": "GAGAL",
+      "reason": "Neighborhood tidak dijalankan.",
+      "interpretation": "stopped at Stage 0; not evidence that strategy alpha is negative"
+    },
+    "G7": {
+      "verdict": "GAGAL",
+      "reason": "Sektor point-in-time/hasil tidak tersedia.",
+      "interpretation": "stopped at Stage 0; not evidence that strategy alpha is negative"
+    },
+    "G8": {
+      "verdict": "GAGAL",
+      "reason": "Tidak ada return per trade untuk bootstrap.",
+      "interpretation": "stopped at Stage 0; not evidence that strategy alpha is negative"
+    },
+    "G9": {
+      "verdict": "GAGAL",
+      "reason": "Strategi/baseline tidak dapat dihitung.",
+      "interpretation": "stopped at Stage 0; not evidence that strategy alpha is negative"
+    },
+    "G10": {
+      "verdict": "GAGAL",
+      "reason": "PF tidak dihitung; audit pemicu tidak terpicu.",
+      "interpretation": "stopped at Stage 0; not evidence that strategy alpha is negative"
+    },
+    "G11": {
+      "verdict": "GAGAL",
+      "reason": "Data spread/likuiditas dan fill ARA/ARB tidak tersedia.",
+      "interpretation": "stopped at Stage 0; not evidence that strategy alpha is negative"
+    }
+  },
+  "metrics": {
+    "trade_count": null,
+    "profit_factor_cost_1x": null,
+    "profit_factor_cost_1_5x": null,
+    "profit_factor_cost_2x": null,
+    "expectancy_r": null,
+    "total_r": null,
+    "t_statistic": null,
+    "bootstrap_ci95_mean_r_per_trade": null,
+    "max_simultaneous_positions": null,
+    "yearly_breakdown": null,
+    "matched_equal_weight_basket": null,
+    "ihsg_baseline": null
+  },
+  "limitations": [
+    "No raw dataset was received; no SHA-256 exists.",
+    "No third acquisition attempt and no fallback source, per locked stop rule.",
+    "Fee broker live, slippage, spread/queue, and ARA/ARB execution risk were not verified in a real account.",
+    "Simulation only; no live-readiness claim."
+  ],
+  "preregistration_commit": "5ef12c40c1cd68e889c9632f08e19e1edab98065",
+  "result_report_path": "research/R333_results.md"
+}
