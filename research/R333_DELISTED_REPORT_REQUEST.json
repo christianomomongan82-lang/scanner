@@ -15,6 +15,18 @@
     {
       "name": "delisted_report_frontend_chunk_428",
       "url": "https://block.idx.id/_nuxt/274f983.js"
+    },
+    {
+      "name": "delisted_api_probe_2026_10",
+      "url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2026&periodMonth=10&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy="
+    },
+    {
+      "name": "delisted_api_probe_2020_01",
+      "url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2020&periodMonth=1&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy="
+    },
+    {
+      "name": "delisted_api_probe_2010_01",
+      "url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2010&periodMonth=1&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy="
     }
   ],
   "route_provenance": {
@@ -37,7 +49,8 @@
   },
   "no_fallback": true,
   "expected_result": "Raw HTML/JS, downloadable file links or exact failed HTTP status and response prefix; this is not assumed to return delisted records.",
-  "request_revision": 2,
-  "previous_run_id": 40324653440,
-  "previous_run_error": "AttributeError: 'dict' object has no attribute 'decode' in load_request source loop; corrected in research/r333_idx_delisted_report_source_only.py"
+  "request_revision": 3,
+  "previous_run_id": 40324779594,
+  "previous_run_error": "AttributeError: 'dict' object has no attribute 'decode' in load_request source loop; corrected in research/r333_idx_delisted_report_source_only.py",
+  "previous_run_observation": "Official report page and webpack chunk fetched HTTP 200; chunk documents GetApiDataPaginated urlName=LINK_DELISTING and GetReportData Excel/PDF route."
 }
