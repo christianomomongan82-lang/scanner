@@ -6,139 +6,189 @@
   "verdict": "DATA_INADEQUATE",
   "alpha_verdict": "NOT_TESTED",
   "verdict_scope": "data_eligibility_only",
-  "status_reason": "Tahap 0 sedang memakai alur GitHub Actions data-only yang diotorisasi; browser probes sebelumnya bukan akuisisi sah dan tidak dihitung.",
-  "acquisition": {
-    "method": "GitHub Actions; Python + yfinance; CSV committed to data/r333-idx-daily-yahoo",
-    "start_date": "2010-01-01",
-    "end_date": "date of workflow run",
+  "reason": "Yahoo smoke acquisition succeeded, but the four tickers are not a historical small-cap universe; invalid OHLC rows and point-in-time/delisted coverage remain unresolved.",
+  "source_acquisition": {
+    "provider": "Yahoo Finance via yfinance",
+    "acquisition_method": "GitHub Actions only",
+    "data_branch": "data/r333-idx-daily-yahoo",
+    "workflow_run_ids": [
+      40306721616,
+      40307102612,
+      40307108809
+    ],
+    "current_verified_run_id": 40307108809,
+    "current_run_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40307108809",
+    "run_started_utc": "2026-10-26T10:24:00Z",
+    "run_finished_utc": "2026-10-26T10:24:41Z",
+    "yfinance_version": "1.7.0",
+    "python_version": "3.12",
+    "start": "2010-01-01",
+    "end": "2026-10-26",
     "interval": "1d",
     "auto_adjust": false,
     "actions": true,
-    "retry_attempts_max": 5,
-    "waits_between_failed_attempts_seconds": [
+    "max_attempts_per_ticker": 5,
+    "waits_seconds": [
       30,
       120,
       600,
       600
     ],
-    "initial_smoke_tickers": [
-      "^JKSE",
-      "BBCA.JK",
-      "BBRI.JK",
-      "TLKM.JK"
-    ],
-    "data_branch": "data/r333-idx-daily-yahoo",
-    "workflow_path": ".github/workflows/r333-yahoo-daily-source-only.yml",
-    "current_run_status": "PENDING_VERIFICATION"
-  },
-  "prior_browser_probes": {
-    "counted_as_authorized_acquisition_attempts": false,
-    "note": "Attempts made by browser tool are not valid Actions data acquisition and do not count toward any attempt cap.",
-    "probes": [
-      {
-        "ticker": "BBCA.JK",
-        "stage": "browser chart URL",
-        "error": "URL inaccessible from browser tool; no price payload received."
-      },
-      {
-        "ticker": "BBCA.JK",
-        "stage": "browser history page",
-        "error": "HTTP 429 reported by browser access."
-      }
-    ]
-  },
-  "data": {
-    "^JKSE": {
-      "ticker": "^JKSE",
-      "row_count": null,
-      "first_date": null,
-      "last_date": null,
-      "sha256": null,
-      "status": "PENDING_VERIFICATION"
-    },
-    "BBCA.JK": {
-      "ticker": "BBCA.JK",
-      "row_count": null,
-      "first_date": null,
-      "last_date": null,
-      "sha256": null,
-      "status": "PENDING_VERIFICATION"
-    },
-    "BBRI.JK": {
-      "ticker": "BBRI.JK",
-      "row_count": null,
-      "first_date": null,
-      "last_date": null,
-      "sha256": null,
-      "status": "PENDING_VERIFICATION"
-    },
-    "TLKM.JK": {
-      "ticker": "TLKM.JK",
-      "row_count": null,
-      "first_date": null,
-      "last_date": null,
-      "sha256": null,
-      "status": "PENDING_VERIFICATION"
+    "all_smoke_tickers_succeeded_on_attempt": 1,
+    "manifest_path": "data/r333/manifests/latest.json",
+    "manifest_blob_sha": "627895191213172a3b8fc3f2a54f579a5b8802f0",
+    "artifact_id": 12643301960,
+    "artifact_sha256": "144ee050d6507c0b335d46b3f2fbe8a25a8fd6c16070a30449a26b4dcd4c4415",
+    "first_workflow_failure": {
+      "run_id": 40306521287,
+      "category": "workflow infrastructure failure, not Yahoo request failure",
+      "error": "actions/setup-python cache lookup failed because no requirements.txt or pyproject.toml was present; commit step also failed because initial data directories were not created."
     }
   },
-  "data_quality": {
-    "raw_ohlc": "request auto_adjust=false",
-    "corporate_actions": "actions=true; require raw CSV columns to verify",
-    "delisted_coverage": "not yet verified; if not available, all results must be labeled survivorship-biased",
-    "survivorship_label": "survivorship-biased until delisted coverage and point-in-time listing universe are demonstrated",
-    "shares_outstanding_point_in_time": "not yet verified",
-    "point_in_time_sector_classification": "not yet verified",
-    "spread_bid_ask": "not in standard daily OHLCV; must remain explicit limitation unless independently modeled using evidence"
+  "cache_files": [
+    {
+      "ticker": "^JKSE",
+      "path": "data/r333/yahoo_daily/IDX_JKSE.csv",
+      "rows": 4131,
+      "first_date": "2010-01-04",
+      "last_date": "2026-10-26",
+      "bytes": 446298,
+      "sha256": "08c46c6a8d59d831f03c4a9cecb2431fda831323db2e9cc3e5256139ccf45fd3",
+      "invalid_ohlc_rows": 52,
+      "duplicate_dates": 0,
+      "dividend_event_rows": 0,
+      "split_event_rows": 0
+    },
+    {
+      "ticker": "BBCA.JK",
+      "path": "data/r333/yahoo_daily/BBCA_JK.csv",
+      "rows": 4131,
+      "first_date": "2010-01-04",
+      "last_date": "2026-10-26",
+      "bytes": 300992,
+      "sha256": "16f85b162f544a12bfab96d149aaa7509c23a1fc241c5be2c978a6b8ad881890",
+      "invalid_ohlc_rows": 0,
+      "duplicate_dates": 0,
+      "dividend_event_rows": 35,
+      "split_event_rows": 1
+    },
+    {
+      "ticker": "BBRI.JK",
+      "path": "data/r333/yahoo_daily/BBRI_JK.csv",
+      "rows": 4131,
+      "first_date": "2010-01-04",
+      "last_date": "2026-10-26",
+      "bytes": 425609,
+      "sha256": "f7e1aa2165a42f3c23e702cf19512e8d39b9084d9094b003cb8280533ae83b39",
+      "invalid_ohlc_rows": 1,
+      "duplicate_dates": 0,
+      "dividend_event_rows": 22,
+      "split_event_rows": 2
+    },
+    {
+      "ticker": "TLKM.JK",
+      "path": "data/r333/yahoo_daily/TLKM_JK.csv",
+      "rows": 4131,
+      "first_date": "2010-01-04",
+      "last_date": "2026-10-26",
+      "bytes": 303002,
+      "sha256": "bb1dcc8c3608a3b9b1b19c208f6a65ba4aeb222b41b0547afc83e6303cac1689",
+      "invalid_ohlc_rows": 4,
+      "duplicate_dates": 0,
+      "dividend_event_rows": 19,
+      "split_event_rows": 1
+    }
+  ],
+  "cache_quality": {
+    "columns": [
+      "Date",
+      "Open",
+      "High",
+      "Low",
+      "Close",
+      "Adj Close",
+      "Volume",
+      "Dividends",
+      "Stock Splits"
+    ],
+    "total_invalid_ohlc_rows": 57,
+    "duplicates": 0,
+    "raw_request": "auto_adjust=false",
+    "adjusted_close_included": true,
+    "corporate_actions_included": true,
+    "split_adjustment_semantics": "not independently verified",
+    "blanks_preserved": true
+  },
+  "official_idx_universe_source": {
+    "source_urls": [
+      "https://block.idx.id/id/data-pasar/data-saham/",
+      "https://idx.co.id/id/data-pasar/ringkasan-perdagangan/ringkasan-saham/",
+      "https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan"
+    ],
+    "initial_run_id": 40308051186,
+    "initial_failure": "SyntaxError in metadata collector before any IDX request; implementation failure, not evidence about source accessibility.",
+    "corrected_run_id": 40308193067,
+    "corrected_run_status": "in_progress_at_report_update",
+    "roster_frozen": false,
+    "delisted_coverage": "not yet verified",
+    "point_in_time_shares": "not yet verified",
+    "sector_point_in_time": "not yet verified"
+  },
+  "survivorship": {
+    "label": "survivorship-biased",
+    "why": "A current ticker roster alone does not show delisted stocks or point-in-time constituents.",
+    "strategy_edge_claim_allowed": false,
+    "correction_required": "point-in-time listing/delisting universe, historical shares outstanding/sectors, and a defensible explicit correction; otherwise data remains inadequate"
   },
   "gates": {
-    "data_eligibility": {
-      "verdict": "DATA_INADEQUATE",
-      "reason": "Wait for Actions-acquired CSV, hashes, time coverage, row-integrity and survivorship audit.",
-      "status": "PENDING"
+    "data_smoke_acquisition": {
+      "verdict": "PASS",
+      "reason": "4/4 tickers downloaded and committed by GitHub Actions."
+    },
+    "csv_hash_integrity": {
+      "verdict": "PASS",
+      "reason": "SHA-256 hashes in current manifest match CSV files extracted from the Actions artifact."
+    },
+    "ohlc_data_quality": {
+      "verdict": "FAIL",
+      "reason": "57 invalid or blank OHLC rows across the four smoke-test series; preserve missing rows and do not silently repair."
+    },
+    "historical_universe_data_eligibility": {
+      "verdict": "NOT_PASSED",
+      "reason": "No frozen IDX small-cap roster yet; delisted, point-in-time shares and sector coverage not proven."
     },
     "G1": {
-      "verdict": "NOT_RUN",
-      "reason": "No strategy PnL calculation is permitted until data eligibility gate passes."
+      "verdict": "NOT_RUN"
     },
     "G2": {
-      "verdict": "NOT_RUN",
-      "reason": "No strategy PnL calculation is permitted until data eligibility gate passes."
+      "verdict": "NOT_RUN"
     },
     "G3": {
-      "verdict": "NOT_RUN",
-      "reason": "No strategy PnL calculation is permitted until data eligibility gate passes."
+      "verdict": "NOT_RUN"
     },
     "G4": {
-      "verdict": "NOT_RUN",
-      "reason": "No strategy PnL calculation is permitted until data eligibility gate passes."
+      "verdict": "NOT_RUN"
     },
     "G5": {
-      "verdict": "NOT_RUN",
-      "reason": "No strategy PnL calculation is permitted until data eligibility gate passes."
+      "verdict": "NOT_RUN"
     },
     "G6": {
-      "verdict": "NOT_RUN",
-      "reason": "No strategy PnL calculation is permitted until data eligibility gate passes."
+      "verdict": "NOT_RUN"
     },
     "G7": {
-      "verdict": "NOT_RUN",
-      "reason": "No strategy PnL calculation is permitted until data eligibility gate passes."
+      "verdict": "NOT_RUN"
     },
     "G8": {
-      "verdict": "NOT_RUN",
-      "reason": "No strategy PnL calculation is permitted until data eligibility gate passes."
+      "verdict": "NOT_RUN"
     },
     "G9": {
-      "verdict": "NOT_RUN",
-      "reason": "No strategy PnL calculation is permitted until data eligibility gate passes."
+      "verdict": "NOT_RUN"
     },
     "G10": {
-      "verdict": "NOT_RUN",
-      "reason": "No strategy PnL calculation is permitted until data eligibility gate passes."
+      "verdict": "NOT_RUN"
     },
     "G11": {
-      "verdict": "NOT_RUN",
-      "reason": "No strategy PnL calculation is permitted until data eligibility gate passes."
+      "verdict": "NOT_RUN"
     }
   },
   "metrics": {
@@ -155,17 +205,11 @@
     "matched_equal_weight_buy_and_hold": null,
     "ihsg_baseline": null
   },
-  "market_execution_limitations": {
-    "live_broker_fee_verified": false,
+  "live_execution": {
+    "broker_fee_verified_in_real_account": false,
     "slippage_verified": false,
-    "actual_bid_ask_spread_and_queue_verified": false,
-    "ara_arb_execution_risk_verified": false,
-    "research_is_simulation_only": true
-  },
-  "artifacts": {
-    "preregistration": "research/R333_LOCKED_PREREGISTRATION.md",
-    "result_report": "research/R333_results.md",
-    "result_json": "research/R333_results.json",
-    "project_state": "PROJECT_STATE.md"
+    "bid_ask_spread_queue_verified": false,
+    "ara_arb_fill_risk_verified": false,
+    "simulation_only": true
   }
 }
