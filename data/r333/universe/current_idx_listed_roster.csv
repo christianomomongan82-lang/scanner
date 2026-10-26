@@ -1,0 +1,963 @@
+source_row,code,name,listing_date,listed_shares,listing_board
+1,MGLV,NexAI Digital Infrastruktur Tb,2021-06-08,1904883411,Akselerasi
+2,TRUE,Triniti Dinamik Tbk.,2021-06-10,7571107860,Pengembangan
+3,LABA,Green Power Group Tbk.,2021-06-10,1103402553,Pengembangan
+4,ARCI,Archi Indonesia Tbk.,2021-06-28,25235000000,Pengembangan
+5,IPAC,Era Graharealty Tbk.,2021-06-30,949868500,Akselerasi
+6,MASB,Bank Multiarta Sentosa Tbk.,2021-06-30,1387737233,Utama
+7,BMHS,Bundamedik Tbk.,2021-07-06,8603416176,Utama
+8,FLMC,Falmaco Nonwoven Industri Tbk.,2021-07-08,781250000,Pemantauan Khusus
+9,NICL,PAM Mineral Tbk.,2021-07-09,10635644907,Pengembangan
+10,UVCR,Trimegah Karya Pratama Tbk.,2021-07-27,2000144838,Pengembangan
+11,BUKA,Bukalapak.com Tbk.,2021-08-06,103167090767,Ekonomi Baru
+12,HAIS,Hasnur Internasional Shipping,2021-09-01,2626250000,Pengembangan
+13,OILS,Indo Oil Perkasa Tbk.,2021-09-06,454056563,Pengembangan
+14,GPSO,Geoprima Solusi Tbk.,2021-09-06,733415103,Pengembangan
+15,MCOL,Prima Andalan Mandiri Tbk.,2021-09-07,3555560000,Utama
+16,RSGK,Kedoya Adyaraya Tbk.,2021-09-08,929675000,Pengembangan
+17,RUNS,Global Sukses Solusi Tbk.,2021-09-08,983557875,Akselerasi
+18,SBMA,Surya Biru Murni Acetylene Tbk,2021-09-08,929926282,Pengembangan
+19,CMNT,Cemindo Gemilang Tbk.,2021-09-08,17125504000,Pengembangan
+20,GTSI,GTS Internasional Tbk.,2021-09-08,15819142767,Pengembangan
+21,IDEA,Idea Indonesia Akademi Tbk.,2021-09-09,1062437500,Akselerasi
+22,KUAS,Ace Oldfields Tbk.,2021-10-25,1292808150,Pengembangan
+23,BOBA,Formosa Ingredient Factory Tbk,2021-11-01,1155750000,Pengembangan
+24,MTEL,Dayamitra Telekomunikasi Tbk.,2021-11-22,83559677444,Utama
+25,DEPO,Caturkarda Depo Bangunan Tbk.,2021-11-25,6790000000,Pengembangan
+26,BINO,Perma Plasindo Tbk.,2021-11-25,2275316111,Pengembangan
+27,CMRY,Cisarua Mountain Dairy Tbk.,2021-12-06,7934683000,Utama
+28,WGSH,Wira Global Solusi Tbk.,2021-12-06,2085000000,Akselerasi
+29,TAYS,Jaya Swarasa Agung Tbk.,2021-12-06,1098920000,Pengembangan
+30,WMPP,Widodo Makmur Perkasa Tbk.,2021-12-06,29419000000,Utama
+31,RMKE,RMK Energy Tbk.,2021-12-07,21875000000,Utama
+32,OBMD,OBM Drilchem Tbk.,2021-12-08,805992931,Pengembangan
+33,AVIA,Avia Avian Tbk.,2021-12-08,61953555600,Utama
+34,IPPE,Indo Pureco Pratama Tbk.,2021-12-09,4600000000,Pengembangan
+35,NASI,Wahana Inti Makmur Tbk.,2021-12-13,807400000,Pengembangan
+36,BSML,Bintang Samudera Mandiri Lines,2021-12-16,1850225000,Pengembangan
+37,DRMA,Dharma Polimetal Tbk.,2021-12-20,4705882300,Utama
+38,ADMR,Alamtri Minerals Indonesia Tbk,2022-01-03,40882331500,Utama
+39,SEMA,Semacom Integrated Tbk.,2022-01-10,1347258842,Pengembangan
+40,ASLC,Autopedia Sukses Lestari Tbk.,2022-01-25,12746354780,Pengembangan
+41,NETV,MDTV Media Technologies Tbk.,2022-01-26,41360517722,Pengembangan
+42,BAUT,Mitra Angkasa Sejahtera Tbk.,2022-01-28,4800182969,Pengembangan
+43,ENAK,Champ Resto Indonesia Tbk.,2022-02-08,2166666800,Pengembangan
+44,NTBK,Nusatama Berkah Tbk.,2022-02-09,2700064877,Pengembangan
+45,SMKM,Sumber Mas Konstruksi Tbk.,2022-03-09,1253000000,Akselerasi
+46,STAA,Sumber Tani Agung Resources Tb,2022-03-10,10903372600,Utama
+47,NANO,Nanotech Indonesia Global Tbk.,2022-03-10,4285440269,Akselerasi
+48,BIKE,Bhineka Inovasi Ketahanan Ener,2022-03-21,1293916404,Pengembangan
+49,WIRG,WIR ASIA Tbk.,2022-04-04,11938622394,Pengembangan
+50,SICO,Sigma Energy Compressindo Tbk.,2022-04-08,910077764,Pengembangan
+51,GOTO,GoTo Gojek Tokopedia Tbk.,2022-04-11,1140573267220,Pengembangan
+52,TLDN,Teladan Prima Agro Tbk.,2022-04-12,12946530200,Utama
+53,MTMH,Murni Sadar Tbk.,2022-04-20,2068526950,Utama
+54,WINR,Winner Nusantara Jaya Tbk.,2022-04-25,5235316030,Utama
+55,IBOS,Indo Boga Sukses Tbk.,2022-04-25,8065789529,Akselerasi
+56,OLIV,Atlas Nexus Group Tbk.,2022-05-17,1900073314,Akselerasi
+57,ASHA,Cilacap Samudera Fishing Indus,2022-05-27,5000000000,Pengembangan
+58,SWID,Saraswanti Indoland Developmen,2022-07-07,5385019201,Pengembangan
+59,TRGU,Cerestar Indonesia Tbk.,2022-07-08,7945412700,Utama
+60,ARKO,Arkora Hydro Tbk.,2022-07-08,2928495000,Pengembangan
+61,CHEM,Chemstar Indonesia Tbk.,2022-07-08,1700014594,Pengembangan
+62,DEWI,Dewi Shri Farmindo Tbk.,2022-07-18,2000000000,Pengembangan
+63,AXIO,Tera Data Indonusa Tbk.,2022-07-20,5840126500,Pengembangan
+64,KRYA,Bangun Karya Perkasa Jaya Tbk.,2022-07-25,1663943474,Pengembangan
+65,HATM,Habco Trans Maritima Tbk.,2022-07-26,9320000000,Utama
+66,RCCC,Utama Radar Cahaya Tbk.,2022-08-02,787500000,Akselerasi
+67,GULA,Aman Agrindo Tbk.,2022-08-03,1070362500,Pengembangan
+68,JARR,Jhonlin Agro Raya Tbk.,2022-08-04,9230665050,Utama
+69,AMMS,Agung Menjangan Mas Tbk.,2022-08-04,1235296802,Akselerasi
+70,RAFI,Sari Kreasi Boga Tbk.,2022-08-05,3128140475,Pengembangan
+71,KKES,Kusuma Kemindo Sentosa Tbk.,2022-08-08,1500000000,Pengembangan
+72,ELPI,Pelayaran Nasional Ekalya Purn,2022-08-08,9524420000,Utama
+73,EURO,Estee Gold Feet Tbk.,2022-08-08,2548826428,Akselerasi
+74,KLIN,Klinko Karya Imaji Tbk.,2022-08-09,1307530330,Akselerasi
+75,TOOL,Rohartindo Nusantara Luas Tbk.,2022-08-09,2050020320,Pengembangan
+76,BUAH,Segar Kumala Indonesia Tbk.,2022-08-09,2000000000,Pengembangan
+77,CRAB,Toba Surimi Industries Tbk.,2022-08-10,1950000000,Pengembangan
+78,MEDS,Hetzer Medical Indonesia Tbk.,2022-08-10,1562500000,Pengembangan
+79,COAL,Black Diamond Resources Tbk.,2022-09-07,6250000000,Pemantauan Khusus
+80,PRAY,Famon Awal Bros Sedaya Tbk.,2022-11-08,13959422300,Utama
+81,CBUT,Citra Borneo Utama Tbk.,2022-11-08,3125000000,Utama
+82,BELI,Global Digital Niaga Tbk.,2022-11-08,137218985689,Pengembangan
+83,MKTR,Menthobi Karyatama Raya Tbk.,2022-11-08,12060428584,Utama
+84,OMED,Jayamas Medica Industri Tbk.,2022-11-08,27058850000,Utama
+85,BSBK,Wulandari Bangun Laksana Tbk.,2022-11-08,25091882375,Pengembangan
+86,PDPP,Primadaya Plastisindo Tbk.,2022-11-09,3061341438,Pengembangan
+87,KDTN,Puri Sentul Permai Tbk.,2022-11-09,1250023298,Pengembangan
+88,ZATA,Bersama Zatta Jaya Tbk.,2022-11-10,8496000000,Pengembangan
+89,NINE,Techno9 Indonesia Tbk.,2022-12-05,2157000000,Akselerasi
+90,MMIX,Multi Medika Internasional Tbk,2022-12-06,4800425380,Pengembangan
+91,PADA,Personel Alih Daya Tbk.,2022-12-08,3150000000,Pengembangan
+92,ISAP,Isra Presisi Indonesia Tbk.,2022-12-09,4020382688,Akselerasi
+93,VTNY,Venteny Fortuna International,2022-12-15,6265193445,Pengembangan
+94,SOUL,Mitra Tirta Buwana Tbk.,2023-01-06,1082526223,Akselerasi
+95,ELIT,Data Sinergitama Jaya Tbk.,2023-01-06,2031643057,Pengembangan
+96,BEER,Jobubu Jarum Minahasa Tbk.,2023-01-06,4000000000,Pengembangan
+97,CBPE,Citra Buana Prasida Tbk.,2023-01-06,1356250000,Pengembangan
+98,SUNI,Sunindo Pratama Tbk.,2023-01-09,2500000000,Utama
+99,CBRE,Cakra Buana Resources Energi T,2023-01-09,4538067441,Pengembangan
+100,WINE,Hatten Bali Tbk.,2023-01-10,2710000000,Pengembangan
+101,BMBL,Lavender Bina Cendikia Tbk.,2023-01-11,1030080995,Akselerasi
+102,PEVE,Penta Valent Tbk.,2023-01-24,1765625000,Pengembangan
+103,LAJU,Jasa Berdikari Logistics Tbk.,2023-01-27,2149942974,Pengembangan
+104,FWCT,Wijaya Cahaya Timber Tbk.,2023-02-01,1963000000,Pengembangan
+105,NAYZ,Hassana Boga Sejahtera Tbk.,2023-02-06,2550011472,Akselerasi
+106,IRSX,Folago Global Nusantara Tbk.,2023-02-07,6195047377,Pengembangan
+107,PACK,Abadi Nusantara Hijau Investam,2023-02-08,34122954271,Akselerasi
+108,VAST,Vastland Indonesia Tbk.,2023-02-08,3055737049,Pengembangan
+109,CHIP,Pelita Teknologi Global Tbk.,2023-02-08,806000000,Akselerasi
+110,HALO,Haloni Jane Tbk.,2023-02-08,6078729117,Pengembangan
+111,KING,Hoffmen Cleanindo Tbk.,2023-02-16,2602852170,Akselerasi
+112,PGEO,Pertamina Geothermal Energy Tb,2023-02-24,41954253581,Utama
+113,FUTR,Futura Energi Global Tbk.,2023-02-27,6635551959,Pengembangan
+114,HILL,Hillcon Tbk.,2023-03-01,14741500000,Pemantauan Khusus
+115,BDKR,Berdikari Pondasi Perkasa Tbk.,2023-03-03,4725101522,Utama
+116,PTMP,Mitra Pack Tbk.,2023-03-06,3169200000,Pengembangan
+117,SAGE,Saptausaha Gemilangindah Tbk.,2023-03-08,8033527260,Pengembangan
+118,TRON,Teknologi Karya Digital Nusa T,2023-03-08,2951328448,Pengembangan
+119,CUAN,Petrindo Jaya Kreasi Tbk.,2023-03-08,112418900000,Utama
+120,NSSS,Nusantara Sawit Sejahtera Tbk.,2023-03-10,23801568645,Pengembangan
+121,GTRA,Grahaprima Suksesmandiri Tbk.,2023-03-30,1894375000,Pengembangan
+122,HAJJ,Arsy Buana Travelindo Tbk.,2023-04-05,2468527572,Akselerasi
+123,PIPA,Oxala Energy International Tbk,2023-04-10,3426097190,Pengembangan
+124,NCKL,Trimegah Bangun Persada Tbk.,2023-04-12,63098600000,Pengembangan
+125,MENN,Menn Teknologi Indonesia Tbk.,2023-04-18,1434052006,Akselerasi
+126,AWAN,Era Digital Media Tbk.,2023-04-18,3435000000,Pengembangan
+127,MBMA,Merdeka Battery Materials Tbk.,2023-04-18,107995419900,Utama
+128,RAAM,Tripar Multivision Plus Tbk.,2023-05-08,6813620000,Utama
+129,DOOH,Era Media Sejahtera Tbk.,2023-05-08,7738891036,Pengembangan
+130,JATI,Informasi Teknologi Indonesia,2023-05-08,3262520106,Pengembangan
+131,TYRE,King Tire Indonesia Tbk.,2023-05-08,3480581727,Pengembangan
+132,MPXL,MPX Logistics International Tb,2023-05-09,2000014587,Pengembangan
+133,SMIL,Sarana Mitra Luas Tbk.,2023-05-12,8751668239,Utama
+134,KLAS,Pelayaran Kurnia Lautan Semest,2023-06-12,3644415975,Pengembangan
+135,MAXI,Maxindo Karya Anugerah Tbk.,2023-06-12,9610099981,Pengembangan
+136,VKTR,VKTR Teknologi Mobilitas Tbk.,2023-06-19,49921767210,Pengembangan
+137,RELF,Graha Mitra Asia Tbk.,2023-06-22,5727832195,Akselerasi
+138,AMMN,Amman Mineral Internasional Tb,2023-07-07,72518217656,Utama
+139,CRSN,Carsurin Tbk.,2023-07-10,2892000000,Pengembangan
+140,GRPM,Graha Prima Mentari Tbk.,2023-07-10,1571666469,Akselerasi
+141,WIDI,Widiant Jaya Krenindo Tbk.,2023-07-10,1600031683,Akselerasi
+142,TGUK,Platinum Wahab Nusantara Tbk.,2023-07-10,3571451815,Pemantauan Khusus
+143,INET,Sinergi Inti Andalan Prima Tbk,2023-07-24,22378471656,Pengembangan
+144,MAHA,Mandiri Herindo Adiperkasa Tbk,2023-07-25,16666000000,Utama
+145,RMKO,Royaltama Mulia Kontraktorindo,2023-07-31,1576720595,Pengembangan
+146,CNMA,Nusantara Sejahtera Raya Tbk.,2023-08-02,83345000000,Pengembangan
+147,FOLK,Multi Garam Utama Tbk.,2023-08-07,4091357544,Pengembangan
+148,HBAT,Minahasa Membangun Hebat Tbk.,2023-08-07,1040740800,Akselerasi
+149,GRIA,Ingria Pratama Capitalindo Tbk,2023-08-08,7375720674,Pengembangan
+150,PPRI,Paperocks Indonesia Tbk.,2023-08-08,1075027288,Pengembangan
+151,ERAL,Sinar Eka Selaras Tbk.,2023-08-08,5187500000,Utama
+152,CYBR,ITSEC Asia Tbk.,2023-08-08,13488398454,Pengembangan
+153,MUTU,Mutuagung Lestari Tbk.,2023-08-09,3452228885,Pengembangan
+154,LMAX,Lupromax Pelumas Indonesia Tbk,2023-08-09,650008775,Akselerasi
+155,HUMI,Humpuss Maritim Internasional,2023-08-09,18063771579,Pengembangan
+156,MSIE,Multisarana Intan Eduka Tbk.,2023-08-10,1460007754,Akselerasi
+157,RSCH,Charlie Hospital Semarang Tbk.,2023-08-28,2650000000,Pengembangan
+158,BABY,Multitrend Indo Tbk.,2023-09-07,2854826582,Pengembangan
+159,AEGS,Anugerah Spareparts Sejahtera,2023-09-11,1006080721,Akselerasi
+160,IOTF,Sumber Sinergi Makmur Tbk.,2023-10-06,5290298067,Pengembangan
+161,KOCI,Kokoh Exa Nusantara Tbk.,2023-10-07,4470679376,Pengembangan
+162,PTPS,Pulau Subur Tbk.,2023-10-09,2167514856,Pengembangan
+163,BREN,Barito Renewables Energy Tbk.,2023-10-09,133786220000,Utama
+164,STRK,Lovina Beach Brewery Tbk.,2023-10-10,10721835562,Pengembangan
+165,KOKA,Koka Indonesia Tbk.,2023-10-11,2861333000,Pengembangan
+166,LOPI,Logisticsplus International Tb,2023-10-11,1100011289,Akselerasi
+167,UDNG,Agro Bahari Nusantara Tbk.,2023-10-31,1750040072,Akselerasi
+168,RGAS,Kian Santang Muliatama Tbk.,2023-11-08,1459234110,Pengembangan
+169,MSTI,Mastersystem Infotama Tbk.,2023-11-08,3139416200,Utama
+170,IKPM,Ikapharmindo Putramas Tbk.,2023-11-08,1684662500,Pengembangan
+171,AYAM,Janu Putra Sejahtera Tbk.,2023-11-30,4000000000,Pengembangan
+172,SURI,Maja Agung Latexindo Tbk.,2023-12-07,6334375000,Pengembangan
+173,ASLI,Asri Karya Lestari Tbk.,2024-01-05,6250000000,Pengembangan
+174,CGAS,Citra Nusantara Gemilang Tbk.,2024-01-08,1771499039,Pengembangan
+175,NICE,Adhi Kartiko Pratama Tbk.,2024-01-09,6082020000,Pengembangan
+176,MSJA,Multi Spunindo Jaya Tbk.,2024-01-10,5882352900,Pengembangan
+177,SMLE,Sinergi Multi Lestarindo Tbk.,2024-01-10,2328153048,Pengembangan
+178,ACRO,Samcro Hyosung Adilestari Tbk.,2024-01-11,3469345537,Pengembangan
+179,MANG,Manggung Polahraya Tbk.,2024-01-11,3812607629,Akselerasi
+180,GRPH,Griptha Putra Persada Tbk.,2024-01-17,1000000000,Pengembangan
+181,SMGA,Sumber Mineral Global Abadi Tb,2024-01-30,8750000000,Pengembangan
+182,UNTD,Terang Dunia Internusa Tbk.,2024-02-07,6666666700,Pengembangan
+183,TOSK,Topindo Solusi Komunika Tbk.,2024-02-07,4375277300,Pengembangan
+184,MPIX,Mitra Pedagang Indonesia Tbk.,2024-02-07,1562574308,Pengembangan
+185,ALII,Ancara Logistics Indonesia Tbk,2024-02-07,15825800000,Utama
+186,MKAP,Multikarya Asia Pasifik Raya T,2024-02-12,3250000000,Pengembangan
+187,MEJA,Harta Djaya Karya Tbk.,2024-02-12,2608081058,Akselerasi
+188,LIVE,Homeco Victoria Makmur Tbk.,2024-02-12,4593005014,Pengembangan
+189,HYGN,Ecocare Indo Pasifik Tbk.,2024-02-13,2525000000,Pengembangan
+190,BAIK,Bersama Mencapai Puncak Tbk.,2024-02-15,1127497572,Pengembangan
+191,VISI,Satu Visi Putra Tbk.,2024-02-27,3075000000,Pengembangan
+192,AREA,Dunia Virtual Online Tbk.,2024-04-01,2539601000,Pengembangan
+193,MHKI,Multi Hanna Kreasindo Tbk.,2024-04-16,3750000000,Pengembangan
+194,ATLA,Atlantis Subsea Indonesia Tbk.,2024-04-16,6199577693,Pengembangan
+195,DATA,Remala Abadi Tbk.,2024-05-07,1375000000,Pengembangan
+196,SOLA,Xolare RCR Energy Tbk.,2024-05-08,3287375000,Pengembangan
+197,BATR,Benteng Api Technic Tbk.,2024-06-10,3025037353,Pengembangan
+198,SPRE,Soraya Berjaya Indonesia Tbk.,2024-07-03,800000000,Akselerasi
+199,PART,Cipta Perdana Lancar Tbk.,2024-07-05,2850594054,Pengembangan
+200,GOLF,Intra Golflink Resorts Tbk.,2024-07-08,19486760000,Utama
+201,ISEA,Indo American Seafoods Tbk.,2024-07-08,1390013370,Pengembangan
+202,BLES,Superior Prima Sukses Tbk.,2024-07-08,8890206400,Pengembangan
+203,GUNA,Gunanusa Eramandiri Tbk.,2024-07-09,2500000000,Pengembangan
+204,LABS,UBC Medical Indonesia Tbk.,2024-07-10,3950000000,Pengembangan
+205,DOSS,Global Sukses Digital Tbk.,2024-08-07,1725000000,Pengembangan
+206,NEST,Esta Indonesia Tbk.,2024-08-08,4112500000,Pengembangan
+207,PTMR,Master Print Tbk.,2024-10-08,1907000000,Pengembangan
+208,VERN,Verona Indah Pictures Tbk.,2024-10-08,4765648183,Pengembangan
+209,DAAZ,Daaz Bara Lestari Tbk.,2024-11-11,1997000000,Utama
+210,BOAT,Newport Marine Services Tbk.,2024-11-12,3501680000,Pengembangan
+211,NAIK,Adiwarna Anugerah Abadi Tbk.,2024-11-13,3329422047,Pengembangan
+212,AADI,Adaro Andalan Indonesia Tbk.,2024-12-05,7786891760,Utama
+213,CBDK,Bangun Kosambi Sukses Tbk.,2025-01-13,5668944500,Utama
+214,OBAT,Brigit Biofarmaka Teknologi Tb,2025-01-13,680376575,Pengembangan
+215,MINE,Sinar Terang Mandiri Tbk.,2025-03-10,4084435300,Pengembangan
+216,KAQI,Jantra Grupo Indonesia Tbk.,2025-03-10,2075800000,Pengembangan
+217,YUPI,Yupi Indo Jelly Gum Tbk.,2025-03-25,8544488700,Utama
+218,FORE,Fore Kopi Indonesia Tbk.,2025-04-14,8918359270,Pengembangan
+219,MDLA,Medela Potentia Tbk.,2025-04-15,14012825000,Utama
+220,DKHH,Cipta Sarana Medika Tbk.,2025-05-08,2550312624,Pengembangan
+221,ASPR,Asia Pramulia Tbk.,2025-07-08,2712000000,Pengembangan
+222,PSAT,Pancaran Samudera Transport Tb,2025-07-08,1482353000,Pengembangan
+223,COIN,Indokripto Koin Semesta Tbk.,2025-07-09,14705882400,Pengembangan
+224,CDIA,Chandra Daya Investasi Tbk.,2025-07-09,124829374700,Pengembangan
+225,BLOG,Trimitra Trans Persada Tbk.,2025-07-10,3379487200,Utama
+226,MERI,Merry Riana Edukasi Tbk.,2025-07-10,1035132500,Pengembangan
+227,CHEK,Diastika Biotekindo Tbk.,2025-07-10,4113331485,Pengembangan
+228,PMUI,Prima Multi Usaha Indonesia Tb,2025-07-10,5800000000,Pengembangan
+229,EMAS,Merdeka Gold Resources Tbk.,2025-09-23,14731366060,Pengembangan
+230,PJHB,Pelayaran Jaya Hidup Baru Tbk.,2025-11-06,1921239956,Pengembangan
+231,RLCO,Abadi Lestari Indonesia Tbk.,2025-12-08,3125000000,Pengembangan
+232,SUPA,Super Bank Indonesia Tbk.,2025-12-17,33558047450,Pengembangan
+233,WBSA,BSA Logistics Indonesia Tbk.,2026-04-10,8675000000,Pengembangan
+234,JECX,Nitrasanata Dharma Tbk.,2026-07-07,3253222300,Utama
+235,JELI,Niramas Utama Tbk.,2026-07-07,1266000000,Pengembangan
+236,EMMI,Esa Medika Mandiri Tbk.,2026-07-08,1742857000,Pengembangan
+237,BACH,Bach Multi Global Tbk.,2026-07-08,4084430000,Utama
+238,PRDL,Prodia Diagnostic Line Tbk.,2026-07-09,1742900000,Pengembangan
+239,RANS,Rans Entertainmen Indonesia Tb,2026-07-10,12609250000,Pengembangan
+240,AALI,Astra Agro Lestari Tbk.,1997-12-09,1924688333,Utama
+241,ABBA,Mahaka Media Tbk.,2002-04-03,3935892857,Pemantauan Khusus
+242,ABDA,Asuransi Bina Dana Arta Tbk.,1989-07-06,620806680,Pengembangan
+243,ABMM,ABM Investama Tbk.,2011-12-06,2753165000,Utama
+244,ACES,Aspirasi Hidup Indonesia Tbk.,2007-11-06,17120389700,Utama
+245,ACST,Acset Indonusa Tbk.,2013-06-24,17675160000,Pemantauan Khusus
+246,ADES,Akasha Wira International Tbk.,1994-06-13,589896800,Utama
+247,ADHI,Adhi Karya (Persero) Tbk.,2004-03-18,8407608979,Utama
+248,ADMF,Adira Dinamika Multi Finance T,2004-03-31,1235803109,Pengembangan
+249,ADMG,Polychem Indonesia Tbk,1993-10-20,3889179559,Pengembangan
+250,ADRO,Alamtri Resources Indonesia Tb,2008-07-16,28800494200,Utama
+251,AGII,Samator Indo Gas Tbk.,2016-09-28,3066660000,Pengembangan
+252,AGRO,Bank Raya Indonesia Tbk.,2003-08-08,24493093216,Utama
+253,AGRS,Bank IBK Indonesia Tbk.,2014-12-22,47367057874,Pengembangan
+254,AHAP,Asuransi Harta Aman Pratama Tb,1990-09-14,7730150865,Pengembangan
+255,CASH,Cashlez Worldwide Indonesia Tb,2020-05-04,2427802216,Akselerasi
+256,TECH,Indosterling Technomedia Tbk.,2020-06-04,1256300000,Pengembangan
+257,BSSR,Baramulti Suksessarana Tbk.,2012-11-08,2616500000,Utama
+258,BSWD,Bank Of India Indonesia Tbk.,2002-05-01,3651978177,Pengembangan
+259,BTEK,Bumi Teknokultura Unggul Tbk,2004-05-14,46277496376,Pengembangan
+260,BTEL,Bakrie Telecom Tbk.,2006-02-03,61847903535,Pemantauan Khusus
+261,BTON,Betonjaya Manunggal Tbk.,2001-07-18,720000000,Pengembangan
+262,BTPN,Bank SMBC Indonesia Tbk.,2008-03-12,10536203690,Utama
+263,BUDI,Budi Starch & Sweetener Tbk.,1995-05-08,4498997362,Utama
+264,MDIY,Daya Intiguna Yasa Tbk.,2024-12-19,25190392000,Utama
+265,KSIX,Kentanix Supra International T,2025-01-08,2137831800,Pengembangan
+266,RATU,Raharja Energi Cepu Tbk.,2025-01-08,2715053800,Pengembangan
+267,YOII,Asuransi Digital Bersama Tbk.,2025-01-08,3926983181,Pengembangan
+268,HGII,Hero Global Investment Tbk.,2025-01-09,6500000000,Pengembangan
+269,BRRC,Raja Roti Cemerlang Tbk.,2025-01-09,994603036,Pemantauan Khusus
+270,DGWG,Delta Giri Wacana Tbk.,2025-01-13,5882353000,Utama
+271,AIMS,Artha Mahiya Investama Tbk.,2001-07-20,220000000,Pengembangan
+272,AISA,FKS Food Sejahtera Tbk.,1997-06-11,9311800000,Utama
+273,AKKU,Anugerah Kagum Karya Utama Tbk,2004-11-01,6449463636,Pengembangan
+274,AKPI,Argha Karya Prima Industry Tbk,1992-12-18,612248000,Pengembangan
+275,AKRA,AKR Corporindo Tbk.,1994-10-03,20073474600,Utama
+276,AKSI,Mineral Sumberdaya Mandiri Tbk,2001-07-13,720000000,Pengembangan
+277,ALDO,Alkindo Naratama Tbk.,2011-07-12,2700713744,Utama
+278,ALKA,Alakasa Industrindo Tbk,1990-07-12,507665055,Pengembangan
+279,ALMI,Alumindo Light Metal Industry,1997-01-02,3816000000,Pengembangan
+280,ALTO,Tri Banyan Tirta Tbk.,2012-07-10,2191870558,Utama
+281,AMAG,Asuransi Multi Artha Guna Tbk.,2005-12-23,5001552516,Utama
+282,AMFG,Asahimas Flat Glass Tbk.,1995-11-08,434000000,Pengembangan
+283,AMIN,Ateliers Mecaniques D Indonesi,2015-12-10,1080000000,Pengembangan
+284,AMRT,Sumber Alfaria Trijaya Tbk.,2009-01-15,41524501700,Utama
+285,ANJT,Austindo Nusantara Jaya Tbk.,2013-05-08,3354175000,Pengembangan
+286,ANTM,ANTAM (Persero) Tbk.,1997-11-27,24030764725,Utama
+287,APEX,Apexindo Pratama Duta Tbk.,2013-06-05,3764556978,Pengembangan
+288,APIC,Pacific Strategic Financial Tb,2002-12-18,11766313488,Pengembangan
+289,APII,Arita Prima Indonesia Tbk.,2013-10-29,1075760000,Pengembangan
+290,APLI,Asiaplast Industries Tbk.,2000-05-01,1362671400,Pengembangan
+291,APLN,Agung Podomoro Land Tbk.,2010-11-11,22699326779,Utama
+292,ARGO,Argo Pantes Tbk,1991-01-07,3174339029,Pengembangan
+293,ARII,Atlas Resources Tbk.,2011-11-08,3750000000,Pengembangan
+294,ARNA,Arwana Citramulia Tbk.,2001-07-17,7341430976,Utama
+295,ARTA,Arthavest Tbk,2002-11-05,446674175,Pengembangan
+296,ARTI,Ratu Prabu Energi Tbk,2003-04-30,7840000000,Pemantauan Khusus
+297,ARTO,Bank Jago Tbk.,2016-01-12,13722768400,Utama
+298,ASBI,Asuransi Bintang Tbk.,1989-11-29,348386472,Pengembangan
+299,ASDM,Asuransi Dayin Mitra Tbk.,1989-12-15,384000000,Pengembangan
+300,ASGR,Astra Graphia Tbk.,1989-11-15,1348780500,Utama
+301,ASII,Astra International Tbk.,1990-04-04,40483553140,Utama
+302,ASJT,Asuransi Jasa Tania Tbk.,2003-12-23,1400000000,Pengembangan
+303,ASMI,Asuransi Maximus Graha Persada,2014-01-16,8958380460,Utama
+304,ASRI,Alam Sutera Realty Tbk.,2007-12-18,19649411888,Utama
+305,ASRM,Asuransi Ramayana Tbk.,1990-03-19,1277992036,Pengembangan
+306,ASSA,Adi Sarana Armada Tbk.,2012-11-12,3691137517,Utama
+307,ATIC,Anabatic Technologies Tbk.,2015-07-08,2894201693,Pengembangan
+308,AUTO,Astra Otoparts Tbk.,1998-06-15,4819733000,Utama
+309,BABP,Bank MNC Internasional Tbk.,2002-07-15,44014333126,Pengembangan
+310,BACA,Bank Capital Indonesia Tbk.,2007-10-04,19753494636,Utama
+311,BAJA,Saranacentral Bajatama Tbk.,2011-12-21,2700000000,Pengembangan
+312,BALI,Bali Towerindo Sentra Tbk.,2014-03-13,3934592500,Utama
+313,BAPA,Bekasi Asri Pemula Tbk.,2008-01-14,661784520,Pengembangan
+314,BATA,Sepatu Bata Tbk.,1982-03-24,1300000000,Pemantauan Khusus
+315,BAYU,Bayu Buana Tbk,1989-10-30,353220780,Utama
+316,BBCA,Bank Central Asia Tbk.,2000-05-31,122042299500,Utama
+317,BBHI,Allo Bank Indonesia Tbk.,2015-08-12,21512953877,Utama
+318,BBKP,Bank KB Indonesia Tbk.,2006-07-10,185819884852,Pengembangan
+319,BBLD,Buana Finance Tbk.,1990-05-07,1645796054,Pengembangan
+320,BBMD,Bank Mestika Dharma Tbk.,2013-07-08,4049189100,Utama
+321,BBNI,Bank Negara Indonesia (Persero,1996-11-25,36924339786,Utama
+322,BBRI,Bank Rakyat Indonesia (Persero,2003-11-10,150043411587,Utama
+323,BBRM,Pelayaran Nasional Bina Buana,2013-01-09,8479490328,Pengembangan
+324,BBTN,Bank Tabungan Negara (Persero),2009-12-17,13894099969,Utama
+325,BBYB,Bank Neo Commerce Tbk.,2015-01-13,13216977523,Utama
+326,BCAP,MNC Kapital Indonesia Tbk.,2001-06-08,42618850927,Utama
+327,BCIC,Bank JTrust Indonesia Tbk.,1997-06-25,17926071041,Pengembangan
+328,BCIP,Bumi Citra Permai Tbk.,2009-12-11,1429915525,Pengembangan
+329,BDMN,Bank Danamon Indonesia Tbk.,1989-12-06,9675817341,Utama
+330,BEKS,Bank Pembangunan Daerah Banten,2001-07-13,51351733883,Pengembangan
+331,BEST,Bekasi Fajar Industrial Estate,2012-04-10,9647311150,Utama
+332,BFIN,BFI Finance  Indonesia Tbk.,1990-05-16,15039383620,Utama
+333,BGTG,Bank Ganesha Tbk.,2016-05-12,23731287132,Utama
+334,BHIT,MNC Asia Holding Tbk.,1997-11-24,86068156705,Utama
+335,BIKA,Binakarya Jaya Abadi Tbk.,2015-07-14,592280000,Pemantauan Khusus
+336,BIMA,Primarindo Asia Infrastructure,1994-08-30,608175716,Pemantauan Khusus
+337,BINA,Bank Ina Perdana Tbk.,2014-01-16,6073369498,Utama
+338,BIPI,Astrindo Nusantara Infrastrukt,2010-02-11,63710196917,Pengembangan
+339,BIPP,Bhuwanatala Indah Permai Tbk.,1995-10-23,5028669376,Pengembangan
+340,BIRD,Blue Bird Tbk.,2014-11-05,2502100000,Utama
+341,BISI,BISI International Tbk.,2007-05-28,3000000000,Utama
+342,BJBR,Bank Pembangunan Daerah Jawa B,2010-07-08,10416229249,Utama
+343,BJTM,Bank Pembangunan Daerah Jawa T,2012-07-12,14865343101,Utama
+344,BKDP,Bukit Darmo Property Tbk,2007-06-15,7513992252,Pengembangan
+345,BKSL,Sentul City Tbk.,1997-07-28,167708902705,Utama
+346,BKSW,Bank QNB Indonesia Tbk.,2002-11-21,34806467881,Pengembangan
+347,BLTA,Berlian Laju Tanker Tbk,1990-03-26,25940187103,Utama
+348,BLTZ,Graha Layar Prima Tbk.,2014-04-10,873937142,Pengembangan
+349,BMAS,Bank Kasikorn Indonesia Tbk.,2013-07-11,17921635680,Pengembangan
+350,BMRI,Bank Mandiri (Persero) Tbk.,2003-07-14,92399999996,Utama
+351,BMSR,Bintang Mitra Semestaraya Tbk,1999-12-29,1159200024,Pengembangan
+352,BMTR,Global Mediacom Tbk.,1995-07-17,16583997586,Utama
+353,BNBA,Bank Bumi Arta Tbk.,2006-06-01,3354120000,Pengembangan
+354,BNBR,Bakrie & Brothers Tbk,1989-08-28,263336671587,Pengembangan
+355,BNGA,Bank CIMB Niaga Tbk.,1989-11-29,24890783784,Utama
+356,BNII,Bank Maybank Indonesia Tbk.,1989-11-21,75357433911,Utama
+357,BNLI,Bank Permata Tbk.,1990-01-15,35819545925,Utama
+358,BOLT,Garuda Metalindo Tbk.,2015-07-07,2343750000,Pengembangan
+359,BPFI,Woori Finance Indonesia Tbk.,2009-06-01,2673995362,Pengembangan
+360,BPII,Batavia Prosperindo Internasio,2014-07-08,9884153240,Pengembangan
+361,BRAM,Indo Kordsa Tbk.,1990-09-05,450056980,Pengembangan
+362,BRMS,Bumi Resources Minerals Tbk.,2010-12-09,141784040338,Utama
+363,BRNA,Berlina Tbk.,1989-11-06,1322272342,Pengembangan
+364,BRPT,Barito Pacific Tbk.,1993-10-01,93747218044,Utama
+365,BSDE,Bumi Serpong Damai Tbk.,2008-06-06,21171365812,Utama
+366,BSIM,Bank Sinarmas Tbk.,2010-12-13,19517921842,Utama
+367,BUKK,Bukaka Teknik Utama Tbk.,2015-06-29,2640452000,Pengembangan
+368,BULL,Buana Lintas Lautan Tbk.,2011-05-23,15494436593,Pengembangan
+369,BUMI,Bumi Resources Tbk.,1990-07-30,371335392068,Utama
+370,BUVA,Bukit Uluwatu Villa Tbk.,2010-07-12,28834826487,Pengembangan
+371,BVIC,Bank Victoria International Tb,1999-06-30,18235266754,Utama
+372,BWPT,Eagle High Plantations Tbk.,2009-10-27,31525291000,Utama
+373,BYAN,Bayan Resources Tbk.,2008-08-12,33333335000,Utama
+374,CANI,Capitol Nusantara Indonesia Tb,2014-01-16,833440000,Pemantauan Khusus
+375,CASS,Cahaya Aero Services Tbk.,2011-12-05,2086950000,Utama
+376,CEKA,Wilmar Cahaya Indonesia Tbk.,1996-07-09,595000000,Pengembangan
+377,CENT,Centratama Telekomunikasi Indo,2001-11-01,31183464900,Pengembangan
+378,CFIN,Clipan Finance Indonesia Tbk.,1990-08-27,3984520457,Utama
+379,CINT,Chitose Internasional Tbk.,2014-06-27,1000000000,Pengembangan
+380,CITA,Cita Mineral Investindo Tbk.,2002-03-20,3960361250,Utama
+381,CLPI,Colorpak Indonesia Tbk.,2001-11-30,306338500,Pengembangan
+382,CMNP,Citra Marga Nusaphala Persada,1995-01-10,6696354391,Utama
+383,CMPP,AirAsia Indonesia Tbk.,1994-12-08,10685124441,Pemantauan Khusus
+384,CNKO,Exploitasi Energi Indonesia Tb,2001-11-20,8956361206,Pemantauan Khusus
+385,COWL,Cowell Development Tbk.,2007-12-19,4871214021,Pemantauan Khusus
+386,CPIN,Charoen Pokphand Indonesia Tbk,1991-03-18,16398000000,Utama
+387,CPRO,Central Proteina Prima Tbk.,2006-11-28,59572382787,Pengembangan
+388,CSAP,Catur Sentosa Adiprana Tbk.,2007-12-12,5683175151,Pengembangan
+389,CTBN,Citra Tubindo Tbk.,1989-11-28,800371500,Pengembangan
+390,CTRA,Ciputra Development Tbk.,1994-03-28,18535695255,Utama
+391,CTTH,Citatah Tbk.,1996-07-03,1230839821,Pengembangan
+392,DART,Duta Anggada Realty Tbk.,1990-05-08,3141390962,Pengembangan
+393,DEFI,Danasupra Erapacific Tbk.,2001-07-06,687266666,Pengembangan
+394,DEWA,Darma Henwa Tbk,2007-09-26,40687434244,Utama
+395,DGIK,Nusa Konstruksi Enjiniring Tbk,2007-12-19,5541165000,Pengembangan
+396,DILD,Intiland Development Tbk.,1991-09-04,10365854185,Utama
+397,DKFT,Central Omega Resources Tbk.,1997-11-21,5638246600,Utama
+398,DLTA,Delta Djakarta Tbk.,1984-02-27,800659050,Utama
+399,DMAS,Puradelta Lestari Tbk.,2015-05-29,48198111100,Utama
+400,DNAR,Bank Oke Indonesia Tbk.,2014-07-11,16721891185,Pengembangan
+401,DNET,Indoritel Makmur Internasional,2000-12-11,14184000000,Utama
+402,DOID,BUMA Internasional Grup Tbk.,2001-06-15,7651007132,Pengembangan
+403,DPNS,Duta Pertiwi Nusantara Tbk.,1990-08-08,331129952,Pengembangan
+404,DSFI,Dharma Samudera Fishing Indust,2000-03-24,1857135500,Pengembangan
+405,DSNG,Dharma Satya Nusantara Tbk.,2013-06-14,10599842400,Utama
+406,DSSA,Dian Swastatika Sentosa Tbk,2009-12-10,192638080000,Utama
+407,DUTI,Duta Pertiwi Tbk,1994-11-02,1850000000,Pengembangan
+408,DVLA,Darya-Varia Laboratoria Tbk.,1994-11-11,1120000000,Pengembangan
+409,DYAN,Dyandra Media International Tb,2013-03-25,4272964279,Pengembangan
+410,ECII,Electronic City Indonesia Tbk.,2013-07-03,1334333000,Pengembangan
+411,EKAD,Ekadharma International Tbk.,1990-08-14,3493875000,Pengembangan
+412,ELSA,Elnusa Tbk.,2008-02-06,7298500000,Utama
+413,ELTY,Bakrieland Development Tbk.,1995-10-30,43521913019,Pengembangan
+414,EMDE,Megapolitan Developments Tbk.,2011-01-12,3350000000,Pengembangan
+415,EMTK,Elang Mahkota Teknologi Tbk.,2010-01-12,61426451483,Utama
+416,ENRG,Energi Mega Persada Tbk.,2004-06-07,39284251006,Utama
+417,EPMT,Enseval Putera Megatrading Tbk,1994-08-01,2708640000,Utama
+418,ERAA,Erajaya Swasembada Tbk.,2011-12-14,15950000000,Utama
+419,ERTX,Eratex Djaja Tbk.,1990-08-21,1286539792,Pengembangan
+420,ESSA,ESSA Industries Indonesia Tbk.,2012-02-01,17226975700,Utama
+421,ESTI,Ever Shine Tex Tbk.,1992-10-13,2015208720,Pengembangan
+422,ETWA,Eterindo Wahanatama Tbk,1997-05-16,4668671400,Pemantauan Khusus
+423,EXCL,XLSMART Telecom Sejahtera Tbk.,2005-09-29,18199862451,Utama
+424,FAST,Fast Food Indonesia Tbk.,1993-05-11,4523610492,Pengembangan
+425,FASW,Fajar Surya Wisesa Tbk.,1994-12-19,3221255423,Utama
+426,FISH,FKS Multi Agro Tbk.,2002-01-18,4800000000,Utama
+427,FMII,Fortune Mate Indonesia Tbk,2000-06-30,6400000000,Pengembangan
+428,FORU,Fortune Indonesia Tbk,2002-01-17,170075257380,Pengembangan
+429,FPNI,Lotte Chemical Titan Tbk.,2002-03-21,5566414000,Pengembangan
+430,GAMA,Aksara Global Development Tbk.,2012-07-11,10011027656,Utama
+431,GDST,Gunawan Dianjaya Steel Tbk.,2009-12-23,9242500000,Pengembangan
+432,GDYR,Goodyear Indonesia Tbk.,1980-12-22,410000000,Pengembangan
+433,GEMA,Gema Grahasarana Tbk.,2002-08-12,1600000000,Pengembangan
+434,GEMS,Golden Energy Mines Tbk.,2011-11-17,5882353000,Utama
+435,GGRM,Gudang Garam Tbk.,1990-08-27,1924088000,Utama
+436,GIAA,Garuda Indonesia (Persero) Tbk,2011-02-11,407091703837,Pemantauan Khusus
+437,GJTL,Gajah Tunggal Tbk.,1990-05-08,3484800000,Utama
+438,GLOB,Globe Kita Terang Tbk.,2012-07-10,1111112000,Pemantauan Khusus
+439,GMTD,Gowa Makassar Tourism Developm,2000-12-11,1015380000,Pengembangan
+440,GOLD,Visi Telekomunikasi Infrastruk,2010-07-07,1277276000,Pengembangan
+441,GOLL,Golden Plantation Tbk.,2014-12-23,3665000759,Pemantauan Khusus
+442,GPRA,Perdana Gapuraprima Tbk.,2007-10-10,4276655336,Pengembangan
+443,GSMF,Equity Development Investment,1989-10-23,15456814805,Pengembangan
+444,GTBO,Garda Tujuh Buana Tbk,2009-07-09,2500000000,Pemantauan Khusus
+445,GWSA,Greenwood Sejahtera Tbk.,2011-12-23,7800760000,Pengembangan
+446,GZCO,Gozco Plantations Tbk.,2008-05-15,6000000000,Utama
+447,HADE,Himalaya Energi Perkasa Tbk.,2004-04-12,2120000000,Pengembangan
+448,HDFA,Radana Bhaskara Finance Tbk.,2011-05-10,6542445783,Pengembangan
+449,HERO,DFI Retail Nusantara Tbk.,1989-08-21,4183634000,Utama
+450,HEXA,Hexindo Adiperkasa Tbk.,1995-02-13,840000000,Utama
+451,HITS,Humpuss Intermoda Transportasi,1997-12-15,7101084801,Pengembangan
+452,HMSP,H.M. Sampoerna Tbk.,1990-08-15,116318076900,Utama
+453,HOME,Hotel Mandarine Regency Tbk.,2008-07-17,22212194782,Pengembangan
+454,HOTL,Saraswati Griya Lestari Tbk.,2013-01-10,3550001452,Pemantauan Khusus
+455,HRUM,Harum Energy Tbk.,2010-10-06,13518100000,Utama
+456,IATA,Karya Pacific Energy Tbk.,2006-09-13,31275829981,Pengembangan
+457,IBFN,Intan Baru Prana Tbk.,2014-12-22,1517332349,Pemantauan Khusus
+458,IBST,Inti Bangun Sejahtera Tbk.,2012-08-31,1350904927,Utama
+459,ICBP,Indofood CBP Sukses Makmur Tbk,2010-10-07,11661908000,Utama
+460,ICON,Island Concepts Indonesia Tbk.,2005-07-08,1089750000,Pengembangan
+461,IGAR,Champion Pacific Indonesia Tbk,1990-11-05,927780600,Pengembangan
+462,IIKP,Inti Agri Resources Tbk,2002-10-14,33600000000,Pengembangan
+463,IKAI,Intikeramik Alamasri Industri,1997-06-04,13305799387,Utama
+464,IKBI,Sumi Indo Kabel Tbk.,1991-01-21,1224000000,Pengembangan
+465,IMAS,Indomobil Sukses Internasional,1993-11-15,3994291039,Utama
+466,IMJS,Indomobil Multi Jasa Tbk.,2013-12-10,10849262500,Pengembangan
+467,IMPC,Impack Pratama Industri Tbk.,2014-12-17,54907000000,Utama
+468,INAF,Indofarma Tbk.,2001-04-17,3099267500,Pemantauan Khusus
+469,INAI,Indal Aluminium Industry Tbk.,1994-12-05,633600000,Pengembangan
+470,INCI,Intanwijaya Internasional Tbk,1990-07-24,207656617,Pengembangan
+471,INCO,Vale Indonesia Tbk.,1990-05-16,10539784534,Utama
+472,INDF,Indofood Sukses Makmur Tbk.,1994-07-14,8780426500,Utama
+473,INDR,Indo-Rama Synthetics Tbk.,1990-08-03,654351707,Pengembangan
+474,INDS,Indospring Tbk.,1990-08-10,6562497100,Pengembangan
+475,INDX,Tanah Laut Tbk,2001-05-17,437913588,Pengembangan
+476,INDY,Indika Energy Tbk.,2008-06-11,5210192000,Utama
+477,INKP,Indah Kiat Pulp & Paper Tbk.,1990-07-16,5470982941,Utama
+478,INPC,Bank Artha Graha Internasional,1990-08-23,20021178779,Utama
+479,INPP,Indonesian Paradise Property T,2004-01-12,11181971732,Pengembangan
+480,INRU,Toba Pulp Lestari Tbk.,1990-06-18,1388883283,Pengembangan
+481,INTA,Intraco Penta Tbk.,1993-08-23,3343935022,Pemantauan Khusus
+482,INTD,Inter Delta Tbk,1989-12-18,591828000,Pengembangan
+483,INTP,Indocement Tunggal Prakarsa Tb,1989-12-05,3431073399,Utama
+484,IPOL,Indopoly Swakarsa Industry Tbk,2010-07-09,6443379509,Pengembangan
+485,ISAT,Indosat Tbk.,1994-10-19,32250810957,Utama
+486,ISSP,Steel Pipe Industry of Indones,2013-02-22,7185992035,Utama
+487,ITMA,Sumber Energi Andalan Tbk.,1990-12-10,999053167,Pengembangan
+488,ITMG,Indo Tambangraya Megah Tbk.,2007-12-18,1129925000,Utama
+489,JAWA,Jaya Agra Wattie Tbk.,2011-05-30,16232951842,Pengembangan
+490,JECC,Jembo Cable Company Tbk.,1992-11-18,756000000,Pengembangan
+491,JIHD,Jakarta International Hotels &,1984-02-29,2329040482,Utama
+492,JKON,Jaya Konstruksi Manggala Prata,2007-12-04,16308519860,Utama
+493,JPFA,Japfa Comfeed Indonesia Tbk.,1989-10-23,11726575201,Utama
+494,JRPT,Jaya Real Property Tbk.,1994-06-29,12910719100,Utama
+495,JSMR,Jasa Marga (Persero) Tbk.,2007-11-12,7257871200,Utama
+496,JSPT,Jakarta Setiabudi Internasiona,1998-01-12,2318736000,Utama
+497,JTPE,Jasuindo Tiga Perkasa Tbk.,2002-04-16,6852050000,Utama
+498,KAEF,Kimia Farma (Persero) Tbk.,2001-07-04,5566589677,Pengembangan
+499,KARW,Meratus Jasa Prima Tbk.,1994-12-20,587152700,Pemantauan Khusus
+500,KBLI,KMI Wire & Cable Tbk.,1992-07-06,4007235107,Utama
+501,KBLM,Kabelindo Murni Tbk.,1992-06-01,1120000000,Pengembangan
+502,KBLV,First Media Tbk.,2000-02-25,1742167907,Pengembangan
+503,KBRI,Kertas Basuki Rachmat Indonesi,2008-07-11,8687995734,Pemantauan Khusus
+504,KDSI,Kedawung Setia Industrial Tbk.,1996-07-29,1620000000,Pengembangan
+505,KIAS,Keramika Indonesia Assosiasi T,1994-12-08,14929100000,Pengembangan
+506,KICI,Kedaung Indah Can Tbk,1993-10-28,276000000,Pengembangan
+507,KIJA,Kawasan Industri Jababeka Tbk.,1995-01-10,20824888369,Utama
+508,KKGI,Resource Alam Indonesia Tbk.,1991-07-01,5000000000,Utama
+509,KLBF,Kalbe Farma Tbk.,1991-07-30,46813391540,Utama
+510,KOBX,Kobexindo Tractors Tbk.,2012-07-05,2272500000,Pengembangan
+511,KOIN,Kokoh Inti Arebama Tbk,2008-04-09,980843732,Pemantauan Khusus
+512,KONI,Perdana Bangun Pusaka Tbk,1995-08-22,312000000,Pengembangan
+513,KOPI,Mitra Energi Persada Tbk.,2015-05-04,697266668,Pengembangan
+514,KPIG,MNC Tourism Indonesia Tbk.,2000-03-30,107312842189,Utama
+515,KRAS,Krakatau Steel (Persero) Tbk.,2010-11-10,19346396900,Pengembangan
+516,KREN,Quantum Clovera Investama Tbk.,2002-06-28,18208470100,Utama
+517,LAPD,Leyand International Tbk.,2001-07-17,3966350139,Pengembangan
+518,LCGP,Eureka Prima Jakarta Tbk.,2007-07-13,5630000914,Pengembangan
+519,LEAD,Logindo Samudramakmur Tbk.,2013-12-11,5799616328,Pengembangan
+520,LINK,Link Net Tbk.,2014-06-02,2863195484,Pengembangan
+521,LION,Lion Metal Works Tbk.,1993-08-20,520160000,Pengembangan
+522,LMAS,Limas Indonesia Makmur Tbk,2001-12-28,787851525,Pemantauan Khusus
+523,LMPI,Langgeng Makmur Industri Tbk.,1994-10-17,1008517669,Pengembangan
+524,LMSH,Lionmesh Prima Tbk.,1990-06-04,96000000,Pengembangan
+525,LPCK,Lippo Cikarang Tbk,1997-07-24,5134685692,Utama
+526,LPGI,Lippo General Insurance Tbk.,1997-07-22,3000000000,Pengembangan
+527,LPIN,Multi Prima Sejahtera Tbk,1990-02-05,425000000,Pengembangan
+528,LPKR,Lippo Karawaci Tbk.,1996-06-28,70898018369,Utama
+529,LPLI,Star Pacific Tbk,1989-10-23,1170432803,Pengembangan
+530,LPPF,MDS Retailing Tbk.,1989-10-09,2227279280,Utama
+531,LPPS,Lenox Pasifik Investama Tbk.,1994-03-28,2588250000,Pengembangan
+532,LRNA,Eka Sari Lorena Transport Tbk.,2014-04-15,350000022,Pengembangan
+533,LSIP,PP London Sumatra Indonesia Tb,1996-07-05,6819963965,Utama
+534,LTLS,Lautan Luas Tbk.,1997-07-21,1560000000,Utama
+535,MAGP,Multi Agro Gemilang Plantation,2013-01-16,9000000004,Pengembangan
+536,MAIN,Malindo Feedmill Tbk.,2006-02-10,2238750000,Utama
+537,MAPI,Mitra Adiperkasa Tbk.,2004-11-10,16600000000,Utama
+538,MAYA,Bank Mayapada Internasional Tb,1997-08-29,25906179152,Utama
+539,MBAP,Mitrabara Adiperdana Tbk.,2014-07-10,1227271952,Pengembangan
+540,MBSS,Mitrabahtera Segara Sejati Tbk,2011-04-06,1750026639,Utama
+541,MBTO,Martina Berto Tbk.,2011-01-13,1070000000,Pengembangan
+542,MCOR,Bank China Construction Bank I,2007-07-03,37540533209,Utama
+543,MDIA,Intermedia Capital Tbk.,2014-04-11,39215538400,Pengembangan
+544,MDKA,Merdeka Copper Gold Tbk.,2015-06-19,24472983771,Utama
+545,MDLN,Modernland Realty Tbk.,1993-01-18,12533067322,Pengembangan
+546,MDRN,Modern Internasional Tbk.,1991-07-16,7632167798,Pemantauan Khusus
+547,MEDC,Medco Energi Internasional Tbk,1994-10-12,25136231252,Utama
+548,MEGA,Bank Mega Tbk.,2000-04-17,23247028262,Utama
+549,MERK,Merck Tbk.,1981-07-23,448000000,Utama
+550,META,Nusantara Infrastructure Tbk.,2001-07-18,17710708194,Pengembangan
+551,MFMI,Multifiling Mitra Indonesia Tb,2010-12-29,757581000,Pengembangan
+552,MGNA,Magna Investama Mandiri Tbk.,2014-07-08,3411179835,Pengembangan
+553,MICE,Multi Indocitra Tbk.,2005-12-21,600000000,Pengembangan
+554,MIDI,Midi Utama Indonesia Tbk.,2010-11-30,33435294800,Utama
+555,MIKA,Mitra Keluarga Karyasehat Tbk.,2015-03-24,13907481500,Utama
+556,MIRA,Mitra International Resources,1997-01-30,3961452039,Pengembangan
+557,MITI,Mitra Investindo Tbk.,1997-07-16,3750526603,Pengembangan
+558,MKPI,Metropolitan Kentjana Tbk.,2009-07-10,948194000,Pengembangan
+559,MLBI,Multi Bintang Indonesia Tbk.,1981-12-15,2107000000,Utama
+560,MLIA,Mulia Industrindo Tbk,1994-01-17,6615000000,Utama
+561,MLPL,Multipolar Tbk.,1989-11-06,15682323987,Utama
+562,MLPT,Multipolar Technology Tbk.,2013-07-08,46875000000,Pengembangan
+563,MMLP,Mega Manunggal Property Tbk.,2015-06-12,6889134608,Pengembangan
+564,MNCN,Media Nusantara Citra Tbk.,2007-06-22,15049787710,Utama
+565,MPMX,Mitra Pinasthika Mustika Tbk.,2013-05-29,4386963276,Utama
+566,MPPA,Matahari Putra Prima Tbk.,1992-12-21,33828872408,Pemantauan Khusus
+567,MRAT,Mustika Ratu Tbk.,1995-07-27,428000000,Pengembangan
+568,MREI,Maskapai Reasuransi Indonesia,1989-09-04,517791681,Pengembangan
+569,MSKY,MNC Sky Vision Tbk.,2012-07-09,1994370480,Pengembangan
+570,MTDL,Metrodata Electronics Tbk.,1990-04-09,12276884585,Utama
+571,MTFN,Capitalinc Investment Tbk.,1990-04-16,31842082852,Pemantauan Khusus
+572,MTLA,Metropolitan Land Tbk.,2011-06-20,7655126330,Utama
+573,MTSM,Metro Realty Tbk.,1992-01-08,232848000,Pengembangan
+574,MYOH,Samindo Resources Tbk.,2000-07-27,2206312500,Pengembangan
+575,MYOR,Mayora Indah Tbk.,1990-07-04,22358699725,Utama
+576,MYTX,Asia Pacific Investama Tbk.,1989-10-10,7747281949,Pemantauan Khusus
+577,NELY,Pelayaran Nelly Dwi Putri Tbk.,2012-10-11,2350000000,Pengembangan
+578,NIKL,Pelat Timah Nusantara Tbk.,2009-12-14,2523350000,Pengembangan
+579,NIRO,City Retail Developments Tbk.,2012-09-13,22198871804,Pengembangan
+580,NISP,Bank OCBC NISP Tbk.,1994-10-20,22715776032,Utama
+581,NOBU,Bank Nationalnobu Tbk.,2013-05-20,7403659460,Utama
+582,NRCA,Nusa Raya Cipta Tbk.,2013-06-27,2496258344,Pengembangan
+583,OCAP,Onix Capital Tbk.,2003-10-10,273200000,Pemantauan Khusus
+584,OKAS,Ancora Indonesia Resources Tbk,2006-03-29,2373449165,Pengembangan
+585,OMRE,Indonesia Prima Property Tbk,1994-08-22,2945211000,Pengembangan
+586,PADI,Minna Padi Investama Sekuritas,2012-01-09,13568695829,Utama
+587,PALM,Provident Investasi Bersama Tb,2012-10-08,15732874458,Utama
+588,PANR,Panorama Sentrawisata Tbk.,2001-09-18,1387500000,Pengembangan
+589,PANS,Panin Sekuritas Tbk.,2000-05-31,720000000,Utama
+590,PBRX,Pan Brothers Tbk.,1990-08-16,21482028246,Utama
+591,PDES,Destinasi Tirta Nusantara Tbk,2008-07-08,715000000,Pengembangan
+592,PEGE,Panca Global Kapital Tbk.,2005-06-24,3777889408,Pengembangan
+593,PGAS,Perusahaan Gas Negara (Persero,2003-12-15,24241508196,Utama
+594,PGLI,Pembangunan Graha Lestari Inda,2000-04-05,488000000,Pengembangan
+595,PICO,Pelangi Indah Canindo Tbk,1996-09-23,568375000,Pengembangan
+596,PJAA,Pembangunan Jaya Ancol Tbk.,2004-07-02,1599999996,Pengembangan
+597,PKPK,Paragon Karya Perkasa Tbk.,2007-07-11,1200000000,Pengembangan
+598,PLAS,Polaris Investama Tbk,2001-03-16,1184200000,Pengembangan
+599,PLIN,Plaza Indonesia Realty Tbk.,1992-06-15,3550000000,Utama
+600,PNBN,Bank Pan Indonesia Tbk,1982-12-29,23837645998,Utama
+601,PNBS,Bank Panin Dubai Syariah Tbk.,2014-01-15,38425504906,Pengembangan
+602,PNIN,Paninvest Tbk.,1983-09-20,4068323920,Utama
+603,PNLF,Panin Financial Tbk.,1983-06-14,32022073293,Utama
+604,PNSE,Pudjiadi & Sons Tbk.,1990-05-01,797813496,Pengembangan
+605,POLY,Asia Pacific Fibers Tbk,1991-03-12,2495753334,Pemantauan Khusus
+606,POOL,Pool Advista Indonesia Tbk.,1991-05-20,2341366264,Pengembangan
+607,PPRO,PP Properti Tbk.,2015-05-19,61675671883,Utama
+608,PSAB,J Resources Asia Pasifik Tbk.,2003-04-22,26460000000,Pengembangan
+609,PSDN,Prasidha Aneka Niaga Tbk,1994-10-18,1440000000,Pengembangan
+610,PSKT,Red Planet Indonesia Tbk.,1995-09-19,10351231636,Pengembangan
+611,PTBA,Bukit Asam (Persero) Tbk.,2002-12-23,11520659250,Utama
+612,PTIS,Indo Straits Tbk.,2011-07-12,550165300,Pengembangan
+613,PTPP,PP (Persero) Tbk.,2010-02-09,6199897354,Utama
+614,PTRO,Petrosea Tbk.,1990-05-21,10086050000,Utama
+615,PTSN,Sat Nusapersada Tbk,2007-11-08,5314344000,Pengembangan
+616,PTSP,Pioneerindo Gourmet Internatio,1994-05-30,220808000,Pengembangan
+617,PUDP,Pudjiadi Prestige Tbk.,1994-11-18,659120000,Pengembangan
+618,PWON,Pakuwon Jati Tbk.,1989-10-09,48159602400,Utama
+619,PYFA,Pyridam Farma Tbk,2001-10-16,11236751784,Pengembangan
+620,RAJA,Rukun Raharja Tbk.,2006-04-19,21135412500,Utama
+621,RALS,Ramayana Lestari Sentosa Tbk.,1996-07-24,7096000000,Utama
+622,RANC,Supra Boga Lestari Tbk.,2012-06-07,1564487500,Pengembangan
+623,RBMS,Ristia Bintang Mahkotasejati T,1997-12-19,2656212826,Pengembangan
+624,RDTX,Roda Vivatex Tbk,1990-05-14,268800000,Pengembangan
+625,RELI,Reliance Sekuritas Indonesia T,2005-07-13,1800000000,Pengembangan
+626,RICY,Ricky Putra Globalindo Tbk,1998-01-22,641717510,Pengembangan
+627,RIGS,Rig Tenders Indonesia Tbk.,1990-03-05,609130000,Pengembangan
+628,RIMO,Rimo International Lestari Tbk,2000-11-10,45080600000,Pengembangan
+629,RODA,Pikko Land Development Tbk.,2001-10-22,13592128209,Pengembangan
+630,ROTI,Nippon Indosari Corpindo Tbk.,2010-06-28,6186488888,Pengembangan
+631,RUIS,Radiant Utama Interinsco Tbk.,2006-07-12,770000000,Pengembangan
+632,SAFE,Steady Safe Tbk,1994-08-15,821207512,Pengembangan
+633,SAME,Sarana Meditama Metropolitan T,2013-01-11,17164632545,Utama
+634,SCCO,Supreme Cable Manufacturing &,1982-07-20,822333600,Pengembangan
+635,SCMA,Surya Citra Media Tbk.,2002-07-16,63564703280,Utama
+636,SCPI,Organon Pharma Indonesia Tbk.,1990-06-08,3600000,Pengembangan
+637,SDMU,Sidomulyo Selaras Tbk.,2011-07-12,2250691100,Pengembangan
+638,SDPC,Millennium Pharmacon Internati,1990-05-07,1274000000,Pengembangan
+639,SDRA,Bank Woori Saudara Indonesia 1,2006-12-15,14545267990,Pengembangan
+640,SGRO,Prime Agri Resources Tbk.,2007-06-18,1818622000,Utama
+641,SHID,Hotel Sahid Jaya International,1990-05-08,1119326168,Pengembangan
+642,SIDO,Industri Jamu dan Farmasi Sido,2013-12-18,30000000000,Utama
+643,SILO,Siloam International Hospitals,2013-09-12,13006125000,Utama
+644,SIMA,Siwani Makmur Tbk,1994-06-03,442589871,Pemantauan Khusus
+645,SIMP,Salim Ivomas Pratama Tbk.,2011-06-09,15501310000,Utama
+646,SIPD,Sreeya Sewu Indonesia Tbk.,1996-12-27,1839102056,Pengembangan
+647,SKBM,Sekar Bumi Tbk.,2012-09-28,1730103217,Pengembangan
+648,SKLT,Sekar Laut Tbk.,1993-09-08,6907405000,Pengembangan
+649,SKYB,Northcliff Citranusa Indonesia,2010-07-07,585000000,Pengembangan
+650,SMAR,Sinar Mas Agro Resources and T,1992-11-20,2872193366,Utama
+651,SMBR,Semen Baturaja (Persero) Tbk.,2013-06-28,9932534336,Utama
+652,SMCB,Solusi Bangun Indonesia Tbk.,1977-08-10,9019381973,Utama
+653,SMDM,Suryamas Dutamakmur Tbk.,1995-10-12,4772138237,Pengembangan
+654,SMDR,Samudera Indonesia  Tbk.,1999-07-05,16375600000,Utama
+655,SMGR,Semen Indonesia (Persero) Tbk.,1991-07-08,6751540089,Utama
+656,SMMA,Sinarmas Multiartha Tbk.,1995-07-05,6367664717,Pengembangan
+657,SMMT,Golden Eagle Energy Tbk.,1997-12-01,3425000000,Pengembangan
+658,SMRA,Summarecon Agung Tbk.,1990-05-07,16508568358,Utama
+659,SMRU,SMR Utama Tbk.,2011-10-10,12499385782,Pemantauan Khusus
+660,SMSM,Selamat Sempurna Tbk.,1996-09-09,5758675440,Utama
+661,SOCI,Soechi Lines Tbk.,2014-12-03,7059000000,Pengembangan
+662,SONA,Sona Topas Tourism Industry Tb,1992-07-21,662400000,Pengembangan
+663,SPMA,Suparma Tbk.,1994-11-16,5330410085,Pengembangan
+664,SQMI,Wilton Makmur Indonesia Tbk.,2004-07-15,15537591429,Pengembangan
+665,SRAJ,Sejahteraraya Anugrahjaya Tbk.,2011-04-11,12238959990,Pengembangan
+666,SRIL,Sri Rejeki Isman Tbk.,2013-06-17,20452176844,Pemantauan Khusus
+667,SRSN,Indo Acidatama Tbk,1993-01-11,6020000000,Pengembangan
+668,SRTG,Saratoga Investama Sedaya Tbk.,2013-06-26,13564835000,Utama
+669,SSIA,Surya Semesta Internusa Tbk.,1997-03-27,4705249440,Utama
+670,SSMS,Sawit Sumbermas Sarana Tbk.,2013-12-12,9525000000,Utama
+671,SSTM,Sunson Textile Manufacture Tbk,1997-08-20,1170909181,Pengembangan
+672,STAR,Calculus Global Ventures Tbk.,2011-07-13,4800000602,Pengembangan
+673,STTP,Siantar Top Tbk.,1996-12-16,1310000000,Pengembangan
+674,SUGI,Sugih Energy Tbk.,2002-06-19,24811541414,Pengembangan
+675,SULI,SLJ Global Tbk.,1994-03-21,6320776836,Pengembangan
+676,SUPR,Solusi Tunas Pratama Tbk.,2011-10-11,1137579698,Pengembangan
+677,TALF,Tunas Alfin Tbk.,2014-01-17,1353435000,Pengembangan
+678,TARA,Agung Semesta Sejahtera Tbk.,2014-07-11,10069645750,Utama
+679,TAXI,Express Transindo Utama Tbk.,2012-11-02,10223647156,Utama
+680,TBIG,Tower Bersama Infrastructure T,2010-10-26,22656999445,Utama
+681,TBLA,Tunas Baru Lampung Tbk.,2000-02-14,6025373372,Utama
+682,TBMS,Tembaga Mulia Semanan Tbk.,1990-05-23,734680000,Pengembangan
+683,TCID,Mandom Indonesia Tbk.,1993-09-30,402133334,Pengembangan
+684,TELE,Omni Inovasi Indonesia Tbk.,2012-01-12,7310929389,Pemantauan Khusus
+685,TFCO,Tifico Fiber Indonesia Tbk.,1980-02-26,4823076400,Pengembangan
+686,TGKA,Tigaraksa Satria Tbk.,1990-06-11,918492750,Pengembangan
+687,TIFA,KDB Tifa Finance Tbk.,2011-07-08,3552213000,Pengembangan
+688,TINS,TIMAH (Persero) Tbk.,1995-10-19,7447753454,Utama
+689,TIRA,Tira Austenite Tbk,1993-07-27,588000000,Pengembangan
+690,TIRT,Tirta Mahakam Resources Tbk,1999-12-13,1011774750,Pemantauan Khusus
+691,TKIM,Pabrik Kertas Tjiwi Kimia Tbk.,1990-04-03,3113223570,Utama
+692,TLKM,Telkom Indonesia (Persero) Tbk,1995-11-14,99062216600,Utama
+693,TMAS,Temas Tbk.,2003-07-09,57051500000,Utama
+694,TMPO,Tempo Intimedia Tbk.,2001-01-08,1058333250,Pengembangan
+695,TOBA,TBS Energi Utama Tbk.,2012-07-06,8319512975,Utama
+696,TOTL,Total Bangun Persada Tbk.,2006-07-25,3410000000,Utama
+697,TOTO,Surya Toto Indonesia Tbk.,1990-10-30,10320000000,Utama
+698,TOWR,Sarana Menara Nusantara Tbk.,2010-03-08,59098103731,Utama
+699,TPIA,Chandra Asri Pacific Tbk.,2008-05-26,86511545092,Utama
+700,TPMA,Trans Power Marine Tbk.,2013-02-20,3507420034,Utama
+701,TRAM,Trada Alam Minera Tbk.,2008-09-10,49643627934,Pengembangan
+702,TRIL,Triwira Insanlestari Tbk.,2008-01-28,1200000000,Pengembangan
+703,TRIM,Trimegah Sekuritas Indonesia T,2000-01-31,7109300000,Utama
+704,TRIO,Trikomsel Oke Tbk.,2009-04-14,26007494645,Pemantauan Khusus
+705,TRIS,Trisula International Tbk.,2012-06-28,3141443831,Pengembangan
+706,TRST,Trias Sentosa Tbk.,1990-07-02,2808000000,Pengembangan
+707,TRUS,Trust Finance Indonesia Tbk,2002-11-28,800000000,Pengembangan
+708,TSPC,Tempo Scan Pacific Tbk.,1994-06-17,4509864300,Utama
+709,ULTJ,Ultrajaya Milk Industry & Trad,1990-07-02,10398175200,Utama
+710,UNIC,Unggul Indah Cahaya Tbk.,1989-11-06,383331363,Utama
+711,UNIT,Nusantara Inti Corpora Tbk,2002-04-18,75422200,Pengembangan
+712,UNSP,Bakrie Sumatera Plantations Tb,1990-03-06,17005275078,Pengembangan
+713,UNTR,United Tractors Tbk.,1989-09-19,3730135136,Utama
+714,UNVR,Unilever Indonesia Tbk.,1982-01-11,38150000000,Utama
+715,VICO,Victoria Investama Tbk.,2013-07-08,15217075658,Utama
+716,VINS,Victoria Insurance Tbk.,2015-09-28,1553430759,Pengembangan
+717,VIVA,Visi Media Asia Tbk.,2011-11-21,16464270400,Pengembangan
+718,VOKS,Voksel Electric Tbk.,1990-12-20,4155602595,Pengembangan
+719,VRNA,Mizuho Leasing Indonesia Tbk.,2008-06-25,5687353997,Pengembangan
+720,WAPO,Wahana Pronatural Tbk.,2001-06-22,1240923111,Pengembangan
+721,WEHA,WEHA Transportasi Indonesia Tb,2007-05-31,1460554819,Pengembangan
+722,WICO,Wicaksana Overseas Internation,1994-08-08,2393710348,Pemantauan Khusus
+723,WIIM,Wismilak Inti Makmur Tbk.,2012-12-18,2099873760,Utama
+724,WIKA,Wijaya Karya (Persero) Tbk.,2007-10-29,39873063858,Pengembangan
+725,WINS,Wintermar Offshore Marine Tbk.,2010-11-29,4523065893,Utama
+726,WOMF,Wahana Ottomitra Multiartha Tb,2004-12-13,3481481480,Pengembangan
+727,WSKT,Waskita Karya (Persero) Tbk.,2012-12-19,28806807016,Utama
+728,WTON,Wijaya Karya Beton Tbk.,2014-04-08,8715466600,Utama
+729,YPAS,Yanaprima Hastapersada Tbk,2008-03-05,668000089,Pengembangan
+730,YULE,Yulie Sekuritas Indonesia Tbk.,2004-12-10,1785000000,Pengembangan
+731,ZBRA,Dosni Roha Indonesia Tbk.,1991-08-01,2510706263,Pemantauan Khusus
+732,SHIP,Sillo Maritime Perdana Tbk.,2016-06-16,2719790000,Utama
+733,CASA,Capital Financial Indonesia Tb,2016-07-19,54476269803,Pengembangan
+734,DAYA,Duta Intidaya Tbk.,2016-06-28,2420547025,Pengembangan
+735,DPUM,Dua Putra Utama Makmur Tbk.,2015-12-08,4175000000,Pengembangan
+736,IDPR,Indonesia Pondasi Raya Tbk.,2015-12-10,2003000000,Pengembangan
+737,JGLE,Graha Andrasentra Propertindo,2016-06-29,22581909405,Pengembangan
+738,KINO,Kino Indonesia Tbk.,2015-12-11,1428571500,Pengembangan
+739,MARI,Mahaka Radio Integra Tbk.,2016-02-11,5252644000,Pemantauan Khusus
+740,MKNT,Mitra Komunikasi Nusantara Tbk,2015-10-26,1029990000000,Pengembangan
+741,MTRA,Mitra Pemuda Tbk.,2016-02-10,770000000,Pemantauan Khusus
+742,OASA,Maharaksa Biru Energi Tbk.,2016-07-18,6347220000,Pengembangan
+743,POWR,Cikarang Listrindo Tbk.,2016-06-14,16087156000,Utama
+744,INCF,Indo Komoditi Korpora Tbk.,2016-09-06,1438370465,Pengembangan
+745,WSBP,Waskita Beton Precast Tbk.,2016-09-20,56959163746,Pemantauan Khusus
+746,PBSA,Paramita Bangun Sarana Tbk.,2016-09-28,6000000000,Pengembangan
+747,PRDA,Prodia Widyahusada Tbk.,2016-12-07,937500000,Utama
+748,BOGA,Apollo Global Interactive Tbk.,2016-12-19,3803526210,Pengembangan
+749,BRIS,Bank Syariah Indonesia (Perser,2018-05-09,45667877639,Utama
+750,PORT,Nusantara Pelabuhan Handal Tbk,2017-03-16,2813941985,Utama
+751,CARS,Industri dan Perdagangan Bintr,2017-04-10,15000000000,Utama
+752,MINA,Sanurhasta Mitra Tbk.,2017-04-28,9843750000,Pengembangan
+753,CLEO,Sariguna Primatirta Tbk.,2017-05-05,24000000000,Utama
+754,TAMU,Pelayaran Tamarin Samudra Tbk.,2017-05-10,37500000000,Pengembangan
+755,CSIS,Cahayasakti Investindo Sukses,2017-05-10,1829804938,Pengembangan
+756,TGRA,Terregra Asia Energy Tbk.,2017-05-16,2750000000,Pemantauan Khusus
+757,FIRE,Alfa Energi Investama Tbk.,2017-06-09,1475363179,Pengembangan
+758,TOPS,Totalindo Eka Persada Tbk.,2017-06-16,33330000000,Pemantauan Khusus
+759,KMTR,Kirana Megatara Tbk.,2017-06-19,8215366379,Pengembangan
+760,ARMY,Armidian Karyatama Tbk.,2017-06-21,9006250000,Pengembangan
+761,MAPB,MAP Boga Adiperkasa Tbk.,2017-06-21,2387922900,Pengembangan
+762,WOOD,Integra Indocabinet Tbk.,2017-06-21,6437500000,Utama
+763,HRTA,Hartadinata Abadi Tbk.,2017-06-21,4605262400,Utama
+764,MABA,Marga Abhinaya Abadi Tbk.,2017-06-22,15365229912,Pemantauan Khusus
+765,HOKI,Buyung Poetra Sembada Tbk.,2017-06-22,9677752680,Pengembangan
+766,MPOW,Megapower Makmur Tbk.,2017-07-05,816997053,Pengembangan
+767,MARK,Mark Dynamics Indonesia Tbk.,2017-07-12,3800000310,Utama
+768,NASA,Andalan Perkasa Abadi Tbk.,2017-08-07,11004929322,Pengembangan
+769,MDKI,Emdeki Utama Tbk.,2017-09-25,2530150002,Pengembangan
+770,BELL,Trisula Textile Industries Tbk,2017-10-03,7250000000,Pengembangan
+771,KIOS,Kioson Komersial Indonesia Tbk,2017-10-05,1075862960,Pengembangan
+772,GMFI,Garuda Maintenance Facility Ae,2017-10-10,124835258434,Pengembangan
+773,MTWI,Malacca Trust Wuwungan Insuran,2017-10-12,2924486639,Pengembangan
+774,ZINC,Kapuas Prima Coal Tbk.,2017-10-16,25250000000,Pemantauan Khusus
+775,MCAS,M Cash Integrasi Tbk.,2017-11-01,867933300,Pengembangan
+776,PPRE,PP Presisi Tbk.,2017-11-24,10224271000,Pengembangan
+777,WEGE,Wijaya Karya Bangunan Gedung T,2017-11-30,9572000000,Pengembangan
+778,PSSI,IMC Pelita Logistik Tbk.,2017-12-05,5417063153,Utama
+779,MORA,Ekamas Mora Republik Tbk.,2022-08-08,47774192736,Utama
+780,DWGL,Dwi Guna Laksana Tbk.,2017-12-13,9252820991,Pengembangan
+781,PBID,Panca Budi Idaman Tbk.,2017-12-13,7500000000,Utama
+782,JMAS,Asuransi Jiwa Syariah Jasa Mit,2017-12-18,1000000000,Pengembangan
+783,CAMP,Campina Ice Cream Industry Tbk,2017-12-19,5885000000,Pengembangan
+784,IPCM,Jasa Armada Indonesia Tbk.,2017-12-22,5284811100,Utama
+785,PCAR,Prima Cakrawala Abadi Tbk.,2017-12-29,1166666700,Pengembangan
+786,LCKM,LCK Global Kedaton Tbk.,2018-01-16,1000000000,Pemantauan Khusus
+787,BOSS,Borneo Olah Sarana Sukses Tbk.,2018-02-15,1400000000,Pemantauan Khusus
+788,HELI,Jaya Trishindo Tbk.,2018-03-27,832862387,Pengembangan
+789,JSKY,Sky Energy Indonesia Tbk.,2018-03-28,2032540000,Pemantauan Khusus
+790,INPS,Indah Prakasa Sentosa Tbk.,2018-04-06,650000000,Pemantauan Khusus
+791,GHON,Gihon Telekomunikasi Indonesia,2018-04-09,550000000,Pengembangan
+792,TDPM,Tianrong Chemicals Industry Tb,2018-04-09,10485050500,Pemantauan Khusus
+793,DFAM,Dafam Property Indonesia Tbk.,2018-04-27,1899852850,Pengembangan
+794,NICK,Charnic Capital Tbk.,2018-05-02,651150000,Pengembangan
+795,BTPS,Bank BTPN Syariah Tbk.,2018-05-08,7626663000,Utama
+796,SPTO,Surya Pertiwi Tbk.,2018-05-14,2700000000,Utama
+797,PRIM,Royal Prima Tbk.,2018-05-15,3393434905,Pengembangan
+798,HEAL,Medikaloka Hermina Tbk.,2018-05-16,15365950000,Utama
+799,TRUK,Guna Timur Raya Tbk.,2018-05-23,435000000,Pengembangan
+800,PZZA,Sarimelati Kencana Tbk.,2018-05-23,3021875000,Pengembangan
+801,TUGU,Asuransi Tugu Pratama Indonesi,2018-05-28,3555575600,Utama
+802,MSIN,MNC Digital Entertainment Tbk.,2018-06-08,60676178205,Utama
+803,SWAT,Sriwahana Adityakarta Tbk.,2018-06-08,3019200000,Pengembangan
+804,TNCA,Trimuda Nuansa Citra Tbk.,2018-06-28,421640000,Pengembangan
+805,MAPA,Map Aktif Adiperkasa Tbk.,2018-07-05,28504000000,Utama
+806,TCPI,Transcoal Pacific Tbk.,2018-07-06,5000000000,Pengembangan
+807,IPCC,Indonesia Kendaraan Terminal T,2018-07-09,1818384820,Utama
+808,RISE,Jaya Sukses Makmur Sentosa Tbk,2018-07-09,16198599990,Pengembangan
+809,BPTR,Batavia Prosperindo Trans Tbk.,2018-07-09,3534000000,Pengembangan
+810,POLL,Pollux Properties Indonesia Tb,2018-07-11,8318823600,Pengembangan
+811,NFCX,NFC Indonesia Tbk.,2018-07-12,666667500,Pengembangan
+812,MGRO,Mahkota Group Tbk.,2018-07-12,3554445700,Pengembangan
+813,NUSA,Sinergi Megah Internusa Tbk.,2018-07-12,7700000148,Pengembangan
+814,FILM,MD Entertainment Tbk.,2018-08-07,10887566758,Utama
+815,ANDI,Andira Agro Tbk.,2018-08-16,9350000000,Pengembangan
+816,LAND,Trimitra Propertindo Tbk.,2018-08-23,2792620000,Pengembangan
+817,MOLI,Madusari Murni Indah Tbk.,2018-08-30,2724036581,Pengembangan
+818,PANI,Pantai Indah Kapuk Dua Tbk.,2018-09-18,18189502198,Utama
+819,DIGI,Arkadia Digital Media Tbk.,2018-09-18,1625000000,Pemantauan Khusus
+820,CITY,Natura City Developments Tbk.,2018-09-28,5405188966,Pengembangan
+821,SAPX,Satria Antaran Prima Tbk.,2018-10-03,833333300,Pengembangan
+822,SURE,Super Energy Tbk.,2018-10-05,1497576771,Pengembangan
+823,HKMU,HK Metals Utama Tbk.,2018-10-09,3221750000,Pemantauan Khusus
+824,MPRO,Maha Properti Indonesia Tbk.,2018-10-09,9942500000,Pengembangan
+825,DUCK,Jaya Bersama Indo Tbk.,2018-10-10,1283330000,Pengembangan
+826,GOOD,Garudafood Putra Putri Jaya Tb,2018-10-10,36897901455,Utama
+827,SKRN,Superkrane Mitra Utama Tbk.,2018-10-11,7500000000,Utama
+828,YELO,Yelooo Integra Datanet Tbk.,2018-10-29,1912774405,Pengembangan
+829,CAKK,Cahayaputra Asa Keramik Tbk.,2018-10-31,1203300219,Pengembangan
+830,SATU,Kota Satu Properti Tbk.,2018-11-05,1375000000,Pengembangan
+831,SOSS,ALSOK Indonesia Services Tbk.,2018-11-06,974525743,Pengembangan
+832,DEAL,Dewata Freightinternational Tb,2018-11-11,1146170959,Pemantauan Khusus
+833,POLA,Pool Advista Finance Tbk.,2018-11-16,3351075600,Pengembangan
+834,DIVA,Distribusi Voucher Nusantara T,2018-11-27,1428571400,Pengembangan
+835,LUCK,Sentral Mitra Informatika Tbk.,2018-11-28,715749640,Pengembangan
+836,URBN,Urban Jakarta Propertindo Tbk.,2018-12-10,3232122640,Pengembangan
+837,SOTS,Satria Mega Kencana Tbk.,2018-12-10,1000003979,Pengembangan
+838,ZONE,Mega Perintis Tbk.,2018-12-12,870171478,Pengembangan
+839,PEHA,Phapros Tbk.,2018-12-26,840000000,Pengembangan
+840,FOOD,Sentra Food Indonesia Tbk.,2019-01-08,650000000,Pemantauan Khusus
+841,BEEF,Estika Tata Tiara Tbk.,2019-01-10,8120249598,Pengembangan
+842,POLI,Pollux Hotels Group Tbk.,2019-01-10,2010526400,Pengembangan
+843,CLAY,Citra Putra Realty Tbk.,2019-01-18,2570000000,Pengembangan
+844,NATO,Olympus Strategic Indonesia Tb,2019-01-18,8001111504,Pengembangan
+845,JAYA,Armada Berjaya Trans Tbk.,2019-02-21,798499394,Pengembangan
+846,COCO,Wahana Interfood Nusantara Tbk,2019-03-20,14237823696,Pengembangan
+847,MTPS,Meta Epsi Tbk.,2019-04-10,2084850829,Pemantauan Khusus
+848,CPRI,Capri Nusa Satu Properti Tbk.,2019-04-11,2433379958,Pengembangan
+849,HRME,Menteng Heritage Realty Tbk.,2019-04-12,5958750000,Pengembangan
+850,POSA,Bliss Properti Indonesia Tbk.,2019-05-10,8388870206,Pemantauan Khusus
+851,JAST,Jasnita Telekomindo Tbk.,2019-05-16,1082575738,Pengembangan
+852,FITT,Fortune Resources Investment T,2019-06-11,1304272051,Pengembangan
+853,BOLA,Bali Bintang Sejahtera Tbk.,2019-06-17,6000000000,Utama
+854,CCSI,Communication Cable Systems In,2019-06-18,1333333331,Pengembangan
+855,SFAN,Surya Fajar Capital Tbk.,2019-06-19,1359934021,Pengembangan
+856,POLU,Golden Flower Tbk.,2019-06-26,750000000,Pengembangan
+857,KJEN,Krida Jaringan Nusantara Tbk.,2019-07-01,500000000,Pengembangan
+858,KAYU,Darmi Bersaudara Tbk.,2019-07-04,665000000,Pemantauan Khusus
+859,ITIC,Indonesian Tobacco Tbk.,2019-07-04,940720000,Pengembangan
+860,PAMG,Bima Sakti Pertiwi Tbk.,2019-07-05,3125000000,Pengembangan
+861,IPTV,MNC Vision Networks Tbk.,2019-07-08,42197950841,Utama
+862,BLUE,Berkah Prima Perkasa Tbk.,2019-07-08,418000000,Pengembangan
+863,ENVY,Envy Technologies Indonesia Tb,2019-07-08,1800000000,Pemantauan Khusus
+864,EAST,Eastparc Hotel Tbk.,2019-07-09,4126405336,Pengembangan
+865,LIFE,MSIG Life Insurance Indonesia,2019-07-09,2100000000,Pengembangan
+866,FUJI,Fuji Finance Indonesia Tbk.,2019-07-09,1300000000,Pengembangan
+867,KOTA,DMS Propertindo Tbk.,2019-07-09,10546185701,Utama
+868,INOV,Inocycle Technology Group Tbk.,2019-07-10,1808221900,Pengembangan
+869,ARKA,Arkha Jayanti Persada Tbk.,2019-07-10,2000000000,Pengembangan
+870,SMKL,Satyamitra Kemas Lestari Tbk.,2019-07-11,3418085290,Pengembangan
+871,HDIT,Hensel Davest Indonesia Tbk.,2019-07-12,1524680000,Utama
+872,KEEN,Kencana Energi Lestari Tbk.,2019-09-02,3666312500,Utama
+873,BAPI,Bhakti Agung Propertindo Tbk.,2019-09-16,5591980103,Pengembangan
+874,TFAS,Telefast Indonesia Tbk.,2019-09-17,1666666500,Pengembangan
+875,GGRP,Gunung Raja Paksi Tbk.,2019-09-19,12111376157,Pengembangan
+876,OPMS,Optima Prima Metal Sinergi Tbk,2019-09-23,1000000000,Pengembangan
+877,NZIA,Nusantara Almazia Tbk.,2019-09-25,2197540705,Pengembangan
+878,SLIS,Gaya Abadi Sempurna Tbk.,2019-10-07,2463367996,Pengembangan
+879,PURE,Trinitan Metals and Minerals T,2019-10-09,1375181505,Pemantauan Khusus
+880,IRRA,Itama Ranoraya Tbk.,2019-10-15,1600000000,Pengembangan
+881,DMMX,Digital Mediatama Maxima Tbk.,2019-10-21,7692307700,Pengembangan
+882,SINI,Singaraja Putra Tbk.,2019-11-08,1202500000,Pengembangan
+883,WOWS,Ginting Jaya Energi Tbk.,2019-11-08,2475720000,Pengembangan
+884,ESIP,Sinergi Inti Plastindo Tbk.,2019-11-14,1109953847,Pengembangan
+885,TEBE,Dana Brata Luhur Tbk.,2019-11-18,1285000000,Utama
+886,KEJU,Mulia Boga Raya Tbk.,2019-11-25,5624999999,Utama
+887,PSGO,Palma Serasih Tbk.,2019-11-25,18850000000,Utama
+888,AGAR,Asia Sejahtera Mina Tbk.,2019-12-02,1000000000,Pengembangan
+889,IFSH,Ifishdeco Tbk.,2019-12-05,2125000000,Pengembangan
+890,REAL,Repower Asia Indonesia Tbk.,2019-12-06,6633610151,Pengembangan
+891,IFII,Indonesia Fibreboard Industry,2019-12-10,9412000000,Pengembangan
+892,PMJS,Putra Mandiri Jembar Tbk.,2019-12-18,13755600000,Pengembangan
+893,UCID,Uni-Charm Indonesia Tbk.,2019-12-20,4156572300,Utama
+894,GLVA,Galva Technologies Tbk.,2019-12-23,1500000000,Utama
+895,PGJO,Bahtera Bumi Raya Tbk.,2020-01-08,795859095,Akselerasi
+896,AMAR,Bank Amar Indonesia Tbk.,2020-01-09,18197283760,Utama
+897,CSRA,Cisadane Sawit Raya Tbk.,2020-01-09,2050000000,Pengembangan
+898,INDO,Royalindo Investa Wijaya Tbk.,2020-01-13,4480741638,Pengembangan
+899,AMOR,Ashmore Asset Management Indon,2020-01-14,2222222400,Pengembangan
+900,TRIN,Perintis Triniti Properti Tbk.,2020-01-15,4551457789,Pengembangan
+901,DMND,Diamond Food Indonesia Tbk.,2020-01-22,9468359000,Utama
+902,PURA,Putra Rajawali Kencana Tbk.,2020-01-29,6301930902,Pengembangan
+903,PTPW,Pratama Widya Tbk.,2020-02-07,878187500,Pengembangan
+904,TAMA,Lancartama Sejati Tbk.,2020-02-10,1200000696,Pemantauan Khusus
+905,IKAN,Era Mandiri Cemerlang Tbk.,2020-02-12,833333000,Pengembangan
+906,AYLS,Arkayana Lestari Grup Tbk.,2020-02-12,853423236,Pengembangan
+907,DADA,Diamond Citra Propertindo Tbk.,2020-02-14,7431530800,Pengembangan
+908,ASPI,Andalan Sakti Primaindo Tbk.,2020-02-17,683810725,Pengembangan
+909,ESTA,Esta Multi Usaha Tbk.,2020-03-09,2425354179,Pengembangan
+910,BESS,Batulicin Nusantara Maritim Tb,2020-03-09,3440455528,Pengembangan
+911,AMAN,Makmur Berkah Amanda Tbk.,2020-03-13,3873500000,Pengembangan
+912,CARE,Metro Healthcare Indonesia Tbk,2020-03-13,33250000000,Pengembangan
+913,SAMF,Saraswanti Anugerah Makmur Tbk,2020-03-31,10250000000,Utama
+914,SBAT,Sejahtera Bintang Abadi Textil,2020-04-08,4752982378,Pemantauan Khusus
+915,KBAG,Karya Bersama Anugerah Tbk.,2020-04-08,7150002603,Pengembangan
+916,CBMF,Cahaya Bintang Medan Tbk.,2020-04-09,1875000000,Pengembangan
+917,RONY,Aracord Nusantara Group Tbk.,2020-04-09,1250000000,Pengembangan
+918,CSMI,Cipta Selera Murni Tbk.,2020-04-09,816061500,Pengembangan
+919,BBSS,Bumi Benowo Sukses Sejahtera T,2020-04-15,4800016020,Pengembangan
+920,BHAT,Bhakti Multi Artha Tbk.,2020-04-15,5000000000,Pengembangan
+921,EPAC,Megalestari Epack Sentosaraya,2020-07-01,3303400000,Pengembangan
+922,UANG,Pakuan Tbk.,2020-07-06,1210000000,Pengembangan
+923,PGUN,Pradiksi Gunatama Tbk.,2020-07-07,5737848882,Pengembangan
+924,SOFA,Solusi Environment Asia Tbk.,2020-07-07,1653574499,Akselerasi
+925,PPGL,Prima Globalindo Logistik Tbk.,2020-07-20,771178020,Akselerasi
+926,TOYS,Sunindo Adipersada Tbk.,2020-08-06,1435000712,Pemantauan Khusus
+927,SGER,Sumber Global Energy Tbk.,2020-08-10,15586909438,Utama
+928,TRJA,Transkon Jaya Tbk.,2020-08-27,1510200000,Pengembangan
+929,PNGO,AEP Pinago Plantations Tbk.,2020-08-31,781250000,Utama
+930,SCNP,Selaras Citra Nusantara Perkas,2020-09-07,2500000000,Pengembangan
+931,BBSI,Krom Bank Indonesia Tbk.,2020-09-07,3637976068,Utama
+932,KMDS,Kurniamitra Duta Sentosa Tbk.,2020-09-07,800000000,Pengembangan
+933,PURI,Puri Global Sukses Tbk.,2020-09-08,1000000000,Pengembangan
+934,SOHO,Soho Global Health Tbk.,2020-09-08,12691682390,Pengembangan
+935,HOMI,Grand House Mulia Tbk.,2020-09-10,1575000000,Pengembangan
+936,ROCK,Rockfields Properti Indonesia,2020-09-10,1435185100,Pengembangan
+937,ENZO,Morenzo Abadi Perkasa Tbk.,2020-09-14,2162547122,Pengembangan
+938,PLAN,Planet Properindo Jaya Tbk.,2020-09-15,896709596,Akselerasi
+939,PTDU,Djasa Ubersakti Tbk.,2020-12-08,1500000000,Pemantauan Khusus
+940,ATAP,Trimitra Prawara Goldland Tbk.,2020-12-11,1250000000,Pengembangan
+941,VICI,Victoria Care Indonesia Tbk.,2020-12-17,6708000000,Utama
+942,PMMP,Panca Mitra Multiperdana Tbk.,2020-12-18,2588300000,Pemantauan Khusus
+943,WIFI,Solusi Sinergi Digital Tbk.,2020-12-30,5308549015,Pengembangan
+944,FAPA,FAP Agri Tbk.,2021-01-04,3629411800,Pengembangan
+945,DCII,DCI Indonesia Tbk.,2021-01-06,2383745900,Pengembangan
+946,KETR,Ketrosden Triasmitra Tbk.,2021-01-11,2841262838,Pengembangan
+947,DGNS,Diagnos Laboratorium Utama Tbk,2021-01-15,1375000000,Pengembangan
+948,UFOE,Damai Sejahtera Abadi Tbk.,2021-02-01,2898261693,Pengembangan
+949,BANK,Bank Aladin Syariah Tbk.,2021-02-01,14793174908,Pengembangan
+950,WMUU,Widodo Makmur Unggas Tbk.,2021-02-02,12941176500,Pengembangan
+951,EDGE,Indointernet Tbk.,2021-02-08,2020250000,Pengembangan
+952,UNIQ,Ulima Nitra Tbk.,2021-03-08,3138983000,Pengembangan
+953,BEBS,Berkah Beton Sadaya Tbk.,2021-03-10,45000000000,Pengembangan
+954,SNLK,Sunter Lakeside Hotel Tbk.,2021-03-29,450000000,Pengembangan
+955,ZYRX,Zyrexindo Mandiri Buana Tbk.,2021-03-30,1333334556,Pengembangan
+956,LFLO,Imago Mulia Persada Tbk.,2021-04-07,1307734937,Akselerasi
+957,FIMP,Fimperkasa Utama Tbk.,2021-04-09,400000975,Akselerasi
+958,TAPG,Triputra Agro Persada Tbk.,2021-04-12,19852540000,Utama
+959,NPGF,Nusa Palapa Gemilang Tbk.,2021-04-14,3240235840,Pengembangan
+960,LUCY,Lima Dua Lima Tiga Tbk.,2021-05-05,1514773893,Akselerasi
+961,ADCP,Adhi Commuter Properti Tbk.,2021-05-21,22222222200,Pengembangan
+962,HOPE,Harapan Duta Pertiwi Tbk.,2021-05-24,2130360203,Pengembangan
