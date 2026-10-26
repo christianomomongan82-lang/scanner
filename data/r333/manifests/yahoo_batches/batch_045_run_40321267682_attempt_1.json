@@ -1,0 +1,494 @@
+{
+  "experiment": "R333",
+  "purpose": "raw daily data acquisition and metadata only; no small-cap selection, signals, PnL, PF, or alpha verdict",
+  "source": "Yahoo Finance via yfinance",
+  "source_branch": "data/r333-idx-daily-yahoo",
+  "run_id": "40321267682",
+  "run_attempt": "1",
+  "batch_index_zero_based": 45,
+  "batch_number_one_based": 46,
+  "batch_count": 97,
+  "batch_size": 10,
+  "started_utc": "2026-10-26T12:23:54Z",
+  "finished_utc": "2026-10-26T12:23:58Z",
+  "library": "yfinance",
+  "library_version": "1.7.0",
+  "python_version": "3.12.15 (main, Oct  1 2026, 02:36:28) [GCC 15.2.0]",
+  "parameters": {
+    "start": "2010-01-01",
+    "end": "API current end; omitted intentionally",
+    "interval": "1d",
+    "auto_adjust": false,
+    "actions": true,
+    "repair": false,
+    "keepna": true,
+    "maximum_total_attempts_per_ticker": 5,
+    "wait_seconds_between_failed_attempts": [
+      30,
+      120,
+      600,
+      600
+    ]
+  },
+  "queue": {
+    "path": "data/r333/universe/yahoo_daily_acquisition_roster.csv",
+    "row_count": 962,
+    "sha256": "4a453489d79735444433603fe0138cd762bd5bb59b94d1150fdc8d67a1d68614",
+    "git_blob_sha": "f095e4aed8ce6c90d50c372e67f654e8729f010e",
+    "source_roster_git_blob_sha": "943c4aba24ef097fd59d0781669321dd38d5f704",
+    "survivorship_label": "survivorship-biased",
+    "is_smallcap_universe": false
+  },
+  "tickers_requested": [
+    "HITS.JK",
+    "HMSP.JK",
+    "HOME.JK",
+    "HOTL.JK",
+    "HRUM.JK",
+    "IATA.JK",
+    "IBFN.JK",
+    "IBST.JK",
+    "ICBP.JK",
+    "ICON.JK"
+  ],
+  "ticker_results": [
+    {
+      "ticker": "HITS.JK",
+      "status": "ACQUIRED_NEEDS_AUDIT",
+      "request": {
+        "library": "yfinance",
+        "method": "Ticker.history",
+        "start": "2010-01-01",
+        "end": null,
+        "interval": "1d",
+        "auto_adjust": false,
+        "actions": true,
+        "repair": false,
+        "keepna": true,
+        "timeout_seconds": 30
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:23:54Z",
+          "finished_utc": "2026-10-26T12:23:55Z",
+          "stage": "success",
+          "status": "OK",
+          "error_type": null,
+          "error_message": null,
+          "library_log_tail": "Entering history()\n Entering _fetch_ticker_tz()\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/HITS.JK\nparams={'range': '1d', 'interval': '1d'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\n       Entering _load_cookie_curlCffi()\n       Exiting _load_cookie_curlCffi()\n       Entering _save_cookie_curlCffi()\n       Exiting _save_cookie_curlCffi()\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\n       Entering _get_cookie_basic()\n        Entering _load_cookie_curlCffi()\n        Exiting _load_cookie_curlCffi()\nreusing persistent cookie\n       Exiting _get_cookie_basic()\ncrumb = 'LoDD1KS7E3g'\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\n Exiting _fetch_ticker_tz()\n Entering history()\nHITS.JK: Yahoo GET parameters: {'period1': '2010-01-01 00:00:00+07:00', 'period2': '2026-10-26 19:23:55+07:00', 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/HITS.JK\nparams={'period1': 1262278800, 'period2': 1793017435, 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\nHITS.JK: yfinance received OHLC data: 2010-01-04 02:00:00 -> 2026-10-26 02:00:00\nHITS.JK: OHLC after cleaning: 2010-01-04 09:00:00+07:00 -> 2026-10-26 09:00:00+07:00\nHITS.JK: OHLC after combining events: 2010-01-04 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\nHITS.JK: yfinance returning OHLC: 2010-01-04 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\n Exiting history()\nExiting history()\n"
+        }
+      ],
+      "csv_path": "data/r333/yahoo_daily/HITS_JK.csv",
+      "row_count": 4131,
+      "first_date": "2010-01-04",
+      "last_date": "2026-10-26",
+      "bytes": 250824,
+      "sha256": "4f3fad57b3d9ef26c2e3a8d58df6c445c4cd39721704f5583612ba2c66198925",
+      "quality_summary": {
+        "missing_required_fields": [],
+        "duplicate_date_rows": 0,
+        "invalid_ohlc_rows": 1,
+        "invalid_volume_rows": 0,
+        "dividend_event_rows": 3,
+        "stock_split_event_rows": 0,
+        "has_adj_close": true,
+        "raw_ohlc_requested": true,
+        "invalid_rows_preserved": true
+      },
+      "yfinance_version": "1.7.0"
+    },
+    {
+      "ticker": "HMSP.JK",
+      "status": "ACQUIRED_NEEDS_AUDIT",
+      "request": {
+        "library": "yfinance",
+        "method": "Ticker.history",
+        "start": "2010-01-01",
+        "end": null,
+        "interval": "1d",
+        "auto_adjust": false,
+        "actions": true,
+        "repair": false,
+        "keepna": true,
+        "timeout_seconds": 30
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:23:55Z",
+          "finished_utc": "2026-10-26T12:23:55Z",
+          "stage": "success",
+          "status": "OK",
+          "error_type": null,
+          "error_message": null,
+          "library_log_tail": "Entering history()\n Entering _fetch_ticker_tz()\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/HMSP.JK\nparams={'range': '1d', 'interval': '1d'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\n Exiting _fetch_ticker_tz()\n Entering history()\nHMSP.JK: Yahoo GET parameters: {'period1': '2010-01-01 00:00:00+07:00', 'period2': '2026-10-26 19:23:55+07:00', 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/HMSP.JK\nparams={'period1': 1262278800, 'period2': 1793017435, 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\nHMSP.JK: yfinance received OHLC data: 2010-01-04 02:00:00 -> 2026-10-26 02:00:00\nHMSP.JK: OHLC after cleaning: 2010-01-04 09:00:00+07:00 -> 2026-10-26 09:00:00+07:00\nHMSP.JK: OHLC after combining events: 2010-01-04 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\nHMSP.JK: yfinance returning OHLC: 2010-01-04 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\n Exiting history()\nExiting history()\n"
+        }
+      ],
+      "csv_path": "data/r333/yahoo_daily/HMSP_JK.csv",
+      "row_count": 4131,
+      "first_date": "2010-01-04",
+      "last_date": "2026-10-26",
+      "bytes": 353418,
+      "sha256": "4f095901bf7b820cd142e1f473c4b9013672e542a99dc9efa489fada0fd9d9a1",
+      "quality_summary": {
+        "missing_required_fields": [],
+        "duplicate_date_rows": 0,
+        "invalid_ohlc_rows": 3,
+        "invalid_volume_rows": 0,
+        "dividend_event_rows": 25,
+        "stock_split_event_rows": 1,
+        "has_adj_close": true,
+        "raw_ohlc_requested": true,
+        "invalid_rows_preserved": true
+      },
+      "yfinance_version": "1.7.0"
+    },
+    {
+      "ticker": "HOME.JK",
+      "status": "FAILED_AFTER_MAX_ATTEMPTS",
+      "request": {
+        "library": "yfinance",
+        "method": "Ticker.history",
+        "start": "2010-01-01",
+        "end": null,
+        "interval": "1d",
+        "auto_adjust": false,
+        "actions": true,
+        "repair": false,
+        "keepna": true,
+        "timeout_seconds": 30
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:23:55Z",
+          "finished_utc": "2026-10-26T12:23:56Z",
+          "stage": "Ticker.history",
+          "status": "ERROR",
+          "error_type": "HTTPError",
+          "error_message": "HTTP Error 404: ",
+          "library_log_tail": "Entering history()\n Entering _fetch_ticker_tz()\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/HOME.JK\nparams={'range': '1d', 'interval': '1d'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=404\ntoggling cookie strategy basic -> csrf\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'csrf'\n     Entering _get_crumb_csrf()\n      Entering _get_cookie_csrf()\n       Entering _load_cookie_curlCffi()\n       Exiting _load_cookie_curlCffi()\nreusing persistent cookie\n      Exiting _get_cookie_csrf()\ncrumb = 'LoDD1KS7E3g'\n     Exiting _get_crumb_csrf()\n    Exiting _get_cookie_and_crumb()\nresponse code=404\n   Exiting _make_request()\n  Exiting get()\nGot error from yahoo api for ticker HOME.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}\n Exiting _fetch_ticker_tz()\nget_raw_json(): https://query2.finance.yahoo.com/v10/finance/quoteSummary/HOME.JK\n Entering get()\n  Entering _make_request()\nurl=https://query2.finance.yahoo.com/v10/finance/quoteSummary/HOME.JK\nparams={'modules': 'financialData,quoteType,defaultKeyStatistics,assetProfile,summaryDetail', 'corsDomain': 'finance.yahoo.com', 'formatted': 'false', 'symbol': 'HOME.JK', 'lang': 'en-US', 'region': 'US'}\n   Entering _get_cookie_and_crumb()\ncookie_mode = 'csrf'\n    Entering _get_crumb_csrf()\nreusing crumb\n    Exiting _get_crumb_csrf()\n   Exiting _get_cookie_and_crumb()\nresponse code=404\ntoggling cookie strategy csrf -> basic\n   Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n    Entering _get_cookie_and_crumb_basic()\n     Entering _get_cookie_basic()\n      Entering _load_cookie_curlCffi()\n      Exiting _load_cookie_curlCffi()\nreusing persistent cookie\n     Exiting _get_cookie_basic()\n     Entering _get_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\ncrumb = 'LoDD1KS7E3g'\n     Exiting _get_crumb_basic()\n    Exiting _get_cookie_and_crumb_basic()\n   Exiting _get_cookie_and_crumb()\nresponse code=404\n  Exiting _make_request()\n Exiting get()\n"
+        }
+      ],
+      "row_count": null,
+      "first_date": null,
+      "last_date": null,
+      "bytes": null,
+      "sha256": null,
+      "failure_stage": "Ticker.history"
+    },
+    {
+      "ticker": "HOTL.JK",
+      "status": "FAILED_AFTER_MAX_ATTEMPTS",
+      "request": {
+        "library": "yfinance",
+        "method": "Ticker.history",
+        "start": "2010-01-01",
+        "end": null,
+        "interval": "1d",
+        "auto_adjust": false,
+        "actions": true,
+        "repair": false,
+        "keepna": true,
+        "timeout_seconds": 30
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:23:56Z",
+          "finished_utc": "2026-10-26T12:23:56Z",
+          "stage": "Ticker.history",
+          "status": "ERROR",
+          "error_type": "HTTPError",
+          "error_message": "HTTP Error 404: ",
+          "library_log_tail": "Entering history()\n Entering _fetch_ticker_tz()\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/HOTL.JK\nparams={'range': '1d', 'interval': '1d'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=404\ntoggling cookie strategy basic -> csrf\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'csrf'\n     Entering _get_crumb_csrf()\n      Entering _get_cookie_csrf()\n       Entering _load_cookie_curlCffi()\n       Exiting _load_cookie_curlCffi()\nreusing persistent cookie\n      Exiting _get_cookie_csrf()\ncrumb = 'LoDD1KS7E3g'\n     Exiting _get_crumb_csrf()\n    Exiting _get_cookie_and_crumb()\nresponse code=404\n   Exiting _make_request()\n  Exiting get()\nGot error from yahoo api for ticker HOTL.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}\n Exiting _fetch_ticker_tz()\nget_raw_json(): https://query2.finance.yahoo.com/v10/finance/quoteSummary/HOTL.JK\n Entering get()\n  Entering _make_request()\nurl=https://query2.finance.yahoo.com/v10/finance/quoteSummary/HOTL.JK\nparams={'modules': 'financialData,quoteType,defaultKeyStatistics,assetProfile,summaryDetail', 'corsDomain': 'finance.yahoo.com', 'formatted': 'false', 'symbol': 'HOTL.JK', 'lang': 'en-US', 'region': 'US'}\n   Entering _get_cookie_and_crumb()\ncookie_mode = 'csrf'\n    Entering _get_crumb_csrf()\nreusing crumb\n    Exiting _get_crumb_csrf()\n   Exiting _get_cookie_and_crumb()\nresponse code=404\ntoggling cookie strategy csrf -> basic\n   Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n    Entering _get_cookie_and_crumb_basic()\n     Entering _get_cookie_basic()\n      Entering _load_cookie_curlCffi()\n      Exiting _load_cookie_curlCffi()\nreusing persistent cookie\n     Exiting _get_cookie_basic()\n     Entering _get_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\ncrumb = 'LoDD1KS7E3g'\n     Exiting _get_crumb_basic()\n    Exiting _get_cookie_and_crumb_basic()\n   Exiting _get_cookie_and_crumb()\nresponse code=404\n  Exiting _make_request()\n Exiting get()\n"
+        }
+      ],
+      "row_count": null,
+      "first_date": null,
+      "last_date": null,
+      "bytes": null,
+      "sha256": null,
+      "failure_stage": "Ticker.history"
+    },
+    {
+      "ticker": "HRUM.JK",
+      "status": "ACQUIRED_NEEDS_AUDIT",
+      "request": {
+        "library": "yfinance",
+        "method": "Ticker.history",
+        "start": "2010-01-01",
+        "end": null,
+        "interval": "1d",
+        "auto_adjust": false,
+        "actions": true,
+        "repair": false,
+        "keepna": true,
+        "timeout_seconds": 30
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:23:56Z",
+          "finished_utc": "2026-10-26T12:23:57Z",
+          "stage": "success",
+          "status": "OK",
+          "error_type": null,
+          "error_message": null,
+          "library_log_tail": "Entering history()\n Entering _fetch_ticker_tz()\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/HRUM.JK\nparams={'range': '1d', 'interval': '1d'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\n Exiting _fetch_ticker_tz()\n Entering history()\nHRUM.JK: Yahoo GET parameters: {'period1': '2010-01-01 00:00:00+07:00', 'period2': '2026-10-26 19:23:57+07:00', 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/HRUM.JK\nparams={'period1': 1262278800, 'period2': 1793017437, 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\nHRUM.JK: yfinance received OHLC data: 2010-10-06 02:00:00 -> 2026-10-26 02:00:00\nHRUM.JK: OHLC after cleaning: 2010-10-06 09:00:00+07:00 -> 2026-10-26 09:00:00+07:00\nHRUM.JK: OHLC after combining events: 2010-10-06 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\nHRUM.JK: yfinance returning OHLC: 2010-10-06 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\n Exiting history()\nExiting history()\n"
+        }
+      ],
+      "csv_path": "data/r333/yahoo_daily/HRUM_JK.csv",
+      "row_count": 3945,
+      "first_date": "2010-10-06",
+      "last_date": "2026-10-26",
+      "bytes": 270934,
+      "sha256": "ce8c940366eeff1672dfdf79a0e9f2a72de613bea31319b6685861147316ac8b",
+      "quality_summary": {
+        "missing_required_fields": [],
+        "duplicate_date_rows": 0,
+        "invalid_ohlc_rows": 0,
+        "invalid_volume_rows": 0,
+        "dividend_event_rows": 9,
+        "stock_split_event_rows": 1,
+        "has_adj_close": true,
+        "raw_ohlc_requested": true,
+        "invalid_rows_preserved": true
+      },
+      "yfinance_version": "1.7.0"
+    },
+    {
+      "ticker": "IATA.JK",
+      "status": "ACQUIRED_NEEDS_AUDIT",
+      "request": {
+        "library": "yfinance",
+        "method": "Ticker.history",
+        "start": "2010-01-01",
+        "end": null,
+        "interval": "1d",
+        "auto_adjust": false,
+        "actions": true,
+        "repair": false,
+        "keepna": true,
+        "timeout_seconds": 30
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:23:57Z",
+          "finished_utc": "2026-10-26T12:23:57Z",
+          "stage": "success",
+          "status": "OK",
+          "error_type": null,
+          "error_message": null,
+          "library_log_tail": "Entering history()\n Entering _fetch_ticker_tz()\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/IATA.JK\nparams={'range': '1d', 'interval': '1d'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\n Exiting _fetch_ticker_tz()\n Entering history()\nIATA.JK: Yahoo GET parameters: {'period1': '2010-01-01 00:00:00+07:00', 'period2': '2026-10-26 19:23:57+07:00', 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/IATA.JK\nparams={'period1': 1262278800, 'period2': 1793017437, 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\nIATA.JK: yfinance received OHLC data: 2010-01-04 02:00:00 -> 2026-10-26 02:00:00\nIATA.JK: OHLC after cleaning: 2010-01-04 09:00:00+07:00 -> 2026-10-26 09:00:00+07:00\nIATA.JK: OHLC after combining events: 2010-01-04 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\nIATA.JK: yfinance returning OHLC: 2010-01-04 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\n Exiting history()\nExiting history()\n"
+        }
+      ],
+      "csv_path": "data/r333/yahoo_daily/IATA_JK.csv",
+      "row_count": 4131,
+      "first_date": "2010-01-04",
+      "last_date": "2026-10-26",
+      "bytes": 212562,
+      "sha256": "8e3ca073ae6dfbb0a9215920f0bd18e13105f5655f8f8f8311317f7e2fece356",
+      "quality_summary": {
+        "missing_required_fields": [],
+        "duplicate_date_rows": 0,
+        "invalid_ohlc_rows": 1,
+        "invalid_volume_rows": 0,
+        "dividend_event_rows": 0,
+        "stock_split_event_rows": 0,
+        "has_adj_close": true,
+        "raw_ohlc_requested": true,
+        "invalid_rows_preserved": true
+      },
+      "yfinance_version": "1.7.0"
+    },
+    {
+      "ticker": "IBFN.JK",
+      "status": "ACQUIRED_NEEDS_AUDIT",
+      "request": {
+        "library": "yfinance",
+        "method": "Ticker.history",
+        "start": "2010-01-01",
+        "end": null,
+        "interval": "1d",
+        "auto_adjust": false,
+        "actions": true,
+        "repair": false,
+        "keepna": true,
+        "timeout_seconds": 30
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:23:57Z",
+          "finished_utc": "2026-10-26T12:23:57Z",
+          "stage": "success",
+          "status": "OK",
+          "error_type": null,
+          "error_message": null,
+          "library_log_tail": "Entering history()\n Entering _fetch_ticker_tz()\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/IBFN.JK\nparams={'range': '1d', 'interval': '1d'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\n Exiting _fetch_ticker_tz()\n Entering history()\nIBFN.JK: Yahoo GET parameters: {'period1': '2010-01-01 00:00:00+07:00', 'period2': '2026-10-26 19:23:57+07:00', 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/IBFN.JK\nparams={'period1': 1262278800, 'period2': 1793017437, 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\nIBFN.JK: yfinance received OHLC data: 2014-12-22 02:00:00 -> 2026-10-26 02:00:00\nIBFN.JK: OHLC after cleaning: 2014-12-22 09:00:00+07:00 -> 2026-10-26 09:00:00+07:00\nIBFN.JK: OHLC after combining events: 2014-12-22 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\nIBFN.JK: yfinance returning OHLC: 2014-12-22 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\n Exiting history()\nExiting history()\n"
+        }
+      ],
+      "csv_path": "data/r333/yahoo_daily/IBFN_JK.csv",
+      "row_count": 2910,
+      "first_date": "2014-12-22",
+      "last_date": "2026-10-26",
+      "bytes": 205721,
+      "sha256": "417bbf3a29b8767cb01353088090ce9d62e10c7f48f32e1a30b6b733dfcc28b1",
+      "quality_summary": {
+        "missing_required_fields": [],
+        "duplicate_date_rows": 0,
+        "invalid_ohlc_rows": 10,
+        "invalid_volume_rows": 0,
+        "dividend_event_rows": 1,
+        "stock_split_event_rows": 1,
+        "has_adj_close": true,
+        "raw_ohlc_requested": true,
+        "invalid_rows_preserved": true
+      },
+      "yfinance_version": "1.7.0"
+    },
+    {
+      "ticker": "IBST.JK",
+      "status": "ACQUIRED_NEEDS_AUDIT",
+      "request": {
+        "library": "yfinance",
+        "method": "Ticker.history",
+        "start": "2010-01-01",
+        "end": null,
+        "interval": "1d",
+        "auto_adjust": false,
+        "actions": true,
+        "repair": false,
+        "keepna": true,
+        "timeout_seconds": 30
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:23:57Z",
+          "finished_utc": "2026-10-26T12:23:57Z",
+          "stage": "success",
+          "status": "OK",
+          "error_type": null,
+          "error_message": null,
+          "library_log_tail": "Entering history()\n Entering _fetch_ticker_tz()\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/IBST.JK\nparams={'range': '1d', 'interval': '1d'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\n Exiting _fetch_ticker_tz()\n Entering history()\nIBST.JK: Yahoo GET parameters: {'period1': '2010-01-01 00:00:00+07:00', 'period2': '2026-10-26 19:23:57+07:00', 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/IBST.JK\nparams={'period1': 1262278800, 'period2': 1793017437, 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\nIBST.JK: yfinance received OHLC data: 2012-08-31 02:00:00 -> 2026-10-26 02:00:00\nIBST.JK: OHLC after cleaning: 2012-08-31 09:00:00+07:00 -> 2026-10-26 09:00:00+07:00\nIBST.JK: OHLC after combining events: 2012-08-31 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\nIBST.JK: yfinance returning OHLC: 2012-08-31 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\n Exiting history()\nExiting history()\n"
+        }
+      ],
+      "csv_path": "data/r333/yahoo_daily/IBST_JK.csv",
+      "row_count": 3474,
+      "first_date": "2012-08-31",
+      "last_date": "2026-10-26",
+      "bytes": 237332,
+      "sha256": "8d9cdce702bd1a5bcfb55c8e1c0625403806f673f328fe5d2a875ab2910246cc",
+      "quality_summary": {
+        "missing_required_fields": [],
+        "duplicate_date_rows": 0,
+        "invalid_ohlc_rows": 3,
+        "invalid_volume_rows": 0,
+        "dividend_event_rows": 1,
+        "stock_split_event_rows": 0,
+        "has_adj_close": true,
+        "raw_ohlc_requested": true,
+        "invalid_rows_preserved": true
+      },
+      "yfinance_version": "1.7.0"
+    },
+    {
+      "ticker": "ICBP.JK",
+      "status": "ACQUIRED_NEEDS_AUDIT",
+      "request": {
+        "library": "yfinance",
+        "method": "Ticker.history",
+        "start": "2010-01-01",
+        "end": null,
+        "interval": "1d",
+        "auto_adjust": false,
+        "actions": true,
+        "repair": false,
+        "keepna": true,
+        "timeout_seconds": 30
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:23:57Z",
+          "finished_utc": "2026-10-26T12:23:58Z",
+          "stage": "success",
+          "status": "OK",
+          "error_type": null,
+          "error_message": null,
+          "library_log_tail": "Entering history()\n Entering _fetch_ticker_tz()\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/ICBP.JK\nparams={'range': '1d', 'interval': '1d'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\n Exiting _fetch_ticker_tz()\n Entering history()\nICBP.JK: Yahoo GET parameters: {'period1': '2010-01-01 00:00:00+07:00', 'period2': '2026-10-26 19:23:58+07:00', 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/ICBP.JK\nparams={'period1': 1262278800, 'period2': 1793017438, 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\nICBP.JK: yfinance received OHLC data: 2010-01-04 02:00:00 -> 2026-10-26 02:00:00\nICBP.JK: OHLC after cleaning: 2010-01-04 09:00:00+07:00 -> 2026-10-26 09:00:00+07:00\nICBP.JK: OHLC after combining events: 2010-01-04 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\nICBP.JK: yfinance returning OHLC: 2010-01-04 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\n Exiting history()\nExiting history()\n"
+        }
+      ],
+      "csv_path": "data/r333/yahoo_daily/ICBP_JK.csv",
+      "row_count": 4131,
+      "first_date": "2010-01-04",
+      "last_date": "2026-10-26",
+      "bytes": 297675,
+      "sha256": "343543d53887e5421d9a865319de9d8d36167b0f997909cdaff6e8208ded02af",
+      "quality_summary": {
+        "missing_required_fields": [],
+        "duplicate_date_rows": 0,
+        "invalid_ohlc_rows": 2,
+        "invalid_volume_rows": 0,
+        "dividend_event_rows": 17,
+        "stock_split_event_rows": 1,
+        "has_adj_close": true,
+        "raw_ohlc_requested": true,
+        "invalid_rows_preserved": true
+      },
+      "yfinance_version": "1.7.0"
+    },
+    {
+      "ticker": "ICON.JK",
+      "status": "ACQUIRED_NEEDS_AUDIT",
+      "request": {
+        "library": "yfinance",
+        "method": "Ticker.history",
+        "start": "2010-01-01",
+        "end": null,
+        "interval": "1d",
+        "auto_adjust": false,
+        "actions": true,
+        "repair": false,
+        "keepna": true,
+        "timeout_seconds": 30
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:23:58Z",
+          "finished_utc": "2026-10-26T12:23:58Z",
+          "stage": "success",
+          "status": "OK",
+          "error_type": null,
+          "error_message": null,
+          "library_log_tail": "Entering history()\n Entering _fetch_ticker_tz()\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/ICON.JK\nparams={'range': '1d', 'interval': '1d'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\n Exiting _fetch_ticker_tz()\n Entering history()\nICON.JK: Yahoo GET parameters: {'period1': '2010-01-01 00:00:00+07:00', 'period2': '2026-10-26 19:23:58+07:00', 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n  Entering get()\n   Entering _make_request()\nurl=https://query2.finance.yahoo.com/v8/finance/chart/ICON.JK\nparams={'period1': 1262278800, 'period2': 1793017438, 'interval': '1d', 'includePrePost': False, 'events': 'div,splits,capitalGains'}\n    Entering _get_cookie_and_crumb()\ncookie_mode = 'basic'\n     Entering _get_cookie_and_crumb_basic()\n      Entering _get_cookie_basic()\nreusing cookie\n      Exiting _get_cookie_basic()\n      Entering _get_crumb_basic()\nreusing crumb\n      Exiting _get_crumb_basic()\n     Exiting _get_cookie_and_crumb_basic()\n    Exiting _get_cookie_and_crumb()\nresponse code=200\n   Exiting _make_request()\n  Exiting get()\nICON.JK: yfinance received OHLC data: 2010-01-04 02:00:00 -> 2026-10-26 02:00:00\nICON.JK: OHLC after cleaning: 2010-01-04 09:00:00+07:00 -> 2026-10-26 09:00:00+07:00\nICON.JK: OHLC after combining events: 2010-01-04 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\nICON.JK: yfinance returning OHLC: 2010-01-04 00:00:00+07:00 -> 2026-10-26 00:00:00+07:00\n Exiting history()\nExiting history()\n"
+        }
+      ],
+      "csv_path": "data/r333/yahoo_daily/ICON_JK.csv",
+      "row_count": 4131,
+      "first_date": "2010-01-04",
+      "last_date": "2026-10-26",
+      "bytes": 278502,
+      "sha256": "9ee6876d8da8d13390fca3b089890868d9028d24ede90fcfb4c5c405914f2535",
+      "quality_summary": {
+        "missing_required_fields": [],
+        "duplicate_date_rows": 0,
+        "invalid_ohlc_rows": 1,
+        "invalid_volume_rows": 0,
+        "dividend_event_rows": 1,
+        "stock_split_event_rows": 0,
+        "has_adj_close": true,
+        "raw_ohlc_requested": true,
+        "invalid_rows_preserved": true
+      },
+      "yfinance_version": "1.7.0"
+    }
+  ],
+  "overall_status": "INCOMPLETE",
+  "survivorship_warning": "Queue contains only current IDX listing roster. No verified delisted universe; this is survivorship-biased acquisition coverage only, not a historical small-cap universe or alpha test."
+}
