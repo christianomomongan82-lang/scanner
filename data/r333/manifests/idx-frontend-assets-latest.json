@@ -1,10 +1,10 @@
 {
   "experiment": "R333",
   "purpose": "official IDX frontend asset inspection for documented public endpoints only; no signals/PnL",
-  "run_id": "40309080545",
+  "run_id": "40309624911",
   "run_attempt": "1",
-  "started_utc": "2026-10-26T10:39:20Z",
-  "finished_utc": "2026-10-26T10:39:28Z",
+  "started_utc": "2026-10-26T10:44:20Z",
+  "finished_utc": "2026-10-26T10:44:30Z",
   "input_pages": [
     {
       "path": "data/r333/idx_metadata/listing_activity_block_page.html",
@@ -12,7 +12,7 @@
     },
     {
       "path": "data/r333/idx_metadata/stock_list_page.html",
-      "sha256": "9ea49b8625cbf18f857c9045034fbdbe759834efedad9db81eaaa421b30c6f99"
+      "sha256": "dd625a89c43584976a9fc217426342d09a9b584798008ab12a54b5d9efb287b9"
     }
   ],
   "asset_count": 15,
@@ -20,7 +20,7 @@
     {
       "path": "/_nuxt/07805a2.js",
       "url": "https://block.idx.id/_nuxt/07805a2.js",
-      "started_utc": "2026-10-26T10:39:20Z",
+      "started_utc": "2026-10-26T10:44:20Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/07805a2.js",
@@ -28,12 +28,12 @@
       "bytes": 10455,
       "saved_path": "data/r333/idx_metadata/frontend_assets/07805a2.js",
       "sha256": "87b89fe4758ab3fd782eec5dbee2387651be0aead0e031a7b1c78da45d1e5c3a",
-      "finished_utc": "2026-10-26T10:39:20Z"
+      "finished_utc": "2026-10-26T10:44:20Z"
     },
     {
       "path": "/_nuxt/1061432.js",
       "url": "https://block.idx.id/_nuxt/1061432.js",
-      "started_utc": "2026-10-26T10:39:20Z",
+      "started_utc": "2026-10-26T10:44:20Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/1061432.js",
@@ -41,12 +41,12 @@
       "bytes": 9249,
       "saved_path": "data/r333/idx_metadata/frontend_assets/1061432.js",
       "sha256": "cee6ff46e0c09c19417557f647b10736263627d043b332f3f8a2ae27ea1e0942",
-      "finished_utc": "2026-10-26T10:39:20Z"
+      "finished_utc": "2026-10-26T10:44:20Z"
     },
     {
       "path": "/_nuxt/8679653.js",
       "url": "https://block.idx.id/_nuxt/8679653.js",
-      "started_utc": "2026-10-26T10:39:20Z",
+      "started_utc": "2026-10-26T10:44:20Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/8679653.js",
@@ -54,12 +54,12 @@
       "bytes": 15798,
       "saved_path": "data/r333/idx_metadata/frontend_assets/8679653.js",
       "sha256": "629077fd672ed9d52eb598f56a6c44a0676ff4abe5833428e6c46bd8a2c828ee",
-      "finished_utc": "2026-10-26T10:39:20Z"
+      "finished_utc": "2026-10-26T10:44:21Z"
     },
     {
       "path": "/_nuxt/4f8d53a.js",
       "url": "https://block.idx.id/_nuxt/4f8d53a.js",
-      "started_utc": "2026-10-26T10:39:20Z",
+      "started_utc": "2026-10-26T10:44:21Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/4f8d53a.js",
@@ -67,12 +67,12 @@
       "bytes": 77678,
       "saved_path": "data/r333/idx_metadata/frontend_assets/4f8d53a.js",
       "sha256": "60e205ae7dc9b7051466437c73b5f77f5169592c822c59376adb6f116bfd373c",
-      "finished_utc": "2026-10-26T10:39:21Z"
+      "finished_utc": "2026-10-26T10:44:21Z"
     },
     {
       "path": "/_nuxt/c248a6c.js",
       "url": "https://block.idx.id/_nuxt/c248a6c.js",
-      "started_utc": "2026-10-26T10:39:21Z",
+      "started_utc": "2026-10-26T10:44:21Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/c248a6c.js",
@@ -80,12 +80,12 @@
       "bytes": 145575,
       "saved_path": "data/r333/idx_metadata/frontend_assets/c248a6c.js",
       "sha256": "365f906b5a6bf1c1c58659f3261d132bad6a8812a7946083e47b04fb6fcde0cf",
-      "finished_utc": "2026-10-26T10:39:22Z"
+      "finished_utc": "2026-10-26T10:44:22Z"
     },
     {
       "path": "/_nuxt/6c2e57d.js",
       "url": "https://block.idx.id/_nuxt/6c2e57d.js",
-      "started_utc": "2026-10-26T10:39:22Z",
+      "started_utc": "2026-10-26T10:44:22Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/6c2e57d.js",
@@ -93,12 +93,12 @@
       "bytes": 133160,
       "saved_path": "data/r333/idx_metadata/frontend_assets/6c2e57d.js",
       "sha256": "fb47826dc434afd6dd022bb378e8ca1db3ec73d707b9fb450032ed500f6c347a",
-      "finished_utc": "2026-10-26T10:39:23Z"
+      "finished_utc": "2026-10-26T10:44:23Z"
     },
     {
       "path": "/_nuxt/606f61c.js",
       "url": "https://block.idx.id/_nuxt/606f61c.js",
-      "started_utc": "2026-10-26T10:39:23Z",
+      "started_utc": "2026-10-26T10:44:23Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/606f61c.js",
@@ -106,12 +106,12 @@
       "bytes": 63403,
       "saved_path": "data/r333/idx_metadata/frontend_assets/606f61c.js",
       "sha256": "dacfb715d25e8e099e9d32d59c24ec07aea56b42ca25ae2aaf0c09b94a5904fc",
-      "finished_utc": "2026-10-26T10:39:23Z"
+      "finished_utc": "2026-10-26T10:44:24Z"
     },
     {
       "path": "/_nuxt/a694809.js",
       "url": "https://block.idx.id/_nuxt/a694809.js",
-      "started_utc": "2026-10-26T10:39:23Z",
+      "started_utc": "2026-10-26T10:44:24Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/a694809.js",
@@ -119,12 +119,12 @@
       "bytes": 150091,
       "saved_path": "data/r333/idx_metadata/frontend_assets/a694809.js",
       "sha256": "b90035a0c05af4a877aab7978064b22dc39034cc4629556ea7969faf889554cf",
-      "finished_utc": "2026-10-26T10:39:24Z"
+      "finished_utc": "2026-10-26T10:44:25Z"
     },
     {
       "path": "/_nuxt/62698ce.js",
       "url": "https://block.idx.id/_nuxt/62698ce.js",
-      "started_utc": "2026-10-26T10:39:24Z",
+      "started_utc": "2026-10-26T10:44:25Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/62698ce.js",
@@ -132,12 +132,12 @@
       "bytes": 26718,
       "saved_path": "data/r333/idx_metadata/frontend_assets/62698ce.js",
       "sha256": "6372567465edb42e71547c7306acd08d1893015ee245184387ebf3da9f12c4e6",
-      "finished_utc": "2026-10-26T10:39:25Z"
+      "finished_utc": "2026-10-26T10:44:25Z"
     },
     {
       "path": "/_nuxt/29f7192.js",
       "url": "https://block.idx.id/_nuxt/29f7192.js",
-      "started_utc": "2026-10-26T10:39:25Z",
+      "started_utc": "2026-10-26T10:44:25Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/29f7192.js",
@@ -145,12 +145,12 @@
       "bytes": 87027,
       "saved_path": "data/r333/idx_metadata/frontend_assets/29f7192.js",
       "sha256": "250fcbe25dde369372e4431e68400ecc8403e20df2e1f9eaf1c3562c4c2bc8a1",
-      "finished_utc": "2026-10-26T10:39:25Z"
+      "finished_utc": "2026-10-26T10:44:26Z"
     },
     {
       "path": "/_nuxt/168d8db.js",
       "url": "https://block.idx.id/_nuxt/168d8db.js",
-      "started_utc": "2026-10-26T10:39:25Z",
+      "started_utc": "2026-10-26T10:44:26Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/168d8db.js",
@@ -158,12 +158,12 @@
       "bytes": 208369,
       "saved_path": "data/r333/idx_metadata/frontend_assets/168d8db.js",
       "sha256": "1df8ccd90909891e0aceef7f833e8e88732ec37c1b309ee37ed2c2f95b81a2f5",
-      "finished_utc": "2026-10-26T10:39:27Z"
+      "finished_utc": "2026-10-26T10:44:28Z"
     },
     {
       "path": "/_nuxt/1671416.js",
       "url": "https://block.idx.id/_nuxt/1671416.js",
-      "started_utc": "2026-10-26T10:39:27Z",
+      "started_utc": "2026-10-26T10:44:28Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/1671416.js",
@@ -171,12 +171,12 @@
       "bytes": 133195,
       "saved_path": "data/r333/idx_metadata/frontend_assets/1671416.js",
       "sha256": "ab2c5a9bc3e6e3bcac0efd31c7105475c91857a0de97c5b1fe1baaf88e3b3fda",
-      "finished_utc": "2026-10-26T10:39:27Z"
+      "finished_utc": "2026-10-26T10:44:29Z"
     },
     {
       "path": "/_nuxt/dbf47ee.js",
       "url": "https://block.idx.id/_nuxt/dbf47ee.js",
-      "started_utc": "2026-10-26T10:39:27Z",
+      "started_utc": "2026-10-26T10:44:29Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/dbf47ee.js",
@@ -184,12 +184,12 @@
       "bytes": 26431,
       "saved_path": "data/r333/idx_metadata/frontend_assets/dbf47ee.js",
       "sha256": "8eeea64ccb57c901cb0a4725fde23f4140dcc00b7a1f2fd13bd109e28da6cf04",
-      "finished_utc": "2026-10-26T10:39:28Z"
+      "finished_utc": "2026-10-26T10:44:30Z"
     },
     {
       "path": "/_nuxt/fd0745a.js",
       "url": "https://block.idx.id/_nuxt/fd0745a.js",
-      "started_utc": "2026-10-26T10:39:28Z",
+      "started_utc": "2026-10-26T10:44:30Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/fd0745a.js",
@@ -197,12 +197,12 @@
       "bytes": 11641,
       "saved_path": "data/r333/idx_metadata/frontend_assets/fd0745a.js",
       "sha256": "69c9509524df0f2998a1bc5b5df6f92feac0af09b6022dd48402a95d3c62c334",
-      "finished_utc": "2026-10-26T10:39:28Z"
+      "finished_utc": "2026-10-26T10:44:30Z"
     },
     {
       "path": "/_nuxt/c96b7fb.js",
       "url": "https://block.idx.id/_nuxt/c96b7fb.js",
-      "started_utc": "2026-10-26T10:39:28Z",
+      "started_utc": "2026-10-26T10:44:30Z",
       "status": "FETCHED",
       "http_status": 200,
       "final_url": "https://block.idx.id/_nuxt/c96b7fb.js",
@@ -210,7 +210,7 @@
       "bytes": 28490,
       "saved_path": "data/r333/idx_metadata/frontend_assets/c96b7fb.js",
       "sha256": "2e61cbf8748937aaa50825da9a0e686d409efaf3c2d1acb0bf509dac31881bea",
-      "finished_utc": "2026-10-26T10:39:28Z"
+      "finished_utc": "2026-10-26T10:44:30Z"
     }
   ],
   "route_hits": [
@@ -240,4 +240,4 @@
     "{LazyListingContent:n(1658).default},mixins:[c.a],data:function(){return{tabNav:{id:[\"New Listing\",\"Delisting\",\"Relisting\"],en:[\"New Listing\",\"Delisting\",\"Relisting\"]},selectedTab:\"tab0\",firstSelected:0}},head:function(){return d({},this.$SEOMeta({metaTitle:this.pageTitle}))},computed:"
   ],
   "note": "A discovered endpoint is not treated as reliable until a separate request in an acquisition-only workflow succeeds and its raw response is committed."
-}\n
+}
