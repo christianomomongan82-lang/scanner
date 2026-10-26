@@ -71,17 +71,18 @@
     "url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40321267682",
     "purpose": "GitHub Actions Yahoo daily history acquisition only",
     "progress_at_manifest_creation": {
-      "batches_total": 97,
-      "batches_successful": 16,
       "tickers_total": 962,
-      "tickers_acquired": 160,
-      "rows_acquired": 158206,
-      "invalid_ohlc_in_completed_batches": 11,
-      "batch_failures": 0,
-      "ticker_attempts_in_completed_batches": 160,
-      "in_progress_batches": 3,
-      "queued_batches": 78,
-      "snapshot_note": "Snapshot captured while run 40321267682 is still running; verify Actions run and per-batch manifests for later progress."
+      "batches_total": 97,
+      "batches_successful": 44,
+      "batches_incomplete": 11,
+      "batches_running": 2,
+      "batches_queued": 40,
+      "tickers_acquired": 537,
+      "ticker_failures": 13,
+      "rows_acquired": 1341841,
+      "invalid_ohlc_in_acquired_csvs": 625,
+      "http_429_observed": 0,
+      "snapshot_note": "Latest queried state of workflow run 40321267682. Counts are a moving snapshot until all batches finish."
     },
     "progress_note": "This is a timestamped snapshot and will change as the run progresses; read per-batch manifests for current status.",
     "no_strategy_calculations": true
