@@ -1,0 +1,206 @@
+{
+  "experiment": "R333",
+  "purpose": "Audit ledger of Yahoo daily batch failures; data-only, no PnL",
+  "acquisition_run_id": 40321267682,
+  "acquisition_run_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40321267682",
+  "snapshot_utc": "2026-10-26T12:25Z",
+  "current_status": "IN_PROGRESS",
+  "queue_ticker_count": 962,
+  "batch_size": 10,
+  "intended_batches": 97,
+  "batch_status_snapshot": {
+    "fully_successful_batches": 44,
+    "incomplete_batches": 11,
+    "running_batches": 2,
+    "queued_batches": 40,
+    "successful_csvs": 537,
+    "failed_tickers": 13,
+    "unprocessed_tickers": 425,
+    "rows_in_successful_csvs": 1341841,
+    "invalid_ohlc_rows_in_downloaded_csvs": 625
+  },
+  "retry_policy": {
+    "attempts_max": 5,
+    "wait_seconds": [
+      30,
+      120,
+      600,
+      600
+    ],
+    "retry_rate_limit_and_transient_errors": true,
+    "observed_http_429_count_in_completed_manifests": 0,
+    "observed_http_404_retry_count": 0,
+    "why_404_not_retried": "Collector classifies HTTP 404 as non-transient; preserves it and stops rather than waiting through retry delays. The user specifically mandated stepped retries on 429. No 429 was observed in the processed batches at this snapshot."
+  },
+  "failed_batches": [
+    {
+      "batch_index": 25,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_025_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "ed94fde9f784a99fd589f64c9fb0052704ddedfd",
+      "committed_csvs": 8,
+      "failed": [
+        {
+          "ticker": "TECH.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        },
+        {
+          "ticker": "BTEL.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 38,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_038_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "e59e0d2a3b626225b3725cd3bd67d8c74c80823e",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "COWL.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 42,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_042_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "b6a3e78eeea4b83ed4ba4af444052ab192cbf935",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "GAMA.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 44,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_044_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "f0fb999d6a17ee4089d66de245ec49a6ae4077b3",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "GOLL.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 45,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_045_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "b73ae9a979ac597b4118fdedae6bd5e36de5a4b1",
+      "committed_csvs": 8,
+      "failed": [
+        {
+          "ticker": "HOME.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        },
+        {
+          "ticker": "HOTL.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 46,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_046_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "472588c414d0db5f731fec1c1c7abab2ac677567",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "IIKP.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 50,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_050_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "118c6ecddfb035b512b5404cbac7beb9236e8b8a",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "KBRI.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 51,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_051_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "f7b3a9d878b2d564b7a7890cd3b45cdd78d392db",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "LCGP.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 52,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_052_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "4abeddafcb8cf6a38933ea426e14e5e54c750b26",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "LMAS.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 53,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_053_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "e01e72addb4652c2ec41aed744b3e3df68f80a54",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "MAGP.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    },
+    {
+      "batch_index": 54,
+      "manifest": "data/r333/manifests/yahoo_batches/batch_054_run_40321267682_attempt_1.json",
+      "manifest_git_blob_sha": "f40cf866cbb16be7800d7b9738b078b9d62be94",
+      "committed_csvs": 9,
+      "failed": [
+        {
+          "ticker": "META.JK",
+          "stage": "Ticker.history",
+          "exception": "HTTPError",
+          "error_message": "HTTP Error 404: "
+        }
+      ]
+    }
+  ],
+  "interpretation": "HTTP 404 from Yahoo is a Yahoo symbol/data-availability failure. Some logs explicitly state 'No data found, symbol may be delisted'; it is not authoritative proof of IDX delisting. Do not label these as delisted without an official delisting record or independently verified source.",
+  "source_only": "No signal, PnL, PF, expectancy, trade counts, alpha or universe ranking was performed by the Actions jobs.",
+  "next_step": "Let remaining predeclared batches finish. Preserve every batch manifest. If any actual HTTP 429 occurs, retry it with the locked wait sequence; if 404 only, record exact ticker and continue the rest of the queue. This acquisition queue remains survivorship-biased."
+}
