@@ -1,0 +1,88 @@
+{
+  "experiment": "R333",
+  "family": "IDX_SMALLCAP_DAILY",
+  "snapshot_date": "2026-10-26",
+  "status": "DATA_INADEQUATE",
+  "alpha_verdict": "NOT_TESTED",
+  "smallcap_universe_frozen": false,
+  "final_universe_path": null,
+  "preregistration": "research/R333_LOCKED_PREREGISTRATION.md",
+  "data_amendment": "research/R333_DATA_AMENDMENT_20261026.md",
+  "active_listing_source": {
+    "endpoint": "https://block.idx.id/primary/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
+    "workflow_run_id": 40309248358,
+    "roster_count": 962,
+    "unique_codes": 962,
+    "raw_sha256": "92114ed2700e7b723b9d538de77009ac09561cff423fdda2c105088df066f6e9",
+    "parsed_sha256": "db85c01ded27208bad3610d5dc1f3931dd3033bad1b03c84d4f6b53726896e82",
+    "roster_csv": "data/r333/universe/current_idx_listed_roster.csv",
+    "roster_git_blob_sha": "943c4aba24ef097fd59d0781669321dd38d5f704"
+  },
+  "acquisition_queue": {
+    "path": "data/r333/universe/yahoo_daily_acquisition_roster.csv",
+    "git_blob_sha": "f095e4aed8ce6c90d50c372e67f654e8729f010e",
+    "current_listing_tickers": 962,
+    "batch_size": 10,
+    "intended_batches": 97,
+    "role": "data acquisition only",
+    "survivorship_label": "survivorship-biased",
+    "not_final_smallcap_universe": true
+  },
+  "required_definition": {
+    "cap_rule": "bottom 30th percentile cross-sectional IDX market capitalization at every monthly rebalance",
+    "point_in_time_inputs": [
+      "shares outstanding",
+      "listing/delisting membership",
+      "sector classification"
+    ],
+    "liquidity_rule": "median daily close×volume over previous 60 completed sessions >= IDR 500,000,000, with at least 54/60 valid sessions",
+    "correlation_dedup": "discovery 2016-2020 daily returns; absolute correlation >0.70 skips later candidate in predetermined liquidity order",
+    "selection_must_be_frozen_before_pnl": true
+  },
+  "failed_data_requirements": {
+    "delisted_history": "NOT_VERIFIED; zero delisting records successfully retrieved",
+    "point_in_time_shares": "NOT_VERIFIED; current shares cannot be applied retroactively",
+    "point_in_time_sectors": "NOT_VERIFIED",
+    "split_adjustment_semantics": "not independently verified",
+    "executable_spread": "not present in Yahoo daily OHLCV; spread model not yet supported by observed bid/ask"
+  },
+  "exact_delisting_errors": [
+    {
+      "url": "https://www.idx.co.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
+      "attempts": 3,
+      "http_status": 403,
+      "error": "Cloudflare challenge HTML; last response begins HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title>"
+    },
+    {
+      "url": "https://block.idx.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
+      "attempts": 3,
+      "http_status": 404,
+      "error": "HTTP 404: {\"Message\":\"No HTTP resource was found that matches the request URI 'http://localhost:8000/api/ListingActivity/GetDelisting?length=2000&start=0'.\"}"
+    },
+    {
+      "url": "https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan",
+      "attempts": 3,
+      "http_status": 403,
+      "error": "Cloudflare challenge HTML"
+    }
+  ],
+  "current_action_run": {
+    "run_id": 40321267682,
+    "url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40321267682",
+    "purpose": "GitHub Actions Yahoo daily history acquisition only",
+    "progress_at_manifest_creation": {
+      "tickers_total": 962,
+      "batch_size": 10,
+      "batches_total": 97,
+      "batches_successful": 10,
+      "tickers_acquired": 100,
+      "rows_acquired": 109029,
+      "invalid_ohlc_in_completed_batches": 9,
+      "batch_failures": 0
+    },
+    "progress_note": "This is a timestamped snapshot and will change as the run progresses; read per-batch manifests for current status.",
+    "no_strategy_calculations": true
+  },
+  "verdict_rule": "Keep DATA_INADEQUATE and alpha NOT_TESTED until the full data eligibility gate and point-in-time universe prerequisites are defensibly satisfied. Do not calculate PnL or claim edge from the survivor-only queue.",
+  "live_costs": "Broker fees, slippage, bid/ask spread/queue and ARA/ARB fill risk have not been verified in a real account."
+}
