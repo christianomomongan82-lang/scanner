@@ -79,6 +79,18 @@ jobs:
             git push origin HEAD:data/r333-idx-daily-yahoo
           fi
 
+
+      - name: Archive acquired CSV and manifest for sandbox handoff
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R333-Yahoo-daily-source-only-${{ github.run_id }}
+          path: |
+            data-repo/data/r333/yahoo_daily/
+            data-repo/data/r333/manifests/
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Mark an incomplete source acquisition as failed after committing logs
         if: steps.acquire.outputs.overall_status == 'INCOMPLETE'
         run: |
