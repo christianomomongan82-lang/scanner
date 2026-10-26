@@ -5,40 +5,63 @@ Smoke-test unduhan harga berhasil. Namun smoke test empat ticker bukan universe 
 
 - Branch riset: `research/r333-idx-smallcap-daily`
 - Branch data: `data/r333-idx-daily-yahoo`
-- Preregistrasi dan amandemen: [R333_LOCKED_PREREGISTRATION.md](R333_LOCKED_PREREGISTRATION.md)
+- Preregistrasi terkunci: [R333_LOCKED_PREREGISTRATION.md](R333_LOCKED_PREREGISTRATION.md) · [amendment akuisisi](R333_DATA_AMENDMENT_20261026.md) · [audit roster/delisting](R333_IDX_METADATA_AUDIT_20261026.md)
 - Collector Yahoo data-only: [r333_yahoo_source_only.py](r333_yahoo_source_only.py)
 - Workflow Yahoo data-only: [.github/workflows/r333-yahoo-daily-source-only.yml](../.github/workflows/r333-yahoo-daily-source-only.yml)
 - Governance: [SEARCH_GOVERNANCE_AND_SCORING_V1.md](https://github.com/christianomomongan82-lang/scanner/blob/local-backtest/market-response-model-v1-20261023/research/SEARCH_GOVERNANCE_AND_SCORING_V1.md)
 - Hasil cache ada di [branch data](https://github.com/christianomomongan82-lang/scanner/tree/data/r333-idx-daily-yahoo).
 
-## 1. Akuisisi Yahoo yang sah (GitHub Actions)
+## 1. Akuisisi Yahoo yang sah — GitHub Actions only
 
-Workflow run [40306721616](https://github.com/christianomomongan82-lang/scanner/actions/runs/40306721616) dan [40307108809](https://github.com/christianomomongan82-lang/scanner/actions/runs/40307108809) berhasil mengunduh keempat ticker melalui Python + `yfinance==1.7.0`, lalu commit CSV dan manifest ke branch data. Run terbaru yang direkonsiliasi dengan manifest: **40307108809**, selesai 2026-10-26 10:24:41 UTC. Artefak dari Actions digunakan untuk membawa cache tersebut ke sandbox tanpa mengakses Yahoo dari sandbox. Hash ZIP artefak Actions: `144ee050d6507c0b335d46b3f2fbe8a25a8fd6c16070a30449a26b4dcd4c4415`.
+Run terbaru yang diaudit: [40309094513](https://github.com/christianomomongan82-lang/scanner/actions/runs/40309094513). Status Actions **SUCCESS**. Akuisisi dijalankan dari runner GitHub, bukan dari sandbox: Python 3.12.15, yfinance 1.7.0, start 2010-01-01, interval 1d, end omitted (API current end), auto_adjust=False, actions=True, repair=False, keepna=True. Keempat ticker sukses pada attempt pertama; tidak ada error Yahoo pada run ini. Data dan manifest sudah di-commit ke branch data.
 
-Parameter: start `2010-01-01`, interval `1d`, `auto_adjust=False`, `actions=True`, end tidak ditentukan agar provider mengembalikan data terbaru. Versi yfinance dicatat di manifest. Run pertama [40306521287](https://github.com/christianomomongan82-lang/scanner/actions/runs/40306521287) adalah **kegagalan infrastruktur workflow sebelum akuisisi** karena cache pip meminta `requirements.txt/pyproject.toml`; bukan 429 dan bukan attempt pengambilan Yahoo. Setelah perbaikan, run berikutnya sukses pada attempt 1 untuk tiap ticker.
+- Manifest: [latest.json](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/latest.json), Git blob SHA a05692486f1da2062947c170555996f1be15965c.
+- Actions artifact [12642749466](https://github.com/christianomomongan82-lang/scanner/actions/runs/40309094513/artifacts/12642749466), ZIP SHA-256 6c33aaeecffe60442dc5d37ec25dcec578e1ee8b1cddc8f48021a14b8534c49f. Artefak diimpor ke sandbox hanya untuk audit dan checksum; sandbox tidak mengakses Yahoo.
+- Run [40306521287](https://github.com/christianomomongan82-lang/scanner/actions/runs/40306521287) sebelumnya gagal di setup workflow sebelum akuisisi Yahoo karena cache pip meminta requirements.txt/pyproject.toml. Itu kesalahan infrastruktur, bukan Yahoo 429. Setelah perbaikan, run data-only berhasil.
 
-Manifest sumber: [latest.json](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/latest.json).
+Semua file mencakup 4.131 baris tanggal dari 2010-01-04 sampai 2026-10-26. Hash SHA-256 di bawah diverifikasi ulang terhadap CSV pada artefak run 40309094513.
 
-| Ticker | Data rows | Tanggal pertama | Tanggal terakhir | File bytes | SHA-256 CSV | Invalid OHLC rows* | Corporate actions tercatat |
-|---|---:|---|---|---:|---|---:|---|
-| `^JKSE` | 4.131 | 2010-01-04 | 2026-10-26 | 446.298 | `08c46c6a8d59d831f03c4a9cecb2431fda831323db2e9cc3e5256139ccf45fd3` | 52 | 0 dividends, 0 splits |
-| `BBCA.JK` | 4.131 | 2010-01-04 | 2026-10-26 | 300.992 | `16f85b162f544a12bfab96d149aaa7509c23a1fc241c5be2c978a6b8ad881890` | 0 | 35 dividend rows, 1 split |
-| `BBRI.JK` | 4.131 | 2010-01-04 | 2026-10-26 | 425.609 | `f7e1aa2165a42f3c23e702cf19512e8d39b9084d9094b003cb8280533ae83b39` | 1 | 22 dividend rows, 2 splits |
-| `TLKM.JK` | 4.131 | 2010-01-04 | 2026-10-26 | 303.002 | `bb1dcc8c3608a3b9b1b19c208f6a65ba4aeb222b41b0547afc83e6303cac1689` | 4 | 19 dividend rows, 1 split |
+| Ticker | CSV | Rows | First–last | Bytes | SHA-256 | Invalid OHLC | Dividends / splits |
+|---|---|---:|---|---:|---|---:|---|
+| ^JKSE | IDX_JKSE.csv | 4.131 | 2010-01-04–2026-10-26 | 446.287 | 9d404c0248b346dfe5ea75545d4c054597ab73061777527e9f208a487ba3b203 | 52 | 0 / 0 |
+| BBCA.JK | BBCA_JK.csv | 4.131 | 2010-01-04–2026-10-26 | 301.116 | 68e873bb42470e68324a175a4298a8b93a2d0dc74c17963fcdf3a7256a2992cd | 0 | 35 / 1 |
+| BBRI.JK | BBRI_JK.csv | 4.131 | 2010-01-04–2026-10-26 | 425.536 | 28f50503e1495241421e8e8cf9bd7a4b0ef09277f514c884d1167a12cde03902 | 1 | 22 / 2 |
+| TLKM.JK | TLKM_JK.csv | 4.131 | 2010-01-04–2026-10-26 | 303.037 | 83cccf3388f14dc71a562c586a8bffda184effbdc8298301d3ac66b533d549f9 | 4 | 19 / 1 |
 
-*Audit defined an invalid row as missing/non-numeric OHLC or OHLC geometry that violates `Low ≤ Open/Close ≤ High`. The 52 `^JKSE` rows are blank OHLC rows (not tradable bars, often non-trading dates); `BBRI.JK` has a geometry issue on 2016-04-20; `TLKM.JK` has three geometry issues (2012-06-27, 2012-06-29, 2016-04-20) plus one blank row (2019-06-19). There are 0 duplicate dates in all four files and no missing required column names. Do not fill blanks or repair broken OHLC silently; preserve and exclude invalid rows by a preregistered rule if the data eventually qualifies.
+Quality audit: zero duplicate dates and no missing date/column names across all four CSVs. ^JKSE has 52 blank OHLC rows with Volume=0; these are preserved and not treated as tradable bars. BBRI.JK has a geometry violation on 2016-04-20 (Low > Open). TLKM.JK has geometry violations on 2012-06-27, 2012-06-29 and 2016-04-20, plus one blank OHLC row on 2019-06-19. Total invalid/blank OHLC rows = 57. Do not fill, interpolate or repair any without an explicitly registered rule.
 
-CSV columns: `Date, Open, High, Low, Close, Adj Close, Volume, Dividends, Stock Splits`. The raw-price request was `auto_adjust=False`, and `Adj Close` and action fields are preserved. Whether Yahoo's historical OHLC semantics fully represent pre-/post-split raw prices is not independently verified; presence of a split event field alone is not proof that all split handling is correct.
+CSV fields: Date, Open, High, Low, Close, Adj Close, Volume, Dividends, Stock Splits. Raw OHLC was requested explicitly and corporate-action fields were retained, but historical split/adjustment semantics and completeness are not independently established. This smoke set only validates the acquisition route; it is not the small-cap universe and does not pass the final data eligibility gate.
 
-## 2. Universe / official IDX source acquisition
+## 2. Universe and latest IDX delisting audit
 
-Sumber publik yang terverifikasi untuk membangun roster adalah halaman resmi IDX [Daftar Saham](https://block.idx.id/id/data-pasar/data-saham/) (table includes code/name/listing date/listed shares/board), [Ringkasan Saham](https://idx.co.id/id/data-pasar/ringkasan-perdagangan/ringkasan-saham/) (includes ticker, value, volume and listed shares), dan [Aktivitas Pencatatan](https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan) (tabs New Listing / Delisting / Relisting). Sumber web yang dibaca tidak membuktikan bahwa halaman roster kini mencakup seluruh delisted ticker sejak 2010 atau historical shares outstanding point-in-time. Karena itu, roster aktif saat ini tidak boleh langsung dianggap sebagai universe historis layak.
+### Current active roster found
 
-Workflow source-only resmi IDX sudah ditambahkan: [.github/workflows/r333-idx-metadata-source-only.yml](../.github/workflows/r333-idx-metadata-source-only.yml), collector [r333_idx_metadata_source_only.py](r333_idx_metadata_source_only.py). Run pertamanya, [40308051186](https://github.com/christianomomongan82-lang/scanner/actions/runs/40308051186), gagal karena SyntaxError di collector—itu kegagalan implementasi, bukan hasil dari sumber IDX. Script diperbaiki; run [40308193067](https://github.com/christianomomongan82-lang/scanner/actions/runs/40308193067) sedang dievaluasi dalam log saat laporan ini diperbarui. Belum ada roster yang dikunci, dan belum ada PnL. Hasil endpoint resmi dan status delisted coverage harus ditambahkan setelah run diperiksa.
+Official IDX source-only run [40309248358](https://github.com/christianomomongan82-lang/scanner/actions/runs/40309248358) returned an active-listed securities JSON from the block subdomain. Source response: HTTP 200, 131,862 bytes, SHA-256 92114ed2700e7b723b9d538de77009ac09561cff423fdda2c105088df066f6e9. Parsed JSON SHA-256 db85c01ded27208bad3610d5dc1f3931dd3033bad1b03c84d4f6b53726896e82. The source reported 962 rows and 962 unique codes, which are committed as data/r333/universe/current_idx_listed_roster.csv (Git blob SHA 943c4aba24ef097fd59d0781669321dd38d5f704).
 
-**Aturan universe tidak berubah:** small-cap = percentile ke-30 kapitalisasi pasar cross-section IDX tiap rebalance bulanan, menggunakan shares outstanding yang diketahui pada tanggal tersebut; filter median nilai transaksi 60 sesi sebelumnya ≥ Rp500 juta/hari dan minimum 54/60 sesi valid; ticker ordering dan dedup korelasi di discovery mengikuti preregistrasi. Daftar universe final dan provenance harus di-commit sebelum PnL.
+This roster gives current code, name, listing date, currently listed shares and board. It does **not** prove historical monthly constituents, historic shares outstanding or historical sector membership. It is not the frozen small-cap universe.
 
-Jika saham delisted atau saham beredar point-in-time tidak dapat diverifikasi, status data historis tetap `DATA_INADEQUATE`; jika analisis deskriptif bersyarat akhirnya dijalankan terhadap survivor-only roster, seluruh hasil wajib dilabeli **`survivorship-biased`** dan tidak boleh dipromosikan sebagai bukti edge tanpa koreksi bias eksplisit dan terukur.
+### Delisting records not acquired — exact errors
+
+The metadata workflow's overall conclusion was ROSTER_JSON_FOUND, not full delisting success. The manifest's selected_delistings field is null. The following source attempts failed:
+
+1. Primary IDX endpoint, [manifest](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/idx-metadata-latest.json): `https://www.idx.co.id/primary/ListingActivity/GetDelisting?start=0&length=2000` — 3 attempts, HTTP 403 Cloudflare. Last error begins: `HTTP 403: <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" ...`; last body 5,979 bytes, content type text/html.
+2. Block host endpoint: `https://block.idx.id/primary/ListingActivity/GetDelisting?start=0&length=2000` — 3 attempts, HTTP 404, 147 bytes. Exact body:
+    HTTP 404: {"Message":"No HTTP resource was found that matches the request URI 'http://localhost:8000/api/ListingActivity/GetDelisting?length=2000&start=0'."}
+3. Primary listing activity page: `https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan` — 3 attempts, HTTP 403 Cloudflare; last body 5,888 bytes.
+4. Block listing activity page: `https://block.idx.id/id/perusahaan-tercatat/aktivitas-pencatatan` — HTTP 200, 146,471 bytes, SHA-256 bef90e211f4ac562334267ba0054740010b786bda55dd48980073c0cd703223d. It loads the page but provides no delisted data table by itself.
+
+### Frontend scan
+
+Run [40309624911](https://github.com/christianomomongan82-lang/scanner/actions/runs/40309624911) successfully downloaded 15/15 official IDX JavaScript assets. It found the page code's data route string `/primary/ListingActivity/GetDelisting` and public monthly/quarterly delisted-company report routes. The strings are only endpoint-discovery evidence: no response of delisted records was fetched, so they do not remove the survivorship gap.
+
+### Current universe and survivor bias
+
+- Current active listing snapshot: 962 unique codes.
+- Delisted history records successfully acquired: **0** (this does not mean IDX has no delisted companies).
+- Point-in-time historical shares outstanding and sectors: **not verified**.
+- Therefore, a queue of these tickers for daily price acquisition is **survivorship-biased** and is only an acquisition/coverage roster, not a selected small-cap universe.
+- Keep the original small-cap definition: monthly cross-sectional bottom 30% market cap using point-in-time shares, plus the locked 60-session liquidity filter. Do not use the latest shares-outstanding field retroactively, do not choose names using PnL, and do not calculate strategy PnL until a defensible universe gate passes.
+- The deterministic 962-ticker acquisition queue and batch workflow are documented in the next data-only commits; they are not a permission to promote survivor-only results.
 
 ## 3. Gate status dan metrik
 
