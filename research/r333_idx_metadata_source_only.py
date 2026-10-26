@@ -22,6 +22,8 @@ SOURCES = [
     ("listed_securities_primary", "https://www.idx.co.id/primary/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000", "json"),
     ("listed_securities_umbraco", "https://www.idx.co.id/umbraco/Surface/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000", "json"),
     ("listed_securities_block", "https://block.idx.id/primary/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000", "json"),
+    ("delisting_activity_primary", "https://www.idx.co.id/primary/ListingActivity/GetDelisting?start=0&length=2000", "json"),
+    ("delisting_activity_block", "https://block.idx.id/primary/ListingActivity/GetDelisting?start=0&length=2000", "json"),
     ("listing_activity_page", "https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan", "html"),
     ("listing_activity_block_page", "https://block.idx.id/id/perusahaan-tercatat/aktivitas-pencatatan", "html"),
     ("stock_list_page", "https://block.idx.id/id/data-pasar/data-saham/daftar-saham/", "html"),
@@ -63,6 +65,18 @@ def has_stock_codes(obj: Any) -> bool:
         return any(has_stock_codes(value) for value in obj.values())
     return False
 
+def has_delisting_records(obj: Any) -> bool:
+    if isinstance(obj, list):
+        if obj and all(isinstance(item, dict) for item in obj[:10]):
+            keys = {str(k).lower() for item in obj[:10] for k in item.keys()}
+            has_code = bool(keys & {"stockcode", "code", "securitycode", "companyid", "companycode"})
+            has_date = bool(keys & {"delistingdate", "delistdate", "lasttradingdate", "date"})
+            return has_code and has_date
+        return any(has_delisting_records(item) for item in obj)
+    if isinstance(obj, dict):
+        return any(has_delisting_records(value) for value in obj.values())
+    return False
+
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     MANIFEST.mkdir(parents=True, exist_ok=True)
@@ -70,6 +84,7 @@ def main() -> int:
     session.headers.update(HEADERS)
     results: list[dict[str, Any]] = []
     valid_listing = None
+    valid_delistings = None
 
     for name, url, kind in SOURCES:
         entry: dict[str, Any] = {
@@ -113,6 +128,11 @@ def main() -> int:
                                     "source": name, "path": str(parsed_path.relative_to(DATA_ROOT)), "url": url,
                                     "candidate_records": len(find_record_arrays(parsed))
                                 }
+                            if name.startswith("delisting_activity") and has_delisting_records(parsed) and valid_delistings is None:
+                                valid_delistings = {
+                                    "source": name, "path": str(parsed_path.relative_to(DATA_ROOT)), "url": url,
+                                    "candidate_records": len(find_record_arrays(parsed))
+                                }
                         except Exception as parse_error:
                             entry["json_parse_error"] = f"{type(parse_error).__name__}: {parse_error}"
                     break
@@ -139,6 +159,7 @@ def main() -> int:
         "started_utc": results[0]["started_utc"] if results else now(),
         "finished_utc": now(), "official_domains_only": True,
         "overall_status": overall, "sources": results, "selected_roster": valid_listing,
+        "selected_delistings": valid_delistings,
         "limitations": [
             "Current listing metadata alone is not a historical point-in-time universe.",
             "A current roster does not prove complete delisted coverage or historical shares outstanding.",
