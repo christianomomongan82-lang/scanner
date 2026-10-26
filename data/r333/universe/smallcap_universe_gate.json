@@ -71,14 +71,17 @@
     "url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40321267682",
     "purpose": "GitHub Actions Yahoo daily history acquisition only",
     "progress_at_manifest_creation": {
-      "tickers_total": 962,
-      "batch_size": 10,
       "batches_total": 97,
-      "batches_successful": 10,
-      "tickers_acquired": 100,
-      "rows_acquired": 109029,
-      "invalid_ohlc_in_completed_batches": 9,
-      "batch_failures": 0
+      "batches_successful": 16,
+      "tickers_total": 962,
+      "tickers_acquired": 160,
+      "rows_acquired": 158206,
+      "invalid_ohlc_in_completed_batches": 11,
+      "batch_failures": 0,
+      "ticker_attempts_in_completed_batches": 160,
+      "in_progress_batches": 3,
+      "queued_batches": 78,
+      "snapshot_note": "Snapshot captured while run 40321267682 is still running; verify Actions run and per-batch manifests for later progress."
     },
     "progress_note": "This is a timestamped snapshot and will change as the run progresses; read per-batch manifests for current status.",
     "no_strategy_calculations": true
