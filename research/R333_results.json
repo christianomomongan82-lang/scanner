@@ -6,22 +6,24 @@
   "verdict": "DATA_INADEQUATE",
   "alpha_verdict": "NOT_TESTED",
   "verdict_scope": "data_eligibility_only",
-  "reason": "Yahoo smoke acquisition succeeded, but the four tickers are not a historical small-cap universe; invalid OHLC rows and point-in-time/delisted coverage remain unresolved.",
+  "reason": "Yahoo smoke acquisition succeeded via GitHub Actions, but 57 invalid/blank OHLC rows and lack of a verifiable point-in-time small-cap universe including delisted IDX shares remain. No strategy PnL has been calculated.",
   "source_acquisition": {
     "provider": "Yahoo Finance via yfinance",
-    "acquisition_method": "GitHub Actions only",
+    "acquisition_method": "GitHub Actions only; sandbox is not permitted to access Yahoo",
     "data_branch": "data/r333-idx-daily-yahoo",
     "workflow_run_ids": [
+      40306521287,
       40306721616,
       40307102612,
-      40307108809
+      40307108809,
+      40309094513
     ],
-    "current_verified_run_id": 40307108809,
-    "current_run_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40307108809",
-    "run_started_utc": "2026-10-26T10:24:00Z",
-    "run_finished_utc": "2026-10-26T10:24:41Z",
+    "current_verified_run_id": 40309094513,
+    "current_run_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40309094513",
+    "run_started_utc": "2026-10-26T10:39:50Z",
+    "run_finished_utc": "2026-10-26T10:39:51Z",
     "yfinance_version": "1.7.0",
-    "python_version": "3.12",
+    "python_version": "3.12.15",
     "start": "2010-01-01",
     "end": "2026-10-26",
     "interval": "1d",
@@ -36,13 +38,13 @@
     ],
     "all_smoke_tickers_succeeded_on_attempt": 1,
     "manifest_path": "data/r333/manifests/latest.json",
-    "manifest_blob_sha": "627895191213172a3b8fc3f2a54f579a5b8802f0",
-    "artifact_id": 12643301960,
-    "artifact_sha256": "144ee050d6507c0b335d46b3f2fbe8a25a8fd6c16070a30449a26b4dcd4c4415",
+    "manifest_git_blob_sha": "a05692486f1da2062947c170555996f1be15965c",
+    "artifact_id": 12642749466,
+    "artifact_sha256": "6c33aaeecffe60442dc5d37ec25dcec578e1ee8b1cddc8f48021a14b8534c49f",
     "first_workflow_failure": {
       "run_id": 40306521287,
-      "category": "workflow infrastructure failure, not Yahoo request failure",
-      "error": "actions/setup-python cache lookup failed because no requirements.txt or pyproject.toml was present; commit step also failed because initial data directories were not created."
+      "category": "workflow infrastructure failure before Yahoo request",
+      "error": "actions/setup-python pip-cache lookup required requirements.txt/pyproject.toml; the commit step also lacked initialized directories. Implementation was repaired; this was not a Yahoo 429."
     }
   },
   "cache_files": [
@@ -52,8 +54,8 @@
       "rows": 4131,
       "first_date": "2010-01-04",
       "last_date": "2026-10-26",
-      "bytes": 446298,
-      "sha256": "08c46c6a8d59d831f03c4a9cecb2431fda831323db2e9cc3e5256139ccf45fd3",
+      "bytes": 446287,
+      "sha256": "9d404c0248b346dfe5ea75545d4c054597ab73061777527e9f208a487ba3b203",
       "invalid_ohlc_rows": 52,
       "duplicate_dates": 0,
       "dividend_event_rows": 0,
@@ -65,8 +67,8 @@
       "rows": 4131,
       "first_date": "2010-01-04",
       "last_date": "2026-10-26",
-      "bytes": 300992,
-      "sha256": "16f85b162f544a12bfab96d149aaa7509c23a1fc241c5be2c978a6b8ad881890",
+      "bytes": 301116,
+      "sha256": "68e873bb42470e68324a175a4298a8b93a2d0dc74c17963fcdf3a7256a2992cd",
       "invalid_ohlc_rows": 0,
       "duplicate_dates": 0,
       "dividend_event_rows": 35,
@@ -78,8 +80,8 @@
       "rows": 4131,
       "first_date": "2010-01-04",
       "last_date": "2026-10-26",
-      "bytes": 425609,
-      "sha256": "f7e1aa2165a42f3c23e702cf19512e8d39b9084d9094b003cb8280533ae83b39",
+      "bytes": 425536,
+      "sha256": "28f50503e1495241421e8e8cf9bd7a4b0ef09277f514c884d1167a12cde03902",
       "invalid_ohlc_rows": 1,
       "duplicate_dates": 0,
       "dividend_event_rows": 22,
@@ -91,8 +93,8 @@
       "rows": 4131,
       "first_date": "2010-01-04",
       "last_date": "2026-10-26",
-      "bytes": 303002,
-      "sha256": "bb1dcc8c3608a3b9b1b19c208f6a65ba4aeb222b41b0547afc83e6303cac1689",
+      "bytes": 303037,
+      "sha256": "83cccf3388f14dc71a562c586a8bffda184effbdc8298301d3ac66b533d549f9",
       "invalid_ohlc_rows": 4,
       "duplicate_dates": 0,
       "dividend_event_rows": 19,
@@ -122,87 +124,163 @@
   "official_idx_universe_source": {
     "source_urls": [
       "https://block.idx.id/id/data-pasar/data-saham/",
+      "https://block.idx.id/primary/StockData/GetSecuritiesStock?code=&sector=&board=&start=0&length=2000",
       "https://idx.co.id/id/data-pasar/ringkasan-perdagangan/ringkasan-saham/",
-      "https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan"
+      "https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan",
+      "https://block.idx.id/id/perusahaan-tercatat/aktivitas-pencatatan"
     ],
     "initial_run_id": 40308051186,
-    "initial_failure": "SyntaxError in metadata collector before any IDX request; implementation failure, not evidence about source accessibility.",
-    "corrected_run_id": 40308193067,
-    "corrected_run_status": "in_progress_at_report_update",
-    "roster_frozen": false,
-    "delisted_coverage": "not yet verified",
-    "point_in_time_shares": "not yet verified",
-    "sector_point_in_time": "not yet verified"
+    "first_failure": "SyntaxError in metadata collector before request; implementation failure, not source access evidence.",
+    "corrected_roster_run_id": 40309248358,
+    "corrected_roster_run_status": "ROSTER_JSON_FOUND",
+    "asset_scan_run_id": 40309624911,
+    "asset_scan_status": "SUCCESS; 15/15 JavaScript assets fetched",
+    "roster_records": 962,
+    "roster_unique_codes": 962,
+    "roster_git_blob_sha": "943c4aba24ef097fd59d0781669321dd38d5f704",
+    "raw_response_sha256": "92114ed2700e7b723b9d538de77009ac09561cff423fdda2c105088df066f6e9",
+    "parsed_response_sha256": "db85c01ded27208bad3610d5dc1f3931dd3033bad1b03c84d4f6b53726896e82",
+    "roster_frozen_as_smallcap_universe": false,
+    "delisted_coverage": "NOT_VERIFIED; zero delisted records were acquired",
+    "point_in_time_shares": "NOT_VERIFIED",
+    "sector_point_in_time": "NOT_VERIFIED",
+    "selected_delistings": null,
+    "delisting_attempts": [
+      {
+        "url": "https://www.idx.co.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
+        "attempts": 3,
+        "status": "FAILED",
+        "http_status": 403,
+        "exact_error_prefix": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">",
+        "last_body_bytes": 5979
+      },
+      {
+        "url": "https://block.idx.id/primary/ListingActivity/GetDelisting?start=0&length=2000",
+        "attempts": 3,
+        "status": "FAILED",
+        "http_status": 404,
+        "exact_error": "HTTP 404: {\"Message\":\"No HTTP resource was found that matches the request URI 'http://localhost:8000/api/ListingActivity/GetDelisting?length=2000&start=0'.\"}",
+        "body_bytes": 147
+      },
+      {
+        "url": "https://www.idx.co.id/id/perusahaan-tercatat/aktivitas-pencatatan",
+        "attempts": 3,
+        "status": "FAILED",
+        "http_status": 403,
+        "exact_error_prefix": "HTTP 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">",
+        "last_body_bytes": 5888
+      },
+      {
+        "url": "https://block.idx.id/id/perusahaan-tercatat/aktivitas-pencatatan",
+        "attempts": 1,
+        "status": "FETCHED",
+        "http_status": 200,
+        "bytes": 146471,
+        "sha256": "bef90e211f4ac562334267ba0054740010b786bda55dd48980073c0cd703223d"
+      }
+    ],
+    "limitations": [
+      "Current listing metadata is not a historical point-in-time universe.",
+      "Current ticker snapshot is survivor-only; delisted data not retrieved.",
+      "Point-in-time shares and sectors are not available.",
+      "Survivor-only results must say survivorship-biased and cannot be used to claim edge without explicit measured correction."
+    ]
   },
   "survivorship": {
     "label": "survivorship-biased",
-    "why": "A current ticker roster alone does not show delisted stocks or point-in-time constituents.",
+    "reason": "Only a current IDX listed roster has been acquired; no delisted data or point-in-time constituents/shares/sectors have been verified.",
     "strategy_edge_claim_allowed": false,
-    "correction_required": "point-in-time listing/delisting universe, historical shares outstanding/sectors, and a defensible explicit correction; otherwise data remains inadequate"
+    "correction_required": "historical listing/delisting coverage, point-in-time shares and sectors, and measured survivorship-bias correction"
   },
   "gates": {
     "data_smoke_acquisition": {
-      "verdict": "PASS",
-      "reason": "4/4 tickers downloaded and committed by GitHub Actions."
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "csv_hash_integrity": {
-      "verdict": "PASS",
-      "reason": "SHA-256 hashes in current manifest match CSV files extracted from the Actions artifact."
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "ohlc_data_quality": {
-      "verdict": "FAIL",
-      "reason": "57 invalid or blank OHLC rows across the four smoke-test series; preserve missing rows and do not silently repair."
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "historical_universe_data_eligibility": {
-      "verdict": "NOT_PASSED",
-      "reason": "No frozen IDX small-cap roster yet; delisted, point-in-time shares and sector coverage not proven."
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "G1": {
-      "verdict": "NOT_RUN"
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "G2": {
-      "verdict": "NOT_RUN"
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "G3": {
-      "verdict": "NOT_RUN"
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "G4": {
-      "verdict": "NOT_RUN"
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "G5": {
-      "verdict": "NOT_RUN"
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "G6": {
-      "verdict": "NOT_RUN"
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "G7": {
-      "verdict": "NOT_RUN"
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "G8": {
-      "verdict": "NOT_RUN"
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "G9": {
-      "verdict": "NOT_RUN"
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "G10": {
-      "verdict": "NOT_RUN"
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     },
     "G11": {
-      "verdict": "NOT_RUN"
+      "verdict": "NOT_RUN",
+      "reason": "Strategy gate not run: no eligible point-in-time universe; only acquisition/coverage audit is allowed.",
+      "interpretation": "DATA_INADEQUATE; alpha NOT_TESTED"
     }
   },
   "metrics": {
     "trade_count": null,
-    "pf_realistic_cost": null,
-    "pf_cost_1_5x": null,
-    "pf_cost_2x": null,
+    "profit_factor_cost_1x": null,
+    "profit_factor_cost_1_5x": null,
+    "profit_factor_cost_2x": null,
     "expectancy_r": null,
     "total_r": null,
     "t_statistic": null,
     "bootstrap_ci95_mean_r_per_trade": null,
     "max_simultaneous_positions": null,
     "yearly_breakdown": null,
-    "matched_equal_weight_buy_and_hold": null,
+    "matched_equal_weight_basket": null,
     "ihsg_baseline": null
   },
   "live_execution": {
@@ -211,5 +289,14 @@
     "bid_ask_spread_queue_verified": false,
     "ara_arb_fill_risk_verified": false,
     "simulation_only": true
-  }
+  },
+  "smallcap_acquisition_queue": {
+    "status": "NOT_YET_COMMITTED_AT_THIS_CHECKPOINT",
+    "current_roster_count": 962,
+    "is_final_smallcap_universe": false,
+    "acquisition_only": true,
+    "p_n_l_allowed": false
+  },
+  "amendment_path": "research/R333_DATA_AMENDMENT_20261026.md",
+  "metadata_audit_path": "research/R333_IDX_METADATA_AUDIT_20261026.md"
 }
