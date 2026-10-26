@@ -1,10 +1,10 @@
 {
   "experiment": "R333",
   "purpose": "official IDX delisted-report page and frontend chunk investigation only; no strategy calculations",
-  "run_id": "40324779594",
+  "run_id": "40325017653",
   "run_attempt": "1",
-  "started_utc": "2026-10-26T12:44:04Z",
-  "finished_utc": "2026-10-26T12:44:06Z",
+  "started_utc": "2026-10-26T12:45:57Z",
+  "finished_utc": "2026-10-26T12:46:01Z",
   "data_only": true,
   "pnl_calculation": false,
   "sources": [
@@ -15,8 +15,8 @@
       "attempts": [
         {
           "attempt": 1,
-          "started_utc": "2026-10-26T12:44:04Z",
-          "finished_utc": "2026-10-26T12:44:05Z",
+          "started_utc": "2026-10-26T12:45:57Z",
+          "finished_utc": "2026-10-26T12:45:58Z",
           "http_status": 200,
           "final_url": "https://block.idx.id/en/market-data/statistical-reports/digital-statistic/monthly/corporate-action-of-listed-companies/delisted-company",
           "content_type": "text/html; charset=utf-8",
@@ -24,13 +24,13 @@
           "error": null
         }
       ],
-      "started_utc": "2026-10-26T12:44:04Z",
+      "started_utc": "2026-10-26T12:45:57Z",
       "final_url": "https://block.idx.id/en/market-data/statistical-reports/digital-statistic/monthly/corporate-action-of-listed-companies/delisted-company",
       "content_type": "text/html; charset=utf-8",
       "bytes": 163729,
       "sha256": "f49d5599cf0b8e3ccbb3c826ef464f924762859e12d0a8a3ba3af8a741aaea64",
       "saved_path": "data/r333/idx_metadata/delisted_report_probe/delisted_company_monthly_en_page.html",
-      "finished_utc": "2026-10-26T12:44:05Z",
+      "finished_utc": "2026-10-26T12:45:58Z",
       "script_srcs": [
         "/_nuxt/07805a2.js",
         "/_nuxt/1671416.js",
@@ -113,8 +113,8 @@
       "attempts": [
         {
           "attempt": 1,
-          "started_utc": "2026-10-26T12:44:05Z",
-          "finished_utc": "2026-10-26T12:44:05Z",
+          "started_utc": "2026-10-26T12:45:58Z",
+          "finished_utc": "2026-10-26T12:45:59Z",
           "http_status": 200,
           "final_url": "https://block.idx.id/id/data-pasar/laporan-statistik/digital-statistic/monthly/corporate-action-of-listed-companies/delisted-company",
           "content_type": "text/html; charset=utf-8",
@@ -122,13 +122,13 @@
           "error": null
         }
       ],
-      "started_utc": "2026-10-26T12:44:05Z",
+      "started_utc": "2026-10-26T12:45:58Z",
       "final_url": "https://block.idx.id/id/data-pasar/laporan-statistik/digital-statistic/monthly/corporate-action-of-listed-companies/delisted-company",
       "content_type": "text/html; charset=utf-8",
       "bytes": 164136,
       "sha256": "0bff5897a5e35a35c82258ba357ad5af0d5050dc091cddcf3dfc26aec36d3323",
       "saved_path": "data/r333/idx_metadata/delisted_report_probe/delisted_company_monthly_id_page.html",
-      "finished_utc": "2026-10-26T12:44:05Z",
+      "finished_utc": "2026-10-26T12:45:59Z",
       "script_srcs": [
         "/_nuxt/07805a2.js",
         "/_nuxt/1671416.js",
@@ -211,8 +211,8 @@
       "attempts": [
         {
           "attempt": 1,
-          "started_utc": "2026-10-26T12:44:05Z",
-          "finished_utc": "2026-10-26T12:44:06Z",
+          "started_utc": "2026-10-26T12:45:59Z",
+          "finished_utc": "2026-10-26T12:45:59Z",
           "http_status": 200,
           "final_url": "https://block.idx.id/_nuxt/274f983.js",
           "content_type": "application/javascript; charset=UTF-8",
@@ -220,13 +220,13 @@
           "error": null
         }
       ],
-      "started_utc": "2026-10-26T12:44:05Z",
+      "started_utc": "2026-10-26T12:45:59Z",
       "final_url": "https://block.idx.id/_nuxt/274f983.js",
       "content_type": "application/javascript; charset=UTF-8",
       "bytes": 34343,
       "sha256": "2d48c0d69e8f7c3d228f706f400be19001cd2aa280eea8f701d6c080b43af2db",
       "saved_path": "data/r333/idx_metadata/delisted_report_probe/delisted_report_frontend_chunk_428.js",
-      "finished_utc": "2026-10-26T12:44:06Z",
+      "finished_utc": "2026-10-26T12:45:59Z",
       "route_and_download_hits": [
         {
           "pattern": "delisted-company",
@@ -250,6 +250,182 @@
         }
       ],
       "contains_getdelisting": false
+    },
+    {
+      "name": "delisted_api_probe_2026_10",
+      "requested_url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2026&periodMonth=10&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy=",
+      "status": "FETCHED",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:45:59Z",
+          "finished_utc": "2026-10-26T12:45:59Z",
+          "http_status": 200,
+          "final_url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2026&periodMonth=10&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy=",
+          "content_type": "application/json; charset=utf-8",
+          "bytes": 3521,
+          "error": null
+        }
+      ],
+      "started_utc": "2026-10-26T12:45:59Z",
+      "final_url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2026&periodMonth=10&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy=",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 3521,
+      "sha256": "4c1453226b0c607b013ef019a175fe555e041a44ffd0290bd02b94fe62af4af6",
+      "saved_path": "data/r333/idx_metadata/delisted_report_probe/delisted_api_probe_2026_10.json",
+      "finished_utc": "2026-10-26T12:45:59Z",
+      "json_top_level_type": "dict",
+      "json_top_level_keys": [
+        "TableName",
+        "data",
+        "footer",
+        "notes",
+        "columns",
+        "FlattenColumns",
+        "NameRow",
+        "meta"
+      ],
+      "json_data_row_count": 0,
+      "json_sample_rows": [],
+      "json_meta": {
+        "search": "",
+        "orderBy": null,
+        "pageNumber": 1,
+        "pageSize": 2000,
+        "s": {
+          "columns": [],
+          "terms": ""
+        },
+        "totalItems": 0
+      }
+    },
+    {
+      "name": "delisted_api_probe_2020_01",
+      "requested_url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2020&periodMonth=1&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy=",
+      "status": "FETCHED",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:45:59Z",
+          "finished_utc": "2026-10-26T12:46:00Z",
+          "http_status": 200,
+          "final_url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2020&periodMonth=1&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy=",
+          "content_type": "application/json; charset=utf-8",
+          "bytes": 3943,
+          "error": null
+        }
+      ],
+      "started_utc": "2026-10-26T12:45:59Z",
+      "final_url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2020&periodMonth=1&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy=",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 3943,
+      "sha256": "dfc7373044349b4beeb52c451e44883951d226444cb77ced33dc696364eb777d",
+      "saved_path": "data/r333/idx_metadata/delisted_report_probe/delisted_api_probe_2020_01.json",
+      "finished_utc": "2026-10-26T12:46:00Z",
+      "json_top_level_type": "dict",
+      "json_top_level_keys": [
+        "TableName",
+        "data",
+        "footer",
+        "notes",
+        "columns",
+        "FlattenColumns",
+        "NameRow",
+        "meta"
+      ],
+      "json_data_row_count": 2,
+      "json_sample_rows": [
+        {
+          "code": "ITTG",
+          "issuerName": "Leo Investments Tbk",
+          "ListedShares": 1379000.0,
+          "MCap": 113078.0,
+          "RegPrice": 82.0,
+          "LastDate": "22 January 2020",
+          "ListingDate": "26 November 2001",
+          "DeListingDate": "23 January 2020"
+        },
+        {
+          "code": "BORN",
+          "issuerName": "Borneo Lumbung Energi & Metal Tbk",
+          "ListedShares": 17693000.0,
+          "MCap": 884650.0,
+          "RegPrice": 50.0,
+          "LastDate": "17 January 2020",
+          "ListingDate": "26 November 2010",
+          "DeListingDate": "20 January 2020"
+        }
+      ],
+      "json_meta": {
+        "search": "",
+        "orderBy": null,
+        "pageNumber": 1,
+        "pageSize": 2000,
+        "s": {
+          "columns": [],
+          "terms": ""
+        },
+        "totalItems": 2
+      }
+    },
+    {
+      "name": "delisted_api_probe_2010_01",
+      "requested_url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2010&periodMonth=1&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy=",
+      "status": "FETCHED",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-10-26T12:46:00Z",
+          "finished_utc": "2026-10-26T12:46:01Z",
+          "http_status": 200,
+          "final_url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2010&periodMonth=1&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy=",
+          "content_type": "application/json; charset=utf-8",
+          "bytes": 3721,
+          "error": null
+        }
+      ],
+      "started_utc": "2026-10-26T12:46:00Z",
+      "final_url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2010&periodMonth=1&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy=",
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 3721,
+      "sha256": "f1e4739459b085e85f9b266d0bf1de15cedd858771aa1cfe89aa40f083981279",
+      "saved_path": "data/r333/idx_metadata/delisted_report_probe/delisted_api_probe_2010_01.json",
+      "finished_utc": "2026-10-26T12:46:01Z",
+      "json_top_level_type": "dict",
+      "json_top_level_keys": [
+        "TableName",
+        "data",
+        "footer",
+        "notes",
+        "columns",
+        "FlattenColumns",
+        "NameRow",
+        "meta"
+      ],
+      "json_data_row_count": 1,
+      "json_sample_rows": [
+        {
+          "code": "BATI",
+          "issuerName": "BAT Indonesia Tbk",
+          "ListedShares": 66000.0,
+          "MCap": 33000.0,
+          "RegPrice": 500.0,
+          "LastDate": "22 December 2009",
+          "ListingDate": "20 December 1979",
+          "DeListingDate": "04 January 2010"
+        }
+      ],
+      "json_meta": {
+        "search": "",
+        "orderBy": null,
+        "pageNumber": 1,
+        "pageSize": 2000,
+        "s": {
+          "columns": [],
+          "terms": ""
+        },
+        "totalItems": 1
+      }
     }
   ],
   "discovered_official_script_urls": [
