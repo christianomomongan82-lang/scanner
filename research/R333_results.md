@@ -65,49 +65,70 @@ Run [40309624911](https://github.com/christianomomongan82-lang/scanner/actions/r
 
 ## 3. Full-roster Yahoo acquisition — current Actions snapshot
 
-Run [40321267682](https://github.com/christianomomongan82-lang/scanner/actions/runs/40321267682) menjalankan workflow data-only dari GitHub Actions. Job persiapan, validasi 962 ticker unik, dan syntax check kolektor berhasil. Semua CSV yang dihasilkan disimpan ke branch data beserta hash/manifest per ticker; tidak ada PnL di Actions.
+Run [40321267682](https://github.com/christianomomongan82-lang/scanner/actions/runs/40321267682) menjalankan workflow data-only dari GitHub Actions. Job persiapan, validasi queue 962 ticker unik, dan syntax check kolektor berhasil. Semua CSV yang berhasil diperoleh disimpan ke branch data bersama hash/manifest per ticker; tidak ada PnL di Actions.
 
-**Progres snapshot terakhir yang berhasil dibaca:**
+**Snapshot progres terakhir yang terverifikasi dari run dan batch manifest:**
 
 | Metrik | Status |
 |---|---:|
-| Queue sumber listing aktif (survivorship-biased) | 962 ticker |
-| Batch yang sudah selesai seluruhnya sukses | 44 / 97 |
-| Batch berstatus INCOMPLETE (hasil parsial tetap commit) | 11 |
-| Batch masih berjalan | 2 |
-| Batch masih queued | 40 |
-| CSV ticker berhasil tersimpan | 537 |
-| Total baris harian dalam CSV sukses/parsial yang tersimpan | 1.341.841 |
-| Baris OHLC invalid menurut pemeriksaan awal per-manifest | 625 |
-| Ticker yang tidak mendapatkan CSV Yahoo | 13 |
-| Error HTTP 429 di manifest batch yang diperiksa | 0 |
+| Queue sumber listing IDX yang sedang dipakai untuk coverage | 962 ticker |
+| Batch selesai penuh dengan semua ticker sukses | 52 / 97 |
+| Batch berstatus INCOMPLETE (CSV parsial dan manifest tetap di-commit) | 28 |
+| Batch masih berjalan | 3 |
+| Batch masih antre | 14 |
+| CSV ticker berhasil tersimpan | 767 |
+| Total baris harian dalam CSV sukses/parsial yang tersimpan | 2.140.303 |
+| Baris OHLC invalid menurut manifest awal per batch | 1.063 |
+| Ticker yang tidak mendapatkan CSV Yahoo | 33 |
+| Error HTTP 429 pada batch yang sudah selesai | 0 |
 
-Ini snapshot, bukan hasil akhir. Dari 11 batch yang belum lengkap, 13 ticker gagal pada tahap `Ticker.history` dengan exception persis `HTTP Error 404: `. Attempt tercatat satu kali per ticker; kolektor mengklasifikasikan 404 sebagai non-transient dan langsung menghentikan retry. Dua ticker pertama secara eksplisit menghasilkan pesan Yahoo `No data found, symbol may be delisted`; pesan ini **bukan** bukti delisting resmi. Tidak ada HTTP 429 yang terlihat dalam batch selesai pada snapshot ini, sehingga jadwal retry 30/120/600/600 detik tidak terpicu. Jika 429 terjadi di batch tersisa, kolektor menerapkan jadwal itu hingga maksimal lima attempt.
+Snapshot ini bukan hasil akhir. Tiga puluh tiga ticker gagal pada tahap `Ticker.history` dengan exception `HTTPError: HTTP Error 404: ` (lihat tabel di bawah dan failure ledger). Setiap 404 diklasifikasikan non-transient oleh collector, dicatat pada manifest, lalu tidak di-retry. Tidak ada 429 yang terlihat pada manifest yang telah selesai saat snapshot ini, jadi jadwal 30/120/600/600 detik belum terpicu. Jika 429 muncul pada batch tersisa, collector menerapkan jadwal tersebut sampai maksimal lima attempt.
 
-### Manifest kegagalan yang exact
+### Gagalnya ticker Yahoo — exact status dan log
 
-| Batch | Ticker gagal | Tahap | Error tersimpan | Manifest |
-|---:|---|---|---|---|
-| 25 | TECH.JK, BTEL.JK | `Ticker.history` | `HTTPError — HTTP Error 404: ` | [batch 025](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_025_run_40321267682_attempt_1.json) |
-| 38 | COWL.JK | `Ticker.history` | `HTTPError — HTTP Error 404: ` | [batch 038](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_038_run_40321267682_attempt_1.json) |
-| 42 | GAMA.JK | `Ticker.history` | `HTTPError — HTTP Error 404: ` | [batch 042](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_042_run_40321267682_attempt_1.json) |
-| 44 | GOLL.JK | `Ticker.history` | `HTTPError — HTTP Error 404: ` | [batch 044](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_044_run_40321267682_attempt_1.json) |
-| 45 | HOME.JK, HOTL.JK | `Ticker.history` | `HTTPError — HTTP Error 404: ` | [batch 045](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_045_run_40321267682_attempt_1.json) |
-| 46 | IIKP.JK | `Ticker.history` | `HTTPError — HTTP Error 404: ` | [batch 046](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_046_run_40321267682_attempt_1.json) |
-| 50 | KBRI.JK | `Ticker.history` | `HTTPError — HTTP Error 404: ` | [batch 050](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_050_run_40321267682_attempt_1.json) |
-| 51 | LCGP.JK | `Ticker.history` | `HTTPError — HTTP Error 404: ` | [batch 051](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_051_run_40321267682_attempt_1.json) |
-| 52 | LMAS.JK | `Ticker.history` | `HTTPError — HTTP Error 404: ` | [batch 052](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_052_run_40321267682_attempt_1.json) |
-| 53 | MAGP.JK | `Ticker.history` | `HTTPError — HTTP Error 404: ` | [batch 053](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_053_run_40321267682_attempt_1.json) |
-| 54 | META.JK | `Ticker.history` | `HTTPError — HTTP Error 404: ` | [batch 054](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/batch_054_run_40321267682_attempt_1.json) |
+| Batch | Ticker gagal | Tahap | Error yang disimpan |
+|---:|---|---|---|
+| 25 | TECH.JK, BTEL.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 38 | COWL.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 42 | GAMA.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 44 | GOLL.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 45 | HOME.JK, HOTL.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 46 | IIKP.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 50 | KBRI.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 51 | LCGP.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 52 | LMAS.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 53 | MAGP.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 54 | META.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 58 | OCAP.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 59 | PLAS.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 60 | POOL.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 62 | RIMO.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 63 | SCPI.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 64 | SIMA.JK, SKYB.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 65 | SMRU.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 66 | SRIL.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 67 | SUGI.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 70 | TRAM.JK, TRIL.JK, TRIO.JK | `Ticker.history` | `HTTPError: HTTP Error 404: `; TRIO also `possibly delisted; no timezone found` |
+| 71 | UNIT.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 72 | WSKT.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 74 | MTRA.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 75 | ARMY.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 76 | MABA.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 78 | JSKY.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
+| 79 | TDPM.JK | `Ticker.history` | `HTTPError: HTTP Error 404: ` |
 
-Error job conclusion ini **bukan** kegagalan commit: untuk masing-masing batch tersebut, CSV simbol lain dan manifest kegagalan berhasil di-commit ke data branch. Workflow sengaja menandai job sebagai failure agar koleksi yang tidak lengkap terlihat jelas. Kegagalan Yahoo 404 hanya berarti data ticker tidak tersedia melalui request tersebut; jangan menyamakan dengan catatan resmi delisting IDX. Ledger keseluruhan disimpan di [failure_ledger_run_40321267682.json](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/failure_ledger_run_40321267682.json).
+Manifest per-batch tetap sumber detail otoritatif, termasuk response code 404 dan log yfinance; daftar lengkap dan SHA Git tiap manifest tersimpan di [failure ledger JSON](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo_batches/failure_ledger_run_40321267682.json).
+
+Penting: sebagian ticker berasal dari roster IDX yang saat ini mencantumkan nama, jumlah saham, dan board, namun Yahoo tidak mengembalikan histori. Log `No data found, symbol may be delisted` hanya muncul untuk sebagian ticker (misalnya TECH.JK, BTEL.JK, TRIO.JK); itu **bukan** bukti resmi delisting dan dapat juga menunjukkan ticker Yahoo tidak tersedia atau mapping berbeda. Status delisting tetap harus diverifikasi dari sumber resmi.
+
+Job batch gagal bukan karena commit: setiap batch di tabel ini menyimpan CSV bagi ticker yang sukses beserta manifest error ke data branch. Workflow sengaja memberi job conclusion `failure` supaya hasil parsial tidak disalahartikan sebagai semua ticker berhasil.
 
 ### Implikasi data dan next step
 
-- Semua output hingga kini hanya berasal dari ticker pada snapshot listing IDX saat ini. Jadi hasil data ini **survivorship-biased**.
-- 625 baris OHLC invalid tetap dipertahankan. Tidak ada interpolasi, forward-fill atau auto-repair.
-- Metadata delisting resmi belum berhasil diperoleh; Yahoo 404 bukan pengganti data delisting resmi.
-- Sesudah seluruh 97 batch selesai, tarik artefak Actions ke sandbox dan jalankan hanya audit integritas cache (`research/r333_audit_yahoo_dataset.py`), bukan backtest. Preregistrasi mensyaratkan universe point-in-time dengan saham delisted, shares outstanding dan sektor historis; sampai itu terbukti, semua gate strategi tetap NOT_RUN dan PnL dilarang.
+- Data roster tetap **survivorship-biased** sampai data delisting point-in-time tersedia.
+- **1.063 baris OHLC invalid** dari 767 CSV sukses/parsial yang sudah selesai tetap dipertahankan; tak ada interpolasi, forward-fill, atau auto-repair.
+- Tidak ada bukti bahwa 962 kode pada queue merupakan universe aktif lengkap; 33 Yahoo 404 menambah kebutuhan mencocokkan roster dengan catatan listing/delisting resmi.
+- Setelah seluruh 97 batch selesai, tarik artefak Actions ke sandbox dan jalankan hanya audit integritas cache (`research/r333_audit_yahoo_dataset.py`), bukan backtest. Roster point-in-time, shares outstanding dan sektor historis belum diverifikasi, sehingga G1–G11 strategi tetap NOT_RUN dan PnL tetap dilarang.
 
 ## 3. Gate status dan metrik
 
