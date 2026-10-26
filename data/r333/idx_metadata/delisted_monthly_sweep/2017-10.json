@@ -1,0 +1,283 @@
+{
+  "source_url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2017&periodMonth=10&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy=",
+  "fetched_utc": "2026-10-26T14:45:44Z",
+  "source_response_sha256": "b055a970ad32b4ab4863366e1e9e7995bdc14524b1e9a6c7aad13440f4ebb52c",
+  "source_response_bytes": 3951,
+  "payload": {
+    "TableName": "",
+    "data": [
+      {
+        "code": "INVS",
+        "issuerName": "Inovisi Infracom Tbk.",
+        "ListedShares": 9990273.135,
+        "MCap": 1168861.956795,
+        "RegPrice": 117.0,
+        "LastDate": "12 February 2015",
+        "ListingDate": "03 July 2009",
+        "DeListingDate": "23 October 2017"
+      },
+      {
+        "code": "CPGT",
+        "issuerName": "Citra Maharlika Nusantara Corpora Tbk.",
+        "ListedShares": 3972222.1,
+        "MCap": 198611.105,
+        "RegPrice": 50.0,
+        "LastDate": "28 April 2017",
+        "ListingDate": "09 July 2013",
+        "DeListingDate": "19 October 2017"
+      }
+    ],
+    "footer": null,
+    "notes": null,
+    "columns": [
+      {
+        "Name": "No.",
+        "DecimalPlaces": 0,
+        "Format": "count",
+        "ClassName": "text-center nowrap",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "No."
+      },
+      {
+        "Name": "code",
+        "DecimalPlaces": 0,
+        "Format": "false",
+        "ClassName": "text-start text-left",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Code"
+      },
+      {
+        "Name": "issuerName",
+        "DecimalPlaces": 0,
+        "Format": "false",
+        "ClassName": "nowrap text-start text-left",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Company Name"
+      },
+      {
+        "Name": "ListingDate",
+        "DecimalPlaces": 0,
+        "Format": "fullDate",
+        "ClassName": "text-center",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Listing Date"
+      },
+      {
+        "Name": "DeListingDate",
+        "DecimalPlaces": 0,
+        "Format": "fullDate",
+        "ClassName": "text-center",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Delisting Date"
+      },
+      {
+        "Name": "ListedShares",
+        "DecimalPlaces": 0,
+        "Format": "true",
+        "ClassName": "text-right text-end",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Listed Shares, th.share"
+      },
+      {
+        "Name": "MCap",
+        "DecimalPlaces": 0,
+        "Format": "true",
+        "ClassName": "text-right text-end",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Market Cap, m.IDR"
+      },
+      {
+        "Name": "RegPrice",
+        "DecimalPlaces": 0,
+        "Format": "true",
+        "ClassName": "text-end text-right",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Regular Price"
+      },
+      {
+        "Name": "LastDate",
+        "DecimalPlaces": 0,
+        "Format": "fullDate",
+        "ClassName": "text-center",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Last Date"
+      }
+    ],
+    "FlattenColumns": [
+      {
+        "Name": "No.",
+        "DecimalPlaces": 0,
+        "Format": "count",
+        "ClassName": "text-center nowrap",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "No."
+      },
+      {
+        "Name": "code",
+        "DecimalPlaces": 0,
+        "Format": "false",
+        "ClassName": "text-start text-left",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Code"
+      },
+      {
+        "Name": "issuerName",
+        "DecimalPlaces": 0,
+        "Format": "false",
+        "ClassName": "nowrap text-start text-left",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Company Name"
+      },
+      {
+        "Name": "ListingDate",
+        "DecimalPlaces": 0,
+        "Format": "fullDate",
+        "ClassName": "text-center",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Listing Date"
+      },
+      {
+        "Name": "DeListingDate",
+        "DecimalPlaces": 0,
+        "Format": "fullDate",
+        "ClassName": "text-center",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Delisting Date"
+      },
+      {
+        "Name": "ListedShares",
+        "DecimalPlaces": 0,
+        "Format": "true",
+        "ClassName": "text-right text-end",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Listed Shares, th.share"
+      },
+      {
+        "Name": "MCap",
+        "DecimalPlaces": 0,
+        "Format": "true",
+        "ClassName": "text-right text-end",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Market Cap, m.IDR"
+      },
+      {
+        "Name": "RegPrice",
+        "DecimalPlaces": 0,
+        "Format": "true",
+        "ClassName": "text-end text-right",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Regular Price"
+      },
+      {
+        "Name": "LastDate",
+        "DecimalPlaces": 0,
+        "Format": "fullDate",
+        "ClassName": "text-center",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Last Date"
+      }
+    ],
+    "NameRow": null,
+    "meta": {
+      "search": "",
+      "orderBy": null,
+      "pageNumber": 1,
+      "pageSize": 2000,
+      "s": {
+        "columns": [],
+        "terms": ""
+      },
+      "totalItems": 2
+    }
+  }
+}

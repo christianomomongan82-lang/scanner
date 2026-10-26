@@ -1,0 +1,273 @@
+{
+  "source_url": "https://block.idx.id/primary/DigitalStatistic/GetApiDataPaginated?urlName=LINK_DELISTING&periodYear=2012&periodMonth=7&periodType=monthly&isPrint=False&cumulative=false&pageSize=2000&pageNumber=1&orderBy=",
+  "fetched_utc": "2026-10-26T14:45:20Z",
+  "source_response_sha256": "092b0914359317cd8a758b3e71ab6297f9ee12c9d01e5272ef65db63b516bd83",
+  "source_response_bytes": 3735,
+  "payload": {
+    "TableName": "",
+    "data": [
+      {
+        "code": "MBAI",
+        "issuerName": "Multibreeder Adirama Indonesia Tbk.",
+        "ListedShares": 75000.0,
+        "MCap": 975000.0,
+        "RegPrice": 13000.0,
+        "LastDate": "22 June 2012",
+        "ListingDate": "28 February 1994",
+        "DeListingDate": "02 July 2012"
+      }
+    ],
+    "footer": null,
+    "notes": null,
+    "columns": [
+      {
+        "Name": "No.",
+        "DecimalPlaces": 0,
+        "Format": "count",
+        "ClassName": "text-center nowrap",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "No."
+      },
+      {
+        "Name": "code",
+        "DecimalPlaces": 0,
+        "Format": "false",
+        "ClassName": "text-start text-left",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Code"
+      },
+      {
+        "Name": "issuerName",
+        "DecimalPlaces": 0,
+        "Format": "false",
+        "ClassName": "nowrap text-start text-left",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Company Name"
+      },
+      {
+        "Name": "ListingDate",
+        "DecimalPlaces": 0,
+        "Format": "fullDate",
+        "ClassName": "text-center",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Listing Date"
+      },
+      {
+        "Name": "DeListingDate",
+        "DecimalPlaces": 0,
+        "Format": "fullDate",
+        "ClassName": "text-center",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Delisting Date"
+      },
+      {
+        "Name": "ListedShares",
+        "DecimalPlaces": 0,
+        "Format": "true",
+        "ClassName": "text-right text-end",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Listed Shares, th.share"
+      },
+      {
+        "Name": "MCap",
+        "DecimalPlaces": 0,
+        "Format": "true",
+        "ClassName": "text-right text-end",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Market Cap, m.IDR"
+      },
+      {
+        "Name": "RegPrice",
+        "DecimalPlaces": 0,
+        "Format": "true",
+        "ClassName": "text-end text-right",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Regular Price"
+      },
+      {
+        "Name": "LastDate",
+        "DecimalPlaces": 0,
+        "Format": "fullDate",
+        "ClassName": "text-center",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Last Date"
+      }
+    ],
+    "FlattenColumns": [
+      {
+        "Name": "No.",
+        "DecimalPlaces": 0,
+        "Format": "count",
+        "ClassName": "text-center nowrap",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "No."
+      },
+      {
+        "Name": "code",
+        "DecimalPlaces": 0,
+        "Format": "false",
+        "ClassName": "text-start text-left",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Code"
+      },
+      {
+        "Name": "issuerName",
+        "DecimalPlaces": 0,
+        "Format": "false",
+        "ClassName": "nowrap text-start text-left",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Company Name"
+      },
+      {
+        "Name": "ListingDate",
+        "DecimalPlaces": 0,
+        "Format": "fullDate",
+        "ClassName": "text-center",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Listing Date"
+      },
+      {
+        "Name": "DeListingDate",
+        "DecimalPlaces": 0,
+        "Format": "fullDate",
+        "ClassName": "text-center",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Delisting Date"
+      },
+      {
+        "Name": "ListedShares",
+        "DecimalPlaces": 0,
+        "Format": "true",
+        "ClassName": "text-right text-end",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Listed Shares, th.share"
+      },
+      {
+        "Name": "MCap",
+        "DecimalPlaces": 0,
+        "Format": "true",
+        "ClassName": "text-right text-end",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Market Cap, m.IDR"
+      },
+      {
+        "Name": "RegPrice",
+        "DecimalPlaces": 0,
+        "Format": "true",
+        "ClassName": "text-end text-right",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Regular Price"
+      },
+      {
+        "Name": "LastDate",
+        "DecimalPlaces": 0,
+        "Format": "fullDate",
+        "ClassName": "text-center",
+        "Width": "",
+        "PropName": "",
+        "ColSpan": 1,
+        "RowSpan": 1,
+        "Order": 0,
+        "Children": [],
+        "Title": "Last Date"
+      }
+    ],
+    "NameRow": null,
+    "meta": {
+      "search": "",
+      "orderBy": null,
+      "pageNumber": 1,
+      "pageSize": 2000,
+      "s": {
+        "columns": [],
+        "terms": ""
+      },
+      "totalItems": 1
+    }
+  }
+}
