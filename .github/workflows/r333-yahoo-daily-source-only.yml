@@ -1,0 +1,86 @@
+name: R333 Yahoo daily source-only acquisition
+
+on:
+  push:
+    branches:
+      - research/r333-idx-smallcap-daily
+    paths:
+      - ".github/workflows/r333-yahoo-daily-source-only.yml"
+      - "research/r333_yahoo_source_only.py"
+  workflow_dispatch:
+    inputs:
+      tickers:
+        description: "Comma-separated Yahoo ticker list (max 10 per run); blank means initial smoke test"
+        required: false
+        default: "^JKSE,BBCA.JK,BBRI.JK,TLKM.JK"
+      start_date:
+        description: "Start date, never earlier than 2010-01-01"
+        required: false
+        default: "2010-01-01"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r333-yahoo-source-only
+  cancel-in-progress: false
+
+jobs:
+  acquire-and-commit:
+    name: Acquire raw daily source data only
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - name: Checkout research branch code
+        uses: actions/checkout@v4
+        with:
+          ref: research/r333-idx-smallcap-daily
+          path: research-code
+          persist-credentials: false
+
+      - name: Checkout data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data/r333-idx-daily-yahoo
+          path: data-repo
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install pinned collector dependencies
+        run: python -m pip install --disable-pip-version-check "yfinance==1.7.0" "pandas>=2.2,<4"
+
+      - name: Acquire daily source and write manifest (no strategy calculations)
+        id: acquire
+        env:
+          R333_DATA_ROOT: ${{ github.workspace }}/data-repo
+          R333_TICKERS: ${{ github.event.inputs.tickers || '' }}
+          R333_START_DATE: ${{ github.event.inputs.start_date || '2010-01-01' }}
+          R333_EVENT_NAME: ${{ github.event_name }}
+        run: python research-code/research/r333_yahoo_source_only.py
+
+      - name: Commit CSV and acquisition manifest to data branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd data-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/r333/yahoo_daily data/r333/manifests
+          if git diff --cached --quiet; then
+            echo "No new data or manifest changes to commit."
+          else
+            git commit -m "R333 data-only Yahoo acquisition run $GITHUB_RUN_ID"
+            git push origin HEAD:data/r333-idx-daily-yahoo
+          fi
+
+      - name: Mark an incomplete source acquisition as failed after committing logs
+        if: steps.acquire.outputs.overall_status == 'INCOMPLETE'
+        run: |
+          echo "One or more tickers failed after the registered retry budget. Exact stages/errors are saved in data/r333/manifests."
+          exit 1
