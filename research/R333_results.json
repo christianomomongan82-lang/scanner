@@ -291,10 +291,21 @@
     "simulation_only": true
   },
   "smallcap_acquisition_queue": {
-    "status": "NOT_YET_COMMITTED_AT_THIS_CHECKPOINT",
+    "status": "FROZEN_FOR_DATA_ACQUISITION_ONLY",
     "current_roster_count": 962,
+    "acquisition_queue_path": "data/r333/universe/yahoo_daily_acquisition_roster.csv",
+    "queue_readme_path": "data/r333/universe/YAHOO_ACQUISITION_QUEUE_README.md",
+    "queue_commit": "90506ff77d807505b405d3a46fcd145570387e4d",
+    "readme_commit": "debf5c9e42c74b9d5de7865cd88179a1e7cd4eac",
+    "source_roster_git_blob_sha": "943c4aba24ef097fd59d0781669321dd38d5f704",
+    "batch_size": 10,
+    "expected_batch_count": 97,
+    "pipeline_workflow": ".github/workflows/r333-yahoo-full-roster-source-only.yml",
+    "pipeline_collector": "research/r333_yahoo_batch_source_only.py",
+    "pipeline_status": "PREPARED; request file not yet committed at time of this result update",
     "is_final_smallcap_universe": false,
     "acquisition_only": true,
+    "survivorship_label": "survivorship-biased",
     "p_n_l_allowed": false
   },
   "amendment_path": "research/R333_DATA_AMENDMENT_20261026.md",
