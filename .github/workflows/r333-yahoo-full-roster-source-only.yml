@@ -29,6 +29,8 @@ jobs:
         with:
           ref: research/r333-idx-smallcap-daily
           persist-credentials: false
+      - name: Validate source-only collector syntax before launching batches
+        run: python -m py_compile research/r333_yahoo_batch_source_only.py
       - name: Checkout data branch and verify acquisition queue
         uses: actions/checkout@v4
         with:
