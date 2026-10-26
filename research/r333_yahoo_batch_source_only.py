@@ -109,6 +109,8 @@ def main() -> int:
     run_attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "1")
 
     request = json.loads(request_path.read_text(encoding="utf-8"))
+    if request.get("data_only") is not True or request.get("pnl_calculation") is not False:
+        raise SystemExit("REQUEST_POLICY_REJECTED: this collector accepts data-only requests and must not calculate PnL.")
     start_date = str(request.get("start_date", "2010-01-01"))
     interval = str(request.get("interval", "1d"))
     batch_size = int(request.get("batch_size", 10))
@@ -164,6 +166,7 @@ def main() -> int:
 
         for attempt in range(1, MAX_ATTEMPTS + 1):
             began = now()
+            retryable_error = False
             logbuf = io.StringIO()
             handler = logging.StreamHandler(logbuf)
             logger = logging.getLogger("yfinance")
@@ -200,6 +203,9 @@ def main() -> int:
             except Exception as exc:
                 diagnostic = logbuf.getvalue()
                 msg = str(exc) or repr(exc)
+                error_text = (msg + "\\n" + diagnostic).lower()
+                retryable_tokens = ("429", "too many requests", "rate limit", "ratelimit", "timed out", "timeout", "connection reset", "connection aborted", "temporarily unavailable", "http 500", "http 502", "http 503", "http 504", "curl: (")
+                retryable_error = any(token in error_text for token in retryable_tokens)
                 result["attempts"].append({
                     "attempt": attempt, "started_utc": began, "finished_utc": now(),
                     "stage": stage, "status": "ERROR", "error_type": type(exc).__name__,
@@ -213,6 +219,9 @@ def main() -> int:
                 logger.setLevel(old_level)
                 handler.close()
             if attempt < MAX_ATTEMPTS:
+                if not retryable_error:
+                    print(f"RETRY_SKIPPED_NONTRANSIENT ticker={ticker} after_attempt={attempt}; exact error retained in manifest")
+                    break
                 delay = WAIT_SECONDS[attempt - 1]
                 print(f"RETRY_WAIT ticker={ticker} next_attempt={attempt + 1} wait_seconds={delay}")
                 time.sleep(delay)
