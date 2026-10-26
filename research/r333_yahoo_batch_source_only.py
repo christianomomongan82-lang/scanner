@@ -163,6 +163,7 @@ def main() -> int:
         }
         success: pd.DataFrame | None = None
         date_values: list[str] | None = None
+        stopped_nontransient = False
 
         for attempt in range(1, MAX_ATTEMPTS + 1):
             began = now()
@@ -220,6 +221,7 @@ def main() -> int:
                 handler.close()
             if attempt < MAX_ATTEMPTS:
                 if not retryable_error:
+                    stopped_nontransient = True
                     print(f"RETRY_SKIPPED_NONTRANSIENT ticker={ticker} after_attempt={attempt}; exact error retained in manifest")
                     break
                 delay = WAIT_SECONDS[attempt - 1]
@@ -245,10 +247,11 @@ def main() -> int:
             })
         else:
             result.update({
-                "status": "FAILED_AFTER_MAX_ATTEMPTS",
+                "status": "FAILED_NONTRANSIENT" if stopped_nontransient else "FAILED_AFTER_MAX_ATTEMPTS",
                 "row_count": None, "first_date": None, "last_date": None,
                 "bytes": None, "sha256": None,
                 "failure_stage": result["attempts"][-1]["stage"] if result["attempts"] else "no-attempt",
+                "failure_reason": "non-transient error; retries intentionally skipped" if stopped_nontransient else "maximum retry budget exhausted",
             })
         ticker_results.append(result)
 
