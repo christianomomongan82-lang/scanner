@@ -1,7 +1,7 @@
 # R333 — Hasil dan Verdict
 
-**KEPUTUSAN DATA GATE: `DATA_INADEQUATE` — alpha `NOT_TESTED`.**  
-Audit baru membuktikan laporan bulanan resmi delisting bisa diambil untuk seluruh 202 bulan dari 2010-01 sampai 2026-10. Namun data gate R333 secara keseluruhan belum lolos: 41 dari 962 ticker OHLCV tidak terambil dari Yahoo, 1.124 baris OHLC invalid/blank, dan shares outstanding serta sektor point-in-time belum terverifikasi. Tahap 1 (universe small-cap historis dibekukan) dan Tahap 2/backtest tetap **NOT_RUN**; tidak ada perhitungan sinyal, trade, PF, expectancy, R, t-stat atau PnL.
+**KEPUTUSAN FINAL: `DATA_INADEQUATE` — alpha `NOT_TESTED`; R333 DITUTUP.**  
+Audit laporan delisting resmi lolos untuk 202 bulan dari 2010-01 sampai 2026-10, tetapi probe harga Yahoo terhadap 65 emiten delisted hanya menemukan 1 ticker dengan riwayat nonkosong dan hanya 1/65 (1,54%) dengan bar valid dalam 30 hari sebelum/sampai tanggal delisting. Ini jauh di bawah ambang 50%. Tahap 1 dan Tahap 2/backtest **tidak dijalankan**; tidak ada perhitungan sinyal, trade, PF, expectancy, R, t-stat atau PnL.
 
 - Branch riset: `research/r333-idx-smallcap-daily`
 - Branch data: `data/r333-idx-daily-yahoo`
@@ -124,9 +124,43 @@ Per-ticker exact logs and manifest hashes are in the [failure ledger](https://gi
 
 ### Survivorship warning and universe
 
-The queue was derived from the current IDX roster and is **`survivorship-biased`**. It has no successfully acquired official delisted records; shares outstanding and sector assignments point-in-time remain unverified. The Yahoo ticker history coverage does not fix those omissions and may be incomplete for names that are still present in the current roster.
+The queue was derived from the current IDX roster and is **`survivorship-biased`**. The official delisting-event report is now acquired for all 202 published monthly reports from 2010-01 to 2026-10, but this does not supply missing historical daily prices: a targeted Yahoo probe of those 65 delisted issuers found nonempty history for only one ticker. Point-in-time shares outstanding and sector assignments remain unverified.
 
 The registered small-cap universe remains **NOT FROZEN**: monthly bottom 30th percentile of market capitalization using point-in-time shares, with the pre-registered 60-session liquidity filter and discovery correlation de-duplication. Today's shares outstanding must not be used retroactively. The current-roster queue is for acquisition coverage only, not candidate selection, not a historical universe, and not an input to strategy PnL.
+
+## 3A. Yahoo daily prices for the 65 officially delisted issuers — final coverage audit
+
+GitHub Actions run [40468535153](https://github.com/christianomomongan82-lang/scanner/actions/runs/40468535153) tested all **65 unique codes** from the official delisted-event CSV using Yahoo Finance via `yfinance` only; the sandbox did not contact Yahoo. Parameters: `start=1970-01-01`, daily interval, provider current end omitted, `auto_adjust=False`, `actions=True`, `repair=False`, `keepna=True`. Event CSV SHA-256 matched the preregistered source: `0ccfb9ae8a5eacfbbe3e4936244a9c85df8cb737a227730baa47dda75b1fa6b3`.
+
+### Results
+
+| Metric | Result |
+|---|---:|
+| Officially delisted issuer codes tested | 65 |
+| Yahoo non-empty daily histories | **1/65 (1.54%)** |
+| Yahoo chart API HTTP 404 logged | **64/65 (98.46%)** |
+| Usable valid OHLC bar within 30 calendar days before/on delisting date | **1/65 (1.54%)** |
+| Last-valid-bar gap for that one ticker | **0 days** |
+| Tick­ers with a history range | 1 |
+| Date range of the only history returned | **2002-06-14 to 2026-10-27** |
+| Rows in that history | 6,034 |
+| Invalid/blank OHLC rows in that CSV | 1 |
+
+The only returned history was `INCF.JK` (Indo Komoditi Korpora Tbk.): CSV [INCF_JK.csv](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/yahoo_delisted_daily/INCF_JK.csv), SHA-256 `fc8f6986d79802afdaf26aca6d4b6b40f153ed71f99bf5915e4834f9847a8d07`. Its history spans 2002-06-14–2026-10-27, but the relevant last valid bar on or before the official delisting date is **2013-02-19**, the same day as the reported delisting. Its full-history end in 2026 must not be interpreted as an uninterrupted pre-delisting series; ticker/issuer relisting or code reuse can make the post-event tail irrelevant to the historical delisting event.
+
+For the other 64 ticker codes, the Yahoo chart API logs explicitly showed HTTP `response code=404`; yfinance then returned an empty history and `possibly delisted; no timezone found`. These 404s mean that free Yahoo did not give a usable daily series for those codes in this test. They are not used as evidence for whether IDX actually delisted a company—the official IDX event list is the listing-status source.
+
+### Saved evidence
+
+- GitHub Actions run: [40468535153](https://github.com/christianomomongan82-lang/scanner/actions/runs/40468535153), SUCCESS; no PnL code was run.
+- [Per-emiten result ledger and ranges](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/yahoo_delisted_daily/delisted_yahoo_coverage_2010-01_to_2026-10.csv), SHA-256 `b7ada9dc172478ae3ee5696d329fee55f589e34c4f0b2dc8ae742997daa15a94`, Git blob SHA `2a0d27e5370286bc92856aff322852828b2e92cb`.
+- [Machine-readable manifest with full logs](https://github.com/christianomomongan82-lang/scanner/blob/data/r333-idx-daily-yahoo/data/r333/manifests/yahoo-delisted-coverage-latest.json), Git blob SHA `4c5c15a142a6ff8941590d1b8f8ab5dd6355a9f0`.
+- Artifact ZIP digest: `sha256:8d21a9319ea5c21d74ae8fbd5733764325613744832851249bf5428ee67d239f`.
+- Data branch commit: [f63fd0226a0c8cc1b734c7f1ee1adbdceb076d53](https://github.com/christianomomongan82-lang/scanner/commit/f63fd0226a0c8cc1b734c7f1ee1adbdceb076d53).
+
+### Final interpretation
+
+Only **1.54%** of the 65 delisted names has even one valid Yahoo daily bar within 30 days of the reported delisting date. The 98.46% absence is not a small missing-data nuisance: it prevents a defensible historical basket/exit reconstruction and means the survivorship problem cannot be measured and corrected using this free Yahoo cache. The event dates from IDX help identify delisting dates, but they do not recreate the missing pre-delisting OHLCV. No alternative provider was tested or substituted in this one-task audit.
 
 ## 4. Gate status dan metrik
 
@@ -136,7 +170,7 @@ The registered small-cap universe remains **NOT FROZEN**: monthly bottom 30th pe
 | Cache integrity | **PASS for 921 acquired CSVs** | SHA, bytes, rows, date range and order match manifest; zero duplicate dates. |
 | Raw OHLC quality | **FAIL for clean-input eligibility** | 1,124 invalid/blank OHLC rows preserved in 459 files. |
 | Official delisted-event report coverage, 2010-01–2026-10 | **PASS** | 202/202 monthly reports acquired, 65 events/65 unique codes, and per-month `data` rows match `meta.totalItems`. Coverage is bounded to the published report window and does not provide Yahoo OHLCV. |
-| Historical price coverage for delisted names | **FAIL / INCOMPLETE** | 41 of 962 Yahoo ticker requests returned HTTP 404; no missing prices are reconstructed or silently filled. |
+| Historical price coverage for current-roster queue | **FAIL / INCOMPLETE** | 41 of 962 Yahoo ticker requests returned HTTP 404. |\n| Yahoo daily history for 65 official delisted names | **FAIL — 1/65 only** | 64 ticker histories returned empty data with logged HTTP 404; only INCF.JK had a valid bar within 30 days of delisting (1.54%). |\n| Survivorship correction using free Yahoo history | **IMPOSSIBLE WITH THIS CACHE** | Only 1.54% near-delisting coverage means 64 of 65 historical exit series are unavailable; the historical basket cannot be reconstructed defensibly. |
 | OHLC input quality | **FAIL for unqualified strategy testing** | 1,124 invalid/blank OHLC rows across the acquired 921 stock CSVs are preserved and not repaired. |
 | Point-in-time shares outstanding / sectors | **NOT VERIFIED** | Current listing metadata is not a historical monthly snapshot. |
 | Corporate-action adjustment semantics | **NOT FULLY VERIFIED** | Raw OHLC and corporate-action fields exist; completeness/adjustment semantics remain unaudited. |
@@ -153,4 +187,7 @@ Jangkar biaya publik broker yang sebelumnya dicatat adalah 0,1513% beli dan 0,25
 
 ## 6. Putusan terkini
 
-**R333 = `DATA_INADEQUATE`; alpha = `NOT_TESTED`.** Akses laporan resmi delisting bulanan **lulus** untuk 2010-01–2026-10 (202/202 bulan, 65 kejadian), tetapi **data gate R333 keseluruhan tetap tidak lolos**. Penyebabnya: 41 ticker belum memiliki OHLCV dari Yahoo, ada 1.124 baris OHLC invalid/blank, shares outstanding dan sektor point-in-time belum tersedia, serta semantik penyesuaian split/dividen belum diverifikasi secara independen. Universe small-cap historis karena itu belum bisa dibekukan secara defensible. Tahap 1 dan Tahap 2 tidak dijalankan; tidak ada klaim “tidak ada edge” atau “ada edge”.
+**survivorship tidak bisa dikoreksi dengan data gratis, R333 DITUTUP sebagai DATA_INADEQUATE final**.
+
+
+**R333 = `DATA_INADEQUATE` FINAL; alpha = `NOT_TESTED`; R333 DITUTUP.** Laporan resmi delisting tersedia untuk seluruh 202 bulan yang dipublikasikan dari 2010-01 sampai 2026-10, tetapi probe Yahoo terhadap 65 emiten delisted hanya memperoleh 1 riwayat harga (1.54%); **64/65 (98.46%) menghasilkan HTTP 404** dan hanya 1/65 punya bar valid dalam 30 hari sebelum/sampai delisting. Ditambah 1.124 baris OHLC invalid pada cache 921 saham umum, shares outstanding/sektor point-in-time yang belum terverifikasi, dan corporate-action semantics yang belum diaudit, universe historis tidak bisa dibangun secara defensible. Tahap 1 dan 2 tidak dijalankan. Ini kegagalan kelayakan data, **bukan** bukti bahwa alpha gagal.
