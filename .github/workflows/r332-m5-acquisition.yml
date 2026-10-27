@@ -266,6 +266,19 @@ jobs:
             git -C datarepo push origin HEAD:data/r332-dukascopy-m5
           fi
 
+      - name: Upload raw M5 caches for sandbox transfer (data only)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R332-Dukascopy-M5-raw-caches
+          path: |
+            datarepo/cache/*.csv.gz
+            datarepo/chunks/
+            datarepo/R332_cache_manifest.json
+            datarepo/R332_acquisition_status.json
+          if-no-files-found: warn
+          retention-days: 90
+
       - name: Upload acquisition manifest
         if: always()
         uses: actions/upload-artifact@v4
