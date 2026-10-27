@@ -1,0 +1,116 @@
+name: R333 delisted issuer Yahoo daily coverage — data only
+
+on:
+  push:
+    branches:
+      - research/r333-idx-smallcap-daily
+    paths:
+      - "research/R333_DELISTED_YAHOO_REQUEST.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r333-delisted-yahoo-coverage
+  cancel-in-progress: false
+
+jobs:
+  probe-delisted-yahoo-history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - name: Checkout research request and source-only collector
+        uses: actions/checkout@v4
+        with:
+          ref: research/r333-idx-smallcap-daily
+          path: research-code
+          persist-credentials: false
+      - name: Checkout data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data/r333-idx-daily-yahoo
+          path: data-repo
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned source acquisition dependencies
+        run: python -m pip install --disable-pip-version-check "yfinance==1.7.0" "pandas>=2.2,<4"
+      - name: Validate probe syntax and request
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile research-code/research/r333_delisted_yahoo_coverage_source_only.py
+          python - <<'PY'
+          import csv, hashlib, json
+          from pathlib import Path
+          req = json.loads(Path("research-code/research/R333_DELISTED_YAHOO_REQUEST.json").read_text(encoding="utf-8"))
+          data = Path("data-repo") / req["events_csv_path"]
+          raw = data.read_bytes()
+          actual = hashlib.sha256(raw).hexdigest()
+          if actual != req["events_csv_sha256"]:
+              raise SystemExit(f"EVENT_CSV_SHA256_MISMATCH expected={req['events_csv_sha256']} actual={actual}")
+          with data.open("r", newline="", encoding="utf-8-sig") as f:
+              rows = list(csv.DictReader(f))
+          codes = [str(row.get("code", "")).strip() for row in rows]
+          if len(rows) != 65 or len(set(codes)) != 65:
+              raise SystemExit(f"EVENT_SET_MISMATCH rows={len(rows)} unique_codes={len(set(codes))}")
+          if req.get("data_only") is not True or req.get("pnl_calculation") is not False:
+              raise SystemExit("REQUEST_POLICY_REJECTED")
+          print(f"R333_DELISTED_EVENT_SET_OK rows={len(rows)} unique_codes={len(set(codes))} sha256={actual}")
+          PY
+      - name: Probe all 65 delisted issuer histories on Yahoo only
+        id: probe
+        env:
+          R333_DATA_ROOT: ${{ github.workspace }}/data-repo
+          R333_REQUEST_PATH: ${{ github.workspace }}/research-code/research/R333_DELISTED_YAHOO_REQUEST.json
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: python research-code/research/r333_delisted_yahoo_coverage_source_only.py
+      - name: Commit every acquired ticker CSV plus exact result ledger to data branch
+        if: always()
+        shell: bash
+        env:
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          cd data-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/r333/yahoo_delisted_daily/
+          git add -f data/r333/manifests/yahoo-delisted-coverage-latest.json 2>/dev/null || true
+          for file in data/r333/manifests/yahoo_delisted_coverage_run_*.json; do
+            if [ -f "$file" ]; then git add "$file"; fi
+          done
+          if git diff --cached --quiet; then
+            echo "No Yahoo delisted coverage output to commit."
+            exit 0
+          fi
+          git commit -m "R333 Yahoo daily availability for official delisted issuers run $GITHUB_RUN_ID"
+          pushed=0
+          for attempt in $(seq 1 10); do
+            git fetch origin data/r333-idx-daily-yahoo
+            git rebase FETCH_HEAD || { git rebase --abort || true; sleep 2; continue; }
+            if git push origin HEAD:data/r333-idx-daily-yahoo; then
+              pushed=1
+              break
+            fi
+            sleep 2
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "DATA_BRANCH_PUSH_FAILED after 10 attempts" >&2
+            exit 1
+          fi
+      - name: Archive per-ticker histories, summary and manifest for audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R333-Yahoo-delisted-coverage-${{ github.run_id }}
+          path: |
+            data-repo/data/r333/yahoo_delisted_daily/
+            data-repo/data/r333/manifests/yahoo-delisted-coverage-latest.json
+            data-repo/data/r333/manifests/yahoo_delisted_coverage_run_*.json
+          if-no-files-found: warn
+          retention-days: 90
