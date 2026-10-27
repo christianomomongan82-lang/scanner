@@ -1,0 +1,42 @@
+{
+  "experiment": "R333",
+  "request_id": "R333_YAHOO_COVERAGE_FOR_65_OFFICIALLY_DELISTED_IDX_ISSUERS",
+  "purpose": "data-only check of Yahoo daily-bar availability and last valid OHLC bar relative to each official IDX delisting date",
+  "data_only": true,
+  "pnl_calculation": false,
+  "source": "Yahoo Finance via yfinance",
+  "acquisition_method": "GitHub Actions only; sandbox must not query Yahoo",
+  "research_branch": "research/r333-idx-smallcap-daily",
+  "data_branch": "data/r333-idx-daily-yahoo",
+  "events_csv_path": "data/r333/idx_metadata/delisted_monthly_sweep/delisted_events_2010-01_to_2026-10.csv",
+  "events_csv_sha256": "0ccfb9ae8a5eacfbbe3e4936244a9c85df8cb737a227730baa47dda75b1fa6b3",
+  "expected_event_rows": 65,
+  "expected_unique_codes": 65,
+  "ticker_suffix": ".JK",
+  "history_start_date": "1970-01-01",
+  "end_date": null,
+  "interval": "1d",
+  "auto_adjust": false,
+  "actions": true,
+  "repair": false,
+  "keepna": true,
+  "max_attempts_per_ticker": 5,
+  "retry_waits_seconds": [
+    30,
+    120,
+    600,
+    600
+  ],
+  "retry_policy": "Retry only rate-limit/transient errors with 30s, 120s, 600s, 600s waits. HTTP 404, empty-history and other non-transient errors are logged and not bypassed or replaced with another provider.",
+  "near_delisting_calendar_days": 30,
+  "near_delisting_definition": "A valid OHLC bar exists on or before official DeListingDate and the last valid OHLC bar on or before that date is no more than 30 calendar days earlier.",
+  "outputs": {
+    "per_ticker_csv_dir": "data/r333/yahoo_delisted_daily/",
+    "coverage_summary_csv": "data/r333/yahoo_delisted_daily/delisted_yahoo_coverage_2010-01_to_2026-10.csv",
+    "latest_manifest": "data/r333/manifests/yahoo-delisted-coverage-latest.json"
+  },
+  "no_fallback": true,
+  "no_backtest": true,
+  "no_universe_freeze": true,
+  "no_strategy_signals_pnl_pf": true
+}
