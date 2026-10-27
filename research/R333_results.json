@@ -3,10 +3,10 @@
   "family": "IDX_SMALLCAP_DAILY",
   "parent": null,
   "branch": "research/r333-idx-smallcap-daily",
-  "verdict": "DATA_INADEQUATE",
+  "verdict": "DATA_INADEQUATE_FINAL",
   "alpha_verdict": "NOT_TESTED",
-  "verdict_scope": "overall_data_eligibility",
-  "reason": "Official IDX monthly delisted-event reports are now acquired and internally reconciled for all 202 months from 2010-01 to 2026-10 (65 events). Overall data gate still fails: 41/962 ticker histories failed at Yahoo HTTP 404, 1,124 invalid/blank OHLC rows remain, point-in-time historical shares/sectors are not verified, split/dividend adjustment semantics remain unproven, and Yahoo daily OHLCV lacks executable bid/ask/queue data. No strategy PnL has been calculated.",
+  "verdict_scope": "final_data_eligibility_closure",
+  "reason": "The official delisting event list is available, but Yahoo returned nonempty daily history for only 1 of 65 delisted issuers (1.54%). The other 64/65 returned logged HTTP 404; only 1/65 had a valid bar within 30 calendar days before/on the official delisting date. Free Yahoo data cannot correct survivorship for this experiment. R333 is closed as DATA_INADEQUATE final; no backtest was run and alpha remains NOT_TESTED.",
   "source_acquisition": {
     "provider": "Yahoo Finance via yfinance",
     "acquisition_method": "GitHub Actions only; sandbox is not permitted to access Yahoo",
@@ -303,7 +303,8 @@
     "max_simultaneous_positions": null,
     "yearly_breakdown": null,
     "matched_equal_weight_basket": null,
-    "ihsg_baseline": null
+    "ihsg_baseline": null,
+    "reason": "NOT_RUN; data gate failed before any backtest."
   },
   "live_execution": {
     "broker_fee_verified_in_real_account": false,
@@ -447,8 +448,8 @@
     "snapshot_is_final": true,
     "no_strategy_calculations": true
   },
-  "strategy_gates": "NOT_RUN: official delisted-event report coverage is complete for 2010-01–2026-10, but 41 ticker OHLCV histories are unavailable, 1,124 invalid OHLC rows remain, and point-in-time shares/sectors are unverified.",
-  "data_audit_verdict": "DATA_INADEQUATE",
+  "strategy_gates": "NOT_RUN — R333 closed at data eligibility gate; no backtest was run.",
+  "data_audit_verdict": "DATA_INADEQUATE_FINAL",
   "audit_summary_path": "research/R333_YAHOO_CACHE_AUDIT_40321267682.md",
   "delisted_monthly_report_sweep": {
     "verdict": "PASS_FOR_OFFICIAL_PUBLISHED_REPORT_COVERAGE",
@@ -478,5 +479,78 @@
       "Historical shares outstanding and point-in-time sectors remain unverified."
     ]
   },
-  "delisted_monthly_report_audit_path": "research/R333_DELISTED_MONTHLY_SWEEP_AUDIT_20261026.md"
+  "delisted_monthly_report_audit_path": "research/R333_DELISTED_MONTHLY_SWEEP_AUDIT_20261026.md",
+  "final_closure": {
+    "closed": true,
+    "decision_phrase": "survivorship tidak bisa dikoreksi dengan data gratis, R333 DITUTUP sebagai DATA_INADEQUATE final",
+    "trigger": "Less than half of official delisted issuers have usable daily prices around their delisting date.",
+    "alpha_verdict": "NOT_TESTED",
+    "backtest_started": false,
+    "universe_frozen": false
+  },
+  "delisted_yahoo_coverage": {
+    "run_id": 40468535153,
+    "run_url": "https://github.com/christianomomongan82-lang/scanner/actions/runs/40468535153",
+    "run_conclusion": "success",
+    "acquisition_method": "GitHub Actions only; sandbox did not query Yahoo",
+    "source": "Yahoo Finance via yfinance 1.7.0",
+    "source_parameters": {
+      "start": "1970-01-01",
+      "end": "provider current end omitted",
+      "interval": "1d",
+      "auto_adjust": false,
+      "actions": true,
+      "repair": false,
+      "keepna": true,
+      "max_attempts_per_ticker": 5,
+      "retry_waits_seconds": [
+        30,
+        120,
+        600,
+        600
+      ]
+    },
+    "event_source_csv": "data/r333/idx_metadata/delisted_monthly_sweep/delisted_events_2010-01_to_2026-10.csv",
+    "event_source_sha256": "0ccfb9ae8a5eacfbbe3e4936244a9c85df8cb737a227730baa47dda75b1fa6b3",
+    "tested_event_rows": 65,
+    "tested_unique_codes": 65,
+    "nonempty_histories": 1,
+    "nonempty_histories_percent": 1.5385,
+    "tickers_with_explicit_chart_http_404": 64,
+    "tickers_with_explicit_chart_http_404_percent": 98.4615,
+    "tickers_with_no_history_other_than_explicit_404": 0,
+    "near_delisting_definition": "A valid OHLC daily bar on or before the official DeListingDate, with the last valid bar no more than 30 calendar days earlier.",
+    "tickers_with_valid_bar_within_30_days": 1,
+    "tickers_with_valid_bar_within_30_days_percent_of_65": 1.5385,
+    "nonempty_ticker_details": [
+      {
+        "code": "INCF",
+        "ticker": "INCF.JK",
+        "issuer_name": "Indo Komoditi Korpora Tbk.",
+        "history_rows": 6034,
+        "first_bar_date": "2002-06-14",
+        "last_bar_date": "2026-10-27",
+        "valid_ohlc_rows": 6033,
+        "invalid_or_blank_ohlc_rows": 1,
+        "official_delisting_date": "2013-02-19",
+        "last_valid_bar_on_or_before_delisting": "2013-02-19",
+        "gap_calendar_days": 0,
+        "csv_path": "data/r333/yahoo_delisted_daily/INCF_JK.csv",
+        "csv_sha256": "fc8f6986d79802afdaf26aca6d4b6b40f153ed71f99bf5915e4834f9847a8d07"
+      }
+    ],
+    "summary_csv": {
+      "path": "data/r333/yahoo_delisted_daily/delisted_yahoo_coverage_2010-01_to_2026-10.csv",
+      "sha256": "b7ada9dc172478ae3ee5696d329fee55f589e34c4f0b2dc8ae742997daa15a94",
+      "git_blob_sha": "2a0d27e5370286bc92856aff322852828b2e92cb"
+    },
+    "manifest": {
+      "path": "data/r333/manifests/yahoo-delisted-coverage-latest.json",
+      "git_blob_sha": "4c5c15a142a6ff8941590d1b8f8ab5dd6355a9f0"
+    },
+    "data_branch_commit": "f63fd0226a0c8cc1b734c7f1ee1adbdceb076d53",
+    "artifact_sha256": "8d21a9319ea5c21d74ae8fbd5733764325613744832851249bf5428ee67d239f",
+    "interpretation": "Only 1.54% have near-delisting valid Yahoo price coverage, far below 50%. Free Yahoo data cannot correct survivorship in this data set.",
+    "decision": "survivorship tidak bisa dikoreksi dengan data gratis, R333 DITUTUP sebagai DATA_INADEQUATE final"
+  }
 }
