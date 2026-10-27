@@ -1,0 +1,2640 @@
+code,ticker,issuer_name,listing_date,reported_delisting_date,report_month,history_status,has_any_history,history_rows,first_bar_date,last_bar_date,valid_ohlc_rows,invalid_or_blank_ohlc_rows,last_valid_bar_on_or_before_delisting,gap_calendar_days_to_delisting,has_valid_bar_within_30_calendar_days,csv_path,csv_bytes,csv_sha256,final_error
+AQUA,AQUA.JK,Aqua Golden Mississippi Tbk.,1990-03-01,2011-04-01,2011-04,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"ring _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+       Entering _save_cookie_curlCffi()
+       Exiting _save_cookie_curlCffi()
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+        Entering _load_cookie_curlCffi()
+        Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker AQUA.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+get_raw_json(): https://query2.finance.yahoo.com/v10/finance/quoteSummary/AQUA.JK
+ Entering get()
+  Entering _make_request()
+url=https://query2.finance.yahoo.com/v10/finance/quoteSummary/AQUA.JK
+params={'modules': 'financialData,quoteType,defaultKeyStatistics,assetProfile,summaryDetail', 'corsDomain': 'finance.yahoo.com', 'formatted': 'false', 'symbol': 'AQUA.JK', 'lang': 'en-US', 'region': 'US'}
+   Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+    Entering _get_crumb_csrf()
+reusing crumb
+    Exiting _get_crumb_csrf()
+   Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+   Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+    Entering _get_cookie_and_crumb_basic()
+     Entering _get_cookie_basic()
+      Entering _load_cookie_curlCffi()
+      Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+     Exiting _get_cookie_basic()
+     Entering _get_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_basic()
+    Exiting _get_cookie_and_crumb_basic()
+   Exiting _get_cookie_and_crumb()
+response code=404
+  Exiting _make_request()
+ Exiting get()
+HTTP Error 404: {""quoteSummary"":{""result"":null,""error"":{""code"":""Not Found"",""description"":""Quote not found for symbol: AQUA.JK""}}}
+get_raw_json(): https://query1.finance.yahoo.com/v7/finance/quote?
+ Entering get()
+  Entering _make_request()
+url=https://query1.finance.yahoo.com/v7/finance/quote?
+params={'symbols': 'AQUA.JK', 'formatted': 'false', 'lang': 'en-US', 'region': 'US'}
+   Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+    Entering _get_cookie_and_crumb_basic()
+     Entering _get_cookie_basic()
+reusing cookie
+     Exiting _get_cookie_basic()
+     Entering _get_crumb_basic()
+reusing crumb
+     Exiting _get_crumb_basic()
+    Exiting _get_cookie_and_crumb_basic()
+   Exiting _get_cookie_and_crumb()
+response code=200
+  Exiting _make_request()
+ Exiting get()
+ Entering get()
+  Entering _make_request()
+url=https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/AQUA.JK?symbol=AQUA.JK&type=trailingPegRatio&period1=1777334400&period2=1793145600
+params=None
+   Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+    Entering _get_cookie_and_crumb_basic()
+     Entering _get_cookie_basic()
+reusing cookie
+     Exiting _get_cookie_basic()
+     Entering _get_crumb_basic()
+reusing crumb
+     Exiting _get_crumb_basic()
+    Exiting _get_cookie_and_crumb_basic()
+   Exiting _get_cookie_and_crumb()
+response code=200
+  Exiting _make_request()
+ Exiting get()
+ Entering history()
+$AQUA.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+IDKM,IDKM.JK,Indosiar Karya Media Tbk,2004-10-04,2013-05-01,2013-05,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/IDKM.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker IDKM.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+get_raw_json(): https://query2.finance.yahoo.com/v10/finance/quoteSummary/IDKM.JK
+ Entering get()
+  Entering _make_request()
+url=https://query2.finance.yahoo.com/v10/finance/quoteSummary/IDKM.JK
+params={'modules': 'financialData,quoteType,defaultKeyStatistics,assetProfile,summaryDetail', 'corsDomain': 'finance.yahoo.com', 'formatted': 'false', 'symbol': 'IDKM.JK', 'lang': 'en-US', 'region': 'US'}
+   Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+    Entering _get_crumb_csrf()
+reusing crumb
+    Exiting _get_crumb_csrf()
+   Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+   Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+    Entering _get_cookie_and_crumb_basic()
+     Entering _get_cookie_basic()
+      Entering _load_cookie_curlCffi()
+      Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+     Exiting _get_cookie_basic()
+     Entering _get_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_basic()
+    Exiting _get_cookie_and_crumb_basic()
+   Exiting _get_cookie_and_crumb()
+response code=404
+  Exiting _make_request()
+ Exiting get()
+HTTP Error 404: {""quoteSummary"":{""result"":null,""error"":{""code"":""Not Found"",""description"":""Quote not found for symbol: IDKM.JK""}}}
+get_raw_json(): https://query1.finance.yahoo.com/v7/finance/quote?
+ Entering get()
+  Entering _make_request()
+url=https://query1.finance.yahoo.com/v7/finance/quote?
+params={'symbols': 'IDKM.JK', 'formatted': 'false', 'lang': 'en-US', 'region': 'US'}
+   Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+    Entering _get_cookie_and_crumb_basic()
+     Entering _get_cookie_basic()
+reusing cookie
+     Exiting _get_cookie_basic()
+     Entering _get_crumb_basic()
+reusing crumb
+     Exiting _get_crumb_basic()
+    Exiting _get_cookie_and_crumb_basic()
+   Exiting _get_cookie_and_crumb()
+response code=200
+  Exiting _make_request()
+ Exiting get()
+ Entering get()
+  Entering _make_request()
+url=https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/IDKM.JK?symbol=IDKM.JK&type=trailingPegRatio&period1=1777334400&period2=1793145600
+params=None
+   Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+    Entering _get_cookie_and_crumb_basic()
+     Entering _get_cookie_basic()
+reusing cookie
+     Exiting _get_cookie_basic()
+     Entering _get_crumb_basic()
+reusing crumb
+     Exiting _get_crumb_basic()
+    Exiting _get_cookie_and_crumb_basic()
+   Exiting _get_cookie_and_crumb()
+response code=200
+  Exiting _make_request()
+ Exiting get()
+ Entering history()
+$IDKM.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+RINA,RINA.JK,Katarina Utama Tbk,2009-07-14,2012-10-01,2012-10,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/RINA.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker RINA.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$RINA.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+MBAI,MBAI.JK,Multibreeder Adirama Indonesia Tbk.,1994-02-28,2012-07-02,2012-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/MBAI.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker MBAI.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$MBAI.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+BBNP,BBNP.JK,Bank Nusantara Parahyangan Tbk,2001-01-10,2019-05-02,2019-05,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/BBNP.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker BBNP.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$BBNP.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+MFIN,MFIN.JK,Mandala Multifinance Tbk,2005-09-06,2025-10-02,2025-10,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/MFIN.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker MFIN.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$MFIN.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+SIMM,SIMM.JK,Surya Intrindo Makmur Tbk,2000-03-28,2012-12-03,2012-12,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/SIMM.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker SIMM.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$SIMM.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+SOBI,SOBI.JK,Sorini Agro Asia Corporindo Tbk,1992-08-03,2017-07-03,2017-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/SOBI.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker SOBI.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$SOBI.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+BATI,BATI.JK,BAT Indonesia Tbk,1979-12-20,2010-01-04,2010-01,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/BATI.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker BATI.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$BATI.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+ANTA,ANTA.JK,Anta Express Tour & Travel Service Tbk,2002-01-18,2011-10-04,2011-10,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/ANTA.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker ANTA.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$ANTA.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+FINN,FINN.JK,PT First Indo American Leasing Tbk.,2017-06-08,2021-05-05,2021-05,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/FINN.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker FINN.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$FINN.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+APOL,APOL.JK,Arpeni Pratama Ocean Line Tbk,2005-06-22,2020-04-06,2020-04,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/APOL.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker APOL.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$APOL.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+TURI,TURI.JK,Tunas Ridean Tbk,1995-05-16,2023-04-06,2023-04,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/TURI.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker TURI.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$TURI.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+UNTX,UNTX.JK,Unitex,1994-07-06,2015-12-07,2015-12,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/UNTX.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker UNTX.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$UNTX.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+JPRS,JPRS.JK,Jaya Pari Steel Tbk,1989-08-04,2018-10-08,2018-10,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/JPRS.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker JPRS.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$JPRS.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+BAEK,BAEK.JK,Bank Ekonomi Raharja Tbk,2008-01-08,2015-09-10,2015-09,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/BAEK.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker BAEK.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$BAEK.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+TMPI,TMPI.JK,PT Sigmagold Inti Perkasa Tbk.,1995-01-26,2019-11-11,2019-11,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/TMPI.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker TMPI.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$TMPI.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+CPDW,CPDW.JK,Indo Setu Bara Resources Tbk.,1990-06-18,2013-09-12,2013-09,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/CPDW.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker CPDW.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$CPDW.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+TRUB,TRUB.JK,Truba Alam Manunggal Engineering Tbk.,2006-10-16,2018-09-12,2018-09,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/TRUB.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker TRUB.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$TRUB.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+GMCW,GMCW.JK,Grahamas Citrawisata Tbk,1995-02-14,2019-08-13,2019-08,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/GMCW.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker GMCW.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$GMCW.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+PAFI,PAFI.JK,Panasia Filament Inti Tbk,1997-07-22,2013-03-14,2013-03,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/PAFI.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker PAFI.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$PAFI.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+RMBA,RMBA.JK,Bentoel International Investama Tbk,1990-03-05,2024-01-16,2024-01,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/RMBA.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker RMBA.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$RMBA.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+BRAU,BRAU.JK,Berau Coal Energy Tbk.,2010-08-19,2017-11-16,2017-11,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/BRAU.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker BRAU.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$BRAU.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+TKGA,TKGA.JK,Permata Prima Sakti Tbk.,1992-01-06,2017-11-16,2017-11,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/TKGA.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker TKGA.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$TKGA.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+SIAP,SIAP.JK,Sekawan Intipratama Tbk,2008-10-17,2019-06-17,2019-06,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/SIAP.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker SIAP.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$SIAP.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+PWSI,PWSI.JK,Panca Wiratama Sakti Tbk,1994-03-10,2013-05-17,2013-05,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/PWSI.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker PWSI.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$PWSI.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+ALFA,ALFA.JK,Alfa Retailindo Tbk.,2000-01-18,2011-10-17,2011-10,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/ALFA.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker ALFA.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$ALFA.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+FORZ,FORZ.JK,Forza Land Indonesia Tbk,2017-04-28,2025-07-18,2025-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/FORZ.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker FORZ.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$FORZ.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+HDTX,HDTX.JK,Panasia Indo Resources Tbk,1990-06-06,2025-07-18,2025-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/HDTX.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker HDTX.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$HDTX.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+JKSW,JKSW.JK,Jakarta Kyoei Steel Works Tbk,1997-08-06,2025-07-18,2025-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/JKSW.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker JKSW.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$JKSW.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+KPAL,KPAL.JK,Steadfast Marine Tbk,2018-06-08,2025-07-18,2025-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/KPAL.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker KPAL.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$KPAL.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+KPAS,KPAS.JK,PT Cottonindo Ariesta Tbk.,2018-10-05,2025-07-18,2025-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/KPAS.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker KPAS.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$KPAS.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+KRAH,KRAH.JK,PT Grand Kartech Tbk,2013-11-08,2025-07-18,2025-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/KRAH.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker KRAH.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$KRAH.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+MAMI,MAMI.JK,Mas Murni Indonesia Tbk,1994-02-09,2025-07-18,2025-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/MAMI.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker MAMI.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$MAMI.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+MAMIP,MAMIP.JK,Mas Murni Tbk (Preferred Stock),1994-02-09,2025-07-18,2025-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/MAMIP.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker MAMIP.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$MAMIP.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+MYRX,MYRX.JK,Hanson International Tbk,1990-10-31,2025-07-18,2025-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/MYRX.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker MYRX.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$MYRX.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+MYRXP,MYRXP.JK,Hanson International (Seri B) Tbk,1990-10-31,2025-07-18,2025-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/MYRXP.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker MYRXP.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$MYRXP.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+NIPS,NIPS.JK,Nipress Tbk,1991-07-24,2025-07-18,2025-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/NIPS.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker NIPS.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$NIPS.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+PRAS,PRAS.JK,Prima Alloy Steel Universal Tbk,1990-07-12,2025-07-18,2025-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/PRAS.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker PRAS.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$PRAS.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+DAJK,DAJK.JK,PT Dwi Aneka Jaya Kemasindo Tbk.,2014-05-14,2018-05-18,2018-05,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/DAJK.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker DAJK.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$DAJK.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+INCF,INCF.JK,Indo Komoditi Korpora Tbk.,2016-09-05,2013-02-19,2013-02,AVAILABLE,1,6034,2002-06-14,2026-10-27,6033,1,2013-02-19,0,1,data/r333/yahoo_delisted_daily/INCF_JK.csv,319562,fc8f6986d79802afdaf26aca6d4b6b40f153ed71f99bf5915e4834f9847a8d07,
+CTRP,CTRP.JK,Ciputra Property Tbk,2007-11-07,2017-01-19,2017-01,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/CTRP.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker CTRP.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$CTRP.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+CTRS,CTRS.JK,Ciputra Surya Tbk,1999-01-15,2017-01-19,2017-01,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/CTRS.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker CTRS.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$CTRS.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+CPGT,CPGT.JK,Citra Maharlika Nusantara Corpora Tbk.,2013-07-09,2017-10-19,2017-10,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/CPGT.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker CPGT.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$CPGT.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+SCBD,SCBD.JK,Danayasa Arthatama Tbk,2002-04-19,2020-04-20,2020-04,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/SCBD.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker SCBD.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$SCBD.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+BORN,BORN.JK,Borneo Lumbung Energi & Metal Tbk,2010-11-26,2020-01-20,2020-01,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/BORN.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker BORN.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$BORN.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+SQBB,SQBB.JK,Taisho Pharmaceutical Indonesia Tbk.,2001-04-18,2018-03-20,2018-03,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/SQBB.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker SQBB.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$SQBB.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+SQBI,SQBI.JK,Taisho Pharmaceutical Indonesia Tbk.,1983-03-29,2018-03-20,2018-03,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/SQBI.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker SQBI.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$SQBI.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+DAVO,DAVO.JK,Davomas Abadi Tbk,1994-12-22,2015-01-21,2015-01,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/DAVO.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker DAVO.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$DAVO.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+NAGA,NAGA.JK,PT Bank Mitraniaga Tbk.,2013-07-09,2019-08-23,2019-08,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/NAGA.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker NAGA.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$NAGA.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+ITTG,ITTG.JK,Leo Investments Tbk,2001-11-26,2020-01-23,2020-01,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/ITTG.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker ITTG.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$ITTG.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+GREN,GREN.JK,Evergreen Invesco Tbk,2010-07-09,2020-11-23,2020-11,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/GREN.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker GREN.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$GREN.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+INVS,INVS.JK,Inovisi Infracom Tbk.,2009-07-03,2017-10-23,2017-10,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/INVS.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker INVS.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$INVS.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+PTRA,PTRA.JK,New Century Development Tbk,1994-03-28,2011-01-24,2011-01,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/PTRA.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker PTRA.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$PTRA.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+KARK,KARK.JK,Dayaindo Resources International Tbk.,2001-07-20,2013-12-27,2013-12,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/KARK.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker KARK.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$KARK.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+DYNA,DYNA.JK,Dynaplast Tbk.,1991-08-05,2011-07-27,2011-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/DYNA.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker DYNA.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$DYNA.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+ASIA,ASIA.JK,Asia Natural Resources Tbk,1994-10-20,2014-11-27,2014-11,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/ASIA.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker ASIA.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$ASIA.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+CKRA,CKRA.JK,Cakra Mineral Tbk.,1999-05-19,2020-08-28,2020-08,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/CKRA.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker CKRA.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$CKRA.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+LAMI,LAMI.JK,Lamicitra Nusantara Tbk.,2001-07-18,2017-12-28,2017-12,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/LAMI.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker LAMI.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$LAMI.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+SIIP,SIIP.JK,Suryainti Permata Tbk,1998-01-08,2012-02-28,2012-02,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/SIIP.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker SIIP.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$SIIP.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+CNTB,CNTB.JK,Century Textile Industry (Seri B) Tbk.,2000-12-22,2026-07-30,2026-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/CNTB.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker CNTB.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$CNTB.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+CNTX,CNTX.JK,Centex Tbk,1979-05-22,2026-07-30,2026-07,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/CNTX.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker CNTX.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$CNTX.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+MASA,MASA.JK,Multistrada Arah Sarana Tbk,2005-06-09,2025-10-30,2025-10,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/MASA.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker MASA.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$MASA.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+ATPK,ATPK.JK,Bara Jaya Internasional Tbk,2002-04-17,2019-09-30,2019-09,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/ATPK.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+reusing cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+reusing crumb
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy basic -> csrf
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+      Entering _get_cookie_csrf()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_csrf()
+crumb = 'IV/IuB3Fva.'
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker ATPK.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$ATPK.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
+SAIP,SAIP.JK,Surabaya Agung Industri Pulp & Kertas Tbk.,1993-05-03,2013-10-31,2013-10,HTTP_404_OR_YAHOO_UNAVAILABLE,0,0,,,0,,,,0,,,,"Entering history()
+ Entering _fetch_ticker_tz()
+  Entering get()
+   Entering _make_request()
+url=https://query2.finance.yahoo.com/v8/finance/chart/SAIP.JK
+params={'range': '1d', 'interval': '1d'}
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'csrf'
+     Entering _get_crumb_csrf()
+reusing crumb
+     Exiting _get_crumb_csrf()
+    Exiting _get_cookie_and_crumb()
+response code=404
+toggling cookie strategy csrf -> basic
+    Entering _get_cookie_and_crumb()
+cookie_mode = 'basic'
+     Entering _get_cookie_and_crumb_basic()
+      Entering _get_cookie_basic()
+       Entering _load_cookie_curlCffi()
+       Exiting _load_cookie_curlCffi()
+reusing persistent cookie
+      Exiting _get_cookie_basic()
+      Entering _get_crumb_basic()
+       Entering _get_cookie_basic()
+reusing cookie
+       Exiting _get_cookie_basic()
+crumb = 'IV/IuB3Fva.'
+      Exiting _get_crumb_basic()
+     Exiting _get_cookie_and_crumb_basic()
+    Exiting _get_cookie_and_crumb()
+response code=404
+   Exiting _make_request()
+  Exiting get()
+Got error from yahoo api for ticker SAIP.JK, Error: {'code': 'Not Found', 'description': 'No data found, symbol may be delisted'}
+ Exiting _fetch_ticker_tz()
+ Entering history()
+$SAIP.JK: possibly delisted; no timezone found
+ Exiting history()
+Exiting history()"
