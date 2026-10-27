@@ -1,0 +1,296 @@
+name: R332 Dukascopy M5 BID acquisition (data only)
+
+on:
+  push:
+    branches:
+      - research/r332-multi-asset-trend
+    paths:
+      - ".github/workflows/r332-m5-acquisition.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r332-m5-bid-acquisition
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - name: Checkout locked R332 research branch (read-only inputs)
+        uses: actions/checkout@v4
+        with:
+          ref: research/r332-multi-asset-trend
+          persist-credentials: false
+
+      - name: Checkout isolated data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data/r332-dukascopy-m5
+          path: datarepo
+          persist-credentials: true
+
+      - name: Setup Node.js and Python
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install acquisition-only dependencies
+        run: python -m pip install --upgrade pip pandas numpy
+
+      - name: Download BID M5 in annual chunks; reuse successful chunks on workflow rerun
+        shell: bash
+        run: |
+          set -u
+          mkdir -p datarepo/chunks datarepo/cache datarepo/logs
+          STATUS="datarepo/R332_acquisition_status.json"
+          if [ ! -s "$STATUS" ]; then
+            printf '{"experiment":"R332","instrument_state":{},"workflow_note":"Download-only; no strategy metrics are computed in Actions."}\n' > "$STATUS"
+          fi
+          INSTRUMENTS=(usa500idxusd usatechidxusd xauusd lightcmdusd bundtreur eurusd usdjpy audusd btcusd)
+
+          valid_chunk() {
+            python - "$1" <<'PY'
+          import sys, pandas as pd, numpy as np
+          p=sys.argv[1]
+          try:
+              d=pd.read_csv(p,compression="gzip")
+              d.columns=[str(c).replace("\ufeff","").strip().lower() for c in d.columns]
+              tc=next((c for c in ("timestamp","time","t","date","datetime") if c in d.columns),None)
+              if tc is None or not {"open","high","low","close"}.issubset(d.columns) or len(d)==0: raise ValueError("missing OHLC/timestamp or zero rows")
+              for c in ("open","high","low","close"):
+                  a=pd.to_numeric(d[c],errors="coerce").to_numpy(float)
+                  if not np.isfinite(a).all(): raise ValueError(f"invalid {c}")
+          except Exception as e:
+              print(f"INVALID_CHUNK {p}: {e}")
+              raise SystemExit(1)
+          PY
+          }
+
+          update_state() {
+            python - "$STATUS" "$1" "$2" "$3" "$4" <<'PY'
+          import json,sys
+          p,inst,attempts,state,missing=sys.argv[1:]
+          try: d=json.load(open(p))
+          except Exception: d={"experiment":"R332","instrument_state":{}}
+          try: m=json.loads(missing)
+          except Exception: m=[]
+          d.setdefault("instrument_state",{})[inst]={"workflow_attempts":int(attempts),"status":state,"missing_required_years":m}
+          with open(p,"w") as f: json.dump(d,f,indent=2); f.write("\n")
+          PY
+          }
+
+          for INST in "${INSTRUMENTS[@]}"; do
+            CACHE="datarepo/cache/${INST}_m5.csv.gz"
+            if [ -s "$CACHE" ]; then
+              echo "CACHE_EXISTS; skip download: $INST"
+              continue
+            fi
+            OLD=$(python - "$STATUS" "$INST" <<'PY'
+          import json,sys
+          d=json.load(open(sys.argv[1]))
+          print(d.get("instrument_state",{}).get(sys.argv[2],{}).get("workflow_attempts",0))
+          PY
+          )
+            if [ "$OLD" -ge 2 ]; then
+              MISSING=$(python - "$STATUS" "$INST" <<'PY'
+          import json,sys
+          d=json.load(open(sys.argv[1])); s=d.get("instrument_state",{}).get(sys.argv[2],{})
+          print(json.dumps(s.get("missing_required_years",["previously_failed_after_two_workflow_attempts"])))
+          PY
+          )
+              echo "STOP_INSTRUMENT_AFTER_TWO_WORKFLOW_ATTEMPTS $INST missing=$MISSING"
+              continue
+            fi
+            ATTEMPT=$((OLD+1))
+            echo "INSTRUMENT $INST workflow_attempt=$ATTEMPT"
+
+            for YEAR in $(seq 2016 2026); do
+              CHUNK="datarepo/chunks/${INST}_${YEAR}.csv.gz"
+              if [ -s "$CHUNK" ] && valid_chunk "$CHUNK"; then
+                echo "CHUNK_EXISTS $INST $YEAR"
+                continue
+              fi
+              rm -f "$CHUNK"
+              NEXT=$((YEAR+1))
+              FROM="${YEAR}-01-01"
+              if [ "$YEAR" -eq 2026 ]; then TO="now"; else TO="${NEXT}-01-01"; fi
+              TMP="datarepo/tmp_${INST}_${YEAR}"
+              mkdir -p "$TMP"
+              OUT="$TMP/${INST}_${YEAR}.csv"
+              LOG="datarepo/logs/${INST}_${YEAR}_attempt${ATTEMPT}.log"
+              rm -f "$OUT"
+              echo "DOWNLOAD start instrument=$INST year=$YEAR from=$FROM to=$TO package=dukascopy-node@1.50.0 utc=0 side=bid tf=m5" | tee "$LOG"
+              set +e
+              npx --yes dukascopy-node@1.50.0 \
+                -i "$INST" -from "$FROM" -to "$TO" \
+                -t m5 -p bid -utc 0 -f csv -fl \
+                -dir "$TMP" -fn "${INST}_${YEAR}" \
+                -bs 10 -bp 1000 -r 5 -rp 1000 -re >> "$LOG" 2>&1
+              RC=$?
+              set -e
+              if [ "$RC" -eq 0 ] && [ -s "$OUT" ]; then
+                if python - "$OUT" <<'PY'
+          import sys,pandas as pd,numpy as np
+          p=sys.argv[1]
+          try:
+              d=pd.read_csv(p)
+              d.columns=[str(c).replace("\ufeff","").strip().lower() for c in d.columns]
+              tc=next((c for c in ("timestamp","time","t","date","datetime") if c in d.columns),None)
+              assert tc is not None and {"open","high","low","close"}.issubset(d.columns) and len(d)>0
+              for c in ("open","high","low","close"):
+                  assert np.isfinite(pd.to_numeric(d[c],errors="coerce").to_numpy(float)).all()
+          except Exception as e:
+              print(f"INVALID_DOWNLOADED_CSV {p}: {e}")
+              raise SystemExit(1)
+          PY
+                then
+                  gzip -n -c "$OUT" > "$CHUNK"
+                  echo "CHUNK_OK $INST $YEAR bytes=$(wc -c < "$CHUNK")"
+                else
+                  echo "CHUNK_INVALID $INST $YEAR rc=$RC" | tee -a "$LOG"
+                fi
+              else
+                echo "CHUNK_DOWNLOAD_FAILED $INST $YEAR rc=$RC" | tee -a "$LOG"
+              fi
+              rm -rf "$TMP"
+            done
+
+            MISSING=$(python - "$INST" <<'PY'
+          import sys,os,json
+          inst=sys.argv[1]
+          print(json.dumps([str(y) for y in range(2017,2027) if not os.path.isfile(f"datarepo/chunks/{inst}_{y}.csv.gz")]))
+          PY
+          )
+            if [ "$MISSING" = "[]" ]; then
+              set +e
+              python - "$INST" <<'PY'
+          import sys,gzip,io,hashlib
+          from pathlib import Path
+          import pandas as pd, numpy as np
+          inst=sys.argv[1]
+          root=Path("datarepo")
+          files=sorted((root/"chunks").glob(f"{inst}_*.csv.gz"))
+          if not files: raise SystemExit(f"No chunks for {inst}")
+          frames=[]
+          for p in files:
+              d=pd.read_csv(p,compression="gzip")
+              d.columns=[str(c).replace("\ufeff","").strip().lower() for c in d.columns]
+              tc=next((c for c in ("timestamp","time","t","date","datetime") if c in d.columns),None)
+              if tc is None: raise SystemExit(f"Timestamp column missing in {p}")
+              ts=d.pop(tc)
+              num=pd.to_numeric(ts,errors="coerce")
+              if num.notna().mean()>.95:
+                  med=float(num.abs().median())
+                  if med>=1e11: idx=pd.to_datetime(num,unit="ms",utc=True,errors="coerce")
+                  elif med>=1e8: idx=pd.to_datetime(num,unit="s",utc=True,errors="coerce")
+                  else: raise SystemExit(f"Unknown numeric timestamp scale in {p}: {med}")
+              else: idx=pd.to_datetime(ts,utc=True,errors="coerce")
+              if pd.isna(idx).any(): raise SystemExit(f"Invalid timestamps in {p}")
+              for c in ("open","high","low","close"):
+                  if c not in d.columns: raise SystemExit(f"Missing {c} in {p}")
+                  d[c]=pd.to_numeric(d[c],errors="coerce")
+              if not np.isfinite(d[["open","high","low","close"]].to_numpy(float)).all(): raise SystemExit(f"Invalid OHLC in {p}")
+              d.insert(0,"timestamp",pd.DatetimeIndex(idx).strftime("%Y-%m-%dT%H:%M:%S.%fZ"))
+              frames.append(d[["timestamp","open","high","low","close"]])
+          all_=pd.concat(frames,ignore_index=True)
+          all_["_ts"]=pd.to_datetime(all_["timestamp"],utc=True,errors="raise")
+          all_=all_.sort_values("_ts").drop_duplicates("_ts",keep="last").drop(columns="_ts").reset_index(drop=True)
+          if len(all_)<1000: raise SystemExit(f"Insufficient merged rows for {inst}: {len(all_)}")
+          out=root/"cache"/f"{inst}_m5.csv.gz"
+          tmp=out.with_suffix(".tmp")
+          with open(tmp,"wb") as raw:
+              with gzip.GzipFile(fileobj=raw,mode="wb",mtime=0) as gz:
+                  with io.TextIOWrapper(gz,encoding="utf-8",newline="") as txt:
+                      all_.to_csv(txt,index=False,float_format="%.15g",lineterminator="\n")
+          tmp.replace(out)
+          print(f"MERGED_CACHE {inst} rows={len(all_)} first={all_.timestamp.iloc[0]} last={all_.timestamp.iloc[-1]} bytes={out.stat().st_size} sha256={hashlib.sha256(out.read_bytes()).hexdigest()}")
+          PY
+              MERGE_RC=$?
+              set -e
+              if [ "$MERGE_RC" -eq 0 ] && [ -s "$CACHE" ]; then
+                rm -f datarepo/chunks/"${INST}"_*.csv.gz
+                update_state "$INST" "$ATTEMPT" "complete" "[]"
+              else
+                update_state "$INST" "$ATTEMPT" "incomplete" '["MERGE_OR_VALIDATION"]'
+              fi
+            else
+              if [ "$ATTEMPT" -ge 2 ]; then STATE="terminal_failure_after_second_workflow_attempt"; else STATE="incomplete_attempt_1"; fi
+              update_state "$INST" "$ATTEMPT" "$STATE" "$MISSING"
+              echo "INCOMPLETE $INST workflow_attempt=$ATTEMPT missing_required_years=$MISSING"
+            fi
+          done
+
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          import pandas as pd
+          root=Path("datarepo")
+          status=json.loads((root/"R332_acquisition_status.json").read_text())
+          instruments=["usa500idxusd","usatechidxusd","xauusd","lightcmdusd","bundtreur","eurusd","usdjpy","audusd","btcusd"]
+          manifest={"experiment":"R332","purpose":"Dukascopy BID M5 acquisition only; no strategy metrics computed in Actions",
+            "downloader":"dukascopy-node@1.50.0","timezone_offset_utc_hours":0,"side":"BID","timeframe":"M5",
+            "requested_year_chunks":list(range(2016,2027)),"required_year_chunks":list(range(2017,2027)),"instruments":{}}
+          for inst in instruments:
+            state=status.get("instrument_state",{}).get(inst,{})
+            p=root/"cache"/f"{inst}_m5.csv.gz"
+            info={"status":"complete" if p.is_file() else state.get("status","not_acquired"),
+              "workflow_attempts":state.get("workflow_attempts",0),"missing_required_years":state.get("missing_required_years",[])}
+            if p.is_file():
+              d=pd.read_csv(p,compression="gzip")
+              info.update({"rows":int(len(d)),"first_timestamp_utc":str(d.timestamp.iloc[0]),"last_timestamp_utc":str(d.timestamp.iloc[-1]),
+                "bytes":int(p.stat().st_size),"sha256":hashlib.sha256(p.read_bytes()).hexdigest(),"path":str(p.relative_to(root))})
+            manifest["instruments"][inst]=info
+          (root/"R332_cache_manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
+          print(json.dumps(manifest,indent=2))
+          PY
+
+      - name: Commit caches and acquisition manifest to data branch only
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C datarepo config user.name "github-actions[bot]"
+          git -C datarepo config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C datarepo add cache chunks logs R332_cache_manifest.json R332_acquisition_status.json
+          if git -C datarepo diff --cached --quiet; then
+            echo "No data-branch changes to commit."
+          else
+            git -C datarepo commit -m "[skip ci] R332 Dukascopy M5 BID acquisition data and manifest"
+            git -C datarepo push origin HEAD:data/r332-dukascopy-m5
+          fi
+
+      - name: Upload acquisition manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R332-Dukascopy-M5-acquisition-manifest
+          path: |
+            datarepo/R332_cache_manifest.json
+            datarepo/R332_acquisition_status.json
+            datarepo/logs/
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Fail run if a required instrument cache is still incomplete
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,sys
+          d=json.load(open("datarepo/R332_acquisition_status.json"))
+          bad=[]
+          for inst,s in d.get("instrument_state",{}).items():
+              if s.get("status") not in ("complete","not_acquired"):
+                  bad.append((inst,s.get("workflow_attempts"),s.get("status"),s.get("missing_required_years")))
+          if bad:
+              print("R332_REQUIRED_ACQUISITION_INCOMPLETE")
+              for row in bad: print(row)
+              raise SystemExit(1)
+          PY
