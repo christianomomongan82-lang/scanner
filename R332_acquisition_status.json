@@ -2,8 +2,8 @@
   "experiment": "R332",
   "instrument_state": {
     "usa500idxusd": {
-      "workflow_attempts": 1,
-      "status": "incomplete_attempt_1",
+      "workflow_attempts": 2,
+      "status": "terminal_failure_after_second_workflow_attempt",
       "missing_required_years": [
         "2017",
         "2018",
@@ -18,8 +18,8 @@
       ]
     },
     "usatechidxusd": {
-      "workflow_attempts": 1,
-      "status": "incomplete_attempt_1",
+      "workflow_attempts": 2,
+      "status": "terminal_failure_after_second_workflow_attempt",
       "missing_required_years": [
         "2017",
         "2018",
@@ -34,8 +34,8 @@
       ]
     },
     "xauusd": {
-      "workflow_attempts": 1,
-      "status": "incomplete_attempt_1",
+      "workflow_attempts": 2,
+      "status": "terminal_failure_after_second_workflow_attempt",
       "missing_required_years": [
         "2017",
         "2018",
@@ -50,8 +50,8 @@
       ]
     },
     "lightcmdusd": {
-      "workflow_attempts": 1,
-      "status": "incomplete_attempt_1",
+      "workflow_attempts": 2,
+      "status": "terminal_failure_after_second_workflow_attempt",
       "missing_required_years": [
         "2017",
         "2018",
@@ -66,8 +66,8 @@
       ]
     },
     "bundtreur": {
-      "workflow_attempts": 1,
-      "status": "incomplete_attempt_1",
+      "workflow_attempts": 2,
+      "status": "terminal_failure_after_second_workflow_attempt",
       "missing_required_years": [
         "2017",
         "2018",
@@ -82,8 +82,8 @@
       ]
     },
     "eurusd": {
-      "workflow_attempts": 1,
-      "status": "incomplete_attempt_1",
+      "workflow_attempts": 2,
+      "status": "terminal_failure_after_second_workflow_attempt",
       "missing_required_years": [
         "2017",
         "2018",
@@ -98,8 +98,8 @@
       ]
     },
     "usdjpy": {
-      "workflow_attempts": 1,
-      "status": "incomplete_attempt_1",
+      "workflow_attempts": 2,
+      "status": "terminal_failure_after_second_workflow_attempt",
       "missing_required_years": [
         "2017",
         "2018",
@@ -114,8 +114,8 @@
       ]
     },
     "audusd": {
-      "workflow_attempts": 1,
-      "status": "incomplete_attempt_1",
+      "workflow_attempts": 2,
+      "status": "terminal_failure_after_second_workflow_attempt",
       "missing_required_years": [
         "2017",
         "2018",
@@ -130,8 +130,8 @@
       ]
     },
     "btcusd": {
-      "workflow_attempts": 1,
-      "status": "incomplete_attempt_1",
+      "workflow_attempts": 2,
+      "status": "terminal_failure_after_second_workflow_attempt",
       "missing_required_years": [
         "2017",
         "2018",

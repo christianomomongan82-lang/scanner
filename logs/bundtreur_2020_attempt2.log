@@ -1,0 +1,19 @@
+DOWNLOAD start instrument=bundtreur year=2020 from=2020-01-01 to=2021-01-01 package=dukascopy-node@1.50.0 utc=0 side=bid tf=m5
+----------------------------------------------------
+Downloading historical price data for:
+----------------------------------------------------
+Instrument:     Euro Bund
+Timeframe:      m5
+From date:      Jan 1, 2020, 12:00 AM
+To date:        Jan 1, 2021, 12:00 AM
+Price type:     bid
+Volumes:        false
+UTC Offset:     0
+Include flats:  true
+Format:         csv
+----------------------------------------------------
+
+Something went wrong:
+ > Request failed with status 202
+
+CHUNK_DOWNLOAD_FAILED bundtreur 2020 rc=1
