@@ -258,7 +258,7 @@ jobs:
           set -euo pipefail
           git -C datarepo config user.name "github-actions[bot]"
           git -C datarepo config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git -C datarepo add cache chunks logs R332_cache_manifest.json R332_acquisition_status.json
+          git -C datarepo add -A
           if git -C datarepo diff --cached --quiet; then
             echo "No data-branch changes to commit."
           else
