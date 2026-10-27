@@ -1,0 +1,150 @@
+{
+  "experiment": "R332",
+  "instrument_state": {
+    "usa500idxusd": {
+      "workflow_attempts": 1,
+      "status": "incomplete_attempt_1",
+      "missing_required_years": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ]
+    },
+    "usatechidxusd": {
+      "workflow_attempts": 1,
+      "status": "incomplete_attempt_1",
+      "missing_required_years": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ]
+    },
+    "xauusd": {
+      "workflow_attempts": 1,
+      "status": "incomplete_attempt_1",
+      "missing_required_years": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ]
+    },
+    "lightcmdusd": {
+      "workflow_attempts": 1,
+      "status": "incomplete_attempt_1",
+      "missing_required_years": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ]
+    },
+    "bundtreur": {
+      "workflow_attempts": 1,
+      "status": "incomplete_attempt_1",
+      "missing_required_years": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ]
+    },
+    "eurusd": {
+      "workflow_attempts": 1,
+      "status": "incomplete_attempt_1",
+      "missing_required_years": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ]
+    },
+    "usdjpy": {
+      "workflow_attempts": 1,
+      "status": "incomplete_attempt_1",
+      "missing_required_years": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ]
+    },
+    "audusd": {
+      "workflow_attempts": 1,
+      "status": "incomplete_attempt_1",
+      "missing_required_years": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ]
+    },
+    "btcusd": {
+      "workflow_attempts": 1,
+      "status": "incomplete_attempt_1",
+      "missing_required_years": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ]
+    }
+  },
+  "workflow_note": "Download-only; no strategy metrics are computed in Actions."
+}

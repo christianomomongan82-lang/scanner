@@ -1,0 +1,19 @@
+DOWNLOAD start instrument=btcusd year=2026 from=2026-01-01 to=now package=dukascopy-node@1.50.0 utc=0 side=bid tf=m5
+----------------------------------------------------
+Downloading historical price data for:
+----------------------------------------------------
+Instrument:     Bitcoin vs US Dollar
+Timeframe:      m5
+From date:      Jan 1, 2026, 12:00 AM
+To date:        Oct 27, 2026, 8:09 AM
+Price type:     bid
+Volumes:        false
+UTC Offset:     0
+Include flats:  true
+Format:         csv
+----------------------------------------------------
+
+Something went wrong:
+ > Request failed with status 202
+
+CHUNK_DOWNLOAD_FAILED btcusd 2026 rc=1
