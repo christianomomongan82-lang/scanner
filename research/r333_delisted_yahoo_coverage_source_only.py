@@ -386,7 +386,7 @@ def main() -> int:
         ],
     }
     manifest_path = data_root / "data/r333/manifests/yahoo-delisted-coverage-latest.json"
-    immutable_path = data_root / "data/r333/manifests/yahoo_delisted_coverage_run_" + Path(f"{run_id}_attempt_{run_attempt}.json")
+    immutable_path = data_root / "data/r333/manifests" / f"yahoo_delisted_coverage_run_{run_id}_attempt_{run_attempt}.json"
     for path in (manifest_path, immutable_path):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
