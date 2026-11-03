@@ -104,7 +104,7 @@ Therefore:
 
 - FundedNext CFD tradable assets (2026-04-09): https://help.fundednext.com/en/articles/8224087-fundednext-tradable-assets-what-can-i-trade-on-fundednext-cfd-accounts
 - FundedNext symbol specifications: https://fundednext.com/symbols
-- FundedNext general CFD rules: https://fundednext.com/forex-trading-rules
+- FundedNext general CFD rules: https://fundednext.com/general-rules/cfds/symbols-and-conditions
 - Dukascopy-node USDHUF: https://www.dukascopy-node.app/instrument/usdhuf
 - Dukascopy-node EURNOK: https://www.dukascopy-node.app/instrument/eurnok
 - Dukascopy-node USDZAR: https://www.dukascopy-node.app/instrument/usdzar
