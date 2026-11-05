@@ -1,9 +1,9 @@
 # Proyek Backtest — Checkpoint Utama
 
-**Terakhir diperbarui:** 2026-10-26  
+**Terakhir diperbarui:** 2026-11-05  
 **Status proyek:** SEMUA KANDIDAT YANG DIUJI BERSTATUS GAGAL; TIDAK ADA YANG LULUS.  
 **Repositori sumber utama:** https://github.com/christianomomongan82-lang/scanner  
-**Branch riset aktif saat checkpoint ini:** [research/r333-idx-smallcap-daily](https://github.com/christianomomongan82-lang/scanner/tree/research/r333-idx-smallcap-daily)
+**Branch riset aktif saat checkpoint ini:** [research/r334-fx-market-eligibility](https://github.com/christianomomongan82-lang/scanner/tree/research/r334-fx-market-eligibility)
 
 ## R333 — IDX small-cap harian — DATA_INADEQUATE (alpha NOT_TESTED), 2026-10-26
 
@@ -423,3 +423,18 @@ Continuation instruction: read the latest R270–R274 results and `research/EVOL
 - Corrected raw-only artifact `12031270051` (data acquisition run `38859918137`) has 947,326 paired XAUUSD M5 BID/ASK rows; synthetic flats disabled; 572 >5m gaps kept. Local calculations used 877,930 quote rows through 2025 only. 2026 remains unopened.
 - Data/entry/exit integrity controls are reusable implementation blocks, not alpha. No R270–R274 signal block is established as a positive edge. Row-level ledgers were generated locally but not uploaded; reports/compact JSON and the R273/R274 runners are stored in the research branch.
 - **Next step:** broader instrument and hypothesis-family coverage with preregistered discovery filters and component ablations. Do not revive the failed signal blocks by lowering thresholds. Do not register R275 until its hypothesis is materially distinct and preregistered.
+
+## R334 — FX market eligibility audit (2026-11-05)
+
+**Status: PREREGISTERED; RAW DATA ACQUISITION IN PROGRESS; NO ALPHA TEST OR PNL.**
+
+- Research branch: [research/r334-fx-market-eligibility](https://github.com/christianomomongan82-lang/scanner/tree/research/r334-fx-market-eligibility)
+- Data branch: [data/r334-fx-market-quotes](https://github.com/christianomomongan82-lang/scanner/tree/data/r334-fx-market-quotes)
+- [Locked scope/preregistration](research/R334_FX_MARKET_ELIGIBILITY_AUDIT_PREREGISTRATION.md)
+- [Local descriptive audit runner](research/r334_fx_market_eligibility_audit.py)
+- [Raw-only acquisition workflow](https://github.com/christianomomongan82-lang/scanner/blob/main/.github/workflows/r334_fx_market_quotes.yml)
+- Instruments: USDHUF (primary), EURNOK, USDZAR, EURUSD (baseline).
+- Dukascopy-node 1.50.0, M5, separate BID/ASK, UTC offset 0, 2007-03-13 inclusive through 2026-11-01 exclusive, synthetic flats disabled.
+- Initial full-window run [41969713251](https://github.com/christianomomongan82-lang/scanner/actions/runs/41969713251) failed on HTTP 429. A second run [41970053054](https://github.com/christianomomongan82-lang/scanner/actions/runs/41970053054) failed because the current CLI 1.50.0 does not recognize the newer `--request-interval` option. Third run [41970110961](https://github.com/christianomomongan82-lang/scanner/actions/runs/41970110961) is currently in progress using annual chunks, batch size 1, 4-second batch pause, and the CLI's supported retry flags.
+- No raw acquisition manifest/artifact has been produced yet. Do not calculate or quote spread, volatility, correlation, market activity, strategy metrics, or funded suitability until the artifact is complete and downloaded locally.
+- This audit is descriptive only. A data-gate PASS would authorize a separate future preregistration, not imply alpha or prove the market is uncrowded.
