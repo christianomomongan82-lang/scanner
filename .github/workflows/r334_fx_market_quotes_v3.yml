@@ -81,7 +81,7 @@ jobs:
                   -i "$symbol" -from "$from" -to "$to" \
                   -t m5 -p "$side" -utc 0 -f csv \
                   -dir raw/r334/parts -fn "$name" \
-                  -bs 1 -bp 4000 -r 10 -re -fr -rp 10000 \
+                  -bs 1 -bp 2000 -r 3 -fr -rp 5000 \
                   2>&1 | tee "$log"
                 rc=${PIPESTATUS[0]}
                 set -e
@@ -269,7 +269,7 @@ jobs:
               "utc_offset_minutes": 0,
               "timeframe": "m5",
               "include_synthetic_flats": False,
-              "empty_response_handling": "retryOnEmpty=true; failAfterRetryCount=false; all annual attempt logs retained",
+              "empty_response_handling": "retryOnEmpty=false; failed requests retried 3 times; failAfterRetryCount=false; all annual attempt logs retained; empty subperiods remain gaps for completeness audit",
               "requested_common_window": {
                   "from_inclusive": "2007-03-13T00:00:00Z",
                   "to_exclusive": "2026-11-01T00:00:00Z"
