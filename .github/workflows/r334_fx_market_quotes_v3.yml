@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 340
     env:
-      GH_TOKEN: \${{ github.token }}
+      GH_TOKEN: ${{ github.token }}
 
     steps:
       - name: Checkout persistent data branch
@@ -50,18 +50,18 @@ jobs:
           SIDES=(bid ask)
           found=0
 
-          for symbol in "\${SYMBOLS[@]}"; do
-            for side in "\${SIDES[@]}"; do
+          for symbol in "${SYMBOLS[@]}"; do
+            for side in "${SIDES[@]}"; do
               for year in $(seq 2007 2026); do
-                from="\${year}-01-01"
+                from="${year}-01-01"
                 to="$((year + 1))-01-01"
                 if [ "$year" -eq 2007 ]; then from="2007-03-13"; fi
                 if [ "$year" -eq 2026 ]; then to="2026-11-01"; fi
 
-                name="\${symbol}_m5_\${side}_\${year}"
-                csv="raw/r334/parts/\${name}.csv"
-                part="raw/r334/parts/\${name}.csv.gz"
-                status_file="raw/r334/status/\${name}.json"
+                name="${symbol}_m5_${side}_${year}"
+                csv="raw/r334/parts/${name}.csv"
+                part="raw/r334/parts/${name}.csv.gz"
+                status_file="raw/r334/status/${name}.json"
 
                 if [ -s "$status_file" ]; then
                   state=$(python -c 'import json,sys; print(json.load(open(sys.argv[1])).get("status",""))' "$status_file")
@@ -74,7 +74,7 @@ jobs:
                 fi
                 attempts=$((attempts + 1))
 
-                log="raw/r334/logs/\${name}.attempt\${attempts}.log"
+                log="raw/r334/logs/${name}.attempt${attempts}.log"
                 echo "ACQUIRE_START symbol=$symbol side=$side year=$year attempt=$attempts from=$from to_exclusive=$to"
                 set +e
                 npx --yes dukascopy-node@1.50.0 \
@@ -84,7 +84,7 @@ jobs:
                   -bs 1 -bp 4000 -r 10 -re -fr -rp 10000 \
                   --rate-limit-retries 5 \
                   2>&1 | tee "$log"
-                rc=\${PIPESTATUS[0]}
+                rc=${PIPESTATUS[0]}
                 set -e
 
                 rows=0
@@ -109,7 +109,7 @@ jobs:
                 fi
 
                 gzip -n "$log"
-                LOG_GZ="\${log}.gz" \
+                LOG_GZ="${log}.gz" \
                 PART="$part" \
                 STATUS_FILE="$status_file" \
                 SYMBOL="$symbol" SIDE="$side" YEAR="$year" \
@@ -142,9 +142,9 @@ jobs:
           print(json.dumps(record))
           PY
 
-                git add "$status_file" "\${log}.gz"
+                git add "$status_file" "${log}.gz"
                 if [ -s "$part" ]; then git add "$part"; fi
-                git commit -m "R334 checkpoint: \${symbol} \${side} M5 \${year} (attempt \${attempts})"
+                git commit -m "R334 checkpoint: ${symbol} ${side} M5 ${year} (attempt ${attempts})"
                 git push origin HEAD:data/r334-fx-market-quotes
 
                 echo "CHECKPOINT_SAVED symbol=$symbol side=$side year=$year state=$state rows=$rows rc=$rc"
@@ -308,6 +308,6 @@ jobs:
         run: |
           set -euo pipefail
           gh api --method POST \
-            "repos/\${GITHUB_REPOSITORY}/actions/workflows/r334_fx_market_quotes_v3.yml/dispatches" \
+            "repos/${GITHUB_REPOSITORY}/actions/workflows/r334_fx_market_quotes_v3.yml/dispatches" \
             -f ref=main
           echo "Next checkpointed acquisition run queued."
