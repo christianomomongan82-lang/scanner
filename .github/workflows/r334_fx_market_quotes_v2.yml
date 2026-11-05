@@ -1,0 +1,196 @@
+name: R334 Dukascopy FX quote acquisition v2 — gap-preserving
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/r334_fx_market_quotes_v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r334-dukascopy-fx-quotes-v2
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout locked data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data/r334-fx-market-quotes
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Download raw M5 BID and ASK candles, preserve empty subperiods as gaps
+        env:
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        shell: bash
+        run: |
+          set -uo pipefail
+          mkdir -p raw/r334/parts raw/r334/logs
+          SYMBOLS=(usdhuf eurnok usdzar eurusd)
+          SIDES=(bid ask)
+
+          for symbol in "${SYMBOLS[@]}"; do
+            for side in "${SIDES[@]}"; do
+              for year in $(seq 2007 2026); do
+                from="${year}-01-01"
+                to="$((year + 1))-01-01"
+                if [ "$year" -eq 2007 ]; then from="2007-03-13"; fi
+                if [ "$year" -eq 2026 ]; then to="2026-11-01"; fi
+                name="${symbol}_m5_${side}_${year}"
+                file="raw/r334/parts/${name}.csv"
+                log="raw/r334/logs/${name}.log"
+                if [ -s "${file}" ]; then
+                  echo "SKIP_EXISTING symbol=${symbol} side=${side} year=${year}"
+                  continue
+                fi
+                echo "ACQUIRE_START symbol=${symbol} side=${side} from=${from} to_exclusive=${to} timeframe=m5 utc_offset=0"
+                set +e
+                npx --yes dukascopy-node@1.50.0 \
+                  -i "${symbol}" -from "${from}" -to "${to}" \
+                  -t m5 -p "${side}" -utc 0 -f csv \
+                  -dir raw/r334/parts -fn "${name}" \
+                  -bs 1 -bp 4000 -r 10 -re -fr -rp 10000 \
+                  2>&1 | tee "${log}"
+                rc=${PIPESTATUS[0]}
+                set -e
+                if [ -s "${file}" ]; then
+                  rows=$(($(wc -l < "${file}") - 1))
+                  echo "ACQUIRE_FILE symbol=${symbol} side=${side} year=${year} rc=${rc} rows=${rows} bytes=$(wc -c < "${file}")"
+                else
+                  echo "ACQUIRE_EMPTY_OR_MISSING symbol=${symbol} side=${side} year=${year} rc=${rc}"
+                fi
+                sleep 2
+              done
+            done
+          done
+
+      - name: Combine available annual files and write complete coverage manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, hashlib, json
+          from pathlib import Path
+
+          root = Path("raw/r334")
+          parts = root / "parts"
+          symbols = ["usdhuf", "eurnok", "usdzar", "eurusd"]
+          sides = ["bid", "ask"]
+          expected_header = ["timestamp", "open", "high", "low", "close"]
+          annual = []
+          combined = []
+
+          for symbol in symbols:
+              for side in sides:
+                  out = root / f"{symbol}_m5_{side}_2007-03-13_2026-11-01.csv"
+                  out_rows = 0
+                  out_first = out_last = None
+                  with out.open("w", newline="", encoding="utf-8") as dst:
+                      writer = csv.writer(dst)
+                      writer.writerow(expected_header)
+                      for year in range(2007, 2027):
+                          start = "2007-03-13" if year == 2007 else f"{year}-01-01"
+                          end = "2026-11-01" if year == 2026 else f"{year+1}-01-01"
+                          part = parts / f"{symbol}_m5_{side}_{year}.csv"
+                          record = {
+                              "symbol": symbol, "side": side, "year": year,
+                              "requested_from_utc_inclusive": start + "T00:00:00Z",
+                              "requested_to_utc_exclusive": end + "T00:00:00Z",
+                              "status": "MISSING_FILE",
+                              "rows_excluding_header": 0,
+                              "bytes": 0, "sha256": None,
+                              "actual_first_timestamp_raw": None,
+                              "actual_last_timestamp_raw": None,
+                          }
+                          if part.is_file() and part.stat().st_size > 0:
+                              digest = hashlib.sha256()
+                              with part.open("rb") as f:
+                                  for chunk in iter(lambda: f.read(1024 * 1024), b""):
+                                      digest.update(chunk)
+                              with part.open("r", newline="", encoding="utf-8-sig") as src:
+                                  reader = csv.reader(src)
+                                  header = next(reader, None)
+                                  if header != expected_header:
+                                      record["status"] = "INVALID_HEADER"
+                                  else:
+                                      rows = list(reader)
+                                      rows = [row for row in rows if row]
+                                      record["rows_excluding_header"] = len(rows)
+                                      record["bytes"] = part.stat().st_size
+                                      record["sha256"] = digest.hexdigest()
+                                      if rows:
+                                          record["status"] = "DATA"
+                                          record["actual_first_timestamp_raw"] = rows[0][0]
+                                          record["actual_last_timestamp_raw"] = rows[-1][0]
+                                          writer.writerows(rows)
+                                          out_rows += len(rows)
+                                          if out_first is None:
+                                              out_first = rows[0][0]
+                                          out_last = rows[-1][0]
+                                      else:
+                                          record["status"] = "EMPTY_FILE"
+                          annual.append(record)
+                  if out_rows:
+                      digest = hashlib.sha256()
+                      with out.open("rb") as f:
+                          for chunk in iter(lambda: f.read(1024 * 1024), b""):
+                              digest.update(chunk)
+                      combined.append({
+                          "symbol": symbol, "side": side, "timeframe": "m5",
+                          "rows_excluding_header": out_rows,
+                          "actual_first_timestamp_raw": out_first,
+                          "actual_last_timestamp_raw": out_last,
+                          "bytes": out.stat().st_size,
+                          "sha256": digest.hexdigest(),
+                          "file": str(out),
+                          "status": "DATA_WITH_GAPS_POSSIBLE",
+                      })
+                  else:
+                      out.unlink(missing_ok=True)
+
+          manifest = {
+              "experiment": "R334",
+              "purpose": "raw historical quote acquisition only; no signals, descriptive statistics, returns, PnL, or strategy verdict calculations",
+              "provider": "Dukascopy via dukascopy-node",
+              "downloader_version": "1.50.0",
+              "timezone": "UTC",
+              "utc_offset_minutes": 0,
+              "timeframe": "m5",
+              "include_synthetic_flats": False,
+              "empty_response_handling": "retryOnEmpty=true; failAfterRetryCount=false; skipped subperiods recorded in annual_status",
+              "requested_common_window": {
+                  "from_inclusive": "2007-03-13T00:00:00Z",
+                  "to_exclusive": "2026-11-01T00:00:00Z"
+              },
+              "symbols": symbols,
+              "combined_files": combined,
+              "annual_status": annual,
+          }
+          manifest_path = root / "R334_ACQUISITION_MANIFEST.json"
+          manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+          print(f"MANIFEST={manifest_path} annual_records={len(annual)} combined_files={len(combined)}")
+          for item in annual:
+              print(f"ANNUAL symbol={item['symbol']} side={item['side']} year={item['year']} status={item['status']} rows={item['rows_excluding_header']}")
+          PY
+
+      - name: Upload merged raw quotes and full provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: R334-Dukascopy-M5-BID-ASK-2007-2026-v2
+          path: |
+            raw/r334/*.csv
+            raw/r334/R334_ACQUISITION_MANIFEST.json
+            raw/r334/logs/
+          if-no-files-found: error
+          retention-days: 90
