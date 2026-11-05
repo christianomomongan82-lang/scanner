@@ -1,0 +1,90 @@
+name: R334 USDHUF data availability probe ONLY
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/r334_fx_data_availability_probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data/r334-fx-market-quotes
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Probe modern and earliest USDHUF M5/H1 windows
+        env:
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        shell: bash
+        run: |
+          set -uo pipefail
+          mkdir -p probe/r334/logs probe/r334/data
+          run_probe() {
+            local label="$1"; shift
+            echo "PROBE_START label=$label args=$*"
+            set +e
+            npx --yes dukascopy-node@1.50.0 "$@" 2>&1 | tee "probe/r334/logs/$label.log"
+            local rc=${PIPESTATUS[0]}
+            set -e
+            echo "PROBE_EXIT label=$label rc=$rc"
+            find probe/r334/data -maxdepth 1 -type f -name "$label.csv" -printf "PROBE_FILE %p bytes=%s\n" || true
+          }
+
+          run_probe usdhuf_m5_2025_bid \
+            -i usdhuf -from 2025-01-06 -to 2025-01-10 \
+            -t m5 -p bid -utc 0 -f csv -dir probe/r334/data -fn usdhuf_m5_2025_bid \
+            -bs 1 -bp 3000 -r 2 -rp 2000 -re
+
+          run_probe usdhuf_m5_2025_ask \
+            -i usdhuf -from 2025-01-06 -to 2025-01-10 \
+            -t m5 -p ask -utc 0 -f csv -dir probe/r334/data -fn usdhuf_m5_2025_ask \
+            -bs 1 -bp 3000 -r 2 -rp 2000 -re
+
+          run_probe usdhuf_m5_2007_bid \
+            -i usdhuf -from 2007-03-13 -to 2007-04-01 \
+            -t m5 -p bid -utc 0 -f csv -dir probe/r334/data -fn usdhuf_m5_2007_bid \
+            -bs 1 -bp 3000 -r 2 -rp 2000 -re
+
+          run_probe usdhuf_h1_2007_bid \
+            -i usdhuf -from 2007-03-13 -to 2007-04-01 \
+            -t h1 -p bid -utc 0 -f csv -dir probe/r334/data -fn usdhuf_h1_2007_bid \
+            -bs 1 -bp 3000 -r 2 -rp 2000 -re
+
+          run_probe usdhuf_h1_2025_bid \
+            -i usdhuf -from 2025-01-06 -to 2025-01-10 \
+            -t h1 -p bid -utc 0 -f csv -dir probe/r334/data -fn usdhuf_h1_2025_bid \
+            -bs 1 -bp 3000 -r 2 -rp 2000 -re
+
+          {
+            echo "R334 USDHUF data availability probe"
+            date -u +"created_utc=%Y-%m-%dT%H:%M:%SZ"
+            echo "No signals, returns, statistics, strategy metrics or PnL calculated."
+            for f in probe/r334/data/*.csv; do
+              [ -f "$f" ] || continue
+              echo "FILE=$f BYTES=$(wc -c < "$f") ROWS=$(($(wc -l < "$f") - 1)) SHA256=$(sha256sum "$f" | cut -d' ' -f1)"
+            done
+          } > probe/r334/PROBE_SUMMARY.txt
+          cat probe/r334/PROBE_SUMMARY.txt
+
+      - name: Upload probe output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R334-USDHUF-data-availability-probe
+          path: probe/r334/
+          if-no-files-found: warn
+          retention-days: 30
