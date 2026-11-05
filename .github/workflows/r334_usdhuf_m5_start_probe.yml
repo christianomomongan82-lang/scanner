@@ -1,0 +1,94 @@
+name: R334 USDHUF M5 earliest-year probe ONLY
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/r334_usdhuf_m5_start_probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: data/r334-fx-market-quotes
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Probe small USDHUF M5 historical windows
+        env:
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        shell: bash
+        run: |
+          set -uo pipefail
+          mkdir -p probe/r334-m5-start/logs probe/r334-m5-start/data
+          run_probe() {
+            local label="$1"; shift
+            echo "PROBE_START label=$label args=$*"
+            set +e
+            npx --yes dukascopy-node@1.50.0 "$@" 2>&1 | tee "probe/r334-m5-start/logs/$label.log"
+            local rc=${PIPESTATUS[0]}
+            set -e
+            echo "PROBE_EXIT label=$label rc=$rc"
+            if [ -s "probe/r334-m5-start/data/$label.csv" ]; then
+              echo "PROBE_DATA label=$label bytes=$(wc -c < "probe/r334-m5-start/data/$label.csv") rows=$(($(wc -l < "probe/r334-m5-start/data/$label.csv") - 1))"
+            else
+              echo "PROBE_EMPTY label=$label"
+            fi
+          }
+
+          run_probe usdhuf_m5_2007_late_bid \
+            -i usdhuf -from 2007-03-20 -to 2007-03-23 \
+            -t m5 -p bid -utc 0 -f csv -dir probe/r334-m5-start/data -fn usdhuf_m5_2007_late_bid \
+            -bs 1 -bp 3000 -r 1 -rp 1500 -re
+
+          run_probe usdhuf_m5_2008_bid \
+            -i usdhuf -from 2008-01-07 -to 2008-01-11 \
+            -t m5 -p bid -utc 0 -f csv -dir probe/r334-m5-start/data -fn usdhuf_m5_2008_bid \
+            -bs 1 -bp 3000 -r 1 -rp 1500 -re
+
+          run_probe usdhuf_m5_2010_bid \
+            -i usdhuf -from 2010-01-04 -to 2010-01-08 \
+            -t m5 -p bid -utc 0 -f csv -dir probe/r334-m5-start/data -fn usdhuf_m5_2010_bid \
+            -bs 1 -bp 3000 -r 1 -rp 1500 -re
+
+          run_probe usdhuf_m5_2012_bid \
+            -i usdhuf -from 2012-01-02 -to 2012-01-06 \
+            -t m5 -p bid -utc 0 -f csv -dir probe/r334-m5-start/data -fn usdhuf_m5_2012_bid \
+            -bs 1 -bp 3000 -r 1 -rp 1500 -re
+
+          run_probe usdhuf_m5_2015_bid \
+            -i usdhuf -from 2015-01-05 -to 2015-01-09 \
+            -t m5 -p bid -utc 0 -f csv -dir probe/r334-m5-start/data -fn usdhuf_m5_2015_bid \
+            -bs 1 -bp 3000 -r 1 -rp 1500 -re
+
+          run_probe usdhuf_m5_2020_bid \
+            -i usdhuf -from 2020-01-06 -to 2020-01-10 \
+            -t m5 -p bid -utc 0 -f csv -dir probe/r334-m5-start/data -fn usdhuf_m5_2020_bid \
+            -bs 1 -bp 3000 -r 1 -rp 1500 -re
+
+          {
+            echo "R334 USDHUF M5 earliest-year probe"
+            date -u +"created_utc=%Y-%m-%dT%H:%M:%SZ"
+            echo "No signals, returns, statistics, strategy metrics or PnL calculated."
+            for f in probe/r334-m5-start/data/*.csv; do
+              [ -f "$f" ] || continue
+              echo "FILE=$f BYTES=$(wc -c < "$f") ROWS=$(($(wc -l < "$f") - 1)) SHA256=$(sha256sum "$f" | cut -d' ' -f1)"
+            done
+          } > probe/r334-m5-start/PROBE_SUMMARY.txt
+          cat probe/r334-m5-start/PROBE_SUMMARY.txt
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: R334-USDHUF-M5-earliest-year-probe
+          path: probe/r334-m5-start/
+          if-no-files-found: warn
+          retention-days: 30
