@@ -1,0 +1,133 @@
+name: R334 Dukascopy FX quote acquisition ONLY
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/r334_fx_market_quotes.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r334-dukascopy-fx-quotes
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout locked data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data/r334-fx-market-quotes
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Download raw M5 BID and ASK candles
+        env:
+          NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p raw/r334
+          FROM="2007-03-13"
+          TO="2026-11-01"
+          SYMBOLS=(usdhuf eurnok usdzar eurusd)
+          SIDES=(bid ask)
+
+          for symbol in "${SYMBOLS[@]}"; do
+            for side in "${SIDES[@]}"; do
+              name="${symbol}_m5_${side}_${FROM}_${TO}"
+              echo "ACQUIRE_START symbol=${symbol} side=${side} from=${FROM} to_exclusive=${TO} timeframe=m5 utc_offset=0"
+              npx --yes dukascopy-node@1.50.0 \
+                -i "${symbol}" -from "${FROM}" -to "${TO}" \
+                -t m5 -p "${side}" -utc 0 -f csv \
+                -dir raw/r334 -fn "${name}" \
+                -bs 10 -bp 1000 -r 5 -rp 1000
+              file="raw/r334/${name}.csv"
+              test -s "${file}"
+              echo "ACQUIRE_OK symbol=${symbol} side=${side} bytes=$(wc -c < "${file}") rows=$(($(wc -l < "${file}") - 1))"
+            done
+          done
+
+      - name: Write acquisition-only provenance manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, hashlib, json
+          from pathlib import Path
+          root = Path("raw/r334")
+          specs = [
+              ("usdhuf","bid"),("usdhuf","ask"),
+              ("eurnok","bid"),("eurnok","ask"),
+              ("usdzar","bid"),("usdzar","ask"),
+              ("eurusd","bid"),("eurusd","ask"),
+          ]
+          files = []
+          for symbol, side in specs:
+              path = root / f"{symbol}_m5_{side}_2007-03-13_2026-11-01.csv"
+              if not path.is_file() or path.stat().st_size == 0:
+                  raise SystemExit(f"MISSING_OR_EMPTY: {path}")
+              digest = hashlib.sha256()
+              with path.open("rb") as f:
+                  for chunk in iter(lambda: f.read(1024 * 1024), b""):
+                      digest.update(chunk)
+              with path.open("r", newline="", encoding="utf-8-sig") as f:
+                  reader = csv.reader(f)
+                  header = next(reader, None)
+                  if header != ["timestamp", "open", "high", "low", "close"]:
+                      raise SystemExit(f"UNEXPECTED_HEADER: {path}: {header}")
+                  count = 0
+                  first = last = None
+                  for row in reader:
+                      if not row:
+                          continue
+                      count += 1
+                      if first is None:
+                          first = row[0]
+                      last = row[0]
+              if count == 0:
+                  raise SystemExit(f"NO_DATA_ROWS: {path}")
+              files.append({
+                  "symbol": symbol, "side": side, "timeframe": "m5",
+                  "requested_from_utc_inclusive": "2007-03-13T00:00:00Z",
+                  "requested_to_utc_exclusive": "2026-11-01T00:00:00Z",
+                  "actual_first_timestamp_raw": first,
+                  "actual_last_timestamp_raw": last,
+                  "rows_excluding_header": count,
+                  "bytes": path.stat().st_size,
+                  "sha256": digest.hexdigest(),
+                  "file": str(path),
+              })
+          manifest = {
+              "experiment": "R334",
+              "purpose": "raw historical quote acquisition only; no signals, statistics, returns, PnL, or strategy verdicts",
+              "provider": "Dukascopy via dukascopy-node",
+              "downloader_version": "1.50.0",
+              "timezone": "UTC",
+              "utc_offset_minutes": 0,
+              "timeframe": "m5",
+              "include_synthetic_flats": False,
+              "symbols": ["usdhuf","eurnok","usdzar","eurusd"],
+              "files": files,
+          }
+          out = root / "R334_ACQUISITION_MANIFEST.json"
+          out.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+          print(out.read_text(encoding="utf-8"))
+          PY
+
+      - name: Upload raw quote inputs and provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: R334-Dukascopy-M5-BID-ASK-2007-2026
+          path: raw/r334/
+          if-no-files-found: error
+          retention-days: 90
