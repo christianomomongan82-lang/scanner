@@ -82,7 +82,6 @@ jobs:
                   -t m5 -p "$side" -utc 0 -f csv \
                   -dir raw/r334/parts -fn "$name" \
                   -bs 1 -bp 4000 -r 10 -re -fr -rp 10000 \
-                  --rate-limit-retries 5 \
                   2>&1 | tee "$log"
                 rc=${PIPESTATUS[0]}
                 set -e
