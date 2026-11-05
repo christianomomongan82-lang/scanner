@@ -58,8 +58,7 @@ jobs:
                   -i "${symbol}" -from "${from}" -to "${to}" \
                   -t m5 -p "${side}" -utc 0 -f csv \
                   -dir raw/r334/parts -fn "${name}" \
-                  -bs 1 -bp 2500 --request-interval 1500 --rate-limit-retries 12 \
-                  -r 5 -re -rp 2000
+                  -bs 1 -bp 4000 -r 10 -re -rp 10000
                 test -s "${file}"
                 echo "ACQUIRE_OK symbol=${symbol} side=${side} year=${year} bytes=$(wc -c < "${file}") rows=$(($(wc -l < "${file}") - 1))"
               done
