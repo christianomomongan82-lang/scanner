@@ -215,7 +215,7 @@ def audit_symbol(symbol: str, root: Path, out: Path) -> tuple[dict, pd.Series | 
         for ts in close_spread.index[bad_close][:1000]:
             exceptions.append({"symbol": symbol, "exception": "nonpositive_close_spread", "timestamp_utc": ts.isoformat()})
         quality["status"] = status
-        return quality, None, exceptions, None
+        return quality, None, exceptions, None, None, []
 
     pip = PIP_SIZE[symbol]
     mid_open = (ask["open"] + bid["open"]) / 2
@@ -286,9 +286,9 @@ def audit_symbol(symbol: str, root: Path, out: Path) -> tuple[dict, pd.Series | 
     m5_gap = bid.index.to_series().diff()
     m5_logret = m5_logret.where(m5_gap.eq(M5))
     abs_m5 = m5_logret.abs()
-    summary["abs_m5_return_autocorr_lag1"] = float(abs_m5.autocorr(lag=1))
-    summary["abs_m5_return_autocorr_lag12"] = float(abs_m5.autocorr(lag=12))
-    summary["abs_m5_return_autocorr_lag288"] = float(abs_m5.autocorr(lag=288))
+    for lag in (1, 12, 288):
+        ac = abs_m5.autocorr(lag=lag)
+        summary[f"abs_m5_return_autocorr_lag{lag}"] = float(ac) if pd.notna(ac) and math.isfinite(float(ac)) else None
     total_missing, monthly_missing, gap_rows = expected_missing_bars(paired)
     quality.update({
         "status": status,
@@ -351,7 +351,8 @@ def main() -> int:
         baseline = daily_returns["eurusd"]
         for symbol, series in daily_returns.items():
             paired = pd.concat([series, baseline], axis=1, join="inner").dropna()
-            corr = float(paired.iloc[:, 0].corr(paired.iloc[:, 1])) if len(paired) >= 2 else None
+            corr_value = paired.iloc[:, 0].corr(paired.iloc[:, 1]) if len(paired) >= 2 else np.nan
+            corr = float(corr_value) if pd.notna(corr_value) and math.isfinite(float(corr_value)) else None
             correlations.append({
                 "symbol": symbol,
                 "baseline": "eurusd",
