@@ -109,7 +109,7 @@ def expected_missing_bars(index: pd.DatetimeIndex) -> tuple[int, dict[str, int],
     return total, dict(sorted(monthly.items())), gap_rows
 
 
-def realized_volatility(close: pd.Series) -> tuple[pd.Series, pd.Series, pd.Series]:
+def realized_volatility(close: pd.Series) -> tuple[pd.Series, pd.Series, pd.Series, pd.Series]:
     idx = close.index
     r = np.log(close.astype(float)).diff()
     gaps = idx.to_series().diff()
@@ -124,12 +124,18 @@ def realized_volatility(close: pd.Series) -> tuple[pd.Series, pd.Series, pd.Seri
     day_n = day.count()
     day_rv = np.sqrt(day.sum()).where(day_n.eq(288)).dropna()
 
-    # Close-to-close daily returns for correlations; omit weekend/long-closure gaps.
+    # Close-to-close hourly and daily returns; omit long gaps and weekend spans.
+    hourly_close = close.groupby(idx.floor("h")).last()
+    hourly_close = hourly_close.loc[hour_rv.index]
+    hourly_ret = np.log(hourly_close).diff()
+    hourly_gap = hourly_close.index.to_series().diff()
+    hourly_ret = hourly_ret.where(hourly_gap.le(pd.Timedelta(minutes=90))).dropna()
+
     daily_close = close.resample("1D").last().dropna()
     daily_ret = np.log(daily_close).diff()
     daily_gap = daily_close.index.to_series().diff()
     daily_ret = daily_ret.where(daily_gap.le(pd.Timedelta(hours=36))).dropna()
-    return hour_rv, day_rv, daily_ret
+    return hour_rv, day_rv, daily_ret, hourly_ret
 
 
 def rolling_ranges(bid: pd.DataFrame) -> tuple[pd.Series, pd.Series]:
@@ -150,7 +156,7 @@ def rolling_ranges(bid: pd.DataFrame) -> tuple[pd.Series, pd.Series]:
     return range_1h, range_4h
 
 
-def audit_symbol(symbol: str, root: Path, out: Path) -> tuple[dict, pd.Series | None, list[dict], pd.DataFrame | None]:
+def audit_symbol(symbol: str, root: Path, out: Path) -> tuple[dict, pd.Series | None, list[dict], pd.DataFrame | None, pd.DataFrame | None, list[dict]]:
     stem = f"{symbol}_m5_"
     bid, qb = load_side(root / f"{stem}bid_2007-03-13_2026-11-01.csv")
     ask, qa = load_side(root / f"{stem}ask_2007-03-13_2026-11-01.csv")
@@ -192,7 +198,7 @@ def audit_symbol(symbol: str, root: Path, out: Path) -> tuple[dict, pd.Series | 
         status = "GAGAL_SPREAD_ANALYSIS_BLOCKED"
         quality["block_reasons"] = block_reasons
         quality["status"] = status
-        return quality, None, exceptions, None
+        return quality, None, exceptions, None, None, []
 
     bid = bid_sorted.loc[paired]
     ask = ask_sorted.loc[paired]
@@ -237,6 +243,7 @@ def audit_symbol(symbol: str, root: Path, out: Path) -> tuple[dict, pd.Series | 
     hourly_rows = []
     frame = pd.DataFrame({
         "spread_pips": spread_pips,
+        "spread_close_pips": close_spread / pip,
         "spread_bps_mid": spread_bps_mid,
         "activity": 1,
     }, index=paired)
@@ -248,18 +255,40 @@ def audit_symbol(symbol: str, root: Path, out: Path) -> tuple[dict, pd.Series | 
             "observed_bars": int(len(group)),
             "spread_pips_median": float(group["spread_pips"].median()),
             "spread_pips_p90": float(group["spread_pips"].quantile(0.90)),
+            "close_spread_pips_median": float(group["spread_close_pips"].median()),
+            "close_spread_pips_p90": float(group["spread_close_pips"].quantile(0.90)),
             "spread_bps_mid_median": float(group["spread_bps_mid"].median()),
             "spread_bps_mid_p90": float(group["spread_bps_mid"].quantile(0.90)),
         })
 
-    hour_rv, day_rv, daily_ret = realized_volatility(bid["close"])
+    weekday_rows = []
+    weekday_group = frame.groupby(paired.dayofweek)
+    for day, group in weekday_group:
+        weekday_rows.append({
+            "symbol": symbol,
+            "utc_weekday": int(day),
+            "observed_bars": int(len(group)),
+            "spread_pips_median": float(group["spread_pips"].median()),
+            "spread_pips_p90": float(group["spread_pips"].quantile(0.90)),
+            "close_spread_pips_median": float(group["spread_close_pips"].median()),
+            "close_spread_pips_p90": float(group["spread_close_pips"].quantile(0.90)),
+            "spread_bps_mid_median": float(group["spread_bps_mid"].median()),
+            "spread_bps_mid_p90": float(group["spread_bps_mid"].quantile(0.90)),
+        })
+
+    hour_rv, day_rv, daily_ret, hourly_ret = realized_volatility(bid["close"])
     summary.update(pct_summary(hour_rv, "hourly_realized_vol_"))
     summary.update(pct_summary(day_rv, "daily_realized_vol_"))
-    rv_by_hour = hour_rv.groupby(hour_rv.index.hour).agg(["count", "median", lambda x: x.quantile(0.90)])
-    for h in range(24):
-        if h in rv_by_hour.index:
-            rec = rv_by_hour.loc[h]
-            hourly_rows[h]["hourly_rv_n"] = int(rec.iloc[0]) if h < len(hourly_rows) else None
+    summary.update(pct_summary(hourly_ret.abs(), "hourly_abs_close_return_"))
+    summary.update(pct_summary(daily_ret.abs(), "daily_abs_close_return_"))
+
+    m5_logret = np.log(bid["close"]).diff()
+    m5_gap = bid.index.to_series().diff()
+    m5_logret = m5_logret.where(m5_gap.eq(M5))
+    abs_m5 = m5_logret.abs()
+    summary["abs_m5_return_autocorr_lag1"] = float(abs_m5.autocorr(lag=1))
+    summary["abs_m5_return_autocorr_lag12"] = float(abs_m5.autocorr(lag=12))
+    summary["abs_m5_return_autocorr_lag288"] = float(abs_m5.autocorr(lag=288))
     total_missing, monthly_missing, gap_rows = expected_missing_bars(paired)
     quality.update({
         "status": status,
@@ -287,7 +316,7 @@ def audit_symbol(symbol: str, root: Path, out: Path) -> tuple[dict, pd.Series | 
 
     for month, count in monthly_missing.items():
         gap_rows.append({"symbol": symbol, "month_utc": month, "expected_missing_m5_bars": count, "record_type": "monthly"})
-    return {**quality, "descriptive": summary}, daily_ret, exceptions, pd.DataFrame(hourly_rows)
+    return {**quality, "descriptive": summary}, daily_ret, exceptions, pd.DataFrame(hourly_rows), pd.DataFrame(weekday_rows), gap_rows
 
 
 def main() -> int:
@@ -301,16 +330,20 @@ def main() -> int:
     daily_returns = {}
     all_exceptions = []
     hourly_frames = []
+    weekday_frames = []
     all_gap_records = []
 
     for symbol in SYMBOLS:
-        report, daily_ret, exceptions, hourly = audit_symbol(symbol, args.data_dir, args.output_dir)
+        report, daily_ret, exceptions, hourly, weekday, gap_rows = audit_symbol(symbol, args.data_dir, args.output_dir)
         reports.append(report)
         all_exceptions.extend(exceptions)
         if daily_ret is not None:
             daily_returns[symbol] = daily_ret.rename(symbol)
         if hourly is not None:
             hourly_frames.append(hourly)
+        if weekday is not None:
+            weekday_frames.append(weekday)
+        all_gap_records.extend({"symbol": symbol, **row} for row in gap_rows)
         print(f"AUDIT {symbol}: {report['status']}")
 
     correlations = []
@@ -348,6 +381,10 @@ def main() -> int:
         pd.concat(hourly_frames, ignore_index=True).to_csv(args.output_dir / "R334_spread_and_volatility_by_utc_hour.csv", index=False)
     if correlations:
         pd.DataFrame(correlations).to_csv(args.output_dir / "R334_daily_correlations_vs_eurusd.csv", index=False)
+    if weekday_frames:
+        pd.concat(weekday_frames, ignore_index=True).to_csv(args.output_dir / "R334_spread_by_utc_weekday.csv", index=False)
+    if all_gap_records:
+        pd.DataFrame(all_gap_records).to_csv(args.output_dir / "R334_expected_gaps_excluding_weekly_close.csv", index=False)
     print(f"OUTPUT {args.output_dir.resolve()}")
     return 0
 
