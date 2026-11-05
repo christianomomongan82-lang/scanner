@@ -30,34 +30,43 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Download raw M5 BID and ASK candles
+      - name: Download raw M5 BID and ASK candles in annual chunks
         env:
           NODE_OPTIONS: --require=./dukascopy_fetch_patch.cjs
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p raw/r334
-          FROM="2007-03-13"
-          TO="2026-11-01"
+          mkdir -p raw/r334/parts
           SYMBOLS=(usdhuf eurnok usdzar eurusd)
           SIDES=(bid ask)
 
           for symbol in "${SYMBOLS[@]}"; do
             for side in "${SIDES[@]}"; do
-              name="${symbol}_m5_${side}_${FROM}_${TO}"
-              echo "ACQUIRE_START symbol=${symbol} side=${side} from=${FROM} to_exclusive=${TO} timeframe=m5 utc_offset=0"
-              npx --yes dukascopy-node@1.50.0 \
-                -i "${symbol}" -from "${FROM}" -to "${TO}" \
-                -t m5 -p "${side}" -utc 0 -f csv \
-                -dir raw/r334 -fn "${name}" \
-                -bs 10 -bp 1000 -r 5 -rp 1000
-              file="raw/r334/${name}.csv"
-              test -s "${file}"
-              echo "ACQUIRE_OK symbol=${symbol} side=${side} bytes=$(wc -c < "${file}") rows=$(($(wc -l < "${file}") - 1))"
+              for year in $(seq 2007 2026); do
+                from="${year}-01-01"
+                to="$((year + 1))-01-01"
+                if [ "$year" -eq 2007 ]; then from="2007-03-13"; fi
+                if [ "$year" -eq 2026 ]; then to="2026-11-01"; fi
+                name="${symbol}_m5_${side}_${year}"
+                file="raw/r334/parts/${name}.csv"
+                if [ -s "${file}" ]; then
+                  echo "SKIP_EXISTING symbol=${symbol} side=${side} year=${year} bytes=$(wc -c < "${file}")"
+                  continue
+                fi
+                echo "ACQUIRE_START symbol=${symbol} side=${side} from=${from} to_exclusive=${to} timeframe=m5 utc_offset=0"
+                npx --yes dukascopy-node@1.50.0 \
+                  -i "${symbol}" -from "${from}" -to "${to}" \
+                  -t m5 -p "${side}" -utc 0 -f csv \
+                  -dir raw/r334/parts -fn "${name}" \
+                  -bs 1 -bp 2500 --request-interval 1500 --rate-limit-retries 12 \
+                  -r 5 -re -rp 2000
+                test -s "${file}"
+                echo "ACQUIRE_OK symbol=${symbol} side=${side} year=${year} bytes=$(wc -c < "${file}") rows=$(($(wc -l < "${file}") - 1))"
+              done
             done
           done
 
-      - name: Write acquisition-only provenance manifest
+      - name: Combine annual raw files and write acquisition-only manifest
         shell: bash
         run: |
           set -euo pipefail
@@ -65,48 +74,54 @@ jobs:
           import csv, hashlib, json
           from pathlib import Path
           root = Path("raw/r334")
-          specs = [
-              ("usdhuf","bid"),("usdhuf","ask"),
-              ("eurnok","bid"),("eurnok","ask"),
-              ("usdzar","bid"),("usdzar","ask"),
-              ("eurusd","bid"),("eurusd","ask"),
-          ]
+          parts = root / "parts"
+          symbols = ["usdhuf", "eurnok", "usdzar", "eurusd"]
+          sides = ["bid", "ask"]
           files = []
-          for symbol, side in specs:
-              path = root / f"{symbol}_m5_{side}_2007-03-13_2026-11-01.csv"
-              if not path.is_file() or path.stat().st_size == 0:
-                  raise SystemExit(f"MISSING_OR_EMPTY: {path}")
-              digest = hashlib.sha256()
-              with path.open("rb") as f:
-                  for chunk in iter(lambda: f.read(1024 * 1024), b""):
-                      digest.update(chunk)
-              with path.open("r", newline="", encoding="utf-8-sig") as f:
-                  reader = csv.reader(f)
-                  header = next(reader, None)
-                  if header != ["timestamp", "open", "high", "low", "close"]:
-                      raise SystemExit(f"UNEXPECTED_HEADER: {path}: {header}")
-                  count = 0
+          header_expected = ["timestamp", "open", "high", "low", "close"]
+          for symbol in symbols:
+              for side in sides:
+                  out = root / f"{symbol}_m5_{side}_2007-03-13_2026-11-01.csv"
+                  rows = 0
                   first = last = None
-                  for row in reader:
-                      if not row:
-                          continue
-                      count += 1
-                      if first is None:
-                          first = row[0]
-                      last = row[0]
-              if count == 0:
-                  raise SystemExit(f"NO_DATA_ROWS: {path}")
-              files.append({
-                  "symbol": symbol, "side": side, "timeframe": "m5",
-                  "requested_from_utc_inclusive": "2007-03-13T00:00:00Z",
-                  "requested_to_utc_exclusive": "2026-11-01T00:00:00Z",
-                  "actual_first_timestamp_raw": first,
-                  "actual_last_timestamp_raw": last,
-                  "rows_excluding_header": count,
-                  "bytes": path.stat().st_size,
-                  "sha256": digest.hexdigest(),
-                  "file": str(path),
-              })
+                  with out.open("w", newline="", encoding="utf-8") as dst:
+                      writer = csv.writer(dst)
+                      for year in range(2007, 2027):
+                          part = parts / f"{symbol}_m5_{side}_{year}.csv"
+                          if not part.is_file() or part.stat().st_size == 0:
+                              raise SystemExit(f"MISSING_OR_EMPTY: {part}")
+                          with part.open("r", newline="", encoding="utf-8-sig") as src:
+                              reader = csv.reader(src)
+                              header = next(reader, None)
+                              if header != header_expected:
+                                  raise SystemExit(f"UNEXPECTED_HEADER: {part}: {header}")
+                              if year == 2007:
+                                  writer.writerow(header)
+                              for row in reader:
+                                  if not row:
+                                      continue
+                                  if first is None:
+                                      first = row[0]
+                                  last = row[0]
+                                  writer.writerow(row)
+                                  rows += 1
+                  if rows == 0:
+                      raise SystemExit(f"NO_DATA_ROWS: {out}")
+                  digest = hashlib.sha256()
+                  with out.open("rb") as f:
+                      for chunk in iter(lambda: f.read(1024 * 1024), b""):
+                          digest.update(chunk)
+                  files.append({
+                      "symbol": symbol, "side": side, "timeframe": "m5",
+                      "requested_from_utc_inclusive": "2007-03-13T00:00:00Z",
+                      "requested_to_utc_exclusive": "2026-11-01T00:00:00Z",
+                      "actual_first_timestamp_raw": first,
+                      "actual_last_timestamp_raw": last,
+                      "rows_excluding_header": rows,
+                      "bytes": out.stat().st_size,
+                      "sha256": digest.hexdigest(),
+                      "file": str(out),
+                  })
           manifest = {
               "experiment": "R334",
               "purpose": "raw historical quote acquisition only; no signals, statistics, returns, PnL, or strategy verdicts",
@@ -116,7 +131,7 @@ jobs:
               "utc_offset_minutes": 0,
               "timeframe": "m5",
               "include_synthetic_flats": False,
-              "symbols": ["usdhuf","eurnok","usdzar","eurusd"],
+              "symbols": symbols,
               "files": files,
           }
           out = root / "R334_ACQUISITION_MANIFEST.json"
@@ -128,6 +143,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: R334-Dukascopy-M5-BID-ASK-2007-2026
-          path: raw/r334/
+          path: |
+            raw/r334/*.csv
+            raw/r334/R334_ACQUISITION_MANIFEST.json
           if-no-files-found: error
           retention-days: 90
