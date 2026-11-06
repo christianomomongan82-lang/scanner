@@ -1,0 +1,19 @@
+{
+  "symbol": "usdhuf",
+  "side": "bid",
+  "timeframe": "m5",
+  "year": 2016,
+  "requested_from_utc_inclusive": "2016-01-01T00:00:00Z",
+  "requested_to_utc_exclusive": "2017-01-01T00:00:00Z",
+  "status": "DATA_WITH_POSSIBLE_GAPS",
+  "attempts": 1,
+  "downloader_exit_code": 0,
+  "rows_excluding_header": 74509,
+  "raw_csv_bytes": 3298682,
+  "raw_csv_sha256": "04cbc9e66984320a903c97209824bad82513b1a8b005f574cac94b717e974a5a",
+  "saved_part": "raw/r334/parts/usdhuf_m5_bid_2016.csv.gz",
+  "log_gzip": "raw/r334/logs/usdhuf_m5_bid_2016.attempt1.log.gz",
+  "utc_offset_minutes": 0,
+  "synthetic_flats": false,
+  "recorded_by": "R334 checkpointed raw acquisition v3"
+}
