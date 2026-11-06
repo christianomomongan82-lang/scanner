@@ -1,0 +1,19 @@
+{
+  "symbol": "usdhuf",
+  "side": "ask",
+  "timeframe": "m5",
+  "year": 2008,
+  "requested_from_utc_inclusive": "2008-01-01T00:00:00Z",
+  "requested_to_utc_exclusive": "2009-01-01T00:00:00Z",
+  "status": "DATA_WITH_POSSIBLE_GAPS",
+  "attempts": 1,
+  "downloader_exit_code": 0,
+  "rows_excluding_header": 87779,
+  "raw_csv_bytes": 3995581,
+  "raw_csv_sha256": "0f00d055576745dd41c487fc9f4fd03dac9418618fa6b3f7885d3b1f65342414",
+  "saved_part": "raw/r334/parts/usdhuf_m5_ask_2008.csv.gz",
+  "log_gzip": "raw/r334/logs/usdhuf_m5_ask_2008.attempt1.log.gz",
+  "utc_offset_minutes": 0,
+  "synthetic_flats": false,
+  "recorded_by": "R334 checkpointed raw acquisition v3"
+}
