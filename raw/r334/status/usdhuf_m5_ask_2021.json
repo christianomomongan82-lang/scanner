@@ -1,0 +1,19 @@
+{
+  "symbol": "usdhuf",
+  "side": "ask",
+  "timeframe": "m5",
+  "year": 2021,
+  "requested_from_utc_inclusive": "2021-01-01T00:00:00Z",
+  "requested_to_utc_exclusive": "2022-01-01T00:00:00Z",
+  "status": "DATA_WITH_POSSIBLE_GAPS",
+  "attempts": 1,
+  "downloader_exit_code": 0,
+  "rows_excluding_header": 86195,
+  "raw_csv_bytes": 3942415,
+  "raw_csv_sha256": "d389439f7d8ec734173b43b5623a77fcf8a0b0f5c09cca9b91883ff42fdd0d01",
+  "saved_part": "raw/r334/parts/usdhuf_m5_ask_2021.csv.gz",
+  "log_gzip": "raw/r334/logs/usdhuf_m5_ask_2021.attempt1.log.gz",
+  "utc_offset_minutes": 0,
+  "synthetic_flats": false,
+  "recorded_by": "R334 checkpointed raw acquisition v3"
+}
