@@ -1,0 +1,19 @@
+{
+  "symbol": "eurnok",
+  "side": "bid",
+  "timeframe": "m5",
+  "year": 2020,
+  "requested_from_utc_inclusive": "2020-01-01T00:00:00Z",
+  "requested_to_utc_exclusive": "2021-01-01T00:00:00Z",
+  "status": "DATA_WITH_POSSIBLE_GAPS",
+  "attempts": 1,
+  "downloader_exit_code": 0,
+  "rows_excluding_header": 88561,
+  "raw_csv_bytes": 4372697,
+  "raw_csv_sha256": "5d45697c53ec7be69c5b967e5244c34a7df7fdf3974a0229f266fdb01d9d4177",
+  "saved_part": "raw/r334/parts/eurnok_m5_bid_2020.csv.gz",
+  "log_gzip": "raw/r334/logs/eurnok_m5_bid_2020.attempt1.log.gz",
+  "utc_offset_minutes": 0,
+  "synthetic_flats": false,
+  "recorded_by": "R334 checkpointed raw acquisition v3"
+}
