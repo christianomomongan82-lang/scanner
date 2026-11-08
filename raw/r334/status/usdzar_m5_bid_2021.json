@@ -1,0 +1,19 @@
+{
+  "symbol": "usdzar",
+  "side": "bid",
+  "timeframe": "m5",
+  "year": 2021,
+  "requested_from_utc_inclusive": "2021-01-01T00:00:00Z",
+  "requested_to_utc_exclusive": "2022-01-01T00:00:00Z",
+  "status": "DATA_WITH_POSSIBLE_GAPS",
+  "attempts": 1,
+  "downloader_exit_code": 0,
+  "rows_excluding_header": 88071,
+  "raw_csv_bytes": 4380826,
+  "raw_csv_sha256": "dc25c7b6a4067f0890c9e6539c297e17cb1dc1f180e272c48cb457727d5e67ba",
+  "saved_part": "raw/r334/parts/usdzar_m5_bid_2021.csv.gz",
+  "log_gzip": "raw/r334/logs/usdzar_m5_bid_2021.attempt1.log.gz",
+  "utc_offset_minutes": 0,
+  "synthetic_flats": false,
+  "recorded_by": "R334 checkpointed raw acquisition v3"
+}
