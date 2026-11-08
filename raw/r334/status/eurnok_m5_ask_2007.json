@@ -1,0 +1,19 @@
+{
+  "symbol": "eurnok",
+  "side": "ask",
+  "timeframe": "m5",
+  "year": 2007,
+  "requested_from_utc_inclusive": "2007-03-13T00:00:00Z",
+  "requested_to_utc_exclusive": "2008-01-01T00:00:00Z",
+  "status": "DATA_WITH_POSSIBLE_GAPS",
+  "attempts": 1,
+  "downloader_exit_code": 0,
+  "rows_excluding_header": 71147,
+  "raw_csv_bytes": 3242504,
+  "raw_csv_sha256": "663976d984bca32f0125d4e04fd2d8d0e053678067aab7e9951e34c22a04892c",
+  "saved_part": "raw/r334/parts/eurnok_m5_ask_2007.csv.gz",
+  "log_gzip": "raw/r334/logs/eurnok_m5_ask_2007.attempt1.log.gz",
+  "utc_offset_minutes": 0,
+  "synthetic_flats": false,
+  "recorded_by": "R334 checkpointed raw acquisition v3"
+}
