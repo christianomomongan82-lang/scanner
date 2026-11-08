@@ -1,0 +1,19 @@
+{
+  "symbol": "usdzar",
+  "side": "bid",
+  "timeframe": "m5",
+  "year": 2015,
+  "requested_from_utc_inclusive": "2015-01-01T00:00:00Z",
+  "requested_to_utc_exclusive": "2016-01-01T00:00:00Z",
+  "status": "DATA_WITH_POSSIBLE_GAPS",
+  "attempts": 1,
+  "downloader_exit_code": 0,
+  "rows_excluding_header": 88141,
+  "raw_csv_bytes": 4388709,
+  "raw_csv_sha256": "20839e1e1e77c1fac7be224c1af90f3431ad22d6f51d427716654b29ec17778e",
+  "saved_part": "raw/r334/parts/usdzar_m5_bid_2015.csv.gz",
+  "log_gzip": "raw/r334/logs/usdzar_m5_bid_2015.attempt1.log.gz",
+  "utc_offset_minutes": 0,
+  "synthetic_flats": false,
+  "recorded_by": "R334 checkpointed raw acquisition v3"
+}
