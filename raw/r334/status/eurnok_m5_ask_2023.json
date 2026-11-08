@@ -1,0 +1,19 @@
+{
+  "symbol": "eurnok",
+  "side": "ask",
+  "timeframe": "m5",
+  "year": 2023,
+  "requested_from_utc_inclusive": "2023-01-01T00:00:00Z",
+  "requested_to_utc_exclusive": "2024-01-01T00:00:00Z",
+  "status": "DATA_WITH_POSSIBLE_GAPS",
+  "attempts": 1,
+  "downloader_exit_code": 0,
+  "rows_excluding_header": 87322,
+  "raw_csv_bytes": 4329551,
+  "raw_csv_sha256": "f283614b94c1cd3937463bb66c638f58cc9cdd6060dd00c583f3a8c13f3485c0",
+  "saved_part": "raw/r334/parts/eurnok_m5_ask_2023.csv.gz",
+  "log_gzip": "raw/r334/logs/eurnok_m5_ask_2023.attempt1.log.gz",
+  "utc_offset_minutes": 0,
+  "synthetic_flats": false,
+  "recorded_by": "R334 checkpointed raw acquisition v3"
+}
