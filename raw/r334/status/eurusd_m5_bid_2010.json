@@ -1,0 +1,19 @@
+{
+  "symbol": "eurusd",
+  "side": "bid",
+  "timeframe": "m5",
+  "year": 2010,
+  "requested_from_utc_inclusive": "2010-01-01T00:00:00Z",
+  "requested_to_utc_exclusive": "2011-01-01T00:00:00Z",
+  "status": "DATA_WITH_POSSIBLE_GAPS",
+  "attempts": 1,
+  "downloader_exit_code": 0,
+  "rows_excluding_header": 88464,
+  "raw_csv_bytes": 4033301,
+  "raw_csv_sha256": "fd0a7ecdf9443222f7d3bca0f0dd95e77981c93d6715e56814ade9ea34153a5a",
+  "saved_part": "raw/r334/parts/eurusd_m5_bid_2010.csv.gz",
+  "log_gzip": "raw/r334/logs/eurusd_m5_bid_2010.attempt1.log.gz",
+  "utc_offset_minutes": 0,
+  "synthetic_flats": false,
+  "recorded_by": "R334 checkpointed raw acquisition v3"
+}
