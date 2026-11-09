@@ -1,0 +1,19 @@
+{
+  "symbol": "usdzar",
+  "side": "ask",
+  "timeframe": "m5",
+  "year": 2015,
+  "requested_from_utc_inclusive": "2015-01-01T00:00:00Z",
+  "requested_to_utc_exclusive": "2016-01-01T00:00:00Z",
+  "status": "DATA_WITH_POSSIBLE_GAPS",
+  "attempts": 1,
+  "downloader_exit_code": 0,
+  "rows_excluding_header": 88141,
+  "raw_csv_bytes": 4389157,
+  "raw_csv_sha256": "31b801e8d440aa524973b90f3e85108387f565b6192727c83f0a198185bc5783",
+  "saved_part": "raw/r334/parts/usdzar_m5_ask_2015.csv.gz",
+  "log_gzip": "raw/r334/logs/usdzar_m5_ask_2015.attempt1.log.gz",
+  "utc_offset_minutes": 0,
+  "synthetic_flats": false,
+  "recorded_by": "R334 checkpointed raw acquisition v3"
+}
