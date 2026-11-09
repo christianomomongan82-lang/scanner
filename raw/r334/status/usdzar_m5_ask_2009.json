@@ -1,0 +1,19 @@
+{
+  "symbol": "usdzar",
+  "side": "ask",
+  "timeframe": "m5",
+  "year": 2009,
+  "requested_from_utc_inclusive": "2009-01-01T00:00:00Z",
+  "requested_to_utc_exclusive": "2010-01-01T00:00:00Z",
+  "status": "DATA_WITH_POSSIBLE_GAPS",
+  "attempts": 1,
+  "downloader_exit_code": 0,
+  "rows_excluding_header": 88487,
+  "raw_csv_bytes": 4055889,
+  "raw_csv_sha256": "d63efac737257b59a5c7d3d53aa81d7b4307cea04140577f48412dd9937da497",
+  "saved_part": "raw/r334/parts/usdzar_m5_ask_2009.csv.gz",
+  "log_gzip": "raw/r334/logs/usdzar_m5_ask_2009.attempt1.log.gz",
+  "utc_offset_minutes": 0,
+  "synthetic_flats": false,
+  "recorded_by": "R334 checkpointed raw acquisition v3"
+}
