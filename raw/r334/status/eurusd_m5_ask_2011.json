@@ -1,0 +1,19 @@
+{
+  "symbol": "eurusd",
+  "side": "ask",
+  "timeframe": "m5",
+  "year": 2011,
+  "requested_from_utc_inclusive": "2011-01-01T00:00:00Z",
+  "requested_to_utc_exclusive": "2012-01-01T00:00:00Z",
+  "status": "DATA_WITH_POSSIBLE_GAPS",
+  "attempts": 1,
+  "downloader_exit_code": 0,
+  "rows_excluding_header": 88200,
+  "raw_csv_bytes": 4013037,
+  "raw_csv_sha256": "2767b5c89a51b3f37d65b4cd3e74c000b1a281a2a8de67594d319069634d1bf3",
+  "saved_part": "raw/r334/parts/eurusd_m5_ask_2011.csv.gz",
+  "log_gzip": "raw/r334/logs/eurusd_m5_ask_2011.attempt1.log.gz",
+  "utc_offset_minutes": 0,
+  "synthetic_flats": false,
+  "recorded_by": "R334 checkpointed raw acquisition v3"
+}
